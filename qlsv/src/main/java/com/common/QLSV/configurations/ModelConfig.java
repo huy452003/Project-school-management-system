@@ -1,6 +1,6 @@
 package com.common.QLSV.configurations;
 
-import com.common.QLSV.enums.Gender;
+import com.common.enums.Gender;
 import org.modelmapper.AbstractConverter;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;

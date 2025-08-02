@@ -1,12 +1,12 @@
 package com.common.QLSV.controllers;
 
 import com.common.QLSV.entities.StudentEntity;
-import com.common.QLSV.models.Response;
-import com.common.QLSV.models.Student.CreateStudentModel;
-import com.common.QLSV.models.Student.request.CreateStudentModelRequest;
-import com.common.QLSV.models.Student.request.StudentModelRequest;
-import com.common.QLSV.models.Student.StudentModel;
 import com.common.QLSV.services.imp.StudentServiceImp;
+import com.common.models.Response;
+import com.common.models.student.CreateStudentModel;
+import com.common.models.student.StudentModel;
+import com.common.models.student.request.CreateStudentModelRequest;
+import com.common.models.student.request.StudentModelRequest;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;

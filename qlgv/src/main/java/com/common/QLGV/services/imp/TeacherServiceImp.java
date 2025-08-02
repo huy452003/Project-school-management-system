@@ -11,8 +11,10 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -24,25 +26,40 @@ public class TeacherServiceImp implements TeacherService {
     TeacherRepo teacherRepo;
     @Autowired
     ModelMapper modelMapper;
+    @Autowired
+    RedisTemplate<String, Object> redisTemplate;
 
-    @Cacheable(value = "teachers")
+    private static final String TEACHERS_CACHE_KEY = "teachers:all";
+
     @Override
     public List<TeacherModel> gets() {
-        log.info("Caching teachers");
+
+        Object cached = redisTemplate.opsForValue().get(TEACHERS_CACHE_KEY);
+        if (cached != null) {
+            log.info("Get data from Redis cache");
+            return (List<TeacherModel>) cached;
+        }
+        log.info("Not found cache, Query DB");
+
         List<TeacherEntity> teacherEntities = teacherRepo.findAll();
-        log.info(teacherEntities.isEmpty() ? "No teachers found" : "Gets teachers Successfully");
+        if(teacherEntities.isEmpty()){
+            throw new NotFoundTeacherException("", Collections.emptyList());
+        }
+
         List<TeacherModel> teacherModels = new ArrayList<>();
         for(TeacherEntity teacherEntity : teacherEntities){
             TeacherModel teacherModel = modelMapper.map(teacherEntity, TeacherModel.class);
             teacherModels.add(teacherModel);
         }
-        if(teacherModels.isEmpty()){
-            throw new NotFoundTeacherException("", Collections.emptyList());
-        }
+        log.info("Gets teachers Successfully");
+
+        redisTemplate.opsForValue()
+                .set(TEACHERS_CACHE_KEY, teacherModels);
+        log.info("Save cache to Redis");
+
         return teacherModels;
     }
 
-    @CacheEvict(value = "teachers", allEntries = true)
     @Override
     public List<TeacherEntity> creates(List<CreateTeacherModel> createTeacherModels) {
         List<TeacherEntity> teacherEntities = new ArrayList<>();
@@ -50,15 +67,17 @@ public class TeacherServiceImp implements TeacherService {
             TeacherEntity teacherEntity = modelMapper.map(createTeacherModel, TeacherEntity.class);
             teacherEntities.add(teacherEntity);
         }
-        log.info(teacherEntities.isEmpty() ? "Create Teachers Failed" : "Create Teachers Successfully");
         teacherRepo.saveAll(teacherEntities);
+        log.info("Create Teachers Successfully");
+
+        redisTemplate.delete(TEACHERS_CACHE_KEY);
+        log.info("Del cache key = teachers:all , after create teachers");
+
         return teacherEntities;
     }
 
-    @CacheEvict(value = "teachers", allEntries = true)
     @Override
     public List<TeacherEntity> updates(List<TeacherModel> teacherModels) {
-        log.info("Delete Caching teachers");
         List<TeacherEntity> teacherEntities = new ArrayList<>();
         List<Integer> listIDNotFound = new ArrayList<>();
         for(TeacherModel teacherModel : teacherModels){
@@ -69,15 +88,20 @@ public class TeacherServiceImp implements TeacherService {
                 listIDNotFound.add(teacherEntity.getId());
             }
         }
-        log.info(listIDNotFound.isEmpty() ? "Update Teacher Successfully" : "Not Found ID: " + listIDNotFound);
+
         if(!listIDNotFound.isEmpty()){
             throw new NotFoundTeacherException("",listIDNotFound);
         }
+
         teacherRepo.saveAll(teacherEntities);
+        log.info("Update Teacher Successfully");
+
+        redisTemplate.delete(TEACHERS_CACHE_KEY);
+        log.info("Del cache key = teachers:all after update teachers");
+
         return teacherEntities;
     }
 
-    @CacheEvict(value = "teachers", allEntries = true)
     @Override
     public boolean deletes(List<TeacherModel> teacherModels) {
         List<Integer> listIDNotFound = new ArrayList<>();
@@ -90,11 +114,17 @@ public class TeacherServiceImp implements TeacherService {
                 listIDNotFound.add(teacherEntity.getId());
             }
         }
-        log.info(listIDNotFound.isEmpty() ? "Delete Teachers Successfully" : "Not Found ID: " + listIDNotFound);
+
         if(!listIDNotFound.isEmpty()){
             throw new NotFoundTeacherException("",listIDNotFound);
         }
+
         teacherRepo.deleteAll(teacherEntities);
+        log.info("Delete Teachers Successfully");
+
+        redisTemplate.delete(TEACHERS_CACHE_KEY);
+        log.info("Del cache key = teachers:all After del teachers");
+
         return true;
     }
 }

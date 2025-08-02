@@ -1,6 +1,6 @@
 package com.common.QLSV.entities;
 
-import com.common.QLSV.enums.Gender;
+import com.common.enums.Gender;
 import jakarta.persistence.*;
 import lombok.*;
 

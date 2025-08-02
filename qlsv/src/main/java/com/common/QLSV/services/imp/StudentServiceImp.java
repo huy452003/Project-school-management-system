@@ -2,15 +2,14 @@ package com.common.QLSV.services.imp;
 
 import com.common.QLSV.entities.StudentEntity;
 import com.common.QLSV.exceptions.NotFoundIDStudentsException;
-import com.common.QLSV.models.Student.CreateStudentModel;
-import com.common.QLSV.models.Student.StudentModel;
 import com.common.QLSV.repositories.StudentRepo;
 import com.common.QLSV.services.StudentService;
+import com.common.models.student.CreateStudentModel;
+import com.common.models.student.StudentModel;
 import lombok.extern.log4j.Log4j2;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -23,25 +22,41 @@ public class StudentServiceImp implements StudentService {
     StudentRepo studentRepo;
     @Autowired
     ModelMapper modelMapper;
+    @Autowired
+    RedisTemplate<String, Object> redisTemplate;
 
-    @Cacheable(value = "students")
+    private static final String STUDENT_CACHE_KEY = "students:all";
+
     @Override
     public List<StudentModel> gets() {
-        System.out.println("run cache");
+
+        Object cached = redisTemplate.opsForValue().get(STUDENT_CACHE_KEY);
+        if (cached != null) {
+            log.info("Get data from Redis cache");
+            return (List<StudentModel>) cached;
+        }
+        log.info("Not found cache, Query DB");
+
         List<StudentEntity> studentEntities = studentRepo.findAll();
-        log.info(studentEntities.isEmpty() ? "No students found" : "Gets Student Successfully");
+
+        if (studentEntities.isEmpty()) {
+            throw new NotFoundIDStudentsException("", null);
+        }
+
         List<StudentModel> studentModels = new ArrayList<>();
         for (StudentEntity students : studentEntities) {
             StudentModel studentModel = modelMapper.map(students, StudentModel.class);
             studentModels.add(studentModel);
         }
-        if (studentModels.isEmpty()) {
-            throw new NotFoundIDStudentsException("", null);
-        }
+        log.info("Gets Student Successfully");
+
+        redisTemplate.opsForValue()
+                .set(STUDENT_CACHE_KEY, studentModels);
+        log.info("Save cache to Redis");
+
         return studentModels;
     }
 
-    @CacheEvict(value = "students", allEntries = true)
     @Override
     public List<StudentEntity> creates(List<CreateStudentModel> studentModels) {
         List<StudentEntity> studentEntities = new ArrayList<>();
@@ -49,15 +64,17 @@ public class StudentServiceImp implements StudentService {
             StudentEntity studentEntity = modelMapper.map(studentModel, StudentEntity.class);
             studentEntities.add(studentEntity);
         }
-        log.info(studentEntities.isEmpty() ? "Create Students Failed" : "Create Students Successfully");
         studentRepo.saveAll(studentEntities);
+        log.info("Create Students Successfully");
+
+        redisTemplate.delete(STUDENT_CACHE_KEY);
+        log.info("Del cache key = students:all , after create students");
+
         return studentEntities;
     }
 
-    @CacheEvict(value = "students", allEntries = true)
     @Override
     public List<StudentEntity> updates(List<StudentModel> studentModels) {
-        System.out.println("del cache");
         List<StudentEntity> studentEntities = new ArrayList<>();
         List<Integer> listIDNotFound = new ArrayList<>();
         for (StudentModel studentModel : studentModels) {
@@ -68,15 +85,20 @@ public class StudentServiceImp implements StudentService {
                 listIDNotFound.add(studentEntity.getId());
             }
         }
-        log.info(listIDNotFound.isEmpty() ? "Update Students Successfully" : "Not Found ID: " + listIDNotFound);
-        if (listIDNotFound.isEmpty()) {
-            studentRepo.saveAll(studentEntities);
-            return studentEntities;
+
+        if (!listIDNotFound.isEmpty()) {
+            throw new NotFoundIDStudentsException("", listIDNotFound);
         }
-        throw new NotFoundIDStudentsException("", listIDNotFound);
+
+        studentRepo.saveAll(studentEntities);
+        log.info("Update Students Successfully");
+
+        redisTemplate.delete(STUDENT_CACHE_KEY);
+        log.info("Del cache key = students:all , after update students");
+
+        return studentEntities;
     }
 
-    @CacheEvict(value = "students", allEntries = true)
     @Override
     public Boolean deletes(List<StudentModel> StudentModels) {
         List<StudentEntity> listDelete = new ArrayList<>();
@@ -89,11 +111,18 @@ public class StudentServiceImp implements StudentService {
                 listIDNotFound.add(studentEntity.getId());
             }
         }
-        log.info(listIDNotFound.isEmpty() ? "Delete Students Successfully" : "Not Found ID: " + listIDNotFound);
-        if (listIDNotFound.isEmpty()) {
-            studentRepo.deleteAll(listDelete);
-            return true;
+
+        if (!listIDNotFound.isEmpty()) {
+            throw new NotFoundIDStudentsException("", listIDNotFound);
         }
-        throw new NotFoundIDStudentsException("", listIDNotFound);
+
+        studentRepo.deleteAll(listDelete);
+        log.info("Delete Students Successfully");
+
+
+        redisTemplate.delete(STUDENT_CACHE_KEY);
+        log.info("Del cache key = students:all , after del students");
+
+        return true;
     }
 }
