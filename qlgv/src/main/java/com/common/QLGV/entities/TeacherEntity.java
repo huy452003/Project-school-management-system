@@ -1,6 +1,5 @@
 package com.common.QLGV.entities;
 
-import com.common.enums.Gender;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,6 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import java.time.LocalDate;
+
+import com.common.enums.Gender;
 
 @Entity
 @Table(name = "Teachers")

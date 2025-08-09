@@ -1,4 +1,4 @@
-package com.common.QLGV.exceptions;
+package com.handle_exceptions;
 
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
@@ -24,15 +24,15 @@ public class CustomExceptionHandler {
     MessageSource messageSource;
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    @ExceptionHandler(NotFoundTeacherException.class)
-    ResponseEntity<Response<TeacherModel>> notFoundExceptionHandler(NotFoundTeacherException e) {
+    @ExceptionHandler(NotFoundExceptionHandle.class)
+    ResponseEntity<Response<?>> notFoundExceptionHandler(NotFoundExceptionHandle e) {
         Locale locale = LocaleContextHolder.getLocale();
         Map<String, String> error = new HashMap<>();
-        error.put("Error", "ID:" + e.getNotFoundIDTeacher().toString());
-        Response<TeacherModel> response = new Response<>(
+        error.put("Error", "ID:" + e.getListNotFounds().toString());
+        Response<?> response = new Response<>(
                 404,
                 messageSource.getMessage("response.error.notFoundError", null, locale),
-                "TeacherModel",
+                e.getModelName(),
                 error,
                 null
         );
@@ -97,17 +97,17 @@ public class CustomExceptionHandler {
 
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(Exception.class)
-    ResponseEntity<Response<TeacherModel>> exceptionHandler(Exception e) {
+    ResponseEntity<Response<?>> exceptionHandler(Exception e) {
         Locale locale = LocaleContextHolder.getLocale();
         Map<String, String> error = new HashMap<>();
-        error.put("Error", "INTERNAL_SERVER_ERROR");
-        Response<TeacherModel> response = new Response<>(
+        error.put("Error", e.getMessage());
+        Response<?> response = new Response<>(
                 500,
                 messageSource.getMessage("response.error.internalServerError", null, locale),
-                "TeacherModel",
+                "Exception",
                 error,
                 null
         );
         return ResponseEntity.status(500).body(response);
     }
-}
+} 

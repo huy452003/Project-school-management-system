@@ -23,6 +23,7 @@
 
   <modules>
     <module>model-shared</module>
+    <module>handle_exceptions</module>
     <module>qlsv</module>
     <module>qlgv</module>
   </modules>

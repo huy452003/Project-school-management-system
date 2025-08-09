@@ -6,18 +6,16 @@ import com.common.QLGV.services.StudentClientService;
 import com.common.models.CreateStudentForTeacher;
 import com.common.models.CreateTeacherAndStudent;
 import com.common.models.Response;
-import com.common.models.student.CreateStudentModel;
 import com.common.models.student.StudentModel;
 import com.common.models.teacher.CreateTeacherModel;
-import com.common.models.teacher.TeacherModel;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -28,8 +26,12 @@ import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
+
+import lombok.extern.log4j.Log4j2;
 
 @Service
+@Log4j2
 public class StudentClientServiceImp implements StudentClientService {
 
     @Autowired
@@ -38,45 +40,37 @@ public class StudentClientServiceImp implements StudentClientService {
     private ModelMapper modelMapper;
     @Autowired
     TeacherRepo teacherRepo;
+    @Autowired
+    RedisTemplate<String, Object> redisTemplate;
 
-    @Cacheable(value = "students")
+    private static final String STUDENTS_CACHE_KEY = "students:all";
+    private static final String TEACHERS_CACHE_KEY = "teachers:all";
+
     @Override
     public List<StudentModel> getAllStudents() {
+
         String studentApi = "http://localhost:8080/students";
-        try {
             ResponseEntity<Response<List<StudentModel>>> response = restTemplate.exchange(
                     studentApi,
                     HttpMethod.GET,
                     null,
                     new ParameterizedTypeReference<>() {}
             );
-            return response.getBody().getData();
 
-        } catch (HttpClientErrorException | HttpServerErrorException ex) {
-            try {
-                ObjectMapper objectMapper = new ObjectMapper();
-                Response<?> errorResponse = objectMapper.readValue(
-                        ex.getResponseBodyAsString(),
-                        new TypeReference<>() {
-                        }
-                );
-
-                System.err.println("Lỗi từ QLSV: " + errorResponse.getMessage());
-                throw new RuntimeException("QLSV trả về lỗi: " + errorResponse.getMessage());
-
-            } catch (IOException e) {
-                System.err.println("Không đọc được body lỗi JSON từ QLSV");
-                throw new RuntimeException("QLSV lỗi: " + ex.getStatusCode(), ex);
+            Object cached = redisTemplate.opsForValue().get(STUDENTS_CACHE_KEY);
+            if (cached != null) {
+                log.info("Get data from Redis cache");
+                return (List<StudentModel>) cached;
             }
+            log.info("Not found cache, Query DB");
 
-        } catch (Exception ex) {
-            System.err.println("Lỗi kết nối tới QLSV: " + ex.getMessage());
-            throw new RuntimeException("Không thể kết nối tới QLSV", ex);
-        }
+            redisTemplate.opsForValue().set(STUDENTS_CACHE_KEY, response.getBody().getData());
+            log.info("Save cache to Redis");
+            
+            return response.getBody().getData();
     }
 
     @Transactional
-    @CacheEvict(value = "teachers", allEntries = true)
     @Override
     public void createTeacherAndStudent(CreateTeacherAndStudent createTeacherAndStudent) {
         for (CreateTeacherModel teacherModel : createTeacherAndStudent.getTeachers()) {
@@ -93,5 +87,8 @@ public class StudentClientServiceImp implements StudentClientService {
                 entity,
                 new ParameterizedTypeReference<>() {}
         );
+        redisTemplate.delete(STUDENTS_CACHE_KEY);
+        redisTemplate.delete(TEACHERS_CACHE_KEY);
+        log.info("Del cache key = students:all , teachers:all , after create students-teachers");
     }
 }

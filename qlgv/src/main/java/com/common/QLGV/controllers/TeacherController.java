@@ -31,24 +31,31 @@ public class TeacherController {
     StudentClientServiceImp studentClientServiceImp;
 
     @GetMapping("/studentsByTeacher")
-    public Response<List<StudentModel>> getStudentsFromQLSV() {
+    ResponseEntity<Response<?>> getStudentsFromQLSV(
+        @RequestHeader(value = "Accept-Language", defaultValue = "en") String language
+    ) {
+        Locale locale = Locale.forLanguageTag(language);
         try {
-            List<StudentModel> studentModels = studentClientServiceImp.getAllStudents();
-            return new Response<>(
-                    200,
-                    "Lấy danh sách sinh viên",
-                    "StudentModel",
-                    null,
-                    studentModels
-            );
-        } catch (RuntimeException ex) {
-            return new Response<>(
-                    500,
-                    "Lỗi khi gọi đến QLSV",
-                    "StudentModel",
-                    Map.of("error", ex.getMessage()),
-                    null
-            );
+                List<StudentModel> studentModels = studentClientServiceImp.getAllStudents();
+                return ResponseEntity.status(200).body(new Response<>(
+                        200,
+                        messageSource.getMessage("response.message.getSuccess",null,locale),
+                        "StudentModel",
+                        null,
+                        studentModels
+                ));
+        } catch (RuntimeException e) {
+                return ResponseEntity.status(500).body(new Response<>(
+                        500,
+                        messageSource.getMessage(
+                                "response.error.getStudentsFromQLSVFail",null,locale
+                        ),
+                        "StudentModel",
+                        Map.of(
+                                "errors: " , "500 Internal Server Error"
+                        ),
+                        null
+                ));
         }
     }
 
@@ -78,7 +85,7 @@ public class TeacherController {
                     ),
                     "TeacherModel-StudentModel",
                     Map.of(
-                            "errors: " , e.getClass().getSimpleName()
+                            "errors: " , "500 Internal Server Error"
                     ),
                     null
             ));

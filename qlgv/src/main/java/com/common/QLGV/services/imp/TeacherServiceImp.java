@@ -1,20 +1,16 @@
 package com.common.QLGV.services.imp;
 
 import com.common.QLGV.entities.TeacherEntity;
-import com.common.QLGV.exceptions.NotFoundTeacherException;
 import com.common.models.teacher.CreateTeacherModel;
 import com.common.models.teacher.TeacherModel;
+import com.handle_exceptions.NotFoundExceptionHandle;
 import com.common.QLGV.repositories.TeacherRepo;
 import com.common.QLGV.services.TeacherService;
 import lombok.extern.log4j.Log4j2;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
-
-import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -41,9 +37,9 @@ public class TeacherServiceImp implements TeacherService {
         }
         log.info("Not found cache, Query DB");
 
-        List<TeacherEntity> teacherEntities = teacherRepo.findAll();
+         List<TeacherEntity> teacherEntities = teacherRepo.findAll();
         if(teacherEntities.isEmpty()){
-            throw new NotFoundTeacherException("", Collections.emptyList());
+            throw new NotFoundExceptionHandle("", Collections.emptyList(), "TeacherModel");
         }
 
         List<TeacherModel> teacherModels = new ArrayList<>();
@@ -90,7 +86,8 @@ public class TeacherServiceImp implements TeacherService {
         }
 
         if(!listIDNotFound.isEmpty()){
-            throw new NotFoundTeacherException("",listIDNotFound);
+            log.error("Found IDs not exist: " + listIDNotFound);
+            throw new NotFoundExceptionHandle("", listIDNotFound, "TeacherModel");
         }
 
         teacherRepo.saveAll(teacherEntities);
@@ -116,7 +113,8 @@ public class TeacherServiceImp implements TeacherService {
         }
 
         if(!listIDNotFound.isEmpty()){
-            throw new NotFoundTeacherException("",listIDNotFound);
+            log.error("Found IDs not exist: " + listIDNotFound);
+            throw new NotFoundExceptionHandle("",listIDNotFound, "TeacherModel");
         }
 
         teacherRepo.deleteAll(teacherEntities);

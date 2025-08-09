@@ -1,11 +1,12 @@
 package com.common.QLSV.services.imp;
 
 import com.common.QLSV.entities.StudentEntity;
-import com.common.QLSV.exceptions.NotFoundIDStudentsException;
+
 import com.common.QLSV.repositories.StudentRepo;
 import com.common.QLSV.services.StudentService;
 import com.common.models.student.CreateStudentModel;
 import com.common.models.student.StudentModel;
+import com.handle_exceptions.NotFoundExceptionHandle;
 import lombok.extern.log4j.Log4j2;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,8 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -40,7 +43,7 @@ public class StudentServiceImp implements StudentService {
         List<StudentEntity> studentEntities = studentRepo.findAll();
 
         if (studentEntities.isEmpty()) {
-            throw new NotFoundIDStudentsException("", null);
+            throw new NotFoundExceptionHandle("", Collections.emptyList(), "StudentModel");
         }
 
         List<StudentModel> studentModels = new ArrayList<>();
@@ -87,7 +90,8 @@ public class StudentServiceImp implements StudentService {
         }
 
         if (!listIDNotFound.isEmpty()) {
-            throw new NotFoundIDStudentsException("", listIDNotFound);
+            log.error("Found IDs not exist: " + listIDNotFound);
+            throw new NotFoundExceptionHandle("", listIDNotFound, "StudentModel");
         }
 
         studentRepo.saveAll(studentEntities);
@@ -113,7 +117,8 @@ public class StudentServiceImp implements StudentService {
         }
 
         if (!listIDNotFound.isEmpty()) {
-            throw new NotFoundIDStudentsException("", listIDNotFound);
+            log.error("Found IDs not exist: " + listIDNotFound);
+            throw new NotFoundExceptionHandle("", listIDNotFound,"StudentModel");
         }
 
         studentRepo.deleteAll(listDelete);

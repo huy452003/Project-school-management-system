@@ -111,6 +111,11 @@
 			<artifactId>model-shared</artifactId>
 			<version>3.5.0</version> <!-- Trùng version với modules-parent -->
 		</dependency>
+		<dependency>
+			<groupId>com.common</groupId>
+			<artifactId>handle_exceptions</artifactId>
+			<version>3.5.0</version>
+		</dependency>
 	</dependencies>
 
 	<build>
