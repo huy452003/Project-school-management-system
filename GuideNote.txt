@@ -1,0 +1,87 @@
+nên dùng enum chỗ gender	 =
+
+thêm method bắt Exception chung		 = 
+	
+nên throw exception và sử lý trong exceptionhandler 	=
+
+sữa lại kiểu trả về method 	=
+
+sửa lại message của validate 	= 
+
+* yêu cầu mới:
+
+- tạo project teacher 				=
+
+- bên teacher cần 1 hàm để lấy dssv		=
+
+- xử lý lỗi nếu bên sv có lỗi khi teacher gọi API của sv ( cả 2 bên ) đã sửa lại
+
+- xử lý đồng bộ dữ liệu ở 2 bên, VD: từ project A gọi sang project B nhưng project
+B cập nhật (thêm - xóa) data bị lỗi thì data bên project A phải được rollback về 
+như ban đầu.	=
+
+- tìm hiểu các caching (Redis) , và xử lý cho cả 2 project 		=
+
+- cách để đo thời gian chạy của API 					=
+
+*new*
+
+- tìm hiểu cách để log lỗi 1 cách đồng bộ giữa các module ( tao 1 module chuyen 
+log errors) 		*
+
+- cách sử dụng redis trong project Springboot ( không sử dụng annotation ) =
+
+- khi thiết kế cả teacher và student cùng 1 project là những module khi deploy 
+project thì teacher và student sẽ gọi nhau như thế nào
++ khi này sẽ thêm dependency của student vào teacher , sau đó gọi service từ 
+student đến teacher như thường			=	
+
+- tìm hiểu về maven 
++ packaging ( war, jar, pom ) : khái niệm và cách sử dụng
+ = war : sử dụng trong spring mvc , ứng dụng web 
+ = jar : sử dụng trong project java thông thường
+ = pom : sử dụng trong project cha , trong việc quản lý dependency/module 
++ dependencies , dependencyManagerment : trong mối quan hệ project cha con
+ = dependencies : dùng để khai báo các thư viện cần dùng trong file pom
+ = dependencyManagerment : dùng trong file pom của module cha để quản lý 
+version của các dependency dùng chung , và các project con chỉ việc thêm 
+dependency từ dependencyManagerment không cần version		*
+
+- tìm hiểu restful Api
++ gồm có status code , các model(DTO) để tách dữ liệu nhận vào và trả về nhằm bảo
+mật thông tin ( vd: che dấu password khi lấy dữ liệu từ database )
+, chuyển sang kiểu dữ liệu JSON ( dễ dùng , nhẹ hơn kiểu xml ) 		=
+
+- tìm hiểu docker, docker images, docker compose : những công dụng của chúng  =
+
+- so sánh giữa 2 cách sử dụng annotation và redis trong caching		=
+
+- không nên để tên HttpMethod vào url				=
+
+*new 10/8/2025*
+
+- tạo 1 security module 
++ thiết kế database user , role
++ tại postman truyền vào js userName, password
++ từ userName và password này tạo 1 JWToken 
++ những API khác như get, post, put, delete phải có Token mới được truy cập
+nếu không được phép trả về lỗi 401
++ cấu hình những đường dẫn truy cập trực tiếp không cần xác thực và ngược lại
+
+- bên trong JWToken có những phần gì? giải thích cụ thể
+- cách để tạo 1 Token? Cách thu hồi? phải gắn permision trong Token
+- cách giải mã Token
+- nếu Token hết hạn thì giải quyết như thế nào?
+
+* messaging. kafka 
+
+
+
+
+
+
+
+
+
+
+		

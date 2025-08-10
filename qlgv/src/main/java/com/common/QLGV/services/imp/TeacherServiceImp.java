@@ -37,7 +37,7 @@ public class TeacherServiceImp implements TeacherService {
         }
         log.info("Not found cache, Query DB");
 
-         List<TeacherEntity> teacherEntities = teacherRepo.findAll();
+        List<TeacherEntity> teacherEntities = teacherRepo.findAll();
         if(teacherEntities.isEmpty()){
             throw new NotFoundExceptionHandle("", Collections.emptyList(), "TeacherModel");
         }
