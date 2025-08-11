@@ -45,7 +45,7 @@ student đến teacher như thường			=
  = dependencies : dùng để khai báo các thư viện cần dùng trong file pom
  = dependencyManagerment : dùng trong file pom của module cha để quản lý 
 version của các dependency dùng chung , và các project con chỉ việc thêm 
-dependency từ dependencyManagerment không cần version		*
+dependency từ dependencyManagerment không cần version		=
 
 - tìm hiểu restful Api
 + gồm có status code , các model(DTO) để tách dữ liệu nhận vào và trả về nhằm bảo
