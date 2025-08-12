@@ -5,6 +5,8 @@ import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import com.fasterxml.jackson.databind.exc.MismatchedInputException;
 import com.common.models.Response;
 import com.common.models.teacher.TeacherModel;
+import com.logging.services.LoggingService;
+import com.logging.models.LogContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -22,13 +24,32 @@ import java.util.*;
 public class CustomExceptionHandler {
     @Autowired
     MessageSource messageSource;
-
+    @Autowired
+    LoggingService loggingService;
+    
+    private LogContext getLogContext(String methodName) {
+        return LogContext.builder()
+            .module("exception-handler")
+            .className("CustomExceptionHandler")
+            .methodName(methodName)
+            .build();
+    }
+    
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(NotFoundExceptionHandle.class)
     ResponseEntity<Response<?>> notFoundExceptionHandler(NotFoundExceptionHandle e) {
         Locale locale = LocaleContextHolder.getLocale();
         Map<String, String> error = new HashMap<>();
         error.put("Error", "ID:" + e.getListNotFounds().toString());
+        
+        // Log exception handled
+        LogContext logContext = getLogContext("notFoundExceptionHandler");
+        loggingService.logExceptionHandled(
+            "NotFoundExceptionHandle", 
+            "IDs not found: " + e.getListNotFounds().toString(), 
+            logContext
+        );
+        
         Response<?> response = new Response<>(
                 404,
                 messageSource.getMessage("response.error.notFoundError", null, locale),
@@ -44,6 +65,7 @@ public class CustomExceptionHandler {
     public ResponseEntity<Response<?>> handleBodyValidation(MethodArgumentNotValidException ex) {
         Locale locale = LocaleContextHolder.getLocale();
         Map<String, String> errors = new LinkedHashMap<>();
+        LogContext logContext = getLogContext("handleBodyValidation");
 
         ex.getBindingResult().getFieldErrors().forEach(fe -> {
             String key = fe.getDefaultMessage();
@@ -52,6 +74,9 @@ public class CustomExceptionHandler {
             }
             String msg = messageSource.getMessage(key, null, key, locale);
             errors.put(fe.getField(), msg);
+            
+            // Log validation error
+            loggingService.logValidationError(fe.getField(), msg, logContext);
         });
 
         Response<?> resp = new Response<>(
@@ -69,6 +94,7 @@ public class CustomExceptionHandler {
     public ResponseEntity<Response<TeacherModel>> handleInvalidFormat(HttpMessageNotReadableException ex) {
         Locale locale = LocaleContextHolder.getLocale();
         Map<String, String> errors = new HashMap<>();
+        LogContext logContext = getLogContext("handleInvalidFormat");
         Throwable cause = ex.getMostSpecificCause();
 
         if (cause instanceof InvalidFormatException || cause instanceof MismatchedInputException) {
@@ -79,10 +105,14 @@ public class CustomExceptionHandler {
                 String msg = messageSource.getMessage(key, null,
                         field + " không đúng định dạng.", locale);
                 errors.put(field, msg);
+                
+                // Log validation error
+                loggingService.logValidationError(field, msg, logContext);
             }
         } else {
-            errors.put("error", messageSource.getMessage(
-                    "response.error.validate", null, locale));
+            String errorMsg = messageSource.getMessage("response.error.validate", null, locale);
+            errors.put("error", errorMsg);
+            loggingService.logValidationError("unknown", errorMsg, logContext);
         }
 
         Response<TeacherModel> response = new Response<>(
@@ -101,6 +131,15 @@ public class CustomExceptionHandler {
         Locale locale = LocaleContextHolder.getLocale();
         Map<String, String> error = new HashMap<>();
         error.put("Error", e.getMessage());
+        
+        // Log exception handled
+        LogContext logContext = getLogContext("exceptionHandler");
+        loggingService.logExceptionHandled(
+            e.getClass().getSimpleName(), 
+            e.getMessage(), 
+            logContext
+        );
+        
         Response<?> response = new Response<>(
                 500,
                 messageSource.getMessage("response.error.internalServerError", null, locale),

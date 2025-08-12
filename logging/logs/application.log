@@ -1,0 +1,9 @@
+2025-08-11 21:11:45 [main] INFO  [c.l.logging.LoggingApplicationTests] - Starting LoggingApplicationTests using Java 20.0.2 with PID 18412 (started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\logging)
+2025-08-11 21:11:45 [main] INFO  [c.l.logging.LoggingApplicationTests] - No active profile set, falling back to 1 default profile: "default"
+2025-08-11 21:11:45 [main] INFO  [c.l.logging.LoggingApplicationTests] - Started LoggingApplicationTests in 0.794 seconds (process running for 1.5)
+2025-08-11 21:16:30 [main] INFO  [c.l.logging.LoggingApplicationTests] - Starting LoggingApplicationTests using Java 20.0.2 with PID 15568 (started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\logging)
+2025-08-11 21:16:30 [main] INFO  [c.l.logging.LoggingApplicationTests] - No active profile set, falling back to 1 default profile: "default"
+2025-08-11 21:16:31 [main] INFO  [c.l.logging.LoggingApplicationTests] - Started LoggingApplicationTests in 0.796 seconds (process running for 1.654)
+2025-08-11 21:17:42 [main] INFO  [c.l.logging.LoggingApplicationTests] - Starting LoggingApplicationTests using Java 20.0.2 with PID 17072 (started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\logging)
+2025-08-11 21:17:42 [main] INFO  [c.l.logging.LoggingApplicationTests] - No active profile set, falling back to 1 default profile: "default"
+2025-08-11 21:17:43 [main] INFO  [c.l.logging.LoggingApplicationTests] - Started LoggingApplicationTests in 0.908 seconds (process running for 1.732)

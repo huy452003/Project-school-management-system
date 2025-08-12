@@ -6,20 +6,20 @@ import com.common.QLSV.repositories.StudentRepo;
 import com.common.QLSV.services.StudentService;
 import com.common.models.student.CreateStudentModel;
 import com.common.models.student.StudentModel;
+import com.logging.services.LoggingService;
+import com.logging.models.LogContext;
 import com.handle_exceptions.NotFoundExceptionHandle;
-import lombok.extern.log4j.Log4j2;
+import lombok.extern.java.Log;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
 @Service
-@Log4j2
 public class StudentServiceImp implements StudentService {
     @Autowired
     StudentRepo studentRepo;
@@ -27,18 +27,30 @@ public class StudentServiceImp implements StudentService {
     ModelMapper modelMapper;
     @Autowired
     RedisTemplate<String, Object> redisTemplate;
+    @Autowired
+    LoggingService loggingService;
 
     private static final String STUDENT_CACHE_KEY = "students:all";
+
+    private LogContext getLogContext(String methodName) {
+            return LogContext.builder()
+                    .module("qlsv")
+                    .className("StudentServiceImp")
+                    .methodName(methodName)
+                    .build();
+    }
 
     @Override
     public List<StudentModel> gets() {
 
+        LogContext logContext = getLogContext("gets");
+
         Object cached = redisTemplate.opsForValue().get(STUDENT_CACHE_KEY);
         if (cached != null) {
-            log.info("Get data from Redis cache");
+            loggingService.logInfo("Get data from Redis cache", logContext);
             return (List<StudentModel>) cached;
         }
-        log.info("Not found cache, Query DB");
+        loggingService.logInfo("Not found cache, Query DB", logContext);
 
         List<StudentEntity> studentEntities = studentRepo.findAll();
 
@@ -50,83 +62,97 @@ public class StudentServiceImp implements StudentService {
         for (StudentEntity students : studentEntities) {
             StudentModel studentModel = modelMapper.map(students, StudentModel.class);
             studentModels.add(studentModel);
+            loggingService.logStudentOperation("GET", String.valueOf(students.getId()), logContext);
         }
-        log.info("Gets Student Successfully");
+        loggingService.logInfo("Gets Student Successfully", logContext);
 
         redisTemplate.opsForValue()
                 .set(STUDENT_CACHE_KEY, studentModels);
-        log.info("Save cache to Redis");
+        loggingService.logInfo("Save cache to Redis", logContext);
 
         return studentModels;
     }
 
     @Override
     public List<StudentEntity> creates(List<CreateStudentModel> studentModels) {
+
+        LogContext logContext = getLogContext("creates");
+
         List<StudentEntity> studentEntities = new ArrayList<>();
         for (CreateStudentModel studentModel : studentModels) {
             StudentEntity studentEntity = modelMapper.map(studentModel, StudentEntity.class);
             studentEntities.add(studentEntity);
+            loggingService.logStudentOperation("CREATE", String.valueOf(studentEntity.getId()), logContext);
         }
         studentRepo.saveAll(studentEntities);
-        log.info("Create Students Successfully");
+        
+        loggingService.logInfo("Create Students Successfully", logContext);
 
         redisTemplate.delete(STUDENT_CACHE_KEY);
-        log.info("Del cache key = students:all , after create students");
+        loggingService.logInfo("Del cache key = students:all , after create students", logContext);
 
         return studentEntities;
     }
 
     @Override
     public List<StudentEntity> updates(List<StudentModel> studentModels) {
+
+        LogContext logContext = getLogContext("updates");
+
         List<StudentEntity> studentEntities = new ArrayList<>();
         List<Integer> listIDNotFound = new ArrayList<>();
         for (StudentModel studentModel : studentModels) {
             StudentEntity studentEntity = modelMapper.map(studentModel, StudentEntity.class);
             if (studentRepo.findById(studentModel.getId()).isPresent()) {
                 studentEntities.add(studentEntity);
+                loggingService.logStudentOperation("UPDATE", String.valueOf(studentModel.getId()), logContext);
             } else {
                 listIDNotFound.add(studentEntity.getId());
             }
         }
 
         if (!listIDNotFound.isEmpty()) {
-            log.error("Found IDs not exist: " + listIDNotFound);
+            loggingService.logError("Found IDs not exist: " + listIDNotFound, null, logContext);
             throw new NotFoundExceptionHandle("", listIDNotFound, "StudentModel");
         }
 
         studentRepo.saveAll(studentEntities);
-        log.info("Update Students Successfully");
+        loggingService.logInfo("Update Students Successfully", logContext);
 
         redisTemplate.delete(STUDENT_CACHE_KEY);
-        log.info("Del cache key = students:all , after update students");
+        loggingService.logInfo("Del cache key = students:all , after update students", logContext);
 
         return studentEntities;
     }
 
     @Override
     public Boolean deletes(List<StudentModel> StudentModels) {
+
+        LogContext logContext = getLogContext("deletes");
+
         List<StudentEntity> listDelete = new ArrayList<>();
         List<Integer> listIDNotFound = new ArrayList<>();
         for (StudentModel StudentModel : StudentModels) {
             StudentEntity studentEntity = modelMapper.map(StudentModel, StudentEntity.class);
             if (studentRepo.findById(studentEntity.getId()).isPresent()) {
                 listDelete.add(studentEntity);
+                loggingService.logStudentOperation("DELETE", String.valueOf(studentEntity.getId()), logContext);
             } else {
                 listIDNotFound.add(studentEntity.getId());
             }
         }
 
         if (!listIDNotFound.isEmpty()) {
-            log.error("Found IDs not exist: " + listIDNotFound);
+            loggingService.logError("Found IDs not exist: " + listIDNotFound, null, logContext);
             throw new NotFoundExceptionHandle("", listIDNotFound,"StudentModel");
         }
 
         studentRepo.deleteAll(listDelete);
-        log.info("Delete Students Successfully");
+        loggingService.logInfo("Delete Students Successfully", logContext);
 
 
         redisTemplate.delete(STUDENT_CACHE_KEY);
-        log.info("Del cache key = students:all , after del students");
+        loggingService.logInfo("Del cache key = students:all , after del students", logContext);
 
         return true;
     }

@@ -5,7 +5,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan(basePackages = {"com.common.QLGV", "com.handle_exceptions"})
+@ComponentScan(basePackages = 
+	{"com.common.QLGV", "com.handle_exceptions", "com.logging"}
+)
 public class QlgvApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(QlgvApplication.class, args);

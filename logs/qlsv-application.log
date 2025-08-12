@@ -1,0 +1,160 @@
+2025-08-12T14:43:43.027+07:00  INFO 18384 --- [QLSV] [restartedMain] com.common.QLSV.QlsvApplication          : Starting QlsvApplication using Java 20.0.2 with PID 18384 (D:\project IntelliJ Ultimate\modules-parent\qlsv\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent)
+2025-08-12T14:43:43.028+07:00  INFO 18384 --- [QLSV] [restartedMain] com.common.QLSV.QlsvApplication          : No active profile set, falling back to 1 default profile: "default"
+2025-08-12T14:43:43.075+07:00  INFO 18384 --- [QLSV] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-08-12T14:43:43.075+07:00  INFO 18384 --- [QLSV] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-08-12T14:43:44.249+07:00  INFO 18384 --- [QLSV] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2025-08-12T14:43:44.250+07:00  INFO 18384 --- [QLSV] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-08-12T14:43:44.447+07:00  INFO 18384 --- [QLSV] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 189 ms. Found 1 JPA repository interface.
+2025-08-12T14:43:44.460+07:00  INFO 18384 --- [QLSV] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2025-08-12T14:43:44.461+07:00  INFO 18384 --- [QLSV] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-08-12T14:43:44.477+07:00  INFO 18384 --- [QLSV] [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.common.QLSV.repositories.StudentRepo; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-08-12T14:43:44.478+07:00  INFO 18384 --- [QLSV] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 6 ms. Found 0 Redis repository interfaces.
+2025-08-12T14:43:44.962+07:00  INFO 18384 --- [QLSV] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-08-12T14:43:44.971+07:00  INFO 18384 --- [QLSV] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-08-12T14:43:44.972+07:00  INFO 18384 --- [QLSV] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.41]
+2025-08-12T14:43:45.004+07:00  INFO 18384 --- [QLSV] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-08-12T14:43:45.005+07:00  INFO 18384 --- [QLSV] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1926 ms
+2025-08-12T14:43:45.219+07:00  INFO 18384 --- [QLSV] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-08-12T14:43:45.268+07:00  INFO 18384 --- [QLSV] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.15.Final
+2025-08-12T14:43:45.304+07:00  INFO 18384 --- [QLSV] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-08-12T14:43:45.523+07:00  INFO 18384 --- [QLSV] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-08-12T14:43:45.548+07:00  WARN 18384 --- [QLSV] [restartedMain] com.zaxxer.hikari.HikariConfig           : HikariPool-1 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
+2025-08-12T14:43:45.549+07:00  INFO 18384 --- [QLSV] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-08-12T14:43:45.801+07:00  INFO 18384 --- [QLSV] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@6998650c
+2025-08-12T14:43:45.803+07:00  INFO 18384 --- [QLSV] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-08-12T14:43:45.845+07:00  WARN 18384 --- [QLSV] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-08-12T14:43:45.847+07:00  WARN 18384 --- [QLSV] [restartedMain] org.hibernate.orm.deprecation            : HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-08-12T14:43:45.863+07:00  INFO 18384 --- [QLSV] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-08-12T14:43:46.562+07:00  INFO 18384 --- [QLSV] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-08-12T14:43:46.604+07:00  INFO 18384 --- [QLSV] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-08-12T14:43:46.913+07:00  INFO 18384 --- [QLSV] [restartedMain] org.redisson.Version                     : Redisson 3.28.0
+2025-08-12T14:43:47.180+07:00  INFO 18384 --- [QLSV] [redisson-netty-1-4] o.redisson.connection.ConnectionsHolder  : 1 connections initialized for 127.0.0.1/127.0.0.1:6379
+2025-08-12T14:43:47.260+07:00  INFO 18384 --- [QLSV] [redisson-netty-1-19] o.redisson.connection.ConnectionsHolder  : 24 connections initialized for 127.0.0.1/127.0.0.1:6379
+2025-08-12T14:43:47.385+07:00  WARN 18384 --- [QLSV] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-08-12T14:43:47.572+07:00  WARN 18384 --- [QLSV] [restartedMain] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2025-08-12T14:43:47.982+07:00  INFO 18384 --- [QLSV] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-08-12T14:43:47.991+07:00  INFO 18384 --- [QLSV] [restartedMain] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint beneath base path '/actuator'
+2025-08-12T14:43:48.066+07:00  INFO 18384 --- [QLSV] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-08-12T14:43:48.081+07:00  INFO 18384 --- [QLSV] [restartedMain] com.common.QLSV.QlsvApplication          : Started QlsvApplication in 5.549 seconds (process running for 6.553)
+2025-08-12T14:43:48.408+07:00  INFO 18384 --- [QLSV] [RMI TCP Connection(2)-192.168.88.166] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-08-12T14:43:48.408+07:00  INFO 18384 --- [QLSV] [RMI TCP Connection(2)-192.168.88.166] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-08-12T14:43:48.410+07:00  INFO 18384 --- [QLSV] [RMI TCP Connection(2)-192.168.88.166] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2025-08-12T14:44:39.208+07:00  INFO 18384 --- [QLSV] [http-nio-8080-exec-4] c.l.services.imp.LoggingServiceImp       : [qlsv] StudentController - Get students API called successfully
+2025-08-12T14:44:39.222+07:00  INFO 18384 --- [QLSV] [http-nio-8080-exec-4] c.l.services.imp.LoggingServiceImp       : [qlsv] StudentServiceImp - Not found cache, Query DB
+2025-08-12T14:44:39.368+07:00  INFO 18384 --- [QLSV] [http-nio-8080-exec-4] c.l.services.imp.LoggingServiceImp       : [qlsv] StudentServiceImp - Student ID: 43, Operation: GET
+2025-08-12T14:44:39.368+07:00  INFO 18384 --- [QLSV] [http-nio-8080-exec-4] c.l.services.imp.LoggingServiceImp       : [qlsv] StudentServiceImp - Gets Student Successfully
+2025-08-12T14:44:39.382+07:00  INFO 18384 --- [QLSV] [http-nio-8080-exec-4] c.l.services.imp.LoggingServiceImp       : [qlsv] StudentServiceImp - Save cache to Redis
+2025-08-12T14:44:52.693+07:00  INFO 18384 --- [QLSV] [http-nio-8080-exec-3] c.l.services.imp.LoggingServiceImp       : [qlsv] StudentController - Get students API called successfully
+2025-08-12T14:44:52.703+07:00  INFO 18384 --- [QLSV] [http-nio-8080-exec-3] c.l.services.imp.LoggingServiceImp       : [qlsv] StudentServiceImp - Get data from Redis cache
+2025-08-12T14:44:59.837+07:00  INFO 18384 --- [QLSV] [http-nio-8080-exec-1] c.l.services.imp.LoggingServiceImp       : [qlsv] StudentController - Create students API called successfully
+2025-08-12T14:44:59.839+07:00  INFO 18384 --- [QLSV] [http-nio-8080-exec-1] c.l.services.imp.LoggingServiceImp       : [qlsv] StudentServiceImp - Student ID: 0, Operation: CREATE
+2025-08-12T14:44:59.883+07:00  INFO 18384 --- [QLSV] [http-nio-8080-exec-1] c.l.services.imp.LoggingServiceImp       : [qlsv] StudentServiceImp - Create Students Successfully
+2025-08-12T14:44:59.886+07:00  INFO 18384 --- [QLSV] [http-nio-8080-exec-1] c.l.services.imp.LoggingServiceImp       : [qlsv] StudentServiceImp - Del cache key = students:all , after create students
+2025-08-12T14:45:08.553+07:00  INFO 18384 --- [QLSV] [http-nio-8080-exec-5] c.l.services.imp.LoggingServiceImp       : [qlsv] StudentController - Update students API called successfully
+2025-08-12T14:45:08.568+07:00  INFO 18384 --- [QLSV] [http-nio-8080-exec-5] c.l.services.imp.LoggingServiceImp       : [qlsv] StudentServiceImp - Student ID: 43, Operation: UPDATE
+2025-08-12T14:45:08.574+07:00  INFO 18384 --- [QLSV] [http-nio-8080-exec-5] c.l.services.imp.LoggingServiceImp       : [qlsv] StudentServiceImp - Update Students Successfully
+2025-08-12T14:45:08.576+07:00  INFO 18384 --- [QLSV] [http-nio-8080-exec-5] c.l.services.imp.LoggingServiceImp       : [qlsv] StudentServiceImp - Del cache key = students:all , after update students
+2025-08-12T14:45:16.671+07:00  INFO 18384 --- [QLSV] [http-nio-8080-exec-6] c.l.services.imp.LoggingServiceImp       : [qlsv] StudentController - Get students API called successfully
+2025-08-12T14:45:16.675+07:00  INFO 18384 --- [QLSV] [http-nio-8080-exec-6] c.l.services.imp.LoggingServiceImp       : [qlsv] StudentServiceImp - Not found cache, Query DB
+2025-08-12T14:45:16.682+07:00  INFO 18384 --- [QLSV] [http-nio-8080-exec-6] c.l.services.imp.LoggingServiceImp       : [qlsv] StudentServiceImp - Student ID: 43, Operation: GET
+2025-08-12T14:45:16.682+07:00  INFO 18384 --- [QLSV] [http-nio-8080-exec-6] c.l.services.imp.LoggingServiceImp       : [qlsv] StudentServiceImp - Student ID: 46, Operation: GET
+2025-08-12T14:45:16.682+07:00  INFO 18384 --- [QLSV] [http-nio-8080-exec-6] c.l.services.imp.LoggingServiceImp       : [qlsv] StudentServiceImp - Gets Student Successfully
+2025-08-12T14:45:16.685+07:00  INFO 18384 --- [QLSV] [http-nio-8080-exec-6] c.l.services.imp.LoggingServiceImp       : [qlsv] StudentServiceImp - Save cache to Redis
+2025-08-12T14:45:25.965+07:00  INFO 18384 --- [QLSV] [http-nio-8080-exec-7] c.l.services.imp.LoggingServiceImp       : [qlsv] StudentController - Create students API called successfully
+2025-08-12T14:45:25.965+07:00  INFO 18384 --- [QLSV] [http-nio-8080-exec-7] c.l.services.imp.LoggingServiceImp       : [qlsv] StudentServiceImp - Student ID: 0, Operation: CREATE
+2025-08-12T14:45:25.979+07:00  INFO 18384 --- [QLSV] [http-nio-8080-exec-7] c.l.services.imp.LoggingServiceImp       : [qlsv] StudentServiceImp - Create Students Successfully
+2025-08-12T14:45:25.981+07:00  INFO 18384 --- [QLSV] [http-nio-8080-exec-7] c.l.services.imp.LoggingServiceImp       : [qlsv] StudentServiceImp - Del cache key = students:all , after create students
+2025-08-12T14:45:29.843+07:00  INFO 18384 --- [QLSV] [http-nio-8080-exec-8] c.l.services.imp.LoggingServiceImp       : [qlsv] StudentController - Get students API called successfully
+2025-08-12T14:45:29.845+07:00  INFO 18384 --- [QLSV] [http-nio-8080-exec-8] c.l.services.imp.LoggingServiceImp       : [qlsv] StudentServiceImp - Not found cache, Query DB
+2025-08-12T14:45:29.852+07:00  INFO 18384 --- [QLSV] [http-nio-8080-exec-8] c.l.services.imp.LoggingServiceImp       : [qlsv] StudentServiceImp - Student ID: 43, Operation: GET
+2025-08-12T14:45:29.853+07:00  INFO 18384 --- [QLSV] [http-nio-8080-exec-8] c.l.services.imp.LoggingServiceImp       : [qlsv] StudentServiceImp - Student ID: 46, Operation: GET
+2025-08-12T14:45:29.853+07:00  INFO 18384 --- [QLSV] [http-nio-8080-exec-8] c.l.services.imp.LoggingServiceImp       : [qlsv] StudentServiceImp - Student ID: 47, Operation: GET
+2025-08-12T14:45:29.853+07:00  INFO 18384 --- [QLSV] [http-nio-8080-exec-8] c.l.services.imp.LoggingServiceImp       : [qlsv] StudentServiceImp - Gets Student Successfully
+2025-08-12T14:45:29.857+07:00  INFO 18384 --- [QLSV] [http-nio-8080-exec-8] c.l.services.imp.LoggingServiceImp       : [qlsv] StudentServiceImp - Save cache to Redis
+2025-08-12T14:45:37.162+07:00  INFO 18384 --- [QLSV] [http-nio-8080-exec-9] c.l.services.imp.LoggingServiceImp       : [qlsv] StudentController - Delete students API called successfully
+2025-08-12T14:45:37.167+07:00  INFO 18384 --- [QLSV] [http-nio-8080-exec-9] c.l.services.imp.LoggingServiceImp       : [qlsv] StudentServiceImp - Student ID: 46, Operation: DELETE
+2025-08-12T14:45:37.170+07:00  INFO 18384 --- [QLSV] [http-nio-8080-exec-9] c.l.services.imp.LoggingServiceImp       : [qlsv] StudentServiceImp - Student ID: 47, Operation: DELETE
+2025-08-12T14:45:37.186+07:00  INFO 18384 --- [QLSV] [http-nio-8080-exec-9] c.l.services.imp.LoggingServiceImp       : [qlsv] StudentServiceImp - Delete Students Successfully
+2025-08-12T14:45:37.188+07:00  INFO 18384 --- [QLSV] [http-nio-8080-exec-9] c.l.services.imp.LoggingServiceImp       : [qlsv] StudentServiceImp - Del cache key = students:all , after del students
+2025-08-12T14:45:46.675+07:00  INFO 18384 --- [QLSV] [http-nio-8080-exec-10] c.l.services.imp.LoggingServiceImp       : [qlsv] StudentController - Update students API called successfully
+2025-08-12T14:45:46.683+07:00 ERROR 18384 --- [QLSV] [http-nio-8080-exec-10] c.l.services.imp.LoggingServiceImp       : [qlsv] StudentServiceImp - Found IDs not exist: [44]: No exception
+2025-08-12T14:45:46.688+07:00  WARN 18384 --- [QLSV] [http-nio-8080-exec-10] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [NotFoundExceptionHandle(listNotFounds=[44], modelName=StudentModel)]
+2025-08-12T14:46:05.376+07:00  INFO 18384 --- [QLSV] [http-nio-8080-exec-2] c.l.services.imp.LoggingServiceImp       : [qlsv] StudentController - Update students API called successfully
+2025-08-12T14:46:20.100+07:00 ERROR 18384 --- [QLSV] [http-nio-8080-exec-2] c.l.services.imp.LoggingServiceImp       : [qlsv] StudentServiceImp - Found IDs not exist: [44]: No exception
+2025-08-12T14:46:59.109+07:00  WARN 18384 --- [QLSV] [http-nio-8080-exec-2] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [NotFoundExceptionHandle(listNotFounds=[44], modelName=StudentModel)]
+2025-08-12T14:48:53.131+07:00  INFO 18384 --- [QLSV] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-08-12T14:48:53.353+07:00  INFO 18384 --- [QLSV] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-08-12T14:48:53.374+07:00  INFO 18384 --- [QLSV] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-08-12T14:48:53.376+07:00  INFO 18384 --- [QLSV] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-08-12T14:48:53.380+07:00  INFO 18384 --- [QLSV] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-08-12T15:36:52.736+07:00  INFO 5848 --- [QLSV] [restartedMain] com.common.QLSV.QlsvApplication          : Starting QlsvApplication using Java 20.0.2 with PID 5848 (D:\project IntelliJ Ultimate\modules-parent\qlsv\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent)
+2025-08-12T15:36:52.738+07:00  INFO 5848 --- [QLSV] [restartedMain] com.common.QLSV.QlsvApplication          : No active profile set, falling back to 1 default profile: "default"
+2025-08-12T15:36:52.782+07:00  INFO 5848 --- [QLSV] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-08-12T15:36:52.782+07:00  INFO 5848 --- [QLSV] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-08-12T15:36:53.951+07:00  INFO 5848 --- [QLSV] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2025-08-12T15:36:53.952+07:00  INFO 5848 --- [QLSV] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-08-12T15:36:54.123+07:00  INFO 5848 --- [QLSV] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 164 ms. Found 1 JPA repository interface.
+2025-08-12T15:36:54.135+07:00  INFO 5848 --- [QLSV] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2025-08-12T15:36:54.136+07:00  INFO 5848 --- [QLSV] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-08-12T15:36:54.147+07:00  INFO 5848 --- [QLSV] [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.common.QLSV.repositories.StudentRepo; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-08-12T15:36:54.148+07:00  INFO 5848 --- [QLSV] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 4 ms. Found 0 Redis repository interfaces.
+2025-08-12T15:36:54.591+07:00  INFO 5848 --- [QLSV] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-08-12T15:36:54.600+07:00  INFO 5848 --- [QLSV] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-08-12T15:36:54.600+07:00  INFO 5848 --- [QLSV] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.41]
+2025-08-12T15:36:54.639+07:00  INFO 5848 --- [QLSV] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-08-12T15:36:54.640+07:00  INFO 5848 --- [QLSV] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1857 ms
+2025-08-12T15:36:54.831+07:00  INFO 5848 --- [QLSV] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-08-12T15:36:54.878+07:00  INFO 5848 --- [QLSV] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.15.Final
+2025-08-12T15:36:54.905+07:00  INFO 5848 --- [QLSV] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-08-12T15:36:55.096+07:00  INFO 5848 --- [QLSV] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-08-12T15:36:55.118+07:00  WARN 5848 --- [QLSV] [restartedMain] com.zaxxer.hikari.HikariConfig           : HikariPool-1 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
+2025-08-12T15:36:55.118+07:00  INFO 5848 --- [QLSV] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-08-12T15:36:55.361+07:00  INFO 5848 --- [QLSV] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@69f48a11
+2025-08-12T15:36:55.362+07:00  INFO 5848 --- [QLSV] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-08-12T15:36:55.395+07:00  WARN 5848 --- [QLSV] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-08-12T15:36:55.396+07:00  WARN 5848 --- [QLSV] [restartedMain] org.hibernate.orm.deprecation            : HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-08-12T15:36:55.407+07:00  INFO 5848 --- [QLSV] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-08-12T15:36:56.065+07:00  INFO 5848 --- [QLSV] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-08-12T15:36:56.103+07:00  INFO 5848 --- [QLSV] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-08-12T15:36:56.389+07:00  INFO 5848 --- [QLSV] [restartedMain] org.redisson.Version                     : Redisson 3.28.0
+2025-08-12T15:36:56.690+07:00  INFO 5848 --- [QLSV] [redisson-netty-1-4] o.redisson.connection.ConnectionsHolder  : 1 connections initialized for 127.0.0.1/127.0.0.1:6379
+2025-08-12T15:36:56.799+07:00  INFO 5848 --- [QLSV] [redisson-netty-1-19] o.redisson.connection.ConnectionsHolder  : 24 connections initialized for 127.0.0.1/127.0.0.1:6379
+2025-08-12T15:36:56.941+07:00  WARN 5848 --- [QLSV] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-08-12T15:36:57.133+07:00  WARN 5848 --- [QLSV] [restartedMain] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2025-08-12T15:36:57.488+07:00  INFO 5848 --- [QLSV] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-08-12T15:36:57.494+07:00  INFO 5848 --- [QLSV] [restartedMain] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint beneath base path '/actuator'
+2025-08-12T15:36:57.566+07:00  INFO 5848 --- [QLSV] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-08-12T15:36:57.584+07:00  INFO 5848 --- [QLSV] [restartedMain] com.common.QLSV.QlsvApplication          : Started QlsvApplication in 5.396 seconds (process running for 6.31)
+2025-08-12T15:36:58.115+07:00  INFO 5848 --- [QLSV] [RMI TCP Connection(2)-192.168.88.166] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-08-12T15:36:58.116+07:00  INFO 5848 --- [QLSV] [RMI TCP Connection(2)-192.168.88.166] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-08-12T15:36:58.117+07:00  INFO 5848 --- [QLSV] [RMI TCP Connection(2)-192.168.88.166] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2025-08-12T15:37:07.580+07:00  INFO 5848 --- [QLSV] [http-nio-8080-exec-3] c.l.services.imp.LoggingServiceImp       : [qlsv] StudentController - Get students API called successfully
+2025-08-12T15:37:07.598+07:00  INFO 5848 --- [QLSV] [http-nio-8080-exec-3] c.l.services.imp.LoggingServiceImp       : [qlsv] StudentServiceImp - Not found cache, Query DB
+2025-08-12T15:37:07.789+07:00  INFO 5848 --- [QLSV] [http-nio-8080-exec-3] c.l.services.imp.LoggingServiceImp       : [qlsv] StudentServiceImp - Student ID: 43, Operation: GET
+2025-08-12T15:37:07.790+07:00  INFO 5848 --- [QLSV] [http-nio-8080-exec-3] c.l.services.imp.LoggingServiceImp       : [qlsv] StudentServiceImp - Gets Student Successfully
+2025-08-12T15:37:07.820+07:00  INFO 5848 --- [QLSV] [http-nio-8080-exec-3] c.l.services.imp.LoggingServiceImp       : [qlsv] StudentServiceImp - Save cache to Redis
+2025-08-12T15:37:17.789+07:00  WARN 5848 --- [QLSV] [http-nio-8080-exec-4] c.l.services.imp.LoggingServiceImp       : [exception-handler] CustomExceptionHandler - Validation Error - Field: students[0].firstName, Error: Vui Lòng Nhập Họ,(Chữ Lót).
+2025-08-12T15:37:17.792+07:00  WARN 5848 --- [QLSV] [http-nio-8080-exec-4] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in org.springframework.http.ResponseEntity<com.common.models.Response<java.util.List<com.common.models.student.CreateStudentModel>>> com.common.QLSV.controllers.StudentController.add(com.common.models.student.request.CreateStudentModelRequest,java.lang.String): [Field error in object 'createStudentModelRequest' on field 'students[0].firstName': rejected value [ ]; codes [NotBlank.createStudentModelRequest.students[0].firstName,NotBlank.createStudentModelRequest.students.firstName,NotBlank.students[0].firstName,NotBlank.students.firstName,NotBlank.firstName,NotBlank.java.lang.String,NotBlank]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [createStudentModelRequest.students[0].firstName,students[0].firstName]; arguments []; default message [students[0].firstName]]; default message [Vui Lòng Nhập Họ,(Chữ Lót).]] ]
+2025-08-12T15:38:14.936+07:00  INFO 5848 --- [QLSV] [http-nio-8080-exec-7] c.l.services.imp.LoggingServiceImp       : [qlsv] StudentController - Update students API called successfully
+2025-08-12T15:38:17.651+07:00 ERROR 5848 --- [QLSV] [http-nio-8080-exec-7] c.l.services.imp.LoggingServiceImp       : [qlsv] StudentServiceImp - Found IDs not exist: [44]: No exception
+2025-08-12T15:38:19.464+07:00  WARN 5848 --- [QLSV] [http-nio-8080-exec-7] c.l.services.imp.LoggingServiceImp       : [exception-handler] CustomExceptionHandler - Exception Handled: NotFoundExceptionHandle - IDs not found: [44]
+2025-08-12T15:38:19.466+07:00  WARN 5848 --- [QLSV] [http-nio-8080-exec-7] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [NotFoundExceptionHandle(listNotFounds=[44], modelName=StudentModel)]
+2025-08-12T15:38:31.380+07:00  INFO 5848 --- [QLSV] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-08-12T15:38:31.548+07:00  INFO 5848 --- [QLSV] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-08-12T15:38:31.575+07:00  INFO 5848 --- [QLSV] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-08-12T15:38:31.578+07:00  INFO 5848 --- [QLSV] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-08-12T15:38:31.585+07:00  INFO 5848 --- [QLSV] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.

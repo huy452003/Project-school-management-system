@@ -27,7 +27,7 @@ như ban đầu.	=
 *new*
 
 - tìm hiểu cách để log lỗi 1 cách đồng bộ giữa các module ( tao 1 module chuyen 
-log errors) 		*
+log errors) 		=
 
 - cách sử dụng redis trong project Springboot ( không sử dụng annotation ) =
 

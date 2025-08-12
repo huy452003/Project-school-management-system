@@ -59,6 +59,10 @@
 			<groupId>com.common</groupId>
 			<artifactId>model-shared</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>com.common</groupId>
+			<artifactId>logging</artifactId>
+		</dependency>
     </dependencies>
 
 	<build>

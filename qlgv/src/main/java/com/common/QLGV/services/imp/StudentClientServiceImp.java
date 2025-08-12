@@ -10,6 +10,8 @@ import com.common.models.student.StudentModel;
 import com.common.models.teacher.CreateTeacherModel;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.logging.models.LogContext;
+import com.logging.services.LoggingService;
 import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,10 +30,8 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-import lombok.extern.log4j.Log4j2;
 
 @Service
-@Log4j2
 public class StudentClientServiceImp implements StudentClientService {
 
     @Autowired
@@ -42,12 +42,24 @@ public class StudentClientServiceImp implements StudentClientService {
     TeacherRepo teacherRepo;
     @Autowired
     RedisTemplate<String, Object> redisTemplate;
+    @Autowired
+    LoggingService loggingService;
 
     private static final String STUDENTS_CACHE_KEY = "students:all";
     private static final String TEACHERS_CACHE_KEY = "teachers:all";
 
+    private LogContext getLogContext(String methodName) {
+        return LogContext.builder()
+                .module("qlgv")
+                .className("StudentClientServiceImp")
+                .methodName(methodName)
+                .build();
+    }
+
     @Override
     public List<StudentModel> getAllStudents() {
+
+        LogContext logContext = getLogContext("getAllStudents");
 
         String studentApi = "http://localhost:8080/students";
             ResponseEntity<Response<List<StudentModel>>> response = restTemplate.exchange(
@@ -59,13 +71,13 @@ public class StudentClientServiceImp implements StudentClientService {
 
             Object cached = redisTemplate.opsForValue().get(STUDENTS_CACHE_KEY);
             if (cached != null) {
-                log.info("Get data from Redis cache");
+                loggingService.logInfo("Get data from Redis cache", logContext);
                 return (List<StudentModel>) cached;
             }
-            log.info("Not found cache, Query DB");
+            loggingService.logInfo("Not found cache, Query DB", logContext);
 
             redisTemplate.opsForValue().set(STUDENTS_CACHE_KEY, response.getBody().getData());
-            log.info("Save cache to Redis");
+            loggingService.logInfo("Save cache to Redis", logContext);
             
             return response.getBody().getData();
     }
@@ -73,6 +85,9 @@ public class StudentClientServiceImp implements StudentClientService {
     @Transactional
     @Override
     public void createTeacherAndStudent(CreateTeacherAndStudent createTeacherAndStudent) {
+
+        LogContext logContext = getLogContext("createTeacherAndStudent");
+
         for (CreateTeacherModel teacherModel : createTeacherAndStudent.getTeachers()) {
             TeacherEntity teacherEntity = modelMapper.map(teacherModel , TeacherEntity.class);
             teacherRepo.save(teacherEntity);
@@ -89,6 +104,6 @@ public class StudentClientServiceImp implements StudentClientService {
         );
         redisTemplate.delete(STUDENTS_CACHE_KEY);
         redisTemplate.delete(TEACHERS_CACHE_KEY);
-        log.info("Del cache key = students:all , teachers:all , after create students-teachers");
+        loggingService.logInfo("Del cache key = students:all , teachers:all , after create students-teachers", logContext);
     }
 }

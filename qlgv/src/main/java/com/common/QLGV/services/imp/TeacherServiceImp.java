@@ -6,7 +6,8 @@ import com.common.models.teacher.TeacherModel;
 import com.handle_exceptions.NotFoundExceptionHandle;
 import com.common.QLGV.repositories.TeacherRepo;
 import com.common.QLGV.services.TeacherService;
-import lombok.extern.log4j.Log4j2;
+import com.logging.services.LoggingService;
+import com.logging.models.LogContext;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -16,7 +17,6 @@ import java.util.Collections;
 import java.util.List;
 
 @Service
-@Log4j2
 public class TeacherServiceImp implements TeacherService {
     @Autowired
     TeacherRepo teacherRepo;
@@ -24,105 +24,125 @@ public class TeacherServiceImp implements TeacherService {
     ModelMapper modelMapper;
     @Autowired
     RedisTemplate<String, Object> redisTemplate;
+    @Autowired
+    LoggingService loggingService;
 
     private static final String TEACHERS_CACHE_KEY = "teachers:all";
+
+    private LogContext getLogContext(String methodName){
+        return LogContext.builder()
+                .module("qlgv")
+                .className("TeacherServiceImp")
+                .methodName(methodName)
+                .build();
+    }
 
     @Override
     public List<TeacherModel> gets() {
 
+        LogContext logContext = getLogContext("gets");
+
         Object cached = redisTemplate.opsForValue().get(TEACHERS_CACHE_KEY);
         if (cached != null) {
-            log.info("Get data from Redis cache");
+            loggingService.logInfo("Get teachers from Redis cache", logContext);
             return (List<TeacherModel>) cached;
         }
-        log.info("Not found cache, Query DB");
+        loggingService.logInfo("Not found cache, Query DB", logContext);
 
         List<TeacherEntity> teacherEntities = teacherRepo.findAll();
         if(teacherEntities.isEmpty()){
+            loggingService.logWarn("No teachers found in database", logContext);
             throw new NotFoundExceptionHandle("", Collections.emptyList(), "TeacherModel");
         }
 
         List<TeacherModel> teacherModels = new ArrayList<>();
         for(TeacherEntity teacherEntity : teacherEntities){
             TeacherModel teacherModel = modelMapper.map(teacherEntity, TeacherModel.class);
+            loggingService.logTeacherOperation("GET", String.valueOf(teacherEntity.getId()), logContext);
             teacherModels.add(teacherModel);
         }
-        log.info("Gets teachers Successfully");
 
         redisTemplate.opsForValue()
                 .set(TEACHERS_CACHE_KEY, teacherModels);
-        log.info("Save cache to Redis");
+        loggingService.logInfo("Save cache to Redis", logContext);
 
         return teacherModels;
     }
 
     @Override
     public List<TeacherEntity> creates(List<CreateTeacherModel> createTeacherModels) {
+        LogContext logContext = getLogContext("creates");
+
         List<TeacherEntity> teacherEntities = new ArrayList<>();
         for(CreateTeacherModel createTeacherModel : createTeacherModels){
             TeacherEntity teacherEntity = modelMapper.map(createTeacherModel, TeacherEntity.class);
             teacherEntities.add(teacherEntity);
+            loggingService.logTeacherOperation("CREATE", String.valueOf(teacherEntity.getId()), logContext);
         }
         teacherRepo.saveAll(teacherEntities);
-        log.info("Create Teachers Successfully");
+        
+        loggingService.logInfo("Create Teachers Successfully", logContext);
 
         redisTemplate.delete(TEACHERS_CACHE_KEY);
-        log.info("Del cache key = teachers:all , after create teachers");
+        loggingService.logInfo("Del cache key = teachers:all , after create teachers", logContext);
 
         return teacherEntities;
     }
 
     @Override
     public List<TeacherEntity> updates(List<TeacherModel> teacherModels) {
+         LogContext logContext = getLogContext("updates");
+
         List<TeacherEntity> teacherEntities = new ArrayList<>();
         List<Integer> listIDNotFound = new ArrayList<>();
         for(TeacherModel teacherModel : teacherModels){
             TeacherEntity teacherEntity = modelMapper.map(teacherModel, TeacherEntity.class);
             if (teacherRepo.findById(teacherModel.getId()).isPresent()) {
                 teacherEntities.add(teacherEntity);
+                loggingService.logTeacherOperation("UPDATE", String.valueOf(teacherModel.getId()), logContext);
             }else {
                 listIDNotFound.add(teacherEntity.getId());
             }
         }
 
         if(!listIDNotFound.isEmpty()){
-            log.error("Found IDs not exist: " + listIDNotFound);
+            loggingService.logWarn("Teachers not found: " + listIDNotFound, logContext);
             throw new NotFoundExceptionHandle("", listIDNotFound, "TeacherModel");
         }
 
         teacherRepo.saveAll(teacherEntities);
-        log.info("Update Teacher Successfully");
+        loggingService.logInfo("Update Teacher Successfully", logContext);
 
         redisTemplate.delete(TEACHERS_CACHE_KEY);
-        log.info("Del cache key = teachers:all after update teachers");
+        loggingService.logInfo("Del cache key = teachers:all , after update teachers", logContext);
 
         return teacherEntities;
     }
 
     @Override
     public boolean deletes(List<TeacherModel> teacherModels) {
+        LogContext logContext = getLogContext("deletes");
+
         List<Integer> listIDNotFound = new ArrayList<>();
-        List<TeacherEntity> teacherEntities = new ArrayList<>();
         for(TeacherModel teacherModel : teacherModels){
-            TeacherEntity teacherEntity = modelMapper.map(teacherModel, TeacherEntity.class);
             if (teacherRepo.findById(teacherModel.getId()).isPresent()) {
-                teacherEntities.add(teacherEntity);
+                teacherRepo.deleteById(teacherModel.getId());
+                loggingService.logTeacherOperation("DELETE", String.valueOf(teacherModel.getId()), logContext);
             }else {
-                listIDNotFound.add(teacherEntity.getId());
+                listIDNotFound.add(teacherModel.getId());
             }
         }
 
         if(!listIDNotFound.isEmpty()){
-            log.error("Found IDs not exist: " + listIDNotFound);
-            throw new NotFoundExceptionHandle("",listIDNotFound, "TeacherModel");
+            loggingService.logWarn("Teachers not found: " + listIDNotFound, logContext);
+            throw new NotFoundExceptionHandle("", listIDNotFound, "TeacherModel");
         }
 
-        teacherRepo.deleteAll(teacherEntities);
-        log.info("Delete Teachers Successfully");
+        loggingService.logInfo("Delete Teacher Successfully", logContext);
 
         redisTemplate.delete(TEACHERS_CACHE_KEY);
-        log.info("Del cache key = teachers:all After del teachers");
-
+        loggingService.logInfo("Del cache key = teachers:all , after delete teachers", logContext);
+        
         return true;
     }
 }

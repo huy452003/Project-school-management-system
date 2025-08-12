@@ -7,6 +7,8 @@ import com.common.models.student.CreateStudentModel;
 import com.common.models.student.StudentModel;
 import com.common.models.student.request.CreateStudentModelRequest;
 import com.common.models.student.request.StudentModelRequest;
+import com.logging.services.LoggingService;
+import com.logging.models.LogContext;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
@@ -23,22 +25,35 @@ public class StudentController {
     StudentServiceImp studentServiceImp;
     @Autowired
     ReloadableResourceBundleMessageSource messageSource;
+    @Autowired
+    LoggingService loggingService;
+
+    private LogContext getLogContext(String methodName) {
+        return LogContext.builder()
+                .module("qlsv")
+                .className("StudentController")
+                .methodName(methodName)
+                .build();
+    }
 
     @GetMapping("")
     ResponseEntity<Response<List<StudentModel>>> get(
             @RequestHeader(value = "Accept-Language"
                     , defaultValue = "en") String acceptLanguage)
     {
+        LogContext logContext = getLogContext("get");
+
         Locale locale = Locale.forLanguageTag(acceptLanguage);
+        loggingService.logInfo("Get students API called successfully", logContext);
         List<StudentModel> studentModels = studentServiceImp.gets();
-            Response<List<StudentModel>> response = new Response<>(
-                    200
-                    , messageSource.getMessage("response.message.getSuccess", null, locale)
-                    , "StudentsModel"
-                    , null
-                    , studentModels
-            );
-            return ResponseEntity.status(response.getStatus()).body(response);
+        Response<List<StudentModel>> response = new Response<>(
+                200
+                , messageSource.getMessage("response.message.getSuccess", null, locale)
+                , "StudentsModel"
+                , null
+                , studentModels
+        );
+        return ResponseEntity.status(response.getStatus()).body(response);
     }
 
     @PostMapping("")
@@ -47,8 +62,11 @@ public class StudentController {
             , @RequestHeader(value = "Accept-Language"
             , defaultValue = "en") String acceptLanguage)
     {
+        LogContext logContext = getLogContext("add");
+
         Locale locale = Locale.forLanguageTag(acceptLanguage);
         List<CreateStudentModel> studentModels = req.getStudents();
+        loggingService.logInfo("Create students API called successfully", logContext);
         List<StudentEntity> studentEntities = studentServiceImp.creates(studentModels);
             Response<List<CreateStudentModel>> response = new Response<>(
                     200
@@ -66,8 +84,11 @@ public class StudentController {
             , @RequestHeader(value = "Accept-Language"
             , defaultValue = "en") String acceptLanguage)
     {
+        LogContext logContext = getLogContext("update");
+
         Locale locale = Locale.forLanguageTag(acceptLanguage);
         List<StudentModel> studentModels = req.getStudents();
+        loggingService.logInfo("Update students API called successfully", logContext);
         List<StudentEntity> studentEntities = studentServiceImp.updates(studentModels);
             Response<List<StudentModel>> response = new Response<>(
                     200
@@ -85,7 +106,10 @@ public class StudentController {
             , @RequestHeader(value = "Accept-Language"
             , defaultValue = "en") String acceptLanguage)
     {
+        LogContext logContext = getLogContext("delete");
+
         Locale locale = Locale.forLanguageTag(acceptLanguage);
+        loggingService.logInfo("Delete students API called successfully", logContext);
         studentServiceImp.deletes(studentModels);
             Response<List<StudentModel>> response = new Response<>(
                     200

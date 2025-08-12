@@ -110,6 +110,10 @@
 			<groupId>com.common</groupId>
 			<artifactId>handle_exceptions</artifactId>
 		</dependency>
+		<dependency>
+        <groupId>com.common</groupId>
+        <artifactId>logging</artifactId>
+    	</dependency>
 	</dependencies>
 
 	<build>
