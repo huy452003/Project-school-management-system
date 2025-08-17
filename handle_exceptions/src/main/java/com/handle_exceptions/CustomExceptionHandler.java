@@ -46,7 +46,7 @@ public class CustomExceptionHandler {
         LogContext logContext = getLogContext("notFoundExceptionHandler");
         loggingService.logExceptionHandled(
             "NotFoundExceptionHandle", 
-            "IDs not found: " + e.getListNotFounds().toString(), 
+            "List Not Found: " + e.getListNotFounds().toString(),
             logContext
         );
         
@@ -58,6 +58,30 @@ public class CustomExceptionHandler {
                 null
         );
         return ResponseEntity.status(404).body(response);
+    }
+
+    @ResponseStatus(HttpStatus.CONFLICT)
+    @ExceptionHandler(ConflictExceptionHandle.class)
+    ResponseEntity<Response<?>> conflictExceptionHandler(ConflictExceptionHandle e) {
+        Locale locale = LocaleContextHolder.getLocale();
+        Map<String, String> error = new HashMap<>();
+        error.put("Error", ": " + e.getConflictList().toString());
+
+        LogContext logContext = getLogContext("conflictExceptionHandler");
+        loggingService.logExceptionHandled(
+                "ConflictExceptionHandler",
+                "List Conflict : " + e.getConflictList().toString(),
+                logContext
+        );
+
+        Response<?> response = new Response<>(
+                409,
+                messageSource.getMessage("response.error.conflict", null, locale),
+                null,
+                error,
+                null
+        );
+        return ResponseEntity.status(409).body(response);
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)

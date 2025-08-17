@@ -8,9 +8,9 @@ import java.util.List;
 @Data
 @ToString
 public class NotFoundExceptionHandle extends RuntimeException {
-    private final List<Integer> listNotFounds;
+    private final List<String> listNotFounds;
     private final String modelName;
-    public NotFoundExceptionHandle(String message, List<Integer> listNotFounds, String modelName) {
+    public NotFoundExceptionHandle(String message, List<String> listNotFounds, String modelName) {
         super(message);
         this.listNotFounds = listNotFounds;
         this.modelName = modelName;

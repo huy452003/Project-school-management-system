@@ -72,11 +72,14 @@ nếu không được phép trả về lỗi 401
 - cách để tạo 1 Token? Cách thu hồi? phải gắn permision trong Token
 - cách giải mã Token
 - nếu Token hết hạn thì giải quyết như thế nào?
++ sử dụng refresh token để tạo access token mới mà không cần phải đăng nhập lại
 
 * messaging. kafka 
 
 
-
+JWT và Session trong restful API
+- session cần query database , jwt không cần -> tăng hiệu suất
+- rest API không cần lưu trạng thái resquest nên session không phù hợp
 
 
 

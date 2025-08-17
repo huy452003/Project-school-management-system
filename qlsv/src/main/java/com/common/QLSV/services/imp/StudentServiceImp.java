@@ -100,14 +100,14 @@ public class StudentServiceImp implements StudentService {
         LogContext logContext = getLogContext("updates");
 
         List<StudentEntity> studentEntities = new ArrayList<>();
-        List<Integer> listIDNotFound = new ArrayList<>();
+        List<String> listIDNotFound = new ArrayList<>();
         for (StudentModel studentModel : studentModels) {
             StudentEntity studentEntity = modelMapper.map(studentModel, StudentEntity.class);
             if (studentRepo.findById(studentModel.getId()).isPresent()) {
                 studentEntities.add(studentEntity);
                 loggingService.logStudentOperation("UPDATE", String.valueOf(studentModel.getId()), logContext);
             } else {
-                listIDNotFound.add(studentEntity.getId());
+                listIDNotFound.add(String.valueOf(studentEntity.getId()));
             }
         }
 
@@ -131,14 +131,14 @@ public class StudentServiceImp implements StudentService {
         LogContext logContext = getLogContext("deletes");
 
         List<StudentEntity> listDelete = new ArrayList<>();
-        List<Integer> listIDNotFound = new ArrayList<>();
+        List<String> listIDNotFound = new ArrayList<>();
         for (StudentModel StudentModel : StudentModels) {
             StudentEntity studentEntity = modelMapper.map(StudentModel, StudentEntity.class);
             if (studentRepo.findById(studentEntity.getId()).isPresent()) {
                 listDelete.add(studentEntity);
                 loggingService.logStudentOperation("DELETE", String.valueOf(studentEntity.getId()), logContext);
             } else {
-                listIDNotFound.add(studentEntity.getId());
+                listIDNotFound.add(String.valueOf(studentEntity.getId()));
             }
         }
 

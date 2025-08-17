@@ -94,14 +94,14 @@ public class TeacherServiceImp implements TeacherService {
          LogContext logContext = getLogContext("updates");
 
         List<TeacherEntity> teacherEntities = new ArrayList<>();
-        List<Integer> listIDNotFound = new ArrayList<>();
+        List<String> listIDNotFound = new ArrayList<>();
         for(TeacherModel teacherModel : teacherModels){
             TeacherEntity teacherEntity = modelMapper.map(teacherModel, TeacherEntity.class);
             if (teacherRepo.findById(teacherModel.getId()).isPresent()) {
                 teacherEntities.add(teacherEntity);
                 loggingService.logTeacherOperation("UPDATE", String.valueOf(teacherModel.getId()), logContext);
             }else {
-                listIDNotFound.add(teacherEntity.getId());
+                listIDNotFound.add(String.valueOf(teacherEntity.getId()));
             }
         }
 
@@ -123,13 +123,13 @@ public class TeacherServiceImp implements TeacherService {
     public boolean deletes(List<TeacherModel> teacherModels) {
         LogContext logContext = getLogContext("deletes");
 
-        List<Integer> listIDNotFound = new ArrayList<>();
+        List<String> listIDNotFound = new ArrayList<>();
         for(TeacherModel teacherModel : teacherModels){
             if (teacherRepo.findById(teacherModel.getId()).isPresent()) {
                 teacherRepo.deleteById(teacherModel.getId());
                 loggingService.logTeacherOperation("DELETE", String.valueOf(teacherModel.getId()), logContext);
             }else {
-                listIDNotFound.add(teacherModel.getId());
+                listIDNotFound.add(String.valueOf(teacherModel.getId()));
             }
         }
 
