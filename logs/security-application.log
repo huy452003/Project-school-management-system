@@ -1,0 +1,427 @@
+2025-09-10T20:52:48.259+07:00  INFO 12768 --- [security] [main] com.security.SecurityApplication         : Starting SecurityApplication using Java 20.0.2 with PID 12768 (D:\project IntelliJ Ultimate\modules-parent\security\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\security)
+2025-09-10T20:52:48.283+07:00  INFO 12768 --- [security] [main] com.security.SecurityApplication         : No active profile set, falling back to 1 default profile: "default"
+2025-09-10T20:52:50.024+07:00  INFO 12768 --- [security] [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2025-09-10T20:52:50.026+07:00  INFO 12768 --- [security] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-09-10T20:52:50.251+07:00  INFO 12768 --- [security] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 215 ms. Found 1 JPA repository interface.
+2025-09-10T20:52:50.284+07:00  INFO 12768 --- [security] [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2025-09-10T20:52:50.287+07:00  INFO 12768 --- [security] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-09-10T20:52:50.316+07:00  INFO 12768 --- [security] [main] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.security.repositories.UserRepo; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-09-10T20:52:50.317+07:00  INFO 12768 --- [security] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 13 ms. Found 0 Redis repository interfaces.
+2025-09-10T20:52:51.248+07:00  INFO 12768 --- [security] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8082 (http)
+2025-09-10T20:52:51.270+07:00  INFO 12768 --- [security] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-09-10T20:52:51.275+07:00  INFO 12768 --- [security] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.41]
+2025-09-10T20:52:51.373+07:00  INFO 12768 --- [security] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-09-10T20:52:51.373+07:00  INFO 12768 --- [security] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3002 ms
+2025-09-10T20:52:51.608+07:00  INFO 12768 --- [security] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-09-10T20:52:51.696+07:00  INFO 12768 --- [security] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.15.Final
+2025-09-10T20:52:51.760+07:00  INFO 12768 --- [security] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-09-10T20:52:52.208+07:00  INFO 12768 --- [security] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-09-10T20:52:52.254+07:00  INFO 12768 --- [security] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-09-10T20:52:52.613+07:00  INFO 12768 --- [security] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@787a0fd6
+2025-09-10T20:52:52.615+07:00  INFO 12768 --- [security] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-09-10T20:52:52.719+07:00  WARN 12768 --- [security] [main] org.hibernate.orm.deprecation            : HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-09-10T20:52:52.759+07:00  INFO 12768 --- [security] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0.36
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-09-10T20:52:53.520+07:00  INFO 12768 --- [security] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-09-10T20:52:53.599+07:00  INFO 12768 --- [security] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-09-10T20:52:54.183+07:00  INFO 12768 --- [security] [main] eAuthenticationProviderManagerConfigurer : Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2025-09-10T20:52:54.184+07:00  WARN 12768 --- [security] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2025-09-10T20:52:54.348+07:00  WARN 12768 --- [security] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-09-10T20:52:56.083+07:00  INFO 12768 --- [security] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8082 (http) with context path '/'
+2025-09-10T20:52:56.177+07:00  INFO 12768 --- [security] [main] com.security.SecurityApplication         : Started SecurityApplication in 8.44 seconds (process running for 9.781)
+2025-09-10 20:54:57 [background-preinit] DEBUG [org.jboss.logging] - Logging Provider: org.jboss.logging.Slf4jLoggerProvider found via system property
+2025-09-10 20:54:57 [main] INFO  [com.security.SecurityApplication] - Starting SecurityApplication using Java 20.0.2 with PID 10692 (D:\project IntelliJ Ultimate\modules-parent\security\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\security)
+2025-09-10 20:54:57 [main] DEBUG [com.security.SecurityApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
+2025-09-10 20:54:57 [main] INFO  [com.security.SecurityApplication] - No active profile set, falling back to 1 default profile: "default"
+2025-09-10 20:54:59 [main] DEBUG [com.zaxxer.hikari.HikariConfig] - Class com.mysql.cj.jdbc.Driver found in Thread context class loader TomcatEmbeddedWebappClassLoader
+  context: ROOT
+  delegate: true
+----------> Parent Classloader:
+jdk.internal.loader.ClassLoaders$AppClassLoader@76ed5528
+
+2025-09-10 20:54:59 [main] DEBUG [com.zaxxer.hikari.HikariConfig] - HikariPool-1 - configuration:
+2025-09-10 20:54:59 [main] DEBUG [com.zaxxer.hikari.HikariConfig] - allowPoolSuspension.............false
+2025-09-10 20:54:59 [main] DEBUG [com.zaxxer.hikari.HikariConfig] - autoCommit......................true
+2025-09-10 20:54:59 [main] DEBUG [com.zaxxer.hikari.HikariConfig] - catalog.........................none
+2025-09-10 20:54:59 [main] DEBUG [com.zaxxer.hikari.HikariConfig] - connectionInitSql...............none
+2025-09-10 20:54:59 [main] DEBUG [com.zaxxer.hikari.HikariConfig] - connectionTestQuery.............none
+2025-09-10 20:54:59 [main] DEBUG [com.zaxxer.hikari.HikariConfig] - connectionTimeout...............30000
+2025-09-10 20:54:59 [main] DEBUG [com.zaxxer.hikari.HikariConfig] - credentials.....................com.zaxxer.hikari.util.Credentials@25dcf1b6
+2025-09-10 20:54:59 [main] DEBUG [com.zaxxer.hikari.HikariConfig] - dataSource......................none
+2025-09-10 20:54:59 [main] DEBUG [com.zaxxer.hikari.HikariConfig] - dataSourceClassName.............none
+2025-09-10 20:54:59 [main] DEBUG [com.zaxxer.hikari.HikariConfig] - dataSourceJNDI..................none
+2025-09-10 20:54:59 [main] DEBUG [com.zaxxer.hikari.HikariConfig] - dataSourceProperties............{password=<masked>}
+2025-09-10 20:54:59 [main] DEBUG [com.zaxxer.hikari.HikariConfig] - driverClassName................."com.mysql.cj.jdbc.Driver"
+2025-09-10 20:54:59 [main] DEBUG [com.zaxxer.hikari.HikariConfig] - exceptionOverride...............none
+2025-09-10 20:54:59 [main] DEBUG [com.zaxxer.hikari.HikariConfig] - exceptionOverrideClassName......none
+2025-09-10 20:54:59 [main] DEBUG [com.zaxxer.hikari.HikariConfig] - healthCheckProperties...........{}
+2025-09-10 20:54:59 [main] DEBUG [com.zaxxer.hikari.HikariConfig] - healthCheckRegistry.............none
+2025-09-10 20:54:59 [main] DEBUG [com.zaxxer.hikari.HikariConfig] - idleTimeout.....................600000
+2025-09-10 20:54:59 [main] DEBUG [com.zaxxer.hikari.HikariConfig] - initializationFailTimeout.......1
+2025-09-10 20:54:59 [main] DEBUG [com.zaxxer.hikari.HikariConfig] - isolateInternalQueries..........false
+2025-09-10 20:54:59 [main] DEBUG [com.zaxxer.hikari.HikariConfig] - jdbcUrl.........................jdbc:mysql://localhost:3306/security_module
+2025-09-10 20:54:59 [main] DEBUG [com.zaxxer.hikari.HikariConfig] - keepaliveTime...................120000
+2025-09-10 20:54:59 [main] DEBUG [com.zaxxer.hikari.HikariConfig] - leakDetectionThreshold..........0
+2025-09-10 20:54:59 [main] DEBUG [com.zaxxer.hikari.HikariConfig] - maxLifetime.....................1800000
+2025-09-10 20:55:00 [main] DEBUG [com.zaxxer.hikari.HikariConfig] - maximumPoolSize.................10
+2025-09-10 20:55:00 [main] DEBUG [com.zaxxer.hikari.HikariConfig] - metricRegistry..................none
+2025-09-10 20:55:00 [main] DEBUG [com.zaxxer.hikari.HikariConfig] - metricsTrackerFactory...........none
+2025-09-10 20:55:00 [main] DEBUG [com.zaxxer.hikari.HikariConfig] - minimumIdle.....................10
+2025-09-10 20:55:00 [main] DEBUG [com.zaxxer.hikari.HikariConfig] - password........................<masked>
+2025-09-10 20:55:00 [main] DEBUG [com.zaxxer.hikari.HikariConfig] - poolName........................"HikariPool-1"
+2025-09-10 20:55:00 [main] DEBUG [com.zaxxer.hikari.HikariConfig] - readOnly........................false
+2025-09-10 20:55:00 [main] DEBUG [com.zaxxer.hikari.HikariConfig] - registerMbeans..................false
+2025-09-10 20:55:00 [main] DEBUG [com.zaxxer.hikari.HikariConfig] - scheduledExecutor...............none
+2025-09-10 20:55:00 [main] DEBUG [com.zaxxer.hikari.HikariConfig] - schema..........................none
+2025-09-10 20:55:00 [main] DEBUG [com.zaxxer.hikari.HikariConfig] - threadFactory...................internal
+2025-09-10 20:55:00 [main] DEBUG [com.zaxxer.hikari.HikariConfig] - transactionIsolation............default
+2025-09-10 20:55:00 [main] DEBUG [com.zaxxer.hikari.HikariConfig] - username........................"root"
+2025-09-10 20:55:00 [main] DEBUG [com.zaxxer.hikari.HikariConfig] - validationTimeout...............5000
+2025-09-10 20:55:00 [main] INFO  [com.zaxxer.hikari.HikariDataSource] - HikariPool-1 - Starting...
+2025-09-10 20:55:00 [main] DEBUG [com.zaxxer.hikari.pool.PoolBase] - HikariPool-1 - Attempting to create/setup new connection (c0e16eb6-d244-4e9f-98bf-ffa99df3bb81)
+2025-09-10 20:55:00 [main] DEBUG [jdk.event.security] - X509Certificate: Alg:SHA256withRSA, Serial:2, Subject:CN=MySQL_Server_8.0.36_Auto_Generated_Server_Certificate, Issuer:CN=MySQL_Server_8.0.36_Auto_Generated_CA_Certificate, Key type:RSA, Length:2048, Cert Id:2357670441, Valid from:13:55, 14/06/2024, Valid until:13:55, 12/06/2034
+2025-09-10 20:55:00 [main] DEBUG [jdk.event.security] - X509Certificate: Alg:SHA256withRSA, Serial:1, Subject:CN=MySQL_Server_8.0.36_Auto_Generated_CA_Certificate, Issuer:CN=MySQL_Server_8.0.36_Auto_Generated_CA_Certificate, Key type:RSA, Length:2048, Cert Id:2224490314, Valid from:13:55, 14/06/2024, Valid until:13:55, 12/06/2034
+2025-09-10 20:55:00 [main] DEBUG [jdk.event.security] -  TLSHandshake: localhost:3306, TLSv1.3, TLS_AES_256_GCM_SHA384, 2357670441
+2025-09-10 20:55:00 [main] DEBUG [com.zaxxer.hikari.pool.PoolBase] - HikariPool-1 - Established new connection (c0e16eb6-d244-4e9f-98bf-ffa99df3bb81)
+2025-09-10 20:55:00 [main] INFO  [com.zaxxer.hikari.pool.HikariPool] - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@dbda472
+2025-09-10 20:55:00 [main] INFO  [com.zaxxer.hikari.HikariDataSource] - HikariPool-1 - Start completed.
+2025-09-10 20:55:00 [main] WARN  [org.hibernate.orm.deprecation] - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-09-10 20:55:00 [HikariPool-1:housekeeper] DEBUG [com.zaxxer.hikari.pool.HikariPool] - HikariPool-1 - Pool stats (total=1/10, idle=0/10, active=1, waiting=0)
+2025-09-10 20:55:00 [HikariPool-1:connection-adder] DEBUG [com.zaxxer.hikari.pool.PoolBase] - HikariPool-1 - Attempting to create/setup new connection (11bc558e-801a-40aa-a121-5fe8ed4dce68)
+2025-09-10 20:55:00 [HikariPool-1:connection-adder] DEBUG [jdk.event.security] - X509Certificate: Alg:SHA256withRSA, Serial:2, Subject:CN=MySQL_Server_8.0.36_Auto_Generated_Server_Certificate, Issuer:CN=MySQL_Server_8.0.36_Auto_Generated_CA_Certificate, Key type:RSA, Length:2048, Cert Id:2357670441, Valid from:13:55, 14/06/2024, Valid until:13:55, 12/06/2034
+2025-09-10 20:55:00 [HikariPool-1:connection-adder] DEBUG [jdk.event.security] - X509Certificate: Alg:SHA256withRSA, Serial:1, Subject:CN=MySQL_Server_8.0.36_Auto_Generated_CA_Certificate, Issuer:CN=MySQL_Server_8.0.36_Auto_Generated_CA_Certificate, Key type:RSA, Length:2048, Cert Id:2224490314, Valid from:13:55, 14/06/2024, Valid until:13:55, 12/06/2034
+2025-09-10 20:55:00 [HikariPool-1:connection-adder] DEBUG [jdk.event.security] -  TLSHandshake: localhost:3306, TLSv1.3, TLS_AES_256_GCM_SHA384, 2357670441
+2025-09-10 20:55:00 [HikariPool-1:connection-adder] DEBUG [com.zaxxer.hikari.pool.PoolBase] - HikariPool-1 - Established new connection (11bc558e-801a-40aa-a121-5fe8ed4dce68)
+2025-09-10 20:55:00 [HikariPool-1:connection-adder] DEBUG [com.zaxxer.hikari.pool.HikariPool] - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@6b7ce097
+2025-09-10 20:55:00 [HikariPool-1:connection-adder] DEBUG [com.zaxxer.hikari.pool.HikariPool] - HikariPool-1 - After adding stats (total=2/10, idle=2/10, active=0, waiting=0)
+2025-09-10 20:55:00 [HikariPool-1:connection-adder] DEBUG [com.zaxxer.hikari.pool.PoolBase] - HikariPool-1 - Attempting to create/setup new connection (880f472c-0438-4346-b661-eae1862c4cec)
+2025-09-10 20:55:00 [HikariPool-1:connection-adder] DEBUG [jdk.event.security] - X509Certificate: Alg:SHA256withRSA, Serial:2, Subject:CN=MySQL_Server_8.0.36_Auto_Generated_Server_Certificate, Issuer:CN=MySQL_Server_8.0.36_Auto_Generated_CA_Certificate, Key type:RSA, Length:2048, Cert Id:2357670441, Valid from:13:55, 14/06/2024, Valid until:13:55, 12/06/2034
+2025-09-10 20:55:00 [HikariPool-1:connection-adder] DEBUG [jdk.event.security] - X509Certificate: Alg:SHA256withRSA, Serial:1, Subject:CN=MySQL_Server_8.0.36_Auto_Generated_CA_Certificate, Issuer:CN=MySQL_Server_8.0.36_Auto_Generated_CA_Certificate, Key type:RSA, Length:2048, Cert Id:2224490314, Valid from:13:55, 14/06/2024, Valid until:13:55, 12/06/2034
+2025-09-10 20:55:00 [HikariPool-1:connection-adder] DEBUG [jdk.event.security] -  TLSHandshake: localhost:3306, TLSv1.3, TLS_AES_256_GCM_SHA384, 2357670441
+2025-09-10 20:55:00 [HikariPool-1:connection-adder] DEBUG [com.zaxxer.hikari.pool.PoolBase] - HikariPool-1 - Established new connection (880f472c-0438-4346-b661-eae1862c4cec)
+2025-09-10 20:55:00 [HikariPool-1:connection-adder] DEBUG [com.zaxxer.hikari.pool.HikariPool] - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@17d54426
+2025-09-10 20:55:00 [HikariPool-1:connection-adder] DEBUG [com.zaxxer.hikari.pool.HikariPool] - HikariPool-1 - After adding stats (total=3/10, idle=3/10, active=0, waiting=0)
+2025-09-10 20:55:00 [HikariPool-1:connection-adder] DEBUG [com.zaxxer.hikari.pool.PoolBase] - HikariPool-1 - Attempting to create/setup new connection (de3c7b65-f797-4c05-bc8a-65fa49dd85e5)
+2025-09-10 20:55:00 [HikariPool-1:connection-adder] DEBUG [jdk.event.security] - X509Certificate: Alg:SHA256withRSA, Serial:2, Subject:CN=MySQL_Server_8.0.36_Auto_Generated_Server_Certificate, Issuer:CN=MySQL_Server_8.0.36_Auto_Generated_CA_Certificate, Key type:RSA, Length:2048, Cert Id:2357670441, Valid from:13:55, 14/06/2024, Valid until:13:55, 12/06/2034
+2025-09-10 20:55:00 [HikariPool-1:connection-adder] DEBUG [jdk.event.security] - X509Certificate: Alg:SHA256withRSA, Serial:1, Subject:CN=MySQL_Server_8.0.36_Auto_Generated_CA_Certificate, Issuer:CN=MySQL_Server_8.0.36_Auto_Generated_CA_Certificate, Key type:RSA, Length:2048, Cert Id:2224490314, Valid from:13:55, 14/06/2024, Valid until:13:55, 12/06/2034
+2025-09-10 20:55:00 [HikariPool-1:connection-adder] DEBUG [jdk.event.security] -  TLSHandshake: localhost:3306, TLSv1.3, TLS_AES_256_GCM_SHA384, 2357670441
+2025-09-10 20:55:00 [HikariPool-1:connection-adder] DEBUG [com.zaxxer.hikari.pool.PoolBase] - HikariPool-1 - Established new connection (de3c7b65-f797-4c05-bc8a-65fa49dd85e5)
+2025-09-10 20:55:00 [HikariPool-1:connection-adder] DEBUG [com.zaxxer.hikari.pool.HikariPool] - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@6fdf963e
+2025-09-10 20:55:00 [HikariPool-1:connection-adder] DEBUG [com.zaxxer.hikari.pool.HikariPool] - HikariPool-1 - After adding stats (total=4/10, idle=4/10, active=0, waiting=0)
+2025-09-10 20:55:00 [HikariPool-1:connection-adder] DEBUG [com.zaxxer.hikari.pool.PoolBase] - HikariPool-1 - Attempting to create/setup new connection (bc09dfee-9d5a-43ac-b777-e31369bfae0b)
+2025-09-10 20:55:00 [HikariPool-1:connection-adder] DEBUG [jdk.event.security] - X509Certificate: Alg:SHA256withRSA, Serial:2, Subject:CN=MySQL_Server_8.0.36_Auto_Generated_Server_Certificate, Issuer:CN=MySQL_Server_8.0.36_Auto_Generated_CA_Certificate, Key type:RSA, Length:2048, Cert Id:2357670441, Valid from:13:55, 14/06/2024, Valid until:13:55, 12/06/2034
+2025-09-10 20:55:00 [HikariPool-1:connection-adder] DEBUG [jdk.event.security] - X509Certificate: Alg:SHA256withRSA, Serial:1, Subject:CN=MySQL_Server_8.0.36_Auto_Generated_CA_Certificate, Issuer:CN=MySQL_Server_8.0.36_Auto_Generated_CA_Certificate, Key type:RSA, Length:2048, Cert Id:2224490314, Valid from:13:55, 14/06/2024, Valid until:13:55, 12/06/2034
+2025-09-10 20:55:00 [HikariPool-1:connection-adder] DEBUG [jdk.event.security] -  TLSHandshake: localhost:3306, TLSv1.3, TLS_AES_256_GCM_SHA384, 2357670441
+2025-09-10 20:55:00 [HikariPool-1:connection-adder] DEBUG [com.zaxxer.hikari.pool.PoolBase] - HikariPool-1 - Established new connection (bc09dfee-9d5a-43ac-b777-e31369bfae0b)
+2025-09-10 20:55:00 [HikariPool-1:connection-adder] DEBUG [com.zaxxer.hikari.pool.HikariPool] - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@77279cfc
+2025-09-10 20:55:00 [HikariPool-1:connection-adder] DEBUG [com.zaxxer.hikari.pool.HikariPool] - HikariPool-1 - After adding stats (total=5/10, idle=5/10, active=0, waiting=0)
+2025-09-10 20:55:00 [HikariPool-1:connection-adder] DEBUG [com.zaxxer.hikari.pool.PoolBase] - HikariPool-1 - Attempting to create/setup new connection (3b65670a-a5e5-47b0-9e4c-b7aadd11426a)
+2025-09-10 20:55:00 [HikariPool-1:connection-adder] DEBUG [jdk.event.security] - X509Certificate: Alg:SHA256withRSA, Serial:2, Subject:CN=MySQL_Server_8.0.36_Auto_Generated_Server_Certificate, Issuer:CN=MySQL_Server_8.0.36_Auto_Generated_CA_Certificate, Key type:RSA, Length:2048, Cert Id:2357670441, Valid from:13:55, 14/06/2024, Valid until:13:55, 12/06/2034
+2025-09-10 20:55:00 [HikariPool-1:connection-adder] DEBUG [jdk.event.security] - X509Certificate: Alg:SHA256withRSA, Serial:1, Subject:CN=MySQL_Server_8.0.36_Auto_Generated_CA_Certificate, Issuer:CN=MySQL_Server_8.0.36_Auto_Generated_CA_Certificate, Key type:RSA, Length:2048, Cert Id:2224490314, Valid from:13:55, 14/06/2024, Valid until:13:55, 12/06/2034
+2025-09-10 20:55:00 [HikariPool-1:connection-adder] DEBUG [jdk.event.security] -  TLSHandshake: localhost:3306, TLSv1.3, TLS_AES_256_GCM_SHA384, 2357670441
+2025-09-10 20:55:00 [HikariPool-1:connection-adder] DEBUG [com.zaxxer.hikari.pool.PoolBase] - HikariPool-1 - Established new connection (3b65670a-a5e5-47b0-9e4c-b7aadd11426a)
+2025-09-10 20:55:00 [HikariPool-1:connection-adder] DEBUG [com.zaxxer.hikari.pool.HikariPool] - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@52b8e68
+2025-09-10 20:55:00 [HikariPool-1:connection-adder] DEBUG [com.zaxxer.hikari.pool.HikariPool] - HikariPool-1 - After adding stats (total=6/10, idle=6/10, active=0, waiting=0)
+2025-09-10 20:55:00 [HikariPool-1:connection-adder] DEBUG [com.zaxxer.hikari.pool.PoolBase] - HikariPool-1 - Attempting to create/setup new connection (acc34be5-9fbd-4df9-862a-9d50b37849ca)
+2025-09-10 20:55:00 [HikariPool-1:connection-adder] DEBUG [jdk.event.security] - X509Certificate: Alg:SHA256withRSA, Serial:2, Subject:CN=MySQL_Server_8.0.36_Auto_Generated_Server_Certificate, Issuer:CN=MySQL_Server_8.0.36_Auto_Generated_CA_Certificate, Key type:RSA, Length:2048, Cert Id:2357670441, Valid from:13:55, 14/06/2024, Valid until:13:55, 12/06/2034
+2025-09-10 20:55:00 [HikariPool-1:connection-adder] DEBUG [jdk.event.security] - X509Certificate: Alg:SHA256withRSA, Serial:1, Subject:CN=MySQL_Server_8.0.36_Auto_Generated_CA_Certificate, Issuer:CN=MySQL_Server_8.0.36_Auto_Generated_CA_Certificate, Key type:RSA, Length:2048, Cert Id:2224490314, Valid from:13:55, 14/06/2024, Valid until:13:55, 12/06/2034
+2025-09-10 20:55:00 [HikariPool-1:connection-adder] DEBUG [jdk.event.security] -  TLSHandshake: localhost:3306, TLSv1.3, TLS_AES_256_GCM_SHA384, 2357670441
+2025-09-10 20:55:00 [HikariPool-1:connection-adder] DEBUG [com.zaxxer.hikari.pool.PoolBase] - HikariPool-1 - Established new connection (acc34be5-9fbd-4df9-862a-9d50b37849ca)
+2025-09-10 20:55:00 [HikariPool-1:connection-adder] DEBUG [com.zaxxer.hikari.pool.HikariPool] - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@7e0838b3
+2025-09-10 20:55:01 [HikariPool-1:connection-adder] DEBUG [com.zaxxer.hikari.pool.HikariPool] - HikariPool-1 - After adding stats (total=7/10, idle=7/10, active=0, waiting=0)
+2025-09-10 20:55:01 [HikariPool-1:connection-adder] DEBUG [com.zaxxer.hikari.pool.PoolBase] - HikariPool-1 - Attempting to create/setup new connection (b68e38d2-cdd2-4028-92f2-4717edd608e8)
+2025-09-10 20:55:01 [HikariPool-1:connection-adder] DEBUG [jdk.event.security] - X509Certificate: Alg:SHA256withRSA, Serial:2, Subject:CN=MySQL_Server_8.0.36_Auto_Generated_Server_Certificate, Issuer:CN=MySQL_Server_8.0.36_Auto_Generated_CA_Certificate, Key type:RSA, Length:2048, Cert Id:2357670441, Valid from:13:55, 14/06/2024, Valid until:13:55, 12/06/2034
+2025-09-10 20:55:01 [HikariPool-1:connection-adder] DEBUG [jdk.event.security] - X509Certificate: Alg:SHA256withRSA, Serial:1, Subject:CN=MySQL_Server_8.0.36_Auto_Generated_CA_Certificate, Issuer:CN=MySQL_Server_8.0.36_Auto_Generated_CA_Certificate, Key type:RSA, Length:2048, Cert Id:2224490314, Valid from:13:55, 14/06/2024, Valid until:13:55, 12/06/2034
+2025-09-10 20:55:01 [HikariPool-1:connection-adder] DEBUG [jdk.event.security] -  TLSHandshake: localhost:3306, TLSv1.3, TLS_AES_256_GCM_SHA384, 2357670441
+2025-09-10 20:55:01 [HikariPool-1:connection-adder] DEBUG [com.zaxxer.hikari.pool.PoolBase] - HikariPool-1 - Established new connection (b68e38d2-cdd2-4028-92f2-4717edd608e8)
+2025-09-10 20:55:01 [HikariPool-1:connection-adder] DEBUG [com.zaxxer.hikari.pool.HikariPool] - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@68bf8584
+2025-09-10 20:55:01 [HikariPool-1:connection-adder] DEBUG [com.zaxxer.hikari.pool.HikariPool] - HikariPool-1 - After adding stats (total=8/10, idle=8/10, active=0, waiting=0)
+2025-09-10 20:55:01 [HikariPool-1:connection-adder] DEBUG [com.zaxxer.hikari.pool.PoolBase] - HikariPool-1 - Attempting to create/setup new connection (866562aa-cfb7-4687-aa0e-7404a1f83e06)
+2025-09-10 20:55:01 [HikariPool-1:connection-adder] DEBUG [jdk.event.security] - X509Certificate: Alg:SHA256withRSA, Serial:2, Subject:CN=MySQL_Server_8.0.36_Auto_Generated_Server_Certificate, Issuer:CN=MySQL_Server_8.0.36_Auto_Generated_CA_Certificate, Key type:RSA, Length:2048, Cert Id:2357670441, Valid from:13:55, 14/06/2024, Valid until:13:55, 12/06/2034
+2025-09-10 20:55:01 [HikariPool-1:connection-adder] DEBUG [jdk.event.security] - X509Certificate: Alg:SHA256withRSA, Serial:1, Subject:CN=MySQL_Server_8.0.36_Auto_Generated_CA_Certificate, Issuer:CN=MySQL_Server_8.0.36_Auto_Generated_CA_Certificate, Key type:RSA, Length:2048, Cert Id:2224490314, Valid from:13:55, 14/06/2024, Valid until:13:55, 12/06/2034
+2025-09-10 20:55:01 [HikariPool-1:connection-adder] DEBUG [jdk.event.security] -  TLSHandshake: localhost:3306, TLSv1.3, TLS_AES_256_GCM_SHA384, 2357670441
+2025-09-10 20:55:01 [HikariPool-1:connection-adder] DEBUG [com.zaxxer.hikari.pool.PoolBase] - HikariPool-1 - Established new connection (866562aa-cfb7-4687-aa0e-7404a1f83e06)
+2025-09-10 20:55:01 [HikariPool-1:connection-adder] DEBUG [com.zaxxer.hikari.pool.HikariPool] - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@12a92bac
+2025-09-10 20:55:01 [HikariPool-1:connection-adder] DEBUG [com.zaxxer.hikari.pool.HikariPool] - HikariPool-1 - After adding stats (total=9/10, idle=9/10, active=0, waiting=0)
+2025-09-10 20:55:01 [HikariPool-1:connection-adder] DEBUG [com.zaxxer.hikari.pool.PoolBase] - HikariPool-1 - Attempting to create/setup new connection (9236814a-c6b6-4ea9-b784-13dd2bf42cf9)
+2025-09-10 20:55:01 [HikariPool-1:connection-adder] DEBUG [jdk.event.security] - X509Certificate: Alg:SHA256withRSA, Serial:2, Subject:CN=MySQL_Server_8.0.36_Auto_Generated_Server_Certificate, Issuer:CN=MySQL_Server_8.0.36_Auto_Generated_CA_Certificate, Key type:RSA, Length:2048, Cert Id:2357670441, Valid from:13:55, 14/06/2024, Valid until:13:55, 12/06/2034
+2025-09-10 20:55:01 [HikariPool-1:connection-adder] DEBUG [jdk.event.security] - X509Certificate: Alg:SHA256withRSA, Serial:1, Subject:CN=MySQL_Server_8.0.36_Auto_Generated_CA_Certificate, Issuer:CN=MySQL_Server_8.0.36_Auto_Generated_CA_Certificate, Key type:RSA, Length:2048, Cert Id:2224490314, Valid from:13:55, 14/06/2024, Valid until:13:55, 12/06/2034
+2025-09-10 20:55:01 [HikariPool-1:connection-adder] DEBUG [jdk.event.security] -  TLSHandshake: localhost:3306, TLSv1.3, TLS_AES_256_GCM_SHA384, 2357670441
+2025-09-10 20:55:01 [HikariPool-1:connection-adder] DEBUG [com.zaxxer.hikari.pool.PoolBase] - HikariPool-1 - Established new connection (9236814a-c6b6-4ea9-b784-13dd2bf42cf9)
+2025-09-10 20:55:01 [HikariPool-1:connection-adder] DEBUG [com.zaxxer.hikari.pool.HikariPool] - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@4779ae1f
+2025-09-10 20:55:01 [HikariPool-1:connection-adder] DEBUG [com.zaxxer.hikari.pool.HikariPool] - HikariPool-1 - After adding stats (total=10/10, idle=10/10, active=0, waiting=0)
+2025-09-10 20:55:01 [HikariPool-1:connection-adder] DEBUG [com.zaxxer.hikari.pool.HikariPool] - HikariPool-1 - Connection not added, stats (total=10/10, idle=10/10, active=0, waiting=0)
+2025-09-10 20:55:02 [main] DEBUG [com.security.config.JwtAuthFilter] - Filter 'jwtAuthFilter' configured for use
+2025-09-10 20:55:02 [main] WARN  [o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer] - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2025-09-10 20:55:02 [main] WARN  [o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-09-10 20:55:02 [main] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
+	c.s.c.AuthController:
+	{POST [/auth/register]}: register(Register,String)
+	{POST [/auth/login]}: login(Login,String)
+	{POST [/auth/refresh]}: refreshToken(String,String)
+	{GET [/auth/validate]}: validateToken(String,String)
+2025-09-10 20:55:02 [main] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
+	o.s.b.a.w.s.e.BasicErrorController:
+	{ [/error]}: error(HttpServletRequest)
+	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
+2025-09-10 20:55:02 [main] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'beanNameHandlerMapping' {}
+2025-09-10 20:55:02 [main] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
+2025-09-10 20:55:02 [main] DEBUG [i.n.u.i.l.InternalLoggerFactory] - Using SLF4J as the default logging framework
+2025-09-10 20:55:02 [main] DEBUG [i.l.c.r.AddressResolverGroupProvider] - Starting without optional netty's non-blocking DNS resolver library
+2025-09-10 20:55:02 [main] DEBUG [i.l.c.r.DefaultClientResources] - -Dio.netty.eventLoopThreads: 8
+2025-09-10 20:55:02 [main] DEBUG [i.l.c.r.DefaultEventLoopGroupProvider] - Creating executor io.netty.util.concurrent.DefaultEventExecutorGroup
+2025-09-10 20:55:02 [main] DEBUG [i.n.u.concurrent.GlobalEventExecutor] - -Dio.netty.globalEventExecutor.quietPeriodSeconds: 1
+2025-09-10 20:55:02 [main] DEBUG [i.n.u.i.InternalThreadLocalMap] - -Dio.netty.threadLocalMap.stringBuilder.initialSize: 1024
+2025-09-10 20:55:02 [main] DEBUG [i.n.u.i.InternalThreadLocalMap] - -Dio.netty.threadLocalMap.stringBuilder.maxSize: 4096
+2025-09-10 20:55:02 [main] DEBUG [io.netty.util.ResourceLeakDetector] - -Dio.netty.leakDetection.level: simple
+2025-09-10 20:55:02 [main] DEBUG [io.netty.util.ResourceLeakDetector] - -Dio.netty.leakDetection.targetRecords: 4
+2025-09-10 20:55:02 [main] DEBUG [i.n.util.ResourceLeakDetectorFactory] - Loaded default ResourceLeakDetector: io.netty.util.ResourceLeakDetector@f7a8a7b
+2025-09-10 20:55:02 [main] DEBUG [i.n.util.internal.PlatformDependent0] - Java version: 20
+2025-09-10 20:55:02 [main] DEBUG [i.n.util.internal.PlatformDependent0] - -Dio.netty.noUnsafe: false
+2025-09-10 20:55:02 [main] DEBUG [i.n.util.internal.PlatformDependent0] - sun.misc.Unsafe.theUnsafe: available
+2025-09-10 20:55:02 [main] DEBUG [i.n.util.internal.PlatformDependent0] - sun.misc.Unsafe base methods: all available
+2025-09-10 20:55:02 [main] DEBUG [i.n.util.internal.PlatformDependent0] - sun.misc.Unsafe.storeFence: available
+2025-09-10 20:55:02 [main] DEBUG [i.n.util.internal.PlatformDependent0] - java.nio.Buffer.address: available
+2025-09-10 20:55:02 [main] DEBUG [i.n.util.internal.PlatformDependent0] - direct buffer constructor: unavailable: Reflective setAccessible(true) disabled
+2025-09-10 20:55:02 [main] DEBUG [i.n.util.internal.PlatformDependent0] - java.nio.Bits.unaligned: available, true
+2025-09-10 20:55:02 [main] DEBUG [i.n.util.internal.PlatformDependent0] - jdk.internal.misc.Unsafe.allocateUninitializedArray(int): unavailable: class io.netty.util.internal.PlatformDependent0$7 cannot access class jdk.internal.misc.Unsafe (in module java.base) because module java.base does not export jdk.internal.misc to unnamed module @4bbf6d0e
+2025-09-10 20:55:02 [main] DEBUG [i.n.util.internal.PlatformDependent0] - java.nio.DirectByteBuffer.<init>(long, {int,long}): unavailable
+2025-09-10 20:55:02 [main] DEBUG [i.n.util.internal.PlatformDependent] - sun.misc.Unsafe: available
+2025-09-10 20:55:02 [main] DEBUG [i.n.util.internal.PlatformDependent] - -Dio.netty.tmpdir: C:\Users\tranhuy\AppData\Local\Temp (java.io.tmpdir)
+2025-09-10 20:55:02 [main] DEBUG [i.n.util.internal.PlatformDependent] - -Dio.netty.bitMode: 64 (sun.arch.data.model)
+2025-09-10 20:55:02 [main] DEBUG [i.n.util.internal.PlatformDependent] - Platform: Windows
+2025-09-10 20:55:02 [main] DEBUG [i.n.util.internal.PlatformDependent] - -Dio.netty.maxDirectMemory: -1 bytes
+2025-09-10 20:55:02 [main] DEBUG [i.n.util.internal.PlatformDependent] - -Dio.netty.uninitializedArrayAllocationThreshold: -1
+2025-09-10 20:55:02 [main] DEBUG [io.netty.util.internal.CleanerJava9] - java.nio.ByteBuffer.cleaner(): available
+2025-09-10 20:55:02 [main] DEBUG [i.n.util.internal.PlatformDependent] - -Dio.netty.noPreferDirect: false
+2025-09-10 20:55:02 [main] DEBUG [i.n.util.internal.PlatformDependent] - org.jctools-core.MpscChunkedArrayQueue: available
+2025-09-10 20:55:02 [main] DEBUG [reactor.util.Loggers] - Using Slf4j logging framework
+2025-09-10 20:55:02 [main] DEBUG [i.l.c.event.jfr.EventRecorderHolder] - Starting with JFR support
+2025-09-10 20:55:02 [main] DEBUG [i.l.c.r.DefaultClientResources] - LatencyUtils/HdrUtils are not available, metrics are disabled
+2025-09-10 20:55:03 [main] INFO  [com.security.SecurityApplication] - Started SecurityApplication in 6.445 seconds (process running for 7.368)
+2025-09-10 20:55:13 [http-nio-8082-exec-1] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Processing request: /auth/validate
+2025-09-10 20:55:14 [http-nio-8082-exec-1] ERROR [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Error processing JWT token: JWT expired 215692073 milliseconds ago at 2025-09-08T02:00:22.000Z. Current time: 2025-09-10T13:55:14.073Z. Allowed clock skew: 0 milliseconds.: JWT expired 215692073 milliseconds ago at 2025-09-08T02:00:22.000Z. Current time: 2025-09-10T13:55:14.073Z. Allowed clock skew: 0 milliseconds.
+2025-09-10 20:55:30 [HikariPool-1:housekeeper] DEBUG [com.zaxxer.hikari.pool.HikariPool] - HikariPool-1 - Pool stats (total=10/10, idle=10/10, active=0, waiting=0)
+2025-09-10 20:55:30 [HikariPool-1:housekeeper] DEBUG [com.zaxxer.hikari.pool.HikariPool] - HikariPool-1 - Fill pool skipped, pool has sufficient level or currently being filled.
+2025-09-10 20:55:38 [http-nio-8082-exec-1] INFO  [c.l.services.imp.LoggingServiceImp] - [security] com.security.controllers.AuthController - validate API Calling...
+2025-09-10 20:56:00 [HikariPool-1:housekeeper] DEBUG [com.zaxxer.hikari.pool.HikariPool] - HikariPool-1 - Pool stats (total=10/10, idle=10/10, active=0, waiting=0)
+2025-09-10 20:56:00 [HikariPool-1:housekeeper] DEBUG [com.zaxxer.hikari.pool.HikariPool] - HikariPool-1 - Fill pool skipped, pool has sufficient level or currently being filled.
+2025-09-10 20:56:06 [http-nio-8082-exec-1] ERROR [c.l.services.imp.LoggingServiceImp] - [security] com.security.controllers.AuthController - Error validating token: JWT expired 215725861 milliseconds ago at 2025-09-08T02:00:22.000Z. Current time: 2025-09-10T13:55:47.861Z. Allowed clock skew: 0 milliseconds.: JWT expired 215725861 milliseconds ago at 2025-09-08T02:00:22.000Z. Current time: 2025-09-10T13:55:47.861Z. Allowed clock skew: 0 milliseconds.
+2025-09-10 20:56:30 [HikariPool-1:housekeeper] DEBUG [com.zaxxer.hikari.pool.HikariPool] - HikariPool-1 - Pool stats (total=10/10, idle=10/10, active=0, waiting=0)
+2025-09-10 20:56:30 [HikariPool-1:housekeeper] DEBUG [com.zaxxer.hikari.pool.HikariPool] - HikariPool-1 - Fill pool skipped, pool has sufficient level or currently being filled.
+2025-09-10 20:56:39 [HikariPool-1:housekeeper] DEBUG [com.zaxxer.hikari.pool.HikariPool] - HikariPool-1 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@dbda472 is alive
+2025-09-10 20:56:39 [HikariPool-1:housekeeper] DEBUG [com.zaxxer.hikari.pool.HikariPool] - HikariPool-1 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@4779ae1f is alive
+2025-09-10 20:56:41 [HikariPool-1:housekeeper] DEBUG [com.zaxxer.hikari.pool.HikariPool] - HikariPool-1 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@7e0838b3 is alive
+2025-09-10 20:56:42 [HikariPool-1:housekeeper] DEBUG [com.zaxxer.hikari.pool.HikariPool] - HikariPool-1 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@6b7ce097 is alive
+2025-09-10 20:56:43 [HikariPool-1:housekeeper] DEBUG [com.zaxxer.hikari.pool.HikariPool] - HikariPool-1 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@17d54426 is alive
+2025-09-10 20:56:47 [HikariPool-1:housekeeper] DEBUG [com.zaxxer.hikari.pool.HikariPool] - HikariPool-1 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@6fdf963e is alive
+2025-09-10 20:56:53 [HikariPool-1:housekeeper] DEBUG [com.zaxxer.hikari.pool.HikariPool] - HikariPool-1 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@68bf8584 is alive
+2025-09-10 20:56:55 [HikariPool-1:housekeeper] DEBUG [com.zaxxer.hikari.pool.HikariPool] - HikariPool-1 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@12a92bac is alive
+2025-09-10 20:56:55 [HikariPool-1:housekeeper] DEBUG [com.zaxxer.hikari.pool.HikariPool] - HikariPool-1 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@52b8e68 is alive
+2025-09-10 20:57:00 [HikariPool-1:housekeeper] DEBUG [com.zaxxer.hikari.pool.HikariPool] - HikariPool-1 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@77279cfc is alive
+2025-09-10 20:57:00 [HikariPool-1:housekeeper] DEBUG [com.zaxxer.hikari.pool.HikariPool] - HikariPool-1 - Pool stats (total=10/10, idle=10/10, active=0, waiting=0)
+2025-09-10 20:57:00 [HikariPool-1:housekeeper] DEBUG [com.zaxxer.hikari.pool.HikariPool] - HikariPool-1 - Fill pool skipped, pool has sufficient level or currently being filled.
+2025-09-10 20:57:30 [HikariPool-1:housekeeper] DEBUG [com.zaxxer.hikari.pool.HikariPool] - HikariPool-1 - Pool stats (total=10/10, idle=10/10, active=0, waiting=0)
+2025-09-10 20:57:30 [HikariPool-1:housekeeper] DEBUG [com.zaxxer.hikari.pool.HikariPool] - HikariPool-1 - Fill pool skipped, pool has sufficient level or currently being filled.
+2025-09-10 21:02:04 [background-preinit] DEBUG [org.jboss.logging] - Logging Provider: org.jboss.logging.Slf4jLoggerProvider found via system property
+2025-09-10 21:02:04 [main] INFO  [com.security.SecurityApplication] - Starting SecurityApplication using Java 20.0.2 with PID 4932 (D:\project IntelliJ Ultimate\modules-parent\security\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\security)
+2025-09-10 21:02:04 [main] DEBUG [com.security.SecurityApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
+2025-09-10 21:02:04 [main] INFO  [com.security.SecurityApplication] - No active profile set, falling back to 1 default profile: "default"
+2025-09-10 21:02:07 [main] WARN  [org.hibernate.orm.deprecation] - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-09-10 21:02:08 [main] DEBUG [com.security.config.JwtAuthFilter] - Filter 'jwtAuthFilter' configured for use
+2025-09-10 21:02:09 [main] WARN  [o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer] - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2025-09-10 21:02:09 [main] WARN  [o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-09-10 21:02:09 [main] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
+	c.s.c.AuthController:
+	{POST [/auth/register]}: register(Register,String)
+	{GET [/auth/validate]}: validateToken(String,String)
+	{POST [/auth/login]}: login(Login,String)
+	{POST [/auth/refresh]}: refreshToken(String,String)
+2025-09-10 21:02:09 [main] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
+	o.s.b.a.w.s.e.BasicErrorController:
+	{ [/error]}: error(HttpServletRequest)
+	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
+2025-09-10 21:02:09 [main] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'beanNameHandlerMapping' {}
+2025-09-10 21:02:09 [main] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
+2025-09-10 21:02:09 [main] DEBUG [reactor.util.Loggers] - Using Slf4j logging framework
+2025-09-10 21:02:10 [main] INFO  [com.security.SecurityApplication] - Started SecurityApplication in 6.054 seconds (process running for 7.333)
+2025-09-10 21:02:17 [http-nio-8082-exec-1] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Processing request: /auth/validate
+2025-09-10 21:02:17 [http-nio-8082-exec-1] ERROR [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Error processing JWT token: JWT expired 216115583 milliseconds ago at 2025-09-08T02:00:22.000Z. Current time: 2025-09-10T14:02:17.583Z. Allowed clock skew: 0 milliseconds.: JWT expired 216115583 milliseconds ago at 2025-09-08T02:00:22.000Z. Current time: 2025-09-10T14:02:17.583Z. Allowed clock skew: 0 milliseconds.
+2025-09-10 21:02:21 [http-nio-8082-exec-1] INFO  [c.l.services.imp.LoggingServiceImp] - [security] com.security.controllers.AuthController - validate API Calling...
+2025-09-10 21:09:02 [background-preinit] DEBUG [org.jboss.logging] - Logging Provider: org.jboss.logging.Slf4jLoggerProvider found via system property
+2025-09-10 21:09:02 [main] INFO  [com.security.SecurityApplication] - Starting SecurityApplication using Java 20.0.2 with PID 1432 (D:\project IntelliJ Ultimate\modules-parent\security\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\security)
+2025-09-10 21:09:02 [main] DEBUG [com.security.SecurityApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
+2025-09-10 21:09:02 [main] INFO  [com.security.SecurityApplication] - No active profile set, falling back to 1 default profile: "default"
+2025-09-10 21:09:06 [main] WARN  [org.hibernate.orm.deprecation] - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-09-10 21:09:08 [main] DEBUG [com.security.config.JwtAuthFilter] - Filter 'jwtAuthFilter' configured for use
+2025-09-10 21:09:08 [main] WARN  [o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer] - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2025-09-10 21:09:08 [main] WARN  [o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-09-10 21:09:08 [main] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
+	c.s.c.AuthController:
+	{POST [/auth/register]}: register(Register,String)
+	{POST [/auth/refresh]}: refreshToken(String,String)
+	{GET [/auth/validate]}: validateToken(String,String)
+	{POST [/auth/login]}: login(Login,String)
+2025-09-10 21:09:08 [main] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
+	o.s.b.a.w.s.e.BasicErrorController:
+	{ [/error]}: error(HttpServletRequest)
+	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
+2025-09-10 21:09:08 [main] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'beanNameHandlerMapping' {}
+2025-09-10 21:09:08 [main] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
+2025-09-10 21:09:08 [main] DEBUG [reactor.util.Loggers] - Using Slf4j logging framework
+2025-09-10 21:09:09 [main] INFO  [com.security.SecurityApplication] - Started SecurityApplication in 7.678 seconds (process running for 8.668)
+2025-09-10 21:09:11 [http-nio-8082-exec-2] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Processing request: /auth/validate
+2025-09-10 21:09:11 [http-nio-8082-exec-2] ERROR [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Error processing JWT token: JWT expired 216529776 milliseconds ago at 2025-09-08T02:00:22.000Z. Current time: 2025-09-10T14:09:11.776Z. Allowed clock skew: 0 milliseconds.: JWT expired 216529776 milliseconds ago at 2025-09-08T02:00:22.000Z. Current time: 2025-09-10T14:09:11.776Z. Allowed clock skew: 0 milliseconds.
+2025-09-10 21:09:15 [http-nio-8082-exec-2] INFO  [c.l.services.imp.LoggingServiceImp] - [security] com.security.controllers.AuthController - validate API Calling...
+2025-09-10 21:09:46 [http-nio-8082-exec-2] WARN  [c.l.services.imp.LoggingServiceImp] - [security] com.security.services.AuthService - Exception Handled: UNAUTHORIZED - JWT expired 216538966 milliseconds ago at 2025-09-08T02:00:22.000Z. Current time: 2025-09-10T14:09:20.966Z. Allowed clock skew: 0 milliseconds.
+2025-09-10 21:10:16 [http-nio-8082-exec-2] WARN  [c.l.services.imp.LoggingServiceImp] - [exception-handler] CustomExceptionHandler - Exception Handled: UnauthorizedExceptionHandle - Error extracting username from token
+2025-09-10 21:11:09 [http-nio-8082-exec-1] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Processing request: /auth/validate
+2025-09-10 21:11:09 [http-nio-8082-exec-1] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Extracted username from JWT: HuyS
+2025-09-10 21:11:09 [http-nio-8082-exec-1] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Successfully authenticated user: HuyS
+2025-09-10 21:11:11 [http-nio-8082-exec-1] INFO  [c.l.services.imp.LoggingServiceImp] - [security] com.security.controllers.AuthController - validate API Calling...
+2025-09-10 21:11:33 [http-nio-8082-exec-1] INFO  [c.l.services.imp.LoggingServiceImp] - [security] com.security.controllers.AuthController - Token validated successfully for user: HuyS
+2025-09-10 21:20:47 [background-preinit] DEBUG [org.jboss.logging] - Logging Provider: org.jboss.logging.Slf4jLoggerProvider found via system property
+2025-09-10 21:20:47 [main] INFO  [com.security.SecurityApplication] - Starting SecurityApplication using Java 20.0.2 with PID 12772 (D:\project IntelliJ Ultimate\modules-parent\security\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\security)
+2025-09-10 21:20:47 [main] DEBUG [com.security.SecurityApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
+2025-09-10 21:20:47 [main] INFO  [com.security.SecurityApplication] - No active profile set, falling back to 1 default profile: "default"
+2025-09-10 21:20:54 [main] WARN  [org.hibernate.orm.deprecation] - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-09-10 21:20:57 [main] DEBUG [com.security.config.JwtAuthFilter] - Filter 'jwtAuthFilter' configured for use
+2025-09-10 21:20:58 [main] WARN  [o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer] - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2025-09-10 21:20:58 [main] WARN  [o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-09-10 21:20:58 [main] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
+	c.s.c.AuthController:
+	{POST [/auth/register]}: register(Register,String)
+	{POST [/auth/login]}: login(Login,String)
+	{POST [/auth/refresh]}: refreshToken(String,String)
+	{GET [/auth/validate]}: validateToken(String,String)
+2025-09-10 21:20:58 [main] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
+	o.s.b.a.w.s.e.BasicErrorController:
+	{ [/error]}: error(HttpServletRequest)
+	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
+2025-09-10 21:20:58 [main] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'beanNameHandlerMapping' {}
+2025-09-10 21:20:58 [main] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
+2025-09-10 21:20:59 [main] DEBUG [reactor.util.Loggers] - Using Slf4j logging framework
+2025-09-10 21:21:00 [main] INFO  [com.security.SecurityApplication] - Started SecurityApplication in 13.97 seconds (process running for 14.845)
+2025-09-10 21:24:02 [background-preinit] DEBUG [org.jboss.logging] - Logging Provider: org.jboss.logging.Slf4jLoggerProvider found via system property
+2025-09-10 21:24:02 [main] INFO  [com.security.SecurityApplication] - Starting SecurityApplication using Java 20.0.2 with PID 11324 (D:\project IntelliJ Ultimate\modules-parent\security\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\security)
+2025-09-10 21:24:02 [main] DEBUG [com.security.SecurityApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
+2025-09-10 21:24:02 [main] INFO  [com.security.SecurityApplication] - No active profile set, falling back to 1 default profile: "default"
+2025-09-10 21:24:04 [main] WARN  [org.hibernate.orm.deprecation] - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-09-10 21:24:05 [main] DEBUG [com.security.config.JwtAuthFilter] - Filter 'jwtAuthFilter' configured for use
+2025-09-10 21:24:05 [main] WARN  [o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer] - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2025-09-10 21:24:05 [main] WARN  [o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-09-10 21:24:06 [main] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
+	c.s.c.AuthController:
+	{POST [/auth/register]}: register(Register,String)
+	{GET [/auth/validate]}: validateToken(String,String)
+	{POST [/auth/refresh]}: refreshToken(String,String)
+	{POST [/auth/login]}: login(Login,String)
+2025-09-10 21:24:06 [main] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
+	o.s.b.a.w.s.e.BasicErrorController:
+	{ [/error]}: error(HttpServletRequest)
+	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
+2025-09-10 21:24:06 [main] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'beanNameHandlerMapping' {}
+2025-09-10 21:24:06 [main] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
+2025-09-10 21:24:06 [main] DEBUG [reactor.util.Loggers] - Using Slf4j logging framework
+2025-09-10 21:24:07 [main] INFO  [com.security.SecurityApplication] - Started SecurityApplication in 5.434 seconds (process running for 6.001)
+2025-09-10 21:24:22 [http-nio-8082-exec-2] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Processing request: /auth/login
+2025-09-10 21:24:22 [http-nio-8082-exec-2] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - No Authorization header or not Bearer token for: /auth/login
+2025-09-10 21:24:22 [http-nio-8082-exec-2] INFO  [c.l.services.imp.LoggingServiceImp] - [security] com.security.controllers.AuthController - Login API calling... by user: HuyS
+2025-09-10 21:24:22 [http-nio-8082-exec-2] INFO  [c.l.services.imp.LoggingServiceImp] - [security] com.security.services.AuthService - Login attempt for username: HuyS
+2025-09-10 21:24:22 [http-nio-8082-exec-2] INFO  [c.l.services.imp.LoggingServiceImp] - [security] com.security.controllers.AuthController - User logged in successfully: HuyS
+2025-09-10 21:24:30 [http-nio-8082-exec-3] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Processing request: /auth/validate
+2025-09-10 21:24:30 [http-nio-8082-exec-3] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Extracted username from JWT: HuyS
+2025-09-10 21:24:30 [http-nio-8082-exec-3] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Successfully authenticated user: HuyS
+2025-09-10 21:24:30 [http-nio-8082-exec-3] INFO  [c.l.services.imp.LoggingServiceImp] - [security] com.security.controllers.AuthController - validate API Calling...
+2025-09-10 21:24:30 [http-nio-8082-exec-3] INFO  [c.l.services.imp.LoggingServiceImp] - [security] com.security.controllers.AuthController - Token validated successfully for user: HuyS
+2025-09-10 21:24:30 [http-nio-8082-exec-4] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Processing request: /auth/validate
+2025-09-10 21:24:30 [http-nio-8082-exec-4] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Extracted username from JWT: HuyS
+2025-09-10 21:24:30 [http-nio-8082-exec-4] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Successfully authenticated user: HuyS
+2025-09-10 21:24:30 [http-nio-8082-exec-4] INFO  [c.l.services.imp.LoggingServiceImp] - [security] com.security.controllers.AuthController - validate API Calling...
+2025-09-10 21:24:30 [http-nio-8082-exec-4] INFO  [c.l.services.imp.LoggingServiceImp] - [security] com.security.controllers.AuthController - Token validated successfully for user: HuyS
+2025-09-10 21:24:35 [http-nio-8082-exec-5] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Processing request: /auth/validate
+2025-09-10 21:24:35 [http-nio-8082-exec-5] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Extracted username from JWT: HuyS
+2025-09-10 21:24:35 [http-nio-8082-exec-5] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Successfully authenticated user: HuyS
+2025-09-10 21:24:35 [http-nio-8082-exec-5] INFO  [c.l.services.imp.LoggingServiceImp] - [security] com.security.controllers.AuthController - validate API Calling...
+2025-09-10 21:24:35 [http-nio-8082-exec-5] INFO  [c.l.services.imp.LoggingServiceImp] - [security] com.security.controllers.AuthController - Token validated successfully for user: HuyS
+2025-09-10 21:24:35 [http-nio-8082-exec-6] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Processing request: /auth/validate
+2025-09-10 21:24:35 [http-nio-8082-exec-6] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Extracted username from JWT: HuyS
+2025-09-10 21:24:35 [http-nio-8082-exec-6] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Successfully authenticated user: HuyS
+2025-09-10 21:24:35 [http-nio-8082-exec-6] INFO  [c.l.services.imp.LoggingServiceImp] - [security] com.security.controllers.AuthController - validate API Calling...
+2025-09-10 21:24:35 [http-nio-8082-exec-6] INFO  [c.l.services.imp.LoggingServiceImp] - [security] com.security.controllers.AuthController - Token validated successfully for user: HuyS
+2025-09-10 21:24:58 [http-nio-8082-exec-7] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Processing request: /auth/validate
+2025-09-10 21:24:58 [http-nio-8082-exec-7] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Extracted username from JWT: HuyS
+2025-09-10 21:24:58 [http-nio-8082-exec-7] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Successfully authenticated user: HuyS
+2025-09-10 21:24:58 [http-nio-8082-exec-7] INFO  [c.l.services.imp.LoggingServiceImp] - [security] com.security.controllers.AuthController - validate API Calling...
+2025-09-10 21:24:58 [http-nio-8082-exec-7] INFO  [c.l.services.imp.LoggingServiceImp] - [security] com.security.controllers.AuthController - Token validated successfully for user: HuyS
+2025-09-10 21:24:58 [http-nio-8082-exec-8] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Processing request: /auth/validate
+2025-09-10 21:24:58 [http-nio-8082-exec-8] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Extracted username from JWT: HuyS
+2025-09-10 21:24:58 [http-nio-8082-exec-8] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Successfully authenticated user: HuyS
+2025-09-10 21:24:58 [http-nio-8082-exec-8] INFO  [c.l.services.imp.LoggingServiceImp] - [security] com.security.controllers.AuthController - validate API Calling...
+2025-09-10 21:24:58 [http-nio-8082-exec-8] INFO  [c.l.services.imp.LoggingServiceImp] - [security] com.security.controllers.AuthController - Token validated successfully for user: HuyS
+2025-09-10 21:26:11 [http-nio-8082-exec-1] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Processing request: /auth/validate
+2025-09-10 21:26:11 [http-nio-8082-exec-1] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Extracted username from JWT: HuyS
+2025-09-10 21:26:11 [http-nio-8082-exec-1] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Successfully authenticated user: HuyS
+2025-09-10 21:26:11 [http-nio-8082-exec-1] INFO  [c.l.services.imp.LoggingServiceImp] - [security] com.security.controllers.AuthController - validate API Calling...
+2025-09-10 21:26:12 [http-nio-8082-exec-1] INFO  [c.l.services.imp.LoggingServiceImp] - [security] com.security.controllers.AuthController - Token validated successfully for user: HuyS
+2025-09-10 21:26:12 [http-nio-8082-exec-2] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Processing request: /auth/validate
+2025-09-10 21:26:12 [http-nio-8082-exec-2] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Extracted username from JWT: HuyS
+2025-09-10 21:26:12 [http-nio-8082-exec-2] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Successfully authenticated user: HuyS
+2025-09-10 21:26:12 [http-nio-8082-exec-2] INFO  [c.l.services.imp.LoggingServiceImp] - [security] com.security.controllers.AuthController - validate API Calling...
+2025-09-10 21:26:12 [http-nio-8082-exec-2] INFO  [c.l.services.imp.LoggingServiceImp] - [security] com.security.controllers.AuthController - Token validated successfully for user: HuyS
+2025-09-10 21:26:50 [http-nio-8082-exec-3] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Processing request: /auth/validate
+2025-09-10 21:26:50 [http-nio-8082-exec-3] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Extracted username from JWT: HuyS
+2025-09-10 21:26:50 [http-nio-8082-exec-3] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Successfully authenticated user: HuyS
+2025-09-10 21:26:50 [http-nio-8082-exec-3] INFO  [c.l.services.imp.LoggingServiceImp] - [security] com.security.controllers.AuthController - validate API Calling...
+2025-09-10 21:26:50 [http-nio-8082-exec-3] INFO  [c.l.services.imp.LoggingServiceImp] - [security] com.security.controllers.AuthController - Token validated successfully for user: HuyS
+2025-09-10 21:26:50 [http-nio-8082-exec-4] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Processing request: /auth/validate
+2025-09-10 21:26:50 [http-nio-8082-exec-4] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Extracted username from JWT: HuyS
+2025-09-10 21:26:50 [http-nio-8082-exec-4] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Successfully authenticated user: HuyS
+2025-09-10 21:26:50 [http-nio-8082-exec-4] INFO  [c.l.services.imp.LoggingServiceImp] - [security] com.security.controllers.AuthController - validate API Calling...
+2025-09-10 21:26:50 [http-nio-8082-exec-4] INFO  [c.l.services.imp.LoggingServiceImp] - [security] com.security.controllers.AuthController - Token validated successfully for user: HuyS
+2025-09-10 21:27:22 [http-nio-8082-exec-6] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Processing request: /auth/validate
+2025-09-10 21:27:22 [http-nio-8082-exec-6] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Extracted username from JWT: HuyS
+2025-09-10 21:27:22 [http-nio-8082-exec-6] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Successfully authenticated user: HuyS
+2025-09-10 21:27:22 [http-nio-8082-exec-6] INFO  [c.l.services.imp.LoggingServiceImp] - [security] com.security.controllers.AuthController - validate API Calling...
+2025-09-10 21:27:22 [http-nio-8082-exec-6] INFO  [c.l.services.imp.LoggingServiceImp] - [security] com.security.controllers.AuthController - Token validated successfully for user: HuyS
+2025-09-10 21:27:22 [http-nio-8082-exec-7] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Processing request: /auth/validate
+2025-09-10 21:27:22 [http-nio-8082-exec-7] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Extracted username from JWT: HuyS
+2025-09-10 21:27:22 [http-nio-8082-exec-7] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Successfully authenticated user: HuyS
+2025-09-10 21:27:22 [http-nio-8082-exec-7] INFO  [c.l.services.imp.LoggingServiceImp] - [security] com.security.controllers.AuthController - validate API Calling...
+2025-09-10 21:27:22 [http-nio-8082-exec-7] INFO  [c.l.services.imp.LoggingServiceImp] - [security] com.security.controllers.AuthController - Token validated successfully for user: HuyS
+2025-09-10 21:28:39 [http-nio-8082-exec-9] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Processing request: /auth/validate
+2025-09-10 21:28:39 [http-nio-8082-exec-9] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Extracted username from JWT: HuyS
+2025-09-10 21:28:39 [http-nio-8082-exec-9] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Successfully authenticated user: HuyS
+2025-09-10 21:28:39 [http-nio-8082-exec-9] INFO  [c.l.services.imp.LoggingServiceImp] - [security] com.security.controllers.AuthController - validate API Calling...
+2025-09-10 21:28:39 [http-nio-8082-exec-9] INFO  [c.l.services.imp.LoggingServiceImp] - [security] com.security.controllers.AuthController - Token validated successfully for user: HuyS
+2025-09-10 21:28:39 [http-nio-8082-exec-10] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Processing request: /auth/validate
+2025-09-10 21:28:39 [http-nio-8082-exec-10] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Extracted username from JWT: HuyS
+2025-09-10 21:28:39 [http-nio-8082-exec-10] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Successfully authenticated user: HuyS
+2025-09-10 21:28:39 [http-nio-8082-exec-10] INFO  [c.l.services.imp.LoggingServiceImp] - [security] com.security.controllers.AuthController - validate API Calling...
+2025-09-10 21:28:39 [http-nio-8082-exec-10] INFO  [c.l.services.imp.LoggingServiceImp] - [security] com.security.controllers.AuthController - Token validated successfully for user: HuyS
+2025-09-10 21:29:31 [http-nio-8082-exec-1] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Processing request: /auth/validate
+2025-09-10 21:29:31 [http-nio-8082-exec-1] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Extracted username from JWT: HuyS
+2025-09-10 21:29:31 [http-nio-8082-exec-1] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Successfully authenticated user: HuyS
+2025-09-10 21:29:31 [http-nio-8082-exec-1] INFO  [c.l.services.imp.LoggingServiceImp] - [security] com.security.controllers.AuthController - validate API Calling...
+2025-09-10 21:29:31 [http-nio-8082-exec-1] INFO  [c.l.services.imp.LoggingServiceImp] - [security] com.security.controllers.AuthController - Token validated successfully for user: HuyS
+2025-09-10 21:29:31 [http-nio-8082-exec-2] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Processing request: /auth/validate
+2025-09-10 21:29:31 [http-nio-8082-exec-2] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Extracted username from JWT: HuyS
+2025-09-10 21:29:31 [http-nio-8082-exec-2] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Successfully authenticated user: HuyS
+2025-09-10 21:29:31 [http-nio-8082-exec-2] INFO  [c.l.services.imp.LoggingServiceImp] - [security] com.security.controllers.AuthController - validate API Calling...
+2025-09-10 21:29:31 [http-nio-8082-exec-2] INFO  [c.l.services.imp.LoggingServiceImp] - [security] com.security.controllers.AuthController - Token validated successfully for user: HuyS
+2025-09-10 21:29:40 [http-nio-8082-exec-3] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Processing request: /auth/validate
+2025-09-10 21:29:40 [http-nio-8082-exec-3] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Extracted username from JWT: HuyS
+2025-09-10 21:29:40 [http-nio-8082-exec-3] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Successfully authenticated user: HuyS
+2025-09-10 21:29:40 [http-nio-8082-exec-3] INFO  [c.l.services.imp.LoggingServiceImp] - [security] com.security.controllers.AuthController - validate API Calling...
+2025-09-10 21:29:40 [http-nio-8082-exec-3] INFO  [c.l.services.imp.LoggingServiceImp] - [security] com.security.controllers.AuthController - Token validated successfully for user: HuyS
+2025-09-10 21:29:40 [http-nio-8082-exec-4] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Processing request: /auth/validate
+2025-09-10 21:29:40 [http-nio-8082-exec-4] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Extracted username from JWT: HuyS
+2025-09-10 21:29:40 [http-nio-8082-exec-4] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Successfully authenticated user: HuyS
+2025-09-10 21:29:40 [http-nio-8082-exec-4] INFO  [c.l.services.imp.LoggingServiceImp] - [security] com.security.controllers.AuthController - validate API Calling...
+2025-09-10 21:29:40 [http-nio-8082-exec-4] INFO  [c.l.services.imp.LoggingServiceImp] - [security] com.security.controllers.AuthController - Token validated successfully for user: HuyS

@@ -1,4 +1,4 @@
-package com.common.QLSV.configurations;
+package com.common.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,10 +11,12 @@ public class LanguageConfig implements WebMvcConfigurer {
     @Bean
     public ReloadableResourceBundleMessageSource messageSource() {
         ReloadableResourceBundleMessageSource message = new ReloadableResourceBundleMessageSource();
+        
         message.setBasename("classpath:messages");
         message.setDefaultEncoding("UTF-8");
+        message.setCacheSeconds(3600); // Cache for 1 hour
+        message.setUseCodeAsDefaultMessage(true); // Use key as fallback if message not found
+        
         return message;
     }
-
-
 }

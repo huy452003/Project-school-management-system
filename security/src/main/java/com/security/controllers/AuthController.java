@@ -1,8 +1,11 @@
 package com.security.controllers;
 
 import com.common.models.Response;
+import com.common.models.UserDto;
+import com.handle_exceptions.NotFoundExceptionHandle;
 import com.logging.models.LogContext;
 import com.logging.services.LoggingService;
+import com.security.entities.UserEntity;
 import com.security.models.Login;
 import com.security.models.Register;
 import com.security.models.SecurityResponse;
@@ -10,14 +13,19 @@ import com.security.services.AuthService;
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
+import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import jakarta.validation.Valid;
+
+import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
+
 import com.security.repositories.UserRepo;
 
 @Slf4j
@@ -27,17 +35,20 @@ import com.security.repositories.UserRepo;
 public class AuthController {
     @Autowired
     private AuthService authService;
-    @Autowired
-    MessageSource messageSource;
+
     @Autowired
     LoggingService loggingService;
+
     @Autowired
     private UserRepo userRepo;
+
+    @Autowired
+    ReloadableResourceBundleMessageSource messageSource;
 
     private LogContext getLogContext(String methodName) {
         return LogContext.builder()
                 .module("security")
-                .className("AuthController")
+                .className(this.getClass().getName())
                 .methodName(methodName)
                 .build();
     }
@@ -46,25 +57,24 @@ public class AuthController {
     public ResponseEntity<Response<SecurityResponse>> register(
             @Valid @RequestBody Register request,
             @RequestHeader(value = "Accept-Language", defaultValue = "en") String acceptLanguage
-    ){    
-        log.info("Registration attempt for username: {}", request.getUsername());
+    ){
         Locale locale = Locale.forLanguageTag(acceptLanguage);
+
+        LogContext logContext = getLogContext("register");
+        logContext.setUserId(request.getUsername());
+
+        loggingService.logInfo("Register API Calling... by user: " + logContext.getUserId(), logContext);
         
-        try {
-            SecurityResponse securityResponse = authService.register(request);
-            Response<SecurityResponse> response = new Response<>(
-                    200,
-                    "User registered successfully",
-                    "Authentication",
-                    null,
-                    securityResponse
-            );
-            log.info("User registered successfully: {}", request.getUsername());
-            return ResponseEntity.ok(response);
-        } catch (Exception e) {
-            log.error("Registration failed for username: {}, error: {}", request.getUsername(), e.getMessage());
-            throw e; // Let global exception handler deal with it
-        }
+        SecurityResponse securityResponse = authService.register(request);
+        Response<SecurityResponse> response = new Response<>(
+                200,
+                messageSource.getMessage("response.message.registerSuccess", null, locale),
+                "Security-Model",
+                null,
+                securityResponse
+        );
+        loggingService.logInfo("User registered successfully: " + logContext.getUserId(), logContext);
+        return ResponseEntity.status(response.getStatus()).body(response);
     }
 
     @PostMapping("/login")
@@ -72,24 +82,21 @@ public class AuthController {
             @Valid @RequestBody Login request,
             @RequestHeader(value = "Accept-Language", defaultValue = "en") String acceptLanguage
     ){
-        log.info("Login attempt for username: {}", request.getUsername());
         Locale locale = Locale.forLanguageTag(acceptLanguage);
-        
-        try {
-            SecurityResponse securityResponse = authService.login(request);
-            Response<SecurityResponse> response = new Response<>(
-                    200,
-                    "User logged in successfully",
-                    "Authentication",
-                    null,
-                    securityResponse
-            );
-            log.info("User logged in successfully: {}", request.getUsername());
-            return ResponseEntity.ok(response);
-        } catch (Exception e) {
-            log.error("Login failed for username: {}, error: {}", request.getUsername(), e.getMessage());
-            throw e; // Let global exception handler deal with it
-        }
+        LogContext logContext = getLogContext("login");
+        logContext.setUserId(request.getUsername());
+
+        loggingService.logInfo("Login API calling... by user: " + logContext.getUserId(), logContext);
+        SecurityResponse securityResponse = authService.login(request);
+        Response<SecurityResponse> response = new Response<>(
+                200,
+                messageSource.getMessage("response.message.loginSuccess",null,locale),
+                "Security-Model",
+                null,
+                securityResponse
+        );
+        loggingService.logInfo("User logged in successfully: " + logContext.getUserId(), logContext);
+        return ResponseEntity.status(response.getStatus()).body(response);
     }
 
     @PostMapping("/refresh")
@@ -97,23 +104,61 @@ public class AuthController {
             @RequestHeader("Authorization") String authHeader,
             @RequestHeader(value = "Accept-Language", defaultValue = "en") String acceptLanguage
     ){
-        log.info("Refresh token request");
         Locale locale = Locale.forLanguageTag(acceptLanguage);
-        
-        try {
-            SecurityResponse securityResponse = authService.refreshToken(authHeader);
-            Response<SecurityResponse> response = new Response<>(
-                    200,
-                    "Token refreshed successfully",
-                    "Authentication",
-                    null,
-                    securityResponse
+
+        LogContext logContext = getLogContext("refreshToken");
+
+        loggingService.logInfo("refreshToken API Calling...", logContext);
+        SecurityResponse securityResponse = authService.refreshToken(authHeader);
+        Response<SecurityResponse> response = new Response<>(
+                200,
+                messageSource.getMessage("response.message.refreshTokenSuccess",null,locale),
+                "Security-Model",
+                null,
+                securityResponse
+        );
+        loggingService.logInfo("refreshToken successfully", logContext);
+        return ResponseEntity.status(response.getStatus()).body(response);
+    }
+
+    @GetMapping("/validate")
+    public ResponseEntity<Response<UserDto>> validateToken(
+            @RequestHeader("Authorization") String authHeader,
+            @RequestHeader(value = "Accept-Language", defaultValue = "en") String acceptLanguage
+    ){
+        Locale locale = Locale.forLanguageTag(acceptLanguage);
+
+        LogContext logContext = getLogContext("validate");
+
+        loggingService.logInfo("validate API Calling...", logContext);
+        String token = authHeader;
+            if (authHeader.startsWith("Bearer ")) {
+                token = authHeader.substring(7);
+            }
+
+            String username = authService.getUsernameFromToken(token);
+            UserEntity user = userRepo.findByUserName(username).orElseThrow(
+                    () -> new NotFoundExceptionHandle("", List.of(username), "Security-Model")
             );
-            log.info("Token refreshed successfully for user: {}", securityResponse.getUserName());
-            return ResponseEntity.ok(response);
-        } catch (Exception e) {
-            log.error("Token refresh failed: {}", e.getMessage());
-            throw e; // Let global exception handler deal with it
-        }
+
+            UserDto userDto = UserDto.builder()
+                .id(user.getId())
+                .userName(user.getUsername())
+                .firstName(user.getFirstName())
+                .lastName(user.getLastName())
+                .role(user.getRole().name())
+                .enabled(user.isEnabled())
+                .build();
+
+            Response<UserDto> response = new Response<>(
+                    200,
+                    messageSource.getMessage("response.error.validateSuccess",null,locale),
+                    "Security-Model",
+                    null,
+                    userDto
+            );
+
+            loggingService.logInfo("Token validated successfully for user: " + username, logContext);
+            return ResponseEntity.status(response.getStatus()).body(response);
     }
 }

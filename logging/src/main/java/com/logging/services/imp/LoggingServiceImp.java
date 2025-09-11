@@ -69,28 +69,5 @@ public class LoggingServiceImp implements LoggingService{
             operation
         );
     }
-
-    @Override
-    public void logExceptionHandled(String exceptionType, String message, LogContext context) {
-        log.warn(
-            "[{}] {} - Exception Handled: {} - {}",
-            context.getModule(),
-            context.getClassName(),
-            exceptionType,
-            message
-        );
-    }
-
-    @Override
-    public void logValidationError(String field, String error, LogContext context) {
-        log.warn(
-            "[{}] {} - Validation Error - Field: {}, Error: {}",
-            context.getModule(),
-            context.getClassName(),
-            field,
-            error
-        );
-    }
-
 }
 

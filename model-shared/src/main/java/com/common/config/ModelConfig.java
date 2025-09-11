@@ -1,4 +1,4 @@
-package com.common.QLSV.configurations;
+package com.common.config;
 
 import com.common.enums.Gender;
 import org.modelmapper.AbstractConverter;
@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class ModelConfig {
+    
     @Bean
     public ModelMapper modelMapper() {
         ModelMapper modelMapper = new ModelMapper();

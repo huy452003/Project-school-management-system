@@ -9,7 +9,6 @@ import com.common.models.student.StudentModel;
 import com.logging.services.LoggingService;
 import com.logging.models.LogContext;
 import com.handle_exceptions.NotFoundExceptionHandle;
-import lombok.extern.java.Log;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -35,14 +34,13 @@ public class StudentServiceImp implements StudentService {
     private LogContext getLogContext(String methodName) {
             return LogContext.builder()
                     .module("qlsv")
-                    .className("StudentServiceImp")
+                    .className(this.getClass().getName())
                     .methodName(methodName)
                     .build();
     }
 
     @Override
     public List<StudentModel> gets() {
-
         LogContext logContext = getLogContext("gets");
 
         Object cached = redisTemplate.opsForValue().get(STUDENT_CACHE_KEY);
@@ -50,7 +48,7 @@ public class StudentServiceImp implements StudentService {
             loggingService.logInfo("Get data from Redis cache", logContext);
             return (List<StudentModel>) cached;
         }
-        loggingService.logInfo("Not found cache, Query DB", logContext);
+        loggingService.logWarn("Not found cache, Query DB", logContext);
 
         List<StudentEntity> studentEntities = studentRepo.findAll();
 
@@ -75,7 +73,6 @@ public class StudentServiceImp implements StudentService {
 
     @Override
     public List<StudentEntity> creates(List<CreateStudentModel> studentModels) {
-
         LogContext logContext = getLogContext("creates");
 
         List<StudentEntity> studentEntities = new ArrayList<>();
@@ -96,7 +93,6 @@ public class StudentServiceImp implements StudentService {
 
     @Override
     public List<StudentEntity> updates(List<StudentModel> studentModels) {
-
         LogContext logContext = getLogContext("updates");
 
         List<StudentEntity> studentEntities = new ArrayList<>();
@@ -127,7 +123,6 @@ public class StudentServiceImp implements StudentService {
 
     @Override
     public Boolean deletes(List<StudentModel> StudentModels) {
-
         LogContext logContext = getLogContext("deletes");
 
         List<StudentEntity> listDelete = new ArrayList<>();

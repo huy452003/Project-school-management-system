@@ -2,6 +2,7 @@ package com.security.services;
 
 import com.handle_exceptions.ConflictExceptionHandle;
 import com.handle_exceptions.NotFoundExceptionHandle;
+import com.handle_exceptions.UnauthorizedExceptionHandle;
 import com.security.config.JwtConfig;
 import com.security.entities.Role;
 import com.security.entities.UserEntity;
@@ -40,7 +41,7 @@ public class AuthService {
     private LogContext getLogContext(String methodName) {
         return LogContext.builder()
                 .module("security")
-                .className("AuthService")
+                .className(this.getClass().getName())
                 .methodName(methodName)
                 .build();
     }
@@ -53,11 +54,13 @@ public class AuthService {
 
     public SecurityResponse register(Register request){
         LogContext logContext = getLogContext("register");
-        loggingService.logInfo("Register attempt for username: " + request.getUsername(), logContext);
+        logContext.setUserId(request.getUsername());
+
+        loggingService.logInfo("Register attempt for username: " + logContext.getUserId(), logContext);
 
         if(userRepo.existsByUserName(request.getUsername())){
-            loggingService.logExceptionHandled("ConflictExceptionHandle", "Username already exists", logContext);
-            throw new ConflictExceptionHandle("", List.of(request.getUsername()));
+            loggingService.logDebug("Username already exists", logContext);
+            throw new ConflictExceptionHandle("", List.of(request.getUsername()) , "Security-Model");
         }
 
         UserEntity user = UserEntity.builder()
@@ -91,10 +94,13 @@ public class AuthService {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword())
         );
+        LogContext logContext = getLogContext("login");
+        logContext.setUserId(request.getUsername());
 
+        loggingService.logInfo("Login attempt for username: " + logContext.getUserId(), logContext);
         UserEntity user = userRepo.findByUserName(request.getUsername())
                 .orElseThrow(() -> new NotFoundExceptionHandle(
-                        "", List.of(request.getUsername()), null)
+                        "", List.of(request.getUsername()), "Security-Model")
                 );
 
         String accessToken = jwtService.generateToken(user);
@@ -120,7 +126,7 @@ public class AuthService {
 
         UserEntity user = userRepo.findByUserName(username)
                 .orElseThrow(() -> new NotFoundExceptionHandle(
-                        "", List.of(username),null)
+                        "", List.of(username),"Security-Model")
                 );
         if (!jwtService.isTokenValid(refreshToken,user)){
             throw new RuntimeException("Invalid refresh token");
@@ -136,5 +142,14 @@ public class AuthService {
                 .refreshToken(refreshToken)
                 .refExpires(formatExpirationTime(jwtService.extractExpiration(refreshToken).getTime()))
                 .build();
+    }
+
+    public String getUsernameFromToken(String token) {
+        try {
+            return jwtService.extractUsername(token);
+        } catch (Exception e) {
+            loggingService.logError("Error extracting username from token", e, getLogContext("getUsernameFromToken"));
+            throw new UnauthorizedExceptionHandle("Error extracting username from token");
+        }
     }
 }

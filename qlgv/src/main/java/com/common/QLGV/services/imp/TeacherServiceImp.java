@@ -32,7 +32,7 @@ public class TeacherServiceImp implements TeacherService {
     private LogContext getLogContext(String methodName){
         return LogContext.builder()
                 .module("qlgv")
-                .className("TeacherServiceImp")
+                .className(this.getClass().getName())
                 .methodName(methodName)
                 .build();
     }

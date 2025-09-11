@@ -10,8 +10,4 @@ public interface LoggingService {
 
     void logTeacherOperation(String operation, String teacherId, LogContext context);
     void logStudentOperation(String operation, String studentId, LogContext context);
-    
-    void logExceptionHandled(String exceptionType, String message, LogContext context);
-    void logValidationError(String field, String error, LogContext context);
-
 }

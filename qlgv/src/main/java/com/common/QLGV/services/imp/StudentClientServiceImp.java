@@ -51,7 +51,7 @@ public class StudentClientServiceImp implements StudentClientService {
     private LogContext getLogContext(String methodName) {
         return LogContext.builder()
                 .module("qlgv")
-                .className("StudentClientServiceImp")
+                .className(this.getClass().getName())
                 .methodName(methodName)
                 .build();
     }

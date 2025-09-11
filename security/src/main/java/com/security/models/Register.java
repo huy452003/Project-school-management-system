@@ -14,23 +14,23 @@ import jakarta.validation.constraints.Pattern;
 @NoArgsConstructor
 @Builder
 public class Register {
-    @NotBlank(message = "Username is required")
+    @NotBlank(message = "{validate.userName.notBlank}")
     @Size(min = 3, max = 50, message = "Username must be between 3 and 50 characters")
     private String username;
     
-    @NotBlank(message = "Password is required")
+    @NotBlank(message = "{validate.password.notBlank}")
     @Size(min = 6, message = "Password must be at least 6 characters")
     private String password;
     
-    @NotBlank(message = "First name is required")
-    @Size(max = 50, message = "First name must not exceed 50 characters")
+    @NotBlank(message = "{validate.firstName.notBlank}")
+    @Size(max = 50, message = "{validate.firstName.size}")
     private String firstName;
     
-    @NotBlank(message = "Last name is required")
-    @Size(max = 50, message = "Last name must not exceed 50 characters")
+    @NotBlank(message = "{validate.lastName.notBlank}")
+    @Size(max = 50, message = "{validate.lastName.size}")
     private String lastName;
     
-    @NotBlank(message = "Role is required")
-    @Pattern(regexp = "^(TEACHER|STUDENT)$", message = "Role must be either TEACHER or STUDENT")
+    @NotBlank(message = "{validate.role.notBlank}")
+    @Pattern(regexp = "^(TEACHER|STUDENT)$", message = "{validate.role.invalidType}")
     private String role;
 }

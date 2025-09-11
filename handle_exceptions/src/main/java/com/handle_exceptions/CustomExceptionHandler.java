@@ -24,16 +24,6 @@ import java.util.*;
 public class CustomExceptionHandler {
     @Autowired
     MessageSource messageSource;
-    @Autowired
-    LoggingService loggingService;
-    
-    private LogContext getLogContext(String methodName) {
-        return LogContext.builder()
-            .module("exception-handler")
-            .className("CustomExceptionHandler")
-            .methodName(methodName)
-            .build();
-    }
     
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(NotFoundExceptionHandle.class)
@@ -41,14 +31,6 @@ public class CustomExceptionHandler {
         Locale locale = LocaleContextHolder.getLocale();
         Map<String, String> error = new HashMap<>();
         error.put("Error", "ID:" + e.getListNotFounds().toString());
-        
-        // Log exception handled
-        LogContext logContext = getLogContext("notFoundExceptionHandler");
-        loggingService.logExceptionHandled(
-            "NotFoundExceptionHandle", 
-            "List Not Found: " + e.getListNotFounds().toString(),
-            logContext
-        );
         
         Response<?> response = new Response<>(
                 404,
@@ -67,17 +49,10 @@ public class CustomExceptionHandler {
         Map<String, String> error = new HashMap<>();
         error.put("Error", ": " + e.getConflictList().toString());
 
-        LogContext logContext = getLogContext("conflictExceptionHandler");
-        loggingService.logExceptionHandled(
-                "ConflictExceptionHandler",
-                "List Conflict : " + e.getConflictList().toString(),
-                logContext
-        );
-
         Response<?> response = new Response<>(
                 409,
                 messageSource.getMessage("response.error.conflict", null, locale),
-                null,
+                e.getModelName(),
                 error,
                 null
         );
@@ -88,9 +63,8 @@ public class CustomExceptionHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Response<?>> handleBodyValidation(MethodArgumentNotValidException ex) {
         Locale locale = LocaleContextHolder.getLocale();
-        Map<String, String> errors = new LinkedHashMap<>();
-        LogContext logContext = getLogContext("handleBodyValidation");
 
+        Map<String, String> errors = new LinkedHashMap<>();
         ex.getBindingResult().getFieldErrors().forEach(fe -> {
             String key = fe.getDefaultMessage();
             if (key.startsWith("{") && key.endsWith("}")) {
@@ -98,15 +72,12 @@ public class CustomExceptionHandler {
             }
             String msg = messageSource.getMessage(key, null, key, locale);
             errors.put(fe.getField(), msg);
-            
-            // Log validation error
-            loggingService.logValidationError(fe.getField(), msg, logContext);
         });
 
         Response<?> resp = new Response<>(
                 400,
-                messageSource.getMessage("response.error.validate", null, locale),
-                "TeacherModel",
+                messageSource.getMessage("response.error.validateFailed", null, locale),
+                null,
                 errors,
                 null
         );
@@ -118,7 +89,6 @@ public class CustomExceptionHandler {
     public ResponseEntity<Response<TeacherModel>> handleInvalidFormat(HttpMessageNotReadableException ex) {
         Locale locale = LocaleContextHolder.getLocale();
         Map<String, String> errors = new HashMap<>();
-        LogContext logContext = getLogContext("handleInvalidFormat");
         Throwable cause = ex.getMostSpecificCause();
 
         if (cause instanceof InvalidFormatException || cause instanceof MismatchedInputException) {
@@ -129,24 +99,62 @@ public class CustomExceptionHandler {
                 String msg = messageSource.getMessage(key, null,
                         field + " không đúng định dạng.", locale);
                 errors.put(field, msg);
-                
-                // Log validation error
-                loggingService.logValidationError(field, msg, logContext);
             }
         } else {
-            String errorMsg = messageSource.getMessage("response.error.validate", null, locale);
+            String errorMsg = messageSource.getMessage("response.error.validateFailed", null, locale);
             errors.put("error", errorMsg);
-            loggingService.logValidationError("unknown", errorMsg, logContext);
+
         }
 
         Response<TeacherModel> response = new Response<>(
                 400,
-                messageSource.getMessage("response.error.validate", null, locale),
+                messageSource.getMessage("response.error.validateFailed", null, locale),
                 "TeacherModel",
                 errors,
                 null
         );
         return ResponseEntity.badRequest().body(response);
+    }
+
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    @ExceptionHandler(UnauthorizedExceptionHandle.class)
+    ResponseEntity<Response<?>> unauthorizedExceptionHandler(UnauthorizedExceptionHandle e) {
+        Locale locale = LocaleContextHolder.getLocale();
+        
+        Map<String, String> error = new HashMap<>();
+        error.put("Error", e.getMessage());
+        if (e.getDetails() != null) {
+            error.put("Details", e.getDetails());
+        }
+      
+        Response<?> response = new Response<>(
+                401,
+                messageSource.getMessage("response.error.unauthorized", null, locale),
+                "Security-Model",
+                error,
+                null
+        );
+            return ResponseEntity.status(401).body(response);
+    }
+
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    @ExceptionHandler(ForbiddenExceptionHandle.class)
+    ResponseEntity<Response<?>> forbiddenExceptionHandler(ForbiddenExceptionHandle e) {
+        Locale locale = LocaleContextHolder.getLocale();
+        Map<String, String> error = new HashMap<>();
+        error.put("Error", e.getMessage());
+        if (e.getRequiredRoles() != null) {
+            error.put("RequiredRoles", e.getRequiredRoles());
+        }
+        
+        Response<?> response = new Response<>(
+                403,
+                messageSource.getMessage("response.error.forbidden", null, locale),
+                "Security-Model",
+                error,
+                null
+        );
+        return ResponseEntity.status(403).body(response);
     }
 
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -155,14 +163,6 @@ public class CustomExceptionHandler {
         Locale locale = LocaleContextHolder.getLocale();
         Map<String, String> error = new HashMap<>();
         error.put("Error", e.getMessage());
-        
-        // Log exception handled
-        LogContext logContext = getLogContext("exceptionHandler");
-        loggingService.logExceptionHandled(
-            e.getClass().getSimpleName(), 
-            e.getMessage(), 
-            logContext
-        );
         
         Response<?> response = new Response<>(
                 500,

@@ -10,9 +10,9 @@ import jakarta.validation.constraints.NotBlank;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Login {
-    @NotBlank(message = "Username is required")
+    @NotBlank(message = "{validate.userName.notBlank}")
     private String username;
     
-    @NotBlank(message = "Password is required")
+    @NotBlank(message = "{validate.password.notBlank}")
     private String password;
 }

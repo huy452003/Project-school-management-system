@@ -1,6 +1,8 @@
 package com.security.config;
 
 import com.security.services.JwtService;
+import com.logging.services.LoggingService;
+import com.logging.models.LogContext;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -25,6 +27,16 @@ public class JwtAuthFilter extends OncePerRequestFilter {
     JwtService jwtService;
     @Autowired
     UserDetailsService userDetailsService;
+    @Autowired
+    LoggingService loggingService;
+
+    private LogContext getLogContext(String methodName) {
+        return LogContext.builder()
+            .module("security")
+            .className(this.getClass().getName())
+            .methodName(methodName)
+            .build();
+    }
 
     @Override
     protected void doFilterInternal(
@@ -32,53 +44,65 @@ public class JwtAuthFilter extends OncePerRequestFilter {
             @NonNull HttpServletResponse response,
             @NonNull FilterChain filterChain) throws ServletException, IOException {
         
-        log.debug("Processing request: {}", request.getRequestURI());
+        LogContext logContext = getLogContext("doFilterInternal");
         
+        loggingService.logDebug("Processing request: " + request.getRequestURI(), logContext);
         String authHeader = request.getHeader("Authorization");
         String jwt;
         String username;
+                
+                // nếu là public endpoint thì skip jwt validation,
+                // vì JwtAuthFilter chạy trước nên xử lý thêm ở đây sẽ hiệu quả hơn
 
-        if (isPublicEndpoint(request.getRequestURI())) {
-            log.debug("Skipping JWT validation for public endpoint: {}", request.getRequestURI());
-            filterChain.doFilter(request, response);
-            return;
-        }
+         if (isPublicEndpoint(request.getRequestURI())) {
+             loggingService.logDebug("Skipping JWT validation for public endpoint: "+ request.getRequestURI()
+                     , logContext);
+             filterChain.doFilter(request, response);
+             return;
+         }
 
+        // nếu không có header Authorization hoặc không phải Bearer token thì skip ,không set vào security context
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
-            log.debug("No Authorization header or not Bearer token for: {}", request.getRequestURI());
+            loggingService.logDebug("No Authorization header or not Bearer token for: " + request.getRequestURI()
+            , logContext);
             filterChain.doFilter(request, response);
             return;
         }
 
         try {
-            jwt = authHeader.substring(7);
-            username = jwtService.extractUsername(jwt);
-            log.debug("Extracted username from JWT: {}", username);
+            jwt = authHeader.substring(7); // bỏ "Bearer " để lấy token từ header
+            username = jwtService.extractUsername(jwt); // lấy username từ token
+            loggingService.logDebug("Extracted username from JWT: " + username, logContext);
 
+            // kiểm tra username có tồn tại không, và đã authentication chưa để tránh lặp lại
             if (username != null && SecurityContextHolder.getContext().getAuthentication() == null){
-                UserDetails userDetails = this.userDetailsService.loadUserByUsername(username);
-                if(jwtService.isTokenValid(jwt, userDetails)) {
+                UserDetails userDetails = this.userDetailsService.loadUserByUsername(username); // lấy user details từ database
+                if(jwtService.isTokenValid(jwt, userDetails)) { // kiểm tra username có tồn tại không, và token còn hạn sử dụng không
                     UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
                             userDetails, null, userDetails.getAuthorities()
                     );
 
                     authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                    // set authentication vào security context
                     SecurityContextHolder.getContext().setAuthentication(authentication);
-                    log.debug("Successfully authenticated user: {}", username);
+                    loggingService.logDebug("Successfully authenticated user: " + username, logContext);
                 } else {
-                    log.warn("Invalid JWT token for user: {}", username);
+                    loggingService.logWarn("Invalid JWT token for user:" + username, logContext);
                 }
             }
         } catch (Exception e) {
-            log.error("Error processing JWT token: {}", e.getMessage(), e);
-            // Clear security context on error
+            loggingService.logError("Error processing JWT token: " + e.getMessage(), e, logContext);
+            // Clear security context nếu có lỗi
             SecurityContextHolder.clearContext();
         }
         filterChain.doFilter(request, response);
     }
 
-    private boolean isPublicEndpoint(String uri) {
-        return uri.startsWith("/auth/") || 
-               uri.startsWith("/public/");
-    }
+        // nếu là public endpoint thì skip jwt validation,
+        // vì JwtAuthFilter chạy trước nên xử lý thêm ở đây sẽ hiệu quả hơn
+
+     private boolean isPublicEndpoint(String uri) {
+         return uri.startsWith("/auth/") ||
+                uri.startsWith("/public/");
+     }
 }

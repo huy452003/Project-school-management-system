@@ -20,7 +20,6 @@ public class JwtService {
     @Autowired
     JwtConfig jwtConfig;
 
-
     private String buildToken(Map<String, Object> claims, UserDetails userDetails, long expiration) {
         return Jwts
                 .builder()

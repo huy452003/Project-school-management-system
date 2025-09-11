@@ -9,6 +9,9 @@ import com.common.models.student.request.CreateStudentModelRequest;
 import com.common.models.student.request.StudentModelRequest;
 import com.logging.services.LoggingService;
 import com.logging.models.LogContext;
+import com.common.QLSV.configurations.RequiresJwt;
+import com.common.models.UserDto;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
@@ -31,20 +34,25 @@ public class StudentController {
     private LogContext getLogContext(String methodName) {
         return LogContext.builder()
                 .module("qlsv")
-                .className("StudentController")
+                .className(this.getClass().getName())
                 .methodName(methodName)
                 .build();
     }
 
     @GetMapping("")
+    @RequiresJwt
     ResponseEntity<Response<List<StudentModel>>> get(
             @RequestHeader(value = "Accept-Language"
-                    , defaultValue = "en") String acceptLanguage)
+                    , defaultValue = "en") String acceptLanguage,
+            HttpServletRequest request)
     {
-        LogContext logContext = getLogContext("get");
-
         Locale locale = Locale.forLanguageTag(acceptLanguage);
-        loggingService.logInfo("Get students API called successfully", logContext);
+        LogContext logContext = getLogContext("get");
+        
+        UserDto currentUser = (UserDto) request.getAttribute("currentUser");
+        loggingService.logInfo("Get students API called successfully by user: " + currentUser.getUserName()
+                , logContext);
+
         List<StudentModel> studentModels = studentServiceImp.gets();
         Response<List<StudentModel>> response = new Response<>(
                 200
@@ -57,16 +65,20 @@ public class StudentController {
     }
 
     @PostMapping("")
+    @RequiresJwt(roles = {"ADMIN", "STUDENT"})
     ResponseEntity<Response<List<CreateStudentModel>>> add(
             @Valid @RequestBody CreateStudentModelRequest req
             , @RequestHeader(value = "Accept-Language"
-            , defaultValue = "en") String acceptLanguage)
+            , defaultValue = "en") String acceptLanguage,
+            HttpServletRequest request)
     {
-        LogContext logContext = getLogContext("add");
-
         Locale locale = Locale.forLanguageTag(acceptLanguage);
+        LogContext logContext = getLogContext("add");
+        
+        UserDto currentUser = (UserDto) request.getAttribute("currentUser");
+
         List<CreateStudentModel> studentModels = req.getStudents();
-        loggingService.logInfo("Create students API called successfully", logContext);
+        loggingService.logInfo("Create students API called successfully by user: " + currentUser.getUserName(), logContext);
         List<StudentEntity> studentEntities = studentServiceImp.creates(studentModels);
             Response<List<CreateStudentModel>> response = new Response<>(
                     200
@@ -79,36 +91,44 @@ public class StudentController {
     }
 
     @PutMapping("")
+    @RequiresJwt(roles = {"ADMIN", "STUDENT"})
     ResponseEntity<Response<List<StudentModel>>> update(
             @Valid @RequestBody StudentModelRequest req
             , @RequestHeader(value = "Accept-Language"
-            , defaultValue = "en") String acceptLanguage)
+            , defaultValue = "en") String acceptLanguage,
+            HttpServletRequest request)
     {
-        LogContext logContext = getLogContext("update");
-
         Locale locale = Locale.forLanguageTag(acceptLanguage);
+        LogContext logContext = getLogContext("update");
+        
+        UserDto currentUser = (UserDto) request.getAttribute("currentUser");
+
         List<StudentModel> studentModels = req.getStudents();
-        loggingService.logInfo("Update students API called successfully", logContext);
+        loggingService.logInfo("Update students API called successfully by user: " + currentUser.getUserName(), logContext);
         List<StudentEntity> studentEntities = studentServiceImp.updates(studentModels);
             Response<List<StudentModel>> response = new Response<>(
-                    200
-                    , messageSource.getMessage("response.message.updateSuccess", null, locale)
-                    , "StudentsModel"
-                    , null
-                    , studentModels
+                200
+                , messageSource.getMessage("response.message.updateSuccess", null, locale)
+                , "StudentsModel"
+                , null
+                , studentModels
             );
             return ResponseEntity.status(response.getStatus()).body(response);
     }
 
     @DeleteMapping("")
+    @RequiresJwt(roles = {"ADMIN", "STUDENT"})
     ResponseEntity<Response<List<StudentModel>>> delete(
             @RequestBody List<StudentModel> studentModels
             , @RequestHeader(value = "Accept-Language"
-            , defaultValue = "en") String acceptLanguage)
+            , defaultValue = "en") String acceptLanguage,
+            HttpServletRequest request)
     {
+        Locale locale = Locale.forLanguageTag(acceptLanguage);
         LogContext logContext = getLogContext("delete");
 
-        Locale locale = Locale.forLanguageTag(acceptLanguage);
+        UserDto currentUser = (UserDto) request.getAttribute("currentUser");
+
         loggingService.logInfo("Delete students API called successfully", logContext);
         studentServiceImp.deletes(studentModels);
             Response<List<StudentModel>> response = new Response<>(

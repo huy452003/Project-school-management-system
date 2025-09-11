@@ -9,12 +9,14 @@ import java.util.List;
 
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
 @ToString
 public class ConflictExceptionHandle extends RuntimeException {
     private List<String> conflictList;
-    public ConflictExceptionHandle(String message, List<String> conflictList) {
+    private final String modelName;
+
+    public ConflictExceptionHandle(String message, List<String> conflictList, String modelName) {
         super(message);
         this.conflictList = conflictList;
+        this.modelName = modelName;
     }
 }
