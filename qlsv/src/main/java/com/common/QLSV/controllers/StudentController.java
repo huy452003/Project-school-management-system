@@ -40,7 +40,7 @@ public class StudentController {
     }
 
     @GetMapping("")
-    @RequiresJwt
+    @RequiresJwt(permissions = {"ADMIN_READ", "STUDENT_READ"})
     ResponseEntity<Response<List<StudentModel>>> get(
             @RequestHeader(value = "Accept-Language"
                     , defaultValue = "en") String acceptLanguage,
@@ -65,7 +65,7 @@ public class StudentController {
     }
 
     @PostMapping("")
-    @RequiresJwt(roles = {"ADMIN", "STUDENT"})
+    @RequiresJwt(roles = {"ADMIN", "STUDENT"}, permissions = {"ADMIN_WRITE", "STUDENT_WRITE"})
     ResponseEntity<Response<List<CreateStudentModel>>> add(
             @Valid @RequestBody CreateStudentModelRequest req
             , @RequestHeader(value = "Accept-Language"
@@ -91,7 +91,7 @@ public class StudentController {
     }
 
     @PutMapping("")
-    @RequiresJwt(roles = {"ADMIN", "STUDENT"})
+    @RequiresJwt(roles = {"ADMIN", "STUDENT"}, permissions = {"ADMIN_WRITE", "STUDENT_WRITE"})
     ResponseEntity<Response<List<StudentModel>>> update(
             @Valid @RequestBody StudentModelRequest req
             , @RequestHeader(value = "Accept-Language"
@@ -117,7 +117,7 @@ public class StudentController {
     }
 
     @DeleteMapping("")
-    @RequiresJwt(roles = {"ADMIN", "STUDENT"})
+    @RequiresJwt(roles = {"ADMIN", "STUDENT"}, permissions = {"ADMIN_DELETE", "STUDENT_DELETE"})
     ResponseEntity<Response<List<StudentModel>>> delete(
             @RequestBody List<StudentModel> studentModels
             , @RequestHeader(value = "Accept-Language"
@@ -129,7 +129,8 @@ public class StudentController {
 
         UserDto currentUser = (UserDto) request.getAttribute("currentUser");
 
-        loggingService.logInfo("Delete students API called successfully", logContext);
+        loggingService.logInfo("Delete students API called successfully by user : " + currentUser.getUserName()
+                , logContext);
         studentServiceImp.deletes(studentModels);
             Response<List<StudentModel>> response = new Response<>(
                     200
@@ -140,4 +141,25 @@ public class StudentController {
             );
             return ResponseEntity.status(response.getStatus()).body(response);
     }
+
+    @GetMapping("/public")
+    ResponseEntity<Response<List<StudentModel>>> public_get(
+            @RequestHeader(value = "Accept-Language"
+                    , defaultValue = "en") String acceptLanguage)
+    {
+        Locale locale = Locale.forLanguageTag(acceptLanguage);
+        LogContext logContext = getLogContext("public_get");
+
+        loggingService.logInfo("Get students public API called successfully ", logContext);
+        List<StudentModel> studentModels = studentServiceImp.gets();
+        Response<List<StudentModel>> response = new Response<>(
+                200
+                , messageSource.getMessage("response.message.getSuccess", null, locale)
+                , "StudentsModel"
+                , null
+                , studentModels
+        );
+        return ResponseEntity.status(response.getStatus()).body(response);
+    }
+
 }

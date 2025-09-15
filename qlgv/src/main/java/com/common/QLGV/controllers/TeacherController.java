@@ -70,16 +70,21 @@ public class TeacherController {
     }
 
     @PostMapping("")
+    @RequiresJwt(roles = {"ADMIN","TEACHER"})
     ResponseEntity<Response<List<CreateTeacherModel>>> add(
             @Valid @RequestBody CreateTeacherModelRequest req
             , @RequestHeader(value = "Accept-Language"
-            , defaultValue = "en") String acceptLanguage)
+            , defaultValue = "en") String acceptLanguage
+            , HttpServletRequest request)
     {
+        Locale locale = Locale.forLanguageTag(acceptLanguage);
         LogContext logContext = getLogContext("add");
 
-        Locale locale = Locale.forLanguageTag(acceptLanguage);
+        UserDto currentUser = (UserDto) request.getAttribute("currentUser");
+
         List<CreateTeacherModel> createTeacherModels = req.getTeachers();
-        loggingService.logInfo("Create teachers API called successfully", logContext);
+        loggingService.logInfo("Create teachers API called successfully by user : " + currentUser.getUserName()
+                , logContext);
         List<TeacherEntity> studentEntities = teacherServiceImp.creates(createTeacherModels);
         Response<List<CreateTeacherModel>> response = new Response<>(
                 200
@@ -92,16 +97,20 @@ public class TeacherController {
     }
 
     @PutMapping("")
+    @RequiresJwt(roles = {"ADMIN","TEACHER"})
     ResponseEntity<Response<List<TeacherModel>>> update(
             @Valid @RequestBody TeacherModelRequest req
             , @RequestHeader(value = "Accept-Language"
-            , defaultValue = "en") String acceptLanguage)
+            , defaultValue = "en") String acceptLanguage
+            , HttpServletRequest request)
     {
+        Locale locale = Locale.forLanguageTag(acceptLanguage);
         LogContext logContext = getLogContext("update");
 
-        Locale locale = Locale.forLanguageTag(acceptLanguage);
+        UserDto currentUser = (UserDto) request.getAttribute("currentUser");
         List<TeacherModel> teacherModels = req.getTeachers();
-        loggingService.logInfo("Update teachers API called successfully", logContext);
+        loggingService.logInfo("Update teachers API called successfully by user : " + currentUser.getUserName()
+                , logContext);
         List<TeacherEntity> studentEntities = teacherServiceImp.updates(teacherModels);
         Response<List<TeacherModel>> response = new Response<>(
                 200
@@ -114,15 +123,20 @@ public class TeacherController {
     }
 
     @DeleteMapping("")
+    @RequiresJwt(roles = {"ADMIN","TEACHER"})
     ResponseEntity<Response<List<TeacherModel>>> delete(
             @RequestBody List<TeacherModel> studentModels
             , @RequestHeader(value = "Accept-Language"
-            , defaultValue = "en") String acceptLanguage)
+            , defaultValue = "en") String acceptLanguage
+            , HttpServletRequest request)
     {
+        Locale locale = Locale.forLanguageTag(acceptLanguage);
         LogContext logContext = getLogContext("delete");
 
-        Locale locale = Locale.forLanguageTag(acceptLanguage);
-        loggingService.logInfo("Delete teachers API called successfully", logContext);
+        UserDto currentUser = (UserDto) request.getAttribute("currentUser");
+
+        loggingService.logInfo("Delete teachers API called successfully by user : " + currentUser.getUserName()
+                , logContext);
         teacherServiceImp.deletes(studentModels);
         Response<List<TeacherModel>> response = new Response<>(
                 200
@@ -134,13 +148,12 @@ public class TeacherController {
         return ResponseEntity.status(response.getStatus()).body(response);
     }
 
-    @GetMapping("/studentsByTeacher")
+    @GetMapping("/public/studentsByTeacher")
     ResponseEntity<Response<?>> getStudentsFromQLSV(
             @RequestHeader(value = "Accept-Language", defaultValue = "en") String language)
     {
         Locale locale = Locale.forLanguageTag(language);
         LogContext logContext = getLogContext("getStudentsFromQLSV");
-
 
         try {
             List<StudentModel> studentModels = studentClientServiceImp.getAllStudents();
@@ -168,43 +181,42 @@ public class TeacherController {
         }
     }
 
-    @PostMapping("/teachersAndStudents")
-    ResponseEntity<Response<?>> createTeachersAndStudents(
-            @RequestBody @Valid CreateTeacherAndStudent request,
-            @RequestHeader(value = "Accept-Language", defaultValue = "en") String language
-    ) {
-
-        LogContext logContext = getLogContext("createTeachersAndStudents");
-
-        Locale locale = Locale.forLanguageTag(language);
-        try {
-            studentClientServiceImp.createTeacherAndStudent(request);
-            loggingService.logInfo("Create teachers and students API called successfully", logContext);
-            return ResponseEntity.status(200).body(new Response<>(
-                    200,
-                    messageSource.getMessage("response.message.createSuccess",null,locale),
-                    "TeacherModel-StudentModel",
-                    null,
-                    new CreateTeacherAndStudent(
-                            request.getTeachers(),
-                            request.getStudents()
-                    )
-            ));
-        }catch (RuntimeException e){
-            loggingService.logError("Create teachers and students API called failed", e, logContext);
-            return ResponseEntity.status(500).body(new Response<>(
-                    500,
-                    messageSource.getMessage(
-                            "response.error.createTeacherAndStudentFail",null,locale
-                    ),
-                    "TeacherModel-StudentModel",
-                    Map.of(
-                            "errors: " , "500 Internal Server Error"
-                    ),
-                    null
-            ));
-        }
-
-    }
+//    @PostMapping("/public/teachersAndStudents")
+//    ResponseEntity<Response<?>> createTeachersAndStudents(
+//            @RequestBody @Valid CreateTeacherAndStudent request,
+//            @RequestHeader(value = "Accept-Language", defaultValue = "en") String language
+//    ) {
+//
+//        LogContext logContext = getLogContext("createTeachersAndStudents");
+//
+//        Locale locale = Locale.forLanguageTag(language);
+//        try {
+//            studentClientServiceImp.createTeacherAndStudent(request);
+//            loggingService.logInfo("Create teachers and students API called successfully", logContext);
+//            return ResponseEntity.status(200).body(new Response<>(
+//                    200,
+//                    messageSource.getMessage("response.message.createSuccess",null,locale),
+//                    "TeacherModel-StudentModel",
+//                    null,
+//                    new CreateTeacherAndStudent(
+//                            request.getTeachers(),
+//                            request.getStudents()
+//                    )
+//            ));
+//        }catch (RuntimeException e){
+//            loggingService.logError("Create teachers and students API called failed", e, logContext);
+//            return ResponseEntity.status(500).body(new Response<>(
+//                    500,
+//                    messageSource.getMessage(
+//                            "response.error.createTeacherAndStudentFail",null,locale
+//                    ),
+//                    "TeacherModel-StudentModel",
+//                    Map.of(
+//                            "errors: " , "500 Internal Server Error"
+//                    ),
+//                    null
+//            ));
+//        }
+//    }
 
 }

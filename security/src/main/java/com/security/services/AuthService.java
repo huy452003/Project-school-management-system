@@ -4,6 +4,7 @@ import com.handle_exceptions.ConflictExceptionHandle;
 import com.handle_exceptions.NotFoundExceptionHandle;
 import com.handle_exceptions.UnauthorizedExceptionHandle;
 import com.security.config.JwtConfig;
+import com.security.entities.Permission;
 import com.security.entities.Role;
 import com.security.entities.UserEntity;
 import com.security.models.Login;
@@ -18,9 +19,15 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class AuthService {
@@ -36,6 +43,8 @@ public class AuthService {
     JwtConfig jwtConfig;
     @Autowired
     LoggingService loggingService;
+    @Autowired
+    BlacklistService blacklistService;
 
 
     private LogContext getLogContext(String methodName) {
@@ -69,6 +78,7 @@ public class AuthService {
                 .firstName(request.getFirstName())
                 .lastName(request.getLastName())
                 .role(Role.valueOf(request.getRole().toUpperCase()))
+                .permissions(convertToPermissions(request.getPermissions()))
                 .enabled(true)
                 .accountNonExpired(true)
                 .accountNonLocked(true)
@@ -77,12 +87,22 @@ public class AuthService {
 
         userRepo.save(user);
 
-        String accessToken = jwtService.generateToken(user);
-        String refreshToken = jwtService.generateRefreshToken(user);
+        // Tạo custom claims cho token
+        Map<String, Object> claim = new HashMap<>();
+        claim.put("role", user.getRole().name());
+        claim.put("permissions", user.getPermissions().stream()
+                .map(Enum::name)
+                .collect(Collectors.toList()));
+        
+        String accessToken = jwtService.generateToken(claim, user);
+        String refreshToken = jwtService.generateRefreshToken(claim, user);
 
         return SecurityResponse.builder()
                 .userName(user.getUsername())
                 .role(user.getRole().name())
+                .permissions(user.getPermissions().stream()
+                        .map(Enum::name)
+                        .collect(Collectors.toList()))
                 .accessToken(accessToken)
                 .expires(formatExpirationTime(jwtConfig.getExpiration()))
                 .refreshToken(refreshToken)
@@ -103,12 +123,22 @@ public class AuthService {
                         "", List.of(request.getUsername()), "Security-Model")
                 );
 
-        String accessToken = jwtService.generateToken(user);
-        String refreshToken = jwtService.generateRefreshToken(user);
+        // Tạo custom claims cho token
+        Map<String, Object> claim = new HashMap<>();
+        claim.put("role", user.getRole().name());
+        claim.put("permissions", user.getPermissions().stream()
+                .map(Enum::name)
+                .collect(Collectors.toList()));
+        
+        String accessToken = jwtService.generateToken(claim, user);
+        String refreshToken = jwtService.generateRefreshToken(claim, user);
 
         return SecurityResponse.builder()
                 .userName(user.getUsername())
                 .role(user.getRole().name())
+                .permissions(user.getPermissions().stream()
+                        .map(Enum::name)
+                        .collect(Collectors.toList()))
                 .accessToken(accessToken)
                 .expires(formatExpirationTime(jwtConfig.getExpiration()))
                 .refreshToken(refreshToken)
@@ -116,27 +146,64 @@ public class AuthService {
                 .build();
     }
 
+    public Map<String, Object> logout(String token) {
+        LogContext logContext = getLogContext("logout");
+        
+        String username = getUsernameFromToken(token);
+            
+            // Blacklist tất cả token của user (logout all devices)
+            blacklistService.blacklistAllUserTokens(username);
+            
+            Map<String, Object> logoutResponse = new HashMap<>();
+            logoutResponse.put("username", username);
+            logoutResponse.put("timestamp",
+            java.time.LocalDateTime.now()
+            .format(java.time.format.DateTimeFormatter
+            .ofPattern("yyyy-MM-dd HH:mm:ss")));
+            
+            loggingService.logInfo("User logged out from all devices successfully: " + username
+            , logContext);
+            return logoutResponse;
+    }
+
     public SecurityResponse refreshToken(String authHeader){
-        String refreshToken = authHeader;
-        if (authHeader.startsWith("Bearer ")) {
-            refreshToken = authHeader.substring(7);
-        }
+        LogContext logContext = getLogContext("refreshToken");
+
+        String refreshToken = authHeader.substring(7); 
         
         String username = jwtService.extractUsername(refreshToken);
+
+        // Kiểm tra user token có bị blacklist không
+        if (blacklistService.isUserTokenBlacklisted(refreshToken, username)) {
+            loggingService.logDebug("User token is blacklisted", logContext);
+            throw new UnauthorizedExceptionHandle("User token is blacklisted"
+            , "User has been logged out from all devices");
+        }
 
         UserEntity user = userRepo.findByUserName(username)
                 .orElseThrow(() -> new NotFoundExceptionHandle(
                         "", List.of(username),"Security-Model")
                 );
         if (!jwtService.isTokenValid(refreshToken,user)){
-            throw new RuntimeException("Invalid refresh token");
+            throw new UnauthorizedExceptionHandle("Invalid refresh token"
+            , "Refresh token is expired");
         }
 
-        String newAccessToken = jwtService.generateToken(user);
+        // Tạo custom claims cho new access token
+        Map<String, Object> accessClaims = new HashMap<>();
+        accessClaims.put("role", user.getRole().name());
+        accessClaims.put("permissions", user.getPermissions().stream()
+                .map(Enum::name)
+                .collect(Collectors.toList()));
+        
+        String newAccessToken = jwtService.generateToken(accessClaims, user);
 
         return SecurityResponse.builder()
                 .userName(user.getUsername())
                 .role(user.getRole().name())
+                .permissions(user.getPermissions().stream()
+                        .map(Enum::name)
+                        .collect(Collectors.toList()))
                 .accessToken(newAccessToken)
                 .expires(formatExpirationTime(jwtConfig.getExpiration()))
                 .refreshToken(refreshToken)
@@ -152,4 +219,20 @@ public class AuthService {
             throw new UnauthorizedExceptionHandle("Error extracting username from token");
         }
     }
+
+    private Set<Permission> convertToPermissions(List<String> permissionStrings) {
+        Set<Permission> permissions = new HashSet<>();
+        if (permissionStrings != null && !permissionStrings.isEmpty()) {
+            for (String permissionStr : permissionStrings) {
+                try {
+                    permissions.add(Permission.valueOf(permissionStr.toUpperCase()));
+                } catch (IllegalArgumentException e) {
+                    loggingService.logWarn("Invalid permission: " + permissionStr, getLogContext("convertToPermissions"));
+                }
+            }
+        }
+        return permissions;
+    }
+
+    
 }

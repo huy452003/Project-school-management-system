@@ -9,4 +9,5 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface RequiresJwt {
     String[] roles() default {};
+    String[] permissions() default {};
 } 

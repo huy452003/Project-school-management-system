@@ -63,7 +63,7 @@ public class StudentClientServiceImp implements StudentClientService {
 
         String studentApi = "http://localhost:8080/students";
             ResponseEntity<Response<List<StudentModel>>> response = restTemplate.exchange(
-                    studentApi,
+                    studentApi + "/public",
                     HttpMethod.GET,
                     null,
                     new ParameterizedTypeReference<>() {}
@@ -82,28 +82,28 @@ public class StudentClientServiceImp implements StudentClientService {
             return response.getBody().getData();
     }
 
-    @Transactional
-    @Override
-    public void createTeacherAndStudent(CreateTeacherAndStudent createTeacherAndStudent) {
-
-        LogContext logContext = getLogContext("createTeacherAndStudent");
-
-        for (CreateTeacherModel teacherModel : createTeacherAndStudent.getTeachers()) {
-            TeacherEntity teacherEntity = modelMapper.map(teacherModel , TeacherEntity.class);
-            teacherRepo.save(teacherEntity);
-        }
-        String studentApi = "http://localhost:8080/students";
-        HttpEntity<CreateStudentForTeacher> entity = new HttpEntity<>(
-                new CreateStudentForTeacher(createTeacherAndStudent.getStudents())
-        );
-        ResponseEntity<Response<?>> response = restTemplate.exchange(
-                studentApi,
-                HttpMethod.POST,
-                entity,
-                new ParameterizedTypeReference<>() {}
-        );
-        redisTemplate.delete(STUDENTS_CACHE_KEY);
-        redisTemplate.delete(TEACHERS_CACHE_KEY);
-        loggingService.logInfo("Del cache key = students:all , teachers:all , after create students-teachers", logContext);
-    }
+//    @Transactional
+//    @Override
+//    public void createTeacherAndStudent(CreateTeacherAndStudent createTeacherAndStudent) {
+//
+//        LogContext logContext = getLogContext("createTeacherAndStudent");
+//
+//        for (CreateTeacherModel teacherModel : createTeacherAndStudent.getTeachers()) {
+//            TeacherEntity teacherEntity = modelMapper.map(teacherModel , TeacherEntity.class);
+//            teacherRepo.save(teacherEntity);
+//        }
+//        String studentApi = "http://localhost:8080/students";
+//        HttpEntity<CreateStudentForTeacher> entity = new HttpEntity<>(
+//                new CreateStudentForTeacher(createTeacherAndStudent.getStudents())
+//        );
+//        ResponseEntity<Response<?>> response = restTemplate.exchange(
+//                studentApi,
+//                HttpMethod.POST,
+//                entity,
+//                new ParameterizedTypeReference<>() {}
+//        );
+//        redisTemplate.delete(STUDENTS_CACHE_KEY);
+//        redisTemplate.delete(TEACHERS_CACHE_KEY);
+//        loggingService.logInfo("Del cache key = students:all , teachers:all , after create students-teachers", logContext);
+//    }
 }

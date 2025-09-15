@@ -1,46 +1,41 @@
-2025-09-11 21:23:19 [background-preinit] DEBUG [org.jboss.logging] - Logging Provider: org.jboss.logging.Slf4jLoggerProvider found via system property
-2025-09-11 21:23:19 [main] INFO  [c.common.QLGV.QlgvApplicationTests] - Starting QlgvApplicationTests using Java 20.0.2 with PID 14316 (started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlgv)
-2025-09-11 21:23:19 [main] DEBUG [c.common.QLGV.QlgvApplicationTests] - Running with Spring Boot v3.5.0, Spring v6.2.7
-2025-09-11 21:23:19 [main] INFO  [c.common.QLGV.QlgvApplicationTests] - No active profile set, falling back to 1 default profile: "default"
-2025-09-11 21:23:22 [main] WARN  [com.zaxxer.hikari.HikariConfig] - HikariPool-1 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
-2025-09-11 21:23:22 [main] WARN  [org.hibernate.orm.deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-09-11 21:23:22 [main] WARN  [org.hibernate.orm.deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
-2025-09-11 21:23:24 [main] WARN  [o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-09-11 21:23:24 [main] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
+2025-09-13 13:39:38 [background-preinit] DEBUG [org.jboss.logging] - Logging Provider: org.jboss.logging.Slf4jLoggerProvider found via system property
+2025-09-13 13:39:38 [restartedMain] INFO  [com.common.QLGV.QlgvApplication] - Starting QlgvApplication using Java 20.0.2 with PID 1988 (D:\project IntelliJ Ultimate\modules-parent\qlgv\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlgv)
+2025-09-13 13:39:38 [restartedMain] DEBUG [com.common.QLGV.QlgvApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
+2025-09-13 13:39:38 [restartedMain] INFO  [com.common.QLGV.QlgvApplication] - No active profile set, falling back to 1 default profile: "default"
+2025-09-13 13:39:43 [restartedMain] DEBUG [i.m.c.u.i.l.InternalLoggerFactory] - Using SLF4J as the default logging framework
+2025-09-13 13:39:44 [restartedMain] WARN  [com.zaxxer.hikari.HikariConfig] - HikariPool-1 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
+2025-09-13 13:39:44 [restartedMain] WARN  [org.hibernate.orm.deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-09-13 13:39:44 [restartedMain] WARN  [org.hibernate.orm.deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-09-13 13:39:47 [restartedMain] WARN  [o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-09-13 13:39:47 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
 	c.c.Q.c.RedisController:
 	{GET [/api/redis/value/{key}]}: getValue(String)
 	{GET [/api/redis/hash/{key}]}: getHash(String)
-	{GET [/api/redis/keys/{pattern}]}: getKeysByPattern(String)
-	{GET [/api/redis/keys]}: getAllKeys()
-	{DELETE [/api/redis/key/{key}]}: deleteKey(String)
 	{GET [/api/redis/zset/{key}]}: getZSet(String)
-	{GET [/api/redis/info]}: getRedisInfo()
 	{GET [/api/redis/list/{key}]}: getList(String)
-	{GET [/api/redis/ttl/{key}]}: getTTL(String)
+	{GET [/api/redis/keys]}: getAllKeys()
+	{GET [/api/redis/keys/{pattern}]}: getKeysByPattern(String)
 	{GET [/api/redis/set/{key}]}: getSet(String)
+	{GET [/api/redis/ttl/{key}]}: getTTL(String)
 	{DELETE [/api/redis/keys]}: deleteAllKeys()
+	{DELETE [/api/redis/key/{key}]}: deleteKey(String)
+	{GET [/api/redis/info]}: getRedisInfo()
 	{GET [/api/redis/type/{key}]}: getKeyType(String)
-2025-09-11 21:23:24 [main] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
+2025-09-13 13:39:47 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
 	c.c.Q.c.TeacherController:
 	{GET [/teachers]}: get(String,HttpServletRequest)
-	{PUT [/teachers]}: update(TeacherModelRequest,String)
-	{POST [/teachers]}: add(CreateTeacherModelRequest,String)
-	{DELETE [/teachers]}: delete(List,String)
-	{GET [/teachers/studentsByTeacher]}: getStudentsFromQLSV(String)
-	{POST [/teachers/teachersAndStudents]}: createTeachersAndStudents(CreateTeacherAndStudent,String)
-2025-09-11 21:23:24 [main] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
+	{PUT [/teachers]}: update(TeacherModelRequest,String,HttpServletRequest)
+	{POST [/teachers]}: add(CreateTeacherModelRequest,String,HttpServletRequest)
+	{DELETE [/teachers]}: delete(List,String,HttpServletRequest)
+	{POST [/teachers/public/teachersAndStudents]}: createTeachersAndStudents(CreateTeacherAndStudent,String)
+	{GET [/teachers/public/studentsByTeacher]}: getStudentsFromQLSV(String)
+2025-09-13 13:39:47 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
 	o.s.b.a.w.s.e.BasicErrorController:
 	{ [/error]}: error(HttpServletRequest)
 	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
-2025-09-11 21:23:24 [main] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'beanNameHandlerMapping' {}
-2025-09-11 21:23:24 [main] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
-2025-09-11 21:23:24 [main] WARN  [o.s.b.a.t.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
-2025-09-11 21:23:24 [main] DEBUG [i.m.c.u.i.l.InternalLoggerFactory] - Using SLF4J as the default logging framework
-2025-09-11 21:23:24 [main] DEBUG [reactor.util.Loggers] - Using Slf4j logging framework
-2025-09-11 21:23:25 [main] WARN  [o.s.b.a.s.s.UserDetailsServiceAutoConfiguration] - 
-
-Using generated security password: aee57627-d18a-45f4-8f5c-2253a6efe805
-
-This generated password is for development use only. Your security configuration must be updated before running your application in production.
-
-2025-09-11 21:23:25 [main] INFO  [c.common.QLGV.QlgvApplicationTests] - Started QlgvApplicationTests in 5.983 seconds (process running for 6.988)
+2025-09-13 13:39:47 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'beanNameHandlerMapping' {}
+2025-09-13 13:39:47 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
+2025-09-13 13:39:47 [restartedMain] WARN  [o.s.b.a.t.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2025-09-13 13:39:47 [restartedMain] DEBUG [reactor.util.Loggers] - Using Slf4j logging framework
+2025-09-13 13:39:48 [restartedMain] INFO  [com.common.QLGV.QlgvApplication] - Started QlgvApplication in 10.61 seconds (process running for 11.977)
+2025-09-13 13:39:54 [http-nio-8081-exec-1] ERROR [c.l.services.imp.LoggingServiceImp] - [qlgv] com.common.QLGV.controllers.TeacherController - Get students from QLSV API called failed: I/O error on GET request for "http://localhost:8080/students": Connection refused: connect

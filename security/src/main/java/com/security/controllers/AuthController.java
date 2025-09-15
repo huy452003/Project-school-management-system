@@ -14,17 +14,16 @@ import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import jakarta.validation.Valid;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import com.security.repositories.UserRepo;
 
@@ -35,6 +34,7 @@ import com.security.repositories.UserRepo;
 public class AuthController {
     @Autowired
     private AuthService authService;
+
 
     @Autowired
     LoggingService loggingService;
@@ -99,6 +99,32 @@ public class AuthController {
         return ResponseEntity.status(response.getStatus()).body(response);
     }
 
+    @PostMapping("/logout")
+    public ResponseEntity<Response<Map<String, Object>>> logout(
+            @RequestHeader("Authorization") String authHeader,
+            @RequestHeader(value = "Accept-Language", defaultValue = "en") String acceptLanguage
+    ){
+        Locale locale = Locale.forLanguageTag(acceptLanguage);
+        LogContext logContext = getLogContext("logout");
+
+        loggingService.logInfo("Logout API calling...", logContext);
+        
+        String token = authHeader.substring(7);
+        Map<String, Object> logoutResponse = authService.logout(token);
+
+        Response<Map<String, Object>> response = new Response<>(
+                200,
+                messageSource.getMessage("response.message.logoutSuccess", null, locale),
+                "Security-Model",
+                null,
+                logoutResponse
+        );
+
+        loggingService.logInfo("User logged out from all devices successfully: " + logoutResponse.get("username")
+        + " at timestamp: " + logoutResponse.get("timestamp"), logContext);
+        return ResponseEntity.status(response.getStatus()).body(response);
+    }
+
     @PostMapping("/refresh")
     public ResponseEntity<Response<SecurityResponse>> refreshToken(
             @RequestHeader("Authorization") String authHeader,
@@ -131,10 +157,7 @@ public class AuthController {
         LogContext logContext = getLogContext("validate");
 
         loggingService.logInfo("validate API Calling...", logContext);
-        String token = authHeader;
-            if (authHeader.startsWith("Bearer ")) {
-                token = authHeader.substring(7);
-            }
+        String token = authHeader.substring(7); 
 
             String username = authService.getUsernameFromToken(token);
             UserEntity user = userRepo.findByUserName(username).orElseThrow(
@@ -147,12 +170,15 @@ public class AuthController {
                 .firstName(user.getFirstName())
                 .lastName(user.getLastName())
                 .role(user.getRole().name())
+                .permissions(user.getPermissions().stream()
+                    .map(Enum::name)
+                    .collect(Collectors.toList()))
                 .enabled(user.isEnabled())
                 .build();
 
             Response<UserDto> response = new Response<>(
                     200,
-                    messageSource.getMessage("response.error.validateSuccess",null,locale),
+                    messageSource.getMessage("response.message.validateSuccess",null,locale),
                     "Security-Model",
                     null,
                     userDto
@@ -161,4 +187,5 @@ public class AuthController {
             loggingService.logInfo("Token validated successfully for user: " + username, logContext);
             return ResponseEntity.status(response.getStatus()).body(response);
     }
+
 }

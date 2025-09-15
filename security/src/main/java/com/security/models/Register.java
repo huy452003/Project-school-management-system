@@ -8,6 +8,9 @@ import lombok.NoArgsConstructor;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import jakarta.validation.constraints.Pattern;
+import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
 
 @Data
 @AllArgsConstructor
@@ -33,4 +36,6 @@ public class Register {
     @NotBlank(message = "{validate.role.notBlank}")
     @Pattern(regexp = "^(TEACHER|STUDENT)$", message = "{validate.role.invalidType}")
     private String role;
+    
+    private List<String> permissions;
 }

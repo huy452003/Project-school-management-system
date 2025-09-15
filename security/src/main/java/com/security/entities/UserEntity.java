@@ -1,6 +1,7 @@
 package com.security.entities;
 
 import jakarta.persistence.*;
+import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,6 +12,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
 
 @Data
 @NoArgsConstructor
@@ -39,6 +42,12 @@ public class UserEntity implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Role role;
 
+    @ElementCollection(targetClass = Permission.class, fetch = FetchType.EAGER)
+    @Enumerated(EnumType.STRING)
+    @CollectionTable(name = "user_permissions", joinColumns = @JoinColumn(name = "user_id"))
+    @Column(name = "permission")
+    private Set<Permission> permissions = new HashSet<>();
+
     private boolean enabled = true;
     private boolean accountNonExpired = true;
     private boolean credentialsNonExpired = true;
@@ -46,7 +55,15 @@ public class UserEntity implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(role.name()));
+        // Combine role and permissions into authorities
+        List<GrantedAuthority> authorities = permissions.stream()
+                .map(permission -> new SimpleGrantedAuthority(permission.name()))
+                .collect(Collectors.toList());
+        
+        // Add role as authority
+        authorities.add(new SimpleGrantedAuthority(role.name()));
+        
+        return authorities;
     }
 
     @Override

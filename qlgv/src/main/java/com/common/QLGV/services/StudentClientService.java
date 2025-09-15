@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface StudentClientService {
     List<StudentModel> getAllStudents();
-    void createTeacherAndStudent(CreateTeacherAndStudent createTeacherAndStudent);
+//    void createTeacherAndStudent(CreateTeacherAndStudent createTeacherAndStudent);
 }

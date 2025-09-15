@@ -1,8 +1,12 @@
 package com.security.config;
 
 import com.security.services.JwtService;
+import com.security.services.BlacklistService;
 import com.logging.services.LoggingService;
 import com.logging.models.LogContext;
+import com.handle_exceptions.UnauthorizedExceptionHandle;
+import org.springframework.web.servlet.HandlerExceptionResolver;
+import org.springframework.beans.factory.annotation.Qualifier;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -29,6 +33,12 @@ public class JwtAuthFilter extends OncePerRequestFilter {
     UserDetailsService userDetailsService;
     @Autowired
     LoggingService loggingService;
+    @Autowired
+    BlacklistService blacklistService;
+
+    @Autowired
+    @Qualifier("handlerExceptionResolver")
+    private HandlerExceptionResolver handlerExceptionResolver;
 
     private LogContext getLogContext(String methodName) {
         return LogContext.builder()
@@ -61,11 +71,14 @@ public class JwtAuthFilter extends OncePerRequestFilter {
              return;
          }
 
-        // nếu không có header Authorization hoặc không phải Bearer token thì skip ,không set vào security context
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
             loggingService.logDebug("No Authorization header or not Bearer token for: " + request.getRequestURI()
             , logContext);
-            filterChain.doFilter(request, response);
+            UnauthorizedExceptionHandle exception = new UnauthorizedExceptionHandle(
+                "Missing or invalid Authorization header",
+                "Authorization header must start with 'Bearer '"
+            );
+            handlerExceptionResolver.resolveException(request, response, null, exception);
             return;
         }
 
@@ -73,6 +86,17 @@ public class JwtAuthFilter extends OncePerRequestFilter {
             jwt = authHeader.substring(7); // bỏ "Bearer " để lấy token từ header
             username = jwtService.extractUsername(jwt); // lấy username từ token
             loggingService.logDebug("Extracted username from JWT: " + username, logContext);
+
+            // Kiểm tra user token có bị blacklist không (dựa trên username)
+            if (blacklistService.isUserTokenBlacklisted(jwt, username)) {
+                loggingService.logWarn("User token is blacklisted for user: " + username, logContext);
+                UnauthorizedExceptionHandle exception = new UnauthorizedExceptionHandle(
+                    "User token is blacklisted",
+                    "User has been logged out from all devices"
+                );
+                handlerExceptionResolver.resolveException(request, response, null, exception);
+                return;
+            }
 
             // kiểm tra username có tồn tại không, và đã authentication chưa để tránh lặp lại
             if (username != null && SecurityContextHolder.getContext().getAuthentication() == null){
@@ -102,7 +126,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         // vì JwtAuthFilter chạy trước nên xử lý thêm ở đây sẽ hiệu quả hơn
 
      private boolean isPublicEndpoint(String uri) {
-         return uri.startsWith("/auth/") ||
-                uri.startsWith("/public/");
+         return uri.equals("/auth/register") ||
+                uri.equals("/auth/login");
      }
 }

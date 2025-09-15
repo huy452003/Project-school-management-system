@@ -10,9 +10,12 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 import java.util.function.Function;
 
 @Service
@@ -23,12 +26,13 @@ public class JwtService {
     private String buildToken(Map<String, Object> claims, UserDetails userDetails, long expiration) {
         return Jwts
                 .builder()
-                .claims(claims)
-                .subject(userDetails.getUsername())
-                .issuedAt(new Date(System.currentTimeMillis()))
-                .expiration(new Date(System.currentTimeMillis() + expiration))
-                .signWith(getSecretKey())
-                .compact();
+                .claims(claims) // thêm custom claims vào token
+                .subject(userDetails.getUsername()) // thêm sub vào token , thường là userID/username 
+                .id(UUID.randomUUID().toString()) // Thêm JTI (JWT ID) vào token dùng cho blacklist
+                .issuedAt(new Date(System.currentTimeMillis())) // Thêm issuedAt (thời gian khởi tạo) vào token
+                .expiration(new Date(System.currentTimeMillis() + expiration)) // Thêm expiration (thời gian hết hạn) vào token
+                .signWith(getSecretKey()) // tạo signature với secret key để mã hóa token
+                .compact(); // compact() để ghép header, payload, UUID và signature thành token
     }
 
     public String generateToken(UserDetails userDetails) {
@@ -40,7 +44,11 @@ public class JwtService {
     }
 
     public String generateRefreshToken(UserDetails userDetails) {
-        return buildToken(new HashMap<>(), userDetails, jwtConfig.getRefreshExpiration());
+        return generateRefreshToken(new HashMap<>(), userDetails);
+    }
+
+    public String generateRefreshToken(Map<String, Object> claims, UserDetails userDetails) {
+        return buildToken(claims, userDetails, jwtConfig.getRefreshExpiration());
     }
 
     public Claims extractAllClaims(String token){
@@ -72,6 +80,43 @@ public class JwtService {
     public boolean isTokenValid(String token, UserDetails userDetails) {
         String username = extractUsername(token);
         return (username.equals(userDetails.getUsername())) && !isTokenExpired(token);
+    }
+    
+    public String extractJTI(String token) {
+        return extractClaims(token, Claims::getId);
+    }
+    
+    public Date extractIssuedAt(String token) {
+        return extractClaims(token, Claims::getIssuedAt);
+    }
+    
+    public String extractRole(String token) {
+        return extractClaims(token, claims -> claims.get("role", String.class));
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<String> extractPermissions(String token) {
+        return extractClaims(token, claims -> claims.get("permissions", List.class));
+    }
+    
+    @SuppressWarnings("unchecked")
+    public List<String> extractAuthorities(String token) {
+        // Tái tạo authorities từ role + permissions thay vì lưu trong token
+        List<String> authorities = new ArrayList<>();
+        
+        // Add permissions
+        List<String> permissions = extractPermissions(token);
+        if (permissions != null) {
+            authorities.addAll(permissions);
+        }
+        
+        // Add role
+        String role = extractRole(token);
+        if (role != null) {
+            authorities.add(role);
+        }
+        
+        return authorities;
     }
 
     private SecretKey getSecretKey() {

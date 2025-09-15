@@ -13,7 +13,7 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {registry.addInterceptor(jwtInterceptor)
-                .excludePathPatterns("/public/**", "/error/**")  // Exclude public and error paths
+                .excludePathPatterns("**/public/**", "/error/**")  // Exclude public and error paths
                 .addPathPatterns("/**");  // Apply to all paths including /students
 
     }

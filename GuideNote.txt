@@ -60,18 +60,35 @@ mật thông tin ( vd: che dấu password khi lấy dữ liệu từ database )
 
 *new 10/8/2025*
 
-- tạo 1 security module 
-+ thiết kế database user , role
-+ tại postman truyền vào js userName, password
-+ từ userName và password này tạo 1 JWToken 
+- tạo 1 security module 	=
++ thiết kế database user , role		=
++ tại postman truyền vào js userName, password		=
++ từ userName và password này tạo 1 JWToken 		=
 + những API khác như get, post, put, delete phải có Token mới được truy cập
-nếu không được phép trả về lỗi 401
-+ cấu hình những đường dẫn truy cập trực tiếp không cần xác thực và ngược lại
+nếu không được phép trả về lỗi 401		=
++ cấu hình những đường dẫn truy cập trực tiếp không cần xác thực và ngược lại	=
 
-- bên trong JWToken có những phần gì? giải thích cụ thể
-- cách để tạo 1 Token? Cách thu hồi? phải gắn permision trong Token
+- bên trong JWToken có những phần gì? giải thích cụ thể 		=
+* gồm ba phần : header , payload , signature
++ header : gồm thuật toán mã hóa và loại token ( thường là JWT )
++ payload ( thân ) : chứa các claims -> 1 claim là 1 thông tin của user, có 2 dạng là:
+claim chuẩn gồm : userID , thời gian tạo, thời gian hết hạn , còn dạng nữa là
+custom claim do ta tự định nghĩa và có thêm như : role ( vai trò )
+, permiss ( quyền hạn ), email,  ... 
++ signature : được tạo bằng cách mã hóa header và payload và mã hóa chúng bằng secret key 
+nhằm bảo mật tránh việc bị làm giả token
+- thường đi chung với bearer token để tăng tính rõ ràng và chuẩn hóa RFC
+ 
+- cách để tạo 1 Token? Cách thu hồi? phải gắn permision trong Token		=
+
+* JWT token không thể thu hồi trực tiếp nhưng có nhiều cách để xử lý như :
++ lưu token vào database và revoke
++ thêm token vào blacklist và block khi sử dụng nó , khi token hết hạn sẽ tự mất
+
 - cách giải mã Token
-- nếu Token hết hạn thì giải quyết như thế nào?
+
+- nếu Token hết hạn thì giải quyết như thế nào?			=
++ access token tự động xóa khi hết hạn
 + sử dụng refresh token để tạo access token mới mà không cần phải đăng nhập lại
 
 * messaging. kafka 
