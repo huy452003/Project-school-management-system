@@ -1,352 +1,119 @@
-2025-09-15 00:14:48 [background-preinit] DEBUG [org.jboss.logging] - Logging Provider: org.jboss.logging.Slf4jLoggerProvider found via system property
-2025-09-15 00:14:48 [main] INFO  [com.security.SecurityApplication] - Starting SecurityApplication using Java 20.0.2 with PID 14472 (D:\project IntelliJ Ultimate\modules-parent\security\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\security)
-2025-09-15 00:14:48 [main] DEBUG [com.security.SecurityApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
-2025-09-15 00:14:48 [main] INFO  [com.security.SecurityApplication] - No active profile set, falling back to 1 default profile: "default"
-2025-09-15 00:14:55 [main] DEBUG [i.m.c.u.i.l.InternalLoggerFactory] - Using SLF4J as the default logging framework
-2025-09-15 00:14:56 [main] WARN  [org.hibernate.orm.deprecation] - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-09-15 00:14:59 [main] WARN  [o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-09-15 00:14:59 [main] DEBUG [com.security.config.JwtAuthFilter] - Filter 'jwtAuthFilter' configured for use
-2025-09-15 00:14:59 [main] WARN  [o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer] - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
-2025-09-15 00:15:00 [main] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
-	c.s.c.AuthController:
-	{POST [/auth/register]}: register(Register,String)
-	{GET [/auth/validate]}: validateToken(String,String)
-	{POST [/auth/refresh]}: refreshToken(String,String)
-	{POST [/auth/login]}: login(Login,String)
-	{POST [/auth/logout]}: logout(String,String)
-2025-09-15 00:15:00 [main] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
-	o.s.b.a.w.s.e.BasicErrorController:
-	{ [/error]}: error(HttpServletRequest)
-	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
-2025-09-15 00:15:00 [main] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'beanNameHandlerMapping' {}
-2025-09-15 00:15:00 [main] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
-2025-09-15 00:15:00 [main] DEBUG [reactor.util.Loggers] - Using Slf4j logging framework
-2025-09-15 00:15:01 [main] INFO  [com.security.SecurityApplication] - Started SecurityApplication in 13.551 seconds (process running for 14.32)
-2025-09-15 00:15:29 [http-nio-8082-exec-1] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Processing request: /auth/validate
-2025-09-15 00:15:29 [http-nio-8082-exec-1] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Extracted username from JWT: HuyT
-2025-09-15 00:15:29 [http-nio-8082-exec-1] WARN  [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - User token is blacklisted for user: HuyT
-2025-09-15 00:17:01 [http-nio-8082-exec-6] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Processing request: /auth/refresh
-2025-09-15 00:17:01 [http-nio-8082-exec-6] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Extracted username from JWT: HuyT
-2025-09-15 00:17:01 [http-nio-8082-exec-6] WARN  [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - User token is blacklisted for user: HuyT
-2025-09-15 00:17:20 [background-preinit] DEBUG [org.jboss.logging] - Logging Provider: org.jboss.logging.Slf4jLoggerProvider found via system property
-2025-09-15 00:17:20 [main] INFO  [com.security.SecurityApplication] - Starting SecurityApplication using Java 20.0.2 with PID 1780 (D:\project IntelliJ Ultimate\modules-parent\security\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\security)
-2025-09-15 00:17:20 [main] DEBUG [com.security.SecurityApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
-2025-09-15 00:17:20 [main] INFO  [com.security.SecurityApplication] - No active profile set, falling back to 1 default profile: "default"
-2025-09-15 00:17:25 [main] DEBUG [i.m.c.u.i.l.InternalLoggerFactory] - Using SLF4J as the default logging framework
-2025-09-15 00:17:27 [main] WARN  [org.hibernate.orm.deprecation] - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-09-15 00:17:30 [main] WARN  [o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-09-15 00:17:30 [main] DEBUG [com.security.config.JwtAuthFilter] - Filter 'jwtAuthFilter' configured for use
-2025-09-15 00:17:30 [main] WARN  [o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer] - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
-2025-09-15 00:17:30 [main] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
-	c.s.c.AuthController:
-	{POST [/auth/register]}: register(Register,String)
-	{POST [/auth/login]}: login(Login,String)
-	{POST [/auth/refresh]}: refreshToken(String,String)
-	{GET [/auth/validate]}: validateToken(String,String)
-	{POST [/auth/logout]}: logout(String,String)
-2025-09-15 00:17:30 [main] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
-	o.s.b.a.w.s.e.BasicErrorController:
-	{ [/error]}: error(HttpServletRequest)
-	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
-2025-09-15 00:17:30 [main] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'beanNameHandlerMapping' {}
-2025-09-15 00:17:30 [main] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
-2025-09-15 00:17:31 [main] DEBUG [reactor.util.Loggers] - Using Slf4j logging framework
-2025-09-15 00:17:32 [main] INFO  [com.security.SecurityApplication] - Started SecurityApplication in 12.995 seconds (process running for 13.946)
-2025-09-15 00:17:38 [http-nio-8082-exec-3] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Processing request: /auth/refresh
-2025-09-15 00:17:45 [http-nio-8082-exec-3] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Extracted username from JWT: HuyT
-2025-09-15 00:17:48 [http-nio-8082-exec-3] WARN  [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - User token is blacklisted for user: HuyT
-2025-09-15 00:19:10 [http-nio-8082-exec-1] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Processing request: /auth/validate
-2025-09-15 00:19:10 [http-nio-8082-exec-1] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Extracted username from JWT: HuyT
-2025-09-15 00:19:10 [http-nio-8082-exec-1] WARN  [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - User token is blacklisted for user: HuyT
-2025-09-15 00:20:48 [http-nio-8082-exec-8] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Processing request: /auth/validate
-2025-09-15 00:20:48 [http-nio-8082-exec-8] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Extracted username from JWT: HuyT
-2025-09-15 00:20:48 [http-nio-8082-exec-8] WARN  [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - User token is blacklisted for user: HuyT
-2025-09-15 00:23:06 [http-nio-8082-exec-6] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Processing request: /auth/validate
-2025-09-15 00:23:06 [http-nio-8082-exec-6] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Extracted username from JWT: HuyT
-2025-09-15 00:23:06 [http-nio-8082-exec-6] WARN  [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - User token is blacklisted for user: HuyT
-2025-09-15 00:23:24 [http-nio-8082-exec-10] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Processing request: /auth/validate
-2025-09-15 00:23:24 [http-nio-8082-exec-10] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Extracted username from JWT: HuyT
-2025-09-15 00:23:24 [http-nio-8082-exec-10] WARN  [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - User token is blacklisted for user: HuyT
-2025-09-15 00:23:46 [http-nio-8082-exec-9] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Processing request: /auth/validate
-2025-09-15 00:23:48 [http-nio-8082-exec-9] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Extracted username from JWT: HuyT
-2025-09-15 00:23:48 [http-nio-8082-exec-9] WARN  [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - User token is blacklisted for user: HuyT
-2025-09-15 00:26:52 [http-nio-8082-exec-2] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Processing request: /auth/login
-2025-09-15 00:26:52 [http-nio-8082-exec-2] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Skipping JWT validation for public endpoint: /auth/login
-2025-09-15 00:26:53 [http-nio-8082-exec-2] INFO  [c.l.services.imp.LoggingServiceImp] - [security] com.security.controllers.AuthController - Login API calling... by user: HuyT
-2025-09-15 00:26:53 [http-nio-8082-exec-2] INFO  [c.l.services.imp.LoggingServiceImp] - [security] com.security.services.AuthService - Login attempt for username: HuyT
-2025-09-15 00:26:53 [http-nio-8082-exec-2] INFO  [c.l.services.imp.LoggingServiceImp] - [security] com.security.controllers.AuthController - User logged in successfully: HuyT
-2025-09-15 00:27:03 [http-nio-8082-exec-1] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Processing request: /auth/validate
-2025-09-15 00:27:05 [http-nio-8082-exec-1] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Extracted username from JWT: HuyT
-2025-09-15 00:27:13 [http-nio-8082-exec-1] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Successfully authenticated user: HuyT
-2025-09-15 00:27:16 [http-nio-8082-exec-1] INFO  [c.l.services.imp.LoggingServiceImp] - [security] com.security.controllers.AuthController - validate API Calling...
-2025-09-15 00:27:20 [http-nio-8082-exec-1] INFO  [c.l.services.imp.LoggingServiceImp] - [security] com.security.controllers.AuthController - Token validated successfully for user: HuyT
-2025-09-15 00:27:33 [http-nio-8082-exec-7] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Processing request: /auth/logout
-2025-09-15 00:27:33 [http-nio-8082-exec-7] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Extracted username from JWT: HuyT
-2025-09-15 00:27:33 [http-nio-8082-exec-7] WARN  [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - User token is blacklisted for user: HuyT
-2025-09-15 00:28:09 [http-nio-8082-exec-8] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Processing request: /auth/logout
-2025-09-15 00:28:09 [http-nio-8082-exec-8] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Extracted username from JWT: HuyT
-2025-09-15 00:28:09 [http-nio-8082-exec-8] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Successfully authenticated user: HuyT
-2025-09-15 00:28:09 [http-nio-8082-exec-8] INFO  [c.l.services.imp.LoggingServiceImp] - [security] com.security.controllers.AuthController - Logout API calling...
-2025-09-15 00:28:09 [http-nio-8082-exec-8] INFO  [c.l.services.imp.LoggingServiceImp] - [security] com.security.services.BlacklistService - All tokens blacklisted for user: HuyT at: 2025-09-15 00:28:09
-2025-09-15 00:28:09 [http-nio-8082-exec-8] INFO  [c.l.services.imp.LoggingServiceImp] - [security] com.security.services.AuthService - User logged out from all devices successfully: HuyT
-2025-09-15 00:28:09 [http-nio-8082-exec-8] INFO  [c.l.services.imp.LoggingServiceImp] - [security] com.security.controllers.AuthController - User logged out from all devices successfully: HuyT at timestamp: 2025-09-15 00:28:09
-2025-09-15 00:28:22 [http-nio-8082-exec-5] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Processing request: /auth/logout
-2025-09-15 00:28:22 [http-nio-8082-exec-5] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Extracted username from JWT: HuyT
-2025-09-15 00:28:22 [http-nio-8082-exec-5] WARN  [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - User token is blacklisted for user: HuyT
-2025-09-15 00:28:30 [http-nio-8082-exec-6] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Processing request: /auth/validate
-2025-09-15 00:28:30 [http-nio-8082-exec-6] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Extracted username from JWT: HuyT
-2025-09-15 00:28:30 [http-nio-8082-exec-6] WARN  [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - User token is blacklisted for user: HuyT
-2025-09-15 00:28:44 [http-nio-8082-exec-10] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Processing request: /auth/refresh
-2025-09-15 00:28:44 [http-nio-8082-exec-10] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Extracted username from JWT: HuyT
-2025-09-15 00:28:44 [http-nio-8082-exec-10] WARN  [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - User token is blacklisted for user: HuyT
-2025-09-15 00:28:50 [http-nio-8082-exec-9] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Processing request: /auth/logout
-2025-09-15 00:28:50 [http-nio-8082-exec-9] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Extracted username from JWT: HuyT
-2025-09-15 00:28:50 [http-nio-8082-exec-9] WARN  [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - User token is blacklisted for user: HuyT
-2025-09-15 08:40:09 [background-preinit] DEBUG [org.jboss.logging] - Logging Provider: org.jboss.logging.Slf4jLoggerProvider found via system property
-2025-09-15 08:40:09 [main] INFO  [com.security.SecurityApplication] - Starting SecurityApplication using Java 20.0.2 with PID 13496 (D:\project IntelliJ Ultimate\modules-parent\security\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\security)
-2025-09-15 08:40:09 [main] DEBUG [com.security.SecurityApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
-2025-09-15 08:40:09 [main] INFO  [com.security.SecurityApplication] - No active profile set, falling back to 1 default profile: "default"
-2025-09-15 08:40:13 [main] DEBUG [i.m.c.u.i.l.InternalLoggerFactory] - Using SLF4J as the default logging framework
-2025-09-15 08:40:15 [main] WARN  [org.hibernate.orm.deprecation] - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-09-15 08:40:21 [main] ERROR [o.s.b.w.e.tomcat.TomcatStarter] - Error starting Tomcat context. Exception: org.springframework.beans.factory.UnsatisfiedDependencyException. Message: Error creating bean with name 'jwtAuthFilter': Unsatisfied dependency expressed through field 'blacklistService': Error creating bean with name 'blacklistService': Unsatisfied dependency expressed through field 'stringRedisTemplate': Error creating bean with name 'customStringRedisTemplate' defined in class path resource [com/common/config/RedisConfig.class]: Unsatisfied dependency expressed through method 'stringRedisTemplate' parameter 0: Error creating bean with name 'redissonConnectionFactory' defined in class path resource [org/redisson/spring/starter/RedissonAutoConfigurationV2.class]: Unsatisfied dependency expressed through method 'redissonConnectionFactory' parameter 0: Error creating bean with name 'redisson' defined in class path resource [com/common/config/RedisConfig.class]: Failed to instantiate [org.redisson.api.RedissonClient]: Factory method 'redisson' threw exception with message: java.util.concurrent.ExecutionException: org.redisson.client.RedisConnectionException: Unable to connect to Redis server: 127.0.0.1/127.0.0.1:6379
-2025-09-15 08:40:21 [main] WARN  [o.a.c.loader.WebappClassLoaderBase] - The web application [ROOT] appears to have started a thread named [HikariPool-1:housekeeper] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
- java.base/jdk.internal.misc.Unsafe.park(Native Method)
- java.base/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)
- java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:1758)
- java.base/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:1182)
- java.base/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:899)
- java.base/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1070)
- java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
- java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
- java.base/java.lang.Thread.run(Thread.java:1623)
-2025-09-15 08:40:21 [main] WARN  [o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext] - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Unable to start web server
-2025-09-15 08:40:21 [main] ERROR [o.s.boot.SpringApplication] - Application run failed
-org.springframework.context.ApplicationContextException: Unable to start web server
-	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.onRefresh(ServletWebServerApplicationContext.java:170)
-	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:621)
-	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
-	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:753)
-	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:439)
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:318)
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1362)
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1351)
-	at com.security.SecurityApplication.main(SecurityApplication.java:14)
-Caused by: org.springframework.boot.web.server.WebServerException: Unable to start embedded Tomcat
-	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.initialize(TomcatWebServer.java:147)
-	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.<init>(TomcatWebServer.java:107)
-	at org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory.getTomcatWebServer(TomcatServletWebServerFactory.java:517)
-	at org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory.getWebServer(TomcatServletWebServerFactory.java:219)
-	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.createWebServer(ServletWebServerApplicationContext.java:193)
-	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.onRefresh(ServletWebServerApplicationContext.java:167)
-	... 8 common frames omitted
-Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'jwtAuthFilter': Unsatisfied dependency expressed through field 'blacklistService': Error creating bean with name 'blacklistService': Unsatisfied dependency expressed through field 'stringRedisTemplate': Error creating bean with name 'customStringRedisTemplate' defined in class path resource [com/common/config/RedisConfig.class]: Unsatisfied dependency expressed through method 'stringRedisTemplate' parameter 0: Error creating bean with name 'redissonConnectionFactory' defined in class path resource [org/redisson/spring/starter/RedissonAutoConfigurationV2.class]: Unsatisfied dependency expressed through method 'redissonConnectionFactory' parameter 0: Error creating bean with name 'redisson' defined in class path resource [com/common/config/RedisConfig.class]: Failed to instantiate [org.redisson.api.RedissonClient]: Factory method 'redisson' threw exception with message: java.util.concurrent.ExecutionException: org.redisson.client.RedisConnectionException: Unable to connect to Redis server: 127.0.0.1/127.0.0.1:6379
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:788)
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:768)
-	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:146)
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:509)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1459)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:606)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:529)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:339)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:373)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:337)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:207)
-	at org.springframework.boot.web.servlet.ServletContextInitializerBeans.getOrderedBeansOfType(ServletContextInitializerBeans.java:230)
-	at org.springframework.boot.web.servlet.ServletContextInitializerBeans.addAsRegistrationBean(ServletContextInitializerBeans.java:184)
-	at org.springframework.boot.web.servlet.ServletContextInitializerBeans.addAsRegistrationBean(ServletContextInitializerBeans.java:179)
-	at org.springframework.boot.web.servlet.ServletContextInitializerBeans.addAdaptableBeans(ServletContextInitializerBeans.java:164)
-	at org.springframework.boot.web.servlet.ServletContextInitializerBeans.<init>(ServletContextInitializerBeans.java:96)
-	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.getServletContextInitializerBeans(ServletWebServerApplicationContext.java:271)
-	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.selfInitialize(ServletWebServerApplicationContext.java:245)
-	at org.springframework.boot.web.embedded.tomcat.TomcatStarter.onStartup(TomcatStarter.java:52)
-	at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:4464)
-	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:164)
-	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1203)
-	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1193)
-	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
-	at org.apache.tomcat.util.threads.InlineExecutorService.execute(InlineExecutorService.java:75)
-	at java.base/java.util.concurrent.AbstractExecutorService.submit(AbstractExecutorService.java:145)
-	at org.apache.catalina.core.ContainerBase.startInternal(ContainerBase.java:749)
-	at org.apache.catalina.core.StandardHost.startInternal(StandardHost.java:772)
-	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:164)
-	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1203)
-	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1193)
-	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
-	at org.apache.tomcat.util.threads.InlineExecutorService.execute(InlineExecutorService.java:75)
-	at java.base/java.util.concurrent.AbstractExecutorService.submit(AbstractExecutorService.java:145)
-	at org.apache.catalina.core.ContainerBase.startInternal(ContainerBase.java:749)
-	at org.apache.catalina.core.StandardEngine.startInternal(StandardEngine.java:203)
-	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:164)
-	at org.apache.catalina.core.StandardService.startInternal(StandardService.java:412)
-	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:164)
-	at org.apache.catalina.core.StandardServer.startInternal(StandardServer.java:870)
-	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:164)
-	at org.apache.catalina.startup.Tomcat.start(Tomcat.java:438)
-	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.initialize(TomcatWebServer.java:128)
-	... 13 common frames omitted
-Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'blacklistService': Unsatisfied dependency expressed through field 'stringRedisTemplate': Error creating bean with name 'customStringRedisTemplate' defined in class path resource [com/common/config/RedisConfig.class]: Unsatisfied dependency expressed through method 'stringRedisTemplate' parameter 0: Error creating bean with name 'redissonConnectionFactory' defined in class path resource [org/redisson/spring/starter/RedissonAutoConfigurationV2.class]: Unsatisfied dependency expressed through method 'redissonConnectionFactory' parameter 0: Error creating bean with name 'redisson' defined in class path resource [com/common/config/RedisConfig.class]: Failed to instantiate [org.redisson.api.RedissonClient]: Factory method 'redisson' threw exception with message: java.util.concurrent.ExecutionException: org.redisson.client.RedisConnectionException: Unable to connect to Redis server: 127.0.0.1/127.0.0.1:6379
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:788)
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:768)
-	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:146)
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:509)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1459)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:606)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:529)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:339)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:373)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:337)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1682)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1628)
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:785)
-	... 55 common frames omitted
-Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'customStringRedisTemplate' defined in class path resource [com/common/config/RedisConfig.class]: Unsatisfied dependency expressed through method 'stringRedisTemplate' parameter 0: Error creating bean with name 'redissonConnectionFactory' defined in class path resource [org/redisson/spring/starter/RedissonAutoConfigurationV2.class]: Unsatisfied dependency expressed through method 'redissonConnectionFactory' parameter 0: Error creating bean with name 'redisson' defined in class path resource [com/common/config/RedisConfig.class]: Failed to instantiate [org.redisson.api.RedissonClient]: Factory method 'redisson' threw exception with message: java.util.concurrent.ExecutionException: org.redisson.client.RedisConnectionException: Unable to connect to Redis server: 127.0.0.1/127.0.0.1:6379
-	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:804)
-	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:546)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1375)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1205)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:569)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:529)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:339)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:373)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:337)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202)
-	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:254)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1740)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1628)
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:785)
-	... 68 common frames omitted
-Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'redissonConnectionFactory' defined in class path resource [org/redisson/spring/starter/RedissonAutoConfigurationV2.class]: Unsatisfied dependency expressed through method 'redissonConnectionFactory' parameter 0: Error creating bean with name 'redisson' defined in class path resource [com/common/config/RedisConfig.class]: Failed to instantiate [org.redisson.api.RedissonClient]: Factory method 'redisson' threw exception with message: java.util.concurrent.ExecutionException: org.redisson.client.RedisConnectionException: Unable to connect to Redis server: 127.0.0.1/127.0.0.1:6379
-	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:804)
-	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:546)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1375)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1205)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:569)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:529)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:339)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:373)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:337)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202)
-	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:254)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1740)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1628)
-	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:913)
-	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:791)
-	... 81 common frames omitted
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'redisson' defined in class path resource [com/common/config/RedisConfig.class]: Failed to instantiate [org.redisson.api.RedissonClient]: Factory method 'redisson' threw exception with message: java.util.concurrent.ExecutionException: org.redisson.client.RedisConnectionException: Unable to connect to Redis server: 127.0.0.1/127.0.0.1:6379
-	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:657)
-	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:489)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1375)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1205)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:569)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:529)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:339)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:373)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:337)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202)
-	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:254)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1740)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1628)
-	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:913)
-	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:791)
-	... 95 common frames omitted
-Caused by: org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.redisson.api.RedissonClient]: Factory method 'redisson' threw exception with message: java.util.concurrent.ExecutionException: org.redisson.client.RedisConnectionException: Unable to connect to Redis server: 127.0.0.1/127.0.0.1:6379
-	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.lambda$instantiate$0(SimpleInstantiationStrategy.java:199)
-	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiateWithFactoryMethod(SimpleInstantiationStrategy.java:88)
-	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:168)
-	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:653)
-	... 109 common frames omitted
-Caused by: org.redisson.client.RedisConnectionException: java.util.concurrent.ExecutionException: org.redisson.client.RedisConnectionException: Unable to connect to Redis server: 127.0.0.1/127.0.0.1:6379
-	at org.redisson.connection.MasterSlaveConnectionManager.doConnect(MasterSlaveConnectionManager.java:229)
-	at org.redisson.connection.MasterSlaveConnectionManager.connect(MasterSlaveConnectionManager.java:193)
-	at org.redisson.config.ConfigSupport.createConnectionManager(ConfigSupport.java:218)
-	at org.redisson.Redisson.<init>(Redisson.java:70)
-	at org.redisson.Redisson.create(Redisson.java:115)
-	at com.common.config.RedisConfig.redisson(RedisConfig.java:31)
-	at com.common.config.RedisConfig$$SpringCGLIB$$0.CGLIB$redisson$0(<generated>)
-	at com.common.config.RedisConfig$$SpringCGLIB$$FastClass$$1.invoke(<generated>)
-	at org.springframework.cglib.proxy.MethodProxy.invokeSuper(MethodProxy.java:258)
-	at org.springframework.context.annotation.ConfigurationClassEnhancer$BeanMethodInterceptor.intercept(ConfigurationClassEnhancer.java:393)
-	at com.common.config.RedisConfig$$SpringCGLIB$$0.redisson(<generated>)
-	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
-	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.lambda$instantiate$0(SimpleInstantiationStrategy.java:171)
-	... 112 common frames omitted
-Caused by: java.util.concurrent.ExecutionException: org.redisson.client.RedisConnectionException: Unable to connect to Redis server: 127.0.0.1/127.0.0.1:6379
-	at java.base/java.util.concurrent.CompletableFuture.reportGet(CompletableFuture.java:396)
-	at java.base/java.util.concurrent.CompletableFuture.get(CompletableFuture.java:2096)
-	at org.redisson.connection.MasterSlaveConnectionManager.doConnect(MasterSlaveConnectionManager.java:225)
-	... 125 common frames omitted
-Caused by: org.redisson.client.RedisConnectionException: Unable to connect to Redis server: 127.0.0.1/127.0.0.1:6379
-	at org.redisson.connection.ConnectionsHolder.lambda$createConnection$2(ConnectionsHolder.java:165)
-	at java.base/java.util.concurrent.CompletableFuture.uniHandle(CompletableFuture.java:934)
-	at java.base/java.util.concurrent.CompletableFuture$UniHandle.tryFire(CompletableFuture.java:911)
-	at java.base/java.util.concurrent.CompletableFuture.postComplete(CompletableFuture.java:510)
-	at java.base/java.util.concurrent.CompletableFuture.completeExceptionally(CompletableFuture.java:2194)
-	at org.redisson.connection.ConnectionsHolder.lambda$createConnection$5(ConnectionsHolder.java:179)
-	at java.base/java.util.concurrent.CompletableFuture.uniWhenComplete(CompletableFuture.java:863)
-	at java.base/java.util.concurrent.CompletableFuture$UniWhenComplete.tryFire(CompletableFuture.java:841)
-	at java.base/java.util.concurrent.CompletableFuture.postComplete(CompletableFuture.java:510)
-	at java.base/java.util.concurrent.CompletableFuture.completeExceptionally(CompletableFuture.java:2194)
-	at org.redisson.client.RedisClient$1$2.run(RedisClient.java:304)
-	at io.netty.util.concurrent.AbstractEventExecutor.runTask(AbstractEventExecutor.java:173)
-	at io.netty.util.concurrent.AbstractEventExecutor.safeExecute(AbstractEventExecutor.java:166)
-	at io.netty.util.concurrent.SingleThreadEventExecutor.runAllTasks(SingleThreadEventExecutor.java:472)
-	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:569)
-	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:998)
-	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
-	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
-	at java.base/java.lang.Thread.run(Thread.java:1623)
-Caused by: java.util.concurrent.CompletionException: io.netty.channel.AbstractChannel$AnnotatedConnectException: Connection refused: no further information: 127.0.0.1/127.0.0.1:6379
-	at java.base/java.util.concurrent.CompletableFuture.encodeRelay(CompletableFuture.java:368)
-	at java.base/java.util.concurrent.CompletableFuture.completeRelay(CompletableFuture.java:377)
-	at java.base/java.util.concurrent.CompletableFuture$UniRelay.tryFire(CompletableFuture.java:1097)
-	... 11 common frames omitted
-Caused by: io.netty.channel.AbstractChannel$AnnotatedConnectException: Connection refused: no further information: 127.0.0.1/127.0.0.1:6379
-Caused by: java.net.ConnectException: Connection refused: no further information
-	at java.base/sun.nio.ch.Net.pollConnect(Native Method)
-	at java.base/sun.nio.ch.Net.pollConnectNow(Net.java:673)
-	at java.base/sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:973)
-	at io.netty.channel.socket.nio.NioSocketChannel.doFinishConnect(NioSocketChannel.java:336)
-	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:339)
-	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:784)
-	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:732)
-	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:658)
-	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
-	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:998)
-	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
-	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
-	at java.base/java.lang.Thread.run(Thread.java:1623)
-2025-09-15 08:57:29 [background-preinit] DEBUG [org.jboss.logging] - Logging Provider: org.jboss.logging.Slf4jLoggerProvider found via system property
-2025-09-15 08:57:29 [main] INFO  [com.security.SecurityApplication] - Starting SecurityApplication using Java 20.0.2 with PID 13536 (D:\project IntelliJ Ultimate\modules-parent\security\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\security)
-2025-09-15 08:57:29 [main] DEBUG [com.security.SecurityApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
-2025-09-15 08:57:29 [main] INFO  [com.security.SecurityApplication] - No active profile set, falling back to 1 default profile: "default"
-2025-09-15 08:57:33 [main] DEBUG [i.m.c.u.i.l.InternalLoggerFactory] - Using SLF4J as the default logging framework
-2025-09-15 08:57:34 [main] WARN  [org.hibernate.orm.deprecation] - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-09-15 08:57:36 [main] WARN  [o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-09-15 08:57:37 [main] DEBUG [com.security.config.JwtAuthFilter] - Filter 'jwtAuthFilter' configured for use
-2025-09-15 08:57:37 [main] WARN  [o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer] - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
-2025-09-15 08:57:37 [main] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
+2025-09-16 20:42:17 [background-preinit] DEBUG [org.jboss.logging] - Logging Provider: org.jboss.logging.Slf4jLoggerProvider found via system property
+2025-09-16 20:42:17 [main] INFO  [com.security.SecurityApplication] - Starting SecurityApplication using Java 20.0.2 with PID 2700 (D:\project IntelliJ Ultimate\modules-parent\security\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\security)
+2025-09-16 20:42:17 [main] DEBUG [com.security.SecurityApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
+2025-09-16 20:42:17 [main] INFO  [com.security.SecurityApplication] - No active profile set, falling back to 1 default profile: "default"
+2025-09-16 20:42:27 [main] DEBUG [i.m.c.u.i.l.InternalLoggerFactory] - Using SLF4J as the default logging framework
+2025-09-16 20:42:30 [main] WARN  [org.hibernate.orm.deprecation] - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-09-16 20:42:35 [main] WARN  [o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-09-16 20:42:36 [main] DEBUG [com.security.config.JwtAuthFilter] - Filter 'jwtAuthFilter' configured for use
+2025-09-16 20:42:36 [main] WARN  [o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer] - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2025-09-16 20:42:36 [main] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
 	c.s.c.AuthController:
 	{POST [/auth/register]}: register(Register,String)
 	{POST [/auth/logout]}: logout(String,String)
 	{POST [/auth/refresh]}: refreshToken(String,String)
-	{GET [/auth/validate]}: validateToken(String,String)
 	{POST [/auth/login]}: login(Login,String)
-2025-09-15 08:57:37 [main] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
+	{GET [/auth/validate]}: validateToken(String,String)
+	{GET [/auth/decode]}: decodeToken(String,String)
+2025-09-16 20:42:36 [main] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
 	o.s.b.a.w.s.e.BasicErrorController:
 	{ [/error]}: error(HttpServletRequest)
 	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
-2025-09-15 08:57:37 [main] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'beanNameHandlerMapping' {}
-2025-09-15 08:57:37 [main] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
-2025-09-15 08:57:38 [main] DEBUG [reactor.util.Loggers] - Using Slf4j logging framework
-2025-09-15 08:57:38 [main] INFO  [com.security.SecurityApplication] - Started SecurityApplication in 9.952 seconds (process running for 11.117)
-2025-09-15 08:58:28 [http-nio-8082-exec-4] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Processing request: /auth/login
-2025-09-15 08:58:28 [http-nio-8082-exec-4] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Skipping JWT validation for public endpoint: /auth/login
-2025-09-15 08:58:28 [http-nio-8082-exec-4] INFO  [c.l.services.imp.LoggingServiceImp] - [security] com.security.controllers.AuthController - Login API calling... by user: HuyT
-2025-09-15 08:58:48 [http-nio-8082-exec-2] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Processing request: /auth/login
-2025-09-15 08:58:51 [http-nio-8082-exec-2] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Skipping JWT validation for public endpoint: /auth/login
-2025-09-15 08:59:04 [http-nio-8082-exec-2] INFO  [c.l.services.imp.LoggingServiceImp] - [security] com.security.controllers.AuthController - Login API calling... by user: HuyT
-2025-09-15 09:00:18 [http-nio-8082-exec-6] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Processing request: /auth/login
-2025-09-15 09:01:33 [http-nio-8082-exec-6] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Skipping JWT validation for public endpoint: /auth/login
-2025-09-15 09:01:33 [http-nio-8082-exec-6] INFO  [c.l.services.imp.LoggingServiceImp] - [security] com.security.controllers.AuthController - Login API calling... by user: HuyT
+2025-09-16 20:42:36 [main] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'beanNameHandlerMapping' {}
+2025-09-16 20:42:36 [main] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
+2025-09-16 20:42:37 [main] DEBUG [reactor.util.Loggers] - Using Slf4j logging framework
+2025-09-16 20:42:38 [main] INFO  [com.security.SecurityApplication] - Started SecurityApplication in 21.829 seconds (process running for 23.57)
+2025-09-16 20:43:21 [http-nio-8082-exec-2] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Processing request: /auth/decode
+2025-09-16 20:43:34 [http-nio-8082-exec-2] ERROR [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Error processing JWT token: JWT expired 1108728453 milliseconds ago at 2025-09-03T17:44:38.000Z. Current time: 2025-09-16T13:43:26.453Z. Allowed clock skew: 0 milliseconds.: JWT expired 1108728453 milliseconds ago at 2025-09-03T17:44:38.000Z. Current time: 2025-09-16T13:43:26.453Z. Allowed clock skew: 0 milliseconds.
+2025-09-16 20:44:04 [http-nio-8082-exec-4] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Processing request: /auth/login
+2025-09-16 20:44:04 [http-nio-8082-exec-4] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Skipping JWT validation for public endpoint: /auth/login
+2025-09-16 20:44:07 [http-nio-8082-exec-4] INFO  [c.l.services.imp.LoggingServiceImp] - [security] com.security.controllers.AuthController - Login API calling... by user: HuyS2
+2025-09-16 20:44:12 [http-nio-8082-exec-4] INFO  [c.l.services.imp.LoggingServiceImp] - [security] com.security.services.AuthService - Login attempt for username: HuyS2
+2025-09-16 20:44:12 [http-nio-8082-exec-4] INFO  [c.l.services.imp.LoggingServiceImp] - [security] com.security.controllers.AuthController - User logged in successfully: HuyS2
+2025-09-16 20:44:32 [http-nio-8082-exec-3] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Processing request: /auth/validate
+2025-09-16 20:44:32 [http-nio-8082-exec-3] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Extracted username from JWT: HuyS2
+2025-09-16 20:44:32 [http-nio-8082-exec-3] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Successfully authenticated user: HuyS2
+2025-09-16 20:44:32 [http-nio-8082-exec-3] INFO  [c.l.services.imp.LoggingServiceImp] - [security] com.security.controllers.AuthController - validate API Calling...
+2025-09-16 20:44:32 [http-nio-8082-exec-3] INFO  [c.l.services.imp.LoggingServiceImp] - [security] com.security.controllers.AuthController - Token validated successfully for user: HuyS2
+2025-09-16 20:44:44 [http-nio-8082-exec-5] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Processing request: /auth/validate
+2025-09-16 20:44:44 [http-nio-8082-exec-5] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Extracted username from JWT: HuyS2
+2025-09-16 20:44:44 [http-nio-8082-exec-5] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Successfully authenticated user: HuyS2
+2025-09-16 20:44:44 [http-nio-8082-exec-5] INFO  [c.l.services.imp.LoggingServiceImp] - [security] com.security.controllers.AuthController - validate API Calling...
+2025-09-16 20:44:44 [http-nio-8082-exec-5] INFO  [c.l.services.imp.LoggingServiceImp] - [security] com.security.controllers.AuthController - Token validated successfully for user: HuyS2
+2025-09-16 20:45:15 [http-nio-8082-exec-7] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Processing request: /auth/validate
+2025-09-16 20:45:15 [http-nio-8082-exec-7] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Extracted username from JWT: HuyS2
+2025-09-16 20:45:15 [http-nio-8082-exec-7] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Successfully authenticated user: HuyS2
+2025-09-16 20:45:15 [http-nio-8082-exec-7] INFO  [c.l.services.imp.LoggingServiceImp] - [security] com.security.controllers.AuthController - validate API Calling...
+2025-09-16 20:45:15 [http-nio-8082-exec-7] INFO  [c.l.services.imp.LoggingServiceImp] - [security] com.security.controllers.AuthController - Token validated successfully for user: HuyS2
+2025-09-16 20:46:19 [http-nio-8082-exec-9] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Processing request: /auth/decode
+2025-09-16 20:46:46 [http-nio-8082-exec-9] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Extracted username from JWT: HuyS2
+2025-09-16 20:47:18 [http-nio-8082-exec-9] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Successfully authenticated user: HuyS2
+2025-09-16 20:47:32 [http-nio-8082-exec-9] INFO  [c.l.services.imp.LoggingServiceImp] - [security] com.security.controllers.AuthController - decodeToken API Calling...
+2025-09-16 20:47:57 [http-nio-8082-exec-9] INFO  [c.l.services.imp.LoggingServiceImp] - [security] com.security.services.AuthService - Token decoded successfully
+2025-09-16 20:48:08 [http-nio-8082-exec-9] INFO  [c.l.services.imp.LoggingServiceImp] - [security] com.security.controllers.AuthController - Token decoded successfully
+2025-09-16 20:50:12 [http-nio-8082-exec-2] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Processing request: /auth/validate
+2025-09-16 20:50:34 [http-nio-8082-exec-2] ERROR [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Error processing JWT token: JWT expired 121677465 milliseconds ago at 2025-09-15T04:02:20.000Z. Current time: 2025-09-16T13:50:17.465Z. Allowed clock skew: 0 milliseconds.: JWT expired 121677465 milliseconds ago at 2025-09-15T04:02:20.000Z. Current time: 2025-09-16T13:50:17.465Z. Allowed clock skew: 0 milliseconds.
+2025-09-16 21:02:22 [background-preinit] DEBUG [org.jboss.logging] - Logging Provider: org.jboss.logging.Slf4jLoggerProvider found via system property
+2025-09-16 21:02:22 [main] INFO  [com.security.SecurityApplication] - Starting SecurityApplication using Java 20.0.2 with PID 6528 (D:\project IntelliJ Ultimate\modules-parent\security\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\security)
+2025-09-16 21:02:22 [main] DEBUG [com.security.SecurityApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
+2025-09-16 21:02:22 [main] INFO  [com.security.SecurityApplication] - No active profile set, falling back to 1 default profile: "default"
+2025-09-16 21:02:26 [main] DEBUG [i.m.c.u.i.l.InternalLoggerFactory] - Using SLF4J as the default logging framework
+2025-09-16 21:02:28 [main] WARN  [org.hibernate.orm.deprecation] - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-09-16 21:02:31 [main] WARN  [o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-09-16 21:02:32 [main] DEBUG [com.security.config.JwtAuthFilter] - Filter 'jwtAuthFilter' configured for use
+2025-09-16 21:02:32 [main] WARN  [o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer] - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2025-09-16 21:02:32 [main] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
+	c.s.c.AuthController:
+	{POST [/auth/register]}: register(Register,String)
+	{POST [/auth/logout]}: logout(String,String)
+	{POST [/auth/login]}: login(Login,String)
+	{POST [/auth/refresh]}: refreshToken(String,String)
+	{GET [/auth/validate]}: validateToken(String,String)
+	{GET [/auth/decode]}: decodeToken(String,String)
+2025-09-16 21:02:32 [main] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
+	o.s.b.a.w.s.e.BasicErrorController:
+	{ [/error]}: error(HttpServletRequest)
+	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
+2025-09-16 21:02:32 [main] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'beanNameHandlerMapping' {}
+2025-09-16 21:02:32 [main] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
+2025-09-16 21:02:33 [main] DEBUG [reactor.util.Loggers] - Using Slf4j logging framework
+2025-09-16 21:02:34 [main] INFO  [com.security.SecurityApplication] - Started SecurityApplication in 12.154 seconds (process running for 12.846)
+2025-09-16 21:02:47 [http-nio-8082-exec-2] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Processing request: /auth/decode
+2025-09-16 21:02:47 [http-nio-8082-exec-2] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Extracted username from JWT: HuyS2
+2025-09-16 21:02:47 [http-nio-8082-exec-2] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Successfully authenticated user: HuyS2
+2025-09-16 21:02:47 [http-nio-8082-exec-2] INFO  [c.l.services.imp.LoggingServiceImp] - [security] com.security.controllers.AuthController - decodeToken API Calling...
+2025-09-16 21:02:47 [http-nio-8082-exec-2] INFO  [c.l.services.imp.LoggingServiceImp] - [security] com.security.services.AuthService - Token decoded successfully
+2025-09-16 21:02:47 [http-nio-8082-exec-2] INFO  [c.l.services.imp.LoggingServiceImp] - [security] com.security.controllers.AuthController - Token decoded successfully
+2025-09-16 21:02:56 [http-nio-8082-exec-3] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Processing request: /auth/decode
+2025-09-16 21:02:56 [http-nio-8082-exec-3] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Extracted username from JWT: HuyS2
+2025-09-16 21:02:56 [http-nio-8082-exec-3] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Successfully authenticated user: HuyS2
+2025-09-16 21:02:56 [http-nio-8082-exec-3] INFO  [c.l.services.imp.LoggingServiceImp] - [security] com.security.controllers.AuthController - decodeToken API Calling...
+2025-09-16 21:02:56 [http-nio-8082-exec-3] INFO  [c.l.services.imp.LoggingServiceImp] - [security] com.security.services.AuthService - Token decoded successfully
+2025-09-16 21:02:56 [http-nio-8082-exec-3] INFO  [c.l.services.imp.LoggingServiceImp] - [security] com.security.controllers.AuthController - Token decoded successfully
+2025-09-16 21:05:38 [background-preinit] DEBUG [org.jboss.logging] - Logging Provider: org.jboss.logging.Slf4jLoggerProvider found via system property
+2025-09-16 21:05:38 [main] INFO  [com.security.SecurityApplication] - Starting SecurityApplication using Java 20.0.2 with PID 12828 (D:\project IntelliJ Ultimate\modules-parent\security\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\security)
+2025-09-16 21:05:38 [main] DEBUG [com.security.SecurityApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
+2025-09-16 21:05:38 [main] INFO  [com.security.SecurityApplication] - No active profile set, falling back to 1 default profile: "default"
+2025-09-16 21:05:43 [main] DEBUG [i.m.c.u.i.l.InternalLoggerFactory] - Using SLF4J as the default logging framework
+2025-09-16 21:05:46 [main] WARN  [org.hibernate.orm.deprecation] - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-09-16 21:05:51 [main] WARN  [o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-09-16 21:05:51 [main] DEBUG [com.security.config.JwtAuthFilter] - Filter 'jwtAuthFilter' configured for use
+2025-09-16 21:05:51 [main] WARN  [o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer] - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2025-09-16 21:05:52 [main] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
+	c.s.c.AuthController:
+	{POST [/auth/register]}: register(Register,String)
+	{GET [/auth/validate]}: validateToken(String,String)
+	{POST [/auth/login]}: login(Login,String)
+	{POST [/auth/refresh]}: refreshToken(String,String)
+	{GET [/auth/decode]}: decodeToken(String,String)
+	{POST [/auth/logout]}: logout(String,String)
+2025-09-16 21:05:52 [main] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
+	o.s.b.a.w.s.e.BasicErrorController:
+	{ [/error]}: error(HttpServletRequest)
+	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
+2025-09-16 21:05:52 [main] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'beanNameHandlerMapping' {}
+2025-09-16 21:05:52 [main] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
+2025-09-16 21:05:53 [main] DEBUG [reactor.util.Loggers] - Using Slf4j logging framework
+2025-09-16 21:05:54 [main] INFO  [com.security.SecurityApplication] - Started SecurityApplication in 16.94 seconds (process running for 18.435)
+2025-09-16 21:06:00 [http-nio-8082-exec-2] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Processing request: /auth/validate
+2025-09-16 21:06:13 [http-nio-8082-exec-2] ERROR [c.l.services.imp.LoggingServiceImp] - [security] com.security.config.JwtAuthFilter - Error processing JWT token: JWT expired 122625577 milliseconds ago at 2025-09-15T04:02:20.000Z. Current time: 2025-09-16T14:06:05.577Z. Allowed clock skew: 0 milliseconds.: JWT expired 122625577 milliseconds ago at 2025-09-15T04:02:20.000Z. Current time: 2025-09-16T14:06:05.577Z. Allowed clock skew: 0 milliseconds.

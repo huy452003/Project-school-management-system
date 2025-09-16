@@ -10,6 +10,7 @@ import com.security.entities.UserEntity;
 import com.security.models.Login;
 import com.security.models.Register;
 import com.security.models.SecurityResponse;
+import com.security.models.TokenInfo;
 import com.security.repositories.UserRepo;
 import com.logging.services.LoggingService;
 import com.logging.models.LogContext;
@@ -108,6 +109,27 @@ public class AuthService {
                 .refreshToken(refreshToken)
                 .refExpires(formatExpirationTime(jwtConfig.getRefreshExpiration()))
                 .build();
+    }
+
+    public TokenInfo decodeToken(String token){
+        LogContext logContext = getLogContext("decodeToken");
+        try{
+            TokenInfo tokenInfo = TokenInfo.builder()
+                .username(jwtService.extractUsername(token))
+                .role(jwtService.extractRole(token))
+                .permissions(jwtService.extractPermissions(token))
+                .expiration(formatExpirationTime(jwtService.extractExpiration(token).getTime()))
+                .issuedAt(formatExpirationTime(jwtService.extractIssuedAt(token).getTime()))
+                .jti(jwtService.extractJTI(token))
+                .isExpired(jwtService.isTokenExpired(token))
+                .build();
+
+            loggingService.logInfo("Token decoded successfully", logContext);
+            return tokenInfo;
+        }catch(Exception e){
+            loggingService.logError("Error decoding token", e, logContext);
+            return null;
+        }
     }
 
     public SecurityResponse login(Login request){

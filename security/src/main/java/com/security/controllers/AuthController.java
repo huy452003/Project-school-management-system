@@ -9,6 +9,7 @@ import com.security.entities.UserEntity;
 import com.security.models.Login;
 import com.security.models.Register;
 import com.security.models.SecurityResponse;
+import com.security.models.TokenInfo;
 import com.security.services.AuthService;
 import lombok.extern.slf4j.Slf4j;
 
@@ -35,15 +36,14 @@ public class AuthController {
     @Autowired
     private AuthService authService;
 
-
     @Autowired
-    LoggingService loggingService;
+    private LoggingService loggingService;
 
     @Autowired
     private UserRepo userRepo;
 
     @Autowired
-    ReloadableResourceBundleMessageSource messageSource;
+    private ReloadableResourceBundleMessageSource messageSource;
 
     private LogContext getLogContext(String methodName) {
         return LogContext.builder()
@@ -186,6 +186,30 @@ public class AuthController {
 
             loggingService.logInfo("Token validated successfully for user: " + username, logContext);
             return ResponseEntity.status(response.getStatus()).body(response);
+    }
+
+    @GetMapping("/decode")
+    public ResponseEntity<Response<TokenInfo>> decodeToken(
+        @RequestHeader("Authorization") String authHeader,
+        @RequestHeader(value = "Accept-Language", defaultValue = "en") String acceptLanguage
+    ){
+        Locale locale = Locale.forLanguageTag(acceptLanguage);
+        LogContext logContext = getLogContext("decodeToken");
+
+        loggingService.logInfo("decodeToken API Calling...", logContext);
+        String token = authHeader.substring(7);
+
+        TokenInfo tokenInfo = authService.decodeToken(token);
+        Response<TokenInfo> response = new Response<>(
+                200,
+                messageSource.getMessage("response.message.decodeTokenSuccess", null, locale),
+                "Security-Model",
+                null,
+                tokenInfo
+        );
+
+        loggingService.logInfo("Token decoded successfully", logContext);
+        return ResponseEntity.status(response.getStatus()).body(response);
     }
 
 }

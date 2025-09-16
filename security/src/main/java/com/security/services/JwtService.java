@@ -51,6 +51,15 @@ public class JwtService {
         return buildToken(claims, userDetails, jwtConfig.getRefreshExpiration());
     }
 
+    public boolean isTokenValid(String token, UserDetails userDetails) {
+        String username = extractUsername(token);
+        return (username.equals(userDetails.getUsername())) && !isTokenExpired(token);
+    }
+
+    public boolean isTokenExpired(String token) {
+        return extractExpiration(token).before(new Date());
+    }
+
     public Claims extractAllClaims(String token){
         return Jwts
                 .parser()
@@ -69,27 +78,6 @@ public class JwtService {
         return extractClaims(token, Claims::getSubject);
     }
 
-    public Date extractExpiration(String token) {
-        return extractClaims(token, Claims::getExpiration);
-    }
-
-    public boolean isTokenExpired(String token) {
-        return extractExpiration(token).before(new Date());
-    }
-
-    public boolean isTokenValid(String token, UserDetails userDetails) {
-        String username = extractUsername(token);
-        return (username.equals(userDetails.getUsername())) && !isTokenExpired(token);
-    }
-    
-    public String extractJTI(String token) {
-        return extractClaims(token, Claims::getId);
-    }
-    
-    public Date extractIssuedAt(String token) {
-        return extractClaims(token, Claims::getIssuedAt);
-    }
-    
     public String extractRole(String token) {
         return extractClaims(token, claims -> claims.get("role", String.class));
     }
@@ -98,26 +86,38 @@ public class JwtService {
     public List<String> extractPermissions(String token) {
         return extractClaims(token, claims -> claims.get("permissions", List.class));
     }
-    
-    @SuppressWarnings("unchecked")
-    public List<String> extractAuthorities(String token) {
-        // Tái tạo authorities từ role + permissions thay vì lưu trong token
-        List<String> authorities = new ArrayList<>();
-        
-        // Add permissions
-        List<String> permissions = extractPermissions(token);
-        if (permissions != null) {
-            authorities.addAll(permissions);
-        }
-        
-        // Add role
-        String role = extractRole(token);
-        if (role != null) {
-            authorities.add(role);
-        }
-        
-        return authorities;
+
+    public Date extractExpiration(String token) {
+        return extractClaims(token, Claims::getExpiration);
     }
+    
+    public Date extractIssuedAt(String token) {
+        return extractClaims(token, Claims::getIssuedAt);
+    }
+    
+    public String extractJTI(String token) {
+        return extractClaims(token, Claims::getId);
+    }
+    
+    // @SuppressWarnings("unchecked")
+    // public List<String> extractAuthorities(String token) {
+    //     // Tái tạo authorities từ role + permissions thay vì lưu trong token
+    //     List<String> authorities = new ArrayList<>();
+        
+    //     // Add permissions
+    //     List<String> permissions = extractPermissions(token);
+    //     if (permissions != null) {
+    //         authorities.addAll(permissions);
+    //     }
+        
+    //     // Add role
+    //     String role = extractRole(token);
+    //     if (role != null) {
+    //         authorities.add(role);
+    //     }
+        
+    //     return authorities;
+    // }
 
     private SecretKey getSecretKey() {
         byte[] keyBytes = Decoders.BASE64.decode(jwtConfig.getSecret());

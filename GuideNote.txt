@@ -85,7 +85,7 @@ nhằm bảo mật tránh việc bị làm giả token
 + lưu token vào database và revoke
 + thêm token vào blacklist và block khi sử dụng nó , khi token hết hạn sẽ tự mất
 
-- cách giải mã Token
+- cách giải mã Token		=
 
 - nếu Token hết hạn thì giải quyết như thế nào?			=
 + access token tự động xóa khi hết hạn

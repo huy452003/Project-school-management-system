@@ -112,12 +112,25 @@ public class JwtAuthFilter extends OncePerRequestFilter {
                     loggingService.logDebug("Successfully authenticated user: " + username, logContext);
                 } else {
                     loggingService.logWarn("Invalid JWT token for user:" + username, logContext);
+                    UnauthorizedExceptionHandle exception = new UnauthorizedExceptionHandle(
+                        "Token validation failed",
+                        "Token may be invalid, expired, or user not found"
+                    );
+                    handlerExceptionResolver.resolveException(request, response, null, exception);
+                    return;
                 }
             }
         } catch (Exception e) {
             loggingService.logError("Error processing JWT token: " + e.getMessage(), e, logContext);
             // Clear security context nếu có lỗi
             SecurityContextHolder.clearContext();
+            
+            UnauthorizedExceptionHandle exception = new UnauthorizedExceptionHandle(
+                "Token validation failed",
+                "Token may be invalid, expired, or malformed"
+            );
+            handlerExceptionResolver.resolveException(request, response, null, exception);
+            return;
         }
         filterChain.doFilter(request, response);
     }
