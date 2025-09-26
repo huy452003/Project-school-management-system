@@ -25,6 +25,7 @@
     <module>model-shared</module>
     <module>handle_exceptions</module>
     <module>logging</module>
+    <module>kafka-shared</module>
     <module>qlsv</module>
     <module>qlgv</module>
     <module>security</module>
@@ -47,6 +48,11 @@
         <dependency>
             <groupId>com.common</groupId>
             <artifactId>logging</artifactId>    
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.common</groupId>
+            <artifactId>kafka-shared</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
@@ -109,6 +115,19 @@
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt-api</artifactId>
             <version>0.12.6</version>
+        </dependency>
+        
+        <!-- Kafka Dependencies -->
+        <dependency>
+            <groupId>org.springframework.kafka</groupId>
+            <artifactId>spring-kafka</artifactId>
+            <version>3.2.0</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.apache.kafka</groupId>
+            <artifactId>kafka-clients</artifactId>
+            <version>3.7.0</version>
         </dependency>
     </dependencies>
 </dependencyManagement>

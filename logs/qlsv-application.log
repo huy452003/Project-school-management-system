@@ -1,512 +1,109 @@
-2025-09-15 00:00:00 [http-nio-8080-exec-2] ERROR [c.l.services.imp.LoggingServiceImp] - [QLSV] com.common.QLSV.services.JwtValidationService - Exception during getUserFromToken: : 401  on GET request for "http://localhost:8082/auth/validate": "{"status":401,"message":"Unauthorized access.","modelName":"Security-Model","errors":{"Details":"User has been logged out from all devices","Error":"User token is blacklisted"}}"
-2025-09-15 00:00:48 [http-nio-8080-exec-2] WARN  [o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver] - Resolved [UnauthorizedExceptionHandle(message=User not found, details=User associated with token not found in database)]
-2025-09-15 00:06:45 [restartedMain] INFO  [com.common.QLSV.QlsvApplication] - Starting QlsvApplication using Java 20.0.2 with PID 2640 (D:\project IntelliJ Ultimate\modules-parent\qlsv\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlsv)
-2025-09-15 00:06:45 [restartedMain] DEBUG [com.common.QLSV.QlsvApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
-2025-09-15 00:06:45 [restartedMain] INFO  [com.common.QLSV.QlsvApplication] - No active profile set, falling back to 1 default profile: "default"
-2025-09-15 00:06:47 [restartedMain] WARN  [com.zaxxer.hikari.HikariConfig] - HikariPool-2 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
-2025-09-15 00:06:47 [restartedMain] WARN  [org.hibernate.orm.deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-09-15 00:06:47 [restartedMain] WARN  [org.hibernate.orm.deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
-2025-09-15 00:06:47 [restartedMain] WARN  [o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-09-15 00:06:47 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
+2025-09-26 20:23:12 [background-preinit] DEBUG [org.jboss.logging] - Logging Provider: org.jboss.logging.Slf4jLoggerProvider found via system property
+2025-09-26 20:23:12 [restartedMain] INFO  [com.common.QLSV.QlsvApplication] - Starting QlsvApplication using Java 20.0.2 with PID 2464 (D:\project IntelliJ Ultimate\modules-parent\qlsv\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlsv)
+2025-09-26 20:23:12 [restartedMain] DEBUG [com.common.QLSV.QlsvApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
+2025-09-26 20:23:12 [restartedMain] INFO  [com.common.QLSV.QlsvApplication] - No active profile set, falling back to 1 default profile: "default"
+2025-09-26 20:23:22 [restartedMain] DEBUG [i.m.c.u.i.l.InternalLoggerFactory] - Using SLF4J as the default logging framework
+2025-09-26 20:23:25 [restartedMain] WARN  [com.zaxxer.hikari.HikariConfig] - HikariPool-1 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
+2025-09-26 20:23:26 [restartedMain] WARN  [org.hibernate.orm.deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-09-26 20:23:26 [restartedMain] WARN  [org.hibernate.orm.deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-09-26 20:23:35 [restartedMain] WARN  [o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-09-26 20:23:36 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
 	c.c.Q.c.StudentController:
 	{GET [/students]}: get(String,HttpServletRequest)
 	{PUT [/students]}: update(StudentModelRequest,String,HttpServletRequest)
 	{POST [/students]}: add(CreateStudentModelRequest,String,HttpServletRequest)
 	{DELETE [/students]}: delete(List,String,HttpServletRequest)
 	{GET [/students/public]}: public_get(String)
-2025-09-15 00:06:47 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
+2025-09-26 20:23:36 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
 	o.s.b.a.w.s.e.BasicErrorController:
 	{ [/error]}: error(HttpServletRequest)
 	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
-2025-09-15 00:06:47 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'beanNameHandlerMapping' {}
-2025-09-15 00:06:47 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
-2025-09-15 00:06:47 [restartedMain] WARN  [o.s.b.a.t.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
-2025-09-15 00:06:47 [restartedMain] INFO  [com.common.QLSV.QlsvApplication] - Started QlsvApplication in 2.265 seconds (process running for 585.842)
-2025-09-15 00:06:50 [restartedMain] INFO  [com.common.QLSV.QlsvApplication] - Starting QlsvApplication using Java 20.0.2 with PID 2640 (D:\project IntelliJ Ultimate\modules-parent\qlsv\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlsv)
-2025-09-15 00:06:50 [restartedMain] DEBUG [com.common.QLSV.QlsvApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
-2025-09-15 00:06:50 [restartedMain] INFO  [com.common.QLSV.QlsvApplication] - No active profile set, falling back to 1 default profile: "default"
-2025-09-15 00:06:52 [restartedMain] WARN  [com.zaxxer.hikari.HikariConfig] - HikariPool-3 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
-2025-09-15 00:06:52 [restartedMain] WARN  [org.hibernate.orm.deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-09-15 00:06:52 [restartedMain] WARN  [org.hibernate.orm.deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
-2025-09-15 00:06:52 [restartedMain] WARN  [o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-09-15 00:06:53 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
-	c.c.Q.c.StudentController:
-	{GET [/students]}: get(String,HttpServletRequest)
-	{PUT [/students]}: update(StudentModelRequest,String,HttpServletRequest)
-	{POST [/students]}: add(CreateStudentModelRequest,String,HttpServletRequest)
-	{DELETE [/students]}: delete(List,String,HttpServletRequest)
-	{GET [/students/public]}: public_get(String)
-2025-09-15 00:06:53 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
-	o.s.b.a.w.s.e.BasicErrorController:
-	{ [/error]}: error(HttpServletRequest)
-	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
-2025-09-15 00:06:53 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'beanNameHandlerMapping' {}
-2025-09-15 00:06:53 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
-2025-09-15 00:06:53 [restartedMain] WARN  [o.s.b.a.t.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
-2025-09-15 00:06:53 [restartedMain] INFO  [com.common.QLSV.QlsvApplication] - Started QlsvApplication in 2.652 seconds (process running for 591.346)
-2025-09-15 00:06:56 [restartedMain] INFO  [com.common.QLSV.QlsvApplication] - Starting QlsvApplication using Java 20.0.2 with PID 2640 (D:\project IntelliJ Ultimate\modules-parent\qlsv\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlsv)
-2025-09-15 00:06:56 [restartedMain] DEBUG [com.common.QLSV.QlsvApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
-2025-09-15 00:06:56 [restartedMain] INFO  [com.common.QLSV.QlsvApplication] - No active profile set, falling back to 1 default profile: "default"
-2025-09-15 00:06:57 [restartedMain] WARN  [com.zaxxer.hikari.HikariConfig] - HikariPool-4 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
-2025-09-15 00:06:57 [restartedMain] WARN  [org.hibernate.orm.deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-09-15 00:06:57 [restartedMain] WARN  [org.hibernate.orm.deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
-2025-09-15 00:06:58 [restartedMain] WARN  [o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-09-15 00:06:58 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
-	c.c.Q.c.StudentController:
-	{GET [/students]}: get(String,HttpServletRequest)
-	{PUT [/students]}: update(StudentModelRequest,String,HttpServletRequest)
-	{POST [/students]}: add(CreateStudentModelRequest,String,HttpServletRequest)
-	{DELETE [/students]}: delete(List,String,HttpServletRequest)
-	{GET [/students/public]}: public_get(String)
-2025-09-15 00:06:58 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
-	o.s.b.a.w.s.e.BasicErrorController:
-	{ [/error]}: error(HttpServletRequest)
-	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
-2025-09-15 00:06:58 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'beanNameHandlerMapping' {}
-2025-09-15 00:06:58 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
-2025-09-15 00:06:58 [restartedMain] WARN  [o.s.b.a.t.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
-2025-09-15 00:06:58 [restartedMain] INFO  [com.common.QLSV.QlsvApplication] - Started QlsvApplication in 2.205 seconds (process running for 596.573)
-2025-09-15 00:07:30 [restartedMain] INFO  [com.common.QLSV.QlsvApplication] - Starting QlsvApplication using Java 20.0.2 with PID 2640 (D:\project IntelliJ Ultimate\modules-parent\qlsv\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlsv)
-2025-09-15 00:07:30 [restartedMain] DEBUG [com.common.QLSV.QlsvApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
-2025-09-15 00:07:30 [restartedMain] INFO  [com.common.QLSV.QlsvApplication] - No active profile set, falling back to 1 default profile: "default"
-2025-09-15 00:07:31 [restartedMain] WARN  [com.zaxxer.hikari.HikariConfig] - HikariPool-5 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
-2025-09-15 00:07:31 [restartedMain] WARN  [org.hibernate.orm.deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-09-15 00:07:31 [restartedMain] WARN  [org.hibernate.orm.deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
-2025-09-15 00:07:31 [restartedMain] WARN  [o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-09-15 00:07:31 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
-	c.c.Q.c.StudentController:
-	{GET [/students]}: get(String,HttpServletRequest)
-	{PUT [/students]}: update(StudentModelRequest,String,HttpServletRequest)
-	{POST [/students]}: add(CreateStudentModelRequest,String,HttpServletRequest)
-	{DELETE [/students]}: delete(List,String,HttpServletRequest)
-	{GET [/students/public]}: public_get(String)
-2025-09-15 00:07:31 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
-	o.s.b.a.w.s.e.BasicErrorController:
-	{ [/error]}: error(HttpServletRequest)
-	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
-2025-09-15 00:07:31 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'beanNameHandlerMapping' {}
-2025-09-15 00:07:31 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
-2025-09-15 00:07:31 [restartedMain] WARN  [o.s.b.a.t.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
-2025-09-15 00:07:31 [restartedMain] INFO  [com.common.QLSV.QlsvApplication] - Started QlsvApplication in 1.661 seconds (process running for 629.779)
-2025-09-15 00:08:36 [restartedMain] INFO  [com.common.QLSV.QlsvApplication] - Starting QlsvApplication using Java 20.0.2 with PID 2640 (D:\project IntelliJ Ultimate\modules-parent\qlsv\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlsv)
-2025-09-15 00:08:36 [restartedMain] DEBUG [com.common.QLSV.QlsvApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
-2025-09-15 00:08:36 [restartedMain] INFO  [com.common.QLSV.QlsvApplication] - No active profile set, falling back to 1 default profile: "default"
-2025-09-15 00:08:37 [restartedMain] WARN  [com.zaxxer.hikari.HikariConfig] - HikariPool-6 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
-2025-09-15 00:08:37 [restartedMain] WARN  [org.hibernate.orm.deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-09-15 00:08:37 [restartedMain] WARN  [org.hibernate.orm.deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
-2025-09-15 00:08:37 [restartedMain] WARN  [o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-09-15 00:08:37 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
-	c.c.Q.c.StudentController:
-	{GET [/students]}: get(String,HttpServletRequest)
-	{PUT [/students]}: update(StudentModelRequest,String,HttpServletRequest)
-	{POST [/students]}: add(CreateStudentModelRequest,String,HttpServletRequest)
-	{DELETE [/students]}: delete(List,String,HttpServletRequest)
-	{GET [/students/public]}: public_get(String)
-2025-09-15 00:08:37 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
-	o.s.b.a.w.s.e.BasicErrorController:
-	{ [/error]}: error(HttpServletRequest)
-	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
-2025-09-15 00:08:37 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'beanNameHandlerMapping' {}
-2025-09-15 00:08:38 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
-2025-09-15 00:08:38 [restartedMain] WARN  [o.s.b.a.t.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
-2025-09-15 00:08:38 [restartedMain] INFO  [com.common.QLSV.QlsvApplication] - Started QlsvApplication in 1.316 seconds (process running for 696.232)
-2025-09-15 00:08:39 [restartedMain] INFO  [com.common.QLSV.QlsvApplication] - Starting QlsvApplication using Java 20.0.2 with PID 2640 (D:\project IntelliJ Ultimate\modules-parent\qlsv\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlsv)
-2025-09-15 00:08:39 [restartedMain] DEBUG [com.common.QLSV.QlsvApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
-2025-09-15 00:08:39 [restartedMain] INFO  [com.common.QLSV.QlsvApplication] - No active profile set, falling back to 1 default profile: "default"
-2025-09-15 00:08:40 [restartedMain] WARN  [com.zaxxer.hikari.HikariConfig] - HikariPool-7 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
-2025-09-15 00:08:40 [restartedMain] WARN  [org.hibernate.orm.deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-09-15 00:08:40 [restartedMain] WARN  [org.hibernate.orm.deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
-2025-09-15 00:08:40 [restartedMain] WARN  [o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-09-15 00:08:40 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
-	c.c.Q.c.StudentController:
-	{GET [/students]}: get(String,HttpServletRequest)
-	{PUT [/students]}: update(StudentModelRequest,String,HttpServletRequest)
-	{POST [/students]}: add(CreateStudentModelRequest,String,HttpServletRequest)
-	{DELETE [/students]}: delete(List,String,HttpServletRequest)
-	{GET [/students/public]}: public_get(String)
-2025-09-15 00:08:40 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
-	o.s.b.a.w.s.e.BasicErrorController:
-	{ [/error]}: error(HttpServletRequest)
-	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
-2025-09-15 00:08:40 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'beanNameHandlerMapping' {}
-2025-09-15 00:08:40 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
-2025-09-15 00:08:40 [restartedMain] WARN  [o.s.b.a.t.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
-2025-09-15 00:08:40 [restartedMain] INFO  [com.common.QLSV.QlsvApplication] - Started QlsvApplication in 0.985 seconds (process running for 698.926)
-2025-09-15 00:09:26 [restartedMain] INFO  [com.common.QLSV.QlsvApplication] - Starting QlsvApplication using Java 20.0.2 with PID 2640 (D:\project IntelliJ Ultimate\modules-parent\qlsv\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlsv)
-2025-09-15 00:09:26 [restartedMain] DEBUG [com.common.QLSV.QlsvApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
-2025-09-15 00:09:26 [restartedMain] INFO  [com.common.QLSV.QlsvApplication] - No active profile set, falling back to 1 default profile: "default"
-2025-09-15 00:09:27 [restartedMain] WARN  [com.zaxxer.hikari.HikariConfig] - HikariPool-8 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
-2025-09-15 00:09:27 [restartedMain] WARN  [org.hibernate.orm.deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-09-15 00:09:27 [restartedMain] WARN  [org.hibernate.orm.deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
-2025-09-15 00:09:27 [restartedMain] WARN  [o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-09-15 00:09:27 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
-	c.c.Q.c.StudentController:
-	{GET [/students]}: get(String,HttpServletRequest)
-	{PUT [/students]}: update(StudentModelRequest,String,HttpServletRequest)
-	{POST [/students]}: add(CreateStudentModelRequest,String,HttpServletRequest)
-	{DELETE [/students]}: delete(List,String,HttpServletRequest)
-	{GET [/students/public]}: public_get(String)
-2025-09-15 00:09:27 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
-	o.s.b.a.w.s.e.BasicErrorController:
-	{ [/error]}: error(HttpServletRequest)
-	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
-2025-09-15 00:09:27 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'beanNameHandlerMapping' {}
-2025-09-15 00:09:27 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
-2025-09-15 00:09:27 [restartedMain] WARN  [o.s.b.a.t.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
-2025-09-15 00:09:28 [restartedMain] INFO  [com.common.QLSV.QlsvApplication] - Started QlsvApplication in 1.398 seconds (process running for 746.123)
-2025-09-15 00:12:07 [http-nio-8080-exec-1] DEBUG [c.l.services.imp.LoggingServiceImp] - [QLSV] com.common.QLSV.services.JwtValidationService - Calling security module with URL : http://localhost:8082/auth/validate to validate token
-2025-09-15 00:13:22 [http-nio-8080-exec-5] DEBUG [c.l.services.imp.LoggingServiceImp] - [QLSV] com.common.QLSV.services.JwtValidationService - Calling security module with URL : http://localhost:8082/auth/validate to validate token
-2025-09-15 00:13:39 [http-nio-8080-exec-1] ERROR [c.l.services.imp.LoggingServiceImp] - [QLSV] com.common.QLSV.services.JwtValidationService - Exception during getUserFromToken: : 401  on GET request for "http://localhost:8082/auth/validate": "{"status":401,"message":"Unauthorized access.","modelName":"Security-Model","errors":{"Details":"User has been logged out from all devices","Error":"User token is blacklisted"}}"
-2025-09-15 00:13:54 [http-nio-8080-exec-1] WARN  [o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver] - Resolved [UnauthorizedExceptionHandle(message=Token validation failed, details=Token may be invalid, expired, or blacklisted)]
-2025-09-15 00:15:08 [background-preinit] DEBUG [org.jboss.logging] - Logging Provider: org.jboss.logging.Slf4jLoggerProvider found via system property
-2025-09-15 00:15:08 [restartedMain] INFO  [com.common.QLSV.QlsvApplication] - Starting QlsvApplication using Java 20.0.2 with PID 13524 (D:\project IntelliJ Ultimate\modules-parent\qlsv\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlsv)
-2025-09-15 00:15:08 [restartedMain] DEBUG [com.common.QLSV.QlsvApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
-2025-09-15 00:15:08 [restartedMain] INFO  [com.common.QLSV.QlsvApplication] - No active profile set, falling back to 1 default profile: "default"
-2025-09-15 00:15:14 [restartedMain] DEBUG [i.m.c.u.i.l.InternalLoggerFactory] - Using SLF4J as the default logging framework
-2025-09-15 00:15:15 [restartedMain] WARN  [com.zaxxer.hikari.HikariConfig] - HikariPool-1 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
-2025-09-15 00:15:15 [restartedMain] WARN  [org.hibernate.orm.deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-09-15 00:15:15 [restartedMain] WARN  [org.hibernate.orm.deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
-2025-09-15 00:15:20 [restartedMain] WARN  [o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-09-15 00:15:20 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
-	c.c.Q.c.StudentController:
-	{GET [/students]}: get(String,HttpServletRequest)
-	{PUT [/students]}: update(StudentModelRequest,String,HttpServletRequest)
-	{POST [/students]}: add(CreateStudentModelRequest,String,HttpServletRequest)
-	{DELETE [/students]}: delete(List,String,HttpServletRequest)
-	{GET [/students/public]}: public_get(String)
-2025-09-15 00:15:20 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
-	o.s.b.a.w.s.e.BasicErrorController:
-	{ [/error]}: error(HttpServletRequest)
-	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
-2025-09-15 00:15:20 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'beanNameHandlerMapping' {}
-2025-09-15 00:15:20 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
-2025-09-15 00:15:21 [restartedMain] WARN  [o.s.b.a.t.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
-2025-09-15 00:15:21 [restartedMain] DEBUG [reactor.util.Loggers] - Using Slf4j logging framework
-2025-09-15 00:15:22 [restartedMain] INFO  [com.common.QLSV.QlsvApplication] - Started QlsvApplication in 14.778 seconds (process running for 15.771)
-2025-09-15 00:15:29 [http-nio-8080-exec-1] DEBUG [c.l.services.imp.LoggingServiceImp] - [QLSV] com.common.QLSV.services.JwtValidationService - Calling security module with URL : http://localhost:8082/auth/validate to validate token
-2025-09-15 00:15:29 [http-nio-8080-exec-1] ERROR [c.l.services.imp.LoggingServiceImp] - [QLSV] com.common.QLSV.services.JwtValidationService - Exception during getUserFromToken: : 401  on GET request for "http://localhost:8082/auth/validate": "{"status":401,"message":"Unauthorized access.","modelName":"Security-Model","errors":{"Details":"User has been logged out from all devices","Error":"User token is blacklisted"}}"
-2025-09-15 00:15:30 [http-nio-8080-exec-1] WARN  [o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver] - Resolved [UnauthorizedExceptionHandle(message=Token validation failed, details=Token may be invalid, expired, or blacklisted)]
-2025-09-15 00:18:28 [background-preinit] DEBUG [org.jboss.logging] - Logging Provider: org.jboss.logging.Slf4jLoggerProvider found via system property
-2025-09-15 00:18:28 [restartedMain] INFO  [com.common.QLSV.QlsvApplication] - Starting QlsvApplication using Java 20.0.2 with PID 8028 (D:\project IntelliJ Ultimate\modules-parent\qlsv\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlsv)
-2025-09-15 00:18:28 [restartedMain] DEBUG [com.common.QLSV.QlsvApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
-2025-09-15 00:18:28 [restartedMain] INFO  [com.common.QLSV.QlsvApplication] - No active profile set, falling back to 1 default profile: "default"
-2025-09-15 00:18:37 [restartedMain] DEBUG [i.m.c.u.i.l.InternalLoggerFactory] - Using SLF4J as the default logging framework
-2025-09-15 00:18:38 [restartedMain] WARN  [com.zaxxer.hikari.HikariConfig] - HikariPool-1 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
-2025-09-15 00:18:39 [restartedMain] WARN  [org.hibernate.orm.deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-09-15 00:18:39 [restartedMain] WARN  [org.hibernate.orm.deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
-2025-09-15 00:18:42 [restartedMain] WARN  [o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-09-15 00:18:42 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
-	c.c.Q.c.StudentController:
-	{GET [/students]}: get(String,HttpServletRequest)
-	{PUT [/students]}: update(StudentModelRequest,String,HttpServletRequest)
-	{POST [/students]}: add(CreateStudentModelRequest,String,HttpServletRequest)
-	{DELETE [/students]}: delete(List,String,HttpServletRequest)
-	{GET [/students/public]}: public_get(String)
-2025-09-15 00:18:42 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
-	o.s.b.a.w.s.e.BasicErrorController:
-	{ [/error]}: error(HttpServletRequest)
-	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
-2025-09-15 00:18:42 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'beanNameHandlerMapping' {}
-2025-09-15 00:18:43 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
-2025-09-15 00:18:43 [restartedMain] WARN  [o.s.b.a.t.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
-2025-09-15 00:18:43 [restartedMain] DEBUG [reactor.util.Loggers] - Using Slf4j logging framework
-2025-09-15 00:18:45 [restartedMain] INFO  [com.common.QLSV.QlsvApplication] - Started QlsvApplication in 16.954 seconds (process running for 17.928)
-2025-09-15 00:19:02 [http-nio-8080-exec-2] DEBUG [c.l.services.imp.LoggingServiceImp] - [QLSV] com.common.QLSV.services.JwtValidationService - Calling security module with URL : http://localhost:8082/auth/validate to validate token
-2025-09-15 00:19:27 [http-nio-8080-exec-2] ERROR [c.l.services.imp.LoggingServiceImp] - [QLSV] com.common.QLSV.services.JwtValidationService - Exception during getUserFromToken: : 401  on GET request for "http://localhost:8082/auth/validate": "{"status":401,"message":"Unauthorized access.","modelName":"Security-Model","errors":{"Details":"User has been logged out from all devices","Error":"User token is blacklisted"}}"
-2025-09-15 00:19:52 [http-nio-8080-exec-2] WARN  [o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver] - Resolved [UnauthorizedExceptionHandle(message=Token validation failed, details=Token may be invalid, expired, or blacklisted)]
-2025-09-15 00:20:12 [restartedMain] INFO  [com.common.QLSV.QlsvApplication] - Starting QlsvApplication using Java 20.0.2 with PID 8028 (D:\project IntelliJ Ultimate\modules-parent\qlsv\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlsv)
-2025-09-15 00:20:12 [restartedMain] DEBUG [com.common.QLSV.QlsvApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
-2025-09-15 00:20:12 [restartedMain] INFO  [com.common.QLSV.QlsvApplication] - No active profile set, falling back to 1 default profile: "default"
-2025-09-15 00:20:13 [restartedMain] WARN  [com.zaxxer.hikari.HikariConfig] - HikariPool-2 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
-2025-09-15 00:20:13 [restartedMain] WARN  [org.hibernate.orm.deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-09-15 00:20:13 [restartedMain] WARN  [org.hibernate.orm.deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
-2025-09-15 00:20:13 [restartedMain] WARN  [o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-09-15 00:20:13 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
-	c.c.Q.c.StudentController:
-	{GET [/students]}: get(String,HttpServletRequest)
-	{PUT [/students]}: update(StudentModelRequest,String,HttpServletRequest)
-	{POST [/students]}: add(CreateStudentModelRequest,String,HttpServletRequest)
-	{DELETE [/students]}: delete(List,String,HttpServletRequest)
-	{GET [/students/public]}: public_get(String)
-2025-09-15 00:20:13 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
-	o.s.b.a.w.s.e.BasicErrorController:
-	{ [/error]}: error(HttpServletRequest)
-	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
-2025-09-15 00:20:13 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'beanNameHandlerMapping' {}
-2025-09-15 00:20:13 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
-2025-09-15 00:20:13 [restartedMain] WARN  [o.s.b.a.t.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
-2025-09-15 00:20:14 [restartedMain] INFO  [com.common.QLSV.QlsvApplication] - Started QlsvApplication in 1.994 seconds (process running for 106.897)
-2025-09-15 00:20:23 [restartedMain] INFO  [com.common.QLSV.QlsvApplication] - Starting QlsvApplication using Java 20.0.2 with PID 8028 (D:\project IntelliJ Ultimate\modules-parent\qlsv\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlsv)
-2025-09-15 00:20:23 [restartedMain] DEBUG [com.common.QLSV.QlsvApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
-2025-09-15 00:20:23 [restartedMain] INFO  [com.common.QLSV.QlsvApplication] - No active profile set, falling back to 1 default profile: "default"
-2025-09-15 00:20:24 [restartedMain] WARN  [com.zaxxer.hikari.HikariConfig] - HikariPool-3 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
-2025-09-15 00:20:24 [restartedMain] WARN  [org.hibernate.orm.deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-09-15 00:20:24 [restartedMain] WARN  [org.hibernate.orm.deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
-2025-09-15 00:20:25 [restartedMain] WARN  [o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-09-15 00:20:25 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
-	c.c.Q.c.StudentController:
-	{GET [/students]}: get(String,HttpServletRequest)
-	{PUT [/students]}: update(StudentModelRequest,String,HttpServletRequest)
-	{POST [/students]}: add(CreateStudentModelRequest,String,HttpServletRequest)
-	{DELETE [/students]}: delete(List,String,HttpServletRequest)
-	{GET [/students/public]}: public_get(String)
-2025-09-15 00:20:25 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
-	o.s.b.a.w.s.e.BasicErrorController:
-	{ [/error]}: error(HttpServletRequest)
-	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
-2025-09-15 00:20:25 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'beanNameHandlerMapping' {}
-2025-09-15 00:20:25 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
-2025-09-15 00:20:25 [restartedMain] WARN  [o.s.b.a.t.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
-2025-09-15 00:20:25 [restartedMain] INFO  [com.common.QLSV.QlsvApplication] - Started QlsvApplication in 2.033 seconds (process running for 118.808)
-2025-09-15 00:20:43 [http-nio-8080-exec-2] DEBUG [c.l.services.imp.LoggingServiceImp] - [QLSV] com.common.QLSV.services.JwtValidationService - Calling security module with URL : http://localhost:8082/auth/validate to validate token
-2025-09-15 00:21:17 [http-nio-8080-exec-2] WARN  [o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver] - Resolved [org.springframework.web.client.HttpClientErrorException$Unauthorized: 401  on GET request for "http://localhost:8082/auth/validate": "{"status":401,"message":"Unauthorized access.","modelName":"Security-Model","errors":{"Details":"User has been logged out from all devices","Error":"User token is blacklisted"}}"]
-2025-09-15 00:22:04 [restartedMain] INFO  [com.common.QLSV.QlsvApplication] - Starting QlsvApplication using Java 20.0.2 with PID 8028 (D:\project IntelliJ Ultimate\modules-parent\qlsv\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlsv)
-2025-09-15 00:22:04 [restartedMain] DEBUG [com.common.QLSV.QlsvApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
-2025-09-15 00:22:04 [restartedMain] INFO  [com.common.QLSV.QlsvApplication] - No active profile set, falling back to 1 default profile: "default"
-2025-09-15 00:22:04 [restartedMain] WARN  [com.zaxxer.hikari.HikariConfig] - HikariPool-4 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
-2025-09-15 00:22:04 [restartedMain] WARN  [org.hibernate.orm.deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-09-15 00:22:04 [restartedMain] WARN  [org.hibernate.orm.deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
-2025-09-15 00:22:05 [restartedMain] WARN  [o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-09-15 00:22:05 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
-	c.c.Q.c.StudentController:
-	{GET [/students]}: get(String,HttpServletRequest)
-	{PUT [/students]}: update(StudentModelRequest,String,HttpServletRequest)
-	{POST [/students]}: add(CreateStudentModelRequest,String,HttpServletRequest)
-	{DELETE [/students]}: delete(List,String,HttpServletRequest)
-	{GET [/students/public]}: public_get(String)
-2025-09-15 00:22:05 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
-	o.s.b.a.w.s.e.BasicErrorController:
-	{ [/error]}: error(HttpServletRequest)
-	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
-2025-09-15 00:22:05 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'beanNameHandlerMapping' {}
-2025-09-15 00:22:05 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
-2025-09-15 00:22:05 [restartedMain] WARN  [o.s.b.a.t.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
-2025-09-15 00:22:05 [restartedMain] INFO  [com.common.QLSV.QlsvApplication] - Started QlsvApplication in 1.378 seconds (process running for 218.27)
-2025-09-15 00:22:30 [restartedMain] INFO  [com.common.QLSV.QlsvApplication] - Starting QlsvApplication using Java 20.0.2 with PID 8028 (D:\project IntelliJ Ultimate\modules-parent\qlsv\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlsv)
-2025-09-15 00:22:30 [restartedMain] DEBUG [com.common.QLSV.QlsvApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
-2025-09-15 00:22:30 [restartedMain] INFO  [com.common.QLSV.QlsvApplication] - No active profile set, falling back to 1 default profile: "default"
-2025-09-15 00:22:31 [restartedMain] WARN  [com.zaxxer.hikari.HikariConfig] - HikariPool-5 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
-2025-09-15 00:22:31 [restartedMain] WARN  [org.hibernate.orm.deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-09-15 00:22:31 [restartedMain] WARN  [org.hibernate.orm.deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
-2025-09-15 00:22:31 [restartedMain] WARN  [o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-09-15 00:22:31 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
-	c.c.Q.c.StudentController:
-	{GET [/students]}: get(String,HttpServletRequest)
-	{PUT [/students]}: update(StudentModelRequest,String,HttpServletRequest)
-	{POST [/students]}: add(CreateStudentModelRequest,String,HttpServletRequest)
-	{DELETE [/students]}: delete(List,String,HttpServletRequest)
-	{GET [/students/public]}: public_get(String)
-2025-09-15 00:22:31 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
-	o.s.b.a.w.s.e.BasicErrorController:
-	{ [/error]}: error(HttpServletRequest)
-	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
-2025-09-15 00:22:31 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'beanNameHandlerMapping' {}
-2025-09-15 00:22:31 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
-2025-09-15 00:22:31 [restartedMain] WARN  [o.s.b.a.t.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
-2025-09-15 00:22:31 [restartedMain] INFO  [com.common.QLSV.QlsvApplication] - Started QlsvApplication in 1.197 seconds (process running for 244.716)
-2025-09-15 00:22:41 [restartedMain] INFO  [com.common.QLSV.QlsvApplication] - Starting QlsvApplication using Java 20.0.2 with PID 8028 (D:\project IntelliJ Ultimate\modules-parent\qlsv\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlsv)
-2025-09-15 00:22:41 [restartedMain] DEBUG [com.common.QLSV.QlsvApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
-2025-09-15 00:22:41 [restartedMain] INFO  [com.common.QLSV.QlsvApplication] - No active profile set, falling back to 1 default profile: "default"
-2025-09-15 00:22:42 [restartedMain] WARN  [com.zaxxer.hikari.HikariConfig] - HikariPool-6 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
-2025-09-15 00:22:42 [restartedMain] WARN  [org.hibernate.orm.deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-09-15 00:22:42 [restartedMain] WARN  [org.hibernate.orm.deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
-2025-09-15 00:22:42 [restartedMain] WARN  [o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-09-15 00:22:42 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
-	c.c.Q.c.StudentController:
-	{GET [/students]}: get(String,HttpServletRequest)
-	{PUT [/students]}: update(StudentModelRequest,String,HttpServletRequest)
-	{POST [/students]}: add(CreateStudentModelRequest,String,HttpServletRequest)
-	{DELETE [/students]}: delete(List,String,HttpServletRequest)
-	{GET [/students/public]}: public_get(String)
-2025-09-15 00:22:42 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
-	o.s.b.a.w.s.e.BasicErrorController:
-	{ [/error]}: error(HttpServletRequest)
-	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
-2025-09-15 00:22:42 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'beanNameHandlerMapping' {}
-2025-09-15 00:22:42 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
-2025-09-15 00:22:42 [restartedMain] WARN  [o.s.b.a.t.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
-2025-09-15 00:22:42 [restartedMain] INFO  [com.common.QLSV.QlsvApplication] - Started QlsvApplication in 1.336 seconds (process running for 255.887)
-2025-09-15 00:23:03 [http-nio-8080-exec-2] DEBUG [c.l.services.imp.LoggingServiceImp] - [QLSV] com.common.QLSV.services.JwtValidationService - Calling security module with URL : http://localhost:8082/auth/validate to validate token
-2025-09-15 00:23:08 [http-nio-8080-exec-2] ERROR [c.l.services.imp.LoggingServiceImp] - [QLSV] com.common.QLSV.services.JwtValidationService - Exception during getUserFromToken: : 401  on GET request for "http://localhost:8082/auth/validate": "{"status":401,"message":"Unauthorized access.","modelName":"Security-Model","errors":{"Details":"User has been logged out from all devices","Error":"User token is blacklisted"}}"
-2025-09-15 00:23:10 [http-nio-8080-exec-2] WARN  [o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver] - Resolved [UnauthorizedExceptionHandle(message=Token validation failed, details=Token may be invalid, expired, or blacklisted)]
-2025-09-15 00:23:22 [http-nio-8080-exec-3] DEBUG [c.l.services.imp.LoggingServiceImp] - [QLSV] com.common.QLSV.services.JwtValidationService - Calling security module with URL : http://localhost:8082/auth/validate to validate token
-2025-09-15 00:23:26 [http-nio-8080-exec-3] ERROR [c.l.services.imp.LoggingServiceImp] - [QLSV] com.common.QLSV.services.JwtValidationService - Exception during getUserFromToken: : 401  on GET request for "http://localhost:8082/auth/validate": "{"status":401,"message":"Unauthorized access.","modelName":"Security-Model","errors":{"Details":"User has been logged out from all devices","Error":"User token is blacklisted"}}"
-2025-09-15 00:23:36 [http-nio-8080-exec-3] WARN  [o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver] - Resolved [UnauthorizedExceptionHandle(message=Token validation failed, details=Token may be invalid, expired, or blacklisted)]
-2025-09-15 00:23:44 [http-nio-8080-exec-4] DEBUG [c.l.services.imp.LoggingServiceImp] - [QLSV] com.common.QLSV.services.JwtValidationService - Calling security module with URL : http://localhost:8082/auth/validate to validate token
-2025-09-15 00:24:13 [http-nio-8080-exec-4] ERROR [c.l.services.imp.LoggingServiceImp] - [QLSV] com.common.QLSV.services.JwtValidationService - Exception during getUserFromToken: : 401  on GET request for "http://localhost:8082/auth/validate": "{"status":401,"message":"Unauthorized access.","modelName":"Security-Model","errors":{"Details":"User has been logged out from all devices","Error":"User token is blacklisted"}}"
-2025-09-15 00:24:26 [http-nio-8080-exec-4] WARN  [o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver] - Resolved [UnauthorizedExceptionHandle(message=Token validation failed, details=Token may be invalid, expired, or blacklisted)]
-2025-09-15 00:25:53 [restartedMain] INFO  [com.common.QLSV.QlsvApplication] - Starting QlsvApplication using Java 20.0.2 with PID 8028 (D:\project IntelliJ Ultimate\modules-parent\qlsv\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlsv)
-2025-09-15 00:25:53 [restartedMain] DEBUG [com.common.QLSV.QlsvApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
-2025-09-15 00:25:53 [restartedMain] INFO  [com.common.QLSV.QlsvApplication] - No active profile set, falling back to 1 default profile: "default"
-2025-09-15 00:25:54 [restartedMain] WARN  [com.zaxxer.hikari.HikariConfig] - HikariPool-7 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
-2025-09-15 00:25:54 [restartedMain] WARN  [org.hibernate.orm.deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-09-15 00:25:54 [restartedMain] WARN  [org.hibernate.orm.deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
-2025-09-15 00:25:54 [restartedMain] WARN  [o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-09-15 00:25:54 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
-	c.c.Q.c.StudentController:
-	{GET [/students]}: get(String,HttpServletRequest)
-	{PUT [/students]}: update(StudentModelRequest,String,HttpServletRequest)
-	{POST [/students]}: add(CreateStudentModelRequest,String,HttpServletRequest)
-	{DELETE [/students]}: delete(List,String,HttpServletRequest)
-	{GET [/students/public]}: public_get(String)
-2025-09-15 00:25:54 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
-	o.s.b.a.w.s.e.BasicErrorController:
-	{ [/error]}: error(HttpServletRequest)
-	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
-2025-09-15 00:25:54 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'beanNameHandlerMapping' {}
-2025-09-15 00:25:54 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
-2025-09-15 00:25:54 [restartedMain] WARN  [o.s.b.a.t.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
-2025-09-15 00:25:54 [restartedMain] INFO  [com.common.QLSV.QlsvApplication] - Started QlsvApplication in 1.137 seconds (process running for 447.567)
-2025-09-15 09:11:45 [background-preinit] DEBUG [org.jboss.logging] - Logging Provider: org.jboss.logging.Slf4jLoggerProvider found via system property
-2025-09-15 09:11:46 [restartedMain] INFO  [com.common.QLSV.QlsvApplication] - Starting QlsvApplication using Java 20.0.2 with PID 8712 (D:\project IntelliJ Ultimate\modules-parent\qlsv\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlsv)
-2025-09-15 09:11:46 [restartedMain] DEBUG [com.common.QLSV.QlsvApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
-2025-09-15 09:11:46 [restartedMain] INFO  [com.common.QLSV.QlsvApplication] - No active profile set, falling back to 1 default profile: "default"
-2025-09-15 09:11:49 [restartedMain] DEBUG [i.m.c.u.i.l.InternalLoggerFactory] - Using SLF4J as the default logging framework
-2025-09-15 09:11:50 [restartedMain] WARN  [com.zaxxer.hikari.HikariConfig] - HikariPool-1 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
-2025-09-15 09:11:51 [restartedMain] WARN  [org.hibernate.orm.deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-09-15 09:11:51 [restartedMain] WARN  [org.hibernate.orm.deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
-2025-09-15 09:11:53 [restartedMain] WARN  [o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-09-15 09:11:53 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
-	c.c.Q.c.StudentController:
-	{GET [/students]}: get(String,HttpServletRequest)
-	{PUT [/students]}: update(StudentModelRequest,String,HttpServletRequest)
-	{POST [/students]}: add(CreateStudentModelRequest,String,HttpServletRequest)
-	{DELETE [/students]}: delete(List,String,HttpServletRequest)
-	{GET [/students/public]}: public_get(String)
-2025-09-15 09:11:53 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
-	o.s.b.a.w.s.e.BasicErrorController:
-	{ [/error]}: error(HttpServletRequest)
-	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
-2025-09-15 09:11:53 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'beanNameHandlerMapping' {}
-2025-09-15 09:11:53 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
-2025-09-15 09:11:53 [restartedMain] WARN  [o.s.b.a.t.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
-2025-09-15 09:11:53 [restartedMain] DEBUG [reactor.util.Loggers] - Using Slf4j logging framework
-2025-09-15 09:11:54 [restartedMain] INFO  [com.common.QLSV.QlsvApplication] - Started QlsvApplication in 9.165 seconds (process running for 9.94)
-2025-09-15 09:13:35 [http-nio-8080-exec-2] DEBUG [c.l.services.imp.LoggingServiceImp] - [QLSV] com.common.QLSV.services.JwtValidationService - Calling security module with URL : http://localhost:8082/auth/validate to validate token
-2025-09-15 09:13:53 [http-nio-8080-exec-2] DEBUG [c.l.services.imp.LoggingServiceImp] - [QLSV] com.common.QLSV.services.JwtValidationService - Successfully retrieved user from security module: HuyS1
-2025-09-15 09:13:53 [http-nio-8080-exec-2] DEBUG [c.l.services.imp.LoggingServiceImp] - [QLSV] com.common.QLSV.services.JwtValidationService - Extracted username from JWT: HuyS1
-2025-09-15 09:13:53 [http-nio-8080-exec-2] DEBUG [c.l.services.imp.LoggingServiceImp] - [QLSV] com.common.QLSV.services.JwtValidationService - Calling security module with URL : http://localhost:8082/auth/validate to validate token
-2025-09-15 09:13:55 [http-nio-8080-exec-2] DEBUG [c.l.services.imp.LoggingServiceImp] - [QLSV] com.common.QLSV.services.JwtValidationService - Successfully retrieved user from security module: HuyS1
-2025-09-15 09:13:55 [http-nio-8080-exec-2] DEBUG [c.l.services.imp.LoggingServiceImp] - [QLSV] com.common.QLSV.services.JwtValidationService - Final JWT validation result for user HuyS1 is true
-2025-09-15 09:13:55 [http-nio-8080-exec-2] INFO  [c.l.services.imp.LoggingServiceImp] - [qlsv] com.common.QLSV.controllers.StudentController - Get students API called successfully by user: HuyS1
-2025-09-15 09:13:55 [http-nio-8080-exec-2] INFO  [c.l.services.imp.LoggingServiceImp] - [qlsv] com.common.QLSV.services.imp.StudentServiceImp - Get data from Redis cache
-2025-09-15 09:14:13 [http-nio-8080-exec-4] DEBUG [c.l.services.imp.LoggingServiceImp] - [QLSV] com.common.QLSV.services.JwtValidationService - Calling security module with URL : http://localhost:8082/auth/validate to validate token
-2025-09-15 09:14:15 [http-nio-8080-exec-4] DEBUG [c.l.services.imp.LoggingServiceImp] - [QLSV] com.common.QLSV.services.JwtValidationService - Successfully retrieved user from security module: HuyS1
-2025-09-15 09:14:15 [http-nio-8080-exec-4] DEBUG [c.l.services.imp.LoggingServiceImp] - [QLSV] com.common.QLSV.services.JwtValidationService - Extracted username from JWT: HuyS1
-2025-09-15 09:14:15 [http-nio-8080-exec-4] DEBUG [c.l.services.imp.LoggingServiceImp] - [QLSV] com.common.QLSV.services.JwtValidationService - Calling security module with URL : http://localhost:8082/auth/validate to validate token
-2025-09-15 09:14:16 [http-nio-8080-exec-4] DEBUG [c.l.services.imp.LoggingServiceImp] - [QLSV] com.common.QLSV.services.JwtValidationService - Successfully retrieved user from security module: HuyS1
-2025-09-15 09:14:16 [http-nio-8080-exec-4] DEBUG [c.l.services.imp.LoggingServiceImp] - [QLSV] com.common.QLSV.services.JwtValidationService - Final JWT validation result for user HuyS1 is true
-2025-09-15 09:14:16 [http-nio-8080-exec-4] DEBUG [c.l.services.imp.LoggingServiceImp] - [qlsv] com.common.QLSV.configurations.JwtInterceptor - User role 'TEACHER' does not have required role: [ADMIN, STUDENT]
-2025-09-15 09:14:16 [http-nio-8080-exec-4] WARN  [o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver] - Resolved [ForbiddenExceptionHandle(message=Insufficient role privileges, details=User role 'TEACHER' does not have required role, requiredRoles=[ADMIN, STUDENT])]
-2025-09-15 09:14:45 [restartedMain] INFO  [com.common.QLSV.QlsvApplication] - Starting QlsvApplication using Java 20.0.2 with PID 8712 (D:\project IntelliJ Ultimate\modules-parent\qlsv\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlsv)
-2025-09-15 09:14:45 [restartedMain] DEBUG [com.common.QLSV.QlsvApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
-2025-09-15 09:14:45 [restartedMain] INFO  [com.common.QLSV.QlsvApplication] - No active profile set, falling back to 1 default profile: "default"
-2025-09-15 09:14:45 [restartedMain] WARN  [com.zaxxer.hikari.HikariConfig] - HikariPool-2 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
-2025-09-15 09:14:45 [restartedMain] WARN  [org.hibernate.orm.deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-09-15 09:14:45 [restartedMain] WARN  [org.hibernate.orm.deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
-2025-09-15 09:14:46 [restartedMain] WARN  [o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-09-15 09:14:46 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
-	c.c.Q.c.StudentController:
-	{GET [/students]}: get(String,HttpServletRequest)
-	{PUT [/students]}: update(StudentModelRequest,String,HttpServletRequest)
-	{POST [/students]}: add(CreateStudentModelRequest,String,HttpServletRequest)
-	{DELETE [/students]}: delete(List,String,HttpServletRequest)
-	{GET [/students/public]}: public_get(String)
-2025-09-15 09:14:46 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
-	o.s.b.a.w.s.e.BasicErrorController:
-	{ [/error]}: error(HttpServletRequest)
-	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
-2025-09-15 09:14:46 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'beanNameHandlerMapping' {}
-2025-09-15 09:14:46 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
-2025-09-15 09:14:46 [restartedMain] WARN  [o.s.b.a.t.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
-2025-09-15 09:14:46 [restartedMain] INFO  [com.common.QLSV.QlsvApplication] - Started QlsvApplication in 1.365 seconds (process running for 181.819)
-2025-09-15 09:15:10 [restartedMain] INFO  [com.common.QLSV.QlsvApplication] - Starting QlsvApplication using Java 20.0.2 with PID 8712 (D:\project IntelliJ Ultimate\modules-parent\qlsv\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlsv)
-2025-09-15 09:15:10 [restartedMain] DEBUG [com.common.QLSV.QlsvApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
-2025-09-15 09:15:10 [restartedMain] INFO  [com.common.QLSV.QlsvApplication] - No active profile set, falling back to 1 default profile: "default"
-2025-09-15 09:15:11 [restartedMain] WARN  [com.zaxxer.hikari.HikariConfig] - HikariPool-3 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
-2025-09-15 09:15:11 [restartedMain] WARN  [org.hibernate.orm.deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-09-15 09:15:11 [restartedMain] WARN  [org.hibernate.orm.deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
-2025-09-15 09:15:11 [restartedMain] WARN  [o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-09-15 09:15:11 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
-	c.c.Q.c.StudentController:
-	{GET [/students]}: get(String,HttpServletRequest)
-	{PUT [/students]}: update(StudentModelRequest,String,HttpServletRequest)
-	{POST [/students]}: add(CreateStudentModelRequest,String,HttpServletRequest)
-	{DELETE [/students]}: delete(List,String,HttpServletRequest)
-	{GET [/students/public]}: public_get(String)
-2025-09-15 09:15:11 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
-	o.s.b.a.w.s.e.BasicErrorController:
-	{ [/error]}: error(HttpServletRequest)
-	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
-2025-09-15 09:15:11 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'beanNameHandlerMapping' {}
-2025-09-15 09:15:11 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
-2025-09-15 09:15:11 [restartedMain] WARN  [o.s.b.a.t.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
-2025-09-15 09:15:12 [restartedMain] INFO  [com.common.QLSV.QlsvApplication] - Started QlsvApplication in 1.304 seconds (process running for 207.352)
-2025-09-15 09:15:37 [http-nio-8080-exec-1] DEBUG [c.l.services.imp.LoggingServiceImp] - [QLSV] com.common.QLSV.services.JwtValidationService - Calling security module with URL : http://localhost:8082/auth/validate to validate token
-2025-09-15 09:15:44 [http-nio-8080-exec-1] DEBUG [c.l.services.imp.LoggingServiceImp] - [QLSV] com.common.QLSV.services.JwtValidationService - Successfully retrieved user from security module: HuyS1
-2025-09-15 09:15:44 [http-nio-8080-exec-1] DEBUG [c.l.services.imp.LoggingServiceImp] - [QLSV] com.common.QLSV.services.JwtValidationService - Extracted username from JWT: HuyS1
-2025-09-15 09:15:44 [http-nio-8080-exec-1] DEBUG [c.l.services.imp.LoggingServiceImp] - [QLSV] com.common.QLSV.services.JwtValidationService - Calling security module with URL : http://localhost:8082/auth/validate to validate token
-2025-09-15 09:15:45 [http-nio-8080-exec-1] DEBUG [c.l.services.imp.LoggingServiceImp] - [QLSV] com.common.QLSV.services.JwtValidationService - Successfully retrieved user from security module: HuyS1
-2025-09-15 09:15:45 [http-nio-8080-exec-1] DEBUG [c.l.services.imp.LoggingServiceImp] - [QLSV] com.common.QLSV.services.JwtValidationService - Final JWT validation result for user HuyS1 is true
-2025-09-15 09:15:45 [http-nio-8080-exec-1] DEBUG [c.l.services.imp.LoggingServiceImp] - [qlsv] com.common.QLSV.configurations.JwtInterceptor - User role 'TEACHER' does not have required role: [ADMIN, STUDENT]
-2025-09-15 09:15:45 [http-nio-8080-exec-1] WARN  [o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver] - Resolved [ForbiddenExceptionHandle(message=Insufficient role privileges, details=User role 'TEACHER' does not have required role, requiredRoles=[ADMIN, STUDENT])]
-2025-09-15 10:01:01 [http-nio-8080-exec-5] DEBUG [c.l.services.imp.LoggingServiceImp] - [QLSV] com.common.QLSV.services.JwtValidationService - Calling security module with URL : http://localhost:8082/auth/validate to validate token
-2025-09-15 10:01:08 [http-nio-8080-exec-5] DEBUG [c.l.services.imp.LoggingServiceImp] - [QLSV] com.common.QLSV.services.JwtValidationService - Successfully retrieved user from security module: HuyS1
-2025-09-15 10:01:08 [http-nio-8080-exec-5] DEBUG [c.l.services.imp.LoggingServiceImp] - [QLSV] com.common.QLSV.services.JwtValidationService - Extracted username from JWT: HuyS1
-2025-09-15 10:01:08 [http-nio-8080-exec-5] DEBUG [c.l.services.imp.LoggingServiceImp] - [QLSV] com.common.QLSV.services.JwtValidationService - Calling security module with URL : http://localhost:8082/auth/validate to validate token
-2025-09-15 10:01:09 [http-nio-8080-exec-5] DEBUG [c.l.services.imp.LoggingServiceImp] - [QLSV] com.common.QLSV.services.JwtValidationService - Successfully retrieved user from security module: HuyS1
-2025-09-15 10:01:09 [http-nio-8080-exec-5] DEBUG [c.l.services.imp.LoggingServiceImp] - [QLSV] com.common.QLSV.services.JwtValidationService - Final JWT validation result for user HuyS1 is true
-2025-09-15 10:01:09 [http-nio-8080-exec-5] INFO  [c.l.services.imp.LoggingServiceImp] - [qlsv] com.common.QLSV.controllers.StudentController - Get students API called successfully by user: HuyS1
-2025-09-15 10:01:09 [http-nio-8080-exec-5] INFO  [c.l.services.imp.LoggingServiceImp] - [qlsv] com.common.QLSV.services.imp.StudentServiceImp - Get data from Redis cache
-2025-09-15 10:01:17 [http-nio-8080-exec-8] DEBUG [c.l.services.imp.LoggingServiceImp] - [QLSV] com.common.QLSV.services.JwtValidationService - Calling security module with URL : http://localhost:8082/auth/validate to validate token
-2025-09-15 10:01:20 [http-nio-8080-exec-8] DEBUG [c.l.services.imp.LoggingServiceImp] - [QLSV] com.common.QLSV.services.JwtValidationService - Successfully retrieved user from security module: HuyS1
-2025-09-15 10:01:20 [http-nio-8080-exec-8] DEBUG [c.l.services.imp.LoggingServiceImp] - [QLSV] com.common.QLSV.services.JwtValidationService - Extracted username from JWT: HuyS1
-2025-09-15 10:01:20 [http-nio-8080-exec-8] DEBUG [c.l.services.imp.LoggingServiceImp] - [QLSV] com.common.QLSV.services.JwtValidationService - Calling security module with URL : http://localhost:8082/auth/validate to validate token
-2025-09-15 10:01:23 [http-nio-8080-exec-8] DEBUG [c.l.services.imp.LoggingServiceImp] - [QLSV] com.common.QLSV.services.JwtValidationService - Successfully retrieved user from security module: HuyS1
-2025-09-15 10:01:23 [http-nio-8080-exec-8] DEBUG [c.l.services.imp.LoggingServiceImp] - [QLSV] com.common.QLSV.services.JwtValidationService - Final JWT validation result for user HuyS1 is true
-2025-09-15 10:01:23 [http-nio-8080-exec-8] INFO  [c.l.services.imp.LoggingServiceImp] - [qlsv] com.common.QLSV.controllers.StudentController - Update students API called successfully by user: HuyS1
-2025-09-15 10:01:24 [http-nio-8080-exec-8] INFO  [c.l.services.imp.LoggingServiceImp] - [qlsv] com.common.QLSV.services.imp.StudentServiceImp - Student ID: 43, Operation: UPDATE
-2025-09-15 10:01:24 [http-nio-8080-exec-8] INFO  [c.l.services.imp.LoggingServiceImp] - [qlsv] com.common.QLSV.services.imp.StudentServiceImp - Update Students Successfully
-2025-09-15 10:01:24 [http-nio-8080-exec-8] INFO  [c.l.services.imp.LoggingServiceImp] - [qlsv] com.common.QLSV.services.imp.StudentServiceImp - Del cache key = students:all , after update students
-2025-09-15 10:02:36 [http-nio-8080-exec-9] DEBUG [c.l.services.imp.LoggingServiceImp] - [QLSV] com.common.QLSV.services.JwtValidationService - Calling security module with URL : http://localhost:8082/auth/validate to validate token
-2025-09-15 10:02:38 [http-nio-8080-exec-9] DEBUG [c.l.services.imp.LoggingServiceImp] - [QLSV] com.common.QLSV.services.JwtValidationService - Successfully retrieved user from security module: HuyS2
-2025-09-15 10:02:38 [http-nio-8080-exec-9] DEBUG [c.l.services.imp.LoggingServiceImp] - [QLSV] com.common.QLSV.services.JwtValidationService - Extracted username from JWT: HuyS2
-2025-09-15 10:02:38 [http-nio-8080-exec-9] DEBUG [c.l.services.imp.LoggingServiceImp] - [QLSV] com.common.QLSV.services.JwtValidationService - Calling security module with URL : http://localhost:8082/auth/validate to validate token
-2025-09-15 10:02:39 [http-nio-8080-exec-9] DEBUG [c.l.services.imp.LoggingServiceImp] - [QLSV] com.common.QLSV.services.JwtValidationService - Successfully retrieved user from security module: HuyS2
-2025-09-15 10:02:39 [http-nio-8080-exec-9] DEBUG [c.l.services.imp.LoggingServiceImp] - [QLSV] com.common.QLSV.services.JwtValidationService - Final JWT validation result for user HuyS2 is true
-2025-09-15 10:02:39 [http-nio-8080-exec-9] INFO  [c.l.services.imp.LoggingServiceImp] - [qlsv] com.common.QLSV.controllers.StudentController - Get students API called successfully by user: HuyS2
-2025-09-15 10:02:39 [http-nio-8080-exec-9] WARN  [c.l.services.imp.LoggingServiceImp] - [qlsv] com.common.QLSV.services.imp.StudentServiceImp - Not found cache, Query DB
-2025-09-15 10:02:39 [http-nio-8080-exec-9] INFO  [c.l.services.imp.LoggingServiceImp] - [qlsv] com.common.QLSV.services.imp.StudentServiceImp - Student ID: 43, Operation: GET
-2025-09-15 10:02:39 [http-nio-8080-exec-9] INFO  [c.l.services.imp.LoggingServiceImp] - [qlsv] com.common.QLSV.services.imp.StudentServiceImp - Student ID: 48, Operation: GET
-2025-09-15 10:02:39 [http-nio-8080-exec-9] INFO  [c.l.services.imp.LoggingServiceImp] - [qlsv] com.common.QLSV.services.imp.StudentServiceImp - Gets Student Successfully
-2025-09-15 10:02:39 [http-nio-8080-exec-9] INFO  [c.l.services.imp.LoggingServiceImp] - [qlsv] com.common.QLSV.services.imp.StudentServiceImp - Save cache to Redis
-2025-09-15 10:02:47 [http-nio-8080-exec-6] DEBUG [c.l.services.imp.LoggingServiceImp] - [QLSV] com.common.QLSV.services.JwtValidationService - Calling security module with URL : http://localhost:8082/auth/validate to validate token
-2025-09-15 10:03:08 [http-nio-8080-exec-6] DEBUG [c.l.services.imp.LoggingServiceImp] - [QLSV] com.common.QLSV.services.JwtValidationService - Successfully retrieved user from security module: HuyS2
-2025-09-15 10:03:08 [http-nio-8080-exec-6] DEBUG [c.l.services.imp.LoggingServiceImp] - [QLSV] com.common.QLSV.services.JwtValidationService - Extracted username from JWT: HuyS2
-2025-09-15 10:03:08 [http-nio-8080-exec-6] DEBUG [c.l.services.imp.LoggingServiceImp] - [QLSV] com.common.QLSV.services.JwtValidationService - Calling security module with URL : http://localhost:8082/auth/validate to validate token
-2025-09-15 10:03:13 [http-nio-8080-exec-6] DEBUG [c.l.services.imp.LoggingServiceImp] - [QLSV] com.common.QLSV.services.JwtValidationService - Successfully retrieved user from security module: HuyS2
-2025-09-15 10:03:13 [http-nio-8080-exec-6] DEBUG [c.l.services.imp.LoggingServiceImp] - [QLSV] com.common.QLSV.services.JwtValidationService - Final JWT validation result for user HuyS2 is true
-2025-09-15 10:03:13 [http-nio-8080-exec-6] DEBUG [c.l.services.imp.LoggingServiceImp] - [qlsv] com.common.QLSV.configurations.JwtInterceptor - User permissions [STUDENT_READ] do not include required permissions: [ADMIN_WRITE, STUDENT_WRITE]
-2025-09-15 10:03:13 [http-nio-8080-exec-6] WARN  [o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver] - Resolved [ForbiddenExceptionHandle(message=Insufficient permission privileges, details=User does not have required permissions, requiredRoles=[ADMIN_WRITE, STUDENT_WRITE])]
-2025-09-15 10:03:32 [restartedMain] INFO  [com.common.QLSV.QlsvApplication] - Starting QlsvApplication using Java 20.0.2 with PID 8712 (D:\project IntelliJ Ultimate\modules-parent\qlsv\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlsv)
-2025-09-15 10:03:32 [restartedMain] DEBUG [com.common.QLSV.QlsvApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
-2025-09-15 10:03:32 [restartedMain] INFO  [com.common.QLSV.QlsvApplication] - No active profile set, falling back to 1 default profile: "default"
-2025-09-15 10:03:33 [restartedMain] WARN  [com.zaxxer.hikari.HikariConfig] - HikariPool-4 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
-2025-09-15 10:03:33 [restartedMain] WARN  [org.hibernate.orm.deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-09-15 10:03:33 [restartedMain] WARN  [org.hibernate.orm.deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
-2025-09-15 10:03:33 [restartedMain] WARN  [o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-09-15 10:03:33 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
-	c.c.Q.c.StudentController:
-	{GET [/students]}: get(String,HttpServletRequest)
-	{PUT [/students]}: update(StudentModelRequest,String,HttpServletRequest)
-	{POST [/students]}: add(CreateStudentModelRequest,String,HttpServletRequest)
-	{DELETE [/students]}: delete(List,String,HttpServletRequest)
-	{GET [/students/public]}: public_get(String)
-2025-09-15 10:03:33 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
-	o.s.b.a.w.s.e.BasicErrorController:
-	{ [/error]}: error(HttpServletRequest)
-	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
-2025-09-15 10:03:33 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'beanNameHandlerMapping' {}
-2025-09-15 10:03:33 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
-2025-09-15 10:03:33 [restartedMain] WARN  [o.s.b.a.t.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
-2025-09-15 10:03:33 [restartedMain] INFO  [com.common.QLSV.QlsvApplication] - Started QlsvApplication in 1.669 seconds (process running for 3109.002)
+2025-09-26 20:23:36 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'beanNameHandlerMapping' {}
+2025-09-26 20:23:37 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
+2025-09-26 20:23:37 [restartedMain] WARN  [o.s.b.a.t.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2025-09-26 20:23:38 [restartedMain] DEBUG [reactor.util.Loggers] - Using Slf4j logging framework
+2025-09-26 20:23:49 [restartedMain] INFO  [com.common.QLSV.QlsvApplication] - Started QlsvApplication in 38.274 seconds (process running for 42.099)
+2025-09-26 20:24:37 [http-nio-8080-exec-4] DEBUG [c.l.services.imp.LoggingServiceImp] - [QLSV] com.common.QLSV.services.JwtValidationService - Extracted username from JWT: HuyS1
+2025-09-26 20:24:50 [http-nio-8080-exec-4] DEBUG [c.l.services.imp.LoggingServiceImp] - [QLSV] com.common.QLSV.services.JwtValidationService - Calling security module with URL : http://localhost:8082/auth/validate to validate token
+2025-09-26 20:24:50 [http-nio-8080-exec-4] DEBUG [c.l.services.imp.LoggingServiceImp] - [QLSV] com.common.QLSV.services.JwtValidationService - Successfully retrieved user from security module: HuyS1
+2025-09-26 20:24:50 [http-nio-8080-exec-4] DEBUG [c.l.services.imp.LoggingServiceImp] - [QLSV] com.common.QLSV.services.JwtValidationService - Final JWT validation result for user HuyS1 is true
+2025-09-26 20:25:05 [http-nio-8080-exec-8] DEBUG [c.l.services.imp.LoggingServiceImp] - [QLSV] com.common.QLSV.services.JwtValidationService - Extracted username from JWT: HuyS1
+2025-09-26 20:25:10 [http-nio-8080-exec-8] DEBUG [c.l.services.imp.LoggingServiceImp] - [QLSV] com.common.QLSV.services.JwtValidationService - Calling security module with URL : http://localhost:8082/auth/validate to validate token
+2025-09-26 20:25:18 [http-nio-8080-exec-8] DEBUG [c.l.services.imp.LoggingServiceImp] - [QLSV] com.common.QLSV.services.JwtValidationService - Successfully retrieved user from security module: HuyS1
+2025-09-26 20:25:18 [http-nio-8080-exec-8] DEBUG [c.l.services.imp.LoggingServiceImp] - [QLSV] com.common.QLSV.services.JwtValidationService - Final JWT validation result for user HuyS1 is true
+2025-09-26 20:25:40 [http-nio-8080-exec-8] INFO  [c.l.services.imp.LoggingServiceImp] - [qlsv] com.common.QLSV.controllers.StudentController - Update students API called successfully by user: HuyS1
+2025-09-26 20:25:47 [http-nio-8080-exec-8] INFO  [c.l.services.imp.LoggingServiceImp] - [qlsv] com.common.QLSV.services.imp.StudentServiceImp - Student ID: 43, Operation: UPDATE
+2025-09-26 20:25:48 [http-nio-8080-exec-8] INFO  [c.l.services.imp.LoggingServiceImp] - [qlsv] com.common.QLSV.services.imp.StudentServiceImp - Update Students Successfully
+2025-09-26 20:25:48 [http-nio-8080-exec-8] INFO  [c.l.services.imp.LoggingServiceImp] - [qlsv] com.common.QLSV.services.imp.StudentServiceImp - Del cache key = students:all , after update students
+2025-09-26 20:27:48 [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] INFO  [c.l.services.imp.LoggingServiceImp] - [kafka-shared] com.common.kafka.services.KafkaConsumerService - Received StudentEvent: StudentEvent(studentId=43, studentName=s a, action=UPDATED)
+2025-09-26 20:28:04 [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] INFO  [c.l.services.imp.LoggingServiceImp] - [kafka-shared] com.common.kafka.services.KafkaConsumerService - Processing Student UPDATE event for student: s a
+2025-09-26 20:28:42 [http-nio-8080-exec-4] INFO  [c.l.services.imp.LoggingServiceImp] - [qlsv] com.common.QLSV.controllers.StudentController - Update students API called successfully by user: HuyS1
+2025-09-26 20:28:46 [http-nio-8080-exec-4] INFO  [c.l.services.imp.LoggingServiceImp] - [qlsv] com.common.QLSV.services.imp.StudentServiceImp - Student ID: 43, Operation: UPDATE
+2025-09-26 20:28:46 [http-nio-8080-exec-4] INFO  [c.l.services.imp.LoggingServiceImp] - [qlsv] com.common.QLSV.services.imp.StudentServiceImp - Update Students Successfully
+2025-09-26 20:28:46 [http-nio-8080-exec-4] INFO  [c.l.services.imp.LoggingServiceImp] - [qlsv] com.common.QLSV.services.imp.StudentServiceImp - Del cache key = students:all , after update students
+2025-09-26 20:29:04 [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] INFO  [c.l.services.imp.LoggingServiceImp] - [kafka-shared] com.common.kafka.services.KafkaConsumerService - Received StudentEvent: StudentEvent(studentId=43, studentName=s a, action=UPDATED)
+2025-09-26 20:29:05 [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] INFO  [c.l.services.imp.LoggingServiceImp] - [kafka-shared] com.common.kafka.services.KafkaConsumerService - Processing Student UPDATE event for student: s a
+2025-09-26 20:29:11 [http-nio-8080-exec-8] INFO  [c.l.services.imp.LoggingServiceImp] - [kafka-shared] com.common.kafka.services.KafkaProducerService - Sent StudentEvent to topic student-events: StudentEvent(studentId=43, studentName=s a, action=UPDATED)
+2025-09-26 20:29:11 [http-nio-8080-exec-8] INFO  [c.l.services.imp.LoggingServiceImp] - [qlsv] com.common.QLSV.controllers.StudentController - Sent student updated event for student: s a
+2025-09-26 20:30:29 [http-nio-8080-exec-4] INFO  [c.l.services.imp.LoggingServiceImp] - [kafka-shared] com.common.kafka.services.KafkaProducerService - Sent StudentEvent to topic student-events: StudentEvent(studentId=43, studentName=s a, action=UPDATED)
+2025-09-26 20:30:38 [http-nio-8080-exec-4] INFO  [c.l.services.imp.LoggingServiceImp] - [qlsv] com.common.QLSV.controllers.StudentController - Sent student updated event for student: s a
+2025-09-26 20:36:14 [http-nio-8080-exec-1] DEBUG [c.l.services.imp.LoggingServiceImp] - [QLSV] com.common.QLSV.services.JwtValidationService - Extracted username from JWT: HuyS1
+2025-09-26 20:36:16 [http-nio-8080-exec-1] DEBUG [c.l.services.imp.LoggingServiceImp] - [QLSV] com.common.QLSV.services.JwtValidationService - Calling security module with URL : http://localhost:8082/auth/validate to validate token
+2025-09-26 20:36:16 [http-nio-8080-exec-1] DEBUG [c.l.services.imp.LoggingServiceImp] - [QLSV] com.common.QLSV.services.JwtValidationService - Successfully retrieved user from security module: HuyS1
+2025-09-26 20:36:16 [http-nio-8080-exec-1] DEBUG [c.l.services.imp.LoggingServiceImp] - [QLSV] com.common.QLSV.services.JwtValidationService - Final JWT validation result for user HuyS1 is true
+2025-09-26 20:36:20 [http-nio-8080-exec-1] INFO  [c.l.services.imp.LoggingServiceImp] - [qlsv] com.common.QLSV.controllers.StudentController - Update students API called successfully by user: HuyS1
+2025-09-26 20:36:21 [http-nio-8080-exec-1] INFO  [c.l.services.imp.LoggingServiceImp] - [qlsv] com.common.QLSV.services.imp.StudentServiceImp - Student ID: 43, Operation: UPDATE
+2025-09-26 20:36:21 [http-nio-8080-exec-1] INFO  [c.l.services.imp.LoggingServiceImp] - [qlsv] com.common.QLSV.services.imp.StudentServiceImp - Update Students Successfully
+2025-09-26 20:36:21 [http-nio-8080-exec-1] INFO  [c.l.services.imp.LoggingServiceImp] - [qlsv] com.common.QLSV.services.imp.StudentServiceImp - Del cache key = students:all , after update students
+2025-09-26 20:36:26 [http-nio-8080-exec-1] INFO  [c.l.services.imp.LoggingServiceImp] - [kafka-shared] com.common.kafka.services.KafkaProducerService - Sent StudentEvent to topic student-events: StudentEvent(studentId=43, studentName=s a, action=UPDATED)
+2025-09-26 20:36:26 [http-nio-8080-exec-1] INFO  [c.l.services.imp.LoggingServiceImp] - [qlsv] com.common.QLSV.controllers.StudentController - Sent student updated event for student: s a
+2025-09-26 20:36:46 [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] INFO  [c.l.services.imp.LoggingServiceImp] - [kafka-shared] com.common.kafka.services.KafkaConsumerService - Received StudentEvent: StudentEvent(studentId=43, studentName=s a, action=UPDATED)
+2025-09-26 20:36:46 [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] INFO  [c.l.services.imp.LoggingServiceImp] - [kafka-shared] com.common.kafka.services.KafkaConsumerService - Processing Student UPDATE event for student: s a
+2025-09-26 20:39:24 [http-nio-8080-exec-10] DEBUG [c.l.services.imp.LoggingServiceImp] - [QLSV] com.common.QLSV.services.JwtValidationService - Extracted username from JWT: HuyS1
+2025-09-26 20:39:24 [http-nio-8080-exec-10] DEBUG [c.l.services.imp.LoggingServiceImp] - [QLSV] com.common.QLSV.services.JwtValidationService - Calling security module with URL : http://localhost:8082/auth/validate to validate token
+2025-09-26 20:39:24 [http-nio-8080-exec-10] DEBUG [c.l.services.imp.LoggingServiceImp] - [QLSV] com.common.QLSV.services.JwtValidationService - Successfully retrieved user from security module: HuyS1
+2025-09-26 20:39:24 [http-nio-8080-exec-10] DEBUG [c.l.services.imp.LoggingServiceImp] - [QLSV] com.common.QLSV.services.JwtValidationService - Final JWT validation result for user HuyS1 is true
+2025-09-26 20:39:25 [http-nio-8080-exec-10] INFO  [c.l.services.imp.LoggingServiceImp] - [qlsv] com.common.QLSV.controllers.StudentController - Update students API called successfully by user: HuyS1
+2025-09-26 20:39:25 [http-nio-8080-exec-10] INFO  [c.l.services.imp.LoggingServiceImp] - [qlsv] com.common.QLSV.services.imp.StudentServiceImp - Student ID: 43, Operation: UPDATE
+2025-09-26 20:39:25 [http-nio-8080-exec-10] INFO  [c.l.services.imp.LoggingServiceImp] - [qlsv] com.common.QLSV.services.imp.StudentServiceImp - Update Students Successfully
+2025-09-26 20:39:25 [http-nio-8080-exec-10] INFO  [c.l.services.imp.LoggingServiceImp] - [qlsv] com.common.QLSV.services.imp.StudentServiceImp - Del cache key = students:all , after update students
+2025-09-26 20:39:28 [http-nio-8080-exec-10] INFO  [c.l.services.imp.LoggingServiceImp] - [kafka-shared] com.common.kafka.services.KafkaProducerService - Sent StudentEvent to topic student-events: StudentEvent(studentId=43, studentName=s a, action=UPDATED)
+2025-09-26 20:39:28 [http-nio-8080-exec-10] INFO  [c.l.services.imp.LoggingServiceImp] - [qlsv] com.common.QLSV.controllers.StudentController - Sent student updated event for student: s a
+2025-09-26 20:39:42 [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] INFO  [c.l.services.imp.LoggingServiceImp] - [kafka-shared] com.common.kafka.services.KafkaConsumerService - Received StudentEvent: StudentEvent(studentId=43, studentName=s a, action=UPDATED)
+2025-09-26 20:39:42 [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] INFO  [c.l.services.imp.LoggingServiceImp] - [kafka-shared] com.common.kafka.services.KafkaConsumerService - Processing Student UPDATE event for student: s a
+2025-09-26 20:41:20 [org.springframework.kafka.KafkaListenerEndpointContainer#0-1-C-1] WARN  [o.apache.kafka.clients.NetworkClient] - [Consumer clientId=consumer-qlsv-student-group-2, groupId=qlsv-student-group] Connection to node 1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2025-09-26 20:41:20 [org.springframework.kafka.KafkaListenerEndpointContainer#0-2-C-1] WARN  [o.apache.kafka.clients.NetworkClient] - [Consumer clientId=consumer-qlsv-student-group-3, groupId=qlsv-student-group] Connection to node 1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2025-09-26 20:41:21 [kafka-producer-network-thread | QLSV-producer-1] WARN  [o.apache.kafka.clients.NetworkClient] - [Producer clientId=QLSV-producer-1] Connection to node 1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2025-09-26 20:41:21 [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] WARN  [o.apache.kafka.clients.NetworkClient] - [Consumer clientId=consumer-qlsv-student-group-1, groupId=qlsv-student-group] Connection to node 1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2025-09-26 20:41:21 [org.springframework.kafka.KafkaListenerEndpointContainer#0-1-C-1] WARN  [o.apache.kafka.clients.NetworkClient] - [Consumer clientId=consumer-qlsv-student-group-2, groupId=qlsv-student-group] Connection to node 1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2025-09-26 20:41:21 [org.springframework.kafka.KafkaListenerEndpointContainer#0-2-C-1] WARN  [o.apache.kafka.clients.NetworkClient] - [Consumer clientId=consumer-qlsv-student-group-3, groupId=qlsv-student-group] Connection to node 1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2025-09-26 20:41:22 [kafka-producer-network-thread | QLSV-producer-1] WARN  [o.apache.kafka.clients.NetworkClient] - [Producer clientId=QLSV-producer-1] Connection to node 1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2025-09-26 20:41:22 [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] WARN  [o.apache.kafka.clients.NetworkClient] - [Consumer clientId=consumer-qlsv-student-group-1, groupId=qlsv-student-group] Connection to node 1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2025-09-26 20:41:22 [org.springframework.kafka.KafkaListenerEndpointContainer#0-1-C-1] WARN  [o.apache.kafka.clients.NetworkClient] - [Consumer clientId=consumer-qlsv-student-group-2, groupId=qlsv-student-group] Connection to node 1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2025-09-26 20:41:22 [org.springframework.kafka.KafkaListenerEndpointContainer#0-2-C-1] WARN  [o.apache.kafka.clients.NetworkClient] - [Consumer clientId=consumer-qlsv-student-group-3, groupId=qlsv-student-group] Connection to node 1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2025-09-26 20:41:23 [kafka-producer-network-thread | QLSV-producer-1] WARN  [o.apache.kafka.clients.NetworkClient] - [Producer clientId=QLSV-producer-1] Connection to node 1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2025-09-26 20:41:23 [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] WARN  [o.apache.kafka.clients.NetworkClient] - [Consumer clientId=consumer-qlsv-student-group-1, groupId=qlsv-student-group] Connection to node 1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2025-09-26 20:41:23 [org.springframework.kafka.KafkaListenerEndpointContainer#0-1-C-1] WARN  [o.apache.kafka.clients.NetworkClient] - [Consumer clientId=consumer-qlsv-student-group-2, groupId=qlsv-student-group] Connection to node 1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2025-09-26 20:41:23 [org.springframework.kafka.KafkaListenerEndpointContainer#0-2-C-1] WARN  [o.apache.kafka.clients.NetworkClient] - [Consumer clientId=consumer-qlsv-student-group-3, groupId=qlsv-student-group] Connection to node 1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2025-09-26 20:41:24 [kafka-producer-network-thread | QLSV-producer-1] WARN  [o.apache.kafka.clients.NetworkClient] - [Producer clientId=QLSV-producer-1] Connection to node 1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2025-09-26 20:41:24 [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] WARN  [o.apache.kafka.clients.NetworkClient] - [Consumer clientId=consumer-qlsv-student-group-1, groupId=qlsv-student-group] Connection to node 1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2025-09-26 20:41:24 [org.springframework.kafka.KafkaListenerEndpointContainer#0-1-C-1] WARN  [o.apache.kafka.clients.NetworkClient] - [Consumer clientId=consumer-qlsv-student-group-2, groupId=qlsv-student-group] Connection to node 1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2025-09-26 20:41:24 [org.springframework.kafka.KafkaListenerEndpointContainer#0-2-C-1] WARN  [o.apache.kafka.clients.NetworkClient] - [Consumer clientId=consumer-qlsv-student-group-3, groupId=qlsv-student-group] Connection to node 1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2025-09-26 20:41:25 [kafka-producer-network-thread | QLSV-producer-1] WARN  [o.apache.kafka.clients.NetworkClient] - [Producer clientId=QLSV-producer-1] Connection to node 1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2025-09-26 20:41:25 [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] WARN  [o.apache.kafka.clients.NetworkClient] - [Consumer clientId=consumer-qlsv-student-group-1, groupId=qlsv-student-group] Connection to node 1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2025-09-26 20:41:25 [org.springframework.kafka.KafkaListenerEndpointContainer#0-1-C-1] WARN  [o.apache.kafka.clients.NetworkClient] - [Consumer clientId=consumer-qlsv-student-group-2, groupId=qlsv-student-group] Connection to node 1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2025-09-26 20:41:25 [org.springframework.kafka.KafkaListenerEndpointContainer#0-2-C-1] WARN  [o.apache.kafka.clients.NetworkClient] - [Consumer clientId=consumer-qlsv-student-group-3, groupId=qlsv-student-group] Connection to node 1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2025-09-26 20:41:26 [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] WARN  [o.apache.kafka.clients.NetworkClient] - [Consumer clientId=consumer-qlsv-student-group-1, groupId=qlsv-student-group] Connection to node 1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2025-09-26 20:41:26 [kafka-producer-network-thread | QLSV-producer-1] WARN  [o.apache.kafka.clients.NetworkClient] - [Producer clientId=QLSV-producer-1] Connection to node 1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2025-09-26 20:41:26 [org.springframework.kafka.KafkaListenerEndpointContainer#0-1-C-1] WARN  [o.apache.kafka.clients.NetworkClient] - [Consumer clientId=consumer-qlsv-student-group-2, groupId=qlsv-student-group] Connection to node 1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2025-09-26 20:41:26 [org.springframework.kafka.KafkaListenerEndpointContainer#0-2-C-1] WARN  [o.apache.kafka.clients.NetworkClient] - [Consumer clientId=consumer-qlsv-student-group-3, groupId=qlsv-student-group] Connection to node 1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2025-09-26 20:41:27 [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] WARN  [o.apache.kafka.clients.NetworkClient] - [Consumer clientId=consumer-qlsv-student-group-1, groupId=qlsv-student-group] Connection to node 1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2025-09-26 20:41:27 [kafka-producer-network-thread | QLSV-producer-1] WARN  [o.apache.kafka.clients.NetworkClient] - [Producer clientId=QLSV-producer-1] Connection to node 1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2025-09-26 20:41:27 [org.springframework.kafka.KafkaListenerEndpointContainer#0-1-C-1] WARN  [o.apache.kafka.clients.NetworkClient] - [Consumer clientId=consumer-qlsv-student-group-2, groupId=qlsv-student-group] Connection to node 1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2025-09-26 20:41:27 [org.springframework.kafka.KafkaListenerEndpointContainer#0-2-C-1] WARN  [o.apache.kafka.clients.NetworkClient] - [Consumer clientId=consumer-qlsv-student-group-3, groupId=qlsv-student-group] Connection to node 1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2025-09-26 20:41:28 [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] WARN  [o.apache.kafka.clients.NetworkClient] - [Consumer clientId=consumer-qlsv-student-group-1, groupId=qlsv-student-group] Connection to node 1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2025-09-26 20:41:28 [kafka-producer-network-thread | QLSV-producer-1] WARN  [o.apache.kafka.clients.NetworkClient] - [Producer clientId=QLSV-producer-1] Connection to node 1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2025-09-26 20:41:28 [org.springframework.kafka.KafkaListenerEndpointContainer#0-1-C-1] WARN  [o.apache.kafka.clients.NetworkClient] - [Consumer clientId=consumer-qlsv-student-group-2, groupId=qlsv-student-group] Connection to node 1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2025-09-26 20:41:28 [org.springframework.kafka.KafkaListenerEndpointContainer#0-2-C-1] WARN  [o.apache.kafka.clients.NetworkClient] - [Consumer clientId=consumer-qlsv-student-group-3, groupId=qlsv-student-group] Connection to node 1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2025-09-26 20:41:29 [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] WARN  [o.apache.kafka.clients.NetworkClient] - [Consumer clientId=consumer-qlsv-student-group-1, groupId=qlsv-student-group] Connection to node 1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2025-09-26 20:41:29 [kafka-producer-network-thread | QLSV-producer-1] WARN  [o.apache.kafka.clients.NetworkClient] - [Producer clientId=QLSV-producer-1] Connection to node 1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.

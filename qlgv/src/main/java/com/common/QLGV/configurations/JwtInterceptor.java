@@ -78,23 +78,15 @@ public class JwtInterceptor implements HandlerInterceptor {
         }
 
         String jwt = authHeader.substring(7);
-        UserDto userDto = jwtValidationService.getUserFromToken(jwt); 
+        
+        UserDto userDto = jwtValidationService.getUserFromTokenAndValidate(jwt); 
 
         if (userDto == null) {
-            loggingService.logDebug("Token validation failed", logContext);
+            loggingService.logDebug("Token validation failed - invalid, expired, or blacklisted", logContext);
             UnauthorizedExceptionHandle exception = new UnauthorizedExceptionHandle(
                 "Token validation failed", 
                 "Token may be invalid, expired, or blacklisted"
             );
-            handlerExceptionResolver.resolveException(request, response, handler, exception);
-            return false;
-        }
-
-        if (!jwtValidationService.isValidToken(jwt)){
-            loggingService.logDebug("Invalid or expired token", logContext);
-            UnauthorizedExceptionHandle exception = new UnauthorizedExceptionHandle(
-                    "User not found",
-                    "User associated with token not found in database");
             handlerExceptionResolver.resolveException(request, response, handler, exception);
             return false;
         }

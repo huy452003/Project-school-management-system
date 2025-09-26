@@ -1,41 +1,215 @@
-2025-09-13 13:39:38 [background-preinit] DEBUG [org.jboss.logging] - Logging Provider: org.jboss.logging.Slf4jLoggerProvider found via system property
-2025-09-13 13:39:38 [restartedMain] INFO  [com.common.QLGV.QlgvApplication] - Starting QlgvApplication using Java 20.0.2 with PID 1988 (D:\project IntelliJ Ultimate\modules-parent\qlgv\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlgv)
-2025-09-13 13:39:38 [restartedMain] DEBUG [com.common.QLGV.QlgvApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
-2025-09-13 13:39:38 [restartedMain] INFO  [com.common.QLGV.QlgvApplication] - No active profile set, falling back to 1 default profile: "default"
-2025-09-13 13:39:43 [restartedMain] DEBUG [i.m.c.u.i.l.InternalLoggerFactory] - Using SLF4J as the default logging framework
-2025-09-13 13:39:44 [restartedMain] WARN  [com.zaxxer.hikari.HikariConfig] - HikariPool-1 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
-2025-09-13 13:39:44 [restartedMain] WARN  [org.hibernate.orm.deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-09-13 13:39:44 [restartedMain] WARN  [org.hibernate.orm.deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
-2025-09-13 13:39:47 [restartedMain] WARN  [o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-09-13 13:39:47 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
+2025-09-26 20:23:31 [background-preinit] DEBUG [org.jboss.logging] - Logging Provider: org.jboss.logging.Slf4jLoggerProvider found via system property
+2025-09-26 20:23:32 [restartedMain] INFO  [com.common.QLGV.QlgvApplication] - Starting QlgvApplication using Java 20.0.2 with PID 16160 (D:\project IntelliJ Ultimate\modules-parent\qlgv\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlgv)
+2025-09-26 20:23:32 [restartedMain] DEBUG [com.common.QLGV.QlgvApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
+2025-09-26 20:23:32 [restartedMain] INFO  [com.common.QLGV.QlgvApplication] - No active profile set, falling back to 1 default profile: "default"
+2025-09-26 20:23:46 [restartedMain] DEBUG [i.m.c.u.i.l.InternalLoggerFactory] - Using SLF4J as the default logging framework
+2025-09-26 20:23:49 [restartedMain] WARN  [com.zaxxer.hikari.HikariConfig] - HikariPool-1 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
+2025-09-26 20:23:50 [restartedMain] WARN  [org.hibernate.orm.deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-09-26 20:23:50 [restartedMain] WARN  [org.hibernate.orm.deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-09-26 20:23:57 [restartedMain] WARN  [o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-09-26 20:23:57 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
 	c.c.Q.c.RedisController:
 	{GET [/api/redis/value/{key}]}: getValue(String)
 	{GET [/api/redis/hash/{key}]}: getHash(String)
-	{GET [/api/redis/zset/{key}]}: getZSet(String)
-	{GET [/api/redis/list/{key}]}: getList(String)
-	{GET [/api/redis/keys]}: getAllKeys()
 	{GET [/api/redis/keys/{pattern}]}: getKeysByPattern(String)
+	{GET [/api/redis/keys]}: getAllKeys()
+	{GET [/api/redis/list/{key}]}: getList(String)
 	{GET [/api/redis/set/{key}]}: getSet(String)
-	{GET [/api/redis/ttl/{key}]}: getTTL(String)
-	{DELETE [/api/redis/keys]}: deleteAllKeys()
-	{DELETE [/api/redis/key/{key}]}: deleteKey(String)
 	{GET [/api/redis/info]}: getRedisInfo()
+	{DELETE [/api/redis/keys]}: deleteAllKeys()
+	{GET [/api/redis/ttl/{key}]}: getTTL(String)
+	{DELETE [/api/redis/key/{key}]}: deleteKey(String)
+	{GET [/api/redis/zset/{key}]}: getZSet(String)
 	{GET [/api/redis/type/{key}]}: getKeyType(String)
-2025-09-13 13:39:47 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
+2025-09-26 20:23:57 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
 	c.c.Q.c.TeacherController:
 	{GET [/teachers]}: get(String,HttpServletRequest)
 	{PUT [/teachers]}: update(TeacherModelRequest,String,HttpServletRequest)
 	{POST [/teachers]}: add(CreateTeacherModelRequest,String,HttpServletRequest)
 	{DELETE [/teachers]}: delete(List,String,HttpServletRequest)
-	{POST [/teachers/public/teachersAndStudents]}: createTeachersAndStudents(CreateTeacherAndStudent,String)
 	{GET [/teachers/public/studentsByTeacher]}: getStudentsFromQLSV(String)
-2025-09-13 13:39:47 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
+2025-09-26 20:23:57 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
 	o.s.b.a.w.s.e.BasicErrorController:
 	{ [/error]}: error(HttpServletRequest)
 	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
-2025-09-13 13:39:47 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'beanNameHandlerMapping' {}
-2025-09-13 13:39:47 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
-2025-09-13 13:39:47 [restartedMain] WARN  [o.s.b.a.t.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
-2025-09-13 13:39:47 [restartedMain] DEBUG [reactor.util.Loggers] - Using Slf4j logging framework
-2025-09-13 13:39:48 [restartedMain] INFO  [com.common.QLGV.QlgvApplication] - Started QlgvApplication in 10.61 seconds (process running for 11.977)
-2025-09-13 13:39:54 [http-nio-8081-exec-1] ERROR [c.l.services.imp.LoggingServiceImp] - [qlgv] com.common.QLGV.controllers.TeacherController - Get students from QLSV API called failed: I/O error on GET request for "http://localhost:8080/students": Connection refused: connect
+2025-09-26 20:23:57 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'beanNameHandlerMapping' {}
+2025-09-26 20:23:57 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
+2025-09-26 20:23:58 [restartedMain] WARN  [o.s.b.a.t.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2025-09-26 20:23:58 [restartedMain] DEBUG [reactor.util.Loggers] - Using Slf4j logging framework
+2025-09-26 20:24:00 [restartedMain] WARN  [o.s.b.d.a.OptionalLiveReloadServer] - Unable to start LiveReload server
+2025-09-26 20:24:01 [restartedMain] INFO  [com.common.QLGV.QlgvApplication] - Started QlgvApplication in 31.044 seconds (process running for 39.121)
+2025-09-26 20:31:14 [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] INFO  [c.l.services.imp.LoggingServiceImp] - [qlgv] com.common.QLGV.services.StudentEventConsumerService - Received student event: UPDATED for student: s a (ID: 43)
+2025-09-26 20:31:46 [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] INFO  [c.l.services.imp.LoggingServiceImp] - [qlgv] com.common.QLGV.services.StudentEventConsumerService - Student updated: s a (ID: 43). Teachers may need to refresh student information.
+2025-09-26 20:32:25 [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] INFO  [c.l.services.imp.LoggingServiceImp] - [qlgv] com.common.QLGV.services.StudentEventConsumerService - Successfully processed student event for student: s a
+2025-09-26 20:32:31 [kafka-coordinator-heartbeat-thread | qlgv-group] WARN  [o.a.k.c.c.i.ConsumerCoordinator] - [Consumer clientId=consumer-qlgv-group-1, groupId=qlgv-group] consumer poll timeout has expired. This means the time between subsequent calls to poll() was longer than the configured max.poll.interval.ms, which typically implies that the poll loop is spending too much time processing messages. You can address this either by increasing max.poll.interval.ms or by reducing the maximum size of batches returned in poll() with max.poll.records.
+2025-09-26 20:32:32 [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] ERROR [o.a.k.c.c.i.ConsumerCoordinator] - [Consumer clientId=consumer-qlgv-group-1, groupId=qlgv-group] Asynchronous auto-commit of offsets failed: Offset commit cannot be completed since the consumer is not part of an active group for auto partition assignment; it is likely that the consumer was kicked out of the group.. Will continue to join group.
+2025-09-26 20:32:32 [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] WARN  [o.a.k.c.c.i.ConsumerCoordinator] - [Consumer clientId=consumer-qlgv-group-1, groupId=qlgv-group] Asynchronous auto-commit of offsets {student-events-0=OffsetAndMetadata{offset=3, leaderEpoch=2, metadata=''}} failed: Offset commit cannot be completed since the consumer is not part of an active group for auto partition assignment; it is likely that the consumer was kicked out of the group.
+2025-09-26 20:33:01 [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] INFO  [c.l.services.imp.LoggingServiceImp] - [qlgv] com.common.QLGV.services.StudentEventConsumerService - Received student event: UPDATED for student: s a (ID: 43)
+2025-09-26 20:33:04 [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] INFO  [c.l.services.imp.LoggingServiceImp] - [qlgv] com.common.QLGV.services.StudentEventConsumerService - Student updated: s a (ID: 43). Teachers may need to refresh student information.
+2025-09-26 20:33:04 [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] INFO  [c.l.services.imp.LoggingServiceImp] - [qlgv] com.common.QLGV.services.StudentEventConsumerService - Successfully processed student event for student: s a
+2025-09-26 20:33:10 [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] INFO  [c.l.services.imp.LoggingServiceImp] - [qlgv] com.common.QLGV.services.StudentEventConsumerService - Received student event: UPDATED for student: s a (ID: 43)
+2025-09-26 20:33:21 [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] INFO  [c.l.services.imp.LoggingServiceImp] - [qlgv] com.common.QLGV.services.StudentEventConsumerService - Student updated: s a (ID: 43). Teachers may need to refresh student information.
+2025-09-26 20:33:21 [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] INFO  [c.l.services.imp.LoggingServiceImp] - [qlgv] com.common.QLGV.services.StudentEventConsumerService - Successfully processed student event for student: s a
+2025-09-26 20:34:35 [restartedMain] INFO  [com.common.QLGV.QlgvApplication] - Starting QlgvApplication using Java 20.0.2 with PID 16160 (D:\project IntelliJ Ultimate\modules-parent\qlgv\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlgv)
+2025-09-26 20:34:35 [restartedMain] DEBUG [com.common.QLGV.QlgvApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
+2025-09-26 20:34:35 [restartedMain] INFO  [com.common.QLGV.QlgvApplication] - No active profile set, falling back to 1 default profile: "default"
+2025-09-26 20:34:36 [restartedMain] WARN  [com.zaxxer.hikari.HikariConfig] - HikariPool-2 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
+2025-09-26 20:34:36 [restartedMain] WARN  [org.hibernate.orm.deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-09-26 20:34:36 [restartedMain] WARN  [org.hibernate.orm.deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-09-26 20:34:37 [restartedMain] WARN  [o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-09-26 20:34:37 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
+	c.c.Q.c.RedisController:
+	{GET [/api/redis/value/{key}]}: getValue(String)
+	{GET [/api/redis/hash/{key}]}: getHash(String)
+	{GET [/api/redis/keys/{pattern}]}: getKeysByPattern(String)
+	{GET [/api/redis/keys]}: getAllKeys()
+	{GET [/api/redis/list/{key}]}: getList(String)
+	{GET [/api/redis/set/{key}]}: getSet(String)
+	{GET [/api/redis/info]}: getRedisInfo()
+	{DELETE [/api/redis/keys]}: deleteAllKeys()
+	{GET [/api/redis/ttl/{key}]}: getTTL(String)
+	{DELETE [/api/redis/key/{key}]}: deleteKey(String)
+	{GET [/api/redis/zset/{key}]}: getZSet(String)
+	{GET [/api/redis/type/{key}]}: getKeyType(String)
+2025-09-26 20:34:37 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
+	c.c.Q.c.TeacherController:
+	{GET [/teachers]}: get(String,HttpServletRequest)
+	{PUT [/teachers]}: update(TeacherModelRequest,String,HttpServletRequest)
+	{POST [/teachers]}: add(CreateTeacherModelRequest,String,HttpServletRequest)
+	{DELETE [/teachers]}: delete(List,String,HttpServletRequest)
+	{GET [/teachers/public/studentsByTeacher]}: getStudentsFromQLSV(String)
+2025-09-26 20:34:37 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
+	o.s.b.a.w.s.e.BasicErrorController:
+	{ [/error]}: error(HttpServletRequest)
+	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
+2025-09-26 20:34:37 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'beanNameHandlerMapping' {}
+2025-09-26 20:34:37 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
+2025-09-26 20:34:37 [restartedMain] WARN  [o.s.b.a.t.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2025-09-26 20:34:37 [restartedMain] WARN  [o.s.b.d.a.OptionalLiveReloadServer] - Unable to start LiveReload server
+2025-09-26 20:34:37 [restartedMain] INFO  [com.common.QLGV.QlgvApplication] - Started QlgvApplication in 2.466 seconds (process running for 675.006)
+2025-09-26 20:34:47 [restartedMain] INFO  [com.common.QLGV.QlgvApplication] - Starting QlgvApplication using Java 20.0.2 with PID 16160 (D:\project IntelliJ Ultimate\modules-parent\qlgv\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlgv)
+2025-09-26 20:34:47 [restartedMain] DEBUG [com.common.QLGV.QlgvApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
+2025-09-26 20:34:47 [restartedMain] INFO  [com.common.QLGV.QlgvApplication] - No active profile set, falling back to 1 default profile: "default"
+2025-09-26 20:34:48 [restartedMain] WARN  [com.zaxxer.hikari.HikariConfig] - HikariPool-3 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
+2025-09-26 20:34:48 [restartedMain] WARN  [org.hibernate.orm.deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-09-26 20:34:48 [restartedMain] WARN  [org.hibernate.orm.deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-09-26 20:34:49 [restartedMain] WARN  [o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-09-26 20:34:49 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
+	c.c.Q.c.RedisController:
+	{GET [/api/redis/value/{key}]}: getValue(String)
+	{GET [/api/redis/hash/{key}]}: getHash(String)
+	{GET [/api/redis/keys/{pattern}]}: getKeysByPattern(String)
+	{GET [/api/redis/keys]}: getAllKeys()
+	{GET [/api/redis/list/{key}]}: getList(String)
+	{GET [/api/redis/set/{key}]}: getSet(String)
+	{GET [/api/redis/info]}: getRedisInfo()
+	{DELETE [/api/redis/keys]}: deleteAllKeys()
+	{GET [/api/redis/ttl/{key}]}: getTTL(String)
+	{DELETE [/api/redis/key/{key}]}: deleteKey(String)
+	{GET [/api/redis/zset/{key}]}: getZSet(String)
+	{GET [/api/redis/type/{key}]}: getKeyType(String)
+2025-09-26 20:34:49 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
+	c.c.Q.c.TeacherController:
+	{GET [/teachers]}: get(String,HttpServletRequest)
+	{PUT [/teachers]}: update(TeacherModelRequest,String,HttpServletRequest)
+	{POST [/teachers]}: add(CreateTeacherModelRequest,String,HttpServletRequest)
+	{DELETE [/teachers]}: delete(List,String,HttpServletRequest)
+	{GET [/teachers/public/studentsByTeacher]}: getStudentsFromQLSV(String)
+2025-09-26 20:34:49 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
+	o.s.b.a.w.s.e.BasicErrorController:
+	{ [/error]}: error(HttpServletRequest)
+	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
+2025-09-26 20:34:49 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'beanNameHandlerMapping' {}
+2025-09-26 20:34:49 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
+2025-09-26 20:34:49 [restartedMain] WARN  [o.s.b.a.t.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2025-09-26 20:34:49 [restartedMain] WARN  [o.s.b.d.a.OptionalLiveReloadServer] - Unable to start LiveReload server
+2025-09-26 20:34:49 [restartedMain] INFO  [com.common.QLGV.QlgvApplication] - Started QlgvApplication in 1.74 seconds (process running for 687.207)
+2025-09-26 20:36:52 [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] INFO  [c.l.services.imp.LoggingServiceImp] - [qlgv] com.common.QLGV.services.StudentEventConsumerService - Received student event: UPDATED for student: s a (ID: 43)
+2025-09-26 20:36:54 [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] INFO  [c.l.services.imp.LoggingServiceImp] - [qlgv] com.common.QLGV.services.StudentEventConsumerService - Student updated: s a (ID: 43). Teachers received event need to do something...
+2025-09-26 20:36:58 [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] INFO  [c.l.services.imp.LoggingServiceImp] - [qlgv] com.common.QLGV.services.StudentEventConsumerService - Successfully processed student event for student: s a
+2025-09-26 20:39:18 [restartedMain] INFO  [com.common.QLGV.QlgvApplication] - Starting QlgvApplication using Java 20.0.2 with PID 16160 (D:\project IntelliJ Ultimate\modules-parent\qlgv\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlgv)
+2025-09-26 20:39:18 [restartedMain] DEBUG [com.common.QLGV.QlgvApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
+2025-09-26 20:39:18 [restartedMain] INFO  [com.common.QLGV.QlgvApplication] - No active profile set, falling back to 1 default profile: "default"
+2025-09-26 20:39:18 [restartedMain] WARN  [com.zaxxer.hikari.HikariConfig] - HikariPool-4 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
+2025-09-26 20:39:18 [restartedMain] WARN  [org.hibernate.orm.deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-09-26 20:39:18 [restartedMain] WARN  [org.hibernate.orm.deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-09-26 20:39:19 [restartedMain] WARN  [o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-09-26 20:39:19 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
+	c.c.Q.c.RedisController:
+	{GET [/api/redis/value/{key}]}: getValue(String)
+	{GET [/api/redis/hash/{key}]}: getHash(String)
+	{GET [/api/redis/keys/{pattern}]}: getKeysByPattern(String)
+	{GET [/api/redis/keys]}: getAllKeys()
+	{GET [/api/redis/list/{key}]}: getList(String)
+	{GET [/api/redis/set/{key}]}: getSet(String)
+	{GET [/api/redis/info]}: getRedisInfo()
+	{DELETE [/api/redis/keys]}: deleteAllKeys()
+	{GET [/api/redis/ttl/{key}]}: getTTL(String)
+	{DELETE [/api/redis/key/{key}]}: deleteKey(String)
+	{GET [/api/redis/zset/{key}]}: getZSet(String)
+	{GET [/api/redis/type/{key}]}: getKeyType(String)
+2025-09-26 20:39:19 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
+	c.c.Q.c.TeacherController:
+	{GET [/teachers]}: get(String,HttpServletRequest)
+	{PUT [/teachers]}: update(TeacherModelRequest,String,HttpServletRequest)
+	{POST [/teachers]}: add(CreateTeacherModelRequest,String,HttpServletRequest)
+	{DELETE [/teachers]}: delete(List,String,HttpServletRequest)
+	{GET [/teachers/public/studentsByTeacher]}: getStudentsFromQLSV(String)
+2025-09-26 20:39:19 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
+	o.s.b.a.w.s.e.BasicErrorController:
+	{ [/error]}: error(HttpServletRequest)
+	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
+2025-09-26 20:39:19 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'beanNameHandlerMapping' {}
+2025-09-26 20:39:19 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
+2025-09-26 20:39:19 [restartedMain] WARN  [o.s.b.a.t.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2025-09-26 20:39:19 [restartedMain] WARN  [o.s.b.d.a.OptionalLiveReloadServer] - Unable to start LiveReload server
+2025-09-26 20:39:19 [restartedMain] INFO  [com.common.QLGV.QlgvApplication] - Started QlgvApplication in 1.355 seconds (process running for 957.035)
+2025-09-26 20:39:31 [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] INFO  [c.l.services.imp.LoggingServiceImp] - [qlgv] StudentEventConsumerService - Received student event: UPDATED for student: s a (ID: 43)
+2025-09-26 20:39:39 [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] INFO  [c.l.services.imp.LoggingServiceImp] - [qlgv] StudentEventConsumerService - Student updated: s a (ID: 43). Teachers received event need to do something...
+2025-09-26 20:39:39 [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] INFO  [c.l.services.imp.LoggingServiceImp] - [qlgv] StudentEventConsumerService - Successfully processed student event for student: s a
+2025-09-26 20:40:07 [restartedMain] INFO  [com.common.QLGV.QlgvApplication] - Starting QlgvApplication using Java 20.0.2 with PID 16160 (D:\project IntelliJ Ultimate\modules-parent\qlgv\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlgv)
+2025-09-26 20:40:07 [restartedMain] DEBUG [com.common.QLGV.QlgvApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
+2025-09-26 20:40:07 [restartedMain] INFO  [com.common.QLGV.QlgvApplication] - No active profile set, falling back to 1 default profile: "default"
+2025-09-26 20:40:07 [restartedMain] WARN  [com.zaxxer.hikari.HikariConfig] - HikariPool-5 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
+2025-09-26 20:40:07 [restartedMain] WARN  [org.hibernate.orm.deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-09-26 20:40:07 [restartedMain] WARN  [org.hibernate.orm.deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-09-26 20:40:08 [restartedMain] WARN  [o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-09-26 20:40:08 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
+	c.c.Q.c.RedisController:
+	{GET [/api/redis/value/{key}]}: getValue(String)
+	{GET [/api/redis/hash/{key}]}: getHash(String)
+	{GET [/api/redis/keys/{pattern}]}: getKeysByPattern(String)
+	{GET [/api/redis/keys]}: getAllKeys()
+	{GET [/api/redis/list/{key}]}: getList(String)
+	{GET [/api/redis/set/{key}]}: getSet(String)
+	{GET [/api/redis/info]}: getRedisInfo()
+	{DELETE [/api/redis/keys]}: deleteAllKeys()
+	{GET [/api/redis/ttl/{key}]}: getTTL(String)
+	{DELETE [/api/redis/key/{key}]}: deleteKey(String)
+	{GET [/api/redis/zset/{key}]}: getZSet(String)
+	{GET [/api/redis/type/{key}]}: getKeyType(String)
+2025-09-26 20:40:08 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
+	c.c.Q.c.TeacherController:
+	{GET [/teachers]}: get(String,HttpServletRequest)
+	{PUT [/teachers]}: update(TeacherModelRequest,String,HttpServletRequest)
+	{POST [/teachers]}: add(CreateTeacherModelRequest,String,HttpServletRequest)
+	{DELETE [/teachers]}: delete(List,String,HttpServletRequest)
+	{GET [/teachers/public/studentsByTeacher]}: getStudentsFromQLSV(String)
+2025-09-26 20:40:08 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
+	o.s.b.a.w.s.e.BasicErrorController:
+	{ [/error]}: error(HttpServletRequest)
+	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
+2025-09-26 20:40:08 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'beanNameHandlerMapping' {}
+2025-09-26 20:40:08 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
+2025-09-26 20:40:08 [restartedMain] WARN  [o.s.b.a.t.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2025-09-26 20:40:08 [restartedMain] WARN  [o.s.b.d.a.OptionalLiveReloadServer] - Unable to start LiveReload server
+2025-09-26 20:40:08 [restartedMain] INFO  [com.common.QLGV.QlgvApplication] - Started QlgvApplication in 1.1 seconds (process running for 1005.746)
+2025-09-26 20:41:21 [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] WARN  [o.apache.kafka.clients.NetworkClient] - [Consumer clientId=consumer-qlgv-group-5, groupId=qlgv-group] Connection to node 1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2025-09-26 20:41:22 [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] WARN  [o.apache.kafka.clients.NetworkClient] - [Consumer clientId=consumer-qlgv-group-5, groupId=qlgv-group] Connection to node 1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2025-09-26 20:41:23 [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] WARN  [o.apache.kafka.clients.NetworkClient] - [Consumer clientId=consumer-qlgv-group-5, groupId=qlgv-group] Connection to node 1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2025-09-26 20:41:24 [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] WARN  [o.apache.kafka.clients.NetworkClient] - [Consumer clientId=consumer-qlgv-group-5, groupId=qlgv-group] Connection to node 1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2025-09-26 20:41:25 [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] WARN  [o.apache.kafka.clients.NetworkClient] - [Consumer clientId=consumer-qlgv-group-5, groupId=qlgv-group] Connection to node 1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2025-09-26 20:41:26 [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] WARN  [o.apache.kafka.clients.NetworkClient] - [Consumer clientId=consumer-qlgv-group-5, groupId=qlgv-group] Connection to node 1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2025-09-26 20:41:27 [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] WARN  [o.apache.kafka.clients.NetworkClient] - [Consumer clientId=consumer-qlgv-group-5, groupId=qlgv-group] Connection to node 1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2025-09-26 20:41:28 [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] WARN  [o.apache.kafka.clients.NetworkClient] - [Consumer clientId=consumer-qlgv-group-5, groupId=qlgv-group] Connection to node 1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2025-09-26 20:41:29 [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] WARN  [o.apache.kafka.clients.NetworkClient] - [Consumer clientId=consumer-qlgv-group-5, groupId=qlgv-group] Connection to node 1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.

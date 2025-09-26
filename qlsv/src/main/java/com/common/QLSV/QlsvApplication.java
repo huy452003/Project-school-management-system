@@ -11,7 +11,7 @@ import org.springframework.context.annotation.ComponentScan;
 	org.springframework.boot.actuate.autoconfigure.security.servlet.ManagementWebSecurityAutoConfiguration.class
 })
 @ComponentScan(basePackages = 
-	{"com.common.QLSV", "com.handle_exceptions", "com.logging", "com.common.config"}
+	{"com.common.QLSV", "com.handle_exceptions", "com.logging", "com.common.config", "com.common.kafka"}
 )
 public class QlsvApplication {
 

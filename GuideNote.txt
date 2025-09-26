@@ -91,12 +91,26 @@ nhằm bảo mật tránh việc bị làm giả token
 + access token tự động xóa khi hết hạn
 + sử dụng refresh token để tạo access token mới mà không cần phải đăng nhập lại
 
-* messaging. kafka 
-
-
 JWT và Session trong restful API
 - session cần query database , jwt không cần -> tăng hiệu suất
 - rest API không cần lưu trạng thái resquest nên session không phù hợp
+
+
+* messaging. kafka : gửi message từ bên nói ( gửi ) sang bên nghe ( nhận )
+- có các cụm broker : gồm các kafka-broker : chứa các metadata 
+- metadata có : 
++ topic : nội dung message ( get, save, ... )
++ các partition : chia nhỏ topic, nội dung đi theo tuần từ. vd: parition 1 : 0,1,2,3,4
++ offset : khoảng partition ( nội dung đẫ chia nhỏ ) đã đi được. vd: partition đã đi
+được 3 phần -> offset = 3
+- kết nối với các zookeeper để quản lý các broker
++ các zookeeper sẽ có 1 zookeeper trưởng có quyền ghi và các zookeeper khác sẽ có quyền đọc
+
+--> ở bản mới nhất của kafka (>3.3.0) đã hỗ trợ KRaft mode, không cần dùng Zookeeper nữa vì:
+Cũ (Zookeeper): Kafka lưu metadata cluster (topic, partition, ACL, v.v.) trong Zookeeper.
+Mới (KRaft): Metadata lưu trực tiếp trong Kafka Controller, sử dụng Raft consensus.
+
+** --> bản chất của kafka là để message từ producer sang các consumer thông qua các topic
 
 
 

@@ -73,31 +73,42 @@ public class JwtValidationService {
         }
     }
 
-    public boolean isValidToken(String token) {
-        LogContext logContext = getLogContext("isValidToken");
+    public UserDto getUserFromTokenAndValidate(String token) {
+        LogContext logContext = getLogContext("getUserFromTokenAndValidate");
         try {
+            // 1. Kiểm tra cơ bản JWT
             String username = jwtService.extractUsername(token);
-            if (username == null){
+            loggingService.logDebug("Extracted username from JWT: " + username, logContext);
+            
+            if (username == null) {
                 loggingService.logWarn("Cannot extract username from token", logContext);
-                return false;
+                return null;
             }
 
+            if (jwtService.isTokenExpired(token)) {
+                loggingService.logWarn("JWT token is expired for user: " + username, logContext);
+                return null;
+            }
+
+            // 2. Gọi API security để lấy user
             UserDto userDto = getUserFromToken(token);
-            if (userDto == null){
+            if (userDto == null) {
                 loggingService.logWarn("Failed to get user from token for username: " + username, logContext);
-                return false;
+                return null;
             }
 
+            // 3. Validate token với user
             UserEntity userEntity = UserEntity.builder()
                     .userName(userDto.getUserName())
                     .role(Role.valueOf(userDto.getRole()))
                     .build();
-            boolean isValid = jwtService.isTokenValid(token,userEntity);
-            loggingService.logDebug("Final JWT validation result for user "+ username + " is " + isValid, logContext);
-            return isValid;
-        }catch (Exception e){
-            loggingService.logError("Exception during isValidToken: ", e, logContext);
-            return false;
+            boolean isValid = jwtService.isTokenValid(token, userEntity);
+            loggingService.logDebug("Final JWT validation result for user " + username + " is " + isValid, logContext);
+            
+            return isValid ? userDto : null;
+        } catch (Exception e) {
+            loggingService.logError("Exception during JWT validation: ", e, logContext);
+            return null;
         }
     }
 

@@ -114,6 +114,10 @@
     	</dependency>
 		<dependency>
 			<groupId>com.common</groupId>
+			<artifactId>kafka-shared</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.common</groupId>
 			<artifactId>security</artifactId>
 		</dependency>
 		<!-- JWT để validate tokens từ Security module -->

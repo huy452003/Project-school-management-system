@@ -3,7 +3,7 @@ package com.common.QLGV.controllers;
 import com.common.QLGV.configurations.RequiresJwt;
 import com.common.QLGV.entities.TeacherEntity;
 import com.common.QLGV.services.imp.StudentClientServiceImp;
-import com.common.models.CreateTeacherAndStudent;
+import com.common.QLGV.services.StudentEventConsumerService;
 import com.common.models.Response;
 import com.common.models.UserDto;
 import com.common.models.student.StudentModel;
@@ -34,6 +34,8 @@ public class TeacherController {
     ReloadableResourceBundleMessageSource messageSource;
     @Autowired
     StudentClientServiceImp studentClientServiceImp;
+    @Autowired
+    StudentEventConsumerService studentEventConsumerService;
     @Autowired
     LoggingService loggingService;
 
