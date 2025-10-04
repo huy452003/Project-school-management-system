@@ -1,0 +1,33 @@
+{
+    "folders": [
+        {
+            "name": "modules-parent",
+            "path": "."
+        }
+    ],
+    "settings": {
+        "java.configuration.updateBuildConfiguration": "automatic",
+        "java.import.maven.enabled": true,
+        "java.maven.downloadSources": true,
+        "java.autobuild.enabled": true,
+        "java.maxConcurrentBuilds": 1,
+        "java.project.sourcePaths": [
+            "*/src/main/java"
+        ],
+        "java.project.outputPath": "*/target/classes",
+        "java.configuration.runtimes": [
+            {
+                "name": "JavaSE-17",
+                "path": "C:\\Program Files\\Eclipse Adoptium\\jdk-17.0.16.8-hotspot"
+            }
+        ]
+    },
+    "extensions": {
+        "recommendations": [
+            "vscjava.vscode-java-pack",
+            "vscjava.vscode-maven",
+            "gabrielbb.vscode-lombok",
+            "redhat.java"
+        ]
+    }
+}

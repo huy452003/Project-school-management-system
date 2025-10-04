@@ -620,3 +620,153 @@ java.lang.ClassNotFoundException: com.model_shared.models.Response
 	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:658)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
 	at java.base/java.lang.Thread.run(Thread.java:1623)
+2025-10-04 18:27:47 [background-preinit] DEBUG [org.jboss.logging] - Logging Provider: org.jboss.logging.Slf4jLoggerProvider found via system property
+2025-10-04 18:27:47 [main] INFO  [com.security.SecurityApplication] - Starting SecurityApplication using Java 17.0.16 with PID 1552 (D:\project IntelliJ Ultimate\modules-parent\security\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\security)
+2025-10-04 18:27:47 [main] DEBUG [com.security.SecurityApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
+2025-10-04 18:27:47 [main] INFO  [com.security.SecurityApplication] - No active profile set, falling back to 1 default profile: "default"
+2025-10-04 18:27:54 [main] DEBUG [i.m.c.u.i.l.InternalLoggerFactory] - Using SLF4J as the default logging framework
+2025-10-04 18:27:56 [main] WARN  [org.hibernate.orm.deprecation] - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-10-04 18:28:00 [main] WARN  [o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-10-04 18:28:00 [main] DEBUG [com.security.config.JwtAuthFilter] - Filter 'jwtAuthFilter' configured for use
+2025-10-04 18:28:00 [main] WARN  [o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer] - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2025-10-04 18:28:00 [main] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
+	c.s.c.AuthController:
+	{POST [/auth/register]}: register(Register,String)
+	{POST [/auth/logout]}: logout(String,String)
+	{POST [/auth/login]}: login(Login,String)
+	{POST [/auth/refresh]}: refreshToken(String,String)
+	{GET [/auth/validate]}: validateToken(String,String)
+	{GET [/auth/decode]}: decodeToken(String,String)
+2025-10-04 18:28:00 [main] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
+	o.s.b.a.w.s.e.BasicErrorController:
+	{ [/error]}: error(HttpServletRequest)
+	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
+2025-10-04 18:28:00 [main] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'beanNameHandlerMapping' {}
+2025-10-04 18:28:01 [main] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
+2025-10-04 18:28:01 [main] DEBUG [reactor.util.Loggers] - Using Slf4j logging framework
+2025-10-04 18:28:02 [main] INFO  [com.security.SecurityApplication] - Started SecurityApplication in 16.414 seconds (process running for 17.534)
+2025-10-04 18:28:06 [http-nio-8083-exec-2] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] JwtAuthFilter - Processing request: /auth/login
+2025-10-04 18:28:06 [http-nio-8083-exec-2] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] JwtAuthFilter - Skipping JWT validation for public endpoint: /auth/login
+2025-10-04 18:28:06 [http-nio-8083-exec-2] INFO  [c.l.services.imp.LoggingServiceImp] - [security] com.security.controllers.AuthController - Login API calling... by user: HuyS2
+2025-10-04 18:28:07 [http-nio-8083-exec-2] INFO  [c.l.services.imp.LoggingServiceImp] - [security] AuthService - Login attempt for username: HuyS2
+2025-10-04 18:28:07 [http-nio-8083-exec-2] INFO  [c.l.services.imp.LoggingServiceImp] - [security] com.security.controllers.AuthController - User logged in successfully: HuyS2
+2025-10-04 18:28:16 [http-nio-8083-exec-3] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] JwtAuthFilter - Processing request: /auth/login
+2025-10-04 18:28:16 [http-nio-8083-exec-3] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] JwtAuthFilter - Skipping JWT validation for public endpoint: /auth/login
+2025-10-04 18:28:16 [http-nio-8083-exec-3] INFO  [c.l.services.imp.LoggingServiceImp] - [security] com.security.controllers.AuthController - Login API calling... by user: HuyS1
+2025-10-04 18:28:16 [http-nio-8083-exec-3] INFO  [c.l.services.imp.LoggingServiceImp] - [security] AuthService - Login attempt for username: HuyS1
+2025-10-04 18:28:16 [http-nio-8083-exec-3] INFO  [c.l.services.imp.LoggingServiceImp] - [security] com.security.controllers.AuthController - User logged in successfully: HuyS1
+2025-10-04 18:29:24 [http-nio-8083-exec-5] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] JwtAuthFilter - Processing request: /auth/validate
+2025-10-04 18:29:24 [http-nio-8083-exec-5] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] JwtAuthFilter - Extracted username from JWT: HuyS1
+2025-10-04 18:29:24 [http-nio-8083-exec-5] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] JwtAuthFilter - Successfully authenticated user: HuyS1
+2025-10-04 18:29:24 [http-nio-8083-exec-5] INFO  [c.l.services.imp.LoggingServiceImp] - [security] com.security.controllers.AuthController - validate API Calling...
+2025-10-04 18:29:24 [http-nio-8083-exec-5] INFO  [c.l.services.imp.LoggingServiceImp] - [security] com.security.controllers.AuthController - Token validated successfully for user: HuyS1
+2025-10-04 18:29:55 [http-nio-8083-exec-6] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] JwtAuthFilter - Processing request: /auth/validate
+2025-10-04 18:29:55 [http-nio-8083-exec-6] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] JwtAuthFilter - Extracted username from JWT: HuyS1
+2025-10-04 18:29:55 [http-nio-8083-exec-6] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] JwtAuthFilter - Successfully authenticated user: HuyS1
+2025-10-04 18:29:55 [http-nio-8083-exec-6] INFO  [c.l.services.imp.LoggingServiceImp] - [security] com.security.controllers.AuthController - validate API Calling...
+2025-10-04 18:29:55 [http-nio-8083-exec-6] INFO  [c.l.services.imp.LoggingServiceImp] - [security] com.security.controllers.AuthController - Token validated successfully for user: HuyS1
+2025-10-04 18:32:03 [http-nio-8083-exec-8] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] JwtAuthFilter - Processing request: /auth/validate
+2025-10-04 18:32:03 [http-nio-8083-exec-8] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] JwtAuthFilter - Extracted username from JWT: HuyS1
+2025-10-04 18:32:03 [http-nio-8083-exec-8] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] JwtAuthFilter - Successfully authenticated user: HuyS1
+2025-10-04 18:32:03 [http-nio-8083-exec-8] INFO  [c.l.services.imp.LoggingServiceImp] - [security] com.security.controllers.AuthController - validate API Calling...
+2025-10-04 18:32:03 [http-nio-8083-exec-8] INFO  [c.l.services.imp.LoggingServiceImp] - [security] com.security.controllers.AuthController - Token validated successfully for user: HuyS1
+2025-10-04 18:33:00 [http-nio-8083-exec-9] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] JwtAuthFilter - Processing request: /auth/validate
+2025-10-04 18:33:00 [http-nio-8083-exec-9] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] JwtAuthFilter - Extracted username from JWT: HuyS1
+2025-10-04 18:33:00 [http-nio-8083-exec-9] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] JwtAuthFilter - Successfully authenticated user: HuyS1
+2025-10-04 18:33:00 [http-nio-8083-exec-9] INFO  [c.l.services.imp.LoggingServiceImp] - [security] com.security.controllers.AuthController - validate API Calling...
+2025-10-04 18:33:00 [http-nio-8083-exec-9] INFO  [c.l.services.imp.LoggingServiceImp] - [security] com.security.controllers.AuthController - Token validated successfully for user: HuyS1
+2025-10-04 18:38:11 [http-nio-8083-exec-1] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] JwtAuthFilter - Processing request: /auth/validate
+2025-10-04 18:38:11 [http-nio-8083-exec-1] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] JwtAuthFilter - Extracted username from JWT: HuyS1
+2025-10-04 18:38:11 [http-nio-8083-exec-1] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] JwtAuthFilter - Successfully authenticated user: HuyS1
+2025-10-04 18:38:11 [http-nio-8083-exec-1] INFO  [c.l.services.imp.LoggingServiceImp] - [security] com.security.controllers.AuthController - validate API Calling...
+2025-10-04 18:38:11 [http-nio-8083-exec-1] INFO  [c.l.services.imp.LoggingServiceImp] - [security] com.security.controllers.AuthController - Token validated successfully for user: HuyS1
+2025-10-04 18:38:31 [http-nio-8083-exec-3] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] JwtAuthFilter - Processing request: /auth/login
+2025-10-04 18:38:31 [http-nio-8083-exec-3] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] JwtAuthFilter - Skipping JWT validation for public endpoint: /auth/login
+2025-10-04 18:38:31 [http-nio-8083-exec-3] INFO  [c.l.services.imp.LoggingServiceImp] - [security] com.security.controllers.AuthController - Login API calling... by user: HuyS1
+2025-10-04 18:38:31 [http-nio-8083-exec-3] INFO  [c.l.services.imp.LoggingServiceImp] - [security] AuthService - Login attempt for username: HuyS1
+2025-10-04 18:38:31 [http-nio-8083-exec-3] INFO  [c.l.services.imp.LoggingServiceImp] - [security] com.security.controllers.AuthController - User logged in successfully: HuyS1
+2025-10-04 18:38:34 [http-nio-8083-exec-4] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] JwtAuthFilter - Processing request: /auth/login
+2025-10-04 18:38:34 [http-nio-8083-exec-4] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] JwtAuthFilter - Skipping JWT validation for public endpoint: /auth/login
+2025-10-04 18:38:34 [http-nio-8083-exec-4] INFO  [c.l.services.imp.LoggingServiceImp] - [security] com.security.controllers.AuthController - Login API calling... by user: HuyS1
+2025-10-04 18:38:34 [http-nio-8083-exec-4] INFO  [c.l.services.imp.LoggingServiceImp] - [security] AuthService - Login attempt for username: HuyS1
+2025-10-04 18:38:34 [http-nio-8083-exec-4] INFO  [c.l.services.imp.LoggingServiceImp] - [security] com.security.controllers.AuthController - User logged in successfully: HuyS1
+2025-10-04 18:39:03 [http-nio-8083-exec-5] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] JwtAuthFilter - Processing request: /auth/login
+2025-10-04 18:39:03 [http-nio-8083-exec-5] DEBUG [c.l.services.imp.LoggingServiceImp] - [security] JwtAuthFilter - Skipping JWT validation for public endpoint: /auth/login
+2025-10-04 18:39:03 [http-nio-8083-exec-5] INFO  [c.l.services.imp.LoggingServiceImp] - [security] com.security.controllers.AuthController - Login API calling... by user: HuyS1
+2025-10-04 18:39:04 [http-nio-8083-exec-5] INFO  [c.l.services.imp.LoggingServiceImp] - [security] AuthService - Login attempt for username: HuyS1
+2025-10-04 18:39:04 [http-nio-8083-exec-5] INFO  [c.l.services.imp.LoggingServiceImp] - [security] com.security.controllers.AuthController - User logged in successfully: HuyS1
+2025-10-04 18:39:34 [background-preinit] DEBUG [logging] - Logging Provider: org.jboss.logging.Slf4jLoggerProvider found via system property
+2025-10-04 18:39:35 [main] INFO  [SecurityApplication] - Starting SecurityApplication using Java 17.0.16 with PID 4580 (D:\project IntelliJ Ultimate\modules-parent\security\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\security)
+2025-10-04 18:39:35 [main] DEBUG [SecurityApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
+2025-10-04 18:39:35 [main] INFO  [SecurityApplication] - No active profile set, falling back to 1 default profile: "default"
+2025-10-04 18:39:42 [main] DEBUG [InternalLoggerFactory] - Using SLF4J as the default logging framework
+2025-10-04 18:39:44 [main] WARN  [deprecation] - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-10-04 18:39:49 [main] WARN  [JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-10-04 18:39:49 [main] DEBUG [JwtAuthFilter] - Filter 'jwtAuthFilter' configured for use
+2025-10-04 18:39:50 [main] WARN  [InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer] - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2025-10-04 18:39:50 [main] DEBUG [Mappings] - 
+	c.s.c.AuthController:
+	{POST [/auth/logout]}: logout(String,String)
+	{POST [/auth/login]}: login(Login,String)
+	{POST [/auth/refresh]}: refreshToken(String,String)
+	{GET [/auth/decode]}: decodeToken(String,String)
+	{GET [/auth/validate]}: validateToken(String,String)
+	{POST [/auth/register]}: register(Register,String)
+2025-10-04 18:39:50 [main] DEBUG [Mappings] - 
+	o.s.b.a.w.s.e.BasicErrorController:
+	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
+	{ [/error]}: error(HttpServletRequest)
+2025-10-04 18:39:50 [main] DEBUG [Mappings] - 'beanNameHandlerMapping' {}
+2025-10-04 18:39:50 [main] DEBUG [Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
+2025-10-04 18:39:51 [main] DEBUG [Loggers] - Using Slf4j logging framework
+2025-10-04 18:39:52 [main] INFO  [SecurityApplication] - Started SecurityApplication in 18.876 seconds (process running for 19.94)
+2025-10-04 18:39:56 [http-nio-8083-exec-2] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Processing request: /auth/login
+2025-10-04 18:39:56 [http-nio-8083-exec-2] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Skipping JWT validation for public endpoint: /auth/login
+2025-10-04 18:39:56 [http-nio-8083-exec-2] INFO  [LoggingServiceImp] - [security] com.security.controllers.AuthController - Login API calling... by user: HuyS1
+2025-10-04 18:39:56 [http-nio-8083-exec-2] INFO  [LoggingServiceImp] - [security] AuthService - Login attempt for username: HuyS1
+2025-10-04 18:39:57 [http-nio-8083-exec-2] INFO  [LoggingServiceImp] - [security] com.security.controllers.AuthController - User logged in successfully: HuyS1
+2025-10-04 18:40:09 [http-nio-8083-exec-3] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Processing request: /auth/validate
+2025-10-04 18:40:09 [http-nio-8083-exec-3] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Extracted username from JWT: HuyS1
+2025-10-04 18:40:09 [http-nio-8083-exec-3] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Successfully authenticated user: HuyS1
+2025-10-04 18:40:09 [http-nio-8083-exec-3] INFO  [LoggingServiceImp] - [security] com.security.controllers.AuthController - validate API Calling...
+2025-10-04 18:40:09 [http-nio-8083-exec-3] INFO  [LoggingServiceImp] - [security] com.security.controllers.AuthController - Token validated successfully for user: HuyS1
+2025-10-04 18:42:55 [http-nio-8083-exec-6] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Processing request: /auth/validate
+2025-10-04 18:42:55 [http-nio-8083-exec-6] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Extracted username from JWT: HuyS1
+2025-10-04 18:42:55 [http-nio-8083-exec-6] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Successfully authenticated user: HuyS1
+2025-10-04 18:42:55 [http-nio-8083-exec-6] INFO  [LoggingServiceImp] - [security] com.security.controllers.AuthController - validate API Calling...
+2025-10-04 18:42:55 [http-nio-8083-exec-6] INFO  [LoggingServiceImp] - [security] com.security.controllers.AuthController - Token validated successfully for user: HuyS1
+2025-10-04 18:48:14 [http-nio-8083-exec-8] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Processing request: /auth/validate
+2025-10-04 18:48:14 [http-nio-8083-exec-8] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Extracted username from JWT: HuyS1
+2025-10-04 18:48:14 [http-nio-8083-exec-8] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Successfully authenticated user: HuyS1
+2025-10-04 18:48:14 [http-nio-8083-exec-8] INFO  [LoggingServiceImp] - [security] com.security.controllers.AuthController - validate API Calling...
+2025-10-04 18:48:14 [http-nio-8083-exec-8] INFO  [LoggingServiceImp] - [security] com.security.controllers.AuthController - Token validated successfully for user: HuyS1
+2025-10-04 18:49:55 [http-nio-8083-exec-10] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Processing request: /auth/validate
+2025-10-04 18:49:55 [http-nio-8083-exec-10] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Extracted username from JWT: HuyS1
+2025-10-04 18:49:55 [http-nio-8083-exec-10] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Successfully authenticated user: HuyS1
+2025-10-04 18:49:55 [http-nio-8083-exec-10] INFO  [LoggingServiceImp] - [security] com.security.controllers.AuthController - validate API Calling...
+2025-10-04 18:49:55 [http-nio-8083-exec-10] INFO  [LoggingServiceImp] - [security] com.security.controllers.AuthController - Token validated successfully for user: HuyS1
+2025-10-04 19:02:40 [background-preinit] DEBUG [logging] - Logging Provider: org.jboss.logging.Slf4jLoggerProvider found via system property
+2025-10-04 19:02:40 [main] INFO  [SecurityApplication] - Starting SecurityApplication using Java 17.0.16 with PID 3628 (D:\project IntelliJ Ultimate\modules-parent\security\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\security)
+2025-10-04 19:02:40 [main] DEBUG [SecurityApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
+2025-10-04 19:02:40 [main] INFO  [SecurityApplication] - No active profile set, falling back to 1 default profile: "default"
+2025-10-04 19:02:45 [main] DEBUG [InternalLoggerFactory] - Using SLF4J as the default logging framework
+2025-10-04 19:02:47 [main] WARN  [deprecation] - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-10-04 19:02:55 [main] WARN  [JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-10-04 19:02:56 [main] DEBUG [JwtAuthFilter] - Filter 'jwtAuthFilter' configured for use
+2025-10-04 19:02:57 [main] WARN  [InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer] - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2025-10-04 19:02:57 [main] DEBUG [Mappings] - 
+	c.s.c.AuthController:
+	{POST [/auth/register]}: register(Register,String)
+	{POST [/auth/logout]}: logout(String,String)
+	{POST [/auth/refresh]}: refreshToken(String,String)
+	{POST [/auth/login]}: login(Login,String)
+	{GET [/auth/decode]}: decodeToken(String,String)
+	{GET [/auth/validate]}: validateToken(String,String)
+2025-10-04 19:02:58 [main] DEBUG [Mappings] - 
+	o.s.b.a.w.s.e.BasicErrorController:
+	{ [/error]}: error(HttpServletRequest)
+	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
+2025-10-04 19:02:58 [main] DEBUG [Mappings] - 'beanNameHandlerMapping' {}
+2025-10-04 19:02:58 [main] DEBUG [Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
+2025-10-04 19:03:00 [main] DEBUG [Loggers] - Using Slf4j logging framework
+2025-10-04 19:03:03 [main] INFO  [SecurityApplication] - Started SecurityApplication in 23.13 seconds (process running for 23.697)

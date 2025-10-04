@@ -53,7 +53,7 @@ public class NotificationMessage {
         this.title = title;
         this.message = message;
         this.timestamp = LocalDateTime.now();
-        this.source = "kafka-shared";
+        this.source = "kafka_shared";
         this.destination = "all";
     }
     

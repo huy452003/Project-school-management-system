@@ -70,15 +70,15 @@ public class NotificationService {
             kafkaTemplate.send(notificationTopic, key, notification);
 
             loggingService.logInfo(
-                String.format("Success notification sent for %s event: %s", 
-                    event.getEntityType(), event.getEntityId()),
+                String.format("Success notification sent for %s with student id : [%s] to topic: %s", 
+                    event.getEntityType(), event.getEntityId(), notificationTopic),
                 getLogContext("sendEventSuccessNotification")
             );
 
         } catch (Exception e) {
             loggingService.logError(
-                String.format("Failed to send success notification for %s event: %s - error: %s", 
-                    event.getEntityType(), event.getEntityId(), e.getMessage()),
+                String.format("Failed to send success notification for %s with student id : [%s] to topic: %s - error: %s", 
+                    event.getEntityType(), event.getEntityId(), notificationTopic, e.getMessage()),
                 e,
                 getLogContext("sendEventSuccessNotification")
             );
@@ -124,15 +124,15 @@ public class NotificationService {
             kafkaTemplate.send(notificationTopic, key, notification);
 
             loggingService.logWarn(
-                String.format("Failure notification sent for %s event: %s - error: %s", 
-                    event.getEntityType(), event.getEntityId(), errorMessage),
+                String.format("Failure notification sent for %s event: %s - error: %s to topic: %s", 
+                    event.getEntityType(), event.getEntityId(), errorMessage, notificationTopic),
                 getLogContext("sendEventFailureNotification")
             );
 
         } catch (Exception e) {
             loggingService.logError(
-                String.format("Failed to send failure notification for %s event: %s - error: %s", 
-                    event.getEntityType(), event.getEntityId(), e.getMessage()),
+                String.format("Failed to send failure notification for %s event: %s - error: %s to topic: %s", 
+                    event.getEntityType(), event.getEntityId(), e.getMessage(), notificationTopic),
                 e,
                 getLogContext("sendEventFailureNotification")
             );
