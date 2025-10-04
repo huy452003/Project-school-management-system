@@ -1,16 +1,15 @@
 package com.common.QLGV.controllers;
 
-import com.common.QLGV.configurations.RequiresJwt;
 import com.common.QLGV.entities.TeacherEntity;
 import com.common.QLGV.services.imp.StudentClientServiceImp;
 import com.common.QLGV.services.StudentEventConsumerService;
-import com.common.models.Response;
-import com.common.models.UserDto;
-import com.common.models.student.StudentModel;
-import com.common.models.teacher.CreateTeacherModel;
-import com.common.models.teacher.TeacherModel;
-import com.common.models.teacher.request.CreateTeacherModelRequest;
-import com.common.models.teacher.request.TeacherModelRequest;
+import com.model_shared.models.Response;
+import com.model_shared.models.UserDto;
+import com.model_shared.models.student.StudentModel;
+import com.model_shared.models.teacher.CreateTeacherModel;
+import com.model_shared.models.teacher.TeacherModel;
+import com.model_shared.models.teacher.request.CreateTeacherModelRequest;
+import com.model_shared.models.teacher.request.TeacherModelRequest;
 import com.common.QLGV.services.imp.TeacherServiceImp;
 import com.logging.models.LogContext;
 import com.logging.services.LoggingService;
@@ -42,13 +41,12 @@ public class TeacherController {
     private LogContext getLogContext(String methodName) {
             return LogContext.builder()
                     .module("qlgv")
-                    .className(this.getClass().getName())
+                    .className(this.getClass().getSimpleName())
                     .methodName(methodName)
                     .build();
     }
 
     @GetMapping("")
-    @RequiresJwt
     ResponseEntity<Response<List<TeacherModel>>> get(
             @RequestHeader(value = "Accept-Language", defaultValue = "en") String acceptLanguage
             , HttpServletRequest request)
@@ -72,7 +70,6 @@ public class TeacherController {
     }
 
     @PostMapping("")
-    @RequiresJwt(roles = {"ADMIN","TEACHER"})
     ResponseEntity<Response<List<CreateTeacherModel>>> add(
             @Valid @RequestBody CreateTeacherModelRequest req
             , @RequestHeader(value = "Accept-Language"
@@ -99,7 +96,6 @@ public class TeacherController {
     }
 
     @PutMapping("")
-    @RequiresJwt(roles = {"ADMIN","TEACHER"})
     ResponseEntity<Response<List<TeacherModel>>> update(
             @Valid @RequestBody TeacherModelRequest req
             , @RequestHeader(value = "Accept-Language"
@@ -125,7 +121,6 @@ public class TeacherController {
     }
 
     @DeleteMapping("")
-    @RequiresJwt(roles = {"ADMIN","TEACHER"})
     ResponseEntity<Response<List<TeacherModel>>> delete(
             @RequestBody List<TeacherModel> studentModels
             , @RequestHeader(value = "Accept-Language"

@@ -11,7 +11,7 @@ import org.springframework.context.annotation.ComponentScan;
 		org.springframework.boot.actuate.autoconfigure.security.servlet.ManagementWebSecurityAutoConfiguration.class
 })
 @ComponentScan(basePackages = 
-	{"com.common.QLGV", "com.handle_exceptions", "com.logging", "com.common.config"}
+	{"com.common.QLGV", "com.handle_exceptions", "com.logging", "com.model_shared.config", "com.kafka_shared", "com.security_shared"}
 )
 public class QlgvApplication {
 	public static void main(String[] args) {

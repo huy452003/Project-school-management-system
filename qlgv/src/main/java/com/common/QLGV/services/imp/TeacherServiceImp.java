@@ -1,8 +1,8 @@
 package com.common.QLGV.services.imp;
 
 import com.common.QLGV.entities.TeacherEntity;
-import com.common.models.teacher.CreateTeacherModel;
-import com.common.models.teacher.TeacherModel;
+import com.model_shared.models.teacher.CreateTeacherModel;
+import com.model_shared.models.teacher.TeacherModel;
 import com.handle_exceptions.NotFoundExceptionHandle;
 import com.common.QLGV.repositories.TeacherRepo;
 import com.common.QLGV.services.TeacherService;
@@ -32,7 +32,7 @@ public class TeacherServiceImp implements TeacherService {
     private LogContext getLogContext(String methodName){
         return LogContext.builder()
                 .module("qlgv")
-                .className(this.getClass().getName())
+                .className(this.getClass().getSimpleName())
                 .methodName(methodName)
                 .build();
     }

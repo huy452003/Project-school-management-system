@@ -8,7 +8,7 @@ import lombok.ToString;
 
 import java.time.LocalDate;
 
-import com.common.enums.Gender;
+import com.model_shared.enums.Gender;
 
 @Entity
 @Table(name = "Teachers")
@@ -21,6 +21,8 @@ public class TeacherEntity {
     @Column(name ="id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Column(name = "user_name", unique = true)
+    private String userName;
     @Column(name ="firstName")
     private String firstName;
     @Column(name ="lastName")

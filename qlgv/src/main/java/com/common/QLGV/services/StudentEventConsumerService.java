@@ -1,14 +1,19 @@
 package com.common.QLGV.services;
 
-import com.common.kafka.models.StudentEvent;
+import com.kafka_shared.models.StudentEvent;
+import com.kafka_shared.services.KafkaConsumerService;
 import com.logging.models.LogContext;
 import com.logging.services.LoggingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.kafka.support.Acknowledgment;
+import org.springframework.kafka.support.KafkaHeaders;
+import org.springframework.messaging.handler.annotation.Header;
+import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Service;
 
 @Service
-public class StudentEventConsumerService {
+public class StudentEventConsumerService extends KafkaConsumerService<StudentEvent> {
 
     @Autowired
     private LoggingService loggingService;
@@ -16,68 +21,66 @@ public class StudentEventConsumerService {
     private LogContext getLogContext(String methodName) {
         return LogContext.builder()
                 .module("qlgv")
-                .className(this.getClass().getName())
+                .className(this.getClass().getSimpleName())
                 .methodName(methodName)
                 .build();
     }
 
     @KafkaListener(topics = "student-events")
-    public void handleStudentEvent(StudentEvent studentEvent) {
-        LogContext logContext = getLogContext("handleStudentEvent");
-
-        try {
-            loggingService.logInfo("Received student event: " + studentEvent.getAction()
-            + " for student: " + studentEvent.getStudentName()
-            + " (ID: " + studentEvent.getStudentId() + ")", logContext);
-
-            // Xử lý logic khi nhận được student event
-            processStudentEvent(studentEvent);
-
-            loggingService.logInfo("Successfully processed student event for student: " + studentEvent.getStudentName(), logContext);
-
-        } catch (Exception e) {
-            loggingService.logError("Error processing student event for student: "
-            + studentEvent.getStudentName() + ". Error: " + e.getMessage(), e, logContext);
-        }
+    public void handleStudentEvent(@Payload StudentEvent studentEvent,
+                                  @Header(KafkaHeaders.RECEIVED_TOPIC) String topic,
+                                  @Header(KafkaHeaders.RECEIVED_PARTITION) int partition,
+                                  @Header(KafkaHeaders.OFFSET) long offset,
+                                  Acknowledgment acknowledgment) {
+        // Use base class method for common handling
+        handleEvent(studentEvent, topic, partition, offset, acknowledgment, "qlgv");
     }
 
-    private void processStudentEvent(StudentEvent studentEvent) {
-        switch (studentEvent.getAction()) {
+    @Override
+    protected void processEvent(StudentEvent event) {
+        LogContext logContext = getLogContext("processEvent");
+        
+        switch (event.getAction()) {
             case "CREATED":
-                handleStudentCreated(studentEvent);
+                handleStudentCreated(event);
                 break;
             case "UPDATED":
-                handleStudentUpdated(studentEvent);
+                handleStudentUpdated(event);
                 break;
             case "DELETED":
-                handleStudentDeleted(studentEvent);
+                handleStudentDeleted(event);
                 break;
             default:
-                break;
+                loggingService.logWarn("Unknown student event action: " + event.getAction(), logContext);
+                throw new IllegalArgumentException("Unknown event action: " + event.getAction());
         }
     }
 
     private void handleStudentCreated(StudentEvent studentEvent) {
         LogContext logContext = getLogContext("handleStudentCreated");
-
-        loggingService.logInfo("New student created: " + studentEvent.getStudentName()
-        + " (ID: " + studentEvent.getStudentId()
-        + "). Teachers received event need to do something...", logContext);
-    }
+        loggingService.logInfo("Processing student CREATED event: " + studentEvent.getEntityDisplayName()
+        + " (ID: " + studentEvent.getEntityId() + ")", logContext);
+        
+        // TODO: Implement business logic for student creation
+        // Ví dụ: Tạo record trong database teacher, gửi email thông báo, etc.
+    }   
 
     private void handleStudentUpdated(StudentEvent studentEvent) {
         LogContext logContext = getLogContext("handleStudentUpdated");
-
-        loggingService.logInfo("Student updated: " + studentEvent.getStudentName()
-        + " (ID: " + studentEvent.getStudentId()
-        + "). Teachers received event need to do something...", logContext);
+        loggingService.logInfo("Processing student UPDATED event: " + studentEvent.getEntityDisplayName()
+        + " (ID: " + studentEvent.getEntityId() + ")", logContext);
+        
+        // TODO: Implement business logic for student update
+        // Ví dụ: Cập nhật thông tin trong database teacher, sync data, etc.
     }
 
     private void handleStudentDeleted(StudentEvent studentEvent) {
         LogContext logContext = getLogContext("handleStudentDeleted");
-
-        loggingService.logInfo("Student deleted: " + studentEvent.getStudentName()
-        + " (ID: " + studentEvent.getStudentId()
-        + "). Teachers received event need to do something...", logContext);
+        loggingService.logInfo("Processing student DELETED event: " + studentEvent.getEntityDisplayName()
+        + " (ID: " + studentEvent.getEntityId() + ")", logContext);
+        
+        // TODO: Implement business logic for student deletion
+        // Ví dụ: Xóa record trong database teacher, cleanup related data, etc.
     }
+    
 }

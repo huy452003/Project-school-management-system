@@ -82,7 +82,7 @@
 		</dependency>
 		<dependency>
 			<groupId>com.common</groupId>
-			<artifactId>model-shared</artifactId>
+			<artifactId>model_shared</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>com.common</groupId>

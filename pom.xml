@@ -22,10 +22,11 @@
   </properties>
 
   <modules>
-    <module>model-shared</module>
+    <module>model_shared</module>
     <module>handle_exceptions</module>
     <module>logging</module>
-    <module>kafka-shared</module>
+    <module>kafka_shared</module>
+    <module>security_shared</module>
     <module>qlsv</module>
     <module>qlgv</module>
     <module>security</module>
@@ -37,7 +38,7 @@
         <!-- Internal modules -->
         <dependency>
             <groupId>com.common</groupId>
-            <artifactId>model-shared</artifactId>
+            <artifactId>model_shared</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
@@ -52,12 +53,17 @@
         </dependency>
         <dependency>
             <groupId>com.common</groupId>
-            <artifactId>kafka-shared</artifactId>
+            <artifactId>kafka_shared</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.common</groupId>
             <artifactId>security</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.common</groupId>
+            <artifactId>security_shared</artifactId>
             <version>${project.version}</version>
         </dependency>
         

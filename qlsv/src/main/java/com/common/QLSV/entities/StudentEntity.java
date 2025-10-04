@@ -1,6 +1,6 @@
 package com.common.QLSV.entities;
 
-import com.common.enums.Gender;
+import com.model_shared.enums.Gender;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -18,6 +18,8 @@ public class StudentEntity {
     @Column(name ="id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Column(name = "user_name", unique = true)
+    private String userName;
     @Column(name ="firstName")
     private String firstName;
     @Column(name ="lastName")

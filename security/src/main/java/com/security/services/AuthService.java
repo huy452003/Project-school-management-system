@@ -51,7 +51,7 @@ public class AuthService {
     private LogContext getLogContext(String methodName) {
         return LogContext.builder()
                 .module("security")
-                .className(this.getClass().getName())
+                .className(this.getClass().getSimpleName())
                 .methodName(methodName)
                 .build();
     }

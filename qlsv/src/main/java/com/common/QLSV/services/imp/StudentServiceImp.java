@@ -4,8 +4,8 @@ import com.common.QLSV.entities.StudentEntity;
 
 import com.common.QLSV.repositories.StudentRepo;
 import com.common.QLSV.services.StudentService;
-import com.common.models.student.CreateStudentModel;
-import com.common.models.student.StudentModel;
+import com.model_shared.models.student.CreateStudentModel;
+import com.model_shared.models.student.StudentModel;
 import com.logging.services.LoggingService;
 import com.logging.models.LogContext;
 import com.handle_exceptions.NotFoundExceptionHandle;
@@ -34,7 +34,7 @@ public class StudentServiceImp implements StudentService {
     private LogContext getLogContext(String methodName) {
             return LogContext.builder()
                     .module("qlsv")
-                    .className(this.getClass().getName())
+                    .className(this.getClass().getSimpleName())
                     .methodName(methodName)
                     .build();
     }

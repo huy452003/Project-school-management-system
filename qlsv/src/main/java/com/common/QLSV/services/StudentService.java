@@ -1,8 +1,8 @@
 package com.common.QLSV.services;
 
 import com.common.QLSV.entities.StudentEntity;
-import com.common.models.student.CreateStudentModel;
-import com.common.models.student.StudentModel;
+import com.model_shared.models.student.CreateStudentModel;
+import com.model_shared.models.student.StudentModel;
 
 import java.util.List;
 

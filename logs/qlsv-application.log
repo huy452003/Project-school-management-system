@@ -1,109 +1,228 @@
-2025-09-26 20:23:12 [background-preinit] DEBUG [org.jboss.logging] - Logging Provider: org.jboss.logging.Slf4jLoggerProvider found via system property
-2025-09-26 20:23:12 [restartedMain] INFO  [com.common.QLSV.QlsvApplication] - Starting QlsvApplication using Java 20.0.2 with PID 2464 (D:\project IntelliJ Ultimate\modules-parent\qlsv\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlsv)
-2025-09-26 20:23:12 [restartedMain] DEBUG [com.common.QLSV.QlsvApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
-2025-09-26 20:23:12 [restartedMain] INFO  [com.common.QLSV.QlsvApplication] - No active profile set, falling back to 1 default profile: "default"
-2025-09-26 20:23:22 [restartedMain] DEBUG [i.m.c.u.i.l.InternalLoggerFactory] - Using SLF4J as the default logging framework
-2025-09-26 20:23:25 [restartedMain] WARN  [com.zaxxer.hikari.HikariConfig] - HikariPool-1 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
-2025-09-26 20:23:26 [restartedMain] WARN  [org.hibernate.orm.deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-09-26 20:23:26 [restartedMain] WARN  [org.hibernate.orm.deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
-2025-09-26 20:23:35 [restartedMain] WARN  [o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-09-26 20:23:36 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
+2025-10-04 17:16:03 [background-preinit] DEBUG [org.jboss.logging] - Logging Provider: org.jboss.logging.Slf4jLoggerProvider found via system property
+2025-10-04 17:16:03 [main] INFO  [c.common.QLSV.QlsvApplicationTests] - Starting QlsvApplicationTests using Java 20.0.2 with PID 14204 (started by tranhuy in d:\project IntelliJ Ultimate\modules-parent\qlsv)
+2025-10-04 17:16:03 [main] DEBUG [c.common.QLSV.QlsvApplicationTests] - Running with Spring Boot v3.5.0, Spring v6.2.7
+2025-10-04 17:16:03 [main] INFO  [c.common.QLSV.QlsvApplicationTests] - No active profile set, falling back to 1 default profile: "default"
+2025-10-04 17:16:07 [main] WARN  [com.zaxxer.hikari.HikariConfig] - HikariPool-1 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
+2025-10-04 17:16:07 [main] WARN  [org.hibernate.orm.deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-10-04 17:16:07 [main] WARN  [org.hibernate.orm.deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-10-04 17:16:10 [main] WARN  [o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-10-04 17:16:10 [main] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
 	c.c.Q.c.StudentController:
-	{GET [/students]}: get(String,HttpServletRequest)
-	{PUT [/students]}: update(StudentModelRequest,String,HttpServletRequest)
-	{POST [/students]}: add(CreateStudentModelRequest,String,HttpServletRequest)
-	{DELETE [/students]}: delete(List,String,HttpServletRequest)
+	{GET [/students]}: get(String,UserDto)
+	{PUT [/students]}: update(StudentModelRequest,String,UserDto)
+	{POST [/students]}: add(CreateStudentModelRequest,String,UserDto)
+	{DELETE [/students]}: delete(List,String,UserDto)
 	{GET [/students/public]}: public_get(String)
-2025-09-26 20:23:36 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
+2025-10-04 17:16:10 [main] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
 	o.s.b.a.w.s.e.BasicErrorController:
 	{ [/error]}: error(HttpServletRequest)
 	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
-2025-09-26 20:23:36 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'beanNameHandlerMapping' {}
-2025-09-26 20:23:37 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
-2025-09-26 20:23:37 [restartedMain] WARN  [o.s.b.a.t.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
-2025-09-26 20:23:38 [restartedMain] DEBUG [reactor.util.Loggers] - Using Slf4j logging framework
-2025-09-26 20:23:49 [restartedMain] INFO  [com.common.QLSV.QlsvApplication] - Started QlsvApplication in 38.274 seconds (process running for 42.099)
-2025-09-26 20:24:37 [http-nio-8080-exec-4] DEBUG [c.l.services.imp.LoggingServiceImp] - [QLSV] com.common.QLSV.services.JwtValidationService - Extracted username from JWT: HuyS1
-2025-09-26 20:24:50 [http-nio-8080-exec-4] DEBUG [c.l.services.imp.LoggingServiceImp] - [QLSV] com.common.QLSV.services.JwtValidationService - Calling security module with URL : http://localhost:8082/auth/validate to validate token
-2025-09-26 20:24:50 [http-nio-8080-exec-4] DEBUG [c.l.services.imp.LoggingServiceImp] - [QLSV] com.common.QLSV.services.JwtValidationService - Successfully retrieved user from security module: HuyS1
-2025-09-26 20:24:50 [http-nio-8080-exec-4] DEBUG [c.l.services.imp.LoggingServiceImp] - [QLSV] com.common.QLSV.services.JwtValidationService - Final JWT validation result for user HuyS1 is true
-2025-09-26 20:25:05 [http-nio-8080-exec-8] DEBUG [c.l.services.imp.LoggingServiceImp] - [QLSV] com.common.QLSV.services.JwtValidationService - Extracted username from JWT: HuyS1
-2025-09-26 20:25:10 [http-nio-8080-exec-8] DEBUG [c.l.services.imp.LoggingServiceImp] - [QLSV] com.common.QLSV.services.JwtValidationService - Calling security module with URL : http://localhost:8082/auth/validate to validate token
-2025-09-26 20:25:18 [http-nio-8080-exec-8] DEBUG [c.l.services.imp.LoggingServiceImp] - [QLSV] com.common.QLSV.services.JwtValidationService - Successfully retrieved user from security module: HuyS1
-2025-09-26 20:25:18 [http-nio-8080-exec-8] DEBUG [c.l.services.imp.LoggingServiceImp] - [QLSV] com.common.QLSV.services.JwtValidationService - Final JWT validation result for user HuyS1 is true
-2025-09-26 20:25:40 [http-nio-8080-exec-8] INFO  [c.l.services.imp.LoggingServiceImp] - [qlsv] com.common.QLSV.controllers.StudentController - Update students API called successfully by user: HuyS1
-2025-09-26 20:25:47 [http-nio-8080-exec-8] INFO  [c.l.services.imp.LoggingServiceImp] - [qlsv] com.common.QLSV.services.imp.StudentServiceImp - Student ID: 43, Operation: UPDATE
-2025-09-26 20:25:48 [http-nio-8080-exec-8] INFO  [c.l.services.imp.LoggingServiceImp] - [qlsv] com.common.QLSV.services.imp.StudentServiceImp - Update Students Successfully
-2025-09-26 20:25:48 [http-nio-8080-exec-8] INFO  [c.l.services.imp.LoggingServiceImp] - [qlsv] com.common.QLSV.services.imp.StudentServiceImp - Del cache key = students:all , after update students
-2025-09-26 20:27:48 [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] INFO  [c.l.services.imp.LoggingServiceImp] - [kafka-shared] com.common.kafka.services.KafkaConsumerService - Received StudentEvent: StudentEvent(studentId=43, studentName=s a, action=UPDATED)
-2025-09-26 20:28:04 [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] INFO  [c.l.services.imp.LoggingServiceImp] - [kafka-shared] com.common.kafka.services.KafkaConsumerService - Processing Student UPDATE event for student: s a
-2025-09-26 20:28:42 [http-nio-8080-exec-4] INFO  [c.l.services.imp.LoggingServiceImp] - [qlsv] com.common.QLSV.controllers.StudentController - Update students API called successfully by user: HuyS1
-2025-09-26 20:28:46 [http-nio-8080-exec-4] INFO  [c.l.services.imp.LoggingServiceImp] - [qlsv] com.common.QLSV.services.imp.StudentServiceImp - Student ID: 43, Operation: UPDATE
-2025-09-26 20:28:46 [http-nio-8080-exec-4] INFO  [c.l.services.imp.LoggingServiceImp] - [qlsv] com.common.QLSV.services.imp.StudentServiceImp - Update Students Successfully
-2025-09-26 20:28:46 [http-nio-8080-exec-4] INFO  [c.l.services.imp.LoggingServiceImp] - [qlsv] com.common.QLSV.services.imp.StudentServiceImp - Del cache key = students:all , after update students
-2025-09-26 20:29:04 [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] INFO  [c.l.services.imp.LoggingServiceImp] - [kafka-shared] com.common.kafka.services.KafkaConsumerService - Received StudentEvent: StudentEvent(studentId=43, studentName=s a, action=UPDATED)
-2025-09-26 20:29:05 [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] INFO  [c.l.services.imp.LoggingServiceImp] - [kafka-shared] com.common.kafka.services.KafkaConsumerService - Processing Student UPDATE event for student: s a
-2025-09-26 20:29:11 [http-nio-8080-exec-8] INFO  [c.l.services.imp.LoggingServiceImp] - [kafka-shared] com.common.kafka.services.KafkaProducerService - Sent StudentEvent to topic student-events: StudentEvent(studentId=43, studentName=s a, action=UPDATED)
-2025-09-26 20:29:11 [http-nio-8080-exec-8] INFO  [c.l.services.imp.LoggingServiceImp] - [qlsv] com.common.QLSV.controllers.StudentController - Sent student updated event for student: s a
-2025-09-26 20:30:29 [http-nio-8080-exec-4] INFO  [c.l.services.imp.LoggingServiceImp] - [kafka-shared] com.common.kafka.services.KafkaProducerService - Sent StudentEvent to topic student-events: StudentEvent(studentId=43, studentName=s a, action=UPDATED)
-2025-09-26 20:30:38 [http-nio-8080-exec-4] INFO  [c.l.services.imp.LoggingServiceImp] - [qlsv] com.common.QLSV.controllers.StudentController - Sent student updated event for student: s a
-2025-09-26 20:36:14 [http-nio-8080-exec-1] DEBUG [c.l.services.imp.LoggingServiceImp] - [QLSV] com.common.QLSV.services.JwtValidationService - Extracted username from JWT: HuyS1
-2025-09-26 20:36:16 [http-nio-8080-exec-1] DEBUG [c.l.services.imp.LoggingServiceImp] - [QLSV] com.common.QLSV.services.JwtValidationService - Calling security module with URL : http://localhost:8082/auth/validate to validate token
-2025-09-26 20:36:16 [http-nio-8080-exec-1] DEBUG [c.l.services.imp.LoggingServiceImp] - [QLSV] com.common.QLSV.services.JwtValidationService - Successfully retrieved user from security module: HuyS1
-2025-09-26 20:36:16 [http-nio-8080-exec-1] DEBUG [c.l.services.imp.LoggingServiceImp] - [QLSV] com.common.QLSV.services.JwtValidationService - Final JWT validation result for user HuyS1 is true
-2025-09-26 20:36:20 [http-nio-8080-exec-1] INFO  [c.l.services.imp.LoggingServiceImp] - [qlsv] com.common.QLSV.controllers.StudentController - Update students API called successfully by user: HuyS1
-2025-09-26 20:36:21 [http-nio-8080-exec-1] INFO  [c.l.services.imp.LoggingServiceImp] - [qlsv] com.common.QLSV.services.imp.StudentServiceImp - Student ID: 43, Operation: UPDATE
-2025-09-26 20:36:21 [http-nio-8080-exec-1] INFO  [c.l.services.imp.LoggingServiceImp] - [qlsv] com.common.QLSV.services.imp.StudentServiceImp - Update Students Successfully
-2025-09-26 20:36:21 [http-nio-8080-exec-1] INFO  [c.l.services.imp.LoggingServiceImp] - [qlsv] com.common.QLSV.services.imp.StudentServiceImp - Del cache key = students:all , after update students
-2025-09-26 20:36:26 [http-nio-8080-exec-1] INFO  [c.l.services.imp.LoggingServiceImp] - [kafka-shared] com.common.kafka.services.KafkaProducerService - Sent StudentEvent to topic student-events: StudentEvent(studentId=43, studentName=s a, action=UPDATED)
-2025-09-26 20:36:26 [http-nio-8080-exec-1] INFO  [c.l.services.imp.LoggingServiceImp] - [qlsv] com.common.QLSV.controllers.StudentController - Sent student updated event for student: s a
-2025-09-26 20:36:46 [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] INFO  [c.l.services.imp.LoggingServiceImp] - [kafka-shared] com.common.kafka.services.KafkaConsumerService - Received StudentEvent: StudentEvent(studentId=43, studentName=s a, action=UPDATED)
-2025-09-26 20:36:46 [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] INFO  [c.l.services.imp.LoggingServiceImp] - [kafka-shared] com.common.kafka.services.KafkaConsumerService - Processing Student UPDATE event for student: s a
-2025-09-26 20:39:24 [http-nio-8080-exec-10] DEBUG [c.l.services.imp.LoggingServiceImp] - [QLSV] com.common.QLSV.services.JwtValidationService - Extracted username from JWT: HuyS1
-2025-09-26 20:39:24 [http-nio-8080-exec-10] DEBUG [c.l.services.imp.LoggingServiceImp] - [QLSV] com.common.QLSV.services.JwtValidationService - Calling security module with URL : http://localhost:8082/auth/validate to validate token
-2025-09-26 20:39:24 [http-nio-8080-exec-10] DEBUG [c.l.services.imp.LoggingServiceImp] - [QLSV] com.common.QLSV.services.JwtValidationService - Successfully retrieved user from security module: HuyS1
-2025-09-26 20:39:24 [http-nio-8080-exec-10] DEBUG [c.l.services.imp.LoggingServiceImp] - [QLSV] com.common.QLSV.services.JwtValidationService - Final JWT validation result for user HuyS1 is true
-2025-09-26 20:39:25 [http-nio-8080-exec-10] INFO  [c.l.services.imp.LoggingServiceImp] - [qlsv] com.common.QLSV.controllers.StudentController - Update students API called successfully by user: HuyS1
-2025-09-26 20:39:25 [http-nio-8080-exec-10] INFO  [c.l.services.imp.LoggingServiceImp] - [qlsv] com.common.QLSV.services.imp.StudentServiceImp - Student ID: 43, Operation: UPDATE
-2025-09-26 20:39:25 [http-nio-8080-exec-10] INFO  [c.l.services.imp.LoggingServiceImp] - [qlsv] com.common.QLSV.services.imp.StudentServiceImp - Update Students Successfully
-2025-09-26 20:39:25 [http-nio-8080-exec-10] INFO  [c.l.services.imp.LoggingServiceImp] - [qlsv] com.common.QLSV.services.imp.StudentServiceImp - Del cache key = students:all , after update students
-2025-09-26 20:39:28 [http-nio-8080-exec-10] INFO  [c.l.services.imp.LoggingServiceImp] - [kafka-shared] com.common.kafka.services.KafkaProducerService - Sent StudentEvent to topic student-events: StudentEvent(studentId=43, studentName=s a, action=UPDATED)
-2025-09-26 20:39:28 [http-nio-8080-exec-10] INFO  [c.l.services.imp.LoggingServiceImp] - [qlsv] com.common.QLSV.controllers.StudentController - Sent student updated event for student: s a
-2025-09-26 20:39:42 [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] INFO  [c.l.services.imp.LoggingServiceImp] - [kafka-shared] com.common.kafka.services.KafkaConsumerService - Received StudentEvent: StudentEvent(studentId=43, studentName=s a, action=UPDATED)
-2025-09-26 20:39:42 [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] INFO  [c.l.services.imp.LoggingServiceImp] - [kafka-shared] com.common.kafka.services.KafkaConsumerService - Processing Student UPDATE event for student: s a
-2025-09-26 20:41:20 [org.springframework.kafka.KafkaListenerEndpointContainer#0-1-C-1] WARN  [o.apache.kafka.clients.NetworkClient] - [Consumer clientId=consumer-qlsv-student-group-2, groupId=qlsv-student-group] Connection to node 1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
-2025-09-26 20:41:20 [org.springframework.kafka.KafkaListenerEndpointContainer#0-2-C-1] WARN  [o.apache.kafka.clients.NetworkClient] - [Consumer clientId=consumer-qlsv-student-group-3, groupId=qlsv-student-group] Connection to node 1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
-2025-09-26 20:41:21 [kafka-producer-network-thread | QLSV-producer-1] WARN  [o.apache.kafka.clients.NetworkClient] - [Producer clientId=QLSV-producer-1] Connection to node 1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
-2025-09-26 20:41:21 [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] WARN  [o.apache.kafka.clients.NetworkClient] - [Consumer clientId=consumer-qlsv-student-group-1, groupId=qlsv-student-group] Connection to node 1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
-2025-09-26 20:41:21 [org.springframework.kafka.KafkaListenerEndpointContainer#0-1-C-1] WARN  [o.apache.kafka.clients.NetworkClient] - [Consumer clientId=consumer-qlsv-student-group-2, groupId=qlsv-student-group] Connection to node 1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
-2025-09-26 20:41:21 [org.springframework.kafka.KafkaListenerEndpointContainer#0-2-C-1] WARN  [o.apache.kafka.clients.NetworkClient] - [Consumer clientId=consumer-qlsv-student-group-3, groupId=qlsv-student-group] Connection to node 1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
-2025-09-26 20:41:22 [kafka-producer-network-thread | QLSV-producer-1] WARN  [o.apache.kafka.clients.NetworkClient] - [Producer clientId=QLSV-producer-1] Connection to node 1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
-2025-09-26 20:41:22 [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] WARN  [o.apache.kafka.clients.NetworkClient] - [Consumer clientId=consumer-qlsv-student-group-1, groupId=qlsv-student-group] Connection to node 1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
-2025-09-26 20:41:22 [org.springframework.kafka.KafkaListenerEndpointContainer#0-1-C-1] WARN  [o.apache.kafka.clients.NetworkClient] - [Consumer clientId=consumer-qlsv-student-group-2, groupId=qlsv-student-group] Connection to node 1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
-2025-09-26 20:41:22 [org.springframework.kafka.KafkaListenerEndpointContainer#0-2-C-1] WARN  [o.apache.kafka.clients.NetworkClient] - [Consumer clientId=consumer-qlsv-student-group-3, groupId=qlsv-student-group] Connection to node 1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
-2025-09-26 20:41:23 [kafka-producer-network-thread | QLSV-producer-1] WARN  [o.apache.kafka.clients.NetworkClient] - [Producer clientId=QLSV-producer-1] Connection to node 1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
-2025-09-26 20:41:23 [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] WARN  [o.apache.kafka.clients.NetworkClient] - [Consumer clientId=consumer-qlsv-student-group-1, groupId=qlsv-student-group] Connection to node 1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
-2025-09-26 20:41:23 [org.springframework.kafka.KafkaListenerEndpointContainer#0-1-C-1] WARN  [o.apache.kafka.clients.NetworkClient] - [Consumer clientId=consumer-qlsv-student-group-2, groupId=qlsv-student-group] Connection to node 1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
-2025-09-26 20:41:23 [org.springframework.kafka.KafkaListenerEndpointContainer#0-2-C-1] WARN  [o.apache.kafka.clients.NetworkClient] - [Consumer clientId=consumer-qlsv-student-group-3, groupId=qlsv-student-group] Connection to node 1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
-2025-09-26 20:41:24 [kafka-producer-network-thread | QLSV-producer-1] WARN  [o.apache.kafka.clients.NetworkClient] - [Producer clientId=QLSV-producer-1] Connection to node 1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
-2025-09-26 20:41:24 [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] WARN  [o.apache.kafka.clients.NetworkClient] - [Consumer clientId=consumer-qlsv-student-group-1, groupId=qlsv-student-group] Connection to node 1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
-2025-09-26 20:41:24 [org.springframework.kafka.KafkaListenerEndpointContainer#0-1-C-1] WARN  [o.apache.kafka.clients.NetworkClient] - [Consumer clientId=consumer-qlsv-student-group-2, groupId=qlsv-student-group] Connection to node 1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
-2025-09-26 20:41:24 [org.springframework.kafka.KafkaListenerEndpointContainer#0-2-C-1] WARN  [o.apache.kafka.clients.NetworkClient] - [Consumer clientId=consumer-qlsv-student-group-3, groupId=qlsv-student-group] Connection to node 1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
-2025-09-26 20:41:25 [kafka-producer-network-thread | QLSV-producer-1] WARN  [o.apache.kafka.clients.NetworkClient] - [Producer clientId=QLSV-producer-1] Connection to node 1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
-2025-09-26 20:41:25 [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] WARN  [o.apache.kafka.clients.NetworkClient] - [Consumer clientId=consumer-qlsv-student-group-1, groupId=qlsv-student-group] Connection to node 1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
-2025-09-26 20:41:25 [org.springframework.kafka.KafkaListenerEndpointContainer#0-1-C-1] WARN  [o.apache.kafka.clients.NetworkClient] - [Consumer clientId=consumer-qlsv-student-group-2, groupId=qlsv-student-group] Connection to node 1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
-2025-09-26 20:41:25 [org.springframework.kafka.KafkaListenerEndpointContainer#0-2-C-1] WARN  [o.apache.kafka.clients.NetworkClient] - [Consumer clientId=consumer-qlsv-student-group-3, groupId=qlsv-student-group] Connection to node 1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
-2025-09-26 20:41:26 [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] WARN  [o.apache.kafka.clients.NetworkClient] - [Consumer clientId=consumer-qlsv-student-group-1, groupId=qlsv-student-group] Connection to node 1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
-2025-09-26 20:41:26 [kafka-producer-network-thread | QLSV-producer-1] WARN  [o.apache.kafka.clients.NetworkClient] - [Producer clientId=QLSV-producer-1] Connection to node 1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
-2025-09-26 20:41:26 [org.springframework.kafka.KafkaListenerEndpointContainer#0-1-C-1] WARN  [o.apache.kafka.clients.NetworkClient] - [Consumer clientId=consumer-qlsv-student-group-2, groupId=qlsv-student-group] Connection to node 1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
-2025-09-26 20:41:26 [org.springframework.kafka.KafkaListenerEndpointContainer#0-2-C-1] WARN  [o.apache.kafka.clients.NetworkClient] - [Consumer clientId=consumer-qlsv-student-group-3, groupId=qlsv-student-group] Connection to node 1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
-2025-09-26 20:41:27 [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] WARN  [o.apache.kafka.clients.NetworkClient] - [Consumer clientId=consumer-qlsv-student-group-1, groupId=qlsv-student-group] Connection to node 1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
-2025-09-26 20:41:27 [kafka-producer-network-thread | QLSV-producer-1] WARN  [o.apache.kafka.clients.NetworkClient] - [Producer clientId=QLSV-producer-1] Connection to node 1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
-2025-09-26 20:41:27 [org.springframework.kafka.KafkaListenerEndpointContainer#0-1-C-1] WARN  [o.apache.kafka.clients.NetworkClient] - [Consumer clientId=consumer-qlsv-student-group-2, groupId=qlsv-student-group] Connection to node 1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
-2025-09-26 20:41:27 [org.springframework.kafka.KafkaListenerEndpointContainer#0-2-C-1] WARN  [o.apache.kafka.clients.NetworkClient] - [Consumer clientId=consumer-qlsv-student-group-3, groupId=qlsv-student-group] Connection to node 1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
-2025-09-26 20:41:28 [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] WARN  [o.apache.kafka.clients.NetworkClient] - [Consumer clientId=consumer-qlsv-student-group-1, groupId=qlsv-student-group] Connection to node 1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
-2025-09-26 20:41:28 [kafka-producer-network-thread | QLSV-producer-1] WARN  [o.apache.kafka.clients.NetworkClient] - [Producer clientId=QLSV-producer-1] Connection to node 1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
-2025-09-26 20:41:28 [org.springframework.kafka.KafkaListenerEndpointContainer#0-1-C-1] WARN  [o.apache.kafka.clients.NetworkClient] - [Consumer clientId=consumer-qlsv-student-group-2, groupId=qlsv-student-group] Connection to node 1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
-2025-09-26 20:41:28 [org.springframework.kafka.KafkaListenerEndpointContainer#0-2-C-1] WARN  [o.apache.kafka.clients.NetworkClient] - [Consumer clientId=consumer-qlsv-student-group-3, groupId=qlsv-student-group] Connection to node 1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
-2025-09-26 20:41:29 [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] WARN  [o.apache.kafka.clients.NetworkClient] - [Consumer clientId=consumer-qlsv-student-group-1, groupId=qlsv-student-group] Connection to node 1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
-2025-09-26 20:41:29 [kafka-producer-network-thread | QLSV-producer-1] WARN  [o.apache.kafka.clients.NetworkClient] - [Producer clientId=QLSV-producer-1] Connection to node 1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2025-10-04 17:16:10 [main] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'beanNameHandlerMapping' {}
+2025-10-04 17:16:10 [main] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
+2025-10-04 17:16:10 [main] WARN  [o.s.b.a.t.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2025-10-04 17:16:11 [main] DEBUG [i.m.c.u.i.l.InternalLoggerFactory] - Using SLF4J as the default logging framework
+2025-10-04 17:16:11 [main] DEBUG [reactor.util.Loggers] - Using Slf4j logging framework
+2025-10-04 17:16:11 [main] INFO  [c.common.QLSV.QlsvApplicationTests] - Started QlsvApplicationTests in 9.367 seconds (process running for 10.683)
+2025-10-04 17:51:22 [background-preinit] DEBUG [org.jboss.logging] - Logging Provider: org.jboss.logging.Slf4jLoggerProvider found via system property
+2025-10-04 17:51:22 [restartedMain] INFO  [com.common.QLSV.QlsvApplication] - Starting QlsvApplication using Java 20.0.2 with PID 11356 (D:\project IntelliJ Ultimate\modules-parent\qlsv\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlsv)
+2025-10-04 17:51:22 [restartedMain] DEBUG [com.common.QLSV.QlsvApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
+2025-10-04 17:51:22 [restartedMain] INFO  [com.common.QLSV.QlsvApplication] - No active profile set, falling back to 1 default profile: "default"
+2025-10-04 17:51:28 [restartedMain] DEBUG [i.m.c.u.i.l.InternalLoggerFactory] - Using SLF4J as the default logging framework
+2025-10-04 17:51:29 [restartedMain] WARN  [com.zaxxer.hikari.HikariConfig] - HikariPool-1 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
+2025-10-04 17:51:30 [restartedMain] WARN  [org.hibernate.orm.deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-10-04 17:51:30 [restartedMain] WARN  [org.hibernate.orm.deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-10-04 17:51:33 [restartedMain] WARN  [o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-10-04 17:51:34 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
+	c.c.Q.c.StudentController:
+	{GET [/students]}: get(String,UserDto)
+	{PUT [/students]}: update(StudentModelRequest,String,UserDto)
+	{POST [/students]}: add(CreateStudentModelRequest,String,UserDto)
+	{DELETE [/students]}: delete(List,String,UserDto)
+	{GET [/students/public]}: public_get(String)
+2025-10-04 17:51:34 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
+	o.s.b.a.w.s.e.BasicErrorController:
+	{ [/error]}: error(HttpServletRequest)
+	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
+2025-10-04 17:51:34 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'beanNameHandlerMapping' {}
+2025-10-04 17:51:34 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
+2025-10-04 17:51:34 [restartedMain] WARN  [o.s.b.a.t.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2025-10-04 17:51:34 [restartedMain] DEBUG [reactor.util.Loggers] - Using Slf4j logging framework
+2025-10-04 17:51:36 [restartedMain] INFO  [com.common.QLSV.QlsvApplication] - Started QlsvApplication in 15.463 seconds (process running for 16.448)
+2025-10-04 17:56:07 [background-preinit] DEBUG [org.jboss.logging] - Logging Provider: org.jboss.logging.Slf4jLoggerProvider found via system property
+2025-10-04 17:56:07 [restartedMain] INFO  [com.common.QLSV.QlsvApplication] - Starting QlsvApplication using Java 20.0.2 with PID 7240 (D:\project IntelliJ Ultimate\modules-parent\qlsv\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlsv)
+2025-10-04 17:56:07 [restartedMain] DEBUG [com.common.QLSV.QlsvApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
+2025-10-04 17:56:07 [restartedMain] INFO  [com.common.QLSV.QlsvApplication] - No active profile set, falling back to 1 default profile: "default"
+2025-10-04 17:56:13 [restartedMain] DEBUG [i.m.c.u.i.l.InternalLoggerFactory] - Using SLF4J as the default logging framework
+2025-10-04 17:56:15 [restartedMain] WARN  [com.zaxxer.hikari.HikariConfig] - HikariPool-1 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
+2025-10-04 17:56:15 [restartedMain] WARN  [org.hibernate.orm.deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-10-04 17:56:15 [restartedMain] WARN  [org.hibernate.orm.deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-10-04 17:56:19 [restartedMain] WARN  [o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-10-04 17:56:19 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
+	c.c.Q.c.StudentController:
+	{GET [/students]}: get(String,UserDto)
+	{PUT [/students]}: update(StudentModelRequest,String,UserDto)
+	{POST [/students]}: add(CreateStudentModelRequest,String,UserDto)
+	{DELETE [/students]}: delete(List,String,UserDto)
+	{GET [/students/public]}: public_get(String)
+2025-10-04 17:56:19 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
+	o.s.b.a.w.s.e.BasicErrorController:
+	{ [/error]}: error(HttpServletRequest)
+	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
+2025-10-04 17:56:19 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'beanNameHandlerMapping' {}
+2025-10-04 17:56:19 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
+2025-10-04 17:56:20 [restartedMain] WARN  [o.s.b.a.t.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2025-10-04 17:56:20 [restartedMain] DEBUG [reactor.util.Loggers] - Using Slf4j logging framework
+2025-10-04 17:56:21 [restartedMain] INFO  [com.common.QLSV.QlsvApplication] - Started QlsvApplication in 15.275 seconds (process running for 16.159)
+2025-10-04 17:57:58 [restartedMain] INFO  [com.common.QLSV.QlsvApplication] - Starting QlsvApplication using Java 20.0.2 with PID 7240 (D:\project IntelliJ Ultimate\modules-parent\qlsv\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlsv)
+2025-10-04 17:57:58 [restartedMain] DEBUG [com.common.QLSV.QlsvApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
+2025-10-04 17:57:58 [restartedMain] INFO  [com.common.QLSV.QlsvApplication] - No active profile set, falling back to 1 default profile: "default"
+2025-10-04 17:58:02 [restartedMain] WARN  [com.zaxxer.hikari.HikariConfig] - HikariPool-2 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
+2025-10-04 17:58:02 [restartedMain] WARN  [org.hibernate.orm.deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-10-04 17:58:02 [restartedMain] WARN  [org.hibernate.orm.deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-10-04 17:58:02 [restartedMain] WARN  [o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext] - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: com/model_shared/enums/Gender
+2025-10-04 17:58:02 [restartedMain] ERROR [o.s.boot.SpringApplication] - Application run failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: com/model_shared/enums/Gender
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1826) ~[spring-beans-6.2.7.jar:6.2.7]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:607) ~[spring-beans-6.2.7.jar:6.2.7]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:529) ~[spring-beans-6.2.7.jar:6.2.7]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:339) ~[spring-beans-6.2.7.jar:6.2.7]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:373) ~[spring-beans-6.2.7.jar:6.2.7]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:337) ~[spring-beans-6.2.7.jar:6.2.7]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:207) ~[spring-beans-6.2.7.jar:6.2.7]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:970) ~[spring-context-6.2.7.jar:6.2.7]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:627) ~[spring-context-6.2.7.jar:6.2.7]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146) ~[spring-boot-3.5.0.jar:3.5.0]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:753) ~[spring-boot-3.5.0.jar:3.5.0]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:439) ~[spring-boot-3.5.0.jar:3.5.0]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:318) ~[spring-boot-3.5.0.jar:3.5.0]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1362) ~[spring-boot-3.5.0.jar:3.5.0]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1351) ~[spring-boot-3.5.0.jar:3.5.0]
+	at com.common.QLSV.QlsvApplication.main(QlsvApplication.java:19) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578) ~[na:na]
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50) ~[spring-boot-devtools-3.5.0.jar:3.5.0]
+Caused by: java.lang.NoClassDefFoundError: com/model_shared/enums/Gender
+	at java.base/java.lang.Class.getDeclaredMethods0(Native Method) ~[na:na]
+	at java.base/java.lang.Class.privateGetDeclaredMethods(Class.java:3502) ~[na:na]
+	at java.base/java.lang.Class.getDeclaredMethods(Class.java:2601) ~[na:na]
+	at org.hibernate.annotations.common.reflection.java.JavaXClass.getDeclaredMethodProperties(JavaXClass.java:134) ~[hibernate-commons-annotations-7.0.3.Final.jar:7.0.3.Final]
+	at org.hibernate.annotations.common.reflection.java.JavaXClass.getDeclaredProperties(JavaXClass.java:172) ~[hibernate-commons-annotations-7.0.3.Final.jar:7.0.3.Final]
+	at org.hibernate.annotations.common.reflection.java.JavaXClass.getDeclaredProperties(JavaXClass.java:164) ~[hibernate-commons-annotations-7.0.3.Final.jar:7.0.3.Final]
+	at org.hibernate.boot.model.internal.InheritanceState.determineDefaultAccessType(InheritanceState.java:269) ~[hibernate-core-6.6.15.Final.jar:6.6.15.Final]
+	at org.hibernate.boot.model.internal.InheritanceState.getElementsToProcess(InheritanceState.java:226) ~[hibernate-core-6.6.15.Final.jar:6.6.15.Final]
+	at org.hibernate.boot.model.internal.InheritanceState.postProcess(InheritanceState.java:162) ~[hibernate-core-6.6.15.Final.jar:6.6.15.Final]
+	at org.hibernate.boot.model.internal.EntityBinder.handleIdentifier(EntityBinder.java:410) ~[hibernate-core-6.6.15.Final.jar:6.6.15.Final]
+	at org.hibernate.boot.model.internal.EntityBinder.bindEntityClass(EntityBinder.java:251) ~[hibernate-core-6.6.15.Final.jar:6.6.15.Final]
+	at org.hibernate.boot.model.internal.AnnotationBinder.bindClass(AnnotationBinder.java:404) ~[hibernate-core-6.6.15.Final.jar:6.6.15.Final]
+	at org.hibernate.boot.model.source.internal.annotations.AnnotationMetadataSourceProcessorImpl.processEntityHierarchies(AnnotationMetadataSourceProcessorImpl.java:266) ~[hibernate-core-6.6.15.Final.jar:6.6.15.Final]
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess$1.processEntityHierarchies(MetadataBuildingProcess.java:281) ~[hibernate-core-6.6.15.Final.jar:6.6.15.Final]
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.complete(MetadataBuildingProcess.java:324) ~[hibernate-core-6.6.15.Final.jar:6.6.15.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.metadata(EntityManagerFactoryBuilderImpl.java:1442) ~[hibernate-core-6.6.15.Final.jar:6.6.15.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1513) ~[hibernate-core-6.6.15.Final.jar:6.6.15.Final]
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:66) ~[spring-orm-6.2.7.jar:6.2.7]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:390) ~[spring-orm-6.2.7.jar:6.2.7]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:419) ~[spring-orm-6.2.7.jar:6.2.7]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:400) ~[spring-orm-6.2.7.jar:6.2.7]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:366) ~[spring-orm-6.2.7.jar:6.2.7]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1873) ~[spring-beans-6.2.7.jar:6.2.7]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1822) ~[spring-beans-6.2.7.jar:6.2.7]
+	... 18 common frames omitted
+Caused by: java.lang.ClassNotFoundException: com.model_shared.enums.Gender
+	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:641) ~[na:na]
+	at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(ClassLoaders.java:188) ~[na:na]
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:521) ~[na:na]
+	at java.base/java.lang.Class.forName0(Native Method) ~[na:na]
+	at java.base/java.lang.Class.forName(Class.java:496) ~[na:na]
+	at java.base/java.lang.Class.forName(Class.java:475) ~[na:na]
+	at org.springframework.boot.devtools.restart.classloader.RestartClassLoader.loadClass(RestartClassLoader.java:121) ~[spring-boot-devtools-3.5.0.jar:3.5.0]
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:521) ~[na:na]
+	... 42 common frames omitted
+2025-10-04 17:58:04 [restartedMain] INFO  [com.common.QLSV.QlsvApplication] - Starting QlsvApplication using Java 20.0.2 with PID 7240 (D:\project IntelliJ Ultimate\modules-parent\qlsv\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlsv)
+2025-10-04 17:58:04 [restartedMain] DEBUG [com.common.QLSV.QlsvApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
+2025-10-04 17:58:04 [restartedMain] INFO  [com.common.QLSV.QlsvApplication] - No active profile set, falling back to 1 default profile: "default"
+2025-10-04 17:58:05 [restartedMain] WARN  [com.zaxxer.hikari.HikariConfig] - HikariPool-3 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
+2025-10-04 17:58:05 [restartedMain] WARN  [org.hibernate.orm.deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-10-04 17:58:05 [restartedMain] WARN  [org.hibernate.orm.deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-10-04 17:58:05 [restartedMain] WARN  [o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext] - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: com/model_shared/enums/Gender
+2025-10-04 17:58:05 [restartedMain] ERROR [o.s.boot.SpringApplication] - Application run failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: com/model_shared/enums/Gender
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1826) ~[spring-beans-6.2.7.jar:6.2.7]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:607) ~[spring-beans-6.2.7.jar:6.2.7]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:529) ~[spring-beans-6.2.7.jar:6.2.7]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:339) ~[spring-beans-6.2.7.jar:6.2.7]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:373) ~[spring-beans-6.2.7.jar:6.2.7]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:337) ~[spring-beans-6.2.7.jar:6.2.7]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:207) ~[spring-beans-6.2.7.jar:6.2.7]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:970) ~[spring-context-6.2.7.jar:6.2.7]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:627) ~[spring-context-6.2.7.jar:6.2.7]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146) ~[spring-boot-3.5.0.jar:3.5.0]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:753) ~[spring-boot-3.5.0.jar:3.5.0]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:439) ~[spring-boot-3.5.0.jar:3.5.0]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:318) ~[spring-boot-3.5.0.jar:3.5.0]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1362) ~[spring-boot-3.5.0.jar:3.5.0]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1351) ~[spring-boot-3.5.0.jar:3.5.0]
+	at com.common.QLSV.QlsvApplication.main(QlsvApplication.java:19) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578) ~[na:na]
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50) ~[spring-boot-devtools-3.5.0.jar:3.5.0]
+Caused by: java.lang.NoClassDefFoundError: com/model_shared/enums/Gender
+	at java.base/java.lang.Class.getDeclaredMethods0(Native Method) ~[na:na]
+	at java.base/java.lang.Class.privateGetDeclaredMethods(Class.java:3502) ~[na:na]
+	at java.base/java.lang.Class.getDeclaredMethods(Class.java:2601) ~[na:na]
+	at org.hibernate.annotations.common.reflection.java.JavaXClass.getDeclaredMethodProperties(JavaXClass.java:134) ~[hibernate-commons-annotations-7.0.3.Final.jar:7.0.3.Final]
+	at org.hibernate.annotations.common.reflection.java.JavaXClass.getDeclaredProperties(JavaXClass.java:172) ~[hibernate-commons-annotations-7.0.3.Final.jar:7.0.3.Final]
+	at org.hibernate.annotations.common.reflection.java.JavaXClass.getDeclaredProperties(JavaXClass.java:164) ~[hibernate-commons-annotations-7.0.3.Final.jar:7.0.3.Final]
+	at org.hibernate.boot.model.internal.InheritanceState.determineDefaultAccessType(InheritanceState.java:269) ~[hibernate-core-6.6.15.Final.jar:6.6.15.Final]
+	at org.hibernate.boot.model.internal.InheritanceState.getElementsToProcess(InheritanceState.java:226) ~[hibernate-core-6.6.15.Final.jar:6.6.15.Final]
+	at org.hibernate.boot.model.internal.InheritanceState.postProcess(InheritanceState.java:162) ~[hibernate-core-6.6.15.Final.jar:6.6.15.Final]
+	at org.hibernate.boot.model.internal.EntityBinder.handleIdentifier(EntityBinder.java:410) ~[hibernate-core-6.6.15.Final.jar:6.6.15.Final]
+	at org.hibernate.boot.model.internal.EntityBinder.bindEntityClass(EntityBinder.java:251) ~[hibernate-core-6.6.15.Final.jar:6.6.15.Final]
+	at org.hibernate.boot.model.internal.AnnotationBinder.bindClass(AnnotationBinder.java:404) ~[hibernate-core-6.6.15.Final.jar:6.6.15.Final]
+	at org.hibernate.boot.model.source.internal.annotations.AnnotationMetadataSourceProcessorImpl.processEntityHierarchies(AnnotationMetadataSourceProcessorImpl.java:266) ~[hibernate-core-6.6.15.Final.jar:6.6.15.Final]
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess$1.processEntityHierarchies(MetadataBuildingProcess.java:281) ~[hibernate-core-6.6.15.Final.jar:6.6.15.Final]
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.complete(MetadataBuildingProcess.java:324) ~[hibernate-core-6.6.15.Final.jar:6.6.15.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.metadata(EntityManagerFactoryBuilderImpl.java:1442) ~[hibernate-core-6.6.15.Final.jar:6.6.15.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1513) ~[hibernate-core-6.6.15.Final.jar:6.6.15.Final]
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:66) ~[spring-orm-6.2.7.jar:6.2.7]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:390) ~[spring-orm-6.2.7.jar:6.2.7]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:419) ~[spring-orm-6.2.7.jar:6.2.7]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:400) ~[spring-orm-6.2.7.jar:6.2.7]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:366) ~[spring-orm-6.2.7.jar:6.2.7]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1873) ~[spring-beans-6.2.7.jar:6.2.7]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1822) ~[spring-beans-6.2.7.jar:6.2.7]
+	... 18 common frames omitted
+Caused by: java.lang.ClassNotFoundException: com.model_shared.enums.Gender
+	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:641) ~[na:na]
+	at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(ClassLoaders.java:188) ~[na:na]
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:521) ~[na:na]
+	at java.base/java.lang.Class.forName0(Native Method) ~[na:na]
+	at java.base/java.lang.Class.forName(Class.java:496) ~[na:na]
+	at java.base/java.lang.Class.forName(Class.java:475) ~[na:na]
+	at org.springframework.boot.devtools.restart.classloader.RestartClassLoader.loadClass(RestartClassLoader.java:121) ~[spring-boot-devtools-3.5.0.jar:3.5.0]
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:521) ~[na:na]
+	... 42 common frames omitted
+2025-10-04 18:07:57 [background-preinit] DEBUG [org.jboss.logging] - Logging Provider: org.jboss.logging.Slf4jLoggerProvider found via system property
+2025-10-04 18:07:57 [main] INFO  [c.common.QLSV.QlsvApplicationTests] - Starting QlsvApplicationTests using Java 20.0.2 with PID 7064 (started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlsv)
+2025-10-04 18:07:57 [main] DEBUG [c.common.QLSV.QlsvApplicationTests] - Running with Spring Boot v3.5.0, Spring v6.2.7
+2025-10-04 18:07:57 [main] INFO  [c.common.QLSV.QlsvApplicationTests] - No active profile set, falling back to 1 default profile: "default"
+2025-10-04 18:08:00 [main] WARN  [com.zaxxer.hikari.HikariConfig] - HikariPool-1 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
+2025-10-04 18:08:01 [main] WARN  [org.hibernate.orm.deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-10-04 18:08:01 [main] WARN  [org.hibernate.orm.deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-10-04 18:08:03 [main] WARN  [o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-10-04 18:08:03 [main] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
+	c.c.Q.c.StudentController:
+	{GET [/students]}: get(String,UserDto)
+	{PUT [/students]}: update(StudentModelRequest,String,UserDto)
+	{POST [/students]}: add(CreateStudentModelRequest,String,UserDto)
+	{DELETE [/students]}: delete(List,String,UserDto)
+	{GET [/students/public]}: public_get(String)
+2025-10-04 18:08:03 [main] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
+	o.s.b.a.w.s.e.BasicErrorController:
+	{ [/error]}: error(HttpServletRequest)
+	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
+2025-10-04 18:08:03 [main] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'beanNameHandlerMapping' {}
+2025-10-04 18:08:03 [main] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
+2025-10-04 18:08:04 [main] WARN  [o.s.b.a.t.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2025-10-04 18:08:04 [main] DEBUG [i.m.c.u.i.l.InternalLoggerFactory] - Using SLF4J as the default logging framework
+2025-10-04 18:08:04 [main] DEBUG [reactor.util.Loggers] - Using Slf4j logging framework
+2025-10-04 18:08:04 [main] INFO  [c.common.QLSV.QlsvApplicationTests] - Started QlsvApplicationTests in 8.101 seconds (process running for 9.403)

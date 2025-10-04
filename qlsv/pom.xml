@@ -104,7 +104,7 @@
 		</dependency>
 		<dependency>
 			<groupId>com.common</groupId>
-			<artifactId>model-shared</artifactId>
+			<artifactId>model_shared</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>com.common</groupId>
@@ -116,11 +116,15 @@
     	</dependency>
 		<dependency>
 			<groupId>com.common</groupId>
-			<artifactId>kafka-shared</artifactId>
+			<artifactId>kafka_shared</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>com.common</groupId>
 			<artifactId>security</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.common</groupId>
+			<artifactId>security_shared</artifactId>
 		</dependency>
 		<!-- JWT để validate tokens từ Security module -->
 		<dependency>
@@ -134,6 +138,11 @@
 		<dependency>
 			<groupId>io.jsonwebtoken</groupId>
 			<artifactId>jjwt-jackson</artifactId>
+		</dependency>
+		<!-- AspectJ for AOP -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-aop</artifactId>
 		</dependency>
 </dependencies>
 

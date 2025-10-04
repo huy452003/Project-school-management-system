@@ -6,7 +6,7 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
 @ComponentScan(basePackages =
-		{"com.security", "com.handle_exceptions", "com.logging", "com.common.config"}
+		{"com.security", "com.handle_exceptions", "com.logging", "com.model_shared.config"}
 )
 public class SecurityApplication {
 

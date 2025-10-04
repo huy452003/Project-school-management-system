@@ -1,8 +1,8 @@
 package com.common.QLGV.services;
 
 import com.common.QLGV.entities.TeacherEntity;
-import com.common.models.teacher.CreateTeacherModel;
-import com.common.models.teacher.TeacherModel;
+import com.model_shared.models.teacher.CreateTeacherModel;
+import com.model_shared.models.teacher.TeacherModel;
 
 
 import java.util.List;

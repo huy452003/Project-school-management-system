@@ -1,7 +1,7 @@
 package com.security.controllers;
 
-import com.common.models.Response;
-import com.common.models.UserDto;
+import com.model_shared.models.Response;
+import com.model_shared.models.UserDto;
 import com.handle_exceptions.NotFoundExceptionHandle;
 import com.logging.models.LogContext;
 import com.logging.services.LoggingService;

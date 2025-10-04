@@ -1,215 +1,352 @@
-2025-09-26 20:23:31 [background-preinit] DEBUG [org.jboss.logging] - Logging Provider: org.jboss.logging.Slf4jLoggerProvider found via system property
-2025-09-26 20:23:32 [restartedMain] INFO  [com.common.QLGV.QlgvApplication] - Starting QlgvApplication using Java 20.0.2 with PID 16160 (D:\project IntelliJ Ultimate\modules-parent\qlgv\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlgv)
-2025-09-26 20:23:32 [restartedMain] DEBUG [com.common.QLGV.QlgvApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
-2025-09-26 20:23:32 [restartedMain] INFO  [com.common.QLGV.QlgvApplication] - No active profile set, falling back to 1 default profile: "default"
-2025-09-26 20:23:46 [restartedMain] DEBUG [i.m.c.u.i.l.InternalLoggerFactory] - Using SLF4J as the default logging framework
-2025-09-26 20:23:49 [restartedMain] WARN  [com.zaxxer.hikari.HikariConfig] - HikariPool-1 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
-2025-09-26 20:23:50 [restartedMain] WARN  [org.hibernate.orm.deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-09-26 20:23:50 [restartedMain] WARN  [org.hibernate.orm.deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
-2025-09-26 20:23:57 [restartedMain] WARN  [o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-09-26 20:23:57 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
+2025-10-04 17:21:08 [background-preinit] DEBUG [org.jboss.logging] - Logging Provider: org.jboss.logging.Slf4jLoggerProvider found via system property
+2025-10-04 17:21:08 [main] INFO  [c.common.QLGV.QlgvApplicationTests] - Starting QlgvApplicationTests using Java 20.0.2 with PID 6424 (started by tranhuy in d:\project IntelliJ Ultimate\modules-parent\qlgv)
+2025-10-04 17:21:08 [main] DEBUG [c.common.QLGV.QlgvApplicationTests] - Running with Spring Boot v3.5.0, Spring v6.2.7
+2025-10-04 17:21:08 [main] INFO  [c.common.QLGV.QlgvApplicationTests] - No active profile set, falling back to 1 default profile: "default"
+2025-10-04 17:21:12 [main] WARN  [com.zaxxer.hikari.HikariConfig] - HikariPool-1 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
+2025-10-04 17:21:13 [main] WARN  [org.hibernate.orm.deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-10-04 17:21:13 [main] WARN  [org.hibernate.orm.deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-10-04 17:21:15 [main] WARN  [o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-10-04 17:21:15 [main] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
 	c.c.Q.c.RedisController:
 	{GET [/api/redis/value/{key}]}: getValue(String)
 	{GET [/api/redis/hash/{key}]}: getHash(String)
-	{GET [/api/redis/keys/{pattern}]}: getKeysByPattern(String)
-	{GET [/api/redis/keys]}: getAllKeys()
-	{GET [/api/redis/list/{key}]}: getList(String)
-	{GET [/api/redis/set/{key}]}: getSet(String)
+	{GET [/api/redis/zset/{key}]}: getZSet(String)
 	{GET [/api/redis/info]}: getRedisInfo()
 	{DELETE [/api/redis/keys]}: deleteAllKeys()
+	{GET [/api/redis/set/{key}]}: getSet(String)
+	{GET [/api/redis/list/{key}]}: getList(String)
 	{GET [/api/redis/ttl/{key}]}: getTTL(String)
-	{DELETE [/api/redis/key/{key}]}: deleteKey(String)
-	{GET [/api/redis/zset/{key}]}: getZSet(String)
 	{GET [/api/redis/type/{key}]}: getKeyType(String)
-2025-09-26 20:23:57 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
+	{GET [/api/redis/keys]}: getAllKeys()
+	{GET [/api/redis/keys/{pattern}]}: getKeysByPattern(String)
+	{DELETE [/api/redis/key/{key}]}: deleteKey(String)
+2025-10-04 17:21:15 [main] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
 	c.c.Q.c.TeacherController:
 	{GET [/teachers]}: get(String,HttpServletRequest)
 	{PUT [/teachers]}: update(TeacherModelRequest,String,HttpServletRequest)
 	{POST [/teachers]}: add(CreateTeacherModelRequest,String,HttpServletRequest)
 	{DELETE [/teachers]}: delete(List,String,HttpServletRequest)
 	{GET [/teachers/public/studentsByTeacher]}: getStudentsFromQLSV(String)
-2025-09-26 20:23:57 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
+2025-10-04 17:21:15 [main] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
 	o.s.b.a.w.s.e.BasicErrorController:
 	{ [/error]}: error(HttpServletRequest)
 	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
-2025-09-26 20:23:57 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'beanNameHandlerMapping' {}
-2025-09-26 20:23:57 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
-2025-09-26 20:23:58 [restartedMain] WARN  [o.s.b.a.t.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
-2025-09-26 20:23:58 [restartedMain] DEBUG [reactor.util.Loggers] - Using Slf4j logging framework
-2025-09-26 20:24:00 [restartedMain] WARN  [o.s.b.d.a.OptionalLiveReloadServer] - Unable to start LiveReload server
-2025-09-26 20:24:01 [restartedMain] INFO  [com.common.QLGV.QlgvApplication] - Started QlgvApplication in 31.044 seconds (process running for 39.121)
-2025-09-26 20:31:14 [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] INFO  [c.l.services.imp.LoggingServiceImp] - [qlgv] com.common.QLGV.services.StudentEventConsumerService - Received student event: UPDATED for student: s a (ID: 43)
-2025-09-26 20:31:46 [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] INFO  [c.l.services.imp.LoggingServiceImp] - [qlgv] com.common.QLGV.services.StudentEventConsumerService - Student updated: s a (ID: 43). Teachers may need to refresh student information.
-2025-09-26 20:32:25 [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] INFO  [c.l.services.imp.LoggingServiceImp] - [qlgv] com.common.QLGV.services.StudentEventConsumerService - Successfully processed student event for student: s a
-2025-09-26 20:32:31 [kafka-coordinator-heartbeat-thread | qlgv-group] WARN  [o.a.k.c.c.i.ConsumerCoordinator] - [Consumer clientId=consumer-qlgv-group-1, groupId=qlgv-group] consumer poll timeout has expired. This means the time between subsequent calls to poll() was longer than the configured max.poll.interval.ms, which typically implies that the poll loop is spending too much time processing messages. You can address this either by increasing max.poll.interval.ms or by reducing the maximum size of batches returned in poll() with max.poll.records.
-2025-09-26 20:32:32 [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] ERROR [o.a.k.c.c.i.ConsumerCoordinator] - [Consumer clientId=consumer-qlgv-group-1, groupId=qlgv-group] Asynchronous auto-commit of offsets failed: Offset commit cannot be completed since the consumer is not part of an active group for auto partition assignment; it is likely that the consumer was kicked out of the group.. Will continue to join group.
-2025-09-26 20:32:32 [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] WARN  [o.a.k.c.c.i.ConsumerCoordinator] - [Consumer clientId=consumer-qlgv-group-1, groupId=qlgv-group] Asynchronous auto-commit of offsets {student-events-0=OffsetAndMetadata{offset=3, leaderEpoch=2, metadata=''}} failed: Offset commit cannot be completed since the consumer is not part of an active group for auto partition assignment; it is likely that the consumer was kicked out of the group.
-2025-09-26 20:33:01 [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] INFO  [c.l.services.imp.LoggingServiceImp] - [qlgv] com.common.QLGV.services.StudentEventConsumerService - Received student event: UPDATED for student: s a (ID: 43)
-2025-09-26 20:33:04 [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] INFO  [c.l.services.imp.LoggingServiceImp] - [qlgv] com.common.QLGV.services.StudentEventConsumerService - Student updated: s a (ID: 43). Teachers may need to refresh student information.
-2025-09-26 20:33:04 [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] INFO  [c.l.services.imp.LoggingServiceImp] - [qlgv] com.common.QLGV.services.StudentEventConsumerService - Successfully processed student event for student: s a
-2025-09-26 20:33:10 [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] INFO  [c.l.services.imp.LoggingServiceImp] - [qlgv] com.common.QLGV.services.StudentEventConsumerService - Received student event: UPDATED for student: s a (ID: 43)
-2025-09-26 20:33:21 [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] INFO  [c.l.services.imp.LoggingServiceImp] - [qlgv] com.common.QLGV.services.StudentEventConsumerService - Student updated: s a (ID: 43). Teachers may need to refresh student information.
-2025-09-26 20:33:21 [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] INFO  [c.l.services.imp.LoggingServiceImp] - [qlgv] com.common.QLGV.services.StudentEventConsumerService - Successfully processed student event for student: s a
-2025-09-26 20:34:35 [restartedMain] INFO  [com.common.QLGV.QlgvApplication] - Starting QlgvApplication using Java 20.0.2 with PID 16160 (D:\project IntelliJ Ultimate\modules-parent\qlgv\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlgv)
-2025-09-26 20:34:35 [restartedMain] DEBUG [com.common.QLGV.QlgvApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
-2025-09-26 20:34:35 [restartedMain] INFO  [com.common.QLGV.QlgvApplication] - No active profile set, falling back to 1 default profile: "default"
-2025-09-26 20:34:36 [restartedMain] WARN  [com.zaxxer.hikari.HikariConfig] - HikariPool-2 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
-2025-09-26 20:34:36 [restartedMain] WARN  [org.hibernate.orm.deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-09-26 20:34:36 [restartedMain] WARN  [org.hibernate.orm.deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
-2025-09-26 20:34:37 [restartedMain] WARN  [o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-09-26 20:34:37 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
+2025-10-04 17:21:15 [main] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'beanNameHandlerMapping' {}
+2025-10-04 17:21:15 [main] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
+2025-10-04 17:21:16 [main] WARN  [o.s.b.a.t.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2025-10-04 17:21:16 [main] DEBUG [i.m.c.u.i.l.InternalLoggerFactory] - Using SLF4J as the default logging framework
+2025-10-04 17:21:16 [main] DEBUG [reactor.util.Loggers] - Using Slf4j logging framework
+2025-10-04 17:21:17 [main] INFO  [c.common.QLGV.QlgvApplicationTests] - Started QlgvApplicationTests in 10.03 seconds (process running for 11.602)
+2025-10-04 17:56:28 [background-preinit] DEBUG [org.jboss.logging] - Logging Provider: org.jboss.logging.Slf4jLoggerProvider found via system property
+2025-10-04 17:56:28 [restartedMain] INFO  [com.common.QLGV.QlgvApplication] - Starting QlgvApplication using Java 20.0.2 with PID 2492 (D:\project IntelliJ Ultimate\modules-parent\qlgv\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlgv)
+2025-10-04 17:56:28 [restartedMain] DEBUG [com.common.QLGV.QlgvApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
+2025-10-04 17:56:28 [restartedMain] INFO  [com.common.QLGV.QlgvApplication] - No active profile set, falling back to 1 default profile: "default"
+2025-10-04 17:56:34 [restartedMain] DEBUG [i.m.c.u.i.l.InternalLoggerFactory] - Using SLF4J as the default logging framework
+2025-10-04 17:56:35 [restartedMain] WARN  [com.zaxxer.hikari.HikariConfig] - HikariPool-1 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
+2025-10-04 17:56:36 [restartedMain] WARN  [org.hibernate.orm.deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-10-04 17:56:36 [restartedMain] WARN  [org.hibernate.orm.deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-10-04 17:56:39 [restartedMain] WARN  [o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-10-04 17:56:39 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
 	c.c.Q.c.RedisController:
 	{GET [/api/redis/value/{key}]}: getValue(String)
 	{GET [/api/redis/hash/{key}]}: getHash(String)
 	{GET [/api/redis/keys/{pattern}]}: getKeysByPattern(String)
+	{GET [/api/redis/set/{key}]}: getSet(String)
+	{GET [/api/redis/zset/{key}]}: getZSet(String)
 	{GET [/api/redis/keys]}: getAllKeys()
 	{GET [/api/redis/list/{key}]}: getList(String)
-	{GET [/api/redis/set/{key}]}: getSet(String)
 	{GET [/api/redis/info]}: getRedisInfo()
-	{DELETE [/api/redis/keys]}: deleteAllKeys()
 	{GET [/api/redis/ttl/{key}]}: getTTL(String)
 	{DELETE [/api/redis/key/{key}]}: deleteKey(String)
-	{GET [/api/redis/zset/{key}]}: getZSet(String)
+	{DELETE [/api/redis/keys]}: deleteAllKeys()
 	{GET [/api/redis/type/{key}]}: getKeyType(String)
-2025-09-26 20:34:37 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
+2025-10-04 17:56:39 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
 	c.c.Q.c.TeacherController:
 	{GET [/teachers]}: get(String,HttpServletRequest)
 	{PUT [/teachers]}: update(TeacherModelRequest,String,HttpServletRequest)
 	{POST [/teachers]}: add(CreateTeacherModelRequest,String,HttpServletRequest)
 	{DELETE [/teachers]}: delete(List,String,HttpServletRequest)
 	{GET [/teachers/public/studentsByTeacher]}: getStudentsFromQLSV(String)
-2025-09-26 20:34:37 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
+2025-10-04 17:56:40 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
 	o.s.b.a.w.s.e.BasicErrorController:
 	{ [/error]}: error(HttpServletRequest)
 	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
-2025-09-26 20:34:37 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'beanNameHandlerMapping' {}
-2025-09-26 20:34:37 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
-2025-09-26 20:34:37 [restartedMain] WARN  [o.s.b.a.t.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
-2025-09-26 20:34:37 [restartedMain] WARN  [o.s.b.d.a.OptionalLiveReloadServer] - Unable to start LiveReload server
-2025-09-26 20:34:37 [restartedMain] INFO  [com.common.QLGV.QlgvApplication] - Started QlgvApplication in 2.466 seconds (process running for 675.006)
-2025-09-26 20:34:47 [restartedMain] INFO  [com.common.QLGV.QlgvApplication] - Starting QlgvApplication using Java 20.0.2 with PID 16160 (D:\project IntelliJ Ultimate\modules-parent\qlgv\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlgv)
-2025-09-26 20:34:47 [restartedMain] DEBUG [com.common.QLGV.QlgvApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
-2025-09-26 20:34:47 [restartedMain] INFO  [com.common.QLGV.QlgvApplication] - No active profile set, falling back to 1 default profile: "default"
-2025-09-26 20:34:48 [restartedMain] WARN  [com.zaxxer.hikari.HikariConfig] - HikariPool-3 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
-2025-09-26 20:34:48 [restartedMain] WARN  [org.hibernate.orm.deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-09-26 20:34:48 [restartedMain] WARN  [org.hibernate.orm.deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
-2025-09-26 20:34:49 [restartedMain] WARN  [o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-09-26 20:34:49 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
+2025-10-04 17:56:40 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'beanNameHandlerMapping' {}
+2025-10-04 17:56:40 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
+2025-10-04 17:56:40 [restartedMain] WARN  [o.s.b.a.t.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2025-10-04 17:56:40 [restartedMain] DEBUG [reactor.util.Loggers] - Using Slf4j logging framework
+2025-10-04 17:56:41 [restartedMain] WARN  [o.s.b.d.a.OptionalLiveReloadServer] - Unable to start LiveReload server
+2025-10-04 17:56:42 [restartedMain] INFO  [com.common.QLGV.QlgvApplication] - Started QlgvApplication in 14.945 seconds (process running for 16.032)
+2025-10-04 17:57:59 [restartedMain] INFO  [com.common.QLGV.QlgvApplication] - Starting QlgvApplication using Java 20.0.2 with PID 2492 (D:\project IntelliJ Ultimate\modules-parent\qlgv\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlgv)
+2025-10-04 17:57:59 [restartedMain] DEBUG [com.common.QLGV.QlgvApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
+2025-10-04 17:57:59 [restartedMain] INFO  [com.common.QLGV.QlgvApplication] - No active profile set, falling back to 1 default profile: "default"
+2025-10-04 17:58:02 [restartedMain] WARN  [com.zaxxer.hikari.HikariConfig] - HikariPool-2 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
+2025-10-04 17:58:02 [restartedMain] WARN  [org.hibernate.orm.deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-10-04 17:58:02 [restartedMain] WARN  [org.hibernate.orm.deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-10-04 17:58:02 [restartedMain] WARN  [o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext] - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: com/model_shared/enums/Gender
+2025-10-04 17:58:03 [restartedMain] ERROR [o.s.boot.SpringApplication] - Application run failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: com/model_shared/enums/Gender
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1826) ~[spring-beans-6.2.7.jar:6.2.7]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:607) ~[spring-beans-6.2.7.jar:6.2.7]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:529) ~[spring-beans-6.2.7.jar:6.2.7]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:339) ~[spring-beans-6.2.7.jar:6.2.7]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:373) ~[spring-beans-6.2.7.jar:6.2.7]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:337) ~[spring-beans-6.2.7.jar:6.2.7]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:207) ~[spring-beans-6.2.7.jar:6.2.7]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:970) ~[spring-context-6.2.7.jar:6.2.7]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:627) ~[spring-context-6.2.7.jar:6.2.7]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146) ~[spring-boot-3.5.0.jar:3.5.0]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:753) ~[spring-boot-3.5.0.jar:3.5.0]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:439) ~[spring-boot-3.5.0.jar:3.5.0]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:318) ~[spring-boot-3.5.0.jar:3.5.0]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1362) ~[spring-boot-3.5.0.jar:3.5.0]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1351) ~[spring-boot-3.5.0.jar:3.5.0]
+	at com.common.QLGV.QlgvApplication.main(QlgvApplication.java:18) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578) ~[na:na]
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50) ~[spring-boot-devtools-3.5.0.jar:3.5.0]
+Caused by: java.lang.NoClassDefFoundError: com/model_shared/enums/Gender
+	at java.base/java.lang.Class.getDeclaredMethods0(Native Method) ~[na:na]
+	at java.base/java.lang.Class.privateGetDeclaredMethods(Class.java:3502) ~[na:na]
+	at java.base/java.lang.Class.getDeclaredMethods(Class.java:2601) ~[na:na]
+	at org.hibernate.annotations.common.reflection.java.JavaXClass.getDeclaredMethodProperties(JavaXClass.java:134) ~[hibernate-commons-annotations-7.0.3.Final.jar:7.0.3.Final]
+	at org.hibernate.annotations.common.reflection.java.JavaXClass.getDeclaredProperties(JavaXClass.java:172) ~[hibernate-commons-annotations-7.0.3.Final.jar:7.0.3.Final]
+	at org.hibernate.annotations.common.reflection.java.JavaXClass.getDeclaredProperties(JavaXClass.java:164) ~[hibernate-commons-annotations-7.0.3.Final.jar:7.0.3.Final]
+	at org.hibernate.boot.model.internal.InheritanceState.determineDefaultAccessType(InheritanceState.java:269) ~[hibernate-core-6.6.15.Final.jar:6.6.15.Final]
+	at org.hibernate.boot.model.internal.InheritanceState.getElementsToProcess(InheritanceState.java:226) ~[hibernate-core-6.6.15.Final.jar:6.6.15.Final]
+	at org.hibernate.boot.model.internal.InheritanceState.postProcess(InheritanceState.java:162) ~[hibernate-core-6.6.15.Final.jar:6.6.15.Final]
+	at org.hibernate.boot.model.internal.EntityBinder.handleIdentifier(EntityBinder.java:410) ~[hibernate-core-6.6.15.Final.jar:6.6.15.Final]
+	at org.hibernate.boot.model.internal.EntityBinder.bindEntityClass(EntityBinder.java:251) ~[hibernate-core-6.6.15.Final.jar:6.6.15.Final]
+	at org.hibernate.boot.model.internal.AnnotationBinder.bindClass(AnnotationBinder.java:404) ~[hibernate-core-6.6.15.Final.jar:6.6.15.Final]
+	at org.hibernate.boot.model.source.internal.annotations.AnnotationMetadataSourceProcessorImpl.processEntityHierarchies(AnnotationMetadataSourceProcessorImpl.java:266) ~[hibernate-core-6.6.15.Final.jar:6.6.15.Final]
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess$1.processEntityHierarchies(MetadataBuildingProcess.java:281) ~[hibernate-core-6.6.15.Final.jar:6.6.15.Final]
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.complete(MetadataBuildingProcess.java:324) ~[hibernate-core-6.6.15.Final.jar:6.6.15.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.metadata(EntityManagerFactoryBuilderImpl.java:1442) ~[hibernate-core-6.6.15.Final.jar:6.6.15.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1513) ~[hibernate-core-6.6.15.Final.jar:6.6.15.Final]
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:66) ~[spring-orm-6.2.7.jar:6.2.7]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:390) ~[spring-orm-6.2.7.jar:6.2.7]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:419) ~[spring-orm-6.2.7.jar:6.2.7]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:400) ~[spring-orm-6.2.7.jar:6.2.7]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:366) ~[spring-orm-6.2.7.jar:6.2.7]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1873) ~[spring-beans-6.2.7.jar:6.2.7]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1822) ~[spring-beans-6.2.7.jar:6.2.7]
+	... 18 common frames omitted
+Caused by: java.lang.ClassNotFoundException: com.model_shared.enums.Gender
+	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:641) ~[na:na]
+	at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(ClassLoaders.java:188) ~[na:na]
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:521) ~[na:na]
+	at java.base/java.lang.Class.forName0(Native Method) ~[na:na]
+	at java.base/java.lang.Class.forName(Class.java:496) ~[na:na]
+	at java.base/java.lang.Class.forName(Class.java:475) ~[na:na]
+	at org.springframework.boot.devtools.restart.classloader.RestartClassLoader.loadClass(RestartClassLoader.java:121) ~[spring-boot-devtools-3.5.0.jar:3.5.0]
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:521) ~[na:na]
+	... 42 common frames omitted
+2025-10-04 17:58:05 [restartedMain] INFO  [com.common.QLGV.QlgvApplication] - Starting QlgvApplication using Java 20.0.2 with PID 2492 (D:\project IntelliJ Ultimate\modules-parent\qlgv\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlgv)
+2025-10-04 17:58:05 [restartedMain] DEBUG [com.common.QLGV.QlgvApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
+2025-10-04 17:58:05 [restartedMain] INFO  [com.common.QLGV.QlgvApplication] - No active profile set, falling back to 1 default profile: "default"
+2025-10-04 17:58:07 [restartedMain] WARN  [com.zaxxer.hikari.HikariConfig] - HikariPool-3 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
+2025-10-04 17:58:07 [restartedMain] WARN  [org.hibernate.orm.deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-10-04 17:58:07 [restartedMain] WARN  [org.hibernate.orm.deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-10-04 17:58:07 [restartedMain] WARN  [o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext] - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: com/model_shared/enums/Gender
+2025-10-04 17:58:07 [restartedMain] ERROR [o.s.boot.SpringApplication] - Application run failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: com/model_shared/enums/Gender
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1826) ~[spring-beans-6.2.7.jar:6.2.7]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:607) ~[spring-beans-6.2.7.jar:6.2.7]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:529) ~[spring-beans-6.2.7.jar:6.2.7]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:339) ~[spring-beans-6.2.7.jar:6.2.7]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:373) ~[spring-beans-6.2.7.jar:6.2.7]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:337) ~[spring-beans-6.2.7.jar:6.2.7]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:207) ~[spring-beans-6.2.7.jar:6.2.7]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:970) ~[spring-context-6.2.7.jar:6.2.7]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:627) ~[spring-context-6.2.7.jar:6.2.7]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146) ~[spring-boot-3.5.0.jar:3.5.0]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:753) ~[spring-boot-3.5.0.jar:3.5.0]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:439) ~[spring-boot-3.5.0.jar:3.5.0]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:318) ~[spring-boot-3.5.0.jar:3.5.0]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1362) ~[spring-boot-3.5.0.jar:3.5.0]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1351) ~[spring-boot-3.5.0.jar:3.5.0]
+	at com.common.QLGV.QlgvApplication.main(QlgvApplication.java:18) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578) ~[na:na]
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50) ~[spring-boot-devtools-3.5.0.jar:3.5.0]
+Caused by: java.lang.NoClassDefFoundError: com/model_shared/enums/Gender
+	at java.base/java.lang.Class.getDeclaredMethods0(Native Method) ~[na:na]
+	at java.base/java.lang.Class.privateGetDeclaredMethods(Class.java:3502) ~[na:na]
+	at java.base/java.lang.Class.getDeclaredMethods(Class.java:2601) ~[na:na]
+	at org.hibernate.annotations.common.reflection.java.JavaXClass.getDeclaredMethodProperties(JavaXClass.java:134) ~[hibernate-commons-annotations-7.0.3.Final.jar:7.0.3.Final]
+	at org.hibernate.annotations.common.reflection.java.JavaXClass.getDeclaredProperties(JavaXClass.java:172) ~[hibernate-commons-annotations-7.0.3.Final.jar:7.0.3.Final]
+	at org.hibernate.annotations.common.reflection.java.JavaXClass.getDeclaredProperties(JavaXClass.java:164) ~[hibernate-commons-annotations-7.0.3.Final.jar:7.0.3.Final]
+	at org.hibernate.boot.model.internal.InheritanceState.determineDefaultAccessType(InheritanceState.java:269) ~[hibernate-core-6.6.15.Final.jar:6.6.15.Final]
+	at org.hibernate.boot.model.internal.InheritanceState.getElementsToProcess(InheritanceState.java:226) ~[hibernate-core-6.6.15.Final.jar:6.6.15.Final]
+	at org.hibernate.boot.model.internal.InheritanceState.postProcess(InheritanceState.java:162) ~[hibernate-core-6.6.15.Final.jar:6.6.15.Final]
+	at org.hibernate.boot.model.internal.EntityBinder.handleIdentifier(EntityBinder.java:410) ~[hibernate-core-6.6.15.Final.jar:6.6.15.Final]
+	at org.hibernate.boot.model.internal.EntityBinder.bindEntityClass(EntityBinder.java:251) ~[hibernate-core-6.6.15.Final.jar:6.6.15.Final]
+	at org.hibernate.boot.model.internal.AnnotationBinder.bindClass(AnnotationBinder.java:404) ~[hibernate-core-6.6.15.Final.jar:6.6.15.Final]
+	at org.hibernate.boot.model.source.internal.annotations.AnnotationMetadataSourceProcessorImpl.processEntityHierarchies(AnnotationMetadataSourceProcessorImpl.java:266) ~[hibernate-core-6.6.15.Final.jar:6.6.15.Final]
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess$1.processEntityHierarchies(MetadataBuildingProcess.java:281) ~[hibernate-core-6.6.15.Final.jar:6.6.15.Final]
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.complete(MetadataBuildingProcess.java:324) ~[hibernate-core-6.6.15.Final.jar:6.6.15.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.metadata(EntityManagerFactoryBuilderImpl.java:1442) ~[hibernate-core-6.6.15.Final.jar:6.6.15.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1513) ~[hibernate-core-6.6.15.Final.jar:6.6.15.Final]
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:66) ~[spring-orm-6.2.7.jar:6.2.7]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:390) ~[spring-orm-6.2.7.jar:6.2.7]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:419) ~[spring-orm-6.2.7.jar:6.2.7]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:400) ~[spring-orm-6.2.7.jar:6.2.7]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:366) ~[spring-orm-6.2.7.jar:6.2.7]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1873) ~[spring-beans-6.2.7.jar:6.2.7]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1822) ~[spring-beans-6.2.7.jar:6.2.7]
+	... 18 common frames omitted
+Caused by: java.lang.ClassNotFoundException: com.model_shared.enums.Gender
+	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:641) ~[na:na]
+	at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(ClassLoaders.java:188) ~[na:na]
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:521) ~[na:na]
+	at java.base/java.lang.Class.forName0(Native Method) ~[na:na]
+	at java.base/java.lang.Class.forName(Class.java:496) ~[na:na]
+	at java.base/java.lang.Class.forName(Class.java:475) ~[na:na]
+	at org.springframework.boot.devtools.restart.classloader.RestartClassLoader.loadClass(RestartClassLoader.java:121) ~[spring-boot-devtools-3.5.0.jar:3.5.0]
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:521) ~[na:na]
+	... 42 common frames omitted
+2025-10-04 17:58:13 [restartedMain] INFO  [com.common.QLGV.QlgvApplication] - Starting QlgvApplication using Java 20.0.2 with PID 2492 (D:\project IntelliJ Ultimate\modules-parent\qlgv\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlgv)
+2025-10-04 17:58:13 [restartedMain] DEBUG [com.common.QLGV.QlgvApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
+2025-10-04 17:58:13 [restartedMain] INFO  [com.common.QLGV.QlgvApplication] - No active profile set, falling back to 1 default profile: "default"
+2025-10-04 17:58:14 [restartedMain] WARN  [com.zaxxer.hikari.HikariConfig] - HikariPool-4 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
+2025-10-04 17:58:14 [restartedMain] WARN  [org.hibernate.orm.deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-10-04 17:58:14 [restartedMain] WARN  [org.hibernate.orm.deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-10-04 17:58:14 [restartedMain] WARN  [o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext] - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: com/model_shared/enums/Gender
+2025-10-04 17:58:15 [restartedMain] ERROR [o.s.boot.SpringApplication] - Application run failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: com/model_shared/enums/Gender
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1826) ~[spring-beans-6.2.7.jar:6.2.7]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:607) ~[spring-beans-6.2.7.jar:6.2.7]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:529) ~[spring-beans-6.2.7.jar:6.2.7]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:339) ~[spring-beans-6.2.7.jar:6.2.7]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:373) ~[spring-beans-6.2.7.jar:6.2.7]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:337) ~[spring-beans-6.2.7.jar:6.2.7]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:207) ~[spring-beans-6.2.7.jar:6.2.7]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:970) ~[spring-context-6.2.7.jar:6.2.7]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:627) ~[spring-context-6.2.7.jar:6.2.7]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146) ~[spring-boot-3.5.0.jar:3.5.0]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:753) ~[spring-boot-3.5.0.jar:3.5.0]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:439) ~[spring-boot-3.5.0.jar:3.5.0]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:318) ~[spring-boot-3.5.0.jar:3.5.0]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1362) ~[spring-boot-3.5.0.jar:3.5.0]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1351) ~[spring-boot-3.5.0.jar:3.5.0]
+	at com.common.QLGV.QlgvApplication.main(QlgvApplication.java:18) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578) ~[na:na]
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50) ~[spring-boot-devtools-3.5.0.jar:3.5.0]
+Caused by: java.lang.NoClassDefFoundError: com/model_shared/enums/Gender
+	at java.base/java.lang.Class.getDeclaredMethods0(Native Method) ~[na:na]
+	at java.base/java.lang.Class.privateGetDeclaredMethods(Class.java:3502) ~[na:na]
+	at java.base/java.lang.Class.getDeclaredMethods(Class.java:2601) ~[na:na]
+	at org.hibernate.annotations.common.reflection.java.JavaXClass.getDeclaredMethodProperties(JavaXClass.java:134) ~[hibernate-commons-annotations-7.0.3.Final.jar:7.0.3.Final]
+	at org.hibernate.annotations.common.reflection.java.JavaXClass.getDeclaredProperties(JavaXClass.java:172) ~[hibernate-commons-annotations-7.0.3.Final.jar:7.0.3.Final]
+	at org.hibernate.annotations.common.reflection.java.JavaXClass.getDeclaredProperties(JavaXClass.java:164) ~[hibernate-commons-annotations-7.0.3.Final.jar:7.0.3.Final]
+	at org.hibernate.boot.model.internal.InheritanceState.determineDefaultAccessType(InheritanceState.java:269) ~[hibernate-core-6.6.15.Final.jar:6.6.15.Final]
+	at org.hibernate.boot.model.internal.InheritanceState.getElementsToProcess(InheritanceState.java:226) ~[hibernate-core-6.6.15.Final.jar:6.6.15.Final]
+	at org.hibernate.boot.model.internal.InheritanceState.postProcess(InheritanceState.java:162) ~[hibernate-core-6.6.15.Final.jar:6.6.15.Final]
+	at org.hibernate.boot.model.internal.EntityBinder.handleIdentifier(EntityBinder.java:410) ~[hibernate-core-6.6.15.Final.jar:6.6.15.Final]
+	at org.hibernate.boot.model.internal.EntityBinder.bindEntityClass(EntityBinder.java:251) ~[hibernate-core-6.6.15.Final.jar:6.6.15.Final]
+	at org.hibernate.boot.model.internal.AnnotationBinder.bindClass(AnnotationBinder.java:404) ~[hibernate-core-6.6.15.Final.jar:6.6.15.Final]
+	at org.hibernate.boot.model.source.internal.annotations.AnnotationMetadataSourceProcessorImpl.processEntityHierarchies(AnnotationMetadataSourceProcessorImpl.java:266) ~[hibernate-core-6.6.15.Final.jar:6.6.15.Final]
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess$1.processEntityHierarchies(MetadataBuildingProcess.java:281) ~[hibernate-core-6.6.15.Final.jar:6.6.15.Final]
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.complete(MetadataBuildingProcess.java:324) ~[hibernate-core-6.6.15.Final.jar:6.6.15.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.metadata(EntityManagerFactoryBuilderImpl.java:1442) ~[hibernate-core-6.6.15.Final.jar:6.6.15.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1513) ~[hibernate-core-6.6.15.Final.jar:6.6.15.Final]
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:66) ~[spring-orm-6.2.7.jar:6.2.7]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:390) ~[spring-orm-6.2.7.jar:6.2.7]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:419) ~[spring-orm-6.2.7.jar:6.2.7]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:400) ~[spring-orm-6.2.7.jar:6.2.7]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:366) ~[spring-orm-6.2.7.jar:6.2.7]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1873) ~[spring-beans-6.2.7.jar:6.2.7]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1822) ~[spring-beans-6.2.7.jar:6.2.7]
+	... 18 common frames omitted
+Caused by: java.lang.ClassNotFoundException: com.model_shared.enums.Gender
+	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:641) ~[na:na]
+	at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(ClassLoaders.java:188) ~[na:na]
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:521) ~[na:na]
+	at java.base/java.lang.Class.forName0(Native Method) ~[na:na]
+	at java.base/java.lang.Class.forName(Class.java:496) ~[na:na]
+	at java.base/java.lang.Class.forName(Class.java:475) ~[na:na]
+	at org.springframework.boot.devtools.restart.classloader.RestartClassLoader.loadClass(RestartClassLoader.java:121) ~[spring-boot-devtools-3.5.0.jar:3.5.0]
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:521) ~[na:na]
+	... 42 common frames omitted
+2025-10-04 17:58:16 [restartedMain] INFO  [com.common.QLGV.QlgvApplication] - Starting QlgvApplication using Java 20.0.2 with PID 2492 (D:\project IntelliJ Ultimate\modules-parent\qlgv\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlgv)
+2025-10-04 17:58:16 [restartedMain] DEBUG [com.common.QLGV.QlgvApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
+2025-10-04 17:58:16 [restartedMain] INFO  [com.common.QLGV.QlgvApplication] - No active profile set, falling back to 1 default profile: "default"
+2025-10-04 17:58:16 [restartedMain] WARN  [o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext] - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanDefinitionStoreException: I/O failure while processing configuration class [com.common.QLGV.services.StudentEventConsumerService]
+2025-10-04 17:58:16 [restartedMain] ERROR [o.s.boot.SpringApplication] - Application run failed
+org.springframework.beans.factory.BeanDefinitionStoreException: I/O failure while processing configuration class [com.common.QLGV.services.StudentEventConsumerService]
+	at org.springframework.context.annotation.ConfigurationClassParser.processConfigurationClass(ConfigurationClassParser.java:286) ~[spring-context-6.2.7.jar:6.2.7]
+	at org.springframework.context.annotation.ConfigurationClassParser.parse(ConfigurationClassParser.java:218) ~[spring-context-6.2.7.jar:6.2.7]
+	at org.springframework.context.annotation.ConfigurationClassParser.doProcessConfigurationClass(ConfigurationClassParser.java:354) ~[spring-context-6.2.7.jar:6.2.7]
+	at org.springframework.context.annotation.ConfigurationClassParser.processConfigurationClass(ConfigurationClassParser.java:281) ~[spring-context-6.2.7.jar:6.2.7]
+	at org.springframework.context.annotation.ConfigurationClassParser.parse(ConfigurationClassParser.java:204) ~[spring-context-6.2.7.jar:6.2.7]
+	at org.springframework.context.annotation.ConfigurationClassParser.parse(ConfigurationClassParser.java:172) ~[spring-context-6.2.7.jar:6.2.7]
+	at org.springframework.context.annotation.ConfigurationClassPostProcessor.processConfigBeanDefinitions(ConfigurationClassPostProcessor.java:418) ~[spring-context-6.2.7.jar:6.2.7]
+	at org.springframework.context.annotation.ConfigurationClassPostProcessor.postProcessBeanDefinitionRegistry(ConfigurationClassPostProcessor.java:290) ~[spring-context-6.2.7.jar:6.2.7]
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanDefinitionRegistryPostProcessors(PostProcessorRegistrationDelegate.java:349) ~[spring-context-6.2.7.jar:6.2.7]
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:118) ~[spring-context-6.2.7.jar:6.2.7]
+	at org.springframework.context.support.AbstractApplicationContext.invokeBeanFactoryPostProcessors(AbstractApplicationContext.java:791) ~[spring-context-6.2.7.jar:6.2.7]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:609) ~[spring-context-6.2.7.jar:6.2.7]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146) ~[spring-boot-3.5.0.jar:3.5.0]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:753) ~[spring-boot-3.5.0.jar:3.5.0]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:439) ~[spring-boot-3.5.0.jar:3.5.0]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:318) ~[spring-boot-3.5.0.jar:3.5.0]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1362) ~[spring-boot-3.5.0.jar:3.5.0]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1351) ~[spring-boot-3.5.0.jar:3.5.0]
+	at com.common.QLGV.QlgvApplication.main(QlgvApplication.java:18) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578) ~[na:na]
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50) ~[spring-boot-devtools-3.5.0.jar:3.5.0]
+Caused by: java.io.FileNotFoundException: class path resource [com/kafka_shared/services/KafkaConsumerService.class] cannot be opened because it does not exist
+	at org.springframework.core.io.ClassPathResource.getInputStream(ClassPathResource.java:215) ~[spring-core-6.2.7.jar:6.2.7]
+	at org.springframework.core.type.classreading.SimpleMetadataReader.getClassReader(SimpleMetadataReader.java:54) ~[spring-core-6.2.7.jar:6.2.7]
+	at org.springframework.core.type.classreading.SimpleMetadataReader.<init>(SimpleMetadataReader.java:48) ~[spring-core-6.2.7.jar:6.2.7]
+	at org.springframework.core.type.classreading.SimpleMetadataReaderFactory.getMetadataReader(SimpleMetadataReaderFactory.java:103) ~[spring-core-6.2.7.jar:6.2.7]
+	at org.springframework.boot.type.classreading.ConcurrentReferenceCachingMetadataReaderFactory.createMetadataReader(ConcurrentReferenceCachingMetadataReaderFactory.java:98) ~[spring-boot-3.5.0.jar:3.5.0]
+	at org.springframework.boot.type.classreading.ConcurrentReferenceCachingMetadataReaderFactory.getMetadataReader(ConcurrentReferenceCachingMetadataReaderFactory.java:85) ~[spring-boot-3.5.0.jar:3.5.0]
+	at org.springframework.core.type.classreading.SimpleMetadataReaderFactory.getMetadataReader(SimpleMetadataReaderFactory.java:81) ~[spring-core-6.2.7.jar:6.2.7]
+	at org.springframework.boot.type.classreading.ConcurrentReferenceCachingMetadataReaderFactory.getMetadataReader(ConcurrentReferenceCachingMetadataReaderFactory.java:75) ~[spring-boot-3.5.0.jar:3.5.0]
+	at org.springframework.context.annotation.ConfigurationClassParser.asSourceClass(ConfigurationClassParser.java:711) ~[spring-context-6.2.7.jar:6.2.7]
+	at org.springframework.context.annotation.ConfigurationClassParser$SourceClass.getSuperClass(ConfigurationClassParser.java:1047) ~[spring-context-6.2.7.jar:6.2.7]
+	at org.springframework.context.annotation.ConfigurationClassParser.doProcessConfigurationClass(ConfigurationClassParser.java:395) ~[spring-context-6.2.7.jar:6.2.7]
+	at org.springframework.context.annotation.ConfigurationClassParser.processConfigurationClass(ConfigurationClassParser.java:281) ~[spring-context-6.2.7.jar:6.2.7]
+	... 21 common frames omitted
+2025-10-04 18:08:15 [background-preinit] DEBUG [org.jboss.logging] - Logging Provider: org.jboss.logging.Slf4jLoggerProvider found via system property
+2025-10-04 18:08:15 [main] INFO  [c.common.QLGV.QlgvApplicationTests] - Starting QlgvApplicationTests using Java 20.0.2 with PID 6608 (started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlgv)
+2025-10-04 18:08:15 [main] DEBUG [c.common.QLGV.QlgvApplicationTests] - Running with Spring Boot v3.5.0, Spring v6.2.7
+2025-10-04 18:08:15 [main] INFO  [c.common.QLGV.QlgvApplicationTests] - No active profile set, falling back to 1 default profile: "default"
+2025-10-04 18:08:19 [main] WARN  [com.zaxxer.hikari.HikariConfig] - HikariPool-1 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
+2025-10-04 18:08:19 [main] WARN  [org.hibernate.orm.deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-10-04 18:08:19 [main] WARN  [org.hibernate.orm.deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-10-04 18:08:21 [main] WARN  [o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-10-04 18:08:21 [main] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
 	c.c.Q.c.RedisController:
 	{GET [/api/redis/value/{key}]}: getValue(String)
-	{GET [/api/redis/hash/{key}]}: getHash(String)
-	{GET [/api/redis/keys/{pattern}]}: getKeysByPattern(String)
-	{GET [/api/redis/keys]}: getAllKeys()
 	{GET [/api/redis/list/{key}]}: getList(String)
+	{GET [/api/redis/keys]}: getAllKeys()
 	{GET [/api/redis/set/{key}]}: getSet(String)
-	{GET [/api/redis/info]}: getRedisInfo()
-	{DELETE [/api/redis/keys]}: deleteAllKeys()
-	{GET [/api/redis/ttl/{key}]}: getTTL(String)
-	{DELETE [/api/redis/key/{key}]}: deleteKey(String)
 	{GET [/api/redis/zset/{key}]}: getZSet(String)
+	{GET [/api/redis/ttl/{key}]}: getTTL(String)
+	{GET [/api/redis/info]}: getRedisInfo()
+	{DELETE [/api/redis/key/{key}]}: deleteKey(String)
+	{GET [/api/redis/keys/{pattern}]}: getKeysByPattern(String)
+	{DELETE [/api/redis/keys]}: deleteAllKeys()
+	{GET [/api/redis/hash/{key}]}: getHash(String)
 	{GET [/api/redis/type/{key}]}: getKeyType(String)
-2025-09-26 20:34:49 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
+2025-10-04 18:08:21 [main] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
 	c.c.Q.c.TeacherController:
 	{GET [/teachers]}: get(String,HttpServletRequest)
 	{PUT [/teachers]}: update(TeacherModelRequest,String,HttpServletRequest)
 	{POST [/teachers]}: add(CreateTeacherModelRequest,String,HttpServletRequest)
 	{DELETE [/teachers]}: delete(List,String,HttpServletRequest)
 	{GET [/teachers/public/studentsByTeacher]}: getStudentsFromQLSV(String)
-2025-09-26 20:34:49 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
+2025-10-04 18:08:21 [main] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
 	o.s.b.a.w.s.e.BasicErrorController:
 	{ [/error]}: error(HttpServletRequest)
 	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
-2025-09-26 20:34:49 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'beanNameHandlerMapping' {}
-2025-09-26 20:34:49 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
-2025-09-26 20:34:49 [restartedMain] WARN  [o.s.b.a.t.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
-2025-09-26 20:34:49 [restartedMain] WARN  [o.s.b.d.a.OptionalLiveReloadServer] - Unable to start LiveReload server
-2025-09-26 20:34:49 [restartedMain] INFO  [com.common.QLGV.QlgvApplication] - Started QlgvApplication in 1.74 seconds (process running for 687.207)
-2025-09-26 20:36:52 [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] INFO  [c.l.services.imp.LoggingServiceImp] - [qlgv] com.common.QLGV.services.StudentEventConsumerService - Received student event: UPDATED for student: s a (ID: 43)
-2025-09-26 20:36:54 [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] INFO  [c.l.services.imp.LoggingServiceImp] - [qlgv] com.common.QLGV.services.StudentEventConsumerService - Student updated: s a (ID: 43). Teachers received event need to do something...
-2025-09-26 20:36:58 [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] INFO  [c.l.services.imp.LoggingServiceImp] - [qlgv] com.common.QLGV.services.StudentEventConsumerService - Successfully processed student event for student: s a
-2025-09-26 20:39:18 [restartedMain] INFO  [com.common.QLGV.QlgvApplication] - Starting QlgvApplication using Java 20.0.2 with PID 16160 (D:\project IntelliJ Ultimate\modules-parent\qlgv\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlgv)
-2025-09-26 20:39:18 [restartedMain] DEBUG [com.common.QLGV.QlgvApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
-2025-09-26 20:39:18 [restartedMain] INFO  [com.common.QLGV.QlgvApplication] - No active profile set, falling back to 1 default profile: "default"
-2025-09-26 20:39:18 [restartedMain] WARN  [com.zaxxer.hikari.HikariConfig] - HikariPool-4 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
-2025-09-26 20:39:18 [restartedMain] WARN  [org.hibernate.orm.deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-09-26 20:39:18 [restartedMain] WARN  [org.hibernate.orm.deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
-2025-09-26 20:39:19 [restartedMain] WARN  [o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-09-26 20:39:19 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
-	c.c.Q.c.RedisController:
-	{GET [/api/redis/value/{key}]}: getValue(String)
-	{GET [/api/redis/hash/{key}]}: getHash(String)
-	{GET [/api/redis/keys/{pattern}]}: getKeysByPattern(String)
-	{GET [/api/redis/keys]}: getAllKeys()
-	{GET [/api/redis/list/{key}]}: getList(String)
-	{GET [/api/redis/set/{key}]}: getSet(String)
-	{GET [/api/redis/info]}: getRedisInfo()
-	{DELETE [/api/redis/keys]}: deleteAllKeys()
-	{GET [/api/redis/ttl/{key}]}: getTTL(String)
-	{DELETE [/api/redis/key/{key}]}: deleteKey(String)
-	{GET [/api/redis/zset/{key}]}: getZSet(String)
-	{GET [/api/redis/type/{key}]}: getKeyType(String)
-2025-09-26 20:39:19 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
-	c.c.Q.c.TeacherController:
-	{GET [/teachers]}: get(String,HttpServletRequest)
-	{PUT [/teachers]}: update(TeacherModelRequest,String,HttpServletRequest)
-	{POST [/teachers]}: add(CreateTeacherModelRequest,String,HttpServletRequest)
-	{DELETE [/teachers]}: delete(List,String,HttpServletRequest)
-	{GET [/teachers/public/studentsByTeacher]}: getStudentsFromQLSV(String)
-2025-09-26 20:39:19 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
-	o.s.b.a.w.s.e.BasicErrorController:
-	{ [/error]}: error(HttpServletRequest)
-	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
-2025-09-26 20:39:19 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'beanNameHandlerMapping' {}
-2025-09-26 20:39:19 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
-2025-09-26 20:39:19 [restartedMain] WARN  [o.s.b.a.t.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
-2025-09-26 20:39:19 [restartedMain] WARN  [o.s.b.d.a.OptionalLiveReloadServer] - Unable to start LiveReload server
-2025-09-26 20:39:19 [restartedMain] INFO  [com.common.QLGV.QlgvApplication] - Started QlgvApplication in 1.355 seconds (process running for 957.035)
-2025-09-26 20:39:31 [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] INFO  [c.l.services.imp.LoggingServiceImp] - [qlgv] StudentEventConsumerService - Received student event: UPDATED for student: s a (ID: 43)
-2025-09-26 20:39:39 [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] INFO  [c.l.services.imp.LoggingServiceImp] - [qlgv] StudentEventConsumerService - Student updated: s a (ID: 43). Teachers received event need to do something...
-2025-09-26 20:39:39 [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] INFO  [c.l.services.imp.LoggingServiceImp] - [qlgv] StudentEventConsumerService - Successfully processed student event for student: s a
-2025-09-26 20:40:07 [restartedMain] INFO  [com.common.QLGV.QlgvApplication] - Starting QlgvApplication using Java 20.0.2 with PID 16160 (D:\project IntelliJ Ultimate\modules-parent\qlgv\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlgv)
-2025-09-26 20:40:07 [restartedMain] DEBUG [com.common.QLGV.QlgvApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
-2025-09-26 20:40:07 [restartedMain] INFO  [com.common.QLGV.QlgvApplication] - No active profile set, falling back to 1 default profile: "default"
-2025-09-26 20:40:07 [restartedMain] WARN  [com.zaxxer.hikari.HikariConfig] - HikariPool-5 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
-2025-09-26 20:40:07 [restartedMain] WARN  [org.hibernate.orm.deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-09-26 20:40:07 [restartedMain] WARN  [org.hibernate.orm.deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
-2025-09-26 20:40:08 [restartedMain] WARN  [o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-09-26 20:40:08 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
-	c.c.Q.c.RedisController:
-	{GET [/api/redis/value/{key}]}: getValue(String)
-	{GET [/api/redis/hash/{key}]}: getHash(String)
-	{GET [/api/redis/keys/{pattern}]}: getKeysByPattern(String)
-	{GET [/api/redis/keys]}: getAllKeys()
-	{GET [/api/redis/list/{key}]}: getList(String)
-	{GET [/api/redis/set/{key}]}: getSet(String)
-	{GET [/api/redis/info]}: getRedisInfo()
-	{DELETE [/api/redis/keys]}: deleteAllKeys()
-	{GET [/api/redis/ttl/{key}]}: getTTL(String)
-	{DELETE [/api/redis/key/{key}]}: deleteKey(String)
-	{GET [/api/redis/zset/{key}]}: getZSet(String)
-	{GET [/api/redis/type/{key}]}: getKeyType(String)
-2025-09-26 20:40:08 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
-	c.c.Q.c.TeacherController:
-	{GET [/teachers]}: get(String,HttpServletRequest)
-	{PUT [/teachers]}: update(TeacherModelRequest,String,HttpServletRequest)
-	{POST [/teachers]}: add(CreateTeacherModelRequest,String,HttpServletRequest)
-	{DELETE [/teachers]}: delete(List,String,HttpServletRequest)
-	{GET [/teachers/public/studentsByTeacher]}: getStudentsFromQLSV(String)
-2025-09-26 20:40:08 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
-	o.s.b.a.w.s.e.BasicErrorController:
-	{ [/error]}: error(HttpServletRequest)
-	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
-2025-09-26 20:40:08 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'beanNameHandlerMapping' {}
-2025-09-26 20:40:08 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
-2025-09-26 20:40:08 [restartedMain] WARN  [o.s.b.a.t.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
-2025-09-26 20:40:08 [restartedMain] WARN  [o.s.b.d.a.OptionalLiveReloadServer] - Unable to start LiveReload server
-2025-09-26 20:40:08 [restartedMain] INFO  [com.common.QLGV.QlgvApplication] - Started QlgvApplication in 1.1 seconds (process running for 1005.746)
-2025-09-26 20:41:21 [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] WARN  [o.apache.kafka.clients.NetworkClient] - [Consumer clientId=consumer-qlgv-group-5, groupId=qlgv-group] Connection to node 1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
-2025-09-26 20:41:22 [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] WARN  [o.apache.kafka.clients.NetworkClient] - [Consumer clientId=consumer-qlgv-group-5, groupId=qlgv-group] Connection to node 1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
-2025-09-26 20:41:23 [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] WARN  [o.apache.kafka.clients.NetworkClient] - [Consumer clientId=consumer-qlgv-group-5, groupId=qlgv-group] Connection to node 1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
-2025-09-26 20:41:24 [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] WARN  [o.apache.kafka.clients.NetworkClient] - [Consumer clientId=consumer-qlgv-group-5, groupId=qlgv-group] Connection to node 1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
-2025-09-26 20:41:25 [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] WARN  [o.apache.kafka.clients.NetworkClient] - [Consumer clientId=consumer-qlgv-group-5, groupId=qlgv-group] Connection to node 1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
-2025-09-26 20:41:26 [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] WARN  [o.apache.kafka.clients.NetworkClient] - [Consumer clientId=consumer-qlgv-group-5, groupId=qlgv-group] Connection to node 1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
-2025-09-26 20:41:27 [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] WARN  [o.apache.kafka.clients.NetworkClient] - [Consumer clientId=consumer-qlgv-group-5, groupId=qlgv-group] Connection to node 1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
-2025-09-26 20:41:28 [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] WARN  [o.apache.kafka.clients.NetworkClient] - [Consumer clientId=consumer-qlgv-group-5, groupId=qlgv-group] Connection to node 1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
-2025-09-26 20:41:29 [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] WARN  [o.apache.kafka.clients.NetworkClient] - [Consumer clientId=consumer-qlgv-group-5, groupId=qlgv-group] Connection to node 1 (localhost/127.0.0.1:9092) could not be established. Node may not be available.
+2025-10-04 18:08:21 [main] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'beanNameHandlerMapping' {}
+2025-10-04 18:08:21 [main] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
+2025-10-04 18:08:22 [main] WARN  [o.s.b.a.t.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2025-10-04 18:08:22 [main] DEBUG [i.m.c.u.i.l.InternalLoggerFactory] - Using SLF4J as the default logging framework
+2025-10-04 18:08:22 [main] DEBUG [reactor.util.Loggers] - Using Slf4j logging framework
+2025-10-04 18:08:23 [main] INFO  [c.common.QLGV.QlgvApplicationTests] - Started QlgvApplicationTests in 8.554 seconds (process running for 9.573)

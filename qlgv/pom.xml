@@ -102,7 +102,7 @@
 		</dependency>
 		<dependency>
 			<groupId>com.common</groupId>
-			<artifactId>model-shared</artifactId>
+			<artifactId>model_shared</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>com.common</groupId>
@@ -114,7 +114,7 @@
     	</dependency>
 		<dependency>
 			<groupId>com.common</groupId>
-			<artifactId>kafka-shared</artifactId>
+			<artifactId>kafka_shared</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>com.common</groupId>

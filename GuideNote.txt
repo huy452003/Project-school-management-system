@@ -112,8 +112,35 @@ Mới (KRaft): Metadata lưu trực tiếp trong Kafka Controller, sử dụng R
 
 ** --> bản chất của kafka là để message từ producer sang các consumer thông qua các topic
 
+*new-28/09/2025
+
+- tìm hiểu cách phân trang.
+
+- làm 1 api filter (tìm từng ký tự) cho phép filter theo nhiều đk cùng lúc, còn search chỉ cho phép 1 đk 1 lúc.
+
+- database user nằm ở database khác với data của student khi login xong thì làm sao để xác định student vừa login là ai,
+    tôi có ý tưởng là sẽ dung kafka để gửi event cho endpoint main của student và trả data ngay lập tức.
++ cho thêm 1 biến userName để khớp với lại data bên security
 
 
+
+- tại thời điểm xác thực user thành công ở authFilter thì có gửi thêm data không nhạy cảm sang endpoint ở service khác.
+
+- những cách khác để bảo vệ backend và database ngoài trừ JWToken.
+
+- tìm hiểu lại cách làm lại luồng đi của security và các module khác.
++ thay interceptor bằng cách sử dụng AOP , custom annotation để check JWT các method cần 
+bảo vệ , nhưng method không sử dụng annotation thì được xem là public API
+
+- áp dụng 1 số design pattern.
+
+- xử lý khi consumer nhận message thất bại và thành công thì producer có biết được trạng thái của message không?,
+  nếu producer là 1 project frontEnd thì sao liệu producer có thể là project frontEnd?
+
+  +  nếu producer là 1 project frontEnd thì có thể nhưng không nên vì :
+   vấn đề bảo mật
+   vấn đề performance
+   nên frontEnd chỉ nền giao tiếp với backEnd qua rest API
 
 
 
