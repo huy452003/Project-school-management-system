@@ -7,9 +7,6 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-/**
- * Notification message model for success/failure notifications
- */
 @Data
 @NoArgsConstructor
 public class NotificationMessage {
@@ -25,6 +22,8 @@ public class NotificationMessage {
     private String entityType;
     
     private String entityId;
+    
+    private String originalEventId; // ID của event gốc được gửi từ producer
     
     private String entityDisplayName;
     
@@ -57,7 +56,7 @@ public class NotificationMessage {
         this.destination = "all";
     }
     
-    // Factory methods
+    // các dạng notification message tùy chọn
     public static NotificationMessage success(String title, String message) {
         return new NotificationMessage("SUCCESS", title, message);
     }

@@ -9,9 +9,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
-/**
- * Generic Kafka producer service supporting multiple event types
- */
 @Service
 public class KafkaProducerService {
 
@@ -21,21 +18,25 @@ public class KafkaProducerService {
     @Autowired
     private LoggingService loggingService;
 
-    // Topic configurations
+    // cấu hình topic
     @Value("${kafka.topics.student-events:student-events}")
     private String studentEventsTopic;
-
-    @Value("${kafka.topics.student-events-dlq:student-events-dlq}")
-    private String studentEventsDLQTopic;
 
     @Value("${kafka.topics.teacher-events:teacher-events}")
     private String teacherEventsTopic;
 
-    @Value("${kafka.topics.teacher-events-dlq:teacher-events-dlq}")
-    private String teacherEventsDLQTopic;
-
     @Value("${kafka.topics.user-events:user-events}")
     private String userEventsTopic;
+
+    @Value("${kafka.topics.notifications:notifications}")
+    private String notificationsTopic;
+
+    // DLQ topics
+    @Value("${kafka.topics.student-events-dlq:student-events-dlq}")
+    private String studentEventsDLQTopic;
+
+    @Value("${kafka.topics.teacher-events-dlq:teacher-events-dlq}")
+    private String teacherEventsDLQTopic;
 
     @Value("${kafka.topics.user-events-dlq:user-events-dlq}")
     private String userEventsDLQTopic;
@@ -48,16 +49,25 @@ public class KafkaProducerService {
                 .build();
     }
 
-    /**
-     * Generic method to send any message to Kafka
-     */
+    // gửi message đến Kafka với callback
     public void sendMessage(String topic, String key, Object message) {
         try {
-            kafkaTemplate.send(topic, key, message);
-            loggingService.logInfo(
-                String.format("Message sent to topic: %s with key(student id): [%s]", topic, key),
-                getLogContext("sendMessage")
-            );
+            kafkaTemplate.send(topic, key, message).whenComplete((result, throwable) -> {
+                if (throwable == null) {
+                    loggingService.logInfo(
+                        String.format("Message sent successfully to topic: %s, partition: %d, offset: %d, key: [%s]", 
+                            topic, result.getRecordMetadata().partition(), result.getRecordMetadata().offset(), key),
+                        getLogContext("sendMessage")
+                    );
+                } else {
+                    loggingService.logError(
+                        String.format("Failed to send message to topic: %s, key: [%s] - error: %s", 
+                            topic, key, throwable.getMessage()),
+                        (Exception) throwable,
+                        getLogContext("sendMessage")
+                    );
+                }
+            });
         } catch (Exception e) {
             loggingService.logError(
                 String.format("Error sending message to topic: %s - error: %s", topic, e.getMessage()),
@@ -67,23 +77,20 @@ public class KafkaProducerService {
         }
     }
 
-    /**
-     * Generic method to send any event type
-     */
+    // gửi event đến Kafka thông qua message
     public <T extends KafkaMessage & EventMetadata> void sendEvent(T event, String topic) {
         try {            
-
             String key = event.getEntityId();
             sendMessage(topic, key, event);
             
             loggingService.logInfo(
-                String.format("%s sent to topic: %s - with student id: [%s]", event.getEntityType(), topic, event.getEntityId()),
+                String.format("%s sent to topic: %s - with entity id: [%s]", event.getEntityType(), topic, event.getEntityId()),
                 getLogContext("sendEvent")
             );
             
         } catch (Exception e) {
             loggingService.logError(
-                String.format("Error sending %s to topic %s with student id: [%s]: %s", event.getEntityType(), topic, event.getEntityId(), e.getMessage()),
+                String.format("Error sending %s to topic %s with entity id: [%s]: %s", event.getEntityType(), topic, event.getEntityId(), e.getMessage()),
                 e,
                 getLogContext("sendEvent")
             );
@@ -91,15 +98,33 @@ public class KafkaProducerService {
         }
     }
 
-    /**
-     * Gửi event đến Dead Letter Queue khi hết số lần retry
-     */
+    // gửi student event đến student-events topic
+    public <T extends KafkaMessage & EventMetadata> void sendStudentEvent(T event) {
+        sendEvent(event, studentEventsTopic);
+    }
+
+    // gửi teacher event đến teacher-events topic
+    public <T extends KafkaMessage & EventMetadata> void sendTeacherEvent(T event) {
+        sendEvent(event, teacherEventsTopic);
+    }
+
+    // gửi user event đến user-events topic
+    public <T extends KafkaMessage & EventMetadata> void sendUserEvent(T event) {
+        sendEvent(event, userEventsTopic);
+    }
+
+    // gửi notification đến notifications topic
+    public void sendNotification(Object notification, String key) {
+        sendMessage(notificationsTopic, key, notification);
+    }
+
+    // gửi event đến Dead Letter Queue khi hết số lần retry
     public <T extends KafkaMessage & EventMetadata> void sendToDeadLetterQueue(T event, Exception error) {
         try {
             String dlqTopic = getDLQTopic(event);
             
             loggingService.logWarn(
-                String.format("Sending %s to DLQ topic %s with student id: [%s]", event.getEntityType(), dlqTopic, event.getEntityId()),
+                String.format("Sending %s to DLQ topic %s with entity id: [%s]", event.getEntityType(), dlqTopic, event.getEntityId()),
                 getLogContext("sendToDeadLetterQueue")
             );
             
@@ -107,29 +132,27 @@ public class KafkaProducerService {
             sendMessage(dlqTopic, key, event);
             
             loggingService.logWarn(
-                String.format("%s sent to DLQ with student id: [%s] - error: %s", 
+                String.format("%s sent to DLQ with entity id: [%s] - error: %s", 
                     event.getEntityType(), event.getEntityId(), error.getMessage()),
                 getLogContext("sendToDeadLetterQueue")
             );
             
         } catch (Exception e) {
             loggingService.logError(
-                String.format("Failed to send %s to DLQ with student id: [%s]: %s", event.getEntityType(), event.getEntityId(), e.getMessage()),
+                String.format("Failed to send %s to DLQ with entity id: [%s]: %s", event.getEntityType(), event.getEntityId(), e.getMessage()),
                 e,
                 getLogContext("sendToDeadLetterQueue")
             );
         }
     }
 
-    /**
-     * Gửi Event đến Dead Letter Queue trực tiếp
-     */
+    // gửi event đến Dead Letter Queue trực tiếp
     public <T extends KafkaMessage & EventMetadata> void sendEventToDLQ(T event, String reason) {
         try {
             String dlqTopic = getDLQTopic(event);
             
             loggingService.logWarn(
-                String.format("Sending %s to DLQ topic %s with student id: [%s] - reason: %s", 
+                String.format("Sending %s to DLQ topic %s with entity id: [%s] - reason: %s", 
                     event.getEntityType(), dlqTopic, event.getEntityId(), reason),
                 getLogContext("sendEventToDLQ")
             );
@@ -138,23 +161,21 @@ public class KafkaProducerService {
             sendMessage(dlqTopic, key, event);
             
             loggingService.logWarn(
-                String.format("%s sent to DLQ with student id: [%s] - reason: %s", 
+                String.format("%s sent to DLQ with entity id: [%s] - reason: %s", 
                     event.getEntityType(), event.getEntityId(), reason),
                 getLogContext("sendEventToDLQ")
             );
             
         } catch (Exception e) {
             loggingService.logError(
-                String.format("Failed to send %s to DLQ with student id: [%s]: %s", event.getEntityType(), event.getEntityId(), e.getMessage()),
+                String.format("Failed to send %s to DLQ with entity id: [%s]: %s", event.getEntityType(), event.getEntityId(), e.getMessage()),
                 e,
                 getLogContext("sendEventToDLQ")
             );
         }
     }
 
-    /**
-     * Get DLQ topic based on event type
-     */
+    // lấy topic DLQ dựa trên type của event
     private <T extends KafkaMessage & EventMetadata> String getDLQTopic(T event) {
         String entityType = event.getEntityType();
         switch (entityType) {
@@ -166,7 +187,7 @@ public class KafkaProducerService {
                 return userEventsDLQTopic;
             default:
                 loggingService.logWarn(
-                    String.format("Unknown entity type: %s, using student DLQ topic with student id: [%s]", entityType, event.getEntityId()),
+                    String.format("Unknown entity type: %s, using student DLQ topic with entity id: [%s]", entityType, event.getEntityId()),
                     getLogContext("getDLQTopic")
                 );
                 return studentEventsDLQTopic;

@@ -1,853 +1,109 @@
-2025-10-04 17:16:03 [background-preinit] DEBUG [org.jboss.logging] - Logging Provider: org.jboss.logging.Slf4jLoggerProvider found via system property
-2025-10-04 17:16:03 [main] INFO  [c.common.QLSV.QlsvApplicationTests] - Starting QlsvApplicationTests using Java 20.0.2 with PID 14204 (started by tranhuy in d:\project IntelliJ Ultimate\modules-parent\qlsv)
-2025-10-04 17:16:03 [main] DEBUG [c.common.QLSV.QlsvApplicationTests] - Running with Spring Boot v3.5.0, Spring v6.2.7
-2025-10-04 17:16:03 [main] INFO  [c.common.QLSV.QlsvApplicationTests] - No active profile set, falling back to 1 default profile: "default"
-2025-10-04 17:16:07 [main] WARN  [com.zaxxer.hikari.HikariConfig] - HikariPool-1 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
-2025-10-04 17:16:07 [main] WARN  [org.hibernate.orm.deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-10-04 17:16:07 [main] WARN  [org.hibernate.orm.deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
-2025-10-04 17:16:10 [main] WARN  [o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-10-04 17:16:10 [main] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
-	c.c.Q.c.StudentController:
-	{GET [/students]}: get(String,UserDto)
-	{PUT [/students]}: update(StudentModelRequest,String,UserDto)
-	{POST [/students]}: add(CreateStudentModelRequest,String,UserDto)
-	{DELETE [/students]}: delete(List,String,UserDto)
-	{GET [/students/public]}: public_get(String)
-2025-10-04 17:16:10 [main] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
-	o.s.b.a.w.s.e.BasicErrorController:
-	{ [/error]}: error(HttpServletRequest)
-	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
-2025-10-04 17:16:10 [main] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'beanNameHandlerMapping' {}
-2025-10-04 17:16:10 [main] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
-2025-10-04 17:16:10 [main] WARN  [o.s.b.a.t.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
-2025-10-04 17:16:11 [main] DEBUG [i.m.c.u.i.l.InternalLoggerFactory] - Using SLF4J as the default logging framework
-2025-10-04 17:16:11 [main] DEBUG [reactor.util.Loggers] - Using Slf4j logging framework
-2025-10-04 17:16:11 [main] INFO  [c.common.QLSV.QlsvApplicationTests] - Started QlsvApplicationTests in 9.367 seconds (process running for 10.683)
-2025-10-04 17:51:22 [background-preinit] DEBUG [org.jboss.logging] - Logging Provider: org.jboss.logging.Slf4jLoggerProvider found via system property
-2025-10-04 17:51:22 [restartedMain] INFO  [com.common.QLSV.QlsvApplication] - Starting QlsvApplication using Java 20.0.2 with PID 11356 (D:\project IntelliJ Ultimate\modules-parent\qlsv\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlsv)
-2025-10-04 17:51:22 [restartedMain] DEBUG [com.common.QLSV.QlsvApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
-2025-10-04 17:51:22 [restartedMain] INFO  [com.common.QLSV.QlsvApplication] - No active profile set, falling back to 1 default profile: "default"
-2025-10-04 17:51:28 [restartedMain] DEBUG [i.m.c.u.i.l.InternalLoggerFactory] - Using SLF4J as the default logging framework
-2025-10-04 17:51:29 [restartedMain] WARN  [com.zaxxer.hikari.HikariConfig] - HikariPool-1 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
-2025-10-04 17:51:30 [restartedMain] WARN  [org.hibernate.orm.deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-10-04 17:51:30 [restartedMain] WARN  [org.hibernate.orm.deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
-2025-10-04 17:51:33 [restartedMain] WARN  [o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-10-04 17:51:34 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
-	c.c.Q.c.StudentController:
-	{GET [/students]}: get(String,UserDto)
-	{PUT [/students]}: update(StudentModelRequest,String,UserDto)
-	{POST [/students]}: add(CreateStudentModelRequest,String,UserDto)
-	{DELETE [/students]}: delete(List,String,UserDto)
-	{GET [/students/public]}: public_get(String)
-2025-10-04 17:51:34 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
-	o.s.b.a.w.s.e.BasicErrorController:
-	{ [/error]}: error(HttpServletRequest)
-	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
-2025-10-04 17:51:34 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'beanNameHandlerMapping' {}
-2025-10-04 17:51:34 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
-2025-10-04 17:51:34 [restartedMain] WARN  [o.s.b.a.t.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
-2025-10-04 17:51:34 [restartedMain] DEBUG [reactor.util.Loggers] - Using Slf4j logging framework
-2025-10-04 17:51:36 [restartedMain] INFO  [com.common.QLSV.QlsvApplication] - Started QlsvApplication in 15.463 seconds (process running for 16.448)
-2025-10-04 17:56:07 [background-preinit] DEBUG [org.jboss.logging] - Logging Provider: org.jboss.logging.Slf4jLoggerProvider found via system property
-2025-10-04 17:56:07 [restartedMain] INFO  [com.common.QLSV.QlsvApplication] - Starting QlsvApplication using Java 20.0.2 with PID 7240 (D:\project IntelliJ Ultimate\modules-parent\qlsv\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlsv)
-2025-10-04 17:56:07 [restartedMain] DEBUG [com.common.QLSV.QlsvApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
-2025-10-04 17:56:07 [restartedMain] INFO  [com.common.QLSV.QlsvApplication] - No active profile set, falling back to 1 default profile: "default"
-2025-10-04 17:56:13 [restartedMain] DEBUG [i.m.c.u.i.l.InternalLoggerFactory] - Using SLF4J as the default logging framework
-2025-10-04 17:56:15 [restartedMain] WARN  [com.zaxxer.hikari.HikariConfig] - HikariPool-1 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
-2025-10-04 17:56:15 [restartedMain] WARN  [org.hibernate.orm.deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-10-04 17:56:15 [restartedMain] WARN  [org.hibernate.orm.deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
-2025-10-04 17:56:19 [restartedMain] WARN  [o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-10-04 17:56:19 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
-	c.c.Q.c.StudentController:
-	{GET [/students]}: get(String,UserDto)
-	{PUT [/students]}: update(StudentModelRequest,String,UserDto)
-	{POST [/students]}: add(CreateStudentModelRequest,String,UserDto)
-	{DELETE [/students]}: delete(List,String,UserDto)
-	{GET [/students/public]}: public_get(String)
-2025-10-04 17:56:19 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
-	o.s.b.a.w.s.e.BasicErrorController:
-	{ [/error]}: error(HttpServletRequest)
-	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
-2025-10-04 17:56:19 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'beanNameHandlerMapping' {}
-2025-10-04 17:56:19 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
-2025-10-04 17:56:20 [restartedMain] WARN  [o.s.b.a.t.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
-2025-10-04 17:56:20 [restartedMain] DEBUG [reactor.util.Loggers] - Using Slf4j logging framework
-2025-10-04 17:56:21 [restartedMain] INFO  [com.common.QLSV.QlsvApplication] - Started QlsvApplication in 15.275 seconds (process running for 16.159)
-2025-10-04 17:57:58 [restartedMain] INFO  [com.common.QLSV.QlsvApplication] - Starting QlsvApplication using Java 20.0.2 with PID 7240 (D:\project IntelliJ Ultimate\modules-parent\qlsv\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlsv)
-2025-10-04 17:57:58 [restartedMain] DEBUG [com.common.QLSV.QlsvApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
-2025-10-04 17:57:58 [restartedMain] INFO  [com.common.QLSV.QlsvApplication] - No active profile set, falling back to 1 default profile: "default"
-2025-10-04 17:58:02 [restartedMain] WARN  [com.zaxxer.hikari.HikariConfig] - HikariPool-2 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
-2025-10-04 17:58:02 [restartedMain] WARN  [org.hibernate.orm.deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-10-04 17:58:02 [restartedMain] WARN  [org.hibernate.orm.deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
-2025-10-04 17:58:02 [restartedMain] WARN  [o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext] - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: com/model_shared/enums/Gender
-2025-10-04 17:58:02 [restartedMain] ERROR [o.s.boot.SpringApplication] - Application run failed
-org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: com/model_shared/enums/Gender
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1826) ~[spring-beans-6.2.7.jar:6.2.7]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:607) ~[spring-beans-6.2.7.jar:6.2.7]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:529) ~[spring-beans-6.2.7.jar:6.2.7]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:339) ~[spring-beans-6.2.7.jar:6.2.7]
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:373) ~[spring-beans-6.2.7.jar:6.2.7]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:337) ~[spring-beans-6.2.7.jar:6.2.7]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:207) ~[spring-beans-6.2.7.jar:6.2.7]
-	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:970) ~[spring-context-6.2.7.jar:6.2.7]
-	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:627) ~[spring-context-6.2.7.jar:6.2.7]
-	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146) ~[spring-boot-3.5.0.jar:3.5.0]
-	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:753) ~[spring-boot-3.5.0.jar:3.5.0]
-	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:439) ~[spring-boot-3.5.0.jar:3.5.0]
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:318) ~[spring-boot-3.5.0.jar:3.5.0]
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1362) ~[spring-boot-3.5.0.jar:3.5.0]
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1351) ~[spring-boot-3.5.0.jar:3.5.0]
-	at com.common.QLSV.QlsvApplication.main(QlsvApplication.java:19) ~[classes/:na]
-	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104) ~[na:na]
-	at java.base/java.lang.reflect.Method.invoke(Method.java:578) ~[na:na]
-	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50) ~[spring-boot-devtools-3.5.0.jar:3.5.0]
-Caused by: java.lang.NoClassDefFoundError: com/model_shared/enums/Gender
-	at java.base/java.lang.Class.getDeclaredMethods0(Native Method) ~[na:na]
-	at java.base/java.lang.Class.privateGetDeclaredMethods(Class.java:3502) ~[na:na]
-	at java.base/java.lang.Class.getDeclaredMethods(Class.java:2601) ~[na:na]
-	at org.hibernate.annotations.common.reflection.java.JavaXClass.getDeclaredMethodProperties(JavaXClass.java:134) ~[hibernate-commons-annotations-7.0.3.Final.jar:7.0.3.Final]
-	at org.hibernate.annotations.common.reflection.java.JavaXClass.getDeclaredProperties(JavaXClass.java:172) ~[hibernate-commons-annotations-7.0.3.Final.jar:7.0.3.Final]
-	at org.hibernate.annotations.common.reflection.java.JavaXClass.getDeclaredProperties(JavaXClass.java:164) ~[hibernate-commons-annotations-7.0.3.Final.jar:7.0.3.Final]
-	at org.hibernate.boot.model.internal.InheritanceState.determineDefaultAccessType(InheritanceState.java:269) ~[hibernate-core-6.6.15.Final.jar:6.6.15.Final]
-	at org.hibernate.boot.model.internal.InheritanceState.getElementsToProcess(InheritanceState.java:226) ~[hibernate-core-6.6.15.Final.jar:6.6.15.Final]
-	at org.hibernate.boot.model.internal.InheritanceState.postProcess(InheritanceState.java:162) ~[hibernate-core-6.6.15.Final.jar:6.6.15.Final]
-	at org.hibernate.boot.model.internal.EntityBinder.handleIdentifier(EntityBinder.java:410) ~[hibernate-core-6.6.15.Final.jar:6.6.15.Final]
-	at org.hibernate.boot.model.internal.EntityBinder.bindEntityClass(EntityBinder.java:251) ~[hibernate-core-6.6.15.Final.jar:6.6.15.Final]
-	at org.hibernate.boot.model.internal.AnnotationBinder.bindClass(AnnotationBinder.java:404) ~[hibernate-core-6.6.15.Final.jar:6.6.15.Final]
-	at org.hibernate.boot.model.source.internal.annotations.AnnotationMetadataSourceProcessorImpl.processEntityHierarchies(AnnotationMetadataSourceProcessorImpl.java:266) ~[hibernate-core-6.6.15.Final.jar:6.6.15.Final]
-	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess$1.processEntityHierarchies(MetadataBuildingProcess.java:281) ~[hibernate-core-6.6.15.Final.jar:6.6.15.Final]
-	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.complete(MetadataBuildingProcess.java:324) ~[hibernate-core-6.6.15.Final.jar:6.6.15.Final]
-	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.metadata(EntityManagerFactoryBuilderImpl.java:1442) ~[hibernate-core-6.6.15.Final.jar:6.6.15.Final]
-	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1513) ~[hibernate-core-6.6.15.Final.jar:6.6.15.Final]
-	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:66) ~[spring-orm-6.2.7.jar:6.2.7]
-	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:390) ~[spring-orm-6.2.7.jar:6.2.7]
-	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:419) ~[spring-orm-6.2.7.jar:6.2.7]
-	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:400) ~[spring-orm-6.2.7.jar:6.2.7]
-	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:366) ~[spring-orm-6.2.7.jar:6.2.7]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1873) ~[spring-beans-6.2.7.jar:6.2.7]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1822) ~[spring-beans-6.2.7.jar:6.2.7]
-	... 18 common frames omitted
-Caused by: java.lang.ClassNotFoundException: com.model_shared.enums.Gender
-	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:641) ~[na:na]
-	at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(ClassLoaders.java:188) ~[na:na]
-	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:521) ~[na:na]
-	at java.base/java.lang.Class.forName0(Native Method) ~[na:na]
-	at java.base/java.lang.Class.forName(Class.java:496) ~[na:na]
-	at java.base/java.lang.Class.forName(Class.java:475) ~[na:na]
-	at org.springframework.boot.devtools.restart.classloader.RestartClassLoader.loadClass(RestartClassLoader.java:121) ~[spring-boot-devtools-3.5.0.jar:3.5.0]
-	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:521) ~[na:na]
-	... 42 common frames omitted
-2025-10-04 17:58:04 [restartedMain] INFO  [com.common.QLSV.QlsvApplication] - Starting QlsvApplication using Java 20.0.2 with PID 7240 (D:\project IntelliJ Ultimate\modules-parent\qlsv\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlsv)
-2025-10-04 17:58:04 [restartedMain] DEBUG [com.common.QLSV.QlsvApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
-2025-10-04 17:58:04 [restartedMain] INFO  [com.common.QLSV.QlsvApplication] - No active profile set, falling back to 1 default profile: "default"
-2025-10-04 17:58:05 [restartedMain] WARN  [com.zaxxer.hikari.HikariConfig] - HikariPool-3 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
-2025-10-04 17:58:05 [restartedMain] WARN  [org.hibernate.orm.deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-10-04 17:58:05 [restartedMain] WARN  [org.hibernate.orm.deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
-2025-10-04 17:58:05 [restartedMain] WARN  [o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext] - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: com/model_shared/enums/Gender
-2025-10-04 17:58:05 [restartedMain] ERROR [o.s.boot.SpringApplication] - Application run failed
-org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: com/model_shared/enums/Gender
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1826) ~[spring-beans-6.2.7.jar:6.2.7]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:607) ~[spring-beans-6.2.7.jar:6.2.7]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:529) ~[spring-beans-6.2.7.jar:6.2.7]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:339) ~[spring-beans-6.2.7.jar:6.2.7]
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:373) ~[spring-beans-6.2.7.jar:6.2.7]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:337) ~[spring-beans-6.2.7.jar:6.2.7]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:207) ~[spring-beans-6.2.7.jar:6.2.7]
-	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:970) ~[spring-context-6.2.7.jar:6.2.7]
-	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:627) ~[spring-context-6.2.7.jar:6.2.7]
-	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146) ~[spring-boot-3.5.0.jar:3.5.0]
-	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:753) ~[spring-boot-3.5.0.jar:3.5.0]
-	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:439) ~[spring-boot-3.5.0.jar:3.5.0]
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:318) ~[spring-boot-3.5.0.jar:3.5.0]
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1362) ~[spring-boot-3.5.0.jar:3.5.0]
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1351) ~[spring-boot-3.5.0.jar:3.5.0]
-	at com.common.QLSV.QlsvApplication.main(QlsvApplication.java:19) ~[classes/:na]
-	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104) ~[na:na]
-	at java.base/java.lang.reflect.Method.invoke(Method.java:578) ~[na:na]
-	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50) ~[spring-boot-devtools-3.5.0.jar:3.5.0]
-Caused by: java.lang.NoClassDefFoundError: com/model_shared/enums/Gender
-	at java.base/java.lang.Class.getDeclaredMethods0(Native Method) ~[na:na]
-	at java.base/java.lang.Class.privateGetDeclaredMethods(Class.java:3502) ~[na:na]
-	at java.base/java.lang.Class.getDeclaredMethods(Class.java:2601) ~[na:na]
-	at org.hibernate.annotations.common.reflection.java.JavaXClass.getDeclaredMethodProperties(JavaXClass.java:134) ~[hibernate-commons-annotations-7.0.3.Final.jar:7.0.3.Final]
-	at org.hibernate.annotations.common.reflection.java.JavaXClass.getDeclaredProperties(JavaXClass.java:172) ~[hibernate-commons-annotations-7.0.3.Final.jar:7.0.3.Final]
-	at org.hibernate.annotations.common.reflection.java.JavaXClass.getDeclaredProperties(JavaXClass.java:164) ~[hibernate-commons-annotations-7.0.3.Final.jar:7.0.3.Final]
-	at org.hibernate.boot.model.internal.InheritanceState.determineDefaultAccessType(InheritanceState.java:269) ~[hibernate-core-6.6.15.Final.jar:6.6.15.Final]
-	at org.hibernate.boot.model.internal.InheritanceState.getElementsToProcess(InheritanceState.java:226) ~[hibernate-core-6.6.15.Final.jar:6.6.15.Final]
-	at org.hibernate.boot.model.internal.InheritanceState.postProcess(InheritanceState.java:162) ~[hibernate-core-6.6.15.Final.jar:6.6.15.Final]
-	at org.hibernate.boot.model.internal.EntityBinder.handleIdentifier(EntityBinder.java:410) ~[hibernate-core-6.6.15.Final.jar:6.6.15.Final]
-	at org.hibernate.boot.model.internal.EntityBinder.bindEntityClass(EntityBinder.java:251) ~[hibernate-core-6.6.15.Final.jar:6.6.15.Final]
-	at org.hibernate.boot.model.internal.AnnotationBinder.bindClass(AnnotationBinder.java:404) ~[hibernate-core-6.6.15.Final.jar:6.6.15.Final]
-	at org.hibernate.boot.model.source.internal.annotations.AnnotationMetadataSourceProcessorImpl.processEntityHierarchies(AnnotationMetadataSourceProcessorImpl.java:266) ~[hibernate-core-6.6.15.Final.jar:6.6.15.Final]
-	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess$1.processEntityHierarchies(MetadataBuildingProcess.java:281) ~[hibernate-core-6.6.15.Final.jar:6.6.15.Final]
-	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.complete(MetadataBuildingProcess.java:324) ~[hibernate-core-6.6.15.Final.jar:6.6.15.Final]
-	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.metadata(EntityManagerFactoryBuilderImpl.java:1442) ~[hibernate-core-6.6.15.Final.jar:6.6.15.Final]
-	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1513) ~[hibernate-core-6.6.15.Final.jar:6.6.15.Final]
-	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:66) ~[spring-orm-6.2.7.jar:6.2.7]
-	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:390) ~[spring-orm-6.2.7.jar:6.2.7]
-	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:419) ~[spring-orm-6.2.7.jar:6.2.7]
-	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:400) ~[spring-orm-6.2.7.jar:6.2.7]
-	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:366) ~[spring-orm-6.2.7.jar:6.2.7]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1873) ~[spring-beans-6.2.7.jar:6.2.7]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1822) ~[spring-beans-6.2.7.jar:6.2.7]
-	... 18 common frames omitted
-Caused by: java.lang.ClassNotFoundException: com.model_shared.enums.Gender
-	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:641) ~[na:na]
-	at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(ClassLoaders.java:188) ~[na:na]
-	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:521) ~[na:na]
-	at java.base/java.lang.Class.forName0(Native Method) ~[na:na]
-	at java.base/java.lang.Class.forName(Class.java:496) ~[na:na]
-	at java.base/java.lang.Class.forName(Class.java:475) ~[na:na]
-	at org.springframework.boot.devtools.restart.classloader.RestartClassLoader.loadClass(RestartClassLoader.java:121) ~[spring-boot-devtools-3.5.0.jar:3.5.0]
-	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:521) ~[na:na]
-	... 42 common frames omitted
-2025-10-04 18:07:57 [background-preinit] DEBUG [org.jboss.logging] - Logging Provider: org.jboss.logging.Slf4jLoggerProvider found via system property
-2025-10-04 18:07:57 [main] INFO  [c.common.QLSV.QlsvApplicationTests] - Starting QlsvApplicationTests using Java 20.0.2 with PID 7064 (started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlsv)
-2025-10-04 18:07:57 [main] DEBUG [c.common.QLSV.QlsvApplicationTests] - Running with Spring Boot v3.5.0, Spring v6.2.7
-2025-10-04 18:07:57 [main] INFO  [c.common.QLSV.QlsvApplicationTests] - No active profile set, falling back to 1 default profile: "default"
-2025-10-04 18:08:00 [main] WARN  [com.zaxxer.hikari.HikariConfig] - HikariPool-1 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
-2025-10-04 18:08:01 [main] WARN  [org.hibernate.orm.deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-10-04 18:08:01 [main] WARN  [org.hibernate.orm.deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
-2025-10-04 18:08:03 [main] WARN  [o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-10-04 18:08:03 [main] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
-	c.c.Q.c.StudentController:
-	{GET [/students]}: get(String,UserDto)
-	{PUT [/students]}: update(StudentModelRequest,String,UserDto)
-	{POST [/students]}: add(CreateStudentModelRequest,String,UserDto)
-	{DELETE [/students]}: delete(List,String,UserDto)
-	{GET [/students/public]}: public_get(String)
-2025-10-04 18:08:03 [main] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
-	o.s.b.a.w.s.e.BasicErrorController:
-	{ [/error]}: error(HttpServletRequest)
-	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
-2025-10-04 18:08:03 [main] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'beanNameHandlerMapping' {}
-2025-10-04 18:08:03 [main] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
-2025-10-04 18:08:04 [main] WARN  [o.s.b.a.t.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
-2025-10-04 18:08:04 [main] DEBUG [i.m.c.u.i.l.InternalLoggerFactory] - Using SLF4J as the default logging framework
-2025-10-04 18:08:04 [main] DEBUG [reactor.util.Loggers] - Using Slf4j logging framework
-2025-10-04 18:08:04 [main] INFO  [c.common.QLSV.QlsvApplicationTests] - Started QlsvApplicationTests in 8.101 seconds (process running for 9.403)
-2025-10-04 18:28:22 [background-preinit] DEBUG [org.jboss.logging] - Logging Provider: org.jboss.logging.Slf4jLoggerProvider found via system property
-2025-10-04 18:28:23 [restartedMain] INFO  [com.common.QLSV.QlsvApplication] - Starting QlsvApplication using Java 17.0.16 with PID 10176 (D:\project IntelliJ Ultimate\modules-parent\qlsv\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlsv)
-2025-10-04 18:28:23 [restartedMain] DEBUG [com.common.QLSV.QlsvApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
-2025-10-04 18:28:23 [restartedMain] INFO  [com.common.QLSV.QlsvApplication] - No active profile set, falling back to 1 default profile: "default"
-2025-10-04 18:28:31 [restartedMain] DEBUG [i.m.c.u.i.l.InternalLoggerFactory] - Using SLF4J as the default logging framework
-2025-10-04 18:28:33 [restartedMain] WARN  [com.zaxxer.hikari.HikariConfig] - HikariPool-1 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
-2025-10-04 18:28:34 [restartedMain] WARN  [org.hibernate.orm.deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-10-04 18:28:34 [restartedMain] WARN  [org.hibernate.orm.deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
-2025-10-04 18:28:40 [restartedMain] WARN  [o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-10-04 18:28:41 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
+2025-10-05 20:42:13 [background-preinit] DEBUG [logging] - Logging Provider: org.jboss.logging.Slf4jLoggerProvider found via system property
+2025-10-05 20:42:14 [restartedMain] INFO  [QlsvApplication] - Starting QlsvApplication using Java 17.0.16 with PID 8256 (D:\project IntelliJ Ultimate\modules-parent\qlsv\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlsv)
+2025-10-05 20:42:14 [restartedMain] DEBUG [QlsvApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
+2025-10-05 20:42:14 [restartedMain] INFO  [QlsvApplication] - No active profile set, falling back to 1 default profile: "default"
+2025-10-05 20:42:22 [restartedMain] DEBUG [InternalLoggerFactory] - Using SLF4J as the default logging framework
+2025-10-05 20:42:24 [restartedMain] WARN  [HikariConfig] - HikariPool-1 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
+2025-10-05 20:42:25 [restartedMain] WARN  [deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-10-05 20:42:25 [restartedMain] WARN  [deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-10-05 20:42:31 [restartedMain] WARN  [JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-10-05 20:42:32 [restartedMain] DEBUG [Mappings] - 
 	c.c.Q.c.StudentController:
 	{POST [/students]}: add(CreateStudentModelRequest,String,UserDto)
 	{GET [/students]}: get(String,UserDto)
 	{PUT [/students]}: update(StudentModelRequest,String,UserDto)
 	{DELETE [/students]}: delete(List,String,UserDto)
 	{GET [/students/public]}: public_get(String)
-2025-10-04 18:28:41 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
+2025-10-05 20:42:32 [restartedMain] DEBUG [Mappings] - 
 	o.s.b.a.w.s.e.BasicErrorController:
 	{ [/error]}: error(HttpServletRequest)
 	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
-2025-10-04 18:28:41 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'beanNameHandlerMapping' {}
-2025-10-04 18:28:42 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
-2025-10-04 18:28:42 [restartedMain] WARN  [o.s.b.a.t.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
-2025-10-04 18:28:43 [restartedMain] DEBUG [reactor.util.Loggers] - Using Slf4j logging framework
-2025-10-04 18:28:46 [restartedMain] INFO  [com.common.QLSV.QlsvApplication] - Started QlsvApplication in 24.526 seconds (process running for 25.303)
-2025-10-04 18:29:24 [http-nio-8080-exec-2] DEBUG [c.l.services.imp.LoggingServiceImp] - [security_shared] SecurityService - Calling security module with URL: http://localhost:8083/auth/validate to validate token
-2025-10-04 18:29:24 [http-nio-8080-exec-2] DEBUG [c.l.services.imp.LoggingServiceImp] - [security_shared] SecurityService - Successfully retrieved user from security module: HuyS1
-2025-10-04 18:29:24 [http-nio-8080-exec-2] DEBUG [c.l.services.imp.LoggingServiceImp] - [security_shared] SecurityService - User HuyS1 successfully authorized
-2025-10-04 18:29:24 [http-nio-8080-exec-2] DEBUG [c.l.services.imp.LoggingServiceImp] - [security_shared] RequiresAuthAspect - User HuyS1 successfully authorized for method: get
-2025-10-04 18:29:24 [http-nio-8080-exec-2] INFO  [c.l.services.imp.LoggingServiceImp] - [qlsv] StudentController - Get students API called successfully by user: HuyS1
-2025-10-04 18:29:24 [http-nio-8080-exec-2] INFO  [c.l.services.imp.LoggingServiceImp] - [qlsv] StudentServiceImp - Get data from Redis cache
-2025-10-04 18:29:55 [http-nio-8080-exec-3] DEBUG [c.l.services.imp.LoggingServiceImp] - [security_shared] SecurityService - Calling security module with URL: http://localhost:8083/auth/validate to validate token
-2025-10-04 18:29:55 [http-nio-8080-exec-3] DEBUG [c.l.services.imp.LoggingServiceImp] - [security_shared] SecurityService - Successfully retrieved user from security module: HuyS1
-2025-10-04 18:29:55 [http-nio-8080-exec-3] DEBUG [c.l.services.imp.LoggingServiceImp] - [security_shared] SecurityService - User HuyS1 successfully authorized
-2025-10-04 18:29:55 [http-nio-8080-exec-3] DEBUG [c.l.services.imp.LoggingServiceImp] - [security_shared] RequiresAuthAspect - User HuyS1 successfully authorized for method: update
-2025-10-04 18:29:55 [http-nio-8080-exec-3] INFO  [c.l.services.imp.LoggingServiceImp] - [qlsv] StudentController - Update students API called successfully by user: HuyS1
-2025-10-04 18:29:55 [http-nio-8080-exec-3] INFO  [c.l.services.imp.LoggingServiceImp] - [qlsv] StudentServiceImp - Student ID: 3, Operation: UPDATE
-2025-10-04 18:29:55 [http-nio-8080-exec-3] INFO  [c.l.services.imp.LoggingServiceImp] - [qlsv] StudentServiceImp - Update Students Successfully
-2025-10-04 18:29:55 [http-nio-8080-exec-3] INFO  [c.l.services.imp.LoggingServiceImp] - [qlsv] StudentServiceImp - Del cache key = students:all , after update students
-2025-10-04 18:29:56 [http-nio-8080-exec-3] INFO  [c.l.services.imp.LoggingServiceImp] - [kafka_shared] KafkaProducerService - Message sent to topic: student-events with key: 3
-2025-10-04 18:29:56 [http-nio-8080-exec-3] INFO  [c.l.services.imp.LoggingServiceImp] - [kafka_shared] KafkaProducerService - studentEvent event sent to topic: student-events - 3
-2025-10-04 18:29:56 [http-nio-8080-exec-3] INFO  [c.l.services.imp.LoggingServiceImp] - [qlsv] StudentController - Sent student updated event for student: s a
-2025-10-04 18:31:24 [restartedMain] INFO  [com.common.QLSV.QlsvApplication] - Starting QlsvApplication using Java 17.0.16 with PID 10176 (D:\project IntelliJ Ultimate\modules-parent\qlsv\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlsv)
-2025-10-04 18:31:24 [restartedMain] DEBUG [com.common.QLSV.QlsvApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
-2025-10-04 18:31:24 [restartedMain] INFO  [com.common.QLSV.QlsvApplication] - No active profile set, falling back to 1 default profile: "default"
-2025-10-04 18:31:29 [restartedMain] WARN  [com.zaxxer.hikari.HikariConfig] - HikariPool-2 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
-2025-10-04 18:31:29 [restartedMain] WARN  [org.hibernate.orm.deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-10-04 18:31:29 [restartedMain] WARN  [org.hibernate.orm.deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
-2025-10-04 18:31:31 [restartedMain] WARN  [o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-10-04 18:31:31 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
+2025-10-05 20:42:32 [restartedMain] DEBUG [Mappings] - 'beanNameHandlerMapping' {}
+2025-10-05 20:42:32 [restartedMain] DEBUG [Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
+2025-10-05 20:42:32 [restartedMain] WARN  [ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2025-10-05 20:42:32 [restartedMain] DEBUG [Loggers] - Using Slf4j logging framework
+2025-10-05 20:42:34 [restartedMain] INFO  [QlsvApplication] - Started QlsvApplication in 21.096 seconds (process running for 21.705)
+2025-10-05 20:42:37 [http-nio-8080-exec-2] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Calling security module with URL: http://localhost:8083/auth/validate to validate token
+2025-10-05 20:42:37 [http-nio-8080-exec-2] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Successfully retrieved user from security module: HuyS1
+2025-10-05 20:42:37 [http-nio-8080-exec-2] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - User HuyS1 successfully authorized
+2025-10-05 20:42:37 [http-nio-8080-exec-2] DEBUG [LoggingServiceImp] - [security_shared] RequiresAuthAspect - User HuyS1 successfully authorized for method: get
+2025-10-05 20:42:37 [http-nio-8080-exec-2] INFO  [LoggingServiceImp] - [qlsv] StudentController - Get students API called successfully by user: HuyS1
+2025-10-05 20:42:37 [http-nio-8080-exec-2] WARN  [LoggingServiceImp] - [qlsv] StudentServiceImp - Not found cache, Query DB
+2025-10-05 20:42:38 [http-nio-8080-exec-2] INFO  [LoggingServiceImp] - [qlsv] StudentServiceImp - Student ID: 3, Operation: GET
+2025-10-05 20:42:38 [http-nio-8080-exec-2] INFO  [LoggingServiceImp] - [qlsv] StudentServiceImp - Gets Student Successfully
+2025-10-05 20:42:38 [http-nio-8080-exec-2] INFO  [LoggingServiceImp] - [qlsv] StudentServiceImp - Save cache to Redis
+2025-10-05 20:49:14 [background-preinit] DEBUG [logging] - Logging Provider: org.jboss.logging.Slf4jLoggerProvider found via system property
+2025-10-05 20:49:15 [main] INFO  [QlsvApplicationTests] - Starting QlsvApplicationTests using Java 17.0.16 with PID 14964 (started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlsv)
+2025-10-05 20:49:15 [main] DEBUG [QlsvApplicationTests] - Running with Spring Boot v3.5.0, Spring v6.2.7
+2025-10-05 20:49:15 [main] INFO  [QlsvApplicationTests] - No active profile set, falling back to 1 default profile: "default"
+2025-10-05 20:49:19 [main] WARN  [HikariConfig] - HikariPool-1 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
+2025-10-05 20:49:20 [main] WARN  [deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-10-05 20:49:20 [main] WARN  [deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-10-05 20:49:23 [main] WARN  [JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-10-05 20:49:23 [main] DEBUG [Mappings] - 
 	c.c.Q.c.StudentController:
 	{POST [/students]}: add(CreateStudentModelRequest,String,UserDto)
 	{GET [/students]}: get(String,UserDto)
 	{PUT [/students]}: update(StudentModelRequest,String,UserDto)
 	{DELETE [/students]}: delete(List,String,UserDto)
 	{GET [/students/public]}: public_get(String)
-2025-10-04 18:31:31 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
+2025-10-05 20:49:23 [main] DEBUG [Mappings] - 
 	o.s.b.a.w.s.e.BasicErrorController:
 	{ [/error]}: error(HttpServletRequest)
 	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
-2025-10-04 18:31:31 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'beanNameHandlerMapping' {}
-2025-10-04 18:31:31 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
-2025-10-04 18:31:31 [restartedMain] WARN  [o.s.b.a.t.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
-2025-10-04 18:31:32 [restartedMain] INFO  [com.common.QLSV.QlsvApplication] - Started QlsvApplication in 8.134 seconds (process running for 191.625)
-2025-10-04 18:32:03 [http-nio-8080-exec-4] DEBUG [c.l.services.imp.LoggingServiceImp] - [security_shared] SecurityService - Calling security module with URL: http://localhost:8083/auth/validate to validate token
-2025-10-04 18:32:03 [http-nio-8080-exec-4] DEBUG [c.l.services.imp.LoggingServiceImp] - [security_shared] SecurityService - Successfully retrieved user from security module: HuyS1
-2025-10-04 18:32:03 [http-nio-8080-exec-4] DEBUG [c.l.services.imp.LoggingServiceImp] - [security_shared] SecurityService - User HuyS1 successfully authorized
-2025-10-04 18:32:03 [http-nio-8080-exec-4] DEBUG [c.l.services.imp.LoggingServiceImp] - [security_shared] RequiresAuthAspect - User HuyS1 successfully authorized for method: update
-2025-10-04 18:32:03 [http-nio-8080-exec-4] INFO  [c.l.services.imp.LoggingServiceImp] - [qlsv] StudentController - Update students API called successfully by user: HuyS1
-2025-10-04 18:32:03 [http-nio-8080-exec-4] INFO  [c.l.services.imp.LoggingServiceImp] - [qlsv] StudentServiceImp - Student ID: 3, Operation: UPDATE
-2025-10-04 18:32:03 [http-nio-8080-exec-4] INFO  [c.l.services.imp.LoggingServiceImp] - [qlsv] StudentServiceImp - Update Students Successfully
-2025-10-04 18:32:03 [http-nio-8080-exec-4] INFO  [c.l.services.imp.LoggingServiceImp] - [qlsv] StudentServiceImp - Del cache key = students:all , after update students
-2025-10-04 18:32:03 [http-nio-8080-exec-4] INFO  [c.l.services.imp.LoggingServiceImp] - [kafka_shared] KafkaProducerService - Message sent to topic: student-events with key: 3
-2025-10-04 18:32:03 [http-nio-8080-exec-4] INFO  [c.l.services.imp.LoggingServiceImp] - [kafka_shared] KafkaProducerService - studentEvent event sent to topic: student-events - 3
-2025-10-04 18:32:03 [http-nio-8080-exec-4] INFO  [c.l.services.imp.LoggingServiceImp] - [qlsv] StudentController - Sent student updated event for student: s a
-2025-10-04 18:32:43 [restartedMain] INFO  [com.common.QLSV.QlsvApplication] - Starting QlsvApplication using Java 17.0.16 with PID 10176 (D:\project IntelliJ Ultimate\modules-parent\qlsv\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlsv)
-2025-10-04 18:32:43 [restartedMain] DEBUG [com.common.QLSV.QlsvApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
-2025-10-04 18:32:43 [restartedMain] INFO  [com.common.QLSV.QlsvApplication] - No active profile set, falling back to 1 default profile: "default"
-2025-10-04 18:32:44 [restartedMain] WARN  [com.zaxxer.hikari.HikariConfig] - HikariPool-3 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
-2025-10-04 18:32:44 [restartedMain] WARN  [org.hibernate.orm.deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-10-04 18:32:44 [restartedMain] WARN  [org.hibernate.orm.deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
-2025-10-04 18:32:45 [restartedMain] WARN  [o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-10-04 18:32:45 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
+2025-10-05 20:49:23 [main] DEBUG [Mappings] - 'beanNameHandlerMapping' {}
+2025-10-05 20:49:23 [main] DEBUG [Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
+2025-10-05 20:49:23 [main] WARN  [ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2025-10-05 20:49:23 [main] DEBUG [InternalLoggerFactory] - Using SLF4J as the default logging framework
+2025-10-05 20:49:23 [main] DEBUG [Loggers] - Using Slf4j logging framework
+2025-10-05 20:49:24 [main] INFO  [QlsvApplicationTests] - Started QlsvApplicationTests in 10.117 seconds (process running for 11.34)
+2025-10-05 20:53:27 [background-preinit] DEBUG [logging] - Logging Provider: org.jboss.logging.Slf4jLoggerProvider found via system property
+2025-10-05 20:53:27 [main] INFO  [QlsvApplicationTests] - Starting QlsvApplicationTests using Java 17.0.16 with PID 13824 (started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlsv)
+2025-10-05 20:53:27 [main] DEBUG [QlsvApplicationTests] - Running with Spring Boot v3.5.0, Spring v6.2.7
+2025-10-05 20:53:27 [main] INFO  [QlsvApplicationTests] - No active profile set, falling back to 1 default profile: "default"
+2025-10-05 20:53:31 [main] WARN  [HikariConfig] - HikariPool-1 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
+2025-10-05 20:53:31 [main] WARN  [deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-10-05 20:53:31 [main] WARN  [deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-10-05 20:53:34 [main] WARN  [JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-10-05 20:53:34 [main] DEBUG [Mappings] - 
 	c.c.Q.c.StudentController:
 	{POST [/students]}: add(CreateStudentModelRequest,String,UserDto)
 	{GET [/students]}: get(String,UserDto)
 	{PUT [/students]}: update(StudentModelRequest,String,UserDto)
 	{DELETE [/students]}: delete(List,String,UserDto)
 	{GET [/students/public]}: public_get(String)
-2025-10-04 18:32:45 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
+2025-10-05 20:53:34 [main] DEBUG [Mappings] - 
 	o.s.b.a.w.s.e.BasicErrorController:
 	{ [/error]}: error(HttpServletRequest)
 	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
-2025-10-04 18:32:45 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'beanNameHandlerMapping' {}
-2025-10-04 18:32:45 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
-2025-10-04 18:32:45 [restartedMain] WARN  [o.s.b.a.t.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
-2025-10-04 18:32:46 [restartedMain] INFO  [com.common.QLSV.QlsvApplication] - Started QlsvApplication in 2.894 seconds (process running for 264.866)
-2025-10-04 18:32:52 [restartedMain] INFO  [com.common.QLSV.QlsvApplication] - Starting QlsvApplication using Java 17.0.16 with PID 10176 (D:\project IntelliJ Ultimate\modules-parent\qlsv\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlsv)
-2025-10-04 18:32:52 [restartedMain] DEBUG [com.common.QLSV.QlsvApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
-2025-10-04 18:32:52 [restartedMain] INFO  [com.common.QLSV.QlsvApplication] - No active profile set, falling back to 1 default profile: "default"
-2025-10-04 18:32:54 [restartedMain] WARN  [com.zaxxer.hikari.HikariConfig] - HikariPool-4 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
-2025-10-04 18:32:54 [restartedMain] WARN  [org.hibernate.orm.deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-10-04 18:32:54 [restartedMain] WARN  [org.hibernate.orm.deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
-2025-10-04 18:32:55 [restartedMain] WARN  [o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-10-04 18:32:55 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
+2025-10-05 20:53:34 [main] DEBUG [Mappings] - 'beanNameHandlerMapping' {}
+2025-10-05 20:53:35 [main] DEBUG [Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
+2025-10-05 20:53:35 [main] WARN  [ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2025-10-05 20:53:35 [main] DEBUG [InternalLoggerFactory] - Using SLF4J as the default logging framework
+2025-10-05 20:53:35 [main] DEBUG [Loggers] - Using Slf4j logging framework
+2025-10-05 20:53:36 [main] INFO  [QlsvApplicationTests] - Started QlsvApplicationTests in 9.364 seconds (process running for 10.619)
+2025-10-05 21:00:55 [background-preinit] DEBUG [logging] - Logging Provider: org.jboss.logging.Slf4jLoggerProvider found via system property
+2025-10-05 21:00:55 [restartedMain] INFO  [QlsvApplication] - Starting QlsvApplication using Java 17.0.16 with PID 4980 (D:\project IntelliJ Ultimate\modules-parent\qlsv\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlsv)
+2025-10-05 21:00:55 [restartedMain] DEBUG [QlsvApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
+2025-10-05 21:00:55 [restartedMain] INFO  [QlsvApplication] - No active profile set, falling back to 1 default profile: "default"
+2025-10-05 21:01:00 [restartedMain] DEBUG [InternalLoggerFactory] - Using SLF4J as the default logging framework
+2025-10-05 21:01:01 [restartedMain] WARN  [HikariConfig] - HikariPool-1 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
+2025-10-05 21:01:02 [restartedMain] WARN  [deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-10-05 21:01:02 [restartedMain] WARN  [deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-10-05 21:01:07 [restartedMain] WARN  [JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-10-05 21:01:07 [restartedMain] DEBUG [Mappings] - 
 	c.c.Q.c.StudentController:
 	{POST [/students]}: add(CreateStudentModelRequest,String,UserDto)
 	{GET [/students]}: get(String,UserDto)
 	{PUT [/students]}: update(StudentModelRequest,String,UserDto)
 	{DELETE [/students]}: delete(List,String,UserDto)
 	{GET [/students/public]}: public_get(String)
-2025-10-04 18:32:55 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
+2025-10-05 21:01:07 [restartedMain] DEBUG [Mappings] - 
 	o.s.b.a.w.s.e.BasicErrorController:
 	{ [/error]}: error(HttpServletRequest)
 	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
-2025-10-04 18:32:55 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'beanNameHandlerMapping' {}
-2025-10-04 18:32:55 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
-2025-10-04 18:32:55 [restartedMain] WARN  [o.s.b.a.t.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
-2025-10-04 18:32:56 [restartedMain] INFO  [com.common.QLSV.QlsvApplication] - Started QlsvApplication in 4.422 seconds (process running for 275.219)
-2025-10-04 18:33:00 [http-nio-8080-exec-3] DEBUG [c.l.services.imp.LoggingServiceImp] - [security_shared] SecurityService - Calling security module with URL: http://localhost:8083/auth/validate to validate token
-2025-10-04 18:33:00 [http-nio-8080-exec-3] DEBUG [c.l.services.imp.LoggingServiceImp] - [security_shared] SecurityService - Successfully retrieved user from security module: HuyS1
-2025-10-04 18:33:00 [http-nio-8080-exec-3] DEBUG [c.l.services.imp.LoggingServiceImp] - [security_shared] SecurityService - User HuyS1 successfully authorized
-2025-10-04 18:33:00 [http-nio-8080-exec-3] DEBUG [c.l.services.imp.LoggingServiceImp] - [security_shared] RequiresAuthAspect - User HuyS1 successfully authorized for method: update
-2025-10-04 18:33:00 [http-nio-8080-exec-3] INFO  [c.l.services.imp.LoggingServiceImp] - [qlsv] StudentController - Update students API called successfully by user: HuyS1
-2025-10-04 18:33:00 [http-nio-8080-exec-3] INFO  [c.l.services.imp.LoggingServiceImp] - [qlsv] StudentServiceImp - Student ID: 3, Operation: UPDATE
-2025-10-04 18:33:00 [http-nio-8080-exec-3] INFO  [c.l.services.imp.LoggingServiceImp] - [qlsv] StudentServiceImp - Update Students Successfully
-2025-10-04 18:33:00 [http-nio-8080-exec-3] INFO  [c.l.services.imp.LoggingServiceImp] - [qlsv] StudentServiceImp - Del cache key = students:all , after update students
-2025-10-04 18:33:00 [http-nio-8080-exec-3] INFO  [c.l.services.imp.LoggingServiceImp] - [kafka_shared] KafkaProducerService - Message sent to topic: student-events with key: 3
-2025-10-04 18:33:00 [http-nio-8080-exec-3] INFO  [c.l.services.imp.LoggingServiceImp] - [kafka_shared] KafkaProducerService - studentEvent event sent to topic: student-events - 3
-2025-10-04 18:33:00 [http-nio-8080-exec-3] INFO  [c.l.services.imp.LoggingServiceImp] - [qlsv] StudentController - Sent student updated event for student: s a
-2025-10-04 18:36:28 [restartedMain] INFO  [com.common.QLSV.QlsvApplication] - Starting QlsvApplication using Java 17.0.16 with PID 10176 (D:\project IntelliJ Ultimate\modules-parent\qlsv\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlsv)
-2025-10-04 18:36:28 [restartedMain] DEBUG [com.common.QLSV.QlsvApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
-2025-10-04 18:36:28 [restartedMain] INFO  [com.common.QLSV.QlsvApplication] - No active profile set, falling back to 1 default profile: "default"
-2025-10-04 18:36:30 [restartedMain] WARN  [com.zaxxer.hikari.HikariConfig] - HikariPool-5 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
-2025-10-04 18:36:31 [restartedMain] WARN  [org.hibernate.orm.deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-10-04 18:36:31 [restartedMain] WARN  [org.hibernate.orm.deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
-2025-10-04 18:36:31 [restartedMain] WARN  [o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-10-04 18:36:31 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
-	c.c.Q.c.StudentController:
-	{POST [/students]}: add(CreateStudentModelRequest,String,UserDto)
-	{GET [/students]}: get(String,UserDto)
-	{PUT [/students]}: update(StudentModelRequest,String,UserDto)
-	{DELETE [/students]}: delete(List,String,UserDto)
-	{GET [/students/public]}: public_get(String)
-2025-10-04 18:36:31 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 
-	o.s.b.a.w.s.e.BasicErrorController:
-	{ [/error]}: error(HttpServletRequest)
-	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
-2025-10-04 18:36:31 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'beanNameHandlerMapping' {}
-2025-10-04 18:36:31 [restartedMain] DEBUG [_.s.w.s.HandlerMapping.Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
-2025-10-04 18:36:31 [restartedMain] WARN  [o.s.b.a.t.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
-2025-10-04 18:36:32 [restartedMain] INFO  [com.common.QLSV.QlsvApplication] - Started QlsvApplication in 3.606 seconds (process running for 491.072)
-2025-10-04 18:36:42 [restartedMain] INFO  [c.c.Q.QlsvApplication] - Starting QlsvApplication using Java 17.0.16 with PID 10176 (D:\project IntelliJ Ultimate\modules-parent\qlsv\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlsv)
-2025-10-04 18:36:42 [restartedMain] DEBUG [c.c.Q.QlsvApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
-2025-10-04 18:36:42 [restartedMain] INFO  [c.c.Q.QlsvApplication] - No active profile set, falling back to 1 default profile: "default"
-2025-10-04 18:36:45 [restartedMain] WARN  [c.z.h.HikariConfig] - HikariPool-6 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
-2025-10-04 18:36:45 [restartedMain] WARN  [o.h.orm.deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-10-04 18:36:45 [restartedMain] WARN  [o.h.orm.deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
-2025-10-04 18:36:46 [restartedMain] WARN  [o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-10-04 18:36:46 [restartedMain] DEBUG [_.s.w.s.H.Mappings] - 
-	c.c.Q.c.StudentController:
-	{POST [/students]}: add(CreateStudentModelRequest,String,UserDto)
-	{GET [/students]}: get(String,UserDto)
-	{PUT [/students]}: update(StudentModelRequest,String,UserDto)
-	{DELETE [/students]}: delete(List,String,UserDto)
-	{GET [/students/public]}: public_get(String)
-2025-10-04 18:36:47 [restartedMain] DEBUG [_.s.w.s.H.Mappings] - 
-	o.s.b.a.w.s.e.BasicErrorController:
-	{ [/error]}: error(HttpServletRequest)
-	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
-2025-10-04 18:36:47 [restartedMain] DEBUG [_.s.w.s.H.Mappings] - 'beanNameHandlerMapping' {}
-2025-10-04 18:36:47 [restartedMain] DEBUG [_.s.w.s.H.Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
-2025-10-04 18:36:47 [restartedMain] WARN  [o.s.b.a.t.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
-2025-10-04 18:36:48 [restartedMain] INFO  [c.c.Q.QlsvApplication] - Started QlsvApplication in 6.313 seconds (process running for 507.172)
-2025-10-04 18:36:50 [restartedMain] INFO  [c.c.Q.QlsvApplication] - Starting QlsvApplication using Java 17.0.16 with PID 10176 (D:\project IntelliJ Ultimate\modules-parent\qlsv\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlsv)
-2025-10-04 18:36:50 [restartedMain] DEBUG [c.c.Q.QlsvApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
-2025-10-04 18:36:50 [restartedMain] INFO  [c.c.Q.QlsvApplication] - No active profile set, falling back to 1 default profile: "default"
-2025-10-04 18:36:53 [restartedMain] WARN  [c.z.h.HikariConfig] - HikariPool-7 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
-2025-10-04 18:36:53 [restartedMain] WARN  [o.h.orm.deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-10-04 18:36:53 [restartedMain] WARN  [o.h.orm.deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
-2025-10-04 18:36:55 [restartedMain] WARN  [o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-10-04 18:36:56 [restartedMain] DEBUG [_.s.w.s.H.Mappings] - 
-	c.c.Q.c.StudentController:
-	{POST [/students]}: add(CreateStudentModelRequest,String,UserDto)
-	{GET [/students]}: get(String,UserDto)
-	{PUT [/students]}: update(StudentModelRequest,String,UserDto)
-	{DELETE [/students]}: delete(List,String,UserDto)
-	{GET [/students/public]}: public_get(String)
-2025-10-04 18:36:56 [restartedMain] DEBUG [_.s.w.s.H.Mappings] - 
-	o.s.b.a.w.s.e.BasicErrorController:
-	{ [/error]}: error(HttpServletRequest)
-	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
-2025-10-04 18:36:56 [restartedMain] DEBUG [_.s.w.s.H.Mappings] - 'beanNameHandlerMapping' {}
-2025-10-04 18:36:56 [restartedMain] DEBUG [_.s.w.s.H.Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
-2025-10-04 18:36:56 [restartedMain] WARN  [o.s.b.a.t.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
-2025-10-04 18:36:57 [restartedMain] INFO  [c.c.Q.QlsvApplication] - Started QlsvApplication in 6.6 seconds (process running for 516.099)
-2025-10-04 18:37:00 [restartedMain] INFO  [c.c.Q.QlsvApplication] - Starting QlsvApplication using Java 17.0.16 with PID 10176 (D:\project IntelliJ Ultimate\modules-parent\qlsv\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlsv)
-2025-10-04 18:37:00 [restartedMain] DEBUG [c.c.Q.QlsvApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
-2025-10-04 18:37:00 [restartedMain] INFO  [c.c.Q.QlsvApplication] - No active profile set, falling back to 1 default profile: "default"
-2025-10-04 18:37:02 [restartedMain] WARN  [c.z.h.HikariConfig] - HikariPool-8 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
-2025-10-04 18:37:02 [restartedMain] WARN  [o.h.orm.deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-10-04 18:37:02 [restartedMain] WARN  [o.h.orm.deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
-2025-10-04 18:37:03 [restartedMain] WARN  [o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-10-04 18:37:03 [restartedMain] DEBUG [_.s.w.s.H.Mappings] - 
-	c.c.Q.c.StudentController:
-	{POST [/students]}: add(CreateStudentModelRequest,String,UserDto)
-	{GET [/students]}: get(String,UserDto)
-	{PUT [/students]}: update(StudentModelRequest,String,UserDto)
-	{DELETE [/students]}: delete(List,String,UserDto)
-	{GET [/students/public]}: public_get(String)
-2025-10-04 18:37:03 [restartedMain] DEBUG [_.s.w.s.H.Mappings] - 
-	o.s.b.a.w.s.e.BasicErrorController:
-	{ [/error]}: error(HttpServletRequest)
-	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
-2025-10-04 18:37:03 [restartedMain] DEBUG [_.s.w.s.H.Mappings] - 'beanNameHandlerMapping' {}
-2025-10-04 18:37:03 [restartedMain] DEBUG [_.s.w.s.H.Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
-2025-10-04 18:37:03 [restartedMain] WARN  [o.s.b.a.t.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
-2025-10-04 18:37:04 [restartedMain] INFO  [c.c.Q.QlsvApplication] - Started QlsvApplication in 3.793 seconds (process running for 522.73)
-2025-10-04 18:37:11 [restartedMain] INFO  [QlsvApplication] - Starting QlsvApplication using Java 17.0.16 with PID 10176 (D:\project IntelliJ Ultimate\modules-parent\qlsv\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlsv)
-2025-10-04 18:37:11 [restartedMain] DEBUG [QlsvApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
-2025-10-04 18:37:11 [restartedMain] INFO  [QlsvApplication] - No active profile set, falling back to 1 default profile: "default"
-2025-10-04 18:37:13 [restartedMain] WARN  [HikariConfig] - HikariPool-9 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
-2025-10-04 18:37:13 [restartedMain] WARN  [deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-10-04 18:37:13 [restartedMain] WARN  [deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
-2025-10-04 18:37:14 [restartedMain] WARN  [JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-10-04 18:37:14 [restartedMain] DEBUG [Mappings] - 
-	c.c.Q.c.StudentController:
-	{POST [/students]}: add(CreateStudentModelRequest,String,UserDto)
-	{GET [/students]}: get(String,UserDto)
-	{PUT [/students]}: update(StudentModelRequest,String,UserDto)
-	{DELETE [/students]}: delete(List,String,UserDto)
-	{GET [/students/public]}: public_get(String)
-2025-10-04 18:37:14 [restartedMain] DEBUG [Mappings] - 
-	o.s.b.a.w.s.e.BasicErrorController:
-	{ [/error]}: error(HttpServletRequest)
-	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
-2025-10-04 18:37:14 [restartedMain] DEBUG [Mappings] - 'beanNameHandlerMapping' {}
-2025-10-04 18:37:14 [restartedMain] DEBUG [Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
-2025-10-04 18:37:14 [restartedMain] WARN  [ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
-2025-10-04 18:37:14 [restartedMain] INFO  [QlsvApplication] - Started QlsvApplication in 3.813 seconds (process running for 533.646)
-2025-10-04 18:37:16 [restartedMain] INFO  [QlsvApplication] - Starting QlsvApplication using Java 17.0.16 with PID 10176 (D:\project IntelliJ Ultimate\modules-parent\qlsv\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlsv)
-2025-10-04 18:37:16 [restartedMain] DEBUG [QlsvApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
-2025-10-04 18:37:16 [restartedMain] INFO  [QlsvApplication] - No active profile set, falling back to 1 default profile: "default"
-2025-10-04 18:37:18 [restartedMain] WARN  [HikariConfig] - HikariPool-10 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
-2025-10-04 18:37:18 [restartedMain] WARN  [deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-10-04 18:37:18 [restartedMain] WARN  [deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
-2025-10-04 18:37:19 [restartedMain] WARN  [JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-10-04 18:37:19 [restartedMain] DEBUG [Mappings] - 
-	c.c.Q.c.StudentController:
-	{POST [/students]}: add(CreateStudentModelRequest,String,UserDto)
-	{GET [/students]}: get(String,UserDto)
-	{PUT [/students]}: update(StudentModelRequest,String,UserDto)
-	{DELETE [/students]}: delete(List,String,UserDto)
-	{GET [/students/public]}: public_get(String)
-2025-10-04 18:37:19 [restartedMain] DEBUG [Mappings] - 
-	o.s.b.a.w.s.e.BasicErrorController:
-	{ [/error]}: error(HttpServletRequest)
-	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
-2025-10-04 18:37:19 [restartedMain] DEBUG [Mappings] - 'beanNameHandlerMapping' {}
-2025-10-04 18:37:20 [restartedMain] DEBUG [Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
-2025-10-04 18:37:20 [restartedMain] WARN  [ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
-2025-10-04 18:37:20 [restartedMain] INFO  [QlsvApplication] - Started QlsvApplication in 3.799 seconds (process running for 539.486)
-2025-10-04 18:37:32 [restartedMain] INFO  [QlsvApplication] - Starting QlsvApplication using Java 17.0.16 with PID 10176 (D:\project IntelliJ Ultimate\modules-parent\qlsv\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlsv)
-2025-10-04 18:37:32 [restartedMain] DEBUG [QlsvApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
-2025-10-04 18:37:32 [restartedMain] INFO  [QlsvApplication] - No active profile set, falling back to 1 default profile: "default"
-2025-10-04 18:37:34 [restartedMain] WARN  [HikariConfig] - HikariPool-11 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
-2025-10-04 18:37:34 [restartedMain] WARN  [deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-10-04 18:37:34 [restartedMain] WARN  [deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
-2025-10-04 18:37:34 [restartedMain] WARN  [JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-10-04 18:37:34 [restartedMain] DEBUG [Mappings] - 
-	c.c.Q.c.StudentController:
-	{POST [/students]}: add(CreateStudentModelRequest,String,UserDto)
-	{GET [/students]}: get(String,UserDto)
-	{PUT [/students]}: update(StudentModelRequest,String,UserDto)
-	{DELETE [/students]}: delete(List,String,UserDto)
-	{GET [/students/public]}: public_get(String)
-2025-10-04 18:37:34 [restartedMain] DEBUG [Mappings] - 
-	o.s.b.a.w.s.e.BasicErrorController:
-	{ [/error]}: error(HttpServletRequest)
-	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
-2025-10-04 18:37:34 [restartedMain] DEBUG [Mappings] - 'beanNameHandlerMapping' {}
-2025-10-04 18:37:35 [restartedMain] DEBUG [Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
-2025-10-04 18:37:35 [restartedMain] WARN  [ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
-2025-10-04 18:37:35 [restartedMain] INFO  [QlsvApplication] - Started QlsvApplication in 2.566 seconds (process running for 554.005)
-2025-10-04 18:38:11 [http-nio-8080-exec-2] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Calling security module with URL: http://localhost:8083/auth/validate to validate token
-2025-10-04 18:38:11 [http-nio-8080-exec-2] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Successfully retrieved user from security module: HuyS1
-2025-10-04 18:38:11 [http-nio-8080-exec-2] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - User HuyS1 successfully authorized
-2025-10-04 18:38:11 [http-nio-8080-exec-2] DEBUG [LoggingServiceImp] - [security_shared] RequiresAuthAspect - User HuyS1 successfully authorized for method: update
-2025-10-04 18:38:11 [http-nio-8080-exec-2] INFO  [LoggingServiceImp] - [qlsv] StudentController - Update students API called successfully by user: HuyS1
-2025-10-04 18:38:11 [http-nio-8080-exec-2] INFO  [LoggingServiceImp] - [qlsv] StudentServiceImp - Student ID: 3, Operation: UPDATE
-2025-10-04 18:38:11 [http-nio-8080-exec-2] INFO  [LoggingServiceImp] - [qlsv] StudentServiceImp - Update Students Successfully
-2025-10-04 18:38:11 [http-nio-8080-exec-2] INFO  [LoggingServiceImp] - [qlsv] StudentServiceImp - Del cache key = students:all , after update students
-2025-10-04 18:38:11 [http-nio-8080-exec-2] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - Message sent to topic: student-events with key: 3
-2025-10-04 18:38:11 [http-nio-8080-exec-2] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - studentEvent event sent to topic: student-events - 3
-2025-10-04 18:38:11 [http-nio-8080-exec-2] INFO  [LoggingServiceImp] - [qlsv] StudentController - Sent student updated event for student: s a
-2025-10-04 18:39:22 [restartedMain] INFO  [QlsvApplication] - Starting QlsvApplication using Java 17.0.16 with PID 10176 (D:\project IntelliJ Ultimate\modules-parent\qlsv\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlsv)
-2025-10-04 18:39:22 [restartedMain] DEBUG [QlsvApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
-2025-10-04 18:39:22 [restartedMain] INFO  [QlsvApplication] - No active profile set, falling back to 1 default profile: "default"
-2025-10-04 18:39:25 [restartedMain] WARN  [HikariConfig] - HikariPool-12 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
-2025-10-04 18:39:25 [restartedMain] WARN  [deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-10-04 18:39:25 [restartedMain] WARN  [deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
-2025-10-04 18:39:26 [restartedMain] WARN  [JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-10-04 18:39:26 [restartedMain] DEBUG [Mappings] - 
-	c.c.Q.c.StudentController:
-	{POST [/students]}: add(CreateStudentModelRequest,String,UserDto)
-	{GET [/students]}: get(String,UserDto)
-	{PUT [/students]}: update(StudentModelRequest,String,UserDto)
-	{DELETE [/students]}: delete(List,String,UserDto)
-	{GET [/students/public]}: public_get(String)
-2025-10-04 18:39:26 [restartedMain] DEBUG [Mappings] - 
-	o.s.b.a.w.s.e.BasicErrorController:
-	{ [/error]}: error(HttpServletRequest)
-	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
-2025-10-04 18:39:26 [restartedMain] DEBUG [Mappings] - 'beanNameHandlerMapping' {}
-2025-10-04 18:39:26 [restartedMain] DEBUG [Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
-2025-10-04 18:39:26 [restartedMain] WARN  [ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
-2025-10-04 18:39:27 [restartedMain] INFO  [QlsvApplication] - Started QlsvApplication in 4.56 seconds (process running for 665.985)
-2025-10-04 18:40:09 [http-nio-8080-exec-3] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Calling security module with URL: http://localhost:8083/auth/validate to validate token
-2025-10-04 18:40:09 [http-nio-8080-exec-3] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Successfully retrieved user from security module: HuyS1
-2025-10-04 18:40:09 [http-nio-8080-exec-3] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - User HuyS1 successfully authorized
-2025-10-04 18:40:09 [http-nio-8080-exec-3] DEBUG [LoggingServiceImp] - [security_shared] RequiresAuthAspect - User HuyS1 successfully authorized for method: update
-2025-10-04 18:40:09 [http-nio-8080-exec-3] INFO  [LoggingServiceImp] - [qlsv] StudentController - Update students API called successfully by user: HuyS1
-2025-10-04 18:40:09 [http-nio-8080-exec-3] INFO  [LoggingServiceImp] - [qlsv] StudentServiceImp - Student ID: 3, Operation: UPDATE
-2025-10-04 18:40:09 [http-nio-8080-exec-3] INFO  [LoggingServiceImp] - [qlsv] StudentServiceImp - Update Students Successfully
-2025-10-04 18:40:09 [http-nio-8080-exec-3] INFO  [LoggingServiceImp] - [qlsv] StudentServiceImp - Del cache key = students:all , after update students
-2025-10-04 18:40:09 [http-nio-8080-exec-3] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - Message sent to topic: student-events with key: 3
-2025-10-04 18:40:09 [http-nio-8080-exec-3] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - studentEvent event sent to topic: student-events - 3
-2025-10-04 18:40:09 [http-nio-8080-exec-3] INFO  [LoggingServiceImp] - [qlsv] StudentController - Sent student updated event for student: s a
-2025-10-04 18:41:25 [restartedMain] INFO  [QlsvApplication] - Starting QlsvApplication using Java 17.0.16 with PID 10176 (D:\project IntelliJ Ultimate\modules-parent\qlsv\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlsv)
-2025-10-04 18:41:25 [restartedMain] DEBUG [QlsvApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
-2025-10-04 18:41:25 [restartedMain] INFO  [QlsvApplication] - No active profile set, falling back to 1 default profile: "default"
-2025-10-04 18:41:26 [restartedMain] WARN  [HikariConfig] - HikariPool-13 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
-2025-10-04 18:41:26 [restartedMain] WARN  [deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-10-04 18:41:26 [restartedMain] WARN  [deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
-2025-10-04 18:41:27 [restartedMain] WARN  [JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-10-04 18:41:27 [restartedMain] DEBUG [Mappings] - 
-	c.c.Q.c.StudentController:
-	{POST [/students]}: add(CreateStudentModelRequest,String,UserDto)
-	{GET [/students]}: get(String,UserDto)
-	{PUT [/students]}: update(StudentModelRequest,String,UserDto)
-	{DELETE [/students]}: delete(List,String,UserDto)
-	{GET [/students/public]}: public_get(String)
-2025-10-04 18:41:27 [restartedMain] DEBUG [Mappings] - 
-	o.s.b.a.w.s.e.BasicErrorController:
-	{ [/error]}: error(HttpServletRequest)
-	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
-2025-10-04 18:41:27 [restartedMain] DEBUG [Mappings] - 'beanNameHandlerMapping' {}
-2025-10-04 18:41:27 [restartedMain] DEBUG [Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
-2025-10-04 18:41:27 [restartedMain] WARN  [ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
-2025-10-04 18:41:28 [restartedMain] INFO  [QlsvApplication] - Started QlsvApplication in 2.695 seconds (process running for 786.969)
-2025-10-04 18:42:55 [http-nio-8080-exec-3] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Calling security module with URL: http://localhost:8083/auth/validate to validate token
-2025-10-04 18:42:55 [http-nio-8080-exec-3] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Successfully retrieved user from security module: HuyS1
-2025-10-04 18:42:55 [http-nio-8080-exec-3] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - User HuyS1 successfully authorized
-2025-10-04 18:42:55 [http-nio-8080-exec-3] DEBUG [LoggingServiceImp] - [security_shared] RequiresAuthAspect - User HuyS1 successfully authorized for method: update
-2025-10-04 18:42:55 [http-nio-8080-exec-3] INFO  [LoggingServiceImp] - [qlsv] StudentController - Update students API called successfully by user: HuyS1
-2025-10-04 18:42:55 [http-nio-8080-exec-3] INFO  [LoggingServiceImp] - [qlsv] StudentServiceImp - Student ID: 3, Operation: UPDATE
-2025-10-04 18:42:55 [http-nio-8080-exec-3] INFO  [LoggingServiceImp] - [qlsv] StudentServiceImp - Update Students Successfully
-2025-10-04 18:42:55 [http-nio-8080-exec-3] INFO  [LoggingServiceImp] - [qlsv] StudentServiceImp - Del cache key = students:all , after update students
-2025-10-04 18:42:55 [http-nio-8080-exec-3] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - Message sent to topic: student-events with key: 3
-2025-10-04 18:42:55 [http-nio-8080-exec-3] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - studentEvent event sent to topic: student-events - 3
-2025-10-04 18:42:55 [http-nio-8080-exec-3] INFO  [LoggingServiceImp] - [qlsv] StudentController - Sent student updated event for student: s a
-2025-10-04 18:44:39 [restartedMain] INFO  [QlsvApplication] - Starting QlsvApplication using Java 17.0.16 with PID 10176 (D:\project IntelliJ Ultimate\modules-parent\qlsv\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlsv)
-2025-10-04 18:44:39 [restartedMain] DEBUG [QlsvApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
-2025-10-04 18:44:39 [restartedMain] INFO  [QlsvApplication] - No active profile set, falling back to 1 default profile: "default"
-2025-10-04 18:44:40 [restartedMain] WARN  [HikariConfig] - HikariPool-14 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
-2025-10-04 18:44:40 [restartedMain] WARN  [deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-10-04 18:44:40 [restartedMain] WARN  [deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
-2025-10-04 18:44:40 [restartedMain] WARN  [JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-10-04 18:44:40 [restartedMain] DEBUG [Mappings] - 
-	c.c.Q.c.StudentController:
-	{POST [/students]}: add(CreateStudentModelRequest,String,UserDto)
-	{GET [/students]}: get(String,UserDto)
-	{PUT [/students]}: update(StudentModelRequest,String,UserDto)
-	{DELETE [/students]}: delete(List,String,UserDto)
-	{GET [/students/public]}: public_get(String)
-2025-10-04 18:44:40 [restartedMain] DEBUG [Mappings] - 
-	o.s.b.a.w.s.e.BasicErrorController:
-	{ [/error]}: error(HttpServletRequest)
-	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
-2025-10-04 18:44:40 [restartedMain] DEBUG [Mappings] - 'beanNameHandlerMapping' {}
-2025-10-04 18:44:41 [restartedMain] DEBUG [Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
-2025-10-04 18:44:41 [restartedMain] WARN  [ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
-2025-10-04 18:44:41 [restartedMain] INFO  [QlsvApplication] - Started QlsvApplication in 1.836 seconds (process running for 980.208)
-2025-10-04 18:45:57 [restartedMain] INFO  [QlsvApplication] - Starting QlsvApplication using Java 17.0.16 with PID 10176 (D:\project IntelliJ Ultimate\modules-parent\qlsv\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlsv)
-2025-10-04 18:45:57 [restartedMain] DEBUG [QlsvApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
-2025-10-04 18:45:57 [restartedMain] INFO  [QlsvApplication] - No active profile set, falling back to 1 default profile: "default"
-2025-10-04 18:45:59 [restartedMain] WARN  [HikariConfig] - HikariPool-15 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
-2025-10-04 18:45:59 [restartedMain] WARN  [deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-10-04 18:45:59 [restartedMain] WARN  [deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
-2025-10-04 18:45:59 [restartedMain] WARN  [JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-10-04 18:45:59 [restartedMain] DEBUG [Mappings] - 
-	c.c.Q.c.StudentController:
-	{POST [/students]}: add(CreateStudentModelRequest,String,UserDto)
-	{GET [/students]}: get(String,UserDto)
-	{PUT [/students]}: update(StudentModelRequest,String,UserDto)
-	{DELETE [/students]}: delete(List,String,UserDto)
-	{GET [/students/public]}: public_get(String)
-2025-10-04 18:45:59 [restartedMain] DEBUG [Mappings] - 
-	o.s.b.a.w.s.e.BasicErrorController:
-	{ [/error]}: error(HttpServletRequest)
-	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
-2025-10-04 18:45:59 [restartedMain] DEBUG [Mappings] - 'beanNameHandlerMapping' {}
-2025-10-04 18:45:59 [restartedMain] DEBUG [Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
-2025-10-04 18:45:59 [restartedMain] WARN  [ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
-2025-10-04 18:46:00 [restartedMain] INFO  [QlsvApplication] - Started QlsvApplication in 2.706 seconds (process running for 1058.931)
-2025-10-04 18:47:21 [restartedMain] INFO  [QlsvApplication] - Starting QlsvApplication using Java 17.0.16 with PID 10176 (D:\project IntelliJ Ultimate\modules-parent\qlsv\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlsv)
-2025-10-04 18:47:21 [restartedMain] DEBUG [QlsvApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
-2025-10-04 18:47:21 [restartedMain] INFO  [QlsvApplication] - No active profile set, falling back to 1 default profile: "default"
-2025-10-04 18:47:22 [restartedMain] WARN  [HikariConfig] - HikariPool-16 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
-2025-10-04 18:47:22 [restartedMain] WARN  [deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-10-04 18:47:22 [restartedMain] WARN  [deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
-2025-10-04 18:47:23 [restartedMain] WARN  [JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-10-04 18:47:23 [restartedMain] DEBUG [Mappings] - 
-	c.c.Q.c.StudentController:
-	{POST [/students]}: add(CreateStudentModelRequest,String,UserDto)
-	{GET [/students]}: get(String,UserDto)
-	{PUT [/students]}: update(StudentModelRequest,String,UserDto)
-	{DELETE [/students]}: delete(List,String,UserDto)
-	{GET [/students/public]}: public_get(String)
-2025-10-04 18:47:23 [restartedMain] DEBUG [Mappings] - 
-	o.s.b.a.w.s.e.BasicErrorController:
-	{ [/error]}: error(HttpServletRequest)
-	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
-2025-10-04 18:47:23 [restartedMain] DEBUG [Mappings] - 'beanNameHandlerMapping' {}
-2025-10-04 18:47:23 [restartedMain] DEBUG [Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
-2025-10-04 18:47:23 [restartedMain] WARN  [ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
-2025-10-04 18:47:23 [restartedMain] INFO  [QlsvApplication] - Started QlsvApplication in 1.878 seconds (process running for 1142.409)
-2025-10-04 18:47:38 [restartedMain] INFO  [QlsvApplication] - Starting QlsvApplication using Java 17.0.16 with PID 10176 (D:\project IntelliJ Ultimate\modules-parent\qlsv\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlsv)
-2025-10-04 18:47:38 [restartedMain] DEBUG [QlsvApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
-2025-10-04 18:47:38 [restartedMain] INFO  [QlsvApplication] - No active profile set, falling back to 1 default profile: "default"
-2025-10-04 18:47:39 [restartedMain] WARN  [HikariConfig] - HikariPool-17 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
-2025-10-04 18:47:39 [restartedMain] WARN  [deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-10-04 18:47:39 [restartedMain] WARN  [deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
-2025-10-04 18:47:40 [restartedMain] WARN  [JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-10-04 18:47:40 [restartedMain] DEBUG [Mappings] - 
-	c.c.Q.c.StudentController:
-	{POST [/students]}: add(CreateStudentModelRequest,String,UserDto)
-	{GET [/students]}: get(String,UserDto)
-	{PUT [/students]}: update(StudentModelRequest,String,UserDto)
-	{DELETE [/students]}: delete(List,String,UserDto)
-	{GET [/students/public]}: public_get(String)
-2025-10-04 18:47:40 [restartedMain] DEBUG [Mappings] - 
-	o.s.b.a.w.s.e.BasicErrorController:
-	{ [/error]}: error(HttpServletRequest)
-	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
-2025-10-04 18:47:40 [restartedMain] DEBUG [Mappings] - 'beanNameHandlerMapping' {}
-2025-10-04 18:47:40 [restartedMain] DEBUG [Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
-2025-10-04 18:47:40 [restartedMain] WARN  [ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
-2025-10-04 18:47:40 [restartedMain] INFO  [QlsvApplication] - Started QlsvApplication in 1.71 seconds (process running for 1159.196)
-2025-10-04 18:47:56 [restartedMain] INFO  [QlsvApplication] - Starting QlsvApplication using Java 17.0.16 with PID 10176 (D:\project IntelliJ Ultimate\modules-parent\qlsv\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlsv)
-2025-10-04 18:47:56 [restartedMain] DEBUG [QlsvApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
-2025-10-04 18:47:56 [restartedMain] INFO  [QlsvApplication] - No active profile set, falling back to 1 default profile: "default"
-2025-10-04 18:47:57 [restartedMain] WARN  [HikariConfig] - HikariPool-18 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
-2025-10-04 18:47:57 [restartedMain] WARN  [deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-10-04 18:47:57 [restartedMain] WARN  [deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
-2025-10-04 18:47:59 [restartedMain] WARN  [JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-10-04 18:47:59 [restartedMain] DEBUG [Mappings] - 
-	c.c.Q.c.StudentController:
-	{POST [/students]}: add(CreateStudentModelRequest,String,UserDto)
-	{GET [/students]}: get(String,UserDto)
-	{PUT [/students]}: update(StudentModelRequest,String,UserDto)
-	{DELETE [/students]}: delete(List,String,UserDto)
-	{GET [/students/public]}: public_get(String)
-2025-10-04 18:47:59 [restartedMain] DEBUG [Mappings] - 
-	o.s.b.a.w.s.e.BasicErrorController:
-	{ [/error]}: error(HttpServletRequest)
-	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
-2025-10-04 18:47:59 [restartedMain] DEBUG [Mappings] - 'beanNameHandlerMapping' {}
-2025-10-04 18:47:59 [restartedMain] DEBUG [Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
-2025-10-04 18:47:59 [restartedMain] WARN  [ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
-2025-10-04 18:47:59 [restartedMain] INFO  [QlsvApplication] - Started QlsvApplication in 3.324 seconds (process running for 1178.588)
-2025-10-04 18:48:02 [restartedMain] INFO  [QlsvApplication] - Starting QlsvApplication using Java 17.0.16 with PID 10176 (D:\project IntelliJ Ultimate\modules-parent\qlsv\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlsv)
-2025-10-04 18:48:02 [restartedMain] DEBUG [QlsvApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
-2025-10-04 18:48:02 [restartedMain] INFO  [QlsvApplication] - No active profile set, falling back to 1 default profile: "default"
-2025-10-04 18:48:03 [restartedMain] WARN  [HikariConfig] - HikariPool-19 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
-2025-10-04 18:48:03 [restartedMain] WARN  [deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-10-04 18:48:03 [restartedMain] WARN  [deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
-2025-10-04 18:48:04 [restartedMain] WARN  [JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-10-04 18:48:04 [restartedMain] DEBUG [Mappings] - 
-	c.c.Q.c.StudentController:
-	{POST [/students]}: add(CreateStudentModelRequest,String,UserDto)
-	{GET [/students]}: get(String,UserDto)
-	{PUT [/students]}: update(StudentModelRequest,String,UserDto)
-	{DELETE [/students]}: delete(List,String,UserDto)
-	{GET [/students/public]}: public_get(String)
-2025-10-04 18:48:04 [restartedMain] DEBUG [Mappings] - 
-	o.s.b.a.w.s.e.BasicErrorController:
-	{ [/error]}: error(HttpServletRequest)
-	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
-2025-10-04 18:48:04 [restartedMain] DEBUG [Mappings] - 'beanNameHandlerMapping' {}
-2025-10-04 18:48:04 [restartedMain] DEBUG [Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
-2025-10-04 18:48:04 [restartedMain] WARN  [ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
-2025-10-04 18:48:04 [restartedMain] INFO  [QlsvApplication] - Started QlsvApplication in 2.176 seconds (process running for 1183.441)
-2025-10-04 18:48:09 [restartedMain] INFO  [QlsvApplication] - Starting QlsvApplication using Java 17.0.16 with PID 10176 (D:\project IntelliJ Ultimate\modules-parent\qlsv\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlsv)
-2025-10-04 18:48:09 [restartedMain] DEBUG [QlsvApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
-2025-10-04 18:48:09 [restartedMain] INFO  [QlsvApplication] - No active profile set, falling back to 1 default profile: "default"
-2025-10-04 18:48:10 [restartedMain] WARN  [HikariConfig] - HikariPool-20 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
-2025-10-04 18:48:10 [restartedMain] WARN  [deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-10-04 18:48:10 [restartedMain] WARN  [deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
-2025-10-04 18:48:11 [restartedMain] WARN  [JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-10-04 18:48:11 [restartedMain] DEBUG [Mappings] - 
-	c.c.Q.c.StudentController:
-	{POST [/students]}: add(CreateStudentModelRequest,String,UserDto)
-	{GET [/students]}: get(String,UserDto)
-	{PUT [/students]}: update(StudentModelRequest,String,UserDto)
-	{DELETE [/students]}: delete(List,String,UserDto)
-	{GET [/students/public]}: public_get(String)
-2025-10-04 18:48:11 [restartedMain] DEBUG [Mappings] - 
-	o.s.b.a.w.s.e.BasicErrorController:
-	{ [/error]}: error(HttpServletRequest)
-	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
-2025-10-04 18:48:11 [restartedMain] DEBUG [Mappings] - 'beanNameHandlerMapping' {}
-2025-10-04 18:48:11 [restartedMain] DEBUG [Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
-2025-10-04 18:48:11 [restartedMain] WARN  [ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
-2025-10-04 18:48:11 [restartedMain] INFO  [QlsvApplication] - Started QlsvApplication in 2.513 seconds (process running for 1190.716)
-2025-10-04 18:48:14 [http-nio-8080-exec-1] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Calling security module with URL: http://localhost:8083/auth/validate to validate token
-2025-10-04 18:48:14 [http-nio-8080-exec-1] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Successfully retrieved user from security module: HuyS1
-2025-10-04 18:48:14 [http-nio-8080-exec-1] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - User HuyS1 successfully authorized
-2025-10-04 18:48:14 [http-nio-8080-exec-1] DEBUG [LoggingServiceImp] - [security_shared] RequiresAuthAspect - User HuyS1 successfully authorized for method: update
-2025-10-04 18:48:14 [http-nio-8080-exec-1] INFO  [LoggingServiceImp] - [qlsv] StudentController - Update students API called successfully by user: HuyS1
-2025-10-04 18:48:14 [http-nio-8080-exec-1] INFO  [LoggingServiceImp] - [qlsv] StudentServiceImp - Student ID: 3, Operation: UPDATE
-2025-10-04 18:48:14 [http-nio-8080-exec-1] INFO  [LoggingServiceImp] - [qlsv] StudentServiceImp - Update Students Successfully
-2025-10-04 18:48:14 [http-nio-8080-exec-1] INFO  [LoggingServiceImp] - [qlsv] StudentServiceImp - Del cache key = students:all , after update students
-2025-10-04 18:48:14 [http-nio-8080-exec-1] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - Message sent to topic: student-events with key(student id): [3]
-2025-10-04 18:48:14 [http-nio-8080-exec-1] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - studentEvent event sent to topic: student-events - 3
-2025-10-04 18:48:14 [http-nio-8080-exec-1] INFO  [LoggingServiceImp] - [qlsv] StudentController - Sent student updated event for student: s a
-2025-10-04 18:49:06 [restartedMain] INFO  [QlsvApplication] - Starting QlsvApplication using Java 17.0.16 with PID 10176 (D:\project IntelliJ Ultimate\modules-parent\qlsv\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlsv)
-2025-10-04 18:49:06 [restartedMain] DEBUG [QlsvApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
-2025-10-04 18:49:06 [restartedMain] INFO  [QlsvApplication] - No active profile set, falling back to 1 default profile: "default"
-2025-10-04 18:49:06 [restartedMain] WARN  [HikariConfig] - HikariPool-21 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
-2025-10-04 18:49:06 [restartedMain] WARN  [deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-10-04 18:49:06 [restartedMain] WARN  [deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
-2025-10-04 18:49:07 [restartedMain] WARN  [JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-10-04 18:49:07 [restartedMain] DEBUG [Mappings] - 
-	c.c.Q.c.StudentController:
-	{POST [/students]}: add(CreateStudentModelRequest,String,UserDto)
-	{GET [/students]}: get(String,UserDto)
-	{PUT [/students]}: update(StudentModelRequest,String,UserDto)
-	{DELETE [/students]}: delete(List,String,UserDto)
-	{GET [/students/public]}: public_get(String)
-2025-10-04 18:49:07 [restartedMain] DEBUG [Mappings] - 
-	o.s.b.a.w.s.e.BasicErrorController:
-	{ [/error]}: error(HttpServletRequest)
-	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
-2025-10-04 18:49:07 [restartedMain] DEBUG [Mappings] - 'beanNameHandlerMapping' {}
-2025-10-04 18:49:07 [restartedMain] DEBUG [Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
-2025-10-04 18:49:07 [restartedMain] WARN  [ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
-2025-10-04 18:49:07 [restartedMain] INFO  [QlsvApplication] - Started QlsvApplication in 1.828 seconds (process running for 1246.551)
-2025-10-04 18:49:15 [restartedMain] INFO  [QlsvApplication] - Starting QlsvApplication using Java 17.0.16 with PID 10176 (D:\project IntelliJ Ultimate\modules-parent\qlsv\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlsv)
-2025-10-04 18:49:15 [restartedMain] DEBUG [QlsvApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
-2025-10-04 18:49:15 [restartedMain] INFO  [QlsvApplication] - No active profile set, falling back to 1 default profile: "default"
-2025-10-04 18:49:16 [restartedMain] WARN  [HikariConfig] - HikariPool-22 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
-2025-10-04 18:49:16 [restartedMain] WARN  [deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-10-04 18:49:16 [restartedMain] WARN  [deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
-2025-10-04 18:49:17 [restartedMain] WARN  [JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-10-04 18:49:17 [restartedMain] DEBUG [Mappings] - 
-	c.c.Q.c.StudentController:
-	{POST [/students]}: add(CreateStudentModelRequest,String,UserDto)
-	{GET [/students]}: get(String,UserDto)
-	{PUT [/students]}: update(StudentModelRequest,String,UserDto)
-	{DELETE [/students]}: delete(List,String,UserDto)
-	{GET [/students/public]}: public_get(String)
-2025-10-04 18:49:17 [restartedMain] DEBUG [Mappings] - 
-	o.s.b.a.w.s.e.BasicErrorController:
-	{ [/error]}: error(HttpServletRequest)
-	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
-2025-10-04 18:49:17 [restartedMain] DEBUG [Mappings] - 'beanNameHandlerMapping' {}
-2025-10-04 18:49:17 [restartedMain] DEBUG [Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
-2025-10-04 18:49:17 [restartedMain] WARN  [ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
-2025-10-04 18:49:17 [restartedMain] INFO  [QlsvApplication] - Started QlsvApplication in 2.111 seconds (process running for 1256.44)
-2025-10-04 18:49:34 [restartedMain] INFO  [QlsvApplication] - Starting QlsvApplication using Java 17.0.16 with PID 10176 (D:\project IntelliJ Ultimate\modules-parent\qlsv\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlsv)
-2025-10-04 18:49:34 [restartedMain] DEBUG [QlsvApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
-2025-10-04 18:49:34 [restartedMain] INFO  [QlsvApplication] - No active profile set, falling back to 1 default profile: "default"
-2025-10-04 18:49:35 [restartedMain] WARN  [HikariConfig] - HikariPool-23 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
-2025-10-04 18:49:35 [restartedMain] WARN  [deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-10-04 18:49:35 [restartedMain] WARN  [deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
-2025-10-04 18:49:36 [restartedMain] WARN  [JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-10-04 18:49:36 [restartedMain] DEBUG [Mappings] - 
-	c.c.Q.c.StudentController:
-	{POST [/students]}: add(CreateStudentModelRequest,String,UserDto)
-	{GET [/students]}: get(String,UserDto)
-	{PUT [/students]}: update(StudentModelRequest,String,UserDto)
-	{DELETE [/students]}: delete(List,String,UserDto)
-	{GET [/students/public]}: public_get(String)
-2025-10-04 18:49:36 [restartedMain] DEBUG [Mappings] - 
-	o.s.b.a.w.s.e.BasicErrorController:
-	{ [/error]}: error(HttpServletRequest)
-	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
-2025-10-04 18:49:36 [restartedMain] DEBUG [Mappings] - 'beanNameHandlerMapping' {}
-2025-10-04 18:49:36 [restartedMain] DEBUG [Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
-2025-10-04 18:49:36 [restartedMain] WARN  [ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
-2025-10-04 18:49:36 [restartedMain] INFO  [QlsvApplication] - Started QlsvApplication in 1.625 seconds (process running for 1275.147)
-2025-10-04 18:49:47 [restartedMain] INFO  [QlsvApplication] - Starting QlsvApplication using Java 17.0.16 with PID 10176 (D:\project IntelliJ Ultimate\modules-parent\qlsv\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlsv)
-2025-10-04 18:49:47 [restartedMain] DEBUG [QlsvApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
-2025-10-04 18:49:47 [restartedMain] INFO  [QlsvApplication] - No active profile set, falling back to 1 default profile: "default"
-2025-10-04 18:49:48 [restartedMain] WARN  [HikariConfig] - HikariPool-24 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
-2025-10-04 18:49:48 [restartedMain] WARN  [deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-10-04 18:49:48 [restartedMain] WARN  [deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
-2025-10-04 18:49:49 [restartedMain] WARN  [JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-10-04 18:49:49 [restartedMain] DEBUG [Mappings] - 
-	c.c.Q.c.StudentController:
-	{POST [/students]}: add(CreateStudentModelRequest,String,UserDto)
-	{GET [/students]}: get(String,UserDto)
-	{PUT [/students]}: update(StudentModelRequest,String,UserDto)
-	{DELETE [/students]}: delete(List,String,UserDto)
-	{GET [/students/public]}: public_get(String)
-2025-10-04 18:49:49 [restartedMain] DEBUG [Mappings] - 
-	o.s.b.a.w.s.e.BasicErrorController:
-	{ [/error]}: error(HttpServletRequest)
-	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
-2025-10-04 18:49:49 [restartedMain] DEBUG [Mappings] - 'beanNameHandlerMapping' {}
-2025-10-04 18:49:49 [restartedMain] DEBUG [Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
-2025-10-04 18:49:49 [restartedMain] WARN  [ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
-2025-10-04 18:49:50 [restartedMain] INFO  [QlsvApplication] - Started QlsvApplication in 2.497 seconds (process running for 1288.757)
-2025-10-04 18:49:55 [http-nio-8080-exec-1] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Calling security module with URL: http://localhost:8083/auth/validate to validate token
-2025-10-04 18:49:55 [http-nio-8080-exec-1] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Successfully retrieved user from security module: HuyS1
-2025-10-04 18:49:55 [http-nio-8080-exec-1] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - User HuyS1 successfully authorized
-2025-10-04 18:49:55 [http-nio-8080-exec-1] DEBUG [LoggingServiceImp] - [security_shared] RequiresAuthAspect - User HuyS1 successfully authorized for method: update
-2025-10-04 18:49:55 [http-nio-8080-exec-1] INFO  [LoggingServiceImp] - [qlsv] StudentController - Update students API called successfully by user: HuyS1
-2025-10-04 18:49:55 [http-nio-8080-exec-1] INFO  [LoggingServiceImp] - [qlsv] StudentServiceImp - Student ID: 3, Operation: UPDATE
-2025-10-04 18:49:55 [http-nio-8080-exec-1] INFO  [LoggingServiceImp] - [qlsv] StudentServiceImp - Update Students Successfully
-2025-10-04 18:49:55 [http-nio-8080-exec-1] INFO  [LoggingServiceImp] - [qlsv] StudentServiceImp - Del cache key = students:all , after update students
-2025-10-04 18:49:55 [http-nio-8080-exec-1] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - Message sent to topic: student-events with key(student id): [3]
-2025-10-04 18:49:55 [http-nio-8080-exec-1] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - studentEvent sent to topic: student-events - with student id: [3]
-2025-10-04 18:49:55 [http-nio-8080-exec-1] INFO  [LoggingServiceImp] - [qlsv] StudentController - Sent student updated event for student: s a
+2025-10-05 21:01:07 [restartedMain] DEBUG [Mappings] - 'beanNameHandlerMapping' {}
+2025-10-05 21:01:07 [restartedMain] DEBUG [Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
+2025-10-05 21:01:07 [restartedMain] WARN  [ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2025-10-05 21:01:08 [restartedMain] DEBUG [Loggers] - Using Slf4j logging framework
+2025-10-05 21:01:09 [restartedMain] INFO  [QlsvApplication] - Started QlsvApplication in 15.382 seconds (process running for 16.025)

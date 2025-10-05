@@ -120,6 +120,10 @@
 			<groupId>com.common</groupId>
 			<artifactId>security</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>com.common</groupId>
+			<artifactId>security_shared</artifactId>
+		</dependency>
 		<!-- JWT để validate tokens từ Security module -->
 		<dependency>
 			<groupId>io.jsonwebtoken</groupId>

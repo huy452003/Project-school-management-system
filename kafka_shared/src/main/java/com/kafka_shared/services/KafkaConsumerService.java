@@ -35,13 +35,13 @@ public abstract class KafkaConsumerService <T extends KafkaMessage & EventMetada
     public void handleEvent(T event, String topic, int partition, long offset, 
                               Acknowledgment acknowledgment, String moduleName) {
         try {
-            // 1. Process business logic
+            // 1. xử lý event ( hàm processEvent được override trong class con )
             processEvent(event);
             
-            // 2. Commit offset
+            // 2. đánh dấu event đã được xử lý bằng offset
             acknowledgment.acknowledge();
             
-            // 3. Send success notification
+            // 3. gửi thông báo thành công
             notificationService.sendEventSuccessNotification(event, topic, partition, offset, moduleName);
             
             loggingService.logInfo(
@@ -51,11 +51,11 @@ public abstract class KafkaConsumerService <T extends KafkaMessage & EventMetada
             );
 
         } catch (NotFoundExceptionHandle | ConflictExceptionHandle | UnauthorizedExceptionHandle | ForbiddenExceptionHandle e) {
-            // Non-retryable error - send to DLQ directly
+            // lỗi không thể retry - gửi đến DLQ
             handleNonRetryableError(event, topic, partition, offset, moduleName, e, acknowledgment);
             
         } catch (Exception e) {
-            // Retryable error - send failure notification and re-throw for retry
+            // lỗi có thể retry - gửi thông báo lỗi và re-throw để retry
             handleRetryableError(event, topic, partition, offset, moduleName, e);
             throw e; // Trigger retry mechanism
         }
@@ -63,19 +63,17 @@ public abstract class KafkaConsumerService <T extends KafkaMessage & EventMetada
 
     protected abstract void processEvent(T event);
     
-    /**
-     * Handle non-retryable errors - send to DLQ directly
-     */
+
     private void handleNonRetryableError(T event, String topic, int partition, long offset, 
                                         String moduleName, Exception e, Acknowledgment acknowledgment) {
         try {
-            // Send to DLQ directly
+            // gửi đến DLQ
             kafkaProducerService.sendEventToDLQ(event, e.getMessage());
             
-            // Send failure notification
+            // gửi thông báo lỗi
             notificationService.sendEventFailureNotification(event, topic, partition, offset, moduleName, e.getMessage());
             
-            // Commit offset to avoid reprocessing
+            // đánh dấu event đã được xử lý bằng offset
             acknowledgment.acknowledge();
             
             loggingService.logWarn(
@@ -91,22 +89,21 @@ public abstract class KafkaConsumerService <T extends KafkaMessage & EventMetada
                 dlqException,
                 getLogContext("handleNonRetryableError")
             );
-            // Still commit to avoid infinite loop
+            // đánh dấu event đã được xử lý bằng offset
             acknowledgment.acknowledge();
         }
     }
     
-    /**
-     * Handle retryable errors - log only, notification will be sent by RetryFailureHandlerService
-     */
+
     private void handleRetryableError(T event, String topic, int partition, long offset, 
                                      String moduleName, Exception e) {
-        // Only log - notification will be sent by RetryFailureHandlerService when retry exhausted
+        // chỉ log - chi tiết thông báo sẽ được gửi bởi RetryFailureHandlerService khi retry hết số lần
         loggingService.logWarn(
             String.format("Retryable error - will retry: %s %s (ID: %s) - error: %s", 
                 event.getEntityType(), event.getEntityDisplayName(), event.getEntityId(), e.getMessage()),
             getLogContext("handleRetryableError")
         );
     }
+    
     
 }

@@ -7,24 +7,17 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-/**
- * Base class for all Kafka events
- */
+// class chung cho tất cả các event entity
 @Data
 @NoArgsConstructor
 public abstract class KafkaMessage {
     
     private String eventId;
-    
     private String eventType;
-
-    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'")
+    @JsonFormat(pattern = "dd-MM-yyyy'T'HH:mm:ss'Z'")
     private LocalDateTime timestamp;
-    
     private String source;
-    
     private String destination;
-        
     private Object data;
     
     public KafkaMessage(String eventType, String source, String destination) {

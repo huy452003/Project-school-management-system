@@ -1,33 +1,17 @@
 package com.kafka_shared.models;
 
-/**
- * Interface for event metadata extraction
- * Replaces reflection-based helper methods with a clean contract
- */
 public interface EventMetadata {
     
-    /**
-     * Get the entity ID from the event
-     * @return entity ID
-     */
+    // lấy id của entity
     String getEntityId();
     
-    /**
-     * Get the entity display name from the event
-     * @return entity display name
-     */
+    // lấy name của entity
     String getEntityDisplayName();
     
-    /**
-     * Get the event action from the event
-     * @return event action
-     */
+    // lấy action của event
     String getEventAction();
     
-    /**
-     * Get the entity type based on class name
-     * @return entity type (e.g., "student", "teacher", "user")
-     */
+    // lấy type của entity
     default String getEntityType() {
         String className = this.getClass().getSimpleName();
         if (className.endsWith("Event")) {

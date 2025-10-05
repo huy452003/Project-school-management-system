@@ -5,6 +5,7 @@ import com.kafka_shared.services.KafkaConsumerService;
 import com.logging.models.LogContext;
 import com.logging.services.LoggingService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.support.Acknowledgment;
 import org.springframework.kafka.support.KafkaHeaders;
@@ -17,6 +18,9 @@ public class StudentEventConsumerService extends KafkaConsumerService<StudentEve
 
     @Autowired
     private LoggingService loggingService;
+    
+    @Autowired
+    private RedisTemplate<String, Object> redisTemplate;
 
     private LogContext getLogContext(String methodName) {
         return LogContext.builder()
@@ -32,7 +36,7 @@ public class StudentEventConsumerService extends KafkaConsumerService<StudentEve
                                   @Header(KafkaHeaders.RECEIVED_PARTITION) int partition,
                                   @Header(KafkaHeaders.OFFSET) long offset,
                                   Acknowledgment acknowledgment) {
-        // Use base class method for common handling
+
         handleEvent(studentEvent, topic, partition, offset, acknowledgment, "qlgv");
     }
 
@@ -61,8 +65,15 @@ public class StudentEventConsumerService extends KafkaConsumerService<StudentEve
         loggingService.logInfo("Processing student CREATED event: " + studentEvent.getEntityDisplayName()
         + " (ID: " + studentEvent.getEntityId() + ")", logContext);
         
-        // TODO: Implement business logic for student creation
-        // Ví dụ: Tạo record trong database teacher, gửi email thông báo, etc.
+        try {
+            clearStudentCacheData();
+        
+            loggingService.logInfo("Successfully processed student CREATED event for ID: " + studentEvent.getEntityId(), logContext);
+            
+        } catch (Exception e) {
+            loggingService.logError("Failed to process student CREATED event for ID: " + studentEvent.getEntityId(), e, logContext);
+            throw e; // Re-throw để trigger retry mechanism
+        }
     }   
 
     private void handleStudentUpdated(StudentEvent studentEvent) {
@@ -70,8 +81,15 @@ public class StudentEventConsumerService extends KafkaConsumerService<StudentEve
         loggingService.logInfo("Processing student UPDATED event: " + studentEvent.getEntityDisplayName()
         + " (ID: " + studentEvent.getEntityId() + ")", logContext);
         
-        // TODO: Implement business logic for student update
-        // Ví dụ: Cập nhật thông tin trong database teacher, sync data, etc.
+        try {
+            clearStudentCacheData();
+            
+            loggingService.logInfo("Successfully processed student UPDATED event for ID: " + studentEvent.getEntityId(), logContext);
+            
+        } catch (Exception e) {
+            loggingService.logError("Failed to process student UPDATED event for ID: " + studentEvent.getEntityId(), e, logContext);
+            throw e; // Re-throw để trigger retry mechanism
+        }
     }
 
     private void handleStudentDeleted(StudentEvent studentEvent) {
@@ -79,8 +97,29 @@ public class StudentEventConsumerService extends KafkaConsumerService<StudentEve
         loggingService.logInfo("Processing student DELETED event: " + studentEvent.getEntityDisplayName()
         + " (ID: " + studentEvent.getEntityId() + ")", logContext);
         
-        // TODO: Implement business logic for student deletion
-        // Ví dụ: Xóa record trong database teacher, cleanup related data, etc.
+        try {
+            clearStudentCacheData();
+            
+            loggingService.logInfo("Successfully processed student DELETED event for ID: " + studentEvent.getEntityId(), logContext);
+            
+        } catch (Exception e) {
+            loggingService.logError("Failed to process student DELETED event for ID: " + studentEvent.getEntityId(), e, logContext);
+            throw e; // Re-throw để trigger retry mechanism
+        }
+    }
+    
+    private void clearStudentCacheData() {
+        LogContext logContext = getLogContext("clearStudentCacheData");
+        
+        try {
+            // Xóa students cache
+            redisTemplate.delete("students:all");
+            loggingService.logInfo("Successfully clear students cache", logContext);
+            
+        } catch (Exception e) {
+            loggingService.logError("Failed to invalidate students cache", e, logContext);
+            // Không nên throw exception ở đây
+        }
     }
     
 }

@@ -10,9 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.listener.ConsumerRecordRecoverer;
 import org.springframework.stereotype.Service;
 
-/**
- * Service to handle retry failures and send messages to Dead Letter Queue
- */
 @Service
 public class RetryFailureHandlerService implements ConsumerRecordRecoverer {
 
@@ -33,10 +30,7 @@ public class RetryFailureHandlerService implements ConsumerRecordRecoverer {
                 .build();
     }
 
-    /**
-     * Called when all retry attempts are exhausted
-     * This method is called by Spring Kafka's DefaultErrorHandler
-     */
+    // gọi khi tất cả các lần retry đều hết
     @Override
     public void accept(ConsumerRecord<?, ?> record, Exception exception) {
         try {
@@ -47,7 +41,7 @@ public class RetryFailureHandlerService implements ConsumerRecordRecoverer {
                 getLogContext("accept")
             );
 
-            // Handle the failed record based on its type
+            // xử lý record thất bại dựa trên type của nó
             if (record.value() instanceof KafkaMessage && record.value() instanceof EventMetadata) {
                 KafkaMessage event = (KafkaMessage) record.value();
                 EventMetadata eventMetadata = (EventMetadata) record.value();
@@ -58,10 +52,10 @@ public class RetryFailureHandlerService implements ConsumerRecordRecoverer {
                     getLogContext("accept")
                 );
                 
-                // Send to DLQ using the generic method
+                // gửi đến DLQ
                 kafkaProducerService.sendToDeadLetterQueue((KafkaMessage & EventMetadata) record.value(), exception);
                 
-                // Send failure notification
+                // gửi thông báo lỗi
                 notificationService.sendEventFailureNotification(
                     (KafkaMessage & EventMetadata) record.value(), 
                     record.topic(), 
@@ -78,7 +72,7 @@ public class RetryFailureHandlerService implements ConsumerRecordRecoverer {
                 );
                 
             } else {
-                // Handle non-KafkaMessage records (e.g., deserialization failures)
+                // xử lý record không phải KafkaMessage (ví dụ: lỗi deserialization)
                 String recordInfo = String.format("topic=%s, partition=%d, offset=%d, key=%s", 
                     record.topic(), record.partition(), record.offset(), record.key());
                 
@@ -95,7 +89,7 @@ public class RetryFailureHandlerService implements ConsumerRecordRecoverer {
                     );
                 }
                 
-                // Log deserialization failure details
+                // log lỗi deserialization
                 if (exception instanceof RecordDeserializationException ||
                     exception.getMessage() != null && exception.getMessage().contains("deserialization")) {
                     loggingService.logError(

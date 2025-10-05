@@ -23,9 +23,6 @@ import org.springframework.util.backoff.FixedBackOff;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Kafka configuration with circular dependency resolution
- */
 @Configuration
 @EnableKafka
 @ComponentScan(basePackages = {"com.logging"})
@@ -41,9 +38,6 @@ public class KafkaConfig {
     @Autowired
     private ApplicationContext applicationContext;
     
-    /**
-     * Producer configuration
-     */
     @Bean
     public ProducerFactory<String, Object> producerFactory() {
         Map<String, Object> configProps = new HashMap<>();
@@ -58,17 +52,11 @@ public class KafkaConfig {
         return new DefaultKafkaProducerFactory<>(configProps);
     }
     
-    /**
-     * Kafka template
-     */
     @Bean
     public KafkaTemplate<String, Object> kafkaTemplate() {
         return new KafkaTemplate<>(producerFactory());
     }
     
-    /**
-     * Consumer configuration
-     */
     @Bean
     public ConsumerFactory<String, Object> consumerFactory() {
         Map<String, Object> configProps = new HashMap<>();
@@ -83,20 +71,16 @@ public class KafkaConfig {
         return new DefaultKafkaConsumerFactory<>(configProps);
     }
     
-    /**
-     * Kafka listener container factory with error handling
-     */
     @Bean
     public ConcurrentKafkaListenerContainerFactory<String, Object> kafkaListenerContainerFactory() {
         ConcurrentKafkaListenerContainerFactory<String, Object> factory = new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(consumerFactory());
         factory.getContainerProperties().setAckMode(ContainerProperties.AckMode.MANUAL_IMMEDIATE);
         
-        // Configure error handler with retry mechanism
         DefaultErrorHandler errorHandler = new DefaultErrorHandler(
-            // Get RetryFailureHandlerService from application context to avoid circular dependency
             applicationContext.getBean(RetryFailureHandlerService.class),
-            new FixedBackOff(1000L, 3L) // Retry 3 lần, mỗi lần cách nhau 1 giây
+            // Retry 3 lần, mỗi lần cách nhau 1 giây
+            new FixedBackOff(1000L, 3L) 
         );
         
         factory.setCommonErrorHandler(errorHandler);

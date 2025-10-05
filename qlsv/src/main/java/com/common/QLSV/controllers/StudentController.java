@@ -86,7 +86,7 @@ public class StudentController {
                 "temp-id-" + System.currentTimeMillis(), // Temporary ID since CreateStudentModel doesn't have ID
                 fullName
             );
-            kafkaProducerService.sendEvent(studentEvent, "student-events");
+            kafkaProducerService.sendStudentEvent(studentEvent);
             loggingService.logInfo("Sent student created event for student: " + fullName, logContext);
         }
         
@@ -121,7 +121,7 @@ public class StudentController {
                 studentModel.getId().toString(),
                 fullName
             );
-            kafkaProducerService.sendEvent(studentEvent, "student-events");
+            kafkaProducerService.sendStudentEvent(studentEvent);
             loggingService.logInfo("Sent student updated event for student: " + fullName, logContext);
         }
         
@@ -155,7 +155,7 @@ public class StudentController {
                 studentModel.getId().toString(),
                 fullName
             );
-            kafkaProducerService.sendEvent(studentEvent, "student-events");
+            kafkaProducerService.sendStudentEvent(studentEvent);
             loggingService.logInfo("Sent student deleted event for student: " + fullName, logContext);
         }
 

@@ -2,9 +2,9 @@ package com.common.QLGV.controllers;
 
 import com.common.QLGV.entities.TeacherEntity;
 import com.common.QLGV.services.imp.StudentClientServiceImp;
-import com.common.QLGV.services.StudentEventConsumerService;
+import com.security_shared.annotations.RequiresAuth;
+import com.security_shared.annotations.CurrentUser;
 import com.model_shared.models.Response;
-import com.model_shared.models.UserDto;
 import com.model_shared.models.student.StudentModel;
 import com.model_shared.models.teacher.CreateTeacherModel;
 import com.model_shared.models.teacher.TeacherModel;
@@ -13,7 +13,7 @@ import com.model_shared.models.teacher.request.TeacherModelRequest;
 import com.common.QLGV.services.imp.TeacherServiceImp;
 import com.logging.models.LogContext;
 import com.logging.services.LoggingService;
-import jakarta.servlet.http.HttpServletRequest;
+import com.model_shared.models.UserDto;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
@@ -34,8 +34,6 @@ public class TeacherController {
     @Autowired
     StudentClientServiceImp studentClientServiceImp;
     @Autowired
-    StudentEventConsumerService studentEventConsumerService;
-    @Autowired
     LoggingService loggingService;
 
     private LogContext getLogContext(String methodName) {
@@ -47,14 +45,14 @@ public class TeacherController {
     }
 
     @GetMapping("")
+    @RequiresAuth(permissions = {"ADMIN_READ", "TEACHER_READ"})
     ResponseEntity<Response<List<TeacherModel>>> get(
             @RequestHeader(value = "Accept-Language", defaultValue = "en") String acceptLanguage
-            , HttpServletRequest request)
+            , @CurrentUser UserDto currentUser)
     {
         Locale locale = Locale.forLanguageTag(acceptLanguage);
         LogContext logContext = getLogContext("get");
 
-        UserDto currentUser = (UserDto) request.getAttribute("currentUser");
         loggingService.logInfo("Get teachers API called successfully by user: " + currentUser.getUserName()
                 , logContext);
 
@@ -74,16 +72,16 @@ public class TeacherController {
             @Valid @RequestBody CreateTeacherModelRequest req
             , @RequestHeader(value = "Accept-Language"
             , defaultValue = "en") String acceptLanguage
-            , HttpServletRequest request)
+            )
     {
         Locale locale = Locale.forLanguageTag(acceptLanguage);
         LogContext logContext = getLogContext("add");
 
-        UserDto currentUser = (UserDto) request.getAttribute("currentUser");
-
         List<CreateTeacherModel> createTeacherModels = req.getTeachers();
-        loggingService.logInfo("Create teachers API called successfully by user : " + currentUser.getUserName()
-                , logContext);
+
+        // loggingService.logInfo("Create teachers API called successfully by user : " + currentUser.getUserName()
+        //         , logContext);
+
         List<TeacherEntity> studentEntities = teacherServiceImp.creates(createTeacherModels);
         Response<List<CreateTeacherModel>> response = new Response<>(
                 200
@@ -100,15 +98,16 @@ public class TeacherController {
             @Valid @RequestBody TeacherModelRequest req
             , @RequestHeader(value = "Accept-Language"
             , defaultValue = "en") String acceptLanguage
-            , HttpServletRequest request)
+            )
     {
         Locale locale = Locale.forLanguageTag(acceptLanguage);
         LogContext logContext = getLogContext("update");
 
-        UserDto currentUser = (UserDto) request.getAttribute("currentUser");
         List<TeacherModel> teacherModels = req.getTeachers();
-        loggingService.logInfo("Update teachers API called successfully by user : " + currentUser.getUserName()
-                , logContext);
+
+        // loggingService.logInfo("Update teachers API called successfully by user : " + currentUser.getUserName()
+        //         , logContext);
+
         List<TeacherEntity> studentEntities = teacherServiceImp.updates(teacherModels);
         Response<List<TeacherModel>> response = new Response<>(
                 200
@@ -125,15 +124,15 @@ public class TeacherController {
             @RequestBody List<TeacherModel> studentModels
             , @RequestHeader(value = "Accept-Language"
             , defaultValue = "en") String acceptLanguage
-            , HttpServletRequest request)
+            )
     {
         Locale locale = Locale.forLanguageTag(acceptLanguage);
         LogContext logContext = getLogContext("delete");
 
-        UserDto currentUser = (UserDto) request.getAttribute("currentUser");
 
-        loggingService.logInfo("Delete teachers API called successfully by user : " + currentUser.getUserName()
-                , logContext);
+        // loggingService.logInfo("Delete teachers API called successfully by user : " + currentUser.getUserName()
+        //         , logContext);
+
         teacherServiceImp.deletes(studentModels);
         Response<List<TeacherModel>> response = new Response<>(
                 200

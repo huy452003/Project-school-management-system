@@ -7,12 +7,8 @@ import com.logging.models.LogContext;
 import com.logging.services.LoggingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
-/**
- * Service for sending success/failure notifications via Kafka
- */
 @Service
 public class NotificationService {
 
@@ -20,7 +16,7 @@ public class NotificationService {
     private LoggingService loggingService;
 
     @Autowired
-    private KafkaTemplate<String, Object> kafkaTemplate;
+    private KafkaProducerService kafkaProducerService;
 
     @Value("${kafka.topics.notifications:notifications}")
     private String notificationTopic;
@@ -33,9 +29,7 @@ public class NotificationService {
                 .build();
     }
 
-    /**
-     * Send success notification for event processing
-     */
+    // gửi thông báo thành công cho event processing
     public <T extends KafkaMessage & EventMetadata> void sendEventSuccessNotification(
             T event, String topic, int partition, long offset, String moduleName) {
         
@@ -58,26 +52,28 @@ public class NotificationService {
             NotificationMessage notification = NotificationMessage.success(title, message);
             notification.setEntityType(event.getEntityType());
             notification.setEntityId(event.getEntityId());
+            notification.setOriginalEventId(event.getEventId()); // Set original event ID
             notification.setEntityDisplayName(event.getEntityDisplayName());
             notification.setEventAction(event.getEventAction());
             notification.setSourceTopic(topic);
             notification.setPartition(partition);
             notification.setOffset(offset);
             notification.setModuleName(moduleName);
+            notification.setSource(event.getSource()); // Set source từ event gốc
 
-            // Send notification to Kafka
+            // gửi thông báo đến Kafka
             String key = event.getEntityId() != null ? event.getEntityId() : event.getEventId();
-            kafkaTemplate.send(notificationTopic, key, notification);
+            kafkaProducerService.sendNotification(notification, key);
 
             loggingService.logInfo(
-                String.format("Success notification sent for %s with student id : [%s] to topic: %s", 
+                String.format("Success notification sent for %s with entity id : [%s] to topic: %s", 
                     event.getEntityType(), event.getEntityId(), notificationTopic),
                 getLogContext("sendEventSuccessNotification")
             );
 
         } catch (Exception e) {
             loggingService.logError(
-                String.format("Failed to send success notification for %s with student id : [%s] to topic: %s - error: %s", 
+                String.format("Failed to send success notification for %s with entity id : [%s] to topic: %s - error: %s", 
                     event.getEntityType(), event.getEntityId(), notificationTopic, e.getMessage()),
                 e,
                 getLogContext("sendEventSuccessNotification")
@@ -85,9 +81,7 @@ public class NotificationService {
         }
     }
 
-    /**
-     * Send failure notification for event processing
-     */
+    // gửi thông báo lỗi cho event processing
     public <T extends KafkaMessage & EventMetadata> void sendEventFailureNotification(
             T event, String topic, int partition, long offset, String moduleName, String errorMessage) {
         
@@ -111,6 +105,7 @@ public class NotificationService {
             NotificationMessage notification = NotificationMessage.failure(title, message);
             notification.setEntityType(event.getEntityType());
             notification.setEntityId(event.getEntityId());
+            notification.setOriginalEventId(event.getEventId()); // Set original event ID
             notification.setEntityDisplayName(event.getEntityDisplayName());
             notification.setEventAction(event.getEventAction());
             notification.setSourceTopic(topic);
@@ -118,10 +113,11 @@ public class NotificationService {
             notification.setOffset(offset);
             notification.setModuleName(moduleName);
             notification.setErrorMessage(errorMessage);
+            notification.setSource(event.getSource()); // Set source từ event gốc
 
-            // Send notification to Kafka
+            // gửi thông báo đến Kafka
             String key = event.getEntityId() != null ? event.getEntityId() : event.getEventId();
-            kafkaTemplate.send(notificationTopic, key, notification);
+            kafkaProducerService.sendNotification(notification, key);
 
             loggingService.logWarn(
                 String.format("Failure notification sent for %s event: %s - error: %s to topic: %s", 
@@ -139,9 +135,7 @@ public class NotificationService {
         }
     }
 
-    /**
-     * Gửi các loại thông báo khác nhau , mặc định là info
-     */
+    // gửi các loại thông báo khác nhau , mặc định là info
     public void sendNotification(String type, String title, String message, String key) {
         try {
             NotificationMessage notification;
@@ -162,7 +156,7 @@ public class NotificationService {
                     break;
             }
 
-            kafkaTemplate.send(notificationTopic, key, notification);
+            kafkaProducerService.sendNotification(notification, key);
 
             loggingService.logInfo(
                 String.format("Notification sent: %s - %s", type, title),

@@ -1,21 +1,21 @@
 package com.kafka_shared.models;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
-import java.util.UUID;
-
 @Data
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
-@AllArgsConstructor
 public class TeacherEvent extends KafkaMessage implements EventMetadata {
     private String id;
     private String fullName;
     private String action; // CREATED, UPDATED, DELETED
+    
+    // Constructor để gọi parent constructor
+    public TeacherEvent(String eventType, String source, String destination) {
+        super(eventType, source, destination);
+    }
 
     @Override
     public String getEntityId() {
@@ -33,41 +33,35 @@ public class TeacherEvent extends KafkaMessage implements EventMetadata {
     }
 
     public static TeacherEvent teacherCreated(String id, String fullName) {
-        TeacherEvent teacherEvent = new TeacherEvent();
-        teacherEvent.setEventId(UUID.randomUUID().toString());
-        teacherEvent.setEventType("TEACHER_EVENT");
+        TeacherEvent teacherEvent = new TeacherEvent(
+            "TEACHER_EVENT", 
+            "qlgv", 
+            "all");
         teacherEvent.setId(id);
         teacherEvent.setFullName(fullName);
         teacherEvent.setAction("CREATED");
-        teacherEvent.setTimestamp(LocalDateTime.now());
-        teacherEvent.setSource("qlgv");
-        teacherEvent.setDestination("all");
         return teacherEvent;
     }
 
     public static TeacherEvent teacherUpdated(String id, String fullName) {
-        TeacherEvent teacherEvent = new TeacherEvent();
-        teacherEvent.setEventId(UUID.randomUUID().toString());
-        teacherEvent.setEventType("TEACHER_EVENT");
+        TeacherEvent teacherEvent = new TeacherEvent(
+            "TEACHER_EVENT", 
+            "qlgv", 
+            "all");
         teacherEvent.setId(id);
         teacherEvent.setFullName(fullName);
         teacherEvent.setAction("UPDATED");
-        teacherEvent.setTimestamp(LocalDateTime.now());
-        teacherEvent.setSource("qlgv");
-        teacherEvent.setDestination("all");
         return teacherEvent;
     }
 
     public static TeacherEvent teacherDeleted(String id, String fullName) {
-        TeacherEvent teacherEvent = new TeacherEvent();
-        teacherEvent.setEventId(UUID.randomUUID().toString());
-        teacherEvent.setEventType("TEACHER_EVENT");
+        TeacherEvent teacherEvent = new TeacherEvent(
+            "TEACHER_EVENT", 
+            "qlgv", 
+            "all");
         teacherEvent.setId(id);
         teacherEvent.setFullName(fullName);
         teacherEvent.setAction("DELETED");
-        teacherEvent.setTimestamp(LocalDateTime.now());
-        teacherEvent.setSource("qlgv");
-        teacherEvent.setDestination("all");
         return teacherEvent;
     }
 }

@@ -120,9 +120,8 @@ Mới (KRaft): Metadata lưu trực tiếp trong Kafka Controller, sử dụng R
 
 - database user nằm ở database khác với data của student khi login xong thì làm sao để xác định student vừa login là ai,
     tôi có ý tưởng là sẽ dung kafka để gửi event cho endpoint main của student và trả data ngay lập tức.
-+ cho thêm 1 biến userName để khớp với lại data bên security
-
-
++ cho thêm 1 biến userName để khớp với lại data bên security.
++ không nên gọi API khi xử lý message Kafka chỉ nên gọi service xử lý.
 
 - tại thời điểm xác thực user thành công ở authFilter thì có gửi thêm data không nhạy cảm sang endpoint ở service khác.
 
@@ -136,6 +135,9 @@ bảo vệ , nhưng method không sử dụng annotation thì được xem là p
 
 - xử lý khi consumer nhận message thất bại và thành công thì producer có biết được trạng thái của message không?,
   nếu producer là 1 project frontEnd thì sao liệu producer có thể là project frontEnd?
+  
+  + gửi notification topic khi xử lý message và producer sẽ Listen topic notification
+  , phân loại ra và biết được trạng thái message.
 
   +  nếu producer là 1 project frontEnd thì có thể nhưng không nên vì :
    vấn đề bảo mật
