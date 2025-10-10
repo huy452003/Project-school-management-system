@@ -2,6 +2,7 @@ package com.security.config;
 
 import com.security.services.JwtService;
 import com.security.services.BlacklistService;
+import com.security.services.AsyncService;
 import com.logging.services.LoggingService;
 import com.logging.models.LogContext;
 import com.handle_exceptions.UnauthorizedExceptionHandle;
@@ -35,6 +36,8 @@ public class JwtAuthFilter extends OncePerRequestFilter {
     LoggingService loggingService;
     @Autowired
     BlacklistService blacklistService;
+    @Autowired
+    AsyncService asyncService;
 
     @Autowired
     @Qualifier("handlerExceptionResolver")
@@ -110,6 +113,11 @@ public class JwtAuthFilter extends OncePerRequestFilter {
                     // set authentication vào security context
                     SecurityContextHolder.getContext().setAuthentication(authentication);
                     loggingService.logDebug("Successfully authenticated user: " + username, logContext);
+                    /* 
+                    lúc này có thể gửi thêm data (không nhạy cảm) sang endpoint ở service khác
+                    nhưng chỉ nên gửi các bất đồng bộ như kafka message tránh làm chậm response
+                    */
+                    asyncService.sendLoginEvent(userDetails);
                 } else {
                     loggingService.logWarn("Invalid JWT token for user:" + username, logContext);
                     UnauthorizedExceptionHandle exception = new UnauthorizedExceptionHandle(

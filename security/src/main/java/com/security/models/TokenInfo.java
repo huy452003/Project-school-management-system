@@ -1,6 +1,5 @@
 package com.security.models;
 
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,7 +11,6 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-// @JsonPropertyOrder({"username", "role", "permissions", "expiration", "issuedAt", "isExpired", "jti"})
 public class TokenInfo {
     private String username;
     private String role;

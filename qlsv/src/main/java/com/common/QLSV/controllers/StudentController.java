@@ -4,13 +4,15 @@ import com.common.QLSV.services.imp.StudentServiceImp;
 import com.security_shared.annotations.RequiresAuth;
 import com.security_shared.annotations.CurrentUser;
 import com.model_shared.models.Response;
+import com.model_shared.models.pages.PagedResponse;
+import com.model_shared.models.pages.PaginationRequest;
 import com.model_shared.models.student.CreateStudentModel;
 import com.model_shared.models.student.StudentModel;
 import com.model_shared.models.student.request.CreateStudentModelRequest;
 import com.model_shared.models.student.request.StudentModelRequest;
+import com.model_shared.models.user.UserDto;
 import com.logging.services.LoggingService;
 import com.logging.models.LogContext;
-import com.model_shared.models.UserDto;
 import com.kafka_shared.models.StudentEvent;
 import com.kafka_shared.services.KafkaProducerService;
 import jakarta.validation.Valid;
@@ -42,8 +44,38 @@ public class StudentController {
                 .build();
     }
 
+    @GetMapping("/paged")
+    @RequiresAuth(roles = {"ADMIN", "STUDENT"}, permissions = {"STUDENT_READ"})
+    ResponseEntity<Response<PagedResponse<StudentModel>>> getPaged(
+// để trang hiện tại mặc định là 0 bên backend và khi frontend muốn hiển thị phân trang sẽ +1
+            @RequestParam(defaultValue = "0") int page, 
+            @RequestParam(defaultValue = "3") int size,
+            @RequestParam(defaultValue = "id") String sortBy,
+            @RequestParam(defaultValue = "asc") String sortDirection,
+            @RequestHeader(value = "Accept-Language", defaultValue = "en") String acceptLanguage,
+            @CurrentUser UserDto currentUser)
+    {
+        Locale locale = Locale.forLanguageTag(acceptLanguage);
+        LogContext logContext = getLogContext("getPaged");
+        
+        loggingService.logInfo("Get paged students API called successfully by user: " + currentUser.getUserName()
+                + " - Page: " + page + ", Size: " + size + ", Sort: " + sortBy + " " + sortDirection, logContext);
+
+        PaginationRequest paginationRequest = new PaginationRequest(page, size, sortBy, sortDirection);
+        PagedResponse<StudentModel> pagedResponse = studentServiceImp.getsPaged(paginationRequest);
+        
+        Response<PagedResponse<StudentModel>> response = new Response<>(
+                200
+                , messageSource.getMessage("response.message.getSuccess", null, locale)
+                , "StudentsModel"
+                , null
+                , pagedResponse
+        );
+        return ResponseEntity.status(response.getStatus()).body(response);
+    }
+
     @GetMapping("")
-    @RequiresAuth(permissions = {"ADMIN_READ", "STUDENT_READ"})
+    @RequiresAuth(roles = {"ADMIN", "STUDENT"}, permissions = {"STUDENT_READ"})
     ResponseEntity<Response<List<StudentModel>>> get(
             @RequestHeader(value = "Accept-Language", defaultValue = "en") String acceptLanguage,
             @CurrentUser UserDto currentUser)
@@ -66,7 +98,7 @@ public class StudentController {
     }
 
     @PostMapping("")
-    @RequiresAuth(roles = {"ADMIN", "STUDENT"}, permissions = {"ADMIN_WRITE", "STUDENT_WRITE"})
+    @RequiresAuth(roles = {"ADMIN", "STUDENT"}, permissions = {"STUDENT_WRITE"})
     ResponseEntity<Response<List<CreateStudentModel>>> add(
             @Valid @RequestBody CreateStudentModelRequest req,
             @RequestHeader(value = "Accept-Language", defaultValue = "en") String acceptLanguage,
@@ -101,7 +133,7 @@ public class StudentController {
     }
 
     @PutMapping("")
-    @RequiresAuth(roles = {"ADMIN", "STUDENT"}, permissions = {"ADMIN_WRITE", "STUDENT_WRITE"})
+    @RequiresAuth(roles = {"ADMIN", "STUDENT"}, permissions = {"STUDENT_WRITE"})
     ResponseEntity<Response<List<StudentModel>>> update(
             @Valid @RequestBody StudentModelRequest req,
             @RequestHeader(value = "Accept-Language", defaultValue = "en") String acceptLanguage,
@@ -136,7 +168,7 @@ public class StudentController {
     }
 
     @DeleteMapping("")
-    @RequiresAuth(roles = {"ADMIN", "STUDENT"}, permissions = {"ADMIN_DELETE", "STUDENT_DELETE"})
+    @RequiresAuth(roles = {"ADMIN", "STUDENT"}, permissions = {"STUDENT_DELETE"})
     ResponseEntity<Response<List<StudentModel>>> delete(
             @RequestBody List<StudentModel> studentModels,
             @RequestHeader(value = "Accept-Language", defaultValue = "en") String acceptLanguage,

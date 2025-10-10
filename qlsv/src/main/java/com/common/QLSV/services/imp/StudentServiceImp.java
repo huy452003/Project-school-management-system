@@ -1,9 +1,10 @@
 package com.common.QLSV.services.imp;
 
 import com.common.QLSV.entities.StudentEntity;
-
 import com.common.QLSV.repositories.StudentRepo;
 import com.common.QLSV.services.StudentService;
+import com.model_shared.models.pages.PagedResponse;
+import com.model_shared.models.pages.PaginationRequest;
 import com.model_shared.models.student.CreateStudentModel;
 import com.model_shared.models.student.StudentModel;
 import com.logging.services.LoggingService;
@@ -11,9 +12,13 @@ import com.logging.models.LogContext;
 import com.handle_exceptions.NotFoundExceptionHandle;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
-
+import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -28,6 +33,8 @@ public class StudentServiceImp implements StudentService {
     RedisTemplate<String, Object> redisTemplate;
     @Autowired
     LoggingService loggingService;
+    @Autowired
+    ObjectMapper objectMapper;
 
     private static final String STUDENT_CACHE_KEY = "students:all";
 
@@ -45,8 +52,10 @@ public class StudentServiceImp implements StudentService {
 
         Object cached = redisTemplate.opsForValue().get(STUDENT_CACHE_KEY);
         if (cached != null) {
-            loggingService.logInfo("Get data from Redis cache", logContext);
-            return (List<StudentModel>) cached;
+            loggingService.logInfo("Get data from Redis cache : " + STUDENT_CACHE_KEY, logContext);
+            @SuppressWarnings("unchecked")
+            List<StudentModel> cachedList = (List<StudentModel>) cached;
+            return cachedList;
         }
         loggingService.logWarn("Not found cache, Query DB", logContext);
 
@@ -66,9 +75,79 @@ public class StudentServiceImp implements StudentService {
 
         redisTemplate.opsForValue()
                 .set(STUDENT_CACHE_KEY, studentModels);
-        loggingService.logInfo("Save cache to Redis", logContext);
+        loggingService.logInfo("Save cache to Redis : " + STUDENT_CACHE_KEY, logContext);
 
         return studentModels;
+    }
+
+    @Override
+    public PagedResponse<StudentModel> getsPaged(PaginationRequest paginationRequest) {
+        LogContext logContext = getLogContext("getsPaged");
+        
+        // Tạo cache key cho phân trang
+        String cacheKey = String.format("students:paged:page=%d:size=%d:sort=%s:%s", 
+            paginationRequest.getPage(), 
+            paginationRequest.getSize(), 
+            paginationRequest.getSortBy(), 
+            paginationRequest.getSortDirection());
+        
+        Object cached = redisTemplate.opsForValue().get(cacheKey);
+        if (cached != null) {
+            loggingService.logInfo("Get paged data from Redis cache : " + cacheKey, logContext);
+            PagedResponse<StudentModel> cachedPaged = objectMapper.convertValue(cached, 
+                    objectMapper.getTypeFactory().constructParametricType(
+                        PagedResponse.class, StudentModel.class));
+            return cachedPaged;
+        }
+        
+        loggingService.logWarn("Not found paged cache, Query DB", logContext);
+        
+        // Tạo Sort object
+        Sort sort = Sort.by(
+            "asc".equalsIgnoreCase(paginationRequest.getSortDirection()) 
+                ? Sort.Direction.ASC 
+                : Sort.Direction.DESC, 
+            paginationRequest.getSortBy()
+        );
+        
+        // Tạo Pageable object, pageable là đối tượng để phân trang
+        Pageable pageable = PageRequest.of(
+            paginationRequest.getPage(), 
+            paginationRequest.getSize(), 
+            sort
+        );
+        
+// lấy data dựa trên pageable đã cấu hình ( số trang, số lượng phần tử trên mỗi trang, cách sắp xếp )
+        Page<StudentEntity> studentPage = studentRepo.findAll(pageable);
+        
+        if (studentPage.isEmpty()) {
+            throw new NotFoundExceptionHandle(
+                "", 
+                List.of(String.valueOf(pageable.getPageNumber())), 
+                "StudentModel");
+        }
+ 
+        List<StudentModel> studentModels = new ArrayList<>();
+        for (StudentEntity studentEntity : studentPage.getContent()) {
+            StudentModel student = modelMapper.map(studentEntity, StudentModel.class);
+            studentModels.add(student);
+            loggingService.logStudentOperation("GET_PAGED", String.valueOf(studentEntity.getId()), logContext);
+        }
+        
+        PagedResponse<StudentModel> pagedResponse = new PagedResponse<>(
+            studentModels,
+            paginationRequest.getPage(),
+            paginationRequest.getSize(),
+            studentPage.getTotalElements()
+        );
+        
+        loggingService.logInfo("Gets Paged Students Successfully", logContext);
+        
+        // Cache kết quả phân trang (cache trong 5 phút)
+        redisTemplate.opsForValue().set(cacheKey, pagedResponse, 300, java.util.concurrent.TimeUnit.SECONDS);
+        loggingService.logInfo("Save paged cache to Redis : " + cacheKey, logContext);
+        
+        return pagedResponse;
     }
 
     @Override
@@ -86,7 +165,7 @@ public class StudentServiceImp implements StudentService {
         loggingService.logInfo("Create Students Successfully", logContext);
 
         redisTemplate.delete(STUDENT_CACHE_KEY);
-        loggingService.logInfo("Del cache key = students:all , after create students", logContext);
+        loggingService.logInfo("Del cache key = students:all , after create students : " + STUDENT_CACHE_KEY, logContext);
 
         return studentEntities;
     }
@@ -116,7 +195,7 @@ public class StudentServiceImp implements StudentService {
         loggingService.logInfo("Update Students Successfully", logContext);
 
         redisTemplate.delete(STUDENT_CACHE_KEY);
-        loggingService.logInfo("Del cache key = students:all , after update students", logContext);
+        loggingService.logInfo("Del cache key = students:all , after update students : " + STUDENT_CACHE_KEY, logContext);
 
         return studentEntities;
     }
@@ -147,7 +226,7 @@ public class StudentServiceImp implements StudentService {
 
 
         redisTemplate.delete(STUDENT_CACHE_KEY);
-        loggingService.logInfo("Del cache key = students:all , after del students", logContext);
+        loggingService.logInfo("Del cache key = students:all , after del students : " + STUDENT_CACHE_KEY, logContext);
 
         return true;
     }

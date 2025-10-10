@@ -44,8 +44,10 @@ public class TeacherServiceImp implements TeacherService {
 
         Object cached = redisTemplate.opsForValue().get(TEACHERS_CACHE_KEY);
         if (cached != null) {
-            loggingService.logInfo("Get teachers from Redis cache", logContext);
-            return (List<TeacherModel>) cached;
+            loggingService.logInfo("Get teachers from Redis cache : " + TEACHERS_CACHE_KEY, logContext);
+            @SuppressWarnings("unchecked")
+            List<TeacherModel> cachedList = (List<TeacherModel>) cached;
+            return cachedList;
         }
         loggingService.logInfo("Not found cache, Query DB", logContext);
 
@@ -64,7 +66,7 @@ public class TeacherServiceImp implements TeacherService {
 
         redisTemplate.opsForValue()
                 .set(TEACHERS_CACHE_KEY, teacherModels);
-        loggingService.logInfo("Save cache to Redis", logContext);
+        loggingService.logInfo("Save cache to Redis : " + TEACHERS_CACHE_KEY, logContext);
 
         return teacherModels;
     }
@@ -84,7 +86,7 @@ public class TeacherServiceImp implements TeacherService {
         loggingService.logInfo("Create Teachers Successfully", logContext);
 
         redisTemplate.delete(TEACHERS_CACHE_KEY);
-        loggingService.logInfo("Del cache key = teachers:all , after create teachers", logContext);
+        loggingService.logInfo("Del cache key = teachers:all , after create teachers : " + TEACHERS_CACHE_KEY, logContext);
 
         return teacherEntities;
     }
@@ -114,7 +116,7 @@ public class TeacherServiceImp implements TeacherService {
         loggingService.logInfo("Update Teacher Successfully", logContext);
 
         redisTemplate.delete(TEACHERS_CACHE_KEY);
-        loggingService.logInfo("Del cache key = teachers:all , after update teachers", logContext);
+        loggingService.logInfo("Del cache key = teachers:all , after update teachers : " + TEACHERS_CACHE_KEY, logContext);
 
         return teacherEntities;
     }
@@ -141,7 +143,7 @@ public class TeacherServiceImp implements TeacherService {
         loggingService.logInfo("Delete Teacher Successfully", logContext);
 
         redisTemplate.delete(TEACHERS_CACHE_KEY);
-        loggingService.logInfo("Del cache key = teachers:all , after delete teachers", logContext);
+        loggingService.logInfo("Del cache key = teachers:all , after delete teachers : " + TEACHERS_CACHE_KEY, logContext);
         
         return true;
     }

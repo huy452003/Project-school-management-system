@@ -9,8 +9,4 @@ public enum Permission {
     TEACHER_WRITE,
     TEACHER_DELETE,
     
-    ADMIN_READ,
-    ADMIN_WRITE,
-    ADMIN_DELETE,
-    
 }

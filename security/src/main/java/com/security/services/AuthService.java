@@ -1,6 +1,7 @@
 package com.security.services;
 
 import com.handle_exceptions.ConflictExceptionHandle;
+import com.handle_exceptions.ForbiddenExceptionHandle;
 import com.handle_exceptions.NotFoundExceptionHandle;
 import com.handle_exceptions.UnauthorizedExceptionHandle;
 import com.security.config.JwtConfig;
@@ -73,13 +74,20 @@ public class AuthService {
             throw new ConflictExceptionHandle("", List.of(request.getUsername()) , "Security-Model");
         }
 
+        // kiểm tra xem role ADMIN có tồn tại trong hệ thống không và chỉ chấp nhận 1 ADMIN
+        Role requestedRole = Role.valueOf(request.getRole().toUpperCase());
+        if (requestedRole == Role.ADMIN) {
+            validateAdminRoleAssignment(logContext);
+        }
+
+        Role userRole = Role.valueOf(request.getRole().toUpperCase());
         UserEntity user = UserEntity.builder()
                 .userName(request.getUsername())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .firstName(request.getFirstName())
                 .lastName(request.getLastName())
-                .role(Role.valueOf(request.getRole().toUpperCase()))
-                .permissions(convertToPermissions(request.getPermissions()))
+                .role(userRole)
+                .permissions(convertToPermissions(request.getPermissions(), userRole))
                 .enabled(true)
                 .accountNonExpired(true)
                 .accountNonLocked(true)
@@ -242,8 +250,31 @@ public class AuthService {
         }
     }
 
-    private Set<Permission> convertToPermissions(List<String> permissionStrings) {
+    private void validateAdminRoleAssignment(LogContext logContext) {
+        // Kiểm tra xem đã có ADMIN nào trong hệ thống chưa
+        long adminCount = userRepo.countByRole(Role.ADMIN);
+        
+        if (adminCount > 0) {
+            loggingService.logWarn("Attempt to create additional ADMIN user - only one ADMIN allowed", logContext);
+            throw new ForbiddenExceptionHandle(
+                "ADMIN role assignment restricted", 
+                "Only one ADMIN user is allowed in the system");
+        }
+        
+        loggingService.logInfo("First ADMIN user being created - this is allowed", logContext);
+    }
+
+    private Set<Permission> convertToPermissions(List<String> permissionStrings, Role role) {
         Set<Permission> permissions = new HashSet<>();
+        
+        // ADMIN tự động có tất cả permissions
+        if (role == Role.ADMIN) {
+            permissions.addAll(List.of(Permission.values()));
+            loggingService.logDebug("ADMIN role assigned all permissions automatically", getLogContext("convertToPermissions"));
+            return permissions;
+        }
+        
+        // Các role khác cần permissions cụ thể
         if (permissionStrings != null && !permissionStrings.isEmpty()) {
             for (String permissionStr : permissionStrings) {
                 try {

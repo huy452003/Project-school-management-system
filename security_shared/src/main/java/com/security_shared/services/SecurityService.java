@@ -1,7 +1,7 @@
 package com.security_shared.services;
 
 import com.model_shared.models.Response;
-import com.model_shared.models.UserDto;
+import com.model_shared.models.user.UserDto;
 import com.handle_exceptions.UnauthorizedExceptionHandle;
 import com.handle_exceptions.ForbiddenExceptionHandle;
 import com.logging.models.LogContext;
@@ -38,11 +38,6 @@ public class SecurityService {
                 .build();
     }
 
-    /**
-     * Validate JWT token và lấy thông tin user từ Security module
-     * @param token JWT token
-     * @return UserDto nếu token hợp lệ, null nếu không hợp lệ
-     */
     public UserDto validateTokenAndGetUser(String token) {
         LogContext logContext = getLogContext("validateTokenAndGetUser");
         
@@ -82,58 +77,6 @@ public class SecurityService {
         }
     }
 
-    /**
-     * Kiểm tra user có role cần thiết không
-     * @param user UserDto
-     * @param requiredRoles Danh sách roles cần thiết
-     * @return true nếu user có ít nhất 1 role cần thiết
-     */
-    public boolean hasRequiredRole(UserDto user, String[] requiredRoles) {
-        if (requiredRoles == null || requiredRoles.length == 0) {
-            return true;
-        }
-        
-        String userRole = user.getRole();
-        for (String requiredRole : requiredRoles) {
-            if (requiredRole.equals(userRole)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
-     * Kiểm tra user có permission cần thiết không
-     * @param user UserDto
-     * @param requiredPermissions Danh sách permissions cần thiết
-     * @return true nếu user có ít nhất 1 permission cần thiết
-     */
-    public boolean hasRequiredPermission(UserDto user, String[] requiredPermissions) {
-        if (requiredPermissions == null || requiredPermissions.length == 0) {
-            return true;
-        }
-        
-        List<String> userPermissions = user.getPermissions();
-        if (userPermissions == null) {
-            return false;
-        }
-        
-        for (String requiredPermission : requiredPermissions) {
-            if (userPermissions.contains(requiredPermission)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
-     * Validate token và kiểm tra authorization
-     * @param authHeader Authorization header
-     * @param requiredRoles Roles cần thiết
-     * @param requiredPermissions Permissions cần thiết
-     * @return UserDto nếu authorized
-     * @throws UnauthorizedExceptionHandle nếu không authorized
-     */
     public UserDto validateAndAuthorize(String authHeader, String[] requiredRoles, String[] requiredPermissions) {
         LogContext logContext = getLogContext("validateAndAuthorize");
         
@@ -156,8 +99,10 @@ public class SecurityService {
                 "Token may be invalid, expired, or blacklisted");
         }
 
+        boolean isAdmin = "ADMIN".equals(user.getRole());
+
         // Kiểm tra roles
-        if (!hasRequiredRole(user, requiredRoles)) {
+        if (!isAdmin && !hasRequiredRole(user, requiredRoles)) {
             String requiredRolesStr = String.join(", ", requiredRoles);
             loggingService.logDebug("User role " + user.getRole() 
                     + " does not match required roles: " + requiredRolesStr, logContext);
@@ -167,7 +112,7 @@ public class SecurityService {
         }
 
         // Kiểm tra permissions
-        if (!hasRequiredPermission(user, requiredPermissions)) {
+        if (!isAdmin && !hasRequiredPermission(user, requiredPermissions)) {
             String requiredPermissionsStr = String.join(", ", requiredPermissions);
             loggingService.logDebug("User permissions " + user.getPermissions() 
                     + " do not include required permissions: " + requiredPermissionsStr, logContext);
@@ -178,5 +123,43 @@ public class SecurityService {
 
         loggingService.logDebug("User " + user.getUserName() + " successfully authorized", logContext);
         return user;
+    }
+
+
+    public boolean hasRequiredRole(UserDto user, String[] requiredRoles) {
+        if (requiredRoles == null || requiredRoles.length == 0) {
+            return true;
+        }
+        
+        String userRole = user.getRole();
+        for (String requiredRole : requiredRoles) {
+            if ("ADMIN".equals(userRole) || requiredRole.equals(userRole)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean hasRequiredPermission(UserDto user, String[] requiredPermissions) {
+        if (requiredPermissions == null || requiredPermissions.length == 0) {
+            return true;
+        }
+        
+        // ADMIN có tất cả permissions
+        if ("ADMIN".equals(user.getRole())) {
+            return true;
+        }
+        
+        List<String> userPermissions = user.getPermissions();
+        if (userPermissions == null) {
+            return false;
+        }
+        
+        for (String requiredPermission : requiredPermissions) {
+            if (userPermissions.contains(requiredPermission)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

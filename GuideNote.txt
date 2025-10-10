@@ -114,7 +114,7 @@ Mới (KRaft): Metadata lưu trực tiếp trong Kafka Controller, sử dụng R
 
 *new-28/09/2025
 
-- tìm hiểu cách phân trang.
+- tìm hiểu cách phân trang.		=
 
 - làm 1 api filter (tìm từng ký tự) cho phép filter theo nhiều đk cùng lúc, còn search chỉ cho phép 1 đk 1 lúc.
 
@@ -123,9 +123,16 @@ Mới (KRaft): Metadata lưu trực tiếp trong Kafka Controller, sử dụng R
 + cho thêm 1 biến userName để khớp với lại data bên security.
 + không nên gọi API khi xử lý message Kafka chỉ nên gọi service xử lý.
 
-- tại thời điểm xác thực user thành công ở authFilter thì có gửi thêm data không nhạy cảm sang endpoint ở service khác.
+- tại thời điểm xác thực user thành công ở authFilter thì có gửi thêm data (không nhạy cảm) sang endpoint ở service khác không?
++ có thể : nhưng chỉ nên gửi các bất đồng bộ như kafka message tránh làm chậm response
 
 - những cách khác để bảo vệ backend và database ngoài trừ JWToken.
++ Session-based Authentication (Server-side Sessions)
+    Khái niệm: Server tạo một session ID sau khi login; ID lưu ở cookie.
+    Trạng thái (user, quyền, TTL) lưu trên server (RAM/Redis/DB).
++ API Keys
+    Khái niệm: Khóa tĩnh gán cho client (header/query).
+    Dùng để nhận diện, đôi khi gắn quota/rate limit.
 
 - tìm hiểu lại cách làm lại luồng đi của security và các module khác.
 + thay interceptor bằng cách sử dụng AOP , custom annotation để check JWT các method cần 

@@ -1,4 +1,4 @@
-package com.model_shared.models;
+package com.model_shared.models.user;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

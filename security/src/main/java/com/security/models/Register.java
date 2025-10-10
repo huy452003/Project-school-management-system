@@ -35,8 +35,8 @@ public class Register {
     @Pattern(regexp = "^(ADMIN|TEACHER|STUDENT)$", message = "{validate.role.invalidType}")
     private String role;
     
-    @NotBlank(message = "{validate.permissions.notBlank}")
-    @Pattern(regexp = "^(ADMIN_READ, ADMIN_WRITE, ADMIN_DELETE, STUDENT_READ, STUDENT_WRITE, STUDENT_DELETE, TEACHER_READ, TEACHER_WRITE, TEACHER_DELETE)$"
-    , message = "{validate.permissions.invalidType}")
+    // @NotBlank(message = "{validate.permissions.notBlank}")
+    // @Pattern(regexp = "^(STUDENT_READ, STUDENT_WRITE, STUDENT_DELETE, TEACHER_READ, TEACHER_WRITE, TEACHER_DELETE)$"
+    // , message = "{validate.permissions.invalidType}")
     private List<String> permissions;
 }

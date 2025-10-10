@@ -3,10 +3,11 @@ package com.security_shared.aspects;
 import com.security_shared.annotations.RequiresAuth;
 import com.security_shared.annotations.CurrentUser;
 import com.security_shared.services.SecurityService;
-import com.model_shared.models.UserDto;
 import com.handle_exceptions.UnauthorizedExceptionHandle;
 import com.logging.models.LogContext;
 import com.logging.services.LoggingService;
+import com.model_shared.models.user.UserDto;
+
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -82,7 +83,10 @@ public class RequiresAuthAspect {
             }
         }
         
-        loggingService.logDebug("User " + currentUser.getUserName() + " successfully authorized for method: " + method.getName(), logContext);
+        loggingService.logDebug("User " + currentUser.getUserName() 
+        + " successfully authorized for method: " + method.getName()
+        + " with roles: " + String.join(", ", requiresAuth.roles())
+        + " and permissions: " + String.join(", ", requiresAuth.permissions()), logContext);
         
         // Tiếp tục thực hiện method với args đã được inject
         return joinPoint.proceed(args);
