@@ -3,8 +3,8 @@ package com.common.QLSV.services.imp;
 import com.common.QLSV.entities.StudentEntity;
 import com.common.QLSV.repositories.StudentRepo;
 import com.common.QLSV.services.StudentService;
-import com.model_shared.models.pages.PagedResponse;
-import com.model_shared.models.pages.PaginationRequest;
+import com.model_shared.models.pages.PagedResponseModel;
+import com.model_shared.models.pages.PagedRequestModel;
 import com.model_shared.models.student.CreateStudentModel;
 import com.model_shared.models.student.StudentModel;
 import com.logging.services.LoggingService;
@@ -69,7 +69,7 @@ public class StudentServiceImp implements StudentService {
         for (StudentEntity students : studentEntities) {
             StudentModel studentModel = modelMapper.map(students, StudentModel.class);
             studentModels.add(studentModel);
-            loggingService.logStudentOperation("GET", String.valueOf(students.getId()), logContext);
+            loggingService.logStudentOperation("GET", students.getId(), logContext);
         }
         loggingService.logInfo("Gets Student Successfully", logContext);
 
@@ -81,22 +81,22 @@ public class StudentServiceImp implements StudentService {
     }
 
     @Override
-    public PagedResponse<StudentModel> getsPaged(PaginationRequest paginationRequest) {
+    public PagedResponseModel<StudentModel> getsPaged(PagedRequestModel pagedRequest) {
         LogContext logContext = getLogContext("getsPaged");
         
         // Tạo cache key cho phân trang
         String cacheKey = String.format("students:paged:page=%d:size=%d:sort=%s:%s", 
-            paginationRequest.getPage(), 
-            paginationRequest.getSize(), 
-            paginationRequest.getSortBy(), 
-            paginationRequest.getSortDirection());
+            pagedRequest.getPage(), 
+            pagedRequest.getSize(), 
+            pagedRequest.getSortBy(), 
+            pagedRequest.getSortDirection());
         
         Object cached = redisTemplate.opsForValue().get(cacheKey);
         if (cached != null) {
             loggingService.logInfo("Get paged data from Redis cache : " + cacheKey, logContext);
-            PagedResponse<StudentModel> cachedPaged = objectMapper.convertValue(cached, 
+            PagedResponseModel<StudentModel> cachedPaged = objectMapper.convertValue(cached, 
                     objectMapper.getTypeFactory().constructParametricType(
-                        PagedResponse.class, StudentModel.class));
+                        PagedResponseModel.class, StudentModel.class));
             return cachedPaged;
         }
         
@@ -104,16 +104,14 @@ public class StudentServiceImp implements StudentService {
         
         // Tạo Sort object
         Sort sort = Sort.by(
-            "asc".equalsIgnoreCase(paginationRequest.getSortDirection()) 
-                ? Sort.Direction.ASC 
-                : Sort.Direction.DESC, 
-            paginationRequest.getSortBy()
+            "asc".equalsIgnoreCase(pagedRequest.getSortDirection()) ? Sort.Direction.ASC : Sort.Direction.DESC
+            ,pagedRequest.getSortBy()
         );
         
         // Tạo Pageable object, pageable là đối tượng để phân trang
         Pageable pageable = PageRequest.of(
-            paginationRequest.getPage(), 
-            paginationRequest.getSize(), 
+            pagedRequest.getPage(), 
+            pagedRequest.getSize(), 
             sort
         );
         
@@ -121,6 +119,7 @@ public class StudentServiceImp implements StudentService {
         Page<StudentEntity> studentPage = studentRepo.findAll(pageable);
         
         if (studentPage.isEmpty()) {
+            loggingService.logWarn("No students found in database", logContext);
             throw new NotFoundExceptionHandle(
                 "", 
                 List.of(String.valueOf(pageable.getPageNumber())), 
@@ -131,13 +130,13 @@ public class StudentServiceImp implements StudentService {
         for (StudentEntity studentEntity : studentPage.getContent()) {
             StudentModel student = modelMapper.map(studentEntity, StudentModel.class);
             studentModels.add(student);
-            loggingService.logStudentOperation("GET_PAGED", String.valueOf(studentEntity.getId()), logContext);
+            loggingService.logStudentOperation("GET_PAGED", studentEntity.getId(), logContext);
         }
         
-        PagedResponse<StudentModel> pagedResponse = new PagedResponse<>(
+        PagedResponseModel<StudentModel> pagedResponse = new PagedResponseModel<>(
             studentModels,
-            paginationRequest.getPage(),
-            paginationRequest.getSize(),
+            pageable.getPageNumber(),
+            pageable.getPageSize(),
             studentPage.getTotalElements()
         );
         
@@ -158,7 +157,7 @@ public class StudentServiceImp implements StudentService {
         for (CreateStudentModel studentModel : studentModels) {
             StudentEntity studentEntity = modelMapper.map(studentModel, StudentEntity.class);
             studentEntities.add(studentEntity);
-            loggingService.logStudentOperation("CREATE", String.valueOf(studentEntity.getId()), logContext);
+            loggingService.logStudentOperation("CREATE", studentEntity.getId(), logContext);
         }
         studentRepo.saveAll(studentEntities);
         
@@ -180,7 +179,7 @@ public class StudentServiceImp implements StudentService {
             StudentEntity studentEntity = modelMapper.map(studentModel, StudentEntity.class);
             if (studentRepo.findById(studentModel.getId()).isPresent()) {
                 studentEntities.add(studentEntity);
-                loggingService.logStudentOperation("UPDATE", String.valueOf(studentModel.getId()), logContext);
+                loggingService.logStudentOperation("UPDATE", studentModel.getId(), logContext);
             } else {
                 listIDNotFound.add(String.valueOf(studentEntity.getId()));
             }
@@ -210,7 +209,7 @@ public class StudentServiceImp implements StudentService {
             StudentEntity studentEntity = modelMapper.map(StudentModel, StudentEntity.class);
             if (studentRepo.findById(studentEntity.getId()).isPresent()) {
                 listDelete.add(studentEntity);
-                loggingService.logStudentOperation("DELETE", String.valueOf(studentEntity.getId()), logContext);
+                loggingService.logStudentOperation("DELETE", studentEntity.getId(), logContext);
             } else {
                 listIDNotFound.add(String.valueOf(studentEntity.getId()));
             }

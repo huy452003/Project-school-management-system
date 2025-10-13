@@ -138,18 +138,16 @@ Mới (KRaft): Metadata lưu trực tiếp trong Kafka Controller, sử dụng R
 + thay interceptor bằng cách sử dụng AOP , custom annotation để check JWT các method cần 
 bảo vệ , nhưng method không sử dụng annotation thì được xem là public API
 
-- áp dụng 1 số design pattern.
-
 - xử lý khi consumer nhận message thất bại và thành công thì producer có biết được trạng thái của message không?,
   nếu producer là 1 project frontEnd thì sao liệu producer có thể là project frontEnd?
   
-  + gửi notification topic khi xử lý message và producer sẽ Listen topic notification
-  , phân loại ra và biết được trạng thái message.
++ gửi notification topic khi xử lý message và producer sẽ Listen topic notification
+, phân loại ra và biết được trạng thái message.
 
-  +  nếu producer là 1 project frontEnd thì có thể nhưng không nên vì :
-   vấn đề bảo mật
-   vấn đề performance
-   nên frontEnd chỉ nền giao tiếp với backEnd qua rest API
++  nếu producer là 1 project frontEnd thì có thể nhưng không nên vì :
+    - vấn đề bảo mật
+    - vấn đề performance
+    - nên frontEnd chỉ nền giao tiếp với backEnd qua rest API
 
 
 

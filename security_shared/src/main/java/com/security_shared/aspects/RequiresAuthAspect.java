@@ -41,17 +41,19 @@ public class RequiresAuthAspect {
                 .build();
     }
 
+    // khi annotation @RequiresAuth được sử dụng, thì sẽ chạy vào phương thức này
+    // ProceedingJoinPoint là đối tượng chứa thông tin về method được gọi
     @Around("@annotation(com.security_shared.annotations.RequiresAuth)")
     public Object validateAuth(ProceedingJoinPoint joinPoint) throws Throwable {
         LogContext logContext = getLogContext("validateAuth");
         
-        // Lấy HttpServletRequest
+        // Lấy HttpServletRequest từ trong RequestContextHolder
+        // Sau đó lấy được auth header từ request
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         if (attributes == null) {
             loggingService.logError("Cannot get HttpServletRequest from RequestContextHolder", null, logContext);
             throw new UnauthorizedExceptionHandle("Cannot get request context", "Request context not available");
         }
-        
         HttpServletRequest request = attributes.getRequest();
         String authHeader = request.getHeader("Authorization");
         
@@ -60,6 +62,7 @@ public class RequiresAuthAspect {
         Method method = signature.getMethod();
         RequiresAuth requiresAuth = method.getAnnotation(RequiresAuth.class);
         
+        // nếu lỡ annotation = null hoặc tùy chọn requireAuth = false thì skip authentication
         if (requiresAuth == null || !requiresAuth.requireAuth()) {
             // Không cần authentication, tiếp tục
             return joinPoint.proceed();
@@ -72,12 +75,15 @@ public class RequiresAuthAspect {
             requiresAuth.permissions()
         );
         
-        // Inject currentUser vào method parameters
+        // lấy tất cả arguments của method và lưu trữ các arguments đó vào một mảng
         Object[] args = joinPoint.getArgs();
+        // Lấy tất cả parameters của method
         Parameter[] parameters = method.getParameters();
-        
+        // Kiểm tra từng parameter có annotation @CurrentUser không
+        // nếu có thì inject currentUser vào parameter đó
         for (int i = 0; i < parameters.length; i++) {
             if (parameters[i].isAnnotationPresent(CurrentUser.class)) {
+                // inject userDto đã validate được vào parameter đó
                 args[i] = currentUser;
                 break;
             }

@@ -7,13 +7,13 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class PaginationRequest {
+public class PagedRequestModel {
     private int page;
     private int size;
     private String sortBy;
     private String sortDirection;
     
-    public PaginationRequest(int page, int size) {
+    public PagedRequestModel(int page, int size) {
         this.page = page;
         this.size = size;
     }

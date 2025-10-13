@@ -2,6 +2,8 @@ package com.common.QLGV.services.imp;
 
 import com.common.QLGV.entities.TeacherEntity;
 import com.model_shared.models.teacher.CreateTeacherModel;
+import com.model_shared.models.pages.PagedRequestModel;
+import com.model_shared.models.pages.PagedResponseModel;
 import com.model_shared.models.teacher.TeacherModel;
 import com.handle_exceptions.NotFoundExceptionHandle;
 import com.common.QLGV.repositories.TeacherRepo;
@@ -10,11 +12,17 @@ import com.logging.services.LoggingService;
 import com.logging.models.LogContext;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 @Service
 public class TeacherServiceImp implements TeacherService {
@@ -26,6 +34,8 @@ public class TeacherServiceImp implements TeacherService {
     RedisTemplate<String, Object> redisTemplate;
     @Autowired
     LoggingService loggingService;
+    @Autowired
+    ObjectMapper objectMapper;
 
     private static final String TEACHERS_CACHE_KEY = "teachers:all";
 
@@ -60,7 +70,7 @@ public class TeacherServiceImp implements TeacherService {
         List<TeacherModel> teacherModels = new ArrayList<>();
         for(TeacherEntity teacherEntity : teacherEntities){
             TeacherModel teacherModel = modelMapper.map(teacherEntity, TeacherModel.class);
-            loggingService.logTeacherOperation("GET", String.valueOf(teacherEntity.getId()), logContext);
+            loggingService.logTeacherOperation("GET", teacherEntity.getId(), logContext);
             teacherModels.add(teacherModel);
         }
 
@@ -72,6 +82,68 @@ public class TeacherServiceImp implements TeacherService {
     }
 
     @Override
+    public PagedResponseModel<TeacherModel> getsPaged(PagedRequestModel pagedRequest) {
+        LogContext logContext = getLogContext("getsPaged");
+        
+        String cacheKey = String.format("teachers:paged:page=%d:size=%d:sort=%s:%s", 
+            pagedRequest.getPage(), 
+            pagedRequest.getSize(), 
+            pagedRequest.getSortBy(), 
+            pagedRequest.getSortDirection());
+            
+        Object cached = redisTemplate.opsForValue().get(cacheKey);
+        if(cached != null){
+            loggingService.logInfo("Get paged data from Redis cache : " + cacheKey, logContext);
+            PagedResponseModel<TeacherModel> cachedPaged = objectMapper.convertValue(cached, 
+                    objectMapper.getTypeFactory().constructParametricType(
+                        PagedResponseModel.class, TeacherModel.class));
+            return cachedPaged;
+        }
+
+        loggingService.logWarn("Not found paged cache, query DB", logContext);
+
+        Sort sort = Sort.by(
+            "asc".equalsIgnoreCase(pagedRequest.getSortDirection()) ? Sort.Direction.ASC : Sort.Direction.DESC
+            ,pagedRequest.getSortBy()
+        );
+
+        Pageable pageable = PageRequest.of(
+            pagedRequest.getPage(),
+            pagedRequest.getSize(),
+            sort
+        );
+
+        Page<TeacherEntity> teacherPage = teacherRepo.findAll(pageable);
+        if(teacherPage.isEmpty()){
+            loggingService.logWarn("Not found teachers in database", logContext);
+            throw new NotFoundExceptionHandle(
+                "", 
+                List.of(String.valueOf(pageable.getPageNumber())), 
+                "TeacherModel");
+        }
+        List<TeacherModel> teacherModels = new ArrayList<>();
+        for(TeacherEntity teacherEntity : teacherPage.getContent()){
+            TeacherModel teacherModel = modelMapper.map(teacherEntity, TeacherModel.class);
+            teacherModels.add(teacherModel);
+            loggingService.logTeacherOperation("GET_PAGED", teacherEntity.getId(), logContext);
+        }
+
+        PagedResponseModel<TeacherModel> pagedResponse = new PagedResponseModel<>(
+            teacherModels,
+            pageable.getPageNumber(),
+            pageable.getPageSize(),
+            teacherPage.getTotalElements()
+        );
+
+        loggingService.logInfo("Gets Paged Teachers Successfully", logContext);
+
+        redisTemplate.opsForValue().set(cacheKey, pagedResponse, 30, TimeUnit.SECONDS);
+        loggingService.logInfo("Save paged cache to Redis : " + cacheKey, logContext);
+
+        return pagedResponse;
+    }
+
+    @Override
     public List<TeacherEntity> creates(List<CreateTeacherModel> createTeacherModels) {
         LogContext logContext = getLogContext("creates");
 
@@ -79,7 +151,7 @@ public class TeacherServiceImp implements TeacherService {
         for(CreateTeacherModel createTeacherModel : createTeacherModels){
             TeacherEntity teacherEntity = modelMapper.map(createTeacherModel, TeacherEntity.class);
             teacherEntities.add(teacherEntity);
-            loggingService.logTeacherOperation("CREATE", String.valueOf(teacherEntity.getId()), logContext);
+            loggingService.logTeacherOperation("CREATE", teacherEntity.getId(), logContext);
         }
         teacherRepo.saveAll(teacherEntities);
         
@@ -101,7 +173,7 @@ public class TeacherServiceImp implements TeacherService {
             TeacherEntity teacherEntity = modelMapper.map(teacherModel, TeacherEntity.class);
             if (teacherRepo.findById(teacherModel.getId()).isPresent()) {
                 teacherEntities.add(teacherEntity);
-                loggingService.logTeacherOperation("UPDATE", String.valueOf(teacherModel.getId()), logContext);
+                loggingService.logTeacherOperation("UPDATE", teacherModel.getId(), logContext);
             }else {
                 listIDNotFound.add(String.valueOf(teacherEntity.getId()));
             }
@@ -129,7 +201,7 @@ public class TeacherServiceImp implements TeacherService {
         for(TeacherModel teacherModel : teacherModels){
             if (teacherRepo.findById(teacherModel.getId()).isPresent()) {
                 teacherRepo.deleteById(teacherModel.getId());
-                loggingService.logTeacherOperation("DELETE", String.valueOf(teacherModel.getId()), logContext);
+                loggingService.logTeacherOperation("DELETE", teacherModel.getId(), logContext);
             }else {
                 listIDNotFound.add(String.valueOf(teacherModel.getId()));
             }

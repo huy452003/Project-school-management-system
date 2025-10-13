@@ -8,6 +8,6 @@ public interface LoggingService {
     void logWarn(String message, LogContext context);
     void logDebug(String message, LogContext context);
 
-    void logTeacherOperation(String operation, String teacherId, LogContext context);
-    void logStudentOperation(String operation, String studentId, LogContext context);
+    void logTeacherOperation(String operation, int teacherId, LogContext context);
+    void logStudentOperation(String operation, int studentId, LogContext context);
 }

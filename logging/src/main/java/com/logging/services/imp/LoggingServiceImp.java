@@ -49,7 +49,7 @@ public class LoggingServiceImp implements LoggingService{
     }
 
     @Override
-    public void logTeacherOperation(String operation, String teacherId, LogContext context) {
+    public void logTeacherOperation(String operation, int teacherId, LogContext context) {
         log.info(
             "[{}] {} - Teacher ID: {}, Operation: {}",
             context.getModule(),
@@ -60,7 +60,7 @@ public class LoggingServiceImp implements LoggingService{
     }
 
     @Override
-    public void logStudentOperation(String operation, String studentId, LogContext context) {
+    public void logStudentOperation(String operation, int studentId, LogContext context) {
         log.info(
             "[{}] {} - Student ID: {}, Operation: {}",
             context.getModule(),

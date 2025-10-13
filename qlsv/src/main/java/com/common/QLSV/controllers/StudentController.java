@@ -4,8 +4,8 @@ import com.common.QLSV.services.imp.StudentServiceImp;
 import com.security_shared.annotations.RequiresAuth;
 import com.security_shared.annotations.CurrentUser;
 import com.model_shared.models.Response;
-import com.model_shared.models.pages.PagedResponse;
-import com.model_shared.models.pages.PaginationRequest;
+import com.model_shared.models.pages.PagedResponseModel;
+import com.model_shared.models.pages.PagedRequestModel;
 import com.model_shared.models.student.CreateStudentModel;
 import com.model_shared.models.student.StudentModel;
 import com.model_shared.models.student.request.CreateStudentModelRequest;
@@ -46,7 +46,7 @@ public class StudentController {
 
     @GetMapping("/paged")
     @RequiresAuth(roles = {"ADMIN", "STUDENT"}, permissions = {"STUDENT_READ"})
-    ResponseEntity<Response<PagedResponse<StudentModel>>> getPaged(
+    ResponseEntity<Response<PagedResponseModel<StudentModel>>> getPaged(
 // để trang hiện tại mặc định là 0 bên backend và khi frontend muốn hiển thị phân trang sẽ +1
             @RequestParam(defaultValue = "0") int page, 
             @RequestParam(defaultValue = "3") int size,
@@ -61,16 +61,17 @@ public class StudentController {
         loggingService.logInfo("Get paged students API called successfully by user: " + currentUser.getUserName()
                 + " - Page: " + page + ", Size: " + size + ", Sort: " + sortBy + " " + sortDirection, logContext);
 
-        PaginationRequest paginationRequest = new PaginationRequest(page, size, sortBy, sortDirection);
-        PagedResponse<StudentModel> pagedResponse = studentServiceImp.getsPaged(paginationRequest);
+        PagedRequestModel pagedRequest = new PagedRequestModel(page, size, sortBy, sortDirection);
+        PagedResponseModel<StudentModel> pagedResponse = studentServiceImp.getsPaged(pagedRequest);
         
-        Response<PagedResponse<StudentModel>> response = new Response<>(
-                200
-                , messageSource.getMessage("response.message.getSuccess", null, locale)
-                , "StudentsModel"
-                , null
-                , pagedResponse
+        Response<PagedResponseModel<StudentModel>> response = new Response<>(
+                200, 
+                messageSource.getMessage("response.message.getSuccess", null, locale),
+                "StudentsModel",
+                null, 
+                pagedResponse
         );
+        
         return ResponseEntity.status(response.getStatus()).body(response);
     }
 

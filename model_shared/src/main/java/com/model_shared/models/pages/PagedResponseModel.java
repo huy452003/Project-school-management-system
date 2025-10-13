@@ -9,7 +9,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class PagedResponse<T> {
+public class PagedResponseModel<T> {
     private List<T> data;
     private int page; // Trang hiện tại
     private int size; // Số lượng phần tử trên mỗi trang
@@ -20,7 +20,7 @@ public class PagedResponse<T> {
     private boolean hasNext; // Kiểm tra xem có phải trang tiếp theo không
     private boolean hasPrevious; // Kiểm tra xem có phải trang trước đó không
     
-    public PagedResponse(List<T> data, int page, int size, long totalElements) {
+    public PagedResponseModel(List<T> data, int page, int size, long totalElements) {
         this.data = data;
         this.page = page;
         this.size = size;

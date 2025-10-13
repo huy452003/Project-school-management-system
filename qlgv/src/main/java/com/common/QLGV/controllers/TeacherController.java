@@ -5,6 +5,8 @@ import com.common.QLGV.services.imp.StudentClientServiceImp;
 import com.security_shared.annotations.RequiresAuth;
 import com.security_shared.annotations.CurrentUser;
 import com.model_shared.models.Response;
+import com.model_shared.models.pages.PagedRequestModel;
+import com.model_shared.models.pages.PagedResponseModel;
 import com.model_shared.models.student.StudentModel;
 import com.model_shared.models.teacher.CreateTeacherModel;
 import com.model_shared.models.teacher.TeacherModel;
@@ -14,7 +16,6 @@ import com.model_shared.models.user.UserDto;
 import com.common.QLGV.services.imp.TeacherServiceImp;
 import com.logging.models.LogContext;
 import com.logging.services.LoggingService;
-
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
@@ -65,6 +66,37 @@ public class TeacherController {
                 null,
                 teacherModels
         );
+        return ResponseEntity.status(response.getStatus()).body(response);
+    }
+
+    @GetMapping("/paged")
+    @RequiresAuth(roles = {"ADMIN", "TEACHER"}, permissions = {"TEACHER_READ"})
+    public ResponseEntity<Response<PagedResponseModel<TeacherModel>>> getPaged(
+                @RequestParam(defaultValue = "0") int page,
+                @RequestParam(defaultValue = "3") int size,
+                @RequestParam(defaultValue = "id") String sortBy,
+                @RequestParam(defaultValue = "asc") String sortDirection,
+                @RequestHeader(value = "Accept-Language", defaultValue = "en") String acceptLanguage,
+                @CurrentUser UserDto currentUser)
+    {
+        Locale locale = Locale.forLanguageTag(acceptLanguage);
+        LogContext logContext = getLogContext("getPaged");
+
+        loggingService.logInfo(String.format(
+                "Get paged teachers API called successfully by user: %s - Page: %d, Size: %d, Sort: %s : %s", 
+                currentUser.getUserName(), page, size, sortBy, sortDirection), logContext);
+        
+        PagedRequestModel pagedRequest = new PagedRequestModel(page, size, sortBy, sortDirection);
+        PagedResponseModel<TeacherModel> pagedResponse = teacherServiceImp.getsPaged(pagedRequest);
+
+        Response<PagedResponseModel<TeacherModel>> response = new Response<>(
+                200,
+                messageSource.getMessage("response.message.getSuccess", null, locale),
+                "TeacherModel",
+                null,
+                pagedResponse
+        );
+
         return ResponseEntity.status(response.getStatus()).body(response);
     }
 
