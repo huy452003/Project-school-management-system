@@ -10,6 +10,7 @@ import com.model_shared.models.student.StudentModel;
 import com.logging.services.LoggingService;
 import com.logging.models.LogContext;
 import com.handle_exceptions.NotFoundExceptionHandle;
+import com.model_shared.enums.Gender;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -78,75 +79,6 @@ public class StudentServiceImp implements StudentService {
         loggingService.logInfo("Save cache to Redis : " + STUDENT_CACHE_KEY, logContext);
 
         return studentModels;
-    }
-
-    @Override
-    public PagedResponseModel<StudentModel> getsPaged(PagedRequestModel pagedRequest) {
-        LogContext logContext = getLogContext("getsPaged");
-        
-        // Tạo cache key cho phân trang
-        String cacheKey = String.format("students:paged:page=%d:size=%d:sort=%s:%s", 
-            pagedRequest.getPage(), 
-            pagedRequest.getSize(), 
-            pagedRequest.getSortBy(), 
-            pagedRequest.getSortDirection());
-        
-        Object cached = redisTemplate.opsForValue().get(cacheKey);
-        if (cached != null) {
-            loggingService.logInfo("Get paged data from Redis cache : " + cacheKey, logContext);
-            PagedResponseModel<StudentModel> cachedPaged = objectMapper.convertValue(cached, 
-                    objectMapper.getTypeFactory().constructParametricType(
-                        PagedResponseModel.class, StudentModel.class));
-            return cachedPaged;
-        }
-        
-        loggingService.logWarn("Not found paged cache, Query DB", logContext);
-        
-        // Tạo Sort object
-        Sort sort = Sort.by(
-            "asc".equalsIgnoreCase(pagedRequest.getSortDirection()) ? Sort.Direction.ASC : Sort.Direction.DESC
-            ,pagedRequest.getSortBy()
-        );
-        
-        // Tạo Pageable object, pageable là đối tượng để phân trang
-        Pageable pageable = PageRequest.of(
-            pagedRequest.getPage(), 
-            pagedRequest.getSize(), 
-            sort
-        );
-        
-// lấy data dựa trên pageable đã cấu hình ( số trang, số lượng phần tử trên mỗi trang, cách sắp xếp )
-        Page<StudentEntity> studentPage = studentRepo.findAll(pageable);
-        
-        if (studentPage.isEmpty()) {
-            loggingService.logWarn("No students found in database", logContext);
-            throw new NotFoundExceptionHandle(
-                "", 
-                List.of(String.valueOf(pageable.getPageNumber())), 
-                "StudentModel");
-        }
- 
-        List<StudentModel> studentModels = new ArrayList<>();
-        for (StudentEntity studentEntity : studentPage.getContent()) {
-            StudentModel student = modelMapper.map(studentEntity, StudentModel.class);
-            studentModels.add(student);
-            loggingService.logStudentOperation("GET_PAGED", studentEntity.getId(), logContext);
-        }
-        
-        PagedResponseModel<StudentModel> pagedResponse = new PagedResponseModel<>(
-            studentModels,
-            pageable.getPageNumber(),
-            pageable.getPageSize(),
-            studentPage.getTotalElements()
-        );
-        
-        loggingService.logInfo("Gets Paged Students Successfully", logContext);
-        
-        // Cache kết quả phân trang (cache trong 5 phút)
-        redisTemplate.opsForValue().set(cacheKey, pagedResponse, 300, java.util.concurrent.TimeUnit.SECONDS);
-        loggingService.logInfo("Save paged cache to Redis : " + cacheKey, logContext);
-        
-        return pagedResponse;
     }
 
     @Override
@@ -228,5 +160,144 @@ public class StudentServiceImp implements StudentService {
         loggingService.logInfo("Del cache key = students:all , after del students : " + STUDENT_CACHE_KEY, logContext);
 
         return true;
+    }
+
+    @Override
+    public PagedResponseModel<StudentModel> getsPaged(PagedRequestModel pagedRequest) {
+        LogContext logContext = getLogContext("getsPaged");
+        
+        // Tạo cache key cho phân trang
+        String cacheKey = String.format("students:paged:page=%d:size=%d:sort=%s:%s", 
+            pagedRequest.getPage(), 
+            pagedRequest.getSize(), 
+            pagedRequest.getSortBy(), 
+            pagedRequest.getSortDirection());
+        
+        Object cached = redisTemplate.opsForValue().get(cacheKey);
+        if (cached != null) {
+            loggingService.logInfo("Get paged data from Redis cache : " + cacheKey, logContext);
+            PagedResponseModel<StudentModel> cachedPaged = objectMapper.convertValue(cached, 
+                    objectMapper.getTypeFactory().constructParametricType(
+                        PagedResponseModel.class, StudentModel.class));
+            return cachedPaged;
+        }
+        
+        loggingService.logWarn("Not found paged cache, Query DB", logContext);
+        
+        // Tạo Sort object
+        Sort sort = Sort.by(
+            "asc".equalsIgnoreCase(pagedRequest.getSortDirection()) ? Sort.Direction.ASC : Sort.Direction.DESC
+            ,pagedRequest.getSortBy()
+        );
+        
+        // Tạo Pageable object, pageable là đối tượng để phân trang
+        Pageable pageable = PageRequest.of(
+            pagedRequest.getPage(), 
+            pagedRequest.getSize(), 
+            sort
+        );
+        
+        // lấy data dựa trên pageable đã cấu hình ( số trang, số lượng phần tử trên mỗi trang, cách sắp xếp )
+        Page<StudentEntity> studentPage = studentRepo.findAll(pageable);
+        
+        if (studentPage.isEmpty()) {
+            loggingService.logWarn("No students found in database", logContext);
+            throw new NotFoundExceptionHandle(
+                "", 
+                List.of(String.valueOf(pageable.getPageNumber())), 
+                "StudentModel");
+        }
+ 
+        List<StudentModel> studentModels = new ArrayList<>();
+        for (StudentEntity studentEntity : studentPage.getContent()) {
+            StudentModel student = modelMapper.map(studentEntity, StudentModel.class);
+            studentModels.add(student);
+            loggingService.logStudentOperation("GET_PAGED", studentEntity.getId(), logContext);
+        }
+        
+        PagedResponseModel<StudentModel> pagedResponse = new PagedResponseModel<>(
+            studentModels,
+            pageable.getPageNumber(),
+            pageable.getPageSize(),
+            studentPage.getTotalElements()
+        );
+        
+        loggingService.logInfo("Gets Paged Students Successfully", logContext);
+        
+        // Cache kết quả phân trang (cache trong 5 phút)
+        redisTemplate.opsForValue().set(cacheKey, pagedResponse, 300, java.util.concurrent.TimeUnit.SECONDS);
+        loggingService.logInfo("Save paged cache to Redis : " + cacheKey, logContext);
+        
+        return pagedResponse;
+    }
+
+    @Override
+    public List<StudentModel> filter(Integer id, String firstName, String lastName, Integer age, Gender gender, Boolean graduate) {
+        LogContext logContext = getLogContext("filter");
+        
+        List<StudentModel> studentModels = new ArrayList<>();
+        List<StudentEntity> studentEntities = studentRepo.findAll();
+
+        if (studentEntities.isEmpty()) {
+            loggingService.logWarn("No students found in database", logContext);
+            throw new NotFoundExceptionHandle("", Collections.emptyList(), "StudentModel");
+        }
+
+        // Đếm số điều kiện được truyền vào (khác null/0/empty)
+        int conditionCount = 0;
+        boolean hasIdCondition = (id != null && id > 0);
+        boolean hasFirstNameCondition = (firstName != null && !firstName.trim().isEmpty());
+        boolean hasLastNameCondition = (lastName != null && !lastName.trim().isEmpty());
+        boolean hasAgeCondition = (age != null && age > 0);
+        boolean hasGenderCondition = (gender != null);
+        boolean hasGraduateCondition = (graduate != null); // Boolean có thể null
+        
+        if (hasIdCondition) conditionCount++;
+        if (hasFirstNameCondition) conditionCount++;
+        if (hasLastNameCondition) conditionCount++;
+        if (hasAgeCondition) conditionCount++;
+        if (hasGenderCondition) conditionCount++;
+        if (hasGraduateCondition) conditionCount++;
+
+        loggingService.logInfo("Filtering with " + conditionCount + " conditions", logContext);
+
+        for (StudentEntity studentEntity : studentEntities) {
+            int matchedConditions = 0;
+            
+            // Kiểm tra từng điều kiện và đếm số điều kiện thỏa mãn
+            if (hasIdCondition && studentEntity.getId() == id) {
+                matchedConditions++;
+            }
+            if (hasFirstNameCondition && studentEntity.getFirstName() != null && firstName != null &&
+                studentEntity.getFirstName().toLowerCase().contains(firstName.toLowerCase())) {
+                matchedConditions++;
+            }
+            if (hasLastNameCondition && studentEntity.getLastName() != null && lastName != null &&
+                studentEntity.getLastName().toLowerCase().contains(lastName.toLowerCase())) {
+                matchedConditions++;
+            }
+            if (hasAgeCondition && studentEntity.getAge() == age) {
+                matchedConditions++;
+            }
+            if (hasGenderCondition && studentEntity.getGender() == gender) {
+                matchedConditions++;
+            }
+            if (hasGraduateCondition && studentEntity.isGraduate() == graduate) {
+                matchedConditions++;
+            }
+            
+            // Chỉ thêm student nếu thỏa mãn TẤT CẢ các điều kiện được truyền vào
+            if (matchedConditions == conditionCount) {
+                studentModels.add(modelMapper.map(studentEntity, StudentModel.class));
+            }
+        }
+
+        if (studentModels.isEmpty()) {
+            loggingService.logWarn("No students found in database", logContext);
+            throw new NotFoundExceptionHandle("", Collections.emptyList(), "StudentModel");
+        }
+        
+        loggingService.logInfo("Filter Students Successfully. Found " + studentModels.size() + " students", logContext);
+        return studentModels;
     }
 }

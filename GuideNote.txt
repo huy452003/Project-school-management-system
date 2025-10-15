@@ -116,7 +116,7 @@ Mới (KRaft): Metadata lưu trực tiếp trong Kafka Controller, sử dụng R
 
 - tìm hiểu cách phân trang.		=
 
-- làm 1 api filter (tìm từng ký tự) cho phép filter theo nhiều đk cùng lúc, còn search chỉ cho phép 1 đk 1 lúc.
+- làm 1 api filter (tìm từng ký tự) cho phép filter theo nhiều đk cùng lúc, còn search chỉ cho phép 1 đk 1 lúc.     =
 
 - database user nằm ở database khác với data của student khi login xong thì làm sao để xác định student vừa login là ai,
     tôi có ý tưởng là sẽ dung kafka để gửi event cho endpoint main của student và trả data ngay lập tức.

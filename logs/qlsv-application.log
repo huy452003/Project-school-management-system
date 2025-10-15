@@ -1,321 +1,459 @@
-2025-10-11 14:35:21 [background-preinit] DEBUG [logging] - Logging Provider: org.jboss.logging.Slf4jLoggerProvider found via system property
-2025-10-11 14:35:21 [restartedMain] INFO  [QlsvApplication] - Starting QlsvApplication using Java 17.0.16 with PID 14504 (D:\project IntelliJ Ultimate\modules-parent\qlsv\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlsv)
-2025-10-11 14:35:21 [restartedMain] DEBUG [QlsvApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
-2025-10-11 14:35:21 [restartedMain] INFO  [QlsvApplication] - No active profile set, falling back to 1 default profile: "default"
-2025-10-11 14:37:41 [background-preinit] DEBUG [logging] - Logging Provider: org.jboss.logging.Slf4jLoggerProvider found via system property
-2025-10-11 14:37:41 [main] INFO  [QlsvApplicationTests] - Starting QlsvApplicationTests using Java 17.0.16 with PID 11688 (started by tranhuy in d:\project IntelliJ Ultimate\modules-parent\qlsv)
-2025-10-11 14:37:41 [main] DEBUG [QlsvApplicationTests] - Running with Spring Boot v3.5.0, Spring v6.2.7
-2025-10-11 14:37:41 [main] INFO  [QlsvApplicationTests] - No active profile set, falling back to 1 default profile: "default"
-2025-10-11 14:37:44 [main] WARN  [HikariConfig] - HikariPool-1 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
-2025-10-11 14:37:45 [main] WARN  [deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-10-11 14:37:45 [main] WARN  [deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
-2025-10-11 14:37:47 [main] WARN  [GenericWebApplicationContext] - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'requiresAuthAspect': Unsatisfied dependency expressed through field 'securityService': Error creating bean with name 'securityService': Lookup method resolution failed
-2025-10-11 14:37:48 [main] ERROR [SpringApplication] - Application run failed
-org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'requiresAuthAspect': Unsatisfied dependency expressed through field 'securityService': Error creating bean with name 'securityService': Lookup method resolution failed
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:788)
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:768)
-	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:146)
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:509)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1459)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:606)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:529)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:339)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:373)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:337)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.instantiateSingleton(DefaultListableBeanFactory.java:1222)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingleton(DefaultListableBeanFactory.java:1188)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:1123)
-	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:987)
-	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:627)
-	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:753)
-	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:439)
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:318)
-	at org.springframework.boot.test.context.SpringBootContextLoader.lambda$loadContext$3(SpringBootContextLoader.java:144)
-	at org.springframework.util.function.ThrowingSupplier.get(ThrowingSupplier.java:58)
-	at org.springframework.util.function.ThrowingSupplier.get(ThrowingSupplier.java:46)
-	at org.springframework.boot.SpringApplication.withHook(SpringApplication.java:1462)
-	at org.springframework.boot.test.context.SpringBootContextLoader$ContextLoaderHook.run(SpringBootContextLoader.java:563)
-	at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:144)
-	at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:110)
-	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:225)
-	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:152)
-	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:130)
-	at org.springframework.test.context.web.ServletTestExecutionListener.setUpRequestContextIfNecessary(ServletTestExecutionListener.java:200)
-	at org.springframework.test.context.web.ServletTestExecutionListener.prepareTestInstance(ServletTestExecutionListener.java:139)
-	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:260)
-	at org.springframework.test.context.junit.jupiter.SpringExtension.postProcessTestInstance(SpringExtension.java:159)
-	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$invokeTestInstancePostProcessors$10(ClassBasedTestDescriptor.java:383)
-	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.executeAndMaskThrowable(ClassBasedTestDescriptor.java:388)
-	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$invokeTestInstancePostProcessors$11(ClassBasedTestDescriptor.java:382)
-	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.accept(ForEachOps.java:183)
-	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:197)
-	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:179)
-	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:197)
-	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1625)
-	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:509)
-	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499)
-	at java.base/java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:150)
-	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:173)
-	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
-	at java.base/java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:596)
-	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.invokeTestInstancePostProcessors(ClassBasedTestDescriptor.java:382)
-	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$instantiateAndPostProcessTestInstance$6(ClassBasedTestDescriptor.java:293)
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.instantiateAndPostProcessTestInstance(ClassBasedTestDescriptor.java:292)
-	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$testInstancesProvider$4(ClassBasedTestDescriptor.java:281)
-	at java.base/java.util.Optional.orElseGet(Optional.java:364)
-	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$testInstancesProvider$5(ClassBasedTestDescriptor.java:280)
-	at org.junit.jupiter.engine.execution.TestInstancesProvider.getTestInstances(TestInstancesProvider.java:27)
-	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$prepare$0(TestMethodTestDescriptor.java:112)
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.prepare(TestMethodTestDescriptor.java:111)
-	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.prepare(TestMethodTestDescriptor.java:69)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$prepare$2(NodeTestTask.java:128)
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.prepare(NodeTestTask.java:128)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
-	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:160)
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:146)
-	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:144)
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:143)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:100)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
-	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:160)
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:146)
-	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:144)
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:143)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:100)
-	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:35)
-	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:57)
-	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:54)
-	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:201)
-	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:170)
-	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:94)
-	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:59)
-	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:142)
-	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:58)
-	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:103)
-	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:85)
-	at org.junit.platform.launcher.core.DelegatingLauncher.execute(DelegatingLauncher.java:47)
-	at org.junit.platform.launcher.core.InterceptingLauncher.lambda$execute$1(InterceptingLauncher.java:39)
-	at org.junit.platform.launcher.core.ClasspathAlignmentCheckingLauncherInterceptor.intercept(ClasspathAlignmentCheckingLauncherInterceptor.java:25)
-	at org.junit.platform.launcher.core.InterceptingLauncher.execute(InterceptingLauncher.java:38)
-	at org.junit.platform.launcher.core.DelegatingLauncher.execute(DelegatingLauncher.java:47)
-	at org.apache.maven.surefire.junitplatform.LazyLauncher.execute(LazyLauncher.java:56)
-	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.execute(JUnitPlatformProvider.java:194)
-	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.invokeAllTests(JUnitPlatformProvider.java:150)
-	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.invoke(JUnitPlatformProvider.java:124)
-	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
-	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
-	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
-	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'securityService': Lookup method resolution failed
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.checkLookupMethods(AutowiredAnnotationBeanPostProcessor.java:498)
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.determineCandidateConstructors(AutowiredAnnotationBeanPostProcessor.java:368)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.determineConstructorsFromBeanPostProcessors(AbstractAutowireCapableBeanFactory.java:1334)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1229)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:569)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:529)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:339)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:373)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:337)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1682)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1628)
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:785)
-	... 106 common frames omitted
-Caused by: java.lang.IllegalStateException: Failed to introspect Class [com.security_shared.services.SecurityService] from ClassLoader [jdk.internal.loader.ClassLoaders$AppClassLoader@4e0e2f2a]
-	at org.springframework.util.ReflectionUtils.getDeclaredMethods(ReflectionUtils.java:483)
-	at org.springframework.util.ReflectionUtils.doWithLocalMethods(ReflectionUtils.java:320)
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.checkLookupMethods(AutowiredAnnotationBeanPostProcessor.java:476)
-	... 118 common frames omitted
-Caused by: java.lang.NoClassDefFoundError: com/model_shared/models/UserDto
-	at java.base/java.lang.Class.getDeclaredMethods0(Native Method)
-	at java.base/java.lang.Class.privateGetDeclaredMethods(Class.java:3402)
-	at java.base/java.lang.Class.getDeclaredMethods(Class.java:2504)
-	at org.springframework.util.ReflectionUtils.getDeclaredMethods(ReflectionUtils.java:465)
-	... 120 common frames omitted
-Caused by: java.lang.ClassNotFoundException: com.model_shared.models.UserDto
-	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:641)
-	at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(ClassLoaders.java:188)
-	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:525)
-	... 124 common frames omitted
-2025-10-11 14:37:48 [main] WARN  [TestContextManager] - Caught exception while allowing TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener] to prepare test instance [com.common.QLSV.QlsvApplicationTests@549561ab]
-java.lang.IllegalStateException: Failed to load ApplicationContext for [WebMergedContextConfiguration@75f67ea7 testClass = com.common.QLSV.QlsvApplicationTests, locations = [], classes = [com.common.QLSV.QlsvApplication], contextInitializerClasses = [], activeProfiles = [], propertySourceDescriptors = [], propertySourceProperties = ["org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true"], contextCustomizers = [org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@74f6c5d8, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@4bbf6d0e, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@2205a05d, org.springframework.boot.test.web.reactor.netty.DisableReactorResourceFactoryGlobalResourcesContextCustomizerFactory$DisableReactorResourceFactoryGlobalResourcesContextCustomizerCustomizer@4f4c4b1a, org.springframework.boot.test.autoconfigure.OnFailureConditionReportContextCustomizerFactory$OnFailureConditionReportContextCustomizer@64e7619d, org.springframework.boot.test.autoconfigure.actuate.observability.ObservabilityContextCustomizerFactory$DisableObservabilityContextCustomizer@1f, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizer@12299890, org.springframework.test.context.support.DynamicPropertiesContextCustomizer@0, org.springframework.boot.test.context.SpringBootTestAnnotation@86e5b41c], resourceBasePath = "src/main/webapp", contextLoader = org.springframework.boot.test.context.SpringBootContextLoader, parent = null]
-	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:180)
-	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:130)
-	at org.springframework.test.context.web.ServletTestExecutionListener.setUpRequestContextIfNecessary(ServletTestExecutionListener.java:200)
-	at org.springframework.test.context.web.ServletTestExecutionListener.prepareTestInstance(ServletTestExecutionListener.java:139)
-	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:260)
-	at org.springframework.test.context.junit.jupiter.SpringExtension.postProcessTestInstance(SpringExtension.java:159)
-	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$invokeTestInstancePostProcessors$10(ClassBasedTestDescriptor.java:383)
-	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.executeAndMaskThrowable(ClassBasedTestDescriptor.java:388)
-	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$invokeTestInstancePostProcessors$11(ClassBasedTestDescriptor.java:382)
-	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.accept(ForEachOps.java:183)
-	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:197)
-	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:179)
-	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:197)
-	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1625)
-	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:509)
-	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499)
-	at java.base/java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:150)
-	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:173)
-	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
-	at java.base/java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:596)
-	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.invokeTestInstancePostProcessors(ClassBasedTestDescriptor.java:382)
-	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$instantiateAndPostProcessTestInstance$6(ClassBasedTestDescriptor.java:293)
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.instantiateAndPostProcessTestInstance(ClassBasedTestDescriptor.java:292)
-	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$testInstancesProvider$4(ClassBasedTestDescriptor.java:281)
-	at java.base/java.util.Optional.orElseGet(Optional.java:364)
-	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$testInstancesProvider$5(ClassBasedTestDescriptor.java:280)
-	at org.junit.jupiter.engine.execution.TestInstancesProvider.getTestInstances(TestInstancesProvider.java:27)
-	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$prepare$0(TestMethodTestDescriptor.java:112)
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.prepare(TestMethodTestDescriptor.java:111)
-	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.prepare(TestMethodTestDescriptor.java:69)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$prepare$2(NodeTestTask.java:128)
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.prepare(NodeTestTask.java:128)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
-	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:160)
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:146)
-	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:144)
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:143)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:100)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
-	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:160)
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:146)
-	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:144)
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:143)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:100)
-	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:35)
-	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:57)
-	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:54)
-	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:201)
-	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:170)
-	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:94)
-	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:59)
-	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:142)
-	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:58)
-	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:103)
-	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:85)
-	at org.junit.platform.launcher.core.DelegatingLauncher.execute(DelegatingLauncher.java:47)
-	at org.junit.platform.launcher.core.InterceptingLauncher.lambda$execute$1(InterceptingLauncher.java:39)
-	at org.junit.platform.launcher.core.ClasspathAlignmentCheckingLauncherInterceptor.intercept(ClasspathAlignmentCheckingLauncherInterceptor.java:25)
-	at org.junit.platform.launcher.core.InterceptingLauncher.execute(InterceptingLauncher.java:38)
-	at org.junit.platform.launcher.core.DelegatingLauncher.execute(DelegatingLauncher.java:47)
-	at org.apache.maven.surefire.junitplatform.LazyLauncher.execute(LazyLauncher.java:56)
-	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.execute(JUnitPlatformProvider.java:194)
-	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.invokeAllTests(JUnitPlatformProvider.java:150)
-	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.invoke(JUnitPlatformProvider.java:124)
-	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
-	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
-	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
-	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
-Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'requiresAuthAspect': Unsatisfied dependency expressed through field 'securityService': Error creating bean with name 'securityService': Lookup method resolution failed
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:788)
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:768)
-	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:146)
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:509)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1459)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:606)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:529)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:339)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:373)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:337)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.instantiateSingleton(DefaultListableBeanFactory.java:1222)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingleton(DefaultListableBeanFactory.java:1188)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:1123)
-	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:987)
-	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:627)
-	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:753)
-	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:439)
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:318)
-	at org.springframework.boot.test.context.SpringBootContextLoader.lambda$loadContext$3(SpringBootContextLoader.java:144)
-	at org.springframework.util.function.ThrowingSupplier.get(ThrowingSupplier.java:58)
-	at org.springframework.util.function.ThrowingSupplier.get(ThrowingSupplier.java:46)
-	at org.springframework.boot.SpringApplication.withHook(SpringApplication.java:1462)
-	at org.springframework.boot.test.context.SpringBootContextLoader$ContextLoaderHook.run(SpringBootContextLoader.java:563)
-	at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:144)
-	at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:110)
-	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:225)
-	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:152)
-	... 79 common frames omitted
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'securityService': Lookup method resolution failed
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.checkLookupMethods(AutowiredAnnotationBeanPostProcessor.java:498)
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.determineCandidateConstructors(AutowiredAnnotationBeanPostProcessor.java:368)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.determineConstructorsFromBeanPostProcessors(AbstractAutowireCapableBeanFactory.java:1334)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1229)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:569)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:529)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:339)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:373)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:337)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1682)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1628)
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:785)
-	... 106 common frames omitted
-Caused by: java.lang.IllegalStateException: Failed to introspect Class [com.security_shared.services.SecurityService] from ClassLoader [jdk.internal.loader.ClassLoaders$AppClassLoader@4e0e2f2a]
-	at org.springframework.util.ReflectionUtils.getDeclaredMethods(ReflectionUtils.java:483)
-	at org.springframework.util.ReflectionUtils.doWithLocalMethods(ReflectionUtils.java:320)
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.checkLookupMethods(AutowiredAnnotationBeanPostProcessor.java:476)
-	... 118 common frames omitted
-Caused by: java.lang.NoClassDefFoundError: com/model_shared/models/UserDto
-	at java.base/java.lang.Class.getDeclaredMethods0(Native Method)
-	at java.base/java.lang.Class.privateGetDeclaredMethods(Class.java:3402)
-	at java.base/java.lang.Class.getDeclaredMethods(Class.java:2504)
-	at org.springframework.util.ReflectionUtils.getDeclaredMethods(ReflectionUtils.java:465)
-	... 120 common frames omitted
-Caused by: java.lang.ClassNotFoundException: com.model_shared.models.UserDto
-	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:641)
-	at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(ClassLoaders.java:188)
-	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:525)
-	... 124 common frames omitted
-2025-10-11 14:39:57 [background-preinit] DEBUG [logging] - Logging Provider: org.jboss.logging.Slf4jLoggerProvider found via system property
-2025-10-11 14:39:57 [main] INFO  [QlsvApplicationTests] - Starting QlsvApplicationTests using Java 17.0.16 with PID 11732 (started by tranhuy in d:\project IntelliJ Ultimate\modules-parent\qlsv)
-2025-10-11 14:39:57 [main] DEBUG [QlsvApplicationTests] - Running with Spring Boot v3.5.0, Spring v6.2.7
-2025-10-11 14:39:57 [main] INFO  [QlsvApplicationTests] - No active profile set, falling back to 1 default profile: "default"
-2025-10-11 14:40:01 [main] WARN  [HikariConfig] - HikariPool-1 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
-2025-10-11 14:40:01 [main] WARN  [deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-10-11 14:40:02 [main] WARN  [deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
-2025-10-11 14:40:04 [main] WARN  [JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-10-11 14:40:04 [main] DEBUG [Mappings] - 
+2025-10-15 16:33:00 [background-preinit] DEBUG [logging] - Logging Provider: org.jboss.logging.Slf4jLoggerProvider found via system property
+2025-10-15 16:33:00 [restartedMain] INFO  [QlsvApplication] - Starting QlsvApplication using Java 17.0.16 with PID 15628 (D:\project IntelliJ Ultimate\modules-parent\qlsv\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlsv)
+2025-10-15 16:33:00 [restartedMain] DEBUG [QlsvApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
+2025-10-15 16:33:00 [restartedMain] INFO  [QlsvApplication] - No active profile set, falling back to 1 default profile: "default"
+2025-10-15 16:33:19 [restartedMain] DEBUG [InternalLoggerFactory] - Using SLF4J as the default logging framework
+2025-10-15 16:33:21 [restartedMain] WARN  [HikariConfig] - HikariPool-1 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
+2025-10-15 16:33:22 [restartedMain] WARN  [deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-10-15 16:33:22 [restartedMain] WARN  [deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-10-15 16:33:30 [restartedMain] WARN  [JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-10-15 16:33:30 [restartedMain] DEBUG [Mappings] - 
 	c.c.Q.c.StudentController:
 	{POST [/students]}: add(CreateStudentModelRequest,String,UserDto)
 	{GET [/students]}: get(String,UserDto)
 	{PUT [/students]}: update(StudentModelRequest,String,UserDto)
+	{GET [/students/filter]}: filter(int,String,String,int,Gender,boolean,String,UserDto)
 	{DELETE [/students]}: delete(List,String,UserDto)
 	{GET [/students/paged]}: getPaged(int,int,String,String,String,UserDto)
 	{GET [/students/public]}: public_get(String)
-2025-10-11 14:40:04 [main] DEBUG [Mappings] - 
+2025-10-15 16:33:30 [restartedMain] DEBUG [Mappings] - 
 	o.s.b.a.w.s.e.BasicErrorController:
 	{ [/error]}: error(HttpServletRequest)
 	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
-2025-10-11 14:40:04 [main] DEBUG [Mappings] - 'beanNameHandlerMapping' {}
-2025-10-11 14:40:04 [main] DEBUG [Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
-2025-10-11 14:40:04 [main] WARN  [ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
-2025-10-11 14:40:05 [main] DEBUG [InternalLoggerFactory] - Using SLF4J as the default logging framework
-2025-10-11 14:40:05 [main] DEBUG [Loggers] - Using Slf4j logging framework
-2025-10-11 14:40:06 [main] INFO  [QlsvApplicationTests] - Started QlsvApplicationTests in 8.818 seconds (process running for 10.084)
+2025-10-15 16:33:30 [restartedMain] DEBUG [Mappings] - 'beanNameHandlerMapping' {}
+2025-10-15 16:33:30 [restartedMain] DEBUG [Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
+2025-10-15 16:33:30 [restartedMain] WARN  [ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2025-10-15 16:33:31 [restartedMain] DEBUG [Loggers] - Using Slf4j logging framework
+2025-10-15 16:33:33 [restartedMain] INFO  [QlsvApplication] - Started QlsvApplication in 34.055 seconds (process running for 35.778)
+2025-10-15 16:34:39 [http-nio-8080-exec-3] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Calling security module with URL: http://localhost:8083/auth/validate to validate token
+2025-10-15 16:34:39 [http-nio-8080-exec-3] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Successfully retrieved user from security module: HuyStu1
+2025-10-15 16:34:39 [http-nio-8080-exec-3] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - User HuyStu1 successfully authorized
+2025-10-15 16:34:39 [http-nio-8080-exec-3] DEBUG [LoggingServiceImp] - [security_shared] RequiresAuthAspect - User HuyStu1 successfully authorized for method: get with roles: ADMIN, STUDENT and permissions: STUDENT_READ
+2025-10-15 16:34:39 [http-nio-8080-exec-3] INFO  [LoggingServiceImp] - [qlsv] StudentController - Get students API called successfully by user: HuyStu1
+2025-10-15 16:34:39 [http-nio-8080-exec-3] WARN  [LoggingServiceImp] - [qlsv] StudentServiceImp - Not found cache, Query DB
+2025-10-15 16:34:39 [http-nio-8080-exec-3] INFO  [LoggingServiceImp] - [qlsv] StudentServiceImp - Student ID: 1, Operation: GET
+2025-10-15 16:34:39 [http-nio-8080-exec-3] INFO  [LoggingServiceImp] - [qlsv] StudentServiceImp - Student ID: 2, Operation: GET
+2025-10-15 16:34:39 [http-nio-8080-exec-3] INFO  [LoggingServiceImp] - [qlsv] StudentServiceImp - Student ID: 3, Operation: GET
+2025-10-15 16:34:39 [http-nio-8080-exec-3] INFO  [LoggingServiceImp] - [qlsv] StudentServiceImp - Student ID: 4, Operation: GET
+2025-10-15 16:34:39 [http-nio-8080-exec-3] INFO  [LoggingServiceImp] - [qlsv] StudentServiceImp - Student ID: 5, Operation: GET
+2025-10-15 16:34:39 [http-nio-8080-exec-3] INFO  [LoggingServiceImp] - [qlsv] StudentServiceImp - Student ID: 6, Operation: GET
+2025-10-15 16:34:39 [http-nio-8080-exec-3] INFO  [LoggingServiceImp] - [qlsv] StudentServiceImp - Gets Student Successfully
+2025-10-15 16:34:39 [http-nio-8080-exec-3] INFO  [LoggingServiceImp] - [qlsv] StudentServiceImp - Save cache to Redis : students:all
+2025-10-15 16:35:06 [http-nio-8080-exec-4] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Missing or invalid Authorization header
+2025-10-15 16:35:06 [http-nio-8080-exec-4] WARN  [ExceptionHandlerExceptionResolver] - Resolved [UnauthorizedExceptionHandle(message=Missing or invalid Authorization header, details=Authorization header must start with 'Bearer ')]
+2025-10-15 16:35:44 [http-nio-8080-exec-2] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Missing or invalid Authorization header
+2025-10-15 16:35:44 [http-nio-8080-exec-2] WARN  [ExceptionHandlerExceptionResolver] - Resolved [UnauthorizedExceptionHandle(message=Missing or invalid Authorization header, details=Authorization header must start with 'Bearer ')]
+2025-10-15 16:36:04 [background-preinit] DEBUG [logging] - Logging Provider: org.jboss.logging.Slf4jLoggerProvider found via system property
+2025-10-15 16:36:05 [restartedMain] INFO  [QlsvApplication] - Starting QlsvApplication using Java 17.0.16 with PID 12816 (D:\project IntelliJ Ultimate\modules-parent\qlsv\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlsv)
+2025-10-15 16:36:05 [restartedMain] DEBUG [QlsvApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
+2025-10-15 16:36:05 [restartedMain] INFO  [QlsvApplication] - No active profile set, falling back to 1 default profile: "default"
+2025-10-15 16:36:12 [restartedMain] DEBUG [InternalLoggerFactory] - Using SLF4J as the default logging framework
+2025-10-15 16:36:13 [restartedMain] WARN  [HikariConfig] - HikariPool-1 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
+2025-10-15 16:36:14 [restartedMain] WARN  [deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-10-15 16:36:14 [restartedMain] WARN  [deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-10-15 16:36:20 [restartedMain] WARN  [JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-10-15 16:36:20 [restartedMain] DEBUG [Mappings] - 
+	c.c.Q.c.StudentController:
+	{POST [/students]}: add(CreateStudentModelRequest,String,UserDto)
+	{GET [/students]}: get(String,UserDto)
+	{PUT [/students]}: update(StudentModelRequest,String,UserDto)
+	{GET [/students/filter]}: filter(int,String,String,int,Gender,boolean,String,UserDto)
+	{DELETE [/students]}: delete(List,String,UserDto)
+	{GET [/students/paged]}: getPaged(int,int,String,String,String,UserDto)
+	{GET [/students/public]}: public_get(String)
+2025-10-15 16:36:20 [restartedMain] DEBUG [Mappings] - 
+	o.s.b.a.w.s.e.BasicErrorController:
+	{ [/error]}: error(HttpServletRequest)
+	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
+2025-10-15 16:36:20 [restartedMain] DEBUG [Mappings] - 'beanNameHandlerMapping' {}
+2025-10-15 16:36:20 [restartedMain] DEBUG [Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
+2025-10-15 16:36:21 [restartedMain] WARN  [ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2025-10-15 16:36:21 [restartedMain] DEBUG [Loggers] - Using Slf4j logging framework
+2025-10-15 16:36:23 [restartedMain] INFO  [QlsvApplication] - Started QlsvApplication in 19.968 seconds (process running for 21.658)
+2025-10-15 16:37:03 [http-nio-8080-exec-3] WARN  [ExceptionHandlerExceptionResolver] - Resolved [org.springframework.web.method.annotation.MethodArgumentTypeMismatchException: Method parameter 'age': Failed to convert value of type 'java.lang.String' to required type 'int'; For input string: ""]
+2025-10-15 16:37:40 [http-nio-8080-exec-6] WARN  [ExceptionHandlerExceptionResolver] - Resolved [org.springframework.web.method.annotation.MethodArgumentTypeMismatchException: Method parameter 'age': Failed to convert value of type 'java.lang.String' to required type 'int'; For input string: ""]
+2025-10-15 16:38:17 [http-nio-8080-exec-8] WARN  [ExceptionHandlerExceptionResolver] - Resolved [org.springframework.web.method.annotation.MethodArgumentTypeMismatchException: Method parameter 'graduate': Failed to convert value of type 'java.lang.String' to required type 'boolean'; Invalid boolean value []]
+2025-10-15 16:38:27 [http-nio-8080-exec-10] WARN  [ExceptionHandlerExceptionResolver] - Resolved [org.springframework.web.method.annotation.MethodArgumentTypeMismatchException: Method parameter 'age': Failed to convert value of type 'java.lang.String' to required type 'int'; For input string: ""]
+2025-10-15 16:38:30 [http-nio-8080-exec-4] WARN  [ExceptionHandlerExceptionResolver] - Resolved [org.springframework.web.method.annotation.MethodArgumentTypeMismatchException: Method parameter 'id': Failed to convert value of type 'java.lang.String' to required type 'int'; For input string: ""]
+2025-10-15 16:38:45 [http-nio-8080-exec-5] WARN  [ExceptionHandlerExceptionResolver] - Resolved [java.lang.IllegalStateException: Optional int parameter 'age' is present but cannot be translated into a null value due to being declared as a primitive type. Consider declaring it as object wrapper for the corresponding primitive type.]
+2025-10-15 16:39:07 [http-nio-8080-exec-7] WARN  [ExceptionHandlerExceptionResolver] - Resolved [java.lang.IllegalStateException: Optional int parameter 'age' is present but cannot be translated into a null value due to being declared as a primitive type. Consider declaring it as object wrapper for the corresponding primitive type.]
+2025-10-15 16:40:43 [Thread-8] WARN  [NioEndpoint] - The executor associated with thread pool [http-nio-8080] has not fully shutdown. Some application threads may still be running.
+2025-10-15 16:40:46 [restartedMain] INFO  [QlsvApplication] - Starting QlsvApplication using Java 17.0.16 with PID 12816 (D:\project IntelliJ Ultimate\modules-parent\qlsv\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlsv)
+2025-10-15 16:40:46 [restartedMain] DEBUG [QlsvApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
+2025-10-15 16:40:46 [restartedMain] INFO  [QlsvApplication] - No active profile set, falling back to 1 default profile: "default"
+2025-10-15 16:40:51 [restartedMain] WARN  [HikariConfig] - HikariPool-2 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
+2025-10-15 16:40:51 [restartedMain] WARN  [deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-10-15 16:40:51 [restartedMain] WARN  [deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-10-15 16:40:52 [restartedMain] WARN  [JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-10-15 16:40:53 [restartedMain] DEBUG [Mappings] - 
+	c.c.Q.c.StudentController:
+	{POST [/students]}: add(CreateStudentModelRequest,String,UserDto)
+	{GET [/students]}: get(String,UserDto)
+	{PUT [/students]}: update(StudentModelRequest,String,UserDto)
+	{GET [/students/filter]}: filter(Integer,String,String,Integer,Gender,Boolean,String,UserDto)
+	{DELETE [/students]}: delete(List,String,UserDto)
+	{GET [/students/paged]}: getPaged(int,int,String,String,String,UserDto)
+	{GET [/students/public]}: public_get(String)
+2025-10-15 16:40:53 [restartedMain] DEBUG [Mappings] - 
+	o.s.b.a.w.s.e.BasicErrorController:
+	{ [/error]}: error(HttpServletRequest)
+	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
+2025-10-15 16:40:53 [restartedMain] DEBUG [Mappings] - 'beanNameHandlerMapping' {}
+2025-10-15 16:40:53 [restartedMain] DEBUG [Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
+2025-10-15 16:40:53 [restartedMain] WARN  [ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2025-10-15 16:40:54 [restartedMain] INFO  [QlsvApplication] - Started QlsvApplication in 8.043 seconds (process running for 292.328)
+2025-10-15 16:40:58 [restartedMain] INFO  [QlsvApplication] - Starting QlsvApplication using Java 17.0.16 with PID 12816 (D:\project IntelliJ Ultimate\modules-parent\qlsv\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlsv)
+2025-10-15 16:40:58 [restartedMain] DEBUG [QlsvApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
+2025-10-15 16:40:58 [restartedMain] INFO  [QlsvApplication] - No active profile set, falling back to 1 default profile: "default"
+2025-10-15 16:41:01 [restartedMain] WARN  [HikariConfig] - HikariPool-3 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
+2025-10-15 16:41:01 [restartedMain] WARN  [deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-10-15 16:41:01 [restartedMain] WARN  [deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-10-15 16:41:01 [restartedMain] WARN  [JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-10-15 16:41:01 [restartedMain] DEBUG [Mappings] - 
+	c.c.Q.c.StudentController:
+	{POST [/students]}: add(CreateStudentModelRequest,String,UserDto)
+	{GET [/students]}: get(String,UserDto)
+	{PUT [/students]}: update(StudentModelRequest,String,UserDto)
+	{GET [/students/filter]}: filter(Integer,String,String,Integer,Gender,Boolean,String,UserDto)
+	{DELETE [/students]}: delete(List,String,UserDto)
+	{GET [/students/paged]}: getPaged(int,int,String,String,String,UserDto)
+	{GET [/students/public]}: public_get(String)
+2025-10-15 16:41:01 [restartedMain] DEBUG [Mappings] - 
+	o.s.b.a.w.s.e.BasicErrorController:
+	{ [/error]}: error(HttpServletRequest)
+	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
+2025-10-15 16:41:01 [restartedMain] DEBUG [Mappings] - 'beanNameHandlerMapping' {}
+2025-10-15 16:41:01 [restartedMain] DEBUG [Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
+2025-10-15 16:41:01 [restartedMain] WARN  [ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2025-10-15 16:41:02 [restartedMain] INFO  [QlsvApplication] - Started QlsvApplication in 3.829 seconds (process running for 300.17)
+2025-10-15 16:41:06 [restartedMain] INFO  [QlsvApplication] - Starting QlsvApplication using Java 17.0.16 with PID 12816 (D:\project IntelliJ Ultimate\modules-parent\qlsv\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlsv)
+2025-10-15 16:41:06 [restartedMain] DEBUG [QlsvApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
+2025-10-15 16:41:06 [restartedMain] INFO  [QlsvApplication] - No active profile set, falling back to 1 default profile: "default"
+2025-10-15 16:41:07 [restartedMain] WARN  [HikariConfig] - HikariPool-4 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
+2025-10-15 16:41:07 [restartedMain] WARN  [deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-10-15 16:41:07 [restartedMain] WARN  [deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-10-15 16:41:08 [restartedMain] WARN  [JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-10-15 16:41:08 [restartedMain] DEBUG [Mappings] - 
+	c.c.Q.c.StudentController:
+	{POST [/students]}: add(CreateStudentModelRequest,String,UserDto)
+	{GET [/students]}: get(String,UserDto)
+	{PUT [/students]}: update(StudentModelRequest,String,UserDto)
+	{GET [/students/filter]}: filter(Integer,String,String,Integer,Gender,Boolean,String,UserDto)
+	{DELETE [/students]}: delete(List,String,UserDto)
+	{GET [/students/paged]}: getPaged(int,int,String,String,String,UserDto)
+	{GET [/students/public]}: public_get(String)
+2025-10-15 16:41:09 [restartedMain] DEBUG [Mappings] - 
+	o.s.b.a.w.s.e.BasicErrorController:
+	{ [/error]}: error(HttpServletRequest)
+	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
+2025-10-15 16:41:09 [restartedMain] DEBUG [Mappings] - 'beanNameHandlerMapping' {}
+2025-10-15 16:41:09 [restartedMain] DEBUG [Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
+2025-10-15 16:41:09 [restartedMain] WARN  [ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2025-10-15 16:41:09 [restartedMain] INFO  [QlsvApplication] - Started QlsvApplication in 3.415 seconds (process running for 307.739)
+2025-10-15 16:41:13 [restartedMain] INFO  [QlsvApplication] - Starting QlsvApplication using Java 17.0.16 with PID 12816 (D:\project IntelliJ Ultimate\modules-parent\qlsv\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlsv)
+2025-10-15 16:41:13 [restartedMain] DEBUG [QlsvApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
+2025-10-15 16:41:13 [restartedMain] INFO  [QlsvApplication] - No active profile set, falling back to 1 default profile: "default"
+2025-10-15 16:41:15 [restartedMain] WARN  [HikariConfig] - HikariPool-5 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
+2025-10-15 16:41:15 [restartedMain] WARN  [deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-10-15 16:41:15 [restartedMain] WARN  [deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-10-15 16:41:15 [restartedMain] WARN  [JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-10-15 16:41:15 [restartedMain] DEBUG [Mappings] - 
+	c.c.Q.c.StudentController:
+	{POST [/students]}: add(CreateStudentModelRequest,String,UserDto)
+	{GET [/students]}: get(String,UserDto)
+	{PUT [/students]}: update(StudentModelRequest,String,UserDto)
+	{GET [/students/filter]}: filter(Integer,String,String,Integer,Gender,Boolean,String,UserDto)
+	{DELETE [/students]}: delete(List,String,UserDto)
+	{GET [/students/paged]}: getPaged(int,int,String,String,String,UserDto)
+	{GET [/students/public]}: public_get(String)
+2025-10-15 16:41:15 [restartedMain] DEBUG [Mappings] - 
+	o.s.b.a.w.s.e.BasicErrorController:
+	{ [/error]}: error(HttpServletRequest)
+	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
+2025-10-15 16:41:15 [restartedMain] DEBUG [Mappings] - 'beanNameHandlerMapping' {}
+2025-10-15 16:41:15 [restartedMain] DEBUG [Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
+2025-10-15 16:41:15 [restartedMain] WARN  [ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2025-10-15 16:41:16 [restartedMain] INFO  [QlsvApplication] - Started QlsvApplication in 2.733 seconds (process running for 314.042)
+2025-10-15 16:41:17 [http-nio-8080-exec-3] INFO  [LoggingServiceImp] - [qlsv] StudentController - Filter students API called successfully by user: null
+2025-10-15 16:41:36 [http-nio-8080-exec-4] INFO  [LoggingServiceImp] - [qlsv] StudentController - Filter students API called successfully by user: null
+2025-10-15 16:42:19 [http-nio-8080-exec-4] INFO  [LoggingServiceImp] - [qlsv] StudentServiceImp - Filtering with 1 conditions
+2025-10-15 16:43:25 [http-nio-8080-exec-4] INFO  [LoggingServiceImp] - [qlsv] StudentServiceImp - Filter Students Successfully. Found 1 students
+2025-10-15 16:43:46 [http-nio-8080-exec-2] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Missing or invalid Authorization header
+2025-10-15 16:43:46 [http-nio-8080-exec-2] WARN  [ExceptionHandlerExceptionResolver] - Resolved [UnauthorizedExceptionHandle(message=Missing or invalid Authorization header, details=Authorization header must start with 'Bearer ')]
+2025-10-15 16:43:48 [http-nio-8080-exec-3] INFO  [LoggingServiceImp] - [qlsv] StudentServiceImp - Filtering with 1 conditions
+2025-10-15 16:43:48 [http-nio-8080-exec-3] INFO  [LoggingServiceImp] - [qlsv] StudentServiceImp - Filter Students Successfully. Found 1 students
+2025-10-15 16:44:34 [http-nio-8080-exec-8] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Calling security module with URL: http://localhost:8083/auth/validate to validate token
+2025-10-15 16:44:34 [http-nio-8080-exec-8] ERROR [LoggingServiceImp] - [security_shared] SecurityService - Exception during token validation: : 401  on GET request for "http://localhost:8083/auth/validate": "{"status":401,"message":"Unauthorized access.","modelName":"Security-Model","errors":{"Details":"Token may be invalid, expired, or malformed","Error":"Token validation failed"}}"
+2025-10-15 16:44:34 [http-nio-8080-exec-8] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Token validation failed - invalid, expired, or blacklisted
+2025-10-15 16:44:34 [http-nio-8080-exec-8] WARN  [ExceptionHandlerExceptionResolver] - Resolved [UnauthorizedExceptionHandle(message=Token validation failed, details=Token may be invalid, expired, or blacklisted)]
+2025-10-15 16:44:54 [http-nio-8080-exec-6] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Calling security module with URL: http://localhost:8083/auth/validate to validate token
+2025-10-15 16:44:54 [http-nio-8080-exec-6] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Successfully retrieved user from security module: HuyStu1
+2025-10-15 16:44:54 [http-nio-8080-exec-6] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - User HuyStu1 successfully authorized
+2025-10-15 16:44:54 [http-nio-8080-exec-6] DEBUG [LoggingServiceImp] - [security_shared] RequiresAuthAspect - User HuyStu1 successfully authorized for method: update with roles: ADMIN, STUDENT and permissions: STUDENT_WRITE
+2025-10-15 16:44:54 [http-nio-8080-exec-6] INFO  [LoggingServiceImp] - [qlsv] StudentController - Update students API called successfully by user: HuyStu1
+2025-10-15 16:44:54 [http-nio-8080-exec-6] INFO  [LoggingServiceImp] - [qlsv] StudentServiceImp - Student ID: 2, Operation: UPDATE
+2025-10-15 16:44:54 [http-nio-8080-exec-6] INFO  [LoggingServiceImp] - [qlsv] StudentServiceImp - Update Students Successfully
+2025-10-15 16:44:54 [http-nio-8080-exec-6] INFO  [LoggingServiceImp] - [qlsv] StudentServiceImp - Del cache key = students:all , after update students : students:all
+2025-10-15 16:44:54 [http-nio-8080-exec-6] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - studentEvent sent to topic: student-events - with entity id: [2]
+2025-10-15 16:44:54 [http-nio-8080-exec-6] INFO  [LoggingServiceImp] - [qlsv] StudentController - Sent student updated event for student: Tran HuyStudent
+2025-10-15 16:44:54 [kafka-producer-network-thread | QLSV-producer-1] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - Message sent successfully to topic: student-events, partition: 0, offset: 11, key: [2]
+2025-10-15 16:45:06 [http-nio-8080-exec-9] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Calling security module with URL: http://localhost:8083/auth/validate to validate token
+2025-10-15 16:45:06 [http-nio-8080-exec-9] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Successfully retrieved user from security module: HuyStu1
+2025-10-15 16:45:06 [http-nio-8080-exec-9] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - User HuyStu1 successfully authorized
+2025-10-15 16:45:06 [http-nio-8080-exec-9] DEBUG [LoggingServiceImp] - [security_shared] RequiresAuthAspect - User HuyStu1 successfully authorized for method: get with roles: ADMIN, STUDENT and permissions: STUDENT_READ
+2025-10-15 16:45:06 [http-nio-8080-exec-9] INFO  [LoggingServiceImp] - [qlsv] StudentController - Get students API called successfully by user: HuyStu1
+2025-10-15 16:45:06 [http-nio-8080-exec-9] WARN  [LoggingServiceImp] - [qlsv] StudentServiceImp - Not found cache, Query DB
+2025-10-15 16:45:06 [http-nio-8080-exec-9] INFO  [LoggingServiceImp] - [qlsv] StudentServiceImp - Student ID: 1, Operation: GET
+2025-10-15 16:45:06 [http-nio-8080-exec-9] INFO  [LoggingServiceImp] - [qlsv] StudentServiceImp - Student ID: 2, Operation: GET
+2025-10-15 16:45:06 [http-nio-8080-exec-9] INFO  [LoggingServiceImp] - [qlsv] StudentServiceImp - Student ID: 3, Operation: GET
+2025-10-15 16:45:06 [http-nio-8080-exec-9] INFO  [LoggingServiceImp] - [qlsv] StudentServiceImp - Student ID: 4, Operation: GET
+2025-10-15 16:45:06 [http-nio-8080-exec-9] INFO  [LoggingServiceImp] - [qlsv] StudentServiceImp - Student ID: 5, Operation: GET
+2025-10-15 16:45:06 [http-nio-8080-exec-9] INFO  [LoggingServiceImp] - [qlsv] StudentServiceImp - Student ID: 6, Operation: GET
+2025-10-15 16:45:06 [http-nio-8080-exec-9] INFO  [LoggingServiceImp] - [qlsv] StudentServiceImp - Gets Student Successfully
+2025-10-15 16:45:06 [http-nio-8080-exec-9] INFO  [LoggingServiceImp] - [qlsv] StudentServiceImp - Save cache to Redis : students:all
+2025-10-15 16:45:26 [http-nio-8080-exec-10] INFO  [LoggingServiceImp] - [qlsv] StudentController - Filter students API called successfully by user: null
+2025-10-15 16:45:33 [http-nio-8080-exec-10] INFO  [LoggingServiceImp] - [qlsv] StudentServiceImp - Filtering with 2 conditions
+2025-10-15 16:45:59 [http-nio-8080-exec-10] INFO  [LoggingServiceImp] - [qlsv] StudentServiceImp - Filter Students Successfully. Found 1 students
+2025-10-15 16:46:33 [http-nio-8080-exec-1] INFO  [LoggingServiceImp] - [qlsv] StudentController - Filter students API called successfully by user: null
+2025-10-15 16:46:44 [http-nio-8080-exec-1] INFO  [LoggingServiceImp] - [qlsv] StudentServiceImp - Filtering with 1 conditions
+2025-10-15 16:46:51 [http-nio-8080-exec-1] INFO  [LoggingServiceImp] - [qlsv] StudentServiceImp - Filter Students Successfully. Found 6 students
+2025-10-15 16:47:09 [http-nio-8080-exec-4] INFO  [LoggingServiceImp] - [qlsv] StudentController - Filter students API called successfully by user: null
+2025-10-15 16:47:18 [http-nio-8080-exec-4] INFO  [LoggingServiceImp] - [qlsv] StudentServiceImp - Filtering with 2 conditions
+2025-10-15 16:47:37 [http-nio-8080-exec-4] INFO  [LoggingServiceImp] - [qlsv] StudentServiceImp - Filter Students Successfully. Found 0 students
+2025-10-15 16:48:02 [restartedMain] INFO  [QlsvApplication] - Starting QlsvApplication using Java 17.0.16 with PID 12816 (D:\project IntelliJ Ultimate\modules-parent\qlsv\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlsv)
+2025-10-15 16:48:02 [restartedMain] DEBUG [QlsvApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
+2025-10-15 16:48:02 [restartedMain] INFO  [QlsvApplication] - No active profile set, falling back to 1 default profile: "default"
+2025-10-15 16:48:03 [restartedMain] WARN  [HikariConfig] - HikariPool-6 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
+2025-10-15 16:48:03 [restartedMain] WARN  [deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-10-15 16:48:03 [restartedMain] WARN  [deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-10-15 16:48:03 [restartedMain] WARN  [JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-10-15 16:48:03 [restartedMain] DEBUG [Mappings] - 
+	c.c.Q.c.StudentController:
+	{POST [/students]}: add(CreateStudentModelRequest,String,UserDto)
+	{GET [/students]}: get(String,UserDto)
+	{PUT [/students]}: update(StudentModelRequest,String,UserDto)
+	{GET [/students/filter]}: filter(Integer,String,String,Integer,Gender,Boolean,String,UserDto)
+	{DELETE [/students]}: delete(List,String,UserDto)
+	{GET [/students/paged]}: getPaged(int,int,String,String,String,UserDto)
+	{GET [/students/public]}: public_get(String)
+2025-10-15 16:48:03 [restartedMain] DEBUG [Mappings] - 
+	o.s.b.a.w.s.e.BasicErrorController:
+	{ [/error]}: error(HttpServletRequest)
+	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
+2025-10-15 16:48:03 [restartedMain] DEBUG [Mappings] - 'beanNameHandlerMapping' {}
+2025-10-15 16:48:04 [restartedMain] DEBUG [Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
+2025-10-15 16:48:04 [restartedMain] WARN  [ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2025-10-15 16:48:04 [restartedMain] INFO  [QlsvApplication] - Started QlsvApplication in 1.681 seconds (process running for 722.302)
+2025-10-15 16:48:07 [http-nio-8080-exec-4] INFO  [LoggingServiceImp] - [qlsv] StudentController - Filter students API called successfully by user: null
+2025-10-15 16:48:08 [http-nio-8080-exec-4] INFO  [LoggingServiceImp] - [qlsv] StudentServiceImp - Filtering with 2 conditions
+2025-10-15 16:48:08 [http-nio-8080-exec-4] WARN  [LoggingServiceImp] - [qlsv] StudentServiceImp - No students found in database
+2025-10-15 16:48:08 [http-nio-8080-exec-4] WARN  [ExceptionHandlerExceptionResolver] - Resolved [NotFoundExceptionHandle(listNotFounds=[], modelName=StudentModel)]
+2025-10-15 16:50:52 [restartedMain] INFO  [QlsvApplication] - Starting QlsvApplication using Java 17.0.16 with PID 12816 (D:\project IntelliJ Ultimate\modules-parent\qlsv\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlsv)
+2025-10-15 16:50:52 [restartedMain] DEBUG [QlsvApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
+2025-10-15 16:50:52 [restartedMain] INFO  [QlsvApplication] - No active profile set, falling back to 1 default profile: "default"
+2025-10-15 16:50:54 [restartedMain] WARN  [HikariConfig] - HikariPool-7 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
+2025-10-15 16:50:54 [restartedMain] WARN  [deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-10-15 16:50:54 [restartedMain] WARN  [deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-10-15 16:50:55 [restartedMain] WARN  [JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-10-15 16:50:55 [restartedMain] DEBUG [Mappings] - 
+	c.c.Q.c.StudentController:
+	{POST [/students]}: add(CreateStudentModelRequest,String,UserDto)
+	{GET [/students]}: get(String,UserDto)
+	{PUT [/students]}: update(StudentModelRequest,String,UserDto)
+	{GET [/students/filter]}: filter(Integer,String,String,Integer,Gender,Boolean,String,UserDto)
+	{DELETE [/students]}: delete(List,String,UserDto)
+	{GET [/students/paged]}: getPaged(int,int,String,String,String,UserDto)
+	{GET [/students/public]}: public_get(String)
+2025-10-15 16:50:55 [restartedMain] DEBUG [Mappings] - 
+	o.s.b.a.w.s.e.BasicErrorController:
+	{ [/error]}: error(HttpServletRequest)
+	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
+2025-10-15 16:50:55 [restartedMain] DEBUG [Mappings] - 'beanNameHandlerMapping' {}
+2025-10-15 16:50:55 [restartedMain] DEBUG [Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
+2025-10-15 16:50:55 [restartedMain] WARN  [ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2025-10-15 16:50:55 [restartedMain] INFO  [QlsvApplication] - Started QlsvApplication in 3.118 seconds (process running for 893.588)
+2025-10-15 16:50:59 [restartedMain] INFO  [QlsvApplication] - Starting QlsvApplication using Java 17.0.16 with PID 12816 (D:\project IntelliJ Ultimate\modules-parent\qlsv\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlsv)
+2025-10-15 16:50:59 [restartedMain] DEBUG [QlsvApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
+2025-10-15 16:50:59 [restartedMain] INFO  [QlsvApplication] - No active profile set, falling back to 1 default profile: "default"
+2025-10-15 16:51:00 [restartedMain] WARN  [HikariConfig] - HikariPool-8 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
+2025-10-15 16:51:00 [restartedMain] WARN  [deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-10-15 16:51:00 [restartedMain] WARN  [deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-10-15 16:51:00 [restartedMain] WARN  [JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-10-15 16:51:01 [restartedMain] DEBUG [Mappings] - 
+	c.c.Q.c.StudentController:
+	{POST [/students]}: add(CreateStudentModelRequest,String,UserDto)
+	{GET [/students]}: get(String,UserDto)
+	{PUT [/students]}: update(StudentModelRequest,String,UserDto)
+	{GET [/students/filter]}: filter(Integer,String,String,Integer,Gender,Boolean,String,UserDto)
+	{DELETE [/students]}: delete(List,String,UserDto)
+	{GET [/students/paged]}: getPaged(int,int,String,String,String,UserDto)
+	{GET [/students/public]}: public_get(String)
+2025-10-15 16:51:01 [restartedMain] DEBUG [Mappings] - 
+	o.s.b.a.w.s.e.BasicErrorController:
+	{ [/error]}: error(HttpServletRequest)
+	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
+2025-10-15 16:51:01 [restartedMain] DEBUG [Mappings] - 'beanNameHandlerMapping' {}
+2025-10-15 16:51:01 [restartedMain] DEBUG [Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
+2025-10-15 16:51:01 [restartedMain] WARN  [ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2025-10-15 16:51:01 [restartedMain] INFO  [QlsvApplication] - Started QlsvApplication in 2.125 seconds (process running for 899.311)
+2025-10-15 16:51:08 [restartedMain] INFO  [QlsvApplication] - Starting QlsvApplication using Java 17.0.16 with PID 12816 (D:\project IntelliJ Ultimate\modules-parent\qlsv\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlsv)
+2025-10-15 16:51:08 [restartedMain] DEBUG [QlsvApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
+2025-10-15 16:51:08 [restartedMain] INFO  [QlsvApplication] - No active profile set, falling back to 1 default profile: "default"
+2025-10-15 16:51:09 [restartedMain] WARN  [HikariConfig] - HikariPool-9 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
+2025-10-15 16:51:09 [restartedMain] WARN  [deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-10-15 16:51:09 [restartedMain] WARN  [deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-10-15 16:51:10 [restartedMain] WARN  [JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-10-15 16:51:10 [restartedMain] DEBUG [Mappings] - 
+	c.c.Q.c.StudentController:
+	{POST [/students]}: add(CreateStudentModelRequest,String,UserDto)
+	{GET [/students]}: get(String,UserDto)
+	{PUT [/students]}: update(StudentModelRequest,String,UserDto)
+	{GET [/students/filter]}: filter(Integer,String,String,Integer,Gender,Boolean,String,UserDto)
+	{DELETE [/students]}: delete(List,String,UserDto)
+	{GET [/students/paged]}: getPaged(int,int,String,String,String,UserDto)
+	{GET [/students/public]}: public_get(String)
+2025-10-15 16:51:10 [restartedMain] DEBUG [Mappings] - 
+	o.s.b.a.w.s.e.BasicErrorController:
+	{ [/error]}: error(HttpServletRequest)
+	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
+2025-10-15 16:51:10 [restartedMain] DEBUG [Mappings] - 'beanNameHandlerMapping' {}
+2025-10-15 16:51:10 [restartedMain] DEBUG [Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
+2025-10-15 16:51:10 [restartedMain] WARN  [ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2025-10-15 16:51:11 [restartedMain] INFO  [QlsvApplication] - Started QlsvApplication in 3.376 seconds (process running for 909.467)
+2025-10-15 16:51:16 [redisson-netty-42-2] ERROR [rejectedExecution] - Failed to submit a listener notification task. Event loop shut down?
+java.util.concurrent.RejectedExecutionException: event executor terminated
+	at io.netty.util.concurrent.SingleThreadEventExecutor.reject(SingleThreadEventExecutor.java:934) ~[netty-common-4.1.121.Final.jar:4.1.121.Final]
+	at io.netty.util.concurrent.SingleThreadEventExecutor.offerTask(SingleThreadEventExecutor.java:353) ~[netty-common-4.1.121.Final.jar:4.1.121.Final]
+	at io.netty.util.concurrent.SingleThreadEventExecutor.addTask(SingleThreadEventExecutor.java:346) ~[netty-common-4.1.121.Final.jar:4.1.121.Final]
+	at io.netty.util.concurrent.SingleThreadEventExecutor.execute(SingleThreadEventExecutor.java:836) ~[netty-common-4.1.121.Final.jar:4.1.121.Final]
+	at io.netty.util.concurrent.SingleThreadEventExecutor.execute0(SingleThreadEventExecutor.java:827) ~[netty-common-4.1.121.Final.jar:4.1.121.Final]
+	at io.netty.util.concurrent.SingleThreadEventExecutor.execute(SingleThreadEventExecutor.java:817) ~[netty-common-4.1.121.Final.jar:4.1.121.Final]
+	at io.netty.util.concurrent.DefaultPromise.safeExecute(DefaultPromise.java:878) ~[netty-common-4.1.121.Final.jar:4.1.121.Final]
+	at io.netty.util.concurrent.DefaultPromise.notifyListeners(DefaultPromise.java:513) ~[netty-common-4.1.121.Final.jar:4.1.121.Final]
+	at io.netty.util.concurrent.DefaultPromise.setValue0(DefaultPromise.java:649) ~[netty-common-4.1.121.Final.jar:4.1.121.Final]
+	at io.netty.util.concurrent.DefaultPromise.setSuccess0(DefaultPromise.java:638) ~[netty-common-4.1.121.Final.jar:4.1.121.Final]
+	at io.netty.util.concurrent.DefaultPromise.setSuccess(DefaultPromise.java:110) ~[netty-common-4.1.121.Final.jar:4.1.121.Final]
+	at io.netty.channel.group.DefaultChannelGroupFuture.setSuccess0(DefaultChannelGroupFuture.java:200) ~[netty-transport-4.1.121.Final.jar:4.1.121.Final]
+	at io.netty.channel.group.DefaultChannelGroupFuture.access$400(DefaultChannelGroupFuture.java:41) ~[netty-transport-4.1.121.Final.jar:4.1.121.Final]
+	at io.netty.channel.group.DefaultChannelGroupFuture$1.operationComplete(DefaultChannelGroupFuture.java:75) ~[netty-transport-4.1.121.Final.jar:4.1.121.Final]
+	at io.netty.channel.group.DefaultChannelGroupFuture$1.operationComplete(DefaultChannelGroupFuture.java:48) ~[netty-transport-4.1.121.Final.jar:4.1.121.Final]
+	at io.netty.util.concurrent.DefaultPromise.notifyListener0(DefaultPromise.java:603) ~[netty-common-4.1.121.Final.jar:4.1.121.Final]
+	at io.netty.util.concurrent.DefaultPromise.notifyListenersNow(DefaultPromise.java:570) ~[netty-common-4.1.121.Final.jar:4.1.121.Final]
+	at io.netty.util.concurrent.DefaultPromise.access$200(DefaultPromise.java:36) ~[netty-common-4.1.121.Final.jar:4.1.121.Final]
+	at io.netty.util.concurrent.DefaultPromise$1.run(DefaultPromise.java:516) ~[netty-common-4.1.121.Final.jar:4.1.121.Final]
+	at io.netty.util.concurrent.AbstractEventExecutor.runTask(AbstractEventExecutor.java:173) ~[netty-common-4.1.121.Final.jar:4.1.121.Final]
+	at io.netty.util.concurrent.AbstractEventExecutor.safeExecute(AbstractEventExecutor.java:166) ~[netty-common-4.1.121.Final.jar:4.1.121.Final]
+	at io.netty.util.concurrent.SingleThreadEventExecutor.runAllTasks(SingleThreadEventExecutor.java:472) ~[netty-common-4.1.121.Final.jar:4.1.121.Final]
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:569) ~[netty-transport-4.1.121.Final.jar:4.1.121.Final]
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:998) ~[netty-common-4.1.121.Final.jar:4.1.121.Final]
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74) ~[netty-common-4.1.121.Final.jar:4.1.121.Final]
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30) ~[netty-common-4.1.121.Final.jar:4.1.121.Final]
+	at java.base/java.lang.Thread.run(Thread.java:840) ~[na:na]
+2025-10-15 16:51:16 [restartedMain] INFO  [QlsvApplication] - Starting QlsvApplication using Java 17.0.16 with PID 12816 (D:\project IntelliJ Ultimate\modules-parent\qlsv\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlsv)
+2025-10-15 16:51:16 [restartedMain] DEBUG [QlsvApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
+2025-10-15 16:51:16 [restartedMain] INFO  [QlsvApplication] - No active profile set, falling back to 1 default profile: "default"
+2025-10-15 16:51:17 [restartedMain] WARN  [HikariConfig] - HikariPool-10 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
+2025-10-15 16:51:17 [restartedMain] WARN  [deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-10-15 16:51:17 [restartedMain] WARN  [deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-10-15 16:51:17 [restartedMain] WARN  [JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-10-15 16:51:18 [restartedMain] DEBUG [Mappings] - 
+	c.c.Q.c.StudentController:
+	{POST [/students]}: add(CreateStudentModelRequest,String,UserDto)
+	{GET [/students]}: get(String,UserDto)
+	{PUT [/students]}: update(StudentModelRequest,String,UserDto)
+	{GET [/students/filter]}: filter(Integer,String,String,Integer,Gender,Boolean,String,UserDto)
+	{DELETE [/students]}: delete(List,String,UserDto)
+	{GET [/students/paged]}: getPaged(int,int,String,String,String,UserDto)
+	{GET [/students/public]}: public_get(String)
+2025-10-15 16:51:18 [restartedMain] DEBUG [Mappings] - 
+	o.s.b.a.w.s.e.BasicErrorController:
+	{ [/error]}: error(HttpServletRequest)
+	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
+2025-10-15 16:51:18 [restartedMain] DEBUG [Mappings] - 'beanNameHandlerMapping' {}
+2025-10-15 16:51:18 [restartedMain] DEBUG [Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
+2025-10-15 16:51:18 [restartedMain] WARN  [ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2025-10-15 16:51:18 [restartedMain] INFO  [QlsvApplication] - Started QlsvApplication in 1.891 seconds (process running for 916.294)
+2025-10-15 16:51:27 [restartedMain] INFO  [QlsvApplication] - Starting QlsvApplication using Java 17.0.16 with PID 12816 (D:\project IntelliJ Ultimate\modules-parent\qlsv\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlsv)
+2025-10-15 16:51:27 [restartedMain] DEBUG [QlsvApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
+2025-10-15 16:51:27 [restartedMain] INFO  [QlsvApplication] - No active profile set, falling back to 1 default profile: "default"
+2025-10-15 16:51:28 [restartedMain] WARN  [HikariConfig] - HikariPool-11 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
+2025-10-15 16:51:28 [restartedMain] WARN  [deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-10-15 16:51:28 [restartedMain] WARN  [deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-10-15 16:51:28 [restartedMain] WARN  [JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-10-15 16:51:28 [restartedMain] DEBUG [Mappings] - 
+	c.c.Q.c.StudentController:
+	{POST [/students]}: add(CreateStudentModelRequest,String,UserDto)
+	{GET [/students]}: get(String,UserDto)
+	{PUT [/students]}: update(StudentModelRequest,String,UserDto)
+	{GET [/students/filter]}: filter(Integer,String,String,Integer,Gender,Boolean,String,UserDto)
+	{DELETE [/students]}: delete(List,String,UserDto)
+	{GET [/students/paged]}: getPaged(int,int,String,String,String,UserDto)
+	{GET [/students/public]}: public_get(String)
+2025-10-15 16:51:28 [restartedMain] DEBUG [Mappings] - 
+	o.s.b.a.w.s.e.BasicErrorController:
+	{ [/error]}: error(HttpServletRequest)
+	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
+2025-10-15 16:51:28 [restartedMain] DEBUG [Mappings] - 'beanNameHandlerMapping' {}
+2025-10-15 16:51:28 [restartedMain] DEBUG [Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
+2025-10-15 16:51:28 [restartedMain] WARN  [ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2025-10-15 16:51:29 [restartedMain] INFO  [QlsvApplication] - Started QlsvApplication in 1.484 seconds (process running for 927.192)
+2025-10-15 16:53:12 [http-nio-8080-exec-4] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Calling security module with URL: http://localhost:8083/auth/validate to validate token
+2025-10-15 16:53:12 [http-nio-8080-exec-4] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Successfully retrieved user from security module: HuyStu1
+2025-10-15 16:53:12 [http-nio-8080-exec-4] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - User HuyStu1 successfully authorized
+2025-10-15 16:53:12 [http-nio-8080-exec-4] DEBUG [LoggingServiceImp] - [security_shared] RequiresAuthAspect - User HuyStu1 successfully authorized for method: update with roles: ADMIN, STUDENT and permissions: STUDENT_WRITE
+2025-10-15 16:53:12 [http-nio-8080-exec-4] INFO  [LoggingServiceImp] - [qlsv] StudentController - Update students API called successfully by user: HuyStu1
+2025-10-15 16:53:12 [http-nio-8080-exec-4] INFO  [LoggingServiceImp] - [qlsv] StudentServiceImp - Student ID: 1, Operation: UPDATE
+2025-10-15 16:53:13 [http-nio-8080-exec-4] WARN  [SqlExceptionHelper] - SQL Error: 1062, SQLState: 23000
+2025-10-15 16:53:13 [http-nio-8080-exec-4] ERROR [SqlExceptionHelper] - Duplicate entry 'HuyStu1' for key 'students.UK174kjl69manglnf5695rrame3'
+2025-10-15 16:53:13 [http-nio-8080-exec-4] WARN  [ExceptionHandlerExceptionResolver] - Resolved [org.springframework.dao.DataIntegrityViolationException: could not execute statement [Duplicate entry 'HuyStu1' for key 'students.UK174kjl69manglnf5695rrame3'] [update students set age=?,birth=?,first_name=?,gender=?,graduate=?,last_name=?,user_name=? where id=?]; SQL [update students set age=?,birth=?,first_name=?,gender=?,graduate=?,last_name=?,user_name=? where id=?]; constraint [students.UK174kjl69manglnf5695rrame3]]
+2025-10-15 16:54:19 [http-nio-8080-exec-2] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Calling security module with URL: http://localhost:8083/auth/validate to validate token
+2025-10-15 16:54:19 [http-nio-8080-exec-2] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Successfully retrieved user from security module: HuyStu1
+2025-10-15 16:54:19 [http-nio-8080-exec-2] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - User HuyStu1 successfully authorized
+2025-10-15 16:54:19 [http-nio-8080-exec-2] DEBUG [LoggingServiceImp] - [security_shared] RequiresAuthAspect - User HuyStu1 successfully authorized for method: update with roles: ADMIN, STUDENT and permissions: STUDENT_WRITE
+2025-10-15 16:54:19 [http-nio-8080-exec-2] INFO  [LoggingServiceImp] - [qlsv] StudentController - Update students API called successfully by user: HuyStu1
+2025-10-15 16:54:19 [http-nio-8080-exec-2] INFO  [LoggingServiceImp] - [qlsv] StudentServiceImp - Student ID: 2, Operation: UPDATE
+2025-10-15 16:54:19 [http-nio-8080-exec-2] INFO  [LoggingServiceImp] - [qlsv] StudentServiceImp - Update Students Successfully
+2025-10-15 16:54:19 [http-nio-8080-exec-2] INFO  [LoggingServiceImp] - [qlsv] StudentServiceImp - Del cache key = students:all , after update students : students:all
+2025-10-15 16:54:19 [http-nio-8080-exec-2] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - studentEvent sent to topic: student-events - with entity id: [2]
+2025-10-15 16:54:19 [http-nio-8080-exec-2] INFO  [LoggingServiceImp] - [qlsv] StudentController - Sent student updated event for student: Tri HuyStudent
+2025-10-15 16:54:20 [kafka-producer-network-thread | QLSV-producer-1] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - Message sent successfully to topic: student-events, partition: 0, offset: 12, key: [2]
+2025-10-15 16:54:34 [http-nio-8080-exec-5] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Calling security module with URL: http://localhost:8083/auth/validate to validate token
+2025-10-15 16:54:34 [http-nio-8080-exec-5] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Successfully retrieved user from security module: HuyStu1
+2025-10-15 16:54:34 [http-nio-8080-exec-5] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - User HuyStu1 successfully authorized
+2025-10-15 16:54:34 [http-nio-8080-exec-5] DEBUG [LoggingServiceImp] - [security_shared] RequiresAuthAspect - User HuyStu1 successfully authorized for method: update with roles: ADMIN, STUDENT and permissions: STUDENT_WRITE
+2025-10-15 16:54:34 [http-nio-8080-exec-5] INFO  [LoggingServiceImp] - [qlsv] StudentController - Update students API called successfully by user: HuyStu1
+2025-10-15 16:54:34 [http-nio-8080-exec-5] INFO  [LoggingServiceImp] - [qlsv] StudentServiceImp - Student ID: 1, Operation: UPDATE
+2025-10-15 16:54:34 [http-nio-8080-exec-5] INFO  [LoggingServiceImp] - [qlsv] StudentServiceImp - Update Students Successfully
+2025-10-15 16:54:34 [http-nio-8080-exec-5] INFO  [LoggingServiceImp] - [qlsv] StudentServiceImp - Del cache key = students:all , after update students : students:all
+2025-10-15 16:54:34 [http-nio-8080-exec-5] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - studentEvent sent to topic: student-events - with entity id: [1]
+2025-10-15 16:54:34 [http-nio-8080-exec-5] INFO  [LoggingServiceImp] - [qlsv] StudentController - Sent student updated event for student: Tran HuyStudent
+2025-10-15 16:54:34 [kafka-producer-network-thread | QLSV-producer-1] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - Message sent successfully to topic: student-events, partition: 0, offset: 13, key: [1]
+2025-10-15 16:54:45 [http-nio-8080-exec-3] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Calling security module with URL: http://localhost:8083/auth/validate to validate token
+2025-10-15 16:54:45 [http-nio-8080-exec-3] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Successfully retrieved user from security module: HuyStu1
+2025-10-15 16:54:45 [http-nio-8080-exec-3] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - User HuyStu1 successfully authorized
+2025-10-15 16:54:45 [http-nio-8080-exec-3] DEBUG [LoggingServiceImp] - [security_shared] RequiresAuthAspect - User HuyStu1 successfully authorized for method: get with roles: ADMIN, STUDENT and permissions: STUDENT_READ
+2025-10-15 16:54:45 [http-nio-8080-exec-3] INFO  [LoggingServiceImp] - [qlsv] StudentController - Get students API called successfully by user: HuyStu1
+2025-10-15 16:54:45 [http-nio-8080-exec-3] WARN  [LoggingServiceImp] - [qlsv] StudentServiceImp - Not found cache, Query DB
+2025-10-15 16:54:45 [http-nio-8080-exec-3] INFO  [LoggingServiceImp] - [qlsv] StudentServiceImp - Student ID: 1, Operation: GET
+2025-10-15 16:54:45 [http-nio-8080-exec-3] INFO  [LoggingServiceImp] - [qlsv] StudentServiceImp - Student ID: 2, Operation: GET
+2025-10-15 16:54:45 [http-nio-8080-exec-3] INFO  [LoggingServiceImp] - [qlsv] StudentServiceImp - Student ID: 3, Operation: GET
+2025-10-15 16:54:45 [http-nio-8080-exec-3] INFO  [LoggingServiceImp] - [qlsv] StudentServiceImp - Student ID: 4, Operation: GET
+2025-10-15 16:54:45 [http-nio-8080-exec-3] INFO  [LoggingServiceImp] - [qlsv] StudentServiceImp - Student ID: 5, Operation: GET
+2025-10-15 16:54:45 [http-nio-8080-exec-3] INFO  [LoggingServiceImp] - [qlsv] StudentServiceImp - Student ID: 6, Operation: GET
+2025-10-15 16:54:45 [http-nio-8080-exec-3] INFO  [LoggingServiceImp] - [qlsv] StudentServiceImp - Gets Student Successfully
+2025-10-15 16:54:45 [http-nio-8080-exec-3] INFO  [LoggingServiceImp] - [qlsv] StudentServiceImp - Save cache to Redis : students:all
+2025-10-15 16:55:10 [http-nio-8080-exec-7] INFO  [LoggingServiceImp] - [qlsv] StudentController - Filter students API called successfully by user: null
+2025-10-15 16:55:21 [http-nio-8080-exec-7] INFO  [LoggingServiceImp] - [qlsv] StudentServiceImp - Filtering with 1 conditions
+2025-10-15 16:55:43 [http-nio-8080-exec-7] INFO  [LoggingServiceImp] - [qlsv] StudentServiceImp - Filter Students Successfully. Found 2 students
+2025-10-15 16:56:07 [http-nio-8080-exec-8] INFO  [LoggingServiceImp] - [qlsv] StudentController - Filter students API called successfully by user: null
+2025-10-15 16:56:08 [http-nio-8080-exec-8] INFO  [LoggingServiceImp] - [qlsv] StudentServiceImp - Filtering with 1 conditions
+2025-10-15 16:56:08 [http-nio-8080-exec-8] INFO  [LoggingServiceImp] - [qlsv] StudentServiceImp - Filter Students Successfully. Found 1 students
+2025-10-15 16:56:18 [http-nio-8080-exec-10] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Calling security module with URL: http://localhost:8083/auth/validate to validate token
+2025-10-15 16:56:18 [http-nio-8080-exec-10] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Successfully retrieved user from security module: HuyStu1
+2025-10-15 16:56:18 [http-nio-8080-exec-10] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - User HuyStu1 successfully authorized
+2025-10-15 16:56:18 [http-nio-8080-exec-10] DEBUG [LoggingServiceImp] - [security_shared] RequiresAuthAspect - User HuyStu1 successfully authorized for method: get with roles: ADMIN, STUDENT and permissions: STUDENT_READ
+2025-10-15 16:56:18 [http-nio-8080-exec-10] INFO  [LoggingServiceImp] - [qlsv] StudentController - Get students API called successfully by user: HuyStu1
+2025-10-15 16:56:18 [http-nio-8080-exec-10] INFO  [LoggingServiceImp] - [qlsv] StudentServiceImp - Get data from Redis cache : students:all
+2025-10-15 16:56:44 [http-nio-8080-exec-9] INFO  [LoggingServiceImp] - [qlsv] StudentController - Filter students API called successfully by user: null
+2025-10-15 16:56:45 [http-nio-8080-exec-9] INFO  [LoggingServiceImp] - [qlsv] StudentServiceImp - Filtering with 1 conditions
+2025-10-15 16:56:45 [http-nio-8080-exec-9] INFO  [LoggingServiceImp] - [qlsv] StudentServiceImp - Filter Students Successfully. Found 1 students

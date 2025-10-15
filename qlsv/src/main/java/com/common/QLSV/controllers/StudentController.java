@@ -1,5 +1,6 @@
 package com.common.QLSV.controllers;
 
+import com.model_shared.enums.Gender;
 import com.common.QLSV.services.imp.StudentServiceImp;
 import com.security_shared.annotations.RequiresAuth;
 import com.security_shared.annotations.CurrentUser;
@@ -23,6 +24,11 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Locale;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @RestController
 @RequestMapping("/students")
@@ -47,7 +53,7 @@ public class StudentController {
     @GetMapping("/paged")
     @RequiresAuth(roles = {"ADMIN", "STUDENT"}, permissions = {"STUDENT_READ"})
     ResponseEntity<Response<PagedResponseModel<StudentModel>>> getPaged(
-// để trang hiện tại mặc định là 0 bên backend và khi frontend muốn hiển thị phân trang sẽ +1
+        // để trang hiện tại mặc định là 0 bên backend và khi frontend muốn hiển thị phân trang sẽ +1
             @RequestParam(defaultValue = "0") int page, 
             @RequestParam(defaultValue = "3") int size,
             @RequestParam(defaultValue = "id") String sortBy,
@@ -74,6 +80,37 @@ public class StudentController {
         
         return ResponseEntity.status(response.getStatus()).body(response);
     }
+
+    @GetMapping("/filter")
+    @RequiresAuth(roles = {"ADMIN", "STUDENT"}, permissions = {"STUDENT_READ"})
+    public ResponseEntity<Response<List<StudentModel>>> filter(
+        @RequestParam(required = false) Integer id,
+        @RequestParam(required = false) String firstName,
+        @RequestParam(required = false) String lastName,
+        @RequestParam(required = false) Integer age,
+        @RequestParam(required = false) Gender gender,
+        @RequestParam(required = false) Boolean graduate,
+        @RequestHeader(value = "Accept-Language", defaultValue = "en") String acceptLanguage,
+        @CurrentUser UserDto currentUser
+    ){
+        Locale locale = Locale.forLanguageTag(acceptLanguage);
+        LogContext logContext = getLogContext("filter");
+        loggingService.logInfo(
+                "Filter students API called successfully by user: " + currentUser.getUserName()
+                , logContext
+        );
+
+        List<StudentModel> studentModels = studentServiceImp.filter(id, firstName, lastName, age, gender, graduate);
+        Response<List<StudentModel>> response = new Response<>(
+                200
+                , messageSource.getMessage("response.message.getSuccess", null, locale)
+                , "StudentsModel"
+                , null
+                , studentModels
+        );
+        return ResponseEntity.status(response.getStatus()).body(response);
+    }
+    
 
     @GetMapping("")
     @RequiresAuth(roles = {"ADMIN", "STUDENT"}, permissions = {"STUDENT_READ"})

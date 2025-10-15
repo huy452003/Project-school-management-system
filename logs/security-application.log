@@ -1,175 +1,96 @@
-2025-10-11 14:41:12 [background-preinit] DEBUG [logging] - Logging Provider: org.jboss.logging.Slf4jLoggerProvider found via system property
-2025-10-11 14:41:12 [main] INFO  [SecurityApplication] - Starting SecurityApplication using Java 17.0.16 with PID 9752 (D:\project IntelliJ Ultimate\modules-parent\security\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\security)
-2025-10-11 14:41:12 [main] DEBUG [SecurityApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
-2025-10-11 14:41:12 [main] INFO  [SecurityApplication] - No active profile set, falling back to 1 default profile: "default"
-2025-10-11 14:41:22 [main] DEBUG [InternalLoggerFactory] - Using SLF4J as the default logging framework
-2025-10-11 14:41:27 [main] WARN  [deprecation] - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-10-11 14:41:36 [main] WARN  [JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-10-11 14:41:37 [main] DEBUG [JwtAuthFilter] - Filter 'jwtAuthFilter' configured for use
-2025-10-11 14:41:37 [main] WARN  [InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer] - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
-2025-10-11 14:41:37 [main] DEBUG [Mappings] - 
+2025-10-15 16:32:46 [background-preinit] DEBUG [logging] - Logging Provider: org.jboss.logging.Slf4jLoggerProvider found via system property
+2025-10-15 16:32:46 [main] INFO  [SecurityApplication] - Starting SecurityApplication using Java 17.0.16 with PID 1948 (D:\project IntelliJ Ultimate\modules-parent\security\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\security)
+2025-10-15 16:32:46 [main] DEBUG [SecurityApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
+2025-10-15 16:32:46 [main] INFO  [SecurityApplication] - No active profile set, falling back to 1 default profile: "default"
+2025-10-15 16:32:55 [main] DEBUG [InternalLoggerFactory] - Using SLF4J as the default logging framework
+2025-10-15 16:32:59 [main] WARN  [deprecation] - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-10-15 16:33:07 [main] WARN  [JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-10-15 16:33:09 [main] DEBUG [JwtAuthFilter] - Filter 'jwtAuthFilter' configured for use
+2025-10-15 16:33:09 [main] WARN  [InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer] - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2025-10-15 16:33:10 [main] DEBUG [Mappings] - 
 	c.s.c.AuthController:
 	{POST [/auth/register]}: register(Register,String)
-	{GET [/auth/decode]}: decodeToken(String,String)
+	{POST [/auth/logout]}: logout(String,String)
 	{POST [/auth/refresh]}: refreshToken(String,String)
 	{GET [/auth/validate]}: validateToken(String,String)
-	{POST [/auth/logout]}: logout(String,String)
 	{POST [/auth/login]}: login(Login,String)
-2025-10-11 14:41:37 [main] DEBUG [Mappings] - 
+	{GET [/auth/decode]}: decodeToken(String,String)
+2025-10-15 16:33:10 [main] DEBUG [Mappings] - 
 	o.s.b.a.w.s.e.BasicErrorController:
 	{ [/error]}: error(HttpServletRequest)
 	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
-2025-10-11 14:41:37 [main] DEBUG [Mappings] - 'beanNameHandlerMapping' {}
-2025-10-11 14:41:37 [main] DEBUG [Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
-2025-10-11 14:41:39 [main] DEBUG [Loggers] - Using Slf4j logging framework
-2025-10-11 14:41:39 [main] INFO  [SecurityApplication] - Started SecurityApplication in 28.982 seconds (process running for 30.914)
-2025-10-11 14:41:56 [http-nio-8083-exec-2] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Processing request: /auth/login
-2025-10-11 14:41:56 [http-nio-8083-exec-2] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Skipping JWT validation for public endpoint: /auth/login
-2025-10-11 14:41:56 [http-nio-8083-exec-2] INFO  [LoggingServiceImp] - [security] com.security.controllers.AuthController - Login API calling... by user: HuyTea1
-2025-10-11 14:41:56 [http-nio-8083-exec-2] INFO  [LoggingServiceImp] - [security] AuthService - Login attempt for username: HuyTea1
-2025-10-11 14:41:56 [http-nio-8083-exec-2] INFO  [LoggingServiceImp] - [security] com.security.controllers.AuthController - User logged in successfully: HuyTea1
-2025-10-11 14:42:36 [http-nio-8083-exec-3] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Processing request: /auth/validate
-2025-10-11 14:42:36 [http-nio-8083-exec-3] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Extracted username from JWT: HuyTea1
-2025-10-11 14:42:36 [http-nio-8083-exec-3] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Successfully authenticated user: HuyTea1
-2025-10-11 14:42:36 [http-nio-8083-exec-3] INFO  [LoggingServiceImp] - [security] com.security.controllers.AuthController - validate API Calling...
-2025-10-11 14:42:36 [http-nio-8083-exec-3] INFO  [LoggingServiceImp] - [security] com.security.controllers.AuthController - Token validated successfully for user: HuyTea1
-2025-10-11 14:42:37 [LoginEvent-1] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - userEvent sent to topic: user-events - with entity id: [HuyTea1]
-2025-10-11 14:42:37 [LoginEvent-1] INFO  [LoggingServiceImp] - [security] AsyncService - Login event sent successfully for user: HuyTea1
-2025-10-11 14:42:37 [kafka-producer-network-thread | security-producer-1] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - Message sent successfully to topic: user-events, partition: 0, offset: 62, key: [HuyTea1]
-2025-10-11 14:47:47 [http-nio-8083-exec-6] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Processing request: /auth/validate
-2025-10-11 14:47:47 [http-nio-8083-exec-6] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Extracted username from JWT: HuyTea1
-2025-10-11 14:47:47 [http-nio-8083-exec-6] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Successfully authenticated user: HuyTea1
-2025-10-11 14:47:47 [http-nio-8083-exec-6] INFO  [LoggingServiceImp] - [security] com.security.controllers.AuthController - validate API Calling...
-2025-10-11 14:47:47 [LoginEvent-2] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - userEvent sent to topic: user-events - with entity id: [HuyTea1]
-2025-10-11 14:47:47 [LoginEvent-2] INFO  [LoggingServiceImp] - [security] AsyncService - Login event sent successfully for user: HuyTea1
-2025-10-11 14:47:47 [http-nio-8083-exec-6] INFO  [LoggingServiceImp] - [security] com.security.controllers.AuthController - Token validated successfully for user: HuyTea1
-2025-10-11 14:47:47 [kafka-producer-network-thread | security-producer-1] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - Message sent successfully to topic: user-events, partition: 0, offset: 63, key: [HuyTea1]
-2025-10-11 14:50:01 [http-nio-8083-exec-8] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Processing request: /auth/validate
-2025-10-11 14:50:01 [http-nio-8083-exec-8] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Extracted username from JWT: HuyTea1
-2025-10-11 14:50:01 [http-nio-8083-exec-8] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Successfully authenticated user: HuyTea1
-2025-10-11 14:50:01 [LoginEvent-1] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - userEvent sent to topic: user-events - with entity id: [HuyTea1]
-2025-10-11 14:50:01 [LoginEvent-1] INFO  [LoggingServiceImp] - [security] AsyncService - Login event sent successfully for user: HuyTea1
-2025-10-11 14:50:01 [http-nio-8083-exec-8] INFO  [LoggingServiceImp] - [security] com.security.controllers.AuthController - validate API Calling...
-2025-10-11 14:50:01 [kafka-producer-network-thread | security-producer-1] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - Message sent successfully to topic: user-events, partition: 0, offset: 64, key: [HuyTea1]
-2025-10-11 14:50:01 [http-nio-8083-exec-8] INFO  [LoggingServiceImp] - [security] com.security.controllers.AuthController - Token validated successfully for user: HuyTea1
-2025-10-11 14:50:30 [http-nio-8083-exec-10] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Processing request: /auth/validate
-2025-10-11 14:50:30 [http-nio-8083-exec-10] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Extracted username from JWT: HuyTea1
-2025-10-11 14:50:30 [http-nio-8083-exec-10] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Successfully authenticated user: HuyTea1
-2025-10-11 14:50:30 [LoginEvent-2] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - userEvent sent to topic: user-events - with entity id: [HuyTea1]
-2025-10-11 14:50:30 [http-nio-8083-exec-10] INFO  [LoggingServiceImp] - [security] com.security.controllers.AuthController - validate API Calling...
-2025-10-11 14:50:30 [LoginEvent-2] INFO  [LoggingServiceImp] - [security] AsyncService - Login event sent successfully for user: HuyTea1
-2025-10-11 14:50:30 [kafka-producer-network-thread | security-producer-1] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - Message sent successfully to topic: user-events, partition: 0, offset: 65, key: [HuyTea1]
-2025-10-11 14:50:30 [http-nio-8083-exec-10] INFO  [LoggingServiceImp] - [security] com.security.controllers.AuthController - Token validated successfully for user: HuyTea1
-2025-10-11 14:50:34 [http-nio-8083-exec-1] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Processing request: /auth/validate
-2025-10-11 14:50:34 [http-nio-8083-exec-1] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Extracted username from JWT: HuyTea1
-2025-10-11 14:50:35 [http-nio-8083-exec-1] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Successfully authenticated user: HuyTea1
-2025-10-11 14:50:35 [LoginEvent-1] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - userEvent sent to topic: user-events - with entity id: [HuyTea1]
-2025-10-11 14:50:35 [LoginEvent-1] INFO  [LoggingServiceImp] - [security] AsyncService - Login event sent successfully for user: HuyTea1
-2025-10-11 14:50:35 [http-nio-8083-exec-1] INFO  [LoggingServiceImp] - [security] com.security.controllers.AuthController - validate API Calling...
-2025-10-11 14:50:35 [kafka-producer-network-thread | security-producer-1] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - Message sent successfully to topic: user-events, partition: 0, offset: 66, key: [HuyTea1]
-2025-10-11 14:50:35 [http-nio-8083-exec-1] INFO  [LoggingServiceImp] - [security] com.security.controllers.AuthController - Token validated successfully for user: HuyTea1
-2025-10-11 14:50:39 [http-nio-8083-exec-2] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Processing request: /auth/validate
-2025-10-11 14:50:39 [http-nio-8083-exec-2] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Extracted username from JWT: HuyTea1
-2025-10-11 14:50:39 [http-nio-8083-exec-2] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Successfully authenticated user: HuyTea1
-2025-10-11 14:50:39 [LoginEvent-2] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - userEvent sent to topic: user-events - with entity id: [HuyTea1]
-2025-10-11 14:50:39 [LoginEvent-2] INFO  [LoggingServiceImp] - [security] AsyncService - Login event sent successfully for user: HuyTea1
-2025-10-11 14:50:39 [http-nio-8083-exec-2] INFO  [LoggingServiceImp] - [security] com.security.controllers.AuthController - validate API Calling...
-2025-10-11 14:50:39 [kafka-producer-network-thread | security-producer-1] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - Message sent successfully to topic: user-events, partition: 0, offset: 67, key: [HuyTea1]
-2025-10-11 14:50:39 [http-nio-8083-exec-2] INFO  [LoggingServiceImp] - [security] com.security.controllers.AuthController - Token validated successfully for user: HuyTea1
-2025-10-11 14:50:45 [http-nio-8083-exec-3] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Processing request: /auth/validate
-2025-10-11 14:50:45 [http-nio-8083-exec-3] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Extracted username from JWT: HuyTea1
-2025-10-11 14:50:45 [http-nio-8083-exec-3] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Successfully authenticated user: HuyTea1
-2025-10-11 14:50:45 [LoginEvent-1] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - userEvent sent to topic: user-events - with entity id: [HuyTea1]
-2025-10-11 14:50:45 [LoginEvent-1] INFO  [LoggingServiceImp] - [security] AsyncService - Login event sent successfully for user: HuyTea1
-2025-10-11 14:50:45 [http-nio-8083-exec-3] INFO  [LoggingServiceImp] - [security] com.security.controllers.AuthController - validate API Calling...
-2025-10-11 14:50:45 [kafka-producer-network-thread | security-producer-1] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - Message sent successfully to topic: user-events, partition: 0, offset: 68, key: [HuyTea1]
-2025-10-11 14:50:45 [http-nio-8083-exec-3] INFO  [LoggingServiceImp] - [security] com.security.controllers.AuthController - Token validated successfully for user: HuyTea1
-2025-10-11 14:50:49 [http-nio-8083-exec-4] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Processing request: /auth/validate
-2025-10-11 14:50:49 [http-nio-8083-exec-4] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Extracted username from JWT: HuyTea1
-2025-10-11 14:50:49 [http-nio-8083-exec-4] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Successfully authenticated user: HuyTea1
-2025-10-11 14:50:49 [LoginEvent-2] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - userEvent sent to topic: user-events - with entity id: [HuyTea1]
-2025-10-11 14:50:49 [LoginEvent-2] INFO  [LoggingServiceImp] - [security] AsyncService - Login event sent successfully for user: HuyTea1
-2025-10-11 14:50:49 [http-nio-8083-exec-4] INFO  [LoggingServiceImp] - [security] com.security.controllers.AuthController - validate API Calling...
-2025-10-11 14:50:49 [kafka-producer-network-thread | security-producer-1] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - Message sent successfully to topic: user-events, partition: 0, offset: 69, key: [HuyTea1]
-2025-10-11 14:50:49 [http-nio-8083-exec-4] INFO  [LoggingServiceImp] - [security] com.security.controllers.AuthController - Token validated successfully for user: HuyTea1
-2025-10-11 14:50:53 [http-nio-8083-exec-5] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Processing request: /auth/validate
-2025-10-11 14:50:53 [http-nio-8083-exec-5] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Extracted username from JWT: HuyTea1
-2025-10-11 14:50:53 [http-nio-8083-exec-5] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Successfully authenticated user: HuyTea1
-2025-10-11 14:50:53 [LoginEvent-1] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - userEvent sent to topic: user-events - with entity id: [HuyTea1]
-2025-10-11 14:50:53 [LoginEvent-1] INFO  [LoggingServiceImp] - [security] AsyncService - Login event sent successfully for user: HuyTea1
-2025-10-11 14:50:53 [http-nio-8083-exec-5] INFO  [LoggingServiceImp] - [security] com.security.controllers.AuthController - validate API Calling...
-2025-10-11 14:50:53 [kafka-producer-network-thread | security-producer-1] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - Message sent successfully to topic: user-events, partition: 0, offset: 70, key: [HuyTea1]
-2025-10-11 14:50:53 [http-nio-8083-exec-5] INFO  [LoggingServiceImp] - [security] com.security.controllers.AuthController - Token validated successfully for user: HuyTea1
-2025-10-11 14:50:57 [http-nio-8083-exec-6] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Processing request: /auth/validate
-2025-10-11 14:50:57 [http-nio-8083-exec-6] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Extracted username from JWT: HuyTea1
-2025-10-11 14:50:57 [http-nio-8083-exec-6] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Successfully authenticated user: HuyTea1
-2025-10-11 14:50:57 [LoginEvent-2] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - userEvent sent to topic: user-events - with entity id: [HuyTea1]
-2025-10-11 14:50:57 [LoginEvent-2] INFO  [LoggingServiceImp] - [security] AsyncService - Login event sent successfully for user: HuyTea1
-2025-10-11 14:50:57 [http-nio-8083-exec-6] INFO  [LoggingServiceImp] - [security] com.security.controllers.AuthController - validate API Calling...
-2025-10-11 14:50:57 [kafka-producer-network-thread | security-producer-1] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - Message sent successfully to topic: user-events, partition: 0, offset: 71, key: [HuyTea1]
-2025-10-11 14:50:57 [http-nio-8083-exec-6] INFO  [LoggingServiceImp] - [security] com.security.controllers.AuthController - Token validated successfully for user: HuyTea1
-2025-10-11 14:51:02 [http-nio-8083-exec-7] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Processing request: /auth/validate
-2025-10-11 14:51:02 [http-nio-8083-exec-7] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Extracted username from JWT: HuyTea1
-2025-10-11 14:51:02 [http-nio-8083-exec-7] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Successfully authenticated user: HuyTea1
-2025-10-11 14:51:02 [LoginEvent-1] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - userEvent sent to topic: user-events - with entity id: [HuyTea1]
-2025-10-11 14:51:02 [LoginEvent-1] INFO  [LoggingServiceImp] - [security] AsyncService - Login event sent successfully for user: HuyTea1
-2025-10-11 14:51:02 [http-nio-8083-exec-7] INFO  [LoggingServiceImp] - [security] com.security.controllers.AuthController - validate API Calling...
-2025-10-11 14:51:02 [kafka-producer-network-thread | security-producer-1] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - Message sent successfully to topic: user-events, partition: 0, offset: 72, key: [HuyTea1]
-2025-10-11 14:51:02 [http-nio-8083-exec-7] INFO  [LoggingServiceImp] - [security] com.security.controllers.AuthController - Token validated successfully for user: HuyTea1
-2025-10-11 14:51:12 [http-nio-8083-exec-8] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Processing request: /auth/validate
-2025-10-11 14:51:12 [http-nio-8083-exec-8] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Extracted username from JWT: HuyTea1
-2025-10-11 14:51:12 [http-nio-8083-exec-8] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Successfully authenticated user: HuyTea1
-2025-10-11 14:51:12 [LoginEvent-2] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - userEvent sent to topic: user-events - with entity id: [HuyTea1]
-2025-10-11 14:51:12 [LoginEvent-2] INFO  [LoggingServiceImp] - [security] AsyncService - Login event sent successfully for user: HuyTea1
-2025-10-11 14:51:12 [http-nio-8083-exec-8] INFO  [LoggingServiceImp] - [security] com.security.controllers.AuthController - validate API Calling...
-2025-10-11 14:51:12 [kafka-producer-network-thread | security-producer-1] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - Message sent successfully to topic: user-events, partition: 0, offset: 73, key: [HuyTea1]
-2025-10-11 14:51:12 [http-nio-8083-exec-8] INFO  [LoggingServiceImp] - [security] com.security.controllers.AuthController - Token validated successfully for user: HuyTea1
-2025-10-11 15:06:05 [background-preinit] DEBUG [logging] - Logging Provider: org.jboss.logging.Slf4jLoggerProvider found via system property
-2025-10-11 15:06:05 [main] INFO  [SecurityApplication] - Starting SecurityApplication using Java 17.0.16 with PID 10496 (D:\project IntelliJ Ultimate\modules-parent\security\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\security)
-2025-10-11 15:06:05 [main] DEBUG [SecurityApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
-2025-10-11 15:06:05 [main] INFO  [SecurityApplication] - No active profile set, falling back to 1 default profile: "default"
-2025-10-11 15:06:09 [main] DEBUG [InternalLoggerFactory] - Using SLF4J as the default logging framework
-2025-10-11 15:06:10 [main] WARN  [deprecation] - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-10-11 15:06:13 [main] WARN  [JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-10-11 15:06:13 [main] DEBUG [JwtAuthFilter] - Filter 'jwtAuthFilter' configured for use
-2025-10-11 15:06:14 [main] WARN  [InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer] - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
-2025-10-11 15:06:14 [main] DEBUG [Mappings] - 
-	c.s.c.AuthController:
-	{POST [/auth/logout]}: logout(String,String)
-	{POST [/auth/register]}: register(Register,String)
-	{GET [/auth/validate]}: validateToken(String,String)
-	{GET [/auth/decode]}: decodeToken(String,String)
-	{POST [/auth/refresh]}: refreshToken(String,String)
-	{POST [/auth/login]}: login(Login,String)
-2025-10-11 15:06:14 [main] DEBUG [Mappings] - 
-	o.s.b.a.w.s.e.BasicErrorController:
-	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
-	{ [/error]}: error(HttpServletRequest)
-2025-10-11 15:06:14 [main] DEBUG [Mappings] - 'beanNameHandlerMapping' {}
-2025-10-11 15:06:14 [main] DEBUG [Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
-2025-10-11 15:06:14 [main] DEBUG [Loggers] - Using Slf4j logging framework
-2025-10-11 15:06:15 [main] INFO  [SecurityApplication] - Started SecurityApplication in 10.389 seconds (process running for 11.016)
-2025-10-11 15:06:18 [http-nio-8083-exec-1] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Processing request: /auth/validate
-2025-10-11 15:06:18 [http-nio-8083-exec-1] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Extracted username from JWT: HuyTea1
-2025-10-11 15:06:18 [http-nio-8083-exec-1] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Successfully authenticated user: HuyTea1
-2025-10-11 15:06:18 [http-nio-8083-exec-1] INFO  [LoggingServiceImp] - [security] com.security.controllers.AuthController - validate API Calling...
-2025-10-11 15:06:18 [http-nio-8083-exec-1] INFO  [LoggingServiceImp] - [security] com.security.controllers.AuthController - Token validated successfully for user: HuyTea1
-2025-10-11 15:06:19 [LoginEvent-1] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - userEvent sent to topic: user-events - with entity id: [HuyTea1]
-2025-10-11 15:06:19 [LoginEvent-1] INFO  [LoggingServiceImp] - [security] AsyncService - Login event sent successfully for user: HuyTea1
-2025-10-11 15:06:19 [kafka-producer-network-thread | security-producer-1] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - Message sent successfully to topic: user-events, partition: 0, offset: 74, key: [HuyTea1]
-2025-10-11 15:06:37 [http-nio-8083-exec-2] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Processing request: /auth/validate
-2025-10-11 15:06:37 [http-nio-8083-exec-2] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Extracted username from JWT: HuyTea1
-2025-10-11 15:06:37 [http-nio-8083-exec-2] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Successfully authenticated user: HuyTea1
-2025-10-11 15:06:37 [LoginEvent-2] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - userEvent sent to topic: user-events - with entity id: [HuyTea1]
-2025-10-11 15:06:37 [LoginEvent-2] INFO  [LoggingServiceImp] - [security] AsyncService - Login event sent successfully for user: HuyTea1
-2025-10-11 15:06:37 [http-nio-8083-exec-2] INFO  [LoggingServiceImp] - [security] com.security.controllers.AuthController - validate API Calling...
-2025-10-11 15:06:37 [kafka-producer-network-thread | security-producer-1] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - Message sent successfully to topic: user-events, partition: 0, offset: 75, key: [HuyTea1]
-2025-10-11 15:06:37 [http-nio-8083-exec-2] INFO  [LoggingServiceImp] - [security] com.security.controllers.AuthController - Token validated successfully for user: HuyTea1
-2025-10-11 15:06:44 [http-nio-8083-exec-3] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Processing request: /auth/validate
-2025-10-11 15:06:44 [http-nio-8083-exec-3] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Extracted username from JWT: HuyTea1
-2025-10-11 15:06:44 [http-nio-8083-exec-3] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Successfully authenticated user: HuyTea1
-2025-10-11 15:06:44 [LoginEvent-1] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - userEvent sent to topic: user-events - with entity id: [HuyTea1]
-2025-10-11 15:06:44 [LoginEvent-1] INFO  [LoggingServiceImp] - [security] AsyncService - Login event sent successfully for user: HuyTea1
-2025-10-11 15:06:44 [http-nio-8083-exec-3] INFO  [LoggingServiceImp] - [security] com.security.controllers.AuthController - validate API Calling...
-2025-10-11 15:06:44 [kafka-producer-network-thread | security-producer-1] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - Message sent successfully to topic: user-events, partition: 0, offset: 76, key: [HuyTea1]
-2025-10-11 15:06:44 [http-nio-8083-exec-3] INFO  [LoggingServiceImp] - [security] com.security.controllers.AuthController - Token validated successfully for user: HuyTea1
+2025-10-15 16:33:10 [main] DEBUG [Mappings] - 'beanNameHandlerMapping' {}
+2025-10-15 16:33:10 [main] DEBUG [Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
+2025-10-15 16:33:13 [main] DEBUG [Loggers] - Using Slf4j logging framework
+2025-10-15 16:33:16 [main] INFO  [SecurityApplication] - Started SecurityApplication in 30.892 seconds (process running for 31.947)
+2025-10-15 16:34:30 [http-nio-8083-exec-2] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Processing request: /auth/login
+2025-10-15 16:34:30 [http-nio-8083-exec-2] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Skipping JWT validation for public endpoint: /auth/login
+2025-10-15 16:34:30 [http-nio-8083-exec-2] INFO  [LoggingServiceImp] - [security] com.security.controllers.AuthController - Login API calling... by user: HuyStu1
+2025-10-15 16:34:31 [http-nio-8083-exec-2] INFO  [LoggingServiceImp] - [security] AuthService - Login attempt for username: HuyStu1
+2025-10-15 16:34:31 [http-nio-8083-exec-2] INFO  [LoggingServiceImp] - [security] com.security.controllers.AuthController - User logged in successfully: HuyStu1
+2025-10-15 16:34:39 [http-nio-8083-exec-5] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Processing request: /auth/validate
+2025-10-15 16:34:39 [http-nio-8083-exec-5] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Extracted username from JWT: HuyStu1
+2025-10-15 16:34:39 [http-nio-8083-exec-5] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Successfully authenticated user: HuyStu1
+2025-10-15 16:34:39 [http-nio-8083-exec-5] INFO  [LoggingServiceImp] - [security] com.security.controllers.AuthController - validate API Calling...
+2025-10-15 16:34:39 [http-nio-8083-exec-5] INFO  [LoggingServiceImp] - [security] com.security.controllers.AuthController - Token validated successfully for user: HuyStu1
+2025-10-15 16:34:40 [LoginEvent-1] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - userEvent sent to topic: user-events - with entity id: [HuyStu1]
+2025-10-15 16:34:40 [LoginEvent-1] INFO  [LoggingServiceImp] - [security] AsyncService - Login event sent successfully for user: HuyStu1
+2025-10-15 16:34:40 [kafka-producer-network-thread | security-producer-1] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - Message sent successfully to topic: user-events, partition: 0, offset: 77, key: [HuyStu1]
+2025-10-15 16:44:34 [http-nio-8083-exec-10] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Processing request: /auth/validate
+2025-10-15 16:44:34 [http-nio-8083-exec-10] ERROR [LoggingServiceImp] - [security] JwtAuthFilter - Error processing JWT token: Compact JWT strings may not contain whitespace.: Compact JWT strings may not contain whitespace.
+2025-10-15 16:44:54 [http-nio-8083-exec-3] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Processing request: /auth/validate
+2025-10-15 16:44:54 [http-nio-8083-exec-3] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Extracted username from JWT: HuyStu1
+2025-10-15 16:44:54 [http-nio-8083-exec-3] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Successfully authenticated user: HuyStu1
+2025-10-15 16:44:54 [http-nio-8083-exec-3] INFO  [LoggingServiceImp] - [security] com.security.controllers.AuthController - validate API Calling...
+2025-10-15 16:44:54 [LoginEvent-2] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - userEvent sent to topic: user-events - with entity id: [HuyStu1]
+2025-10-15 16:44:54 [LoginEvent-2] INFO  [LoggingServiceImp] - [security] AsyncService - Login event sent successfully for user: HuyStu1
+2025-10-15 16:44:54 [http-nio-8083-exec-3] INFO  [LoggingServiceImp] - [security] com.security.controllers.AuthController - Token validated successfully for user: HuyStu1
+2025-10-15 16:44:54 [kafka-producer-network-thread | security-producer-1] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - Message sent successfully to topic: user-events, partition: 0, offset: 78, key: [HuyStu1]
+2025-10-15 16:45:06 [http-nio-8083-exec-4] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Processing request: /auth/validate
+2025-10-15 16:45:06 [http-nio-8083-exec-4] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Extracted username from JWT: HuyStu1
+2025-10-15 16:45:06 [http-nio-8083-exec-4] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Successfully authenticated user: HuyStu1
+2025-10-15 16:45:06 [LoginEvent-1] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - userEvent sent to topic: user-events - with entity id: [HuyStu1]
+2025-10-15 16:45:06 [http-nio-8083-exec-4] INFO  [LoggingServiceImp] - [security] com.security.controllers.AuthController - validate API Calling...
+2025-10-15 16:45:06 [LoginEvent-1] INFO  [LoggingServiceImp] - [security] AsyncService - Login event sent successfully for user: HuyStu1
+2025-10-15 16:45:06 [kafka-producer-network-thread | security-producer-1] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - Message sent successfully to topic: user-events, partition: 0, offset: 79, key: [HuyStu1]
+2025-10-15 16:45:06 [http-nio-8083-exec-4] INFO  [LoggingServiceImp] - [security] com.security.controllers.AuthController - Token validated successfully for user: HuyStu1
+2025-10-15 16:53:12 [http-nio-8083-exec-8] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Processing request: /auth/validate
+2025-10-15 16:53:12 [http-nio-8083-exec-8] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Extracted username from JWT: HuyStu1
+2025-10-15 16:53:12 [http-nio-8083-exec-8] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Successfully authenticated user: HuyStu1
+2025-10-15 16:53:12 [LoginEvent-2] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - userEvent sent to topic: user-events - with entity id: [HuyStu1]
+2025-10-15 16:53:12 [LoginEvent-2] INFO  [LoggingServiceImp] - [security] AsyncService - Login event sent successfully for user: HuyStu1
+2025-10-15 16:53:12 [http-nio-8083-exec-8] INFO  [LoggingServiceImp] - [security] com.security.controllers.AuthController - validate API Calling...
+2025-10-15 16:53:12 [kafka-producer-network-thread | security-producer-1] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - Message sent successfully to topic: user-events, partition: 0, offset: 80, key: [HuyStu1]
+2025-10-15 16:53:12 [http-nio-8083-exec-8] INFO  [LoggingServiceImp] - [security] com.security.controllers.AuthController - Token validated successfully for user: HuyStu1
+2025-10-15 16:54:19 [http-nio-8083-exec-2] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Processing request: /auth/validate
+2025-10-15 16:54:19 [http-nio-8083-exec-2] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Extracted username from JWT: HuyStu1
+2025-10-15 16:54:19 [http-nio-8083-exec-2] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Successfully authenticated user: HuyStu1
+2025-10-15 16:54:19 [LoginEvent-1] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - userEvent sent to topic: user-events - with entity id: [HuyStu1]
+2025-10-15 16:54:19 [LoginEvent-1] INFO  [LoggingServiceImp] - [security] AsyncService - Login event sent successfully for user: HuyStu1
+2025-10-15 16:54:19 [http-nio-8083-exec-2] INFO  [LoggingServiceImp] - [security] com.security.controllers.AuthController - validate API Calling...
+2025-10-15 16:54:19 [kafka-producer-network-thread | security-producer-1] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - Message sent successfully to topic: user-events, partition: 0, offset: 81, key: [HuyStu1]
+2025-10-15 16:54:19 [http-nio-8083-exec-2] INFO  [LoggingServiceImp] - [security] com.security.controllers.AuthController - Token validated successfully for user: HuyStu1
+2025-10-15 16:54:34 [http-nio-8083-exec-5] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Processing request: /auth/validate
+2025-10-15 16:54:34 [http-nio-8083-exec-5] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Extracted username from JWT: HuyStu1
+2025-10-15 16:54:34 [http-nio-8083-exec-5] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Successfully authenticated user: HuyStu1
+2025-10-15 16:54:34 [LoginEvent-2] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - userEvent sent to topic: user-events - with entity id: [HuyStu1]
+2025-10-15 16:54:34 [LoginEvent-2] INFO  [LoggingServiceImp] - [security] AsyncService - Login event sent successfully for user: HuyStu1
+2025-10-15 16:54:34 [http-nio-8083-exec-5] INFO  [LoggingServiceImp] - [security] com.security.controllers.AuthController - validate API Calling...
+2025-10-15 16:54:34 [kafka-producer-network-thread | security-producer-1] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - Message sent successfully to topic: user-events, partition: 0, offset: 82, key: [HuyStu1]
+2025-10-15 16:54:34 [http-nio-8083-exec-5] INFO  [LoggingServiceImp] - [security] com.security.controllers.AuthController - Token validated successfully for user: HuyStu1
+2025-10-15 16:54:45 [http-nio-8083-exec-6] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Processing request: /auth/validate
+2025-10-15 16:54:45 [http-nio-8083-exec-6] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Extracted username from JWT: HuyStu1
+2025-10-15 16:54:45 [http-nio-8083-exec-6] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Successfully authenticated user: HuyStu1
+2025-10-15 16:54:45 [LoginEvent-1] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - userEvent sent to topic: user-events - with entity id: [HuyStu1]
+2025-10-15 16:54:45 [http-nio-8083-exec-6] INFO  [LoggingServiceImp] - [security] com.security.controllers.AuthController - validate API Calling...
+2025-10-15 16:54:45 [LoginEvent-1] INFO  [LoggingServiceImp] - [security] AsyncService - Login event sent successfully for user: HuyStu1
+2025-10-15 16:54:45 [kafka-producer-network-thread | security-producer-1] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - Message sent successfully to topic: user-events, partition: 0, offset: 83, key: [HuyStu1]
+2025-10-15 16:54:45 [http-nio-8083-exec-6] INFO  [LoggingServiceImp] - [security] com.security.controllers.AuthController - Token validated successfully for user: HuyStu1
+2025-10-15 16:56:18 [http-nio-8083-exec-10] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Processing request: /auth/validate
+2025-10-15 16:56:18 [http-nio-8083-exec-10] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Extracted username from JWT: HuyStu1
+2025-10-15 16:56:18 [http-nio-8083-exec-10] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Successfully authenticated user: HuyStu1
+2025-10-15 16:56:18 [LoginEvent-2] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - userEvent sent to topic: user-events - with entity id: [HuyStu1]
+2025-10-15 16:56:18 [LoginEvent-2] INFO  [LoggingServiceImp] - [security] AsyncService - Login event sent successfully for user: HuyStu1
+2025-10-15 16:56:18 [http-nio-8083-exec-10] INFO  [LoggingServiceImp] - [security] com.security.controllers.AuthController - validate API Calling...
+2025-10-15 16:56:18 [kafka-producer-network-thread | security-producer-1] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - Message sent successfully to topic: user-events, partition: 0, offset: 84, key: [HuyStu1]
+2025-10-15 16:56:18 [http-nio-8083-exec-10] INFO  [LoggingServiceImp] - [security] com.security.controllers.AuthController - Token validated successfully for user: HuyStu1
