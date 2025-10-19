@@ -14,7 +14,6 @@ public class UserEvent extends KafkaMessage implements EventMetadata {
     private String role;
     private List<String> permissions;
     
-    // Constructor để gọi parent constructor
     public UserEvent(String eventType, String source, String destination) {
         super(eventType, source, destination);
     }

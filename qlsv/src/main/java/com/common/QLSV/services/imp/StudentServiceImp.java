@@ -243,14 +243,14 @@ public class StudentServiceImp implements StudentService {
             throw new NotFoundExceptionHandle("", Collections.emptyList(), "StudentModel");
         }
 
-        // Đếm số điều kiện được truyền vào (khác null/0/empty)
+        // Đếm số điều kiện được truyền vào
         int conditionCount = 0;
-        boolean hasIdCondition = (id != null && id > 0);
-        boolean hasFirstNameCondition = (firstName != null && !firstName.trim().isEmpty());
-        boolean hasLastNameCondition = (lastName != null && !lastName.trim().isEmpty());
-        boolean hasAgeCondition = (age != null && age > 0);
-        boolean hasGenderCondition = (gender != null);
-        boolean hasGraduateCondition = (graduate != null); // Boolean có thể null
+        boolean hasIdCondition = id != null;
+        boolean hasFirstNameCondition = firstName != null;
+        boolean hasLastNameCondition = lastName != null;
+        boolean hasAgeCondition = age != null;
+        boolean hasGenderCondition = gender != null;
+        boolean hasGraduateCondition = graduate != null;
         
         if (hasIdCondition) conditionCount++;
         if (hasFirstNameCondition) conditionCount++;
@@ -268,12 +268,14 @@ public class StudentServiceImp implements StudentService {
             if (hasIdCondition && studentEntity.getId() == id) {
                 matchedConditions++;
             }
-            if (hasFirstNameCondition && studentEntity.getFirstName() != null && firstName != null &&
-                studentEntity.getFirstName().toLowerCase().contains(firstName.toLowerCase())) {
+            if (hasFirstNameCondition && studentEntity.getFirstName() != null &&
+                studentEntity.getFirstName().toLowerCase().contains(firstName.toLowerCase())
+            ) {
                 matchedConditions++;
             }
-            if (hasLastNameCondition && studentEntity.getLastName() != null && lastName != null &&
-                studentEntity.getLastName().toLowerCase().contains(lastName.toLowerCase())) {
+            if (hasLastNameCondition && studentEntity.getLastName() != null &&
+                studentEntity.getLastName().toLowerCase().contains(lastName.toLowerCase())
+            ) {
                 matchedConditions++;
             }
             if (hasAgeCondition && studentEntity.getAge() == age) {

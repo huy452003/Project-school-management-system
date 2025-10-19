@@ -19,6 +19,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.model_shared.enums.Gender;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -79,68 +81,6 @@ public class TeacherServiceImp implements TeacherService {
         loggingService.logInfo("Save cache to Redis : " + TEACHERS_CACHE_KEY, logContext);
 
         return teacherModels;
-    }
-
-    @Override
-    public PagedResponseModel<TeacherModel> getsPaged(PagedRequestModel pagedRequest) {
-        LogContext logContext = getLogContext("getsPaged");
-        
-        String cacheKey = String.format("teachers:paged:page=%d:size=%d:sort=%s:%s", 
-            pagedRequest.getPage(), 
-            pagedRequest.getSize(), 
-            pagedRequest.getSortBy(), 
-            pagedRequest.getSortDirection());
-            
-        Object cached = redisTemplate.opsForValue().get(cacheKey);
-        if(cached != null){
-            loggingService.logInfo("Get paged data from Redis cache : " + cacheKey, logContext);
-            PagedResponseModel<TeacherModel> cachedPaged = objectMapper.convertValue(cached, 
-                    objectMapper.getTypeFactory().constructParametricType(
-                        PagedResponseModel.class, TeacherModel.class));
-            return cachedPaged;
-        }
-
-        loggingService.logWarn("Not found paged cache, query DB", logContext);
-
-        Sort sort = Sort.by(
-            "asc".equalsIgnoreCase(pagedRequest.getSortDirection()) ? Sort.Direction.ASC : Sort.Direction.DESC
-            ,pagedRequest.getSortBy()
-        );
-
-        Pageable pageable = PageRequest.of(
-            pagedRequest.getPage(),
-            pagedRequest.getSize(),
-            sort
-        );
-
-        Page<TeacherEntity> teacherPage = teacherRepo.findAll(pageable);
-        if(teacherPage.isEmpty()){
-            loggingService.logWarn("Not found teachers in database", logContext);
-            throw new NotFoundExceptionHandle(
-                "", 
-                List.of(String.valueOf(pageable.getPageNumber())), 
-                "TeacherModel");
-        }
-        List<TeacherModel> teacherModels = new ArrayList<>();
-        for(TeacherEntity teacherEntity : teacherPage.getContent()){
-            TeacherModel teacherModel = modelMapper.map(teacherEntity, TeacherModel.class);
-            teacherModels.add(teacherModel);
-            loggingService.logTeacherOperation("GET_PAGED", teacherEntity.getId(), logContext);
-        }
-
-        PagedResponseModel<TeacherModel> pagedResponse = new PagedResponseModel<>(
-            teacherModels,
-            pageable.getPageNumber(),
-            pageable.getPageSize(),
-            teacherPage.getTotalElements()
-        );
-
-        loggingService.logInfo("Gets Paged Teachers Successfully", logContext);
-
-        redisTemplate.opsForValue().set(cacheKey, pagedResponse, 30, TimeUnit.SECONDS);
-        loggingService.logInfo("Save paged cache to Redis : " + cacheKey, logContext);
-
-        return pagedResponse;
     }
 
     @Override
@@ -219,4 +159,126 @@ public class TeacherServiceImp implements TeacherService {
         
         return true;
     }
+
+    @Override
+    public PagedResponseModel<TeacherModel> getsPaged(PagedRequestModel pagedRequest) {
+        LogContext logContext = getLogContext("getsPaged");
+        
+        String cacheKey = String.format("teachers:paged:page=%d:size=%d:sort=%s:%s", 
+            pagedRequest.getPage(), 
+            pagedRequest.getSize(), 
+            pagedRequest.getSortBy(), 
+            pagedRequest.getSortDirection());
+            
+        Object cached = redisTemplate.opsForValue().get(cacheKey);
+        if(cached != null){
+            loggingService.logInfo("Get paged data from Redis cache : " + cacheKey, logContext);
+            PagedResponseModel<TeacherModel> cachedPaged = objectMapper.convertValue(cached, 
+                    objectMapper.getTypeFactory().constructParametricType(
+                        PagedResponseModel.class, TeacherModel.class));
+            return cachedPaged;
+        }
+
+        loggingService.logWarn("Not found paged cache, query DB", logContext);
+
+        Sort sort = Sort.by(
+            "asc".equalsIgnoreCase(pagedRequest.getSortDirection()) ? Sort.Direction.ASC : Sort.Direction.DESC
+            ,pagedRequest.getSortBy()
+        );
+
+        Pageable pageable = PageRequest.of(
+            pagedRequest.getPage(),
+            pagedRequest.getSize(),
+            sort
+        );
+
+        Page<TeacherEntity> teacherPage = teacherRepo.findAll(pageable);
+        if(teacherPage.isEmpty()){
+            loggingService.logWarn("Not found teachers in database", logContext);
+            throw new NotFoundExceptionHandle(
+                "", 
+                List.of(String.valueOf(pageable.getPageNumber())), 
+                "TeacherModel");
+        }
+        List<TeacherModel> teacherModels = new ArrayList<>();
+        for(TeacherEntity teacherEntity : teacherPage.getContent()){
+            TeacherModel teacherModel = modelMapper.map(teacherEntity, TeacherModel.class);
+            teacherModels.add(teacherModel);
+            loggingService.logTeacherOperation("GET_PAGED", teacherEntity.getId(), logContext);
+        }
+
+        PagedResponseModel<TeacherModel> pagedResponse = new PagedResponseModel<>(
+            teacherModels,
+            pageable.getPageNumber(),
+            pageable.getPageSize(),
+            teacherPage.getTotalElements()
+        );
+
+        loggingService.logInfo("Gets Paged Teachers Successfully", logContext);
+
+        redisTemplate.opsForValue().set(cacheKey, pagedResponse, 30, TimeUnit.SECONDS);
+        loggingService.logInfo("Save paged cache to Redis : " + cacheKey, logContext);
+
+        return pagedResponse;
+    }
+
+    @Override
+    public List<TeacherModel> filter(Integer id, String firstName, String lastName, Integer age, Gender gender) {
+        LogContext logContext = getLogContext("filter");
+
+        int conditionCount = 0;
+        boolean hasIdCondition = id != null;
+        boolean hasFirstNameCondition = firstName != null;
+        boolean hasLastNameCondition = lastName != null;
+        boolean hasAgeCondition = age != null;
+        boolean hasGenderCondition = gender != null;
+
+        if (hasIdCondition) conditionCount++;
+        if (hasFirstNameCondition) conditionCount++;
+        if (hasLastNameCondition) conditionCount++;
+        if (hasAgeCondition) conditionCount++;
+        if (hasGenderCondition) conditionCount++;
+
+        loggingService.logInfo("Filtering with " + conditionCount + " conditions", logContext);
+
+        List<TeacherModel> teacherModels = new ArrayList<>();
+        List<TeacherEntity> teacherEntities = teacherRepo.findAll();
+
+        if (teacherEntities.isEmpty()) {
+            loggingService.logWarn("No teachers found in database", logContext);
+            throw new NotFoundExceptionHandle("", Collections.emptyList(), "TeacherModel");
+        }
+
+        for(TeacherEntity teacherEntity : teacherEntities){
+            int matchedConditions = 0;
+            if (hasIdCondition && teacherEntity.getId() == id) {
+                matchedConditions++;
+            }
+            if (hasFirstNameCondition && teacherEntity.getFirstName() != null &&
+                teacherEntity.getFirstName().toLowerCase().contains(firstName.toLowerCase())
+            ) {
+                matchedConditions++;
+            }
+            if (hasLastNameCondition && teacherEntity.getLastName() != null &&
+                teacherEntity.getLastName().toLowerCase().contains(lastName.toLowerCase())
+            ) {
+                matchedConditions++;
+            }
+            if (hasAgeCondition && teacherEntity.getAge() == age) {
+                matchedConditions++;
+            }
+            if (hasGenderCondition && teacherEntity.getGender() == gender) {
+                matchedConditions++;
+            }
+            if (matchedConditions == conditionCount) {
+                teacherModels.add(modelMapper.map(teacherEntity, TeacherModel.class));
+            }
+        }
+
+        loggingService.logInfo("Filter Teachers Successfully. Found " + teacherModels.size() + " teachers", logContext);
+        
+        return teacherModels;     
+    }
+
 }
+

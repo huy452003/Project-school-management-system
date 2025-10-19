@@ -12,7 +12,6 @@ public class TeacherEvent extends KafkaMessage implements EventMetadata {
     private String fullName;
     private String action; // CREATED, UPDATED, DELETED
     
-    // Constructor để gọi parent constructor
     public TeacherEvent(String eventType, String source, String destination) {
         super(eventType, source, destination);
     }

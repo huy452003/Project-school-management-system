@@ -22,6 +22,7 @@ import org.springframework.context.support.ReloadableResourceBundleMessageSource
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import com.model_shared.enums.Gender;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -66,37 +67,6 @@ public class TeacherController {
                 null,
                 teacherModels
         );
-        return ResponseEntity.status(response.getStatus()).body(response);
-    }
-
-    @GetMapping("/paged")
-    @RequiresAuth(roles = {"ADMIN", "TEACHER"}, permissions = {"TEACHER_READ"})
-    public ResponseEntity<Response<PagedResponseModel<TeacherModel>>> getPaged(
-                @RequestParam(defaultValue = "0") int page,
-                @RequestParam(defaultValue = "3") int size,
-                @RequestParam(defaultValue = "id") String sortBy,
-                @RequestParam(defaultValue = "asc") String sortDirection,
-                @RequestHeader(value = "Accept-Language", defaultValue = "en") String acceptLanguage,
-                @CurrentUser UserDto currentUser)
-    {
-        Locale locale = Locale.forLanguageTag(acceptLanguage);
-        LogContext logContext = getLogContext("getPaged");
-
-        loggingService.logInfo(String.format(
-                "Get paged teachers API called successfully by user: %s - Page: %d, Size: %d, Sort: %s : %s", 
-                currentUser.getUserName(), page, size, sortBy, sortDirection), logContext);
-        
-        PagedRequestModel pagedRequest = new PagedRequestModel(page, size, sortBy, sortDirection);
-        PagedResponseModel<TeacherModel> pagedResponse = teacherServiceImp.getsPaged(pagedRequest);
-
-        Response<PagedResponseModel<TeacherModel>> response = new Response<>(
-                200,
-                messageSource.getMessage("response.message.getSuccess", null, locale),
-                "TeacherModel",
-                null,
-                pagedResponse
-        );
-
         return ResponseEntity.status(response.getStatus()).body(response);
     }
 
@@ -212,6 +182,66 @@ public class TeacherController {
             ));
         }
     }
+
+    @GetMapping("/paged")
+    @RequiresAuth(roles = {"ADMIN", "TEACHER"}, permissions = {"TEACHER_READ"})
+    public ResponseEntity<Response<PagedResponseModel<TeacherModel>>> getPaged(
+                @RequestParam(defaultValue = "0") int page,
+                @RequestParam(defaultValue = "3") int size,
+                @RequestParam(defaultValue = "id") String sortBy,
+                @RequestParam(defaultValue = "asc") String sortDirection,
+                @RequestHeader(value = "Accept-Language", defaultValue = "en") String acceptLanguage,
+                @CurrentUser UserDto currentUser)
+    {
+        Locale locale = Locale.forLanguageTag(acceptLanguage);
+        LogContext logContext = getLogContext("getPaged");
+
+        loggingService.logInfo(String.format(
+                "Get paged teachers API called successfully by user: %s - Page: %d, Size: %d, Sort: %s : %s", 
+                currentUser.getUserName(), page, size, sortBy, sortDirection), logContext);
+        
+        PagedRequestModel pagedRequest = new PagedRequestModel(page, size, sortBy, sortDirection);
+        PagedResponseModel<TeacherModel> pagedResponse = teacherServiceImp.getsPaged(pagedRequest);
+
+        Response<PagedResponseModel<TeacherModel>> response = new Response<>(
+                200,
+                messageSource.getMessage("response.message.getSuccess", null, locale),
+                "TeacherModel",
+                null,
+                pagedResponse
+        );
+
+        return ResponseEntity.status(response.getStatus()).body(response);
+    }
+
+    @GetMapping("/filter")
+    @RequiresAuth(roles = {"ADMIN", "TEACHER"}, permissions = {"TEACHER_READ"})
+    public ResponseEntity<Response<List<TeacherModel>>> filter(
+        @RequestParam(required = false) Integer id,
+        @RequestParam(required = false) String firstName,
+        @RequestParam(required = false) String lastName,
+        @RequestParam(required = false) Integer age,
+        @RequestParam(required = false) Gender gender,
+        @RequestHeader(value = "Accept-Language", defaultValue = "en") String acceptLanguage,
+        @CurrentUser UserDto currentUser
+    ){
+        Locale locale = Locale.forLanguageTag(acceptLanguage);
+        LogContext logContext = getLogContext("filter");
+
+        loggingService.logInfo("Filter teachers API called successfully by user: " + currentUser.getUserName(), logContext);
+        List<TeacherModel> teacherModels = teacherServiceImp.filter(id, firstName, lastName, age, gender);
+        Response<List<TeacherModel>> response = new Response<>(
+                200,
+                messageSource.getMessage("response.message.getSuccess", null, locale),
+                "TeacherModel",
+                null,
+                teacherModels
+        );
+        return ResponseEntity.status(response.getStatus()).body(response);
+    }
+
+
+
 
 //    @PostMapping("/public/teachersAndStudents")
 //    ResponseEntity<Response<?>> createTeachersAndStudents(
