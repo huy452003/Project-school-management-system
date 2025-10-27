@@ -40,7 +40,6 @@ public class NotificationConsumerService {
                 logNotificationFeedback(notification, logContext);
             }
             
-            // Acknowledge message
             acknowledgment.acknowledge();
             
         } catch (Exception e) {
@@ -48,22 +47,17 @@ public class NotificationConsumerService {
         }
     }
 
-    /**
-     * Kiểm tra notification có liên quan đến QLSV không
-     */
+    
+    // Kiểm tra notification có liên quan đến QLSV không
     private boolean isRelevantNotification(NotificationMessage notification) {
-        // Chỉ xử lý student events và từ QLSV
         return "studentEvent".equals(notification.getEntityType()) && 
                "qlsv".equals(notification.getSource());
     }
 
-    /**
-     * Log feedback từ consumer về trạng thái xử lý event
-     */
     private void logNotificationFeedback(NotificationMessage notification, LogContext logContext) {
         switch (notification.getType()) {
             case "SUCCESS":
-                loggingService.logInfo(
+                loggingService.logInfo(        
                     String.format("✅ Student event processed successfully: %s (ID: %s) by %s - Event ID: %s", 
                         notification.getEntityDisplayName(), 
                         notification.getEntityId(), 

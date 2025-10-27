@@ -3,6 +3,9 @@
         {
             "name": "modules-parent",
             "path": "."
+        },
+        {
+            "path": "../my-ts-project"
         }
     ],
     "settings": {

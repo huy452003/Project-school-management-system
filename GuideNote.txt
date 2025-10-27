@@ -124,19 +124,21 @@ Mới (KRaft): Metadata lưu trực tiếp trong Kafka Controller, sử dụng R
 + không nên gọi API khi xử lý message Kafka chỉ nên gọi service xử lý.
 
 - tại thời điểm xác thực user thành công ở authFilter thì có gửi thêm data (không nhạy cảm) sang endpoint ở service khác không?
-+ có thể : nhưng chỉ nên gửi các bất đồng bộ như kafka message tránh làm chậm response
++ có thể : nhưng chỉ nên gửi các bất đồng bộ như kafka message tránh làm chậm response.
+ * làm thêm phần nhận userEvent của các module.
 
-- những cách khác để bảo vệ backend và database ngoài trừ JWToken.
-+ Session-based Authentication (Server-side Sessions)
-    Khái niệm: Server tạo một session ID sau khi login; ID lưu ở cookie.
-    Trạng thái (user, quyền, TTL) lưu trên server (RAM/Redis/DB).
-+ API Keys
-    Khái niệm: Khóa tĩnh gán cho client (header/query).
-    Dùng để nhận diện, đôi khi gắn quota/rate limit.
+
+- Nếu như có 1000 req gửi cùng lúc trong 1s và gửi liên tục trong 5s thì làm cách nào 
+để bảo vệ API, khi mà service die phải làm cách nào để khôi phục ser ngay.
+( tìm giải pháp để bảo vệ API trong tình huống trên và khắc phục hậu quả khi ser die ).
+
 
 - tìm hiểu lại cách làm lại luồng đi của security và các module khác.
 + thay interceptor bằng cách sử dụng AOP , custom annotation để check JWT các method cần 
 bảo vệ , nhưng method không sử dụng annotation thì được xem là public API
+- ss giữa AOP(module security_shared) và SecurityConfig(module security) tôi đã cấu hình.
+để tránh duplicate
+
 
 - xử lý khi consumer nhận message thất bại và thành công thì producer có biết được trạng thái của message không?,
   nếu producer là 1 project frontEnd thì sao liệu producer có thể là project frontEnd?
@@ -151,5 +153,27 @@ bảo vệ , nhưng method không sử dụng annotation thì được xem là p
 
 
 
+* new 26/10/2025, phạm vi : (Spring boot và MySQL).
 
-		
+- lý thuyết + thực hành.
+1/ nghiên cứu vấn đề n+1 trong db, cho ví dụ và giải pháp để giải quyết.
+
+2/ các loại index trong db. Làm ví dụ từng loại và nêu lợi ích, tác hại của nó.
+
+3/ ( cả MySQL và Redis ) xử lý nếu như cùng 1 thời điểm mà có 2 câu lệnh update data thì nên
+làm gì để tránh data không đồng bộ. Khi nào sẽ áp dụng ở redis (Spring boot), MySql (Spring boot).
+
+4/ liệt kê các design pattern tôi đang dùng trong projcet hiện tại và hãy giải thích các design này
+, sau đó gợi ý thêm các design pattern có thể thêm vào được.		
+
+5/ record trong java 17.
+
+- lý thuyết.
+6/ HashMap và ConcurrentHashMap ss cơ chế bên trong.
+
+7/ Set khi thêm 1 phần tử mới nhưng phát hiện đã có trong nó thì Set sẽ không thêm hay remove data cũ thêm mới vô.
+
+8/ ArrayList và LinkedList ss tốc độ truy vấn, thêm, xóa
+hiểu cơ chế hoạt động bên trong.
+
+9/ Tại sao spring boot lại tốt nhất hiện tại? (trả lời + dẫn chứng).

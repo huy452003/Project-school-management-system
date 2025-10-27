@@ -96,7 +96,7 @@ public class StudentServiceImp implements StudentService {
         loggingService.logInfo("Create Students Successfully", logContext);
 
         redisTemplate.delete(STUDENT_CACHE_KEY);
-        loggingService.logInfo("Del cache key = students:all , after create students : " + STUDENT_CACHE_KEY, logContext);
+        loggingService.logInfo("Del cache key: " + STUDENT_CACHE_KEY + " after create students", logContext);
 
         return studentEntities;
     }
@@ -126,7 +126,7 @@ public class StudentServiceImp implements StudentService {
         loggingService.logInfo("Update Students Successfully", logContext);
 
         redisTemplate.delete(STUDENT_CACHE_KEY);
-        loggingService.logInfo("Del cache key = students:all , after update students : " + STUDENT_CACHE_KEY, logContext);
+        loggingService.logInfo("Del cache key: " + STUDENT_CACHE_KEY + " after update students", logContext);
 
         return studentEntities;
     }
@@ -157,7 +157,7 @@ public class StudentServiceImp implements StudentService {
 
 
         redisTemplate.delete(STUDENT_CACHE_KEY);
-        loggingService.logInfo("Del cache key = students:all , after del students : " + STUDENT_CACHE_KEY, logContext);
+        loggingService.logInfo("Del cache key: " + STUDENT_CACHE_KEY + " after del students", logContext);
 
         return true;
     }
@@ -245,10 +245,10 @@ public class StudentServiceImp implements StudentService {
 
         // Đếm số điều kiện được truyền vào
         int conditionCount = 0;
-        boolean hasIdCondition = id != null;
-        boolean hasFirstNameCondition = firstName != null;
-        boolean hasLastNameCondition = lastName != null;
-        boolean hasAgeCondition = age != null;
+        boolean hasIdCondition = (id != null && id > 0);
+        boolean hasFirstNameCondition = (firstName != null && !firstName.trim().isEmpty());
+        boolean hasLastNameCondition = (lastName != null && !lastName.trim().isEmpty());
+        boolean hasAgeCondition = (age != null && age > 0);
         boolean hasGenderCondition = gender != null;
         boolean hasGraduateCondition = graduate != null;
         
@@ -258,6 +258,11 @@ public class StudentServiceImp implements StudentService {
         if (hasAgeCondition) conditionCount++;
         if (hasGenderCondition) conditionCount++;
         if (hasGraduateCondition) conditionCount++;
+
+        if (conditionCount == 0) {
+            loggingService.logWarn("No conditions provided for filtering", logContext);
+            return gets();
+        }
 
         loggingService.logInfo("Filtering with " + conditionCount + " conditions", logContext);
 
@@ -293,13 +298,8 @@ public class StudentServiceImp implements StudentService {
                 studentModels.add(modelMapper.map(studentEntity, StudentModel.class));
             }
         }
-
-        if (studentModels.isEmpty()) {
-            loggingService.logWarn("No students found in database", logContext);
-            throw new NotFoundExceptionHandle("", Collections.emptyList(), "StudentModel");
-        }
         
-        loggingService.logInfo("Filter Students Successfully. Found " + studentModels.size() + " students", logContext);
+        loggingService.logInfo("Filter Students Successfully. Found " + studentModels.size() + " students with the given filters", logContext);
         return studentModels;
     }
 }

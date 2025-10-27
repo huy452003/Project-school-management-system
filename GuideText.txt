@@ -1,0 +1,110 @@
+
+###( Guide Note 172)###
+- Sử dụng HashMap khi:
++ tối ưu cho Single-threaded application
++ Cần performance tối đa
++ Không cần thread safety
++ Có thể chấp nhận null keys/values
+- Sử dụng ConcurrentHashMap khi:
++ tối ưu cho Multi-threaded application
++ có (CAS) là một atomic operation cho phép thay đổi giá trị chỉ khi giá trị hiện tại khớp với giá trị mong đợi.
+ví dụ Chỉ 1 thread thành công, các thread khác retry nên không dẫn đến overwirite data
++ Cần thread safety : Thread Safety là khả năng của code có thể được sử dụng an toàn bởi
+nhiều thread đồng thời mà không gây ra lỗi hoặc hành vi không mong đợi.
++ Read-heavy workloads
++ Cần high concurrency
++ Không thể chấp nhận null keys/values
+
+--> sử dụng HashMap trong Single-threaded để tối ưu performance,
+sử dụng ConcurrentHashMap trong Multi-threaded để đảm bảo data không mất, bị lỗi,...
+            VD:
+* HashMap (UNSAFE) - Lost Data
+// Thread A: map.put("key100", 100)
+// Thread B: map.put("key200", 200)
+// Cả 2 đều hash đến bucket index 5
+
+// Timeline HashMap:
+// Thread A: read table[5] = null
+// Thread B: read table[5] = null  (cùng lúc)
+// Thread A: write table[5] = node100
+// Thread B: write table[5] = node200  (OVERWRITE!)
+
+// Kết quả: "key100" bị mất!
+// map.get("key100") = null
+// map.get("key200") = 200
+
+* ConcurrentHashMap (SAFE) - No Lost Data
+// Thread A: map.put("key100", 100)
+// Thread B: map.put("key200", 200)
+// Cả 2 đều hash đến bucket index 5
+
+// Timeline ConcurrentHashMap:
+// Thread A: casTabAt(table, 5, null, node100) -> true (thành công)
+// Thread B: casTabAt(table, 5, null, node200) -> false (thất bại)
+
+// Thread B retry với synchronized block:
+// Thread B: synchronized(node100) {
+//     // Add node200 vào linked list
+//     node100.next = node200
+// }
+
+// Kết quả: Cả 2 entries đều được lưu!
+// map.get("key100") = 100
+// map.get("key200") = 200
+
+###( Guide Note 174)###
+- Set sẽ bỏ qua phần tử đã tồn tại và trả về false, không thực hiện bất kỳ hành vi nào thêm.
+
+###( Guide Note 176)###
+- tốc độ truy vấn:
++ ArrayList query qua index nên tốc độ cao, còn LinkedList phải query từ đầu
+- thêm,xóa:
++ khi thêm phần tử mới vào đầu hay giữa danh sách ArrayList phải chuyển các phần tử cũ sang phải để nhường chỗ(index) cho
+phần tử Mới
++ vì mỗi data trong LinkedList chứa luôn vị trí (con trỏ) của node đó, chỉ cần thay đổi vị trí con trỏ của các node để thêm mới
+
+- thêm nữa là LinkedList nó có thể thay đổi kích thước và thêm/xóa phần tử mà không ảnh hưởng đến các phần tử khác
+- còn ArrayList khi mở rộng (resize) phải tạo 1 list mới và copy + thay đổi index của các phần 
+
+- LinkedList tự động tạo 2 biến first và last khi khởi tạo danh sách, tự động gắn 2 biến này thành phần tử đầu tiên thêm vào danh sách
+và sẽ tự động gắn lại khi thêm/xóa.
+
+    VD: ArrayList
+[0][1][2][3][4]  <- Thêm vào vị trí 2
+     ↓
+[0][1][X][2][3][4]  <- Phải dịch chuyển 2,3,4 sang phải
+
+// Trước khi thêm X vào vị trí 2
+elementData: [A][B][C][D][E][null][null][null]
+index:        0  1  2  3  4   5    6    7
+
+// Gọi System.arraycopy
+System.arraycopy(elementData, 2, elementData,  3,      3);
+//                   ↑        ↑        ↑       ↑       ↑
+//                  src     srcPos    dest  destPos  length   
+                             (2)              (3)     (3)
+//                   ↑        ↑        ↑       ↑       ↑
+//                  mảng     cắt      dán     dán     độ
+//                   sẽ      tại      vào     vào     dài
+//                  thao    vị trí    mảng    từ       3
+//                  tác       2       cũ     index     3
+
+    VD: LinkedList
+A -> B -> C -> D  <- Thêm X vào giữa B và C
+     ↓
+A -> B -> X -> C -> D  <- Chỉ cập nhật con trỏ B.next và C.prev
+(gắn vị trí phía sau B lúc này là C = X và gắn vị trí phía trước C lúc này là B = X).
+                
+                 Tạo node mới với thông tin đầy đủ
+    Node<E> newNode = new Node<>(current.prev, element, current);
+                            ↑        ↑           ↑        ↑
+                            prev     B           X        C
+    
+    // Cập nhật con trỏ
+    if (current.prev != null) {
+        current.prev.next = newNode;  // B.next = X
+    }
+    current.prev = newNode;  // C.prev = X
+
+--> ArrayList tốt cho truy cập ngẫu nhiên và thêm vào cuối
+    LinkedList tốt cho thao tác đầu/cuối/giữa và cấu trúc Queue/Stack

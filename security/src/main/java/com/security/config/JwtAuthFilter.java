@@ -67,12 +67,12 @@ public class JwtAuthFilter extends OncePerRequestFilter {
                 // nếu là public endpoint thì skip jwt validation,
                 // vì JwtAuthFilter chạy trước nên xử lý thêm ở đây sẽ hiệu quả hơn
 
-         if (isPublicEndpoint(request.getRequestURI())) {
+        if (isPublicEndpoint(request.getRequestURI())) {
              loggingService.logDebug("Skipping JWT validation for public endpoint: "+ request.getRequestURI()
                      , logContext);
              filterChain.doFilter(request, response);
              return;
-         }
+        }
 
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
             loggingService.logDebug("No Authorization header or not Bearer token for: " + request.getRequestURI()

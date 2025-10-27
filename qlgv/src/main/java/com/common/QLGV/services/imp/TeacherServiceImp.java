@@ -98,7 +98,7 @@ public class TeacherServiceImp implements TeacherService {
         loggingService.logInfo("Create Teachers Successfully", logContext);
 
         redisTemplate.delete(TEACHERS_CACHE_KEY);
-        loggingService.logInfo("Del cache key = teachers:all , after create teachers : " + TEACHERS_CACHE_KEY, logContext);
+        loggingService.logInfo("Del cache key: " + TEACHERS_CACHE_KEY + " after create teachers", logContext);
 
         return teacherEntities;
     }
@@ -128,7 +128,7 @@ public class TeacherServiceImp implements TeacherService {
         loggingService.logInfo("Update Teacher Successfully", logContext);
 
         redisTemplate.delete(TEACHERS_CACHE_KEY);
-        loggingService.logInfo("Del cache key = teachers:all , after update teachers : " + TEACHERS_CACHE_KEY, logContext);
+        loggingService.logInfo("Del cache key: " + TEACHERS_CACHE_KEY + " after update teachers", logContext);
 
         return teacherEntities;
     }
@@ -155,7 +155,7 @@ public class TeacherServiceImp implements TeacherService {
         loggingService.logInfo("Delete Teacher Successfully", logContext);
 
         redisTemplate.delete(TEACHERS_CACHE_KEY);
-        loggingService.logInfo("Del cache key = teachers:all , after delete teachers : " + TEACHERS_CACHE_KEY, logContext);
+        loggingService.logInfo("Del cache key: " + TEACHERS_CACHE_KEY + " after delete teachers", logContext);
         
         return true;
     }
@@ -216,7 +216,7 @@ public class TeacherServiceImp implements TeacherService {
 
         loggingService.logInfo("Gets Paged Teachers Successfully", logContext);
 
-        redisTemplate.opsForValue().set(cacheKey, pagedResponse, 30, TimeUnit.SECONDS);
+        redisTemplate.opsForValue().set(cacheKey, pagedResponse, 300, TimeUnit.SECONDS);
         loggingService.logInfo("Save paged cache to Redis : " + cacheKey, logContext);
 
         return pagedResponse;
@@ -227,10 +227,10 @@ public class TeacherServiceImp implements TeacherService {
         LogContext logContext = getLogContext("filter");
 
         int conditionCount = 0;
-        boolean hasIdCondition = id != null;
-        boolean hasFirstNameCondition = firstName != null;
-        boolean hasLastNameCondition = lastName != null;
-        boolean hasAgeCondition = age != null;
+        boolean hasIdCondition = (id != null && id > 0);
+        boolean hasFirstNameCondition = (firstName != null && !firstName.trim().isEmpty());
+        boolean hasLastNameCondition = (lastName != null && !lastName.trim().isEmpty());
+        boolean hasAgeCondition = (age != null && age > 0);
         boolean hasGenderCondition = gender != null;
 
         if (hasIdCondition) conditionCount++;
@@ -239,13 +239,18 @@ public class TeacherServiceImp implements TeacherService {
         if (hasAgeCondition) conditionCount++;
         if (hasGenderCondition) conditionCount++;
 
+        if (conditionCount == 0) {
+            loggingService.logWarn("No conditions provided for filtering", logContext);
+            return gets();
+        }
+
         loggingService.logInfo("Filtering with " + conditionCount + " conditions", logContext);
 
         List<TeacherModel> teacherModels = new ArrayList<>();
         List<TeacherEntity> teacherEntities = teacherRepo.findAll();
 
         if (teacherEntities.isEmpty()) {
-            loggingService.logWarn("No teachers found in database", logContext);
+            loggingService.logWarn("No teachers found in database with the given filters", logContext);
             throw new NotFoundExceptionHandle("", Collections.emptyList(), "TeacherModel");
         }
 
@@ -256,12 +261,14 @@ public class TeacherServiceImp implements TeacherService {
             }
             if (hasFirstNameCondition && teacherEntity.getFirstName() != null &&
                 teacherEntity.getFirstName().toLowerCase().contains(firstName.toLowerCase())
-            ) {
+            )
+            {
                 matchedConditions++;
             }
             if (hasLastNameCondition && teacherEntity.getLastName() != null &&
                 teacherEntity.getLastName().toLowerCase().contains(lastName.toLowerCase())
-            ) {
+            )
+            {
                 matchedConditions++;
             }
             if (hasAgeCondition && teacherEntity.getAge() == age) {
@@ -275,7 +282,7 @@ public class TeacherServiceImp implements TeacherService {
             }
         }
 
-        loggingService.logInfo("Filter Teachers Successfully. Found " + teacherModels.size() + " teachers", logContext);
+        loggingService.logInfo("Filter Teachers Successfully. Found " + teacherModels.size() + " teachers with the given filters", logContext);
         
         return teacherModels;     
     }

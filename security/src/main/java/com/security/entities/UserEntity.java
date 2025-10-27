@@ -27,7 +27,7 @@ public class UserEntity implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "userName" , unique = true)
+    @Column(name = "userName", unique = true)
     private String userName;
 
     @Column(name = "password")
