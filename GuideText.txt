@@ -108,3 +108,36 @@ A -> B -> X -> C -> D  <- Chỉ cập nhật con trỏ B.next và C.prev
 
 --> ArrayList tốt cho truy cập ngẫu nhiên và thêm vào cuối
     LinkedList tốt cho thao tác đầu/cuối/giữa và cấu trúc Queue/Stack
+
+
+###( Guide Note 179)###
+
+- Auto-configuration & Starters: Giảm cấu hình rườm rà, “bật là chạy” với spring-boot-starter-*.
++ Spring Boot tự đăng ký bean phù hợp.
++ có Spring Security filter chain tối thiểu.
++ tự động cấu hình server mặc định ( tomcat ).
++ Web MVC mặc định: DispatcherServlet, message converters (Jackson), static resources.
++ Logging (Logback) và cấu hình level qua properties `logging.*`.
++ DataSource (Hikari) + JdbcTemplate khi có driver JDBC.
++ JPA/Hibernate: EntityManagerFactory, TransactionManager, DDL auto khi thêm starter JPA.
++ Cache abstraction + provider (Caffeine/Redis/Ehcache) khi có dependency phù hợp.
++ Validation: Hibernate Validator, hỗ trợ `@Valid` cho MVC và beans.
++ Scheduling/Async: `TaskScheduler`, `TaskExecutor` khi bật `@EnableScheduling`/`@EnableAsync`.
++ Cấu hình externalized: profiles, `application-*.properties/yaml`, environment binding `@ConfigurationProperties`.
++ CORS, multipart upload, compression, HTTP/2, graceful shutdown theo `server.*` và `spring.mvc.*`.
+
+- Sẵn sàng cloud-native và observable
++ Tối ưu runtime AOT + GraalVM native image cho startup nhanh, footprint thấp.
++ Đóng gói & cấu hình cloud
+Build OCI image nhanh (buildpacks, layered JAR).
+Externalized config + profiles (application-*.yml, env vars).
+
+- Cộng đồng và tài nguyên: Kho GitHub của Spring Boot có lượng sao, issue, PR, release rất lớn, phản ánh mức độ sử dụng rộng rãi và hoạt động sôi nổi.
+- Spring Data/Security/Validation/Batch: Xử lý CRUD, bảo mật, validation, batch job theo chuẩn thống nhất, hạn chế code nền.0
+
+
+
+
+
+
+

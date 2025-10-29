@@ -128,16 +128,9 @@ Mới (KRaft): Metadata lưu trực tiếp trong Kafka Controller, sử dụng R
  * làm thêm phần nhận userEvent của các module.
 
 
-- Nếu như có 1000 req gửi cùng lúc trong 1s và gửi liên tục trong 5s thì làm cách nào 
-để bảo vệ API, khi mà service die phải làm cách nào để khôi phục ser ngay.
-( tìm giải pháp để bảo vệ API trong tình huống trên và khắc phục hậu quả khi ser die ).
-
-
 - tìm hiểu lại cách làm lại luồng đi của security và các module khác.
 + thay interceptor bằng cách sử dụng AOP , custom annotation để check JWT các method cần 
 bảo vệ , nhưng method không sử dụng annotation thì được xem là public API
-- ss giữa AOP(module security_shared) và SecurityConfig(module security) tôi đã cấu hình.
-để tránh duplicate
 
 
 - xử lý khi consumer nhận message thất bại và thành công thì producer có biết được trạng thái của message không?,
@@ -155,6 +148,13 @@ bảo vệ , nhưng method không sử dụng annotation thì được xem là p
 
 * new 26/10/2025, phạm vi : (Spring boot và MySQL).
 
+- ss giữa AOP(module security_shared) và SecurityConfig(module security) tôi đã cấu hình.
+để tránh duplicate.
+
+- Nếu như có 1000 req gửi cùng lúc trong 1s và gửi liên tục trong 5s thì làm cách nào 
+để bảo vệ API, khi mà service die phải làm cách nào để khôi phục ser ngay.
+( tìm giải pháp để bảo vệ API trong tình huống trên và khắc phục hậu quả khi ser die ).
+
 - lý thuyết + thực hành.
 1/ nghiên cứu vấn đề n+1 trong db, cho ví dụ và giải pháp để giải quyết.
 
@@ -169,11 +169,11 @@ làm gì để tránh data không đồng bộ. Khi nào sẽ áp dụng ở red
 5/ record trong java 17.
 
 - lý thuyết.
-6/ HashMap và ConcurrentHashMap ss cơ chế bên trong.
+6/ HashMap và ConcurrentHashMap ss cơ chế bên trong.    =
 
-7/ Set khi thêm 1 phần tử mới nhưng phát hiện đã có trong nó thì Set sẽ không thêm hay remove data cũ thêm mới vô.
+7/ Set khi thêm 1 phần tử mới nhưng phát hiện đã có trong nó thì Set sẽ không thêm hay remove data cũ thêm mới vô.  =
 
-8/ ArrayList và LinkedList ss tốc độ truy vấn, thêm, xóa
+8/ ArrayList và LinkedList ss tốc độ truy vấn, thêm, xóa    =
 hiểu cơ chế hoạt động bên trong.
 
-9/ Tại sao spring boot lại tốt nhất hiện tại? (trả lời + dẫn chứng).
+9/ Tại sao spring boot lại tốt nhất hiện tại? (trả lời + dẫn chứng).    =

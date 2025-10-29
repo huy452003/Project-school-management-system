@@ -1,4 +1,4 @@
-package com.security.entities;
+package com.security.enums;
 
 public enum Permission {
     STUDENT_READ,

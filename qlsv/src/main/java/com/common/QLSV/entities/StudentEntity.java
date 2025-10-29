@@ -1,10 +1,7 @@
 package com.common.QLSV.entities;
 
-import com.model_shared.enums.Gender;
 import jakarta.persistence.*;
 import lombok.*;
-
-import java.time.LocalDate;
 
 @Entity
 @Table(name = "Students")
@@ -13,24 +10,15 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @ToString
-public class StudentEntity {
+public class StudentEntity{
     @Id
-    @Column(name ="id")
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    @Column(name = "user_name", unique = true)
-    private String userName;
-    @Column(name ="firstName")
-    private String firstName;
-    @Column(name ="lastName")
-    private String lastName;
-    @Column(name ="age")
-    private int age;
-    @Enumerated(EnumType.STRING)
-    @Column(name = "gender")
-    private Gender gender;
-    @Column(name ="birth")
-    private LocalDate birth;
+    private Integer id;
+
+    @Column(name = "user_id", nullable = false, unique = true)
+    private Integer userId;
+    
     @Column(name ="graduate")
-    private boolean graduate;
+    private Boolean graduate;
 }

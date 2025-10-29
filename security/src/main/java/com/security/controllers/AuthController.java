@@ -48,7 +48,7 @@ public class AuthController {
     private LogContext getLogContext(String methodName) {
         return LogContext.builder()
                 .module("security")
-                .className(this.getClass().getName())
+                .className(this.getClass().getSimpleName())
                 .methodName(methodName)
                 .build();
     }
@@ -164,17 +164,19 @@ public class AuthController {
                     () -> new NotFoundExceptionHandle("", List.of(username), "Security-Model")
             );
 
-            UserDto userDto = UserDto.builder()
-                .id(user.getId())
-                .userName(user.getUsername())
-                .firstName(user.getFirstName())
-                .lastName(user.getLastName())
-                .role(user.getRole().name())
-                .permissions(user.getPermissions().stream()
+            UserDto userDto = new UserDto();
+            userDto.setUserId(user.getUserId());
+            userDto.setUserName(user.getUsername());
+            userDto.setFirstName(user.getFirstName());
+            userDto.setLastName(user.getLastName());
+            userDto.setAge(user.getAge());
+            userDto.setGender(user.getGender());
+            userDto.setBirth(user.getBirth());
+            userDto.setRole(user.getRole().name());
+            userDto.setPermissions(user.getPermissions().stream()
                     .map(Enum::name)
-                    .collect(Collectors.toList()))
-                .enabled(user.isEnabled())
-                .build();
+                    .collect(Collectors.toList()));
+            userDto.setEnabled(user.isEnabled());
 
             Response<UserDto> response = new Response<>(
                     200,

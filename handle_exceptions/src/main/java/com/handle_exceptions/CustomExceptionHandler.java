@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import com.fasterxml.jackson.databind.exc.MismatchedInputException;
 import com.model_shared.models.Response;
-import com.model_shared.models.teacher.TeacherModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -65,10 +64,10 @@ public class CustomExceptionHandler {
         Map<String, String> errors = new LinkedHashMap<>();
         ex.getBindingResult().getFieldErrors().forEach(fe -> {
             String key = fe.getDefaultMessage();
-            if (key.startsWith("{") && key.endsWith("}")) {
+            if (key != null && key.startsWith("{") && key.endsWith("}")) {
                 key = key.substring(1, key.length() - 1);
             }
-            String msg = messageSource.getMessage(key, null, key, locale);
+            String msg = messageSource.getMessage(key != null ? key : fe.getField(), null, key != null ? key : fe.getField(), locale);
             errors.put(fe.getField(), msg);
         });
 
@@ -84,10 +83,11 @@ public class CustomExceptionHandler {
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(HttpMessageNotReadableException.class)
-    public ResponseEntity<Response<TeacherModel>> handleInvalidFormat(HttpMessageNotReadableException ex) {
+    public ResponseEntity<Response<?>> handleInvalidFormat(HttpMessageNotReadableException ex) {
         Locale locale = LocaleContextHolder.getLocale();
         Map<String, String> errors = new HashMap<>();
         Throwable cause = ex.getMostSpecificCause();
+        String modelName = "Request-Model"; // Generic model name instead of hardcoded TeacherModel
 
         if (cause instanceof InvalidFormatException || cause instanceof MismatchedInputException) {
             List<JsonMappingException.Reference> path = ((JsonMappingException) cause).getPath();
@@ -104,10 +104,10 @@ public class CustomExceptionHandler {
 
         }
 
-        Response<TeacherModel> response = new Response<>(
+        Response<?> response = new Response<>(
                 400,
                 messageSource.getMessage("response.error.validateFailed", null, locale),
-                "TeacherModel",
+                modelName,
                 errors,
                 null
         );

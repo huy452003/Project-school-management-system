@@ -5,9 +5,9 @@ import com.handle_exceptions.ForbiddenExceptionHandle;
 import com.handle_exceptions.NotFoundExceptionHandle;
 import com.handle_exceptions.UnauthorizedExceptionHandle;
 import com.security.config.JwtConfig;
-import com.security.entities.Permission;
-import com.security.entities.Role;
 import com.security.entities.UserEntity;
+import com.security.enums.Permission;
+import com.security.enums.Role;
 import com.security.models.Login;
 import com.security.models.Register;
 import com.security.models.SecurityResponse;
@@ -18,9 +18,9 @@ import com.logging.models.LogContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -47,6 +47,8 @@ public class AuthService {
     LoggingService loggingService;
     @Autowired
     BlacklistService blacklistService;
+    @Autowired
+    ProfileOrchestrationService profileOrchestrationService;
 
 
     private LogContext getLogContext(String methodName) {
@@ -63,6 +65,7 @@ public class AuthService {
         return expirationTime.format(formatter);
     }
 
+    @Transactional(rollbackFor = Exception.class)
     public SecurityResponse register(Register request){
         LogContext logContext = getLogContext("register");
         logContext.setUserId(request.getUsername());
@@ -82,10 +85,14 @@ public class AuthService {
 
         Role userRole = Role.valueOf(request.getRole().toUpperCase());
         UserEntity user = UserEntity.builder()
+                .type(request.getType())
                 .userName(request.getUsername())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .firstName(request.getFirstName())
                 .lastName(request.getLastName())
+                .age(request.getAge())
+                .gender(request.getGender())
+                .birth(request.getBirth())
                 .role(userRole)
                 .permissions(convertToPermissions(request.getPermissions(), userRole))
                 .enabled(true)
@@ -95,6 +102,8 @@ public class AuthService {
                 .build();
 
         userRepo.save(user);
+
+        profileOrchestrationService.createProfile(user, request);
 
         // Tạo custom claims cho token
         Map<String, Object> claim = new HashMap<>();
@@ -107,7 +116,11 @@ public class AuthService {
         String refreshToken = jwtService.generateRefreshToken(claim, user);
 
         return SecurityResponse.builder()
+                .userId(user.getUserId())
                 .userName(user.getUsername())
+                .age(user.getAge())
+                .gender(user.getGender())
+                .birth(user.getBirth())
                 .role(user.getRole().name())
                 .permissions(user.getPermissions().stream()
                         .map(Enum::name)
@@ -164,7 +177,11 @@ public class AuthService {
         String refreshToken = jwtService.generateRefreshToken(claim, user);
 
         return SecurityResponse.builder()
+                .userId(user.getUserId())
                 .userName(user.getUsername())
+                .age(user.getAge())
+                .gender(user.getGender())
+                .birth(user.getBirth())
                 .role(user.getRole().name())
                 .permissions(user.getPermissions().stream()
                         .map(Enum::name)
@@ -229,7 +246,11 @@ public class AuthService {
         String newAccessToken = jwtService.generateToken(accessClaims, user);
 
         return SecurityResponse.builder()
+                .userId(user.getUserId())
                 .userName(user.getUsername())
+                .age(user.getAge())
+                .gender(user.getGender())
+                .birth(user.getBirth())
                 .role(user.getRole().name())
                 .permissions(user.getPermissions().stream()
                         .map(Enum::name)

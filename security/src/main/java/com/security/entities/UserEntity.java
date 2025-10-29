@@ -10,6 +10,12 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.model_shared.enums.Gender;
+import com.security.enums.Permission;
+import com.security.enums.Role;
+import com.security.enums.Type;
+
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
@@ -18,16 +24,20 @@ import java.util.HashSet;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@Builder    
 @Entity
 @Table(name = "users")
 public class UserEntity implements UserDetails {
     @Id
-    @Column(name = "id")
+    @Column(name = "user_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer userId;
 
-    @Column(name = "userName", unique = true)
+    @Enumerated(EnumType.STRING)
+    @Column(name = "type")
+    private Type type;
+
+    @Column(name = "user_name", unique = true)
     private String userName;
 
     @Column(name = "password")
@@ -39,7 +49,18 @@ public class UserEntity implements UserDetails {
     @Column(name = "last_name")
     private String lastName;
 
+    @Column(name ="age")
+    private Integer age;
+
     @Enumerated(EnumType.STRING)
+    @Column(name = "gender")
+    private Gender gender;
+
+    @Column(name ="birth")
+    private LocalDate birth;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "role")
     private Role role;
 
     @ElementCollection(targetClass = Permission.class, fetch = FetchType.EAGER)
