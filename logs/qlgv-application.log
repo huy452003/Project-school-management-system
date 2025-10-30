@@ -1,425 +1,123 @@
-2025-10-11 14:40:31 [background-preinit] DEBUG [logging] - Logging Provider: org.jboss.logging.Slf4jLoggerProvider found via system property
-2025-10-11 14:40:31 [main] INFO  [QlgvApplicationTests] - Starting QlgvApplicationTests using Java 17.0.16 with PID 13760 (started by tranhuy in d:\project IntelliJ Ultimate\modules-parent\qlgv)
-2025-10-11 14:40:31 [main] DEBUG [QlgvApplicationTests] - Running with Spring Boot v3.5.0, Spring v6.2.7
-2025-10-11 14:40:31 [main] INFO  [QlgvApplicationTests] - No active profile set, falling back to 1 default profile: "default"
-2025-10-11 14:40:35 [main] WARN  [HikariConfig] - HikariPool-1 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
-2025-10-11 14:40:36 [main] WARN  [deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-10-11 14:40:36 [main] WARN  [deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
-2025-10-11 14:40:38 [main] WARN  [JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-10-11 14:40:38 [main] DEBUG [Mappings] - 
+2025-10-30 14:56:03 [background-preinit] DEBUG [logging] - Logging Provider: org.jboss.logging.Slf4jLoggerProvider found via system property
+2025-10-30 14:56:03 [main] INFO  [QlgvApplicationTests] - Starting QlgvApplicationTests using Java 17.0.16 with PID 7616 (started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlgv)
+2025-10-30 14:56:03 [main] DEBUG [QlgvApplicationTests] - Running with Spring Boot v3.5.0, Spring v6.2.7
+2025-10-30 14:56:03 [main] INFO  [QlgvApplicationTests] - No active profile set, falling back to 1 default profile: "default"
+2025-10-30 14:56:08 [main] WARN  [HikariConfig] - HikariPool-1 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
+2025-10-30 14:56:08 [main] WARN  [deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-10-30 14:56:08 [main] WARN  [deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-10-30 14:56:12 [main] WARN  [JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-10-30 14:56:12 [main] DEBUG [Mappings] - 
 	c.c.Q.c.RedisController:
 	{GET [/redis/value/{key}]}: getValue(String)
-	{GET [/redis/list/{key}]}: getList(String)
-	{GET [/redis/keys]}: getAllKeys()
-	{GET [/redis/keys/{pattern}]}: getKeysByPattern(String)
-	{GET [/redis/set/{key}]}: getSet(String)
+	{GET [/redis/hash/{key}]}: getHash(String)
 	{GET [/redis/ttl/{key}]}: getTTL(String)
-	{GET [/redis/info]}: getRedisInfo()
 	{GET [/redis/zset/{key}]}: getZSet(String)
 	{DELETE [/redis/keys]}: deleteAllKeys()
+	{GET [/redis/keys/{pattern}]}: getKeysByPattern(String)
+	{GET [/redis/set/{key}]}: getSet(String)
 	{DELETE [/redis/key/{key}]}: deleteKey(String)
-	{GET [/redis/hash/{key}]}: getHash(String)
+	{GET [/redis/keys]}: getAllKeys()
+	{GET [/redis/info]}: getRedisInfo()
+	{GET [/redis/list/{key}]}: getList(String)
 	{GET [/redis/type/{key}]}: getKeyType(String)
-2025-10-11 14:40:39 [main] DEBUG [Mappings] - 
+2025-10-30 14:56:12 [main] DEBUG [Mappings] - 
 	c.c.Q.c.TeacherController:
 	{POST [/teachers]}: add(CreateTeacherModelRequest,String,UserDto)
 	{GET [/teachers]}: get(String,UserDto)
 	{PUT [/teachers]}: update(TeacherModelRequest,String,UserDto)
+	{GET [/teachers/filter]}: filter(Integer,String,String,Integer,Gender,String,UserDto)
 	{DELETE [/teachers]}: delete(List,String,UserDto)
 	{GET [/teachers/paged]}: getPaged(int,int,String,String,String,UserDto)
 	{GET [/teachers/public/studentsByTeacher]}: getStudentsFromQLSV(String)
-2025-10-11 14:40:39 [main] DEBUG [Mappings] - 
+2025-10-30 14:56:12 [main] DEBUG [Mappings] - 
 	o.s.b.a.w.s.e.BasicErrorController:
 	{ [/error]}: error(HttpServletRequest)
 	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
-2025-10-11 14:40:39 [main] DEBUG [Mappings] - 'beanNameHandlerMapping' {}
-2025-10-11 14:40:39 [main] DEBUG [Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
-2025-10-11 14:40:39 [main] WARN  [ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
-2025-10-11 14:40:39 [main] DEBUG [InternalLoggerFactory] - Using SLF4J as the default logging framework
-2025-10-11 14:40:39 [main] DEBUG [Loggers] - Using Slf4j logging framework
-2025-10-11 14:40:40 [main] INFO  [QlgvApplicationTests] - Started QlgvApplicationTests in 9.746 seconds (process running for 10.945)
-2025-10-11 14:41:02 [background-preinit] DEBUG [logging] - Logging Provider: org.jboss.logging.Slf4jLoggerProvider found via system property
-2025-10-11 14:41:02 [restartedMain] INFO  [QlgvApplication] - Starting QlgvApplication using Java 17.0.16 with PID 5536 (D:\project IntelliJ Ultimate\modules-parent\qlgv\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlgv)
-2025-10-11 14:41:02 [restartedMain] DEBUG [QlgvApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
-2025-10-11 14:41:02 [restartedMain] INFO  [QlgvApplication] - No active profile set, falling back to 1 default profile: "default"
-2025-10-11 14:41:09 [restartedMain] DEBUG [InternalLoggerFactory] - Using SLF4J as the default logging framework
-2025-10-11 14:41:11 [restartedMain] WARN  [HikariConfig] - HikariPool-1 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
-2025-10-11 14:41:13 [restartedMain] WARN  [deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-10-11 14:41:13 [restartedMain] WARN  [deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
-2025-10-11 14:41:27 [restartedMain] WARN  [JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-10-11 14:41:28 [restartedMain] DEBUG [Mappings] - 
+2025-10-30 14:56:12 [main] DEBUG [Mappings] - 'beanNameHandlerMapping' {}
+2025-10-30 14:56:12 [main] DEBUG [Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
+2025-10-30 14:56:12 [main] WARN  [ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2025-10-30 14:56:12 [main] DEBUG [InternalLoggerFactory] - Using SLF4J as the default logging framework
+2025-10-30 14:56:12 [main] DEBUG [Loggers] - Using Slf4j logging framework
+2025-10-30 14:56:14 [main] INFO  [QlgvApplicationTests] - Started QlgvApplicationTests in 10.709 seconds (process running for 11.94)
+2025-10-30 16:43:10 [background-preinit] DEBUG [logging] - Logging Provider: org.jboss.logging.Slf4jLoggerProvider found via system property
+2025-10-30 16:43:10 [main] INFO  [QlgvApplicationTests] - Starting QlgvApplicationTests using Java 17.0.16 with PID 16948 (started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlgv)
+2025-10-30 16:43:10 [main] DEBUG [QlgvApplicationTests] - Running with Spring Boot v3.5.0, Spring v6.2.7
+2025-10-30 16:43:10 [main] INFO  [QlgvApplicationTests] - No active profile set, falling back to 1 default profile: "default"
+2025-10-30 16:43:15 [main] WARN  [HikariConfig] - HikariPool-1 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
+2025-10-30 16:43:15 [main] WARN  [deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-10-30 16:43:15 [main] WARN  [deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-10-30 16:43:18 [main] WARN  [JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-10-30 16:43:18 [main] DEBUG [Mappings] - 
 	c.c.Q.c.RedisController:
 	{GET [/redis/value/{key}]}: getValue(String)
 	{GET [/redis/hash/{key}]}: getHash(String)
-	{GET [/redis/type/{key}]}: getKeyType(String)
-	{GET [/redis/keys]}: getAllKeys()
-	{GET [/redis/keys/{pattern}]}: getKeysByPattern(String)
-	{GET [/redis/list/{key}]}: getList(String)
-	{GET [/redis/set/{key}]}: getSet(String)
-	{GET [/redis/zset/{key}]}: getZSet(String)
-	{GET [/redis/ttl/{key}]}: getTTL(String)
-	{GET [/redis/info]}: getRedisInfo()
 	{DELETE [/redis/key/{key}]}: deleteKey(String)
 	{DELETE [/redis/keys]}: deleteAllKeys()
-2025-10-11 14:41:28 [restartedMain] DEBUG [Mappings] - 
+	{GET [/redis/zset/{key}]}: getZSet(String)
+	{GET [/redis/list/{key}]}: getList(String)
+	{GET [/redis/ttl/{key}]}: getTTL(String)
+	{GET [/redis/set/{key}]}: getSet(String)
+	{GET [/redis/info]}: getRedisInfo()
+	{GET [/redis/keys]}: getAllKeys()
+	{GET [/redis/keys/{pattern}]}: getKeysByPattern(String)
+	{GET [/redis/type/{key}]}: getKeyType(String)
+2025-10-30 16:43:19 [main] DEBUG [Mappings] - 
 	c.c.Q.c.TeacherController:
 	{POST [/teachers]}: add(CreateTeacherModelRequest,String,UserDto)
 	{GET [/teachers]}: get(String,UserDto)
 	{PUT [/teachers]}: update(TeacherModelRequest,String,UserDto)
+	{GET [/teachers/filter]}: filter(Integer,String,String,Integer,Gender,String,UserDto)
 	{DELETE [/teachers]}: delete(List,String,UserDto)
-	{GET [/teachers/public/studentsByTeacher]}: getStudentsFromQLSV(String)
 	{GET [/teachers/paged]}: getPaged(int,int,String,String,String,UserDto)
-2025-10-11 14:41:28 [restartedMain] DEBUG [Mappings] - 
+	{GET [/teachers/public/studentsByTeacher]}: getStudentsFromQLSV(String)
+2025-10-30 16:43:19 [main] DEBUG [Mappings] - 
 	o.s.b.a.w.s.e.BasicErrorController:
 	{ [/error]}: error(HttpServletRequest)
 	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
-2025-10-11 14:41:28 [restartedMain] DEBUG [Mappings] - 'beanNameHandlerMapping' {}
-2025-10-11 14:41:28 [restartedMain] DEBUG [Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
-2025-10-11 14:41:29 [restartedMain] WARN  [ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
-2025-10-11 14:41:29 [restartedMain] DEBUG [Loggers] - Using Slf4j logging framework
-2025-10-11 14:41:32 [restartedMain] INFO  [QlgvApplication] - Started QlgvApplication in 30.265 seconds (process running for 31.347)
-2025-10-11 14:42:15 [http-nio-8081-exec-4] WARN  [ExceptionHandlerExceptionResolver] - Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource teachers/pages.]
-2025-10-11 14:42:36 [http-nio-8081-exec-5] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Calling security module with URL: http://localhost:8083/auth/validate to validate token
-2025-10-11 14:42:36 [http-nio-8081-exec-5] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Successfully retrieved user from security module: HuyTea1
-2025-10-11 14:42:36 [http-nio-8081-exec-5] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - User HuyTea1 successfully authorized
-2025-10-11 14:42:36 [http-nio-8081-exec-5] DEBUG [LoggingServiceImp] - [security_shared] RequiresAuthAspect - User HuyTea1 successfully authorized for method: getPaged with roles: ADMIN, TEACHER and permissions: TEACHER_READ
-2025-10-11 14:42:45 [http-nio-8081-exec-5] INFO  [LoggingServiceImp] - [qlgv] TeacherController - Get paged teachers API called successfully by user: HuyTea1 - Page: 0, Size: 3, Sort: id asc
-2025-10-11 14:43:49 [http-nio-8081-exec-5] WARN  [LoggingServiceImp] - [qlgv] TeacherServiceImp - Not found paged cache, query DB
-2025-10-11 14:43:51 [Thread-8] WARN  [NioEndpoint] - The executor associated with thread pool [http-nio-8081] has not fully shutdown. Some application threads may still be running.
-2025-10-11 14:43:53 [restartedMain] INFO  [QlgvApplication] - Starting QlgvApplication using Java 17.0.16 with PID 5536 (D:\project IntelliJ Ultimate\modules-parent\qlgv\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlgv)
-2025-10-11 14:43:53 [restartedMain] DEBUG [QlgvApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
-2025-10-11 14:43:53 [restartedMain] INFO  [QlgvApplication] - No active profile set, falling back to 1 default profile: "default"
-2025-10-11 14:43:55 [restartedMain] WARN  [HikariConfig] - HikariPool-2 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
-2025-10-11 14:43:55 [restartedMain] WARN  [deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-10-11 14:43:55 [restartedMain] WARN  [deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
-2025-10-11 14:43:55 [restartedMain] WARN  [AnnotationConfigServletWebServerApplicationContext] - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'teacherController' defined in file [D:\project IntelliJ Ultimate\modules-parent\qlgv\target\classes\com\common\QLGV\controllers\TeacherController.class]: Failed to instantiate [com.common.QLGV.controllers.TeacherController]: Constructor threw exception
-2025-10-11 14:43:55 [restartedMain] ERROR [SpringApplication] - Application run failed
-org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'teacherController' defined in file [D:\project IntelliJ Ultimate\modules-parent\qlgv\target\classes\com\common\QLGV\controllers\TeacherController.class]: Failed to instantiate [com.common.QLGV.controllers.TeacherController]: Constructor threw exception
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateBean(AbstractAutowireCapableBeanFactory.java:1357) ~[spring-beans-6.2.7.jar:6.2.7]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1242) ~[spring-beans-6.2.7.jar:6.2.7]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:569) ~[spring-beans-6.2.7.jar:6.2.7]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:529) ~[spring-beans-6.2.7.jar:6.2.7]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:339) ~[spring-beans-6.2.7.jar:6.2.7]
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:373) ~[spring-beans-6.2.7.jar:6.2.7]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:337) ~[spring-beans-6.2.7.jar:6.2.7]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202) ~[spring-beans-6.2.7.jar:6.2.7]
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.instantiateSingleton(DefaultListableBeanFactory.java:1222) ~[spring-beans-6.2.7.jar:6.2.7]
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingleton(DefaultListableBeanFactory.java:1188) ~[spring-beans-6.2.7.jar:6.2.7]
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:1123) ~[spring-beans-6.2.7.jar:6.2.7]
-	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:987) ~[spring-context-6.2.7.jar:6.2.7]
-	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:627) ~[spring-context-6.2.7.jar:6.2.7]
-	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146) ~[spring-boot-3.5.0.jar:3.5.0]
-	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:753) ~[spring-boot-3.5.0.jar:3.5.0]
-	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:439) ~[spring-boot-3.5.0.jar:3.5.0]
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:318) ~[spring-boot-3.5.0.jar:3.5.0]
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1362) ~[spring-boot-3.5.0.jar:3.5.0]
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1351) ~[spring-boot-3.5.0.jar:3.5.0]
-	at com.common.QLGV.QlgvApplication.main(QlgvApplication.java:18) ~[classes/:na]
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
-	at java.base/java.lang.reflect.Method.invoke(Method.java:569) ~[na:na]
-	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50) ~[spring-boot-devtools-3.5.0.jar:3.5.0]
-Caused by: org.springframework.beans.BeanInstantiationException: Failed to instantiate [com.common.QLGV.controllers.TeacherController]: Constructor threw exception
-	at org.springframework.beans.BeanUtils.instantiateClass(BeanUtils.java:222) ~[spring-beans-6.2.7.jar:6.2.7]
-	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:122) ~[spring-beans-6.2.7.jar:6.2.7]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateBean(AbstractAutowireCapableBeanFactory.java:1351) ~[spring-beans-6.2.7.jar:6.2.7]
-	... 24 common frames omitted
-Caused by: java.lang.Error: Unresolved compilation problems: 
-	The type com.common.QLGV.entities.TeacherEntity cannot be resolved. It is indirectly referenced from required type com.common.QLGV.services.imp.TeacherServiceImp
-	The import com.common.QLGV.entities.TeacherEntity cannot be resolved
-	The import com.common.QLGV.services.imp.StudentClientServiceImp cannot be resolved
-	StudentClientServiceImp cannot be resolved to a type
-	TeacherEntity cannot be resolved to a type
-	The method creates(List<CreateTeacherModel>) from the type TeacherServiceImp refers to the missing type TeacherEntity
-	TeacherEntity cannot be resolved to a type
-	The method updates(List<TeacherModel>) from the type TeacherServiceImp refers to the missing type TeacherEntity
-	StudentClientServiceImp cannot be resolved to a type
-
-	at com.common.QLGV.controllers.TeacherController.<init>(TeacherController.java:1) ~[classes/:na]
-	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method) ~[na:na]
-	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:77) ~[na:na]
-	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45) ~[na:na]
-	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:500) ~[na:na]
-	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:481) ~[na:na]
-	at org.springframework.beans.BeanUtils.instantiateClass(BeanUtils.java:196) ~[spring-beans-6.2.7.jar:6.2.7]
-	... 26 common frames omitted
-2025-10-11 14:44:11 [http-nio-8081-exec-5] WARN  [ExceptionHandlerExceptionResolver] - Resolved [org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'org.redisson.spring.starter.RedissonAutoConfigurationV2': Unsatisfied dependency expressed through field 'redissonProperties': Error creating bean with name 'spring.redis.redisson-org.redisson.spring.starter.RedissonProperties': Could not bind properties to 'RedissonProperties' : prefix=spring.redis.redisson, ignoreInvalidFields=false, ignoreUnknownFields=true]
-2025-10-11 14:44:58 [background-preinit] DEBUG [logging] - Logging Provider: org.jboss.logging.Slf4jLoggerProvider found via system property
-2025-10-11 14:44:58 [restartedMain] INFO  [QlgvApplication] - Starting QlgvApplication using Java 17.0.16 with PID 15752 (D:\project IntelliJ Ultimate\modules-parent\qlgv\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlgv)
-2025-10-11 14:44:58 [restartedMain] DEBUG [QlgvApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
-2025-10-11 14:44:58 [restartedMain] INFO  [QlgvApplication] - No active profile set, falling back to 1 default profile: "default"
-2025-10-11 14:45:03 [restartedMain] DEBUG [InternalLoggerFactory] - Using SLF4J as the default logging framework
-2025-10-11 14:45:04 [restartedMain] WARN  [HikariConfig] - HikariPool-1 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
-2025-10-11 14:45:05 [restartedMain] WARN  [deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-10-11 14:45:05 [restartedMain] WARN  [deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
-2025-10-11 14:45:09 [restartedMain] WARN  [JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-10-11 14:45:10 [restartedMain] DEBUG [Mappings] - 
+2025-10-30 16:43:19 [main] DEBUG [Mappings] - 'beanNameHandlerMapping' {}
+2025-10-30 16:43:19 [main] DEBUG [Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
+2025-10-30 16:43:19 [main] WARN  [ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2025-10-30 16:43:19 [main] DEBUG [InternalLoggerFactory] - Using SLF4J as the default logging framework
+2025-10-30 16:43:19 [main] DEBUG [Loggers] - Using Slf4j logging framework
+2025-10-30 16:43:20 [main] INFO  [QlgvApplicationTests] - Started QlgvApplicationTests in 10.192 seconds (process running for 11.306)
+2025-10-30 17:21:05 [background-preinit] DEBUG [logging] - Logging Provider: org.jboss.logging.Slf4jLoggerProvider found via system property
+2025-10-30 17:21:05 [main] INFO  [QlgvApplicationTests] - Starting QlgvApplicationTests using Java 17.0.16 with PID 16208 (started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlgv)
+2025-10-30 17:21:05 [main] DEBUG [QlgvApplicationTests] - Running with Spring Boot v3.5.0, Spring v6.2.7
+2025-10-30 17:21:05 [main] INFO  [QlgvApplicationTests] - No active profile set, falling back to 1 default profile: "default"
+2025-10-30 17:21:09 [main] WARN  [HikariConfig] - HikariPool-1 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
+2025-10-30 17:21:10 [main] WARN  [deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-10-30 17:21:10 [main] WARN  [deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-10-30 17:21:12 [main] WARN  [JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-10-30 17:21:12 [main] DEBUG [Mappings] - 
 	c.c.Q.c.RedisController:
 	{GET [/redis/value/{key}]}: getValue(String)
 	{GET [/redis/hash/{key}]}: getHash(String)
+	{GET [/redis/type/{key}]}: getKeyType(String)
+	{GET [/redis/ttl/{key}]}: getTTL(String)
 	{GET [/redis/list/{key}]}: getList(String)
 	{GET [/redis/zset/{key}]}: getZSet(String)
 	{GET [/redis/keys]}: getAllKeys()
 	{GET [/redis/set/{key}]}: getSet(String)
-	{GET [/redis/keys/{pattern}]}: getKeysByPattern(String)
-	{GET [/redis/ttl/{key}]}: getTTL(String)
-	{DELETE [/redis/keys]}: deleteAllKeys()
-	{DELETE [/redis/key/{key}]}: deleteKey(String)
 	{GET [/redis/info]}: getRedisInfo()
-	{GET [/redis/type/{key}]}: getKeyType(String)
-2025-10-11 14:45:10 [restartedMain] DEBUG [Mappings] - 
+	{DELETE [/redis/key/{key}]}: deleteKey(String)
+	{DELETE [/redis/keys]}: deleteAllKeys()
+	{GET [/redis/keys/{pattern}]}: getKeysByPattern(String)
+2025-10-30 17:21:12 [main] DEBUG [Mappings] - 
 	c.c.Q.c.TeacherController:
 	{POST [/teachers]}: add(CreateTeacherModelRequest,String,UserDto)
 	{GET [/teachers]}: get(String,UserDto)
 	{PUT [/teachers]}: update(TeacherModelRequest,String,UserDto)
+	{GET [/teachers/filter]}: filter(Integer,String,String,Integer,Gender,String,UserDto)
 	{DELETE [/teachers]}: delete(List,String,UserDto)
-	{GET [/teachers/public/studentsByTeacher]}: getStudentsFromQLSV(String)
 	{GET [/teachers/paged]}: getPaged(int,int,String,String,String,UserDto)
-2025-10-11 14:45:10 [restartedMain] DEBUG [Mappings] - 
+	{GET [/teachers/public/studentsByTeacher]}: getStudentsFromQLSV(String)
+2025-10-30 17:21:13 [main] DEBUG [Mappings] - 
 	o.s.b.a.w.s.e.BasicErrorController:
 	{ [/error]}: error(HttpServletRequest)
 	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
-2025-10-11 14:45:10 [restartedMain] DEBUG [Mappings] - 'beanNameHandlerMapping' {}
-2025-10-11 14:45:10 [restartedMain] DEBUG [Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
-2025-10-11 14:45:10 [restartedMain] WARN  [ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
-2025-10-11 14:45:10 [restartedMain] DEBUG [Loggers] - Using Slf4j logging framework
-2025-10-11 14:45:12 [restartedMain] INFO  [QlgvApplication] - Started QlgvApplication in 15.188 seconds (process running for 16.122)
-2025-10-11 14:47:25 [background-preinit] DEBUG [logging] - Logging Provider: org.jboss.logging.Slf4jLoggerProvider found via system property
-2025-10-11 14:47:25 [restartedMain] INFO  [QlgvApplication] - Starting QlgvApplication using Java 17.0.16 with PID 13980 (D:\project IntelliJ Ultimate\modules-parent\qlgv\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlgv)
-2025-10-11 14:47:25 [restartedMain] DEBUG [QlgvApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
-2025-10-11 14:47:25 [restartedMain] INFO  [QlgvApplication] - No active profile set, falling back to 1 default profile: "default"
-2025-10-11 14:47:29 [restartedMain] DEBUG [InternalLoggerFactory] - Using SLF4J as the default logging framework
-2025-10-11 14:47:31 [restartedMain] WARN  [HikariConfig] - HikariPool-1 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
-2025-10-11 14:47:31 [restartedMain] WARN  [deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-10-11 14:47:31 [restartedMain] WARN  [deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
-2025-10-11 14:47:36 [restartedMain] WARN  [JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-10-11 14:47:36 [restartedMain] DEBUG [Mappings] - 
-	c.c.Q.c.RedisController:
-	{GET [/redis/value/{key}]}: getValue(String)
-	{GET [/redis/hash/{key}]}: getHash(String)
-	{GET [/redis/keys/{pattern}]}: getKeysByPattern(String)
-	{GET [/redis/keys]}: getAllKeys()
-	{GET [/redis/set/{key}]}: getSet(String)
-	{DELETE [/redis/key/{key}]}: deleteKey(String)
-	{DELETE [/redis/keys]}: deleteAllKeys()
-	{GET [/redis/zset/{key}]}: getZSet(String)
-	{GET [/redis/ttl/{key}]}: getTTL(String)
-	{GET [/redis/info]}: getRedisInfo()
-	{GET [/redis/list/{key}]}: getList(String)
-	{GET [/redis/type/{key}]}: getKeyType(String)
-2025-10-11 14:47:36 [restartedMain] DEBUG [Mappings] - 
-	c.c.Q.c.TeacherController:
-	{POST [/teachers]}: add(CreateTeacherModelRequest,String,UserDto)
-	{GET [/teachers]}: get(String,UserDto)
-	{PUT [/teachers]}: update(TeacherModelRequest,String,UserDto)
-	{DELETE [/teachers]}: delete(List,String,UserDto)
-	{GET [/teachers/public/studentsByTeacher]}: getStudentsFromQLSV(String)
-	{GET [/teachers/paged]}: getPaged(int,int,String,String,String,UserDto)
-2025-10-11 14:47:36 [restartedMain] DEBUG [Mappings] - 
-	o.s.b.a.w.s.e.BasicErrorController:
-	{ [/error]}: error(HttpServletRequest)
-	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
-2025-10-11 14:47:36 [restartedMain] DEBUG [Mappings] - 'beanNameHandlerMapping' {}
-2025-10-11 14:47:36 [restartedMain] DEBUG [Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
-2025-10-11 14:47:36 [restartedMain] WARN  [ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
-2025-10-11 14:47:36 [restartedMain] DEBUG [Loggers] - Using Slf4j logging framework
-2025-10-11 14:47:38 [restartedMain] INFO  [QlgvApplication] - Started QlgvApplication in 14.149 seconds (process running for 15.155)
-2025-10-11 14:47:47 [http-nio-8081-exec-1] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Calling security module with URL: http://localhost:8083/auth/validate to validate token
-2025-10-11 14:47:47 [http-nio-8081-exec-1] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Successfully retrieved user from security module: HuyTea1
-2025-10-11 14:47:47 [http-nio-8081-exec-1] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - User HuyTea1 successfully authorized
-2025-10-11 14:47:47 [http-nio-8081-exec-1] DEBUG [LoggingServiceImp] - [security_shared] RequiresAuthAspect - User HuyTea1 successfully authorized for method: getPaged with roles: ADMIN, TEACHER and permissions: TEACHER_READ
-2025-10-11 14:47:52 [http-nio-8081-exec-1] INFO  [LoggingServiceImp] - [qlgv] TeacherController - Get paged teachers API called successfully by user: HuyTea1 - Page: 0, Size: 3, Sort: id : asc
-2025-10-11 14:48:03 [http-nio-8081-exec-1] WARN  [LoggingServiceImp] - [qlgv] TeacherServiceImp - Not found paged cache, query DB
-2025-10-11 14:48:59 [http-nio-8081-exec-1] INFO  [LoggingServiceImp] - [qlgv] TeacherServiceImp - Teacher ID: 1, Operation: GET_PAGED
-2025-10-11 14:49:05 [http-nio-8081-exec-1] INFO  [LoggingServiceImp] - [qlgv] TeacherServiceImp - Gets Paged Teachers Successfully
-2025-10-11 14:49:11 [http-nio-8081-exec-1] INFO  [LoggingServiceImp] - [qlgv] TeacherServiceImp - Save paged cache to Redis : teachers:paged:page=0:size=3:sort=id:asc
-2025-10-11 14:50:01 [http-nio-8081-exec-4] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Calling security module with URL: http://localhost:8083/auth/validate to validate token
-2025-10-11 14:50:01 [http-nio-8081-exec-4] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Successfully retrieved user from security module: HuyTea1
-2025-10-11 14:50:01 [http-nio-8081-exec-4] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - User HuyTea1 successfully authorized
-2025-10-11 14:50:01 [http-nio-8081-exec-4] DEBUG [LoggingServiceImp] - [security_shared] RequiresAuthAspect - User HuyTea1 successfully authorized for method: add with roles: ADMIN, TEACHER and permissions: TEACHER_WRITE
-2025-10-11 14:50:01 [http-nio-8081-exec-4] INFO  [LoggingServiceImp] - [qlgv] TeacherController - Create teachers API called successfully by user : HuyTea1
-2025-10-11 14:50:01 [http-nio-8081-exec-4] INFO  [LoggingServiceImp] - [qlgv] TeacherServiceImp - Teacher ID: 0, Operation: CREATE
-2025-10-11 14:50:01 [http-nio-8081-exec-4] INFO  [LoggingServiceImp] - [qlgv] TeacherServiceImp - Create Teachers Successfully
-2025-10-11 14:50:01 [http-nio-8081-exec-4] INFO  [LoggingServiceImp] - [qlgv] TeacherServiceImp - Del cache key = teachers:all , after create teachers : teachers:all
-2025-10-11 14:50:11 [background-preinit] DEBUG [logging] - Logging Provider: org.jboss.logging.Slf4jLoggerProvider found via system property
-2025-10-11 14:50:11 [restartedMain] INFO  [QlgvApplication] - Starting QlgvApplication using Java 17.0.16 with PID 10524 (D:\project IntelliJ Ultimate\modules-parent\qlgv\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlgv)
-2025-10-11 14:50:11 [restartedMain] DEBUG [QlgvApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
-2025-10-11 14:50:11 [restartedMain] INFO  [QlgvApplication] - No active profile set, falling back to 1 default profile: "default"
-2025-10-11 14:50:17 [restartedMain] DEBUG [InternalLoggerFactory] - Using SLF4J as the default logging framework
-2025-10-11 14:50:19 [restartedMain] WARN  [HikariConfig] - HikariPool-1 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
-2025-10-11 14:50:20 [restartedMain] WARN  [deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-10-11 14:50:20 [restartedMain] WARN  [deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
-2025-10-11 14:50:24 [restartedMain] WARN  [JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-10-11 14:50:24 [restartedMain] DEBUG [Mappings] - 
-	c.c.Q.c.RedisController:
-	{GET [/redis/value/{key}]}: getValue(String)
-	{GET [/redis/hash/{key}]}: getHash(String)
-	{GET [/redis/list/{key}]}: getList(String)
-	{GET [/redis/zset/{key}]}: getZSet(String)
-	{GET [/redis/keys/{pattern}]}: getKeysByPattern(String)
-	{GET [/redis/ttl/{key}]}: getTTL(String)
-	{GET [/redis/set/{key}]}: getSet(String)
-	{GET [/redis/keys]}: getAllKeys()
-	{GET [/redis/info]}: getRedisInfo()
-	{DELETE [/redis/keys]}: deleteAllKeys()
-	{DELETE [/redis/key/{key}]}: deleteKey(String)
-	{GET [/redis/type/{key}]}: getKeyType(String)
-2025-10-11 14:50:24 [restartedMain] DEBUG [Mappings] - 
-	c.c.Q.c.TeacherController:
-	{POST [/teachers]}: add(CreateTeacherModelRequest,String,UserDto)
-	{GET [/teachers]}: get(String,UserDto)
-	{PUT [/teachers]}: update(TeacherModelRequest,String,UserDto)
-	{DELETE [/teachers]}: delete(List,String,UserDto)
-	{GET [/teachers/public/studentsByTeacher]}: getStudentsFromQLSV(String)
-	{GET [/teachers/paged]}: getPaged(int,int,String,String,String,UserDto)
-2025-10-11 14:50:24 [restartedMain] DEBUG [Mappings] - 
-	o.s.b.a.w.s.e.BasicErrorController:
-	{ [/error]}: error(HttpServletRequest)
-	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
-2025-10-11 14:50:24 [restartedMain] DEBUG [Mappings] - 'beanNameHandlerMapping' {}
-2025-10-11 14:50:24 [restartedMain] DEBUG [Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
-2025-10-11 14:50:24 [restartedMain] WARN  [ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
-2025-10-11 14:50:24 [restartedMain] DEBUG [Loggers] - Using Slf4j logging framework
-2025-10-11 14:50:26 [restartedMain] INFO  [QlgvApplication] - Started QlgvApplication in 16.486 seconds (process running for 17.315)
-2025-10-11 14:50:30 [http-nio-8081-exec-3] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Calling security module with URL: http://localhost:8083/auth/validate to validate token
-2025-10-11 14:50:30 [http-nio-8081-exec-3] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Successfully retrieved user from security module: HuyTea1
-2025-10-11 14:50:30 [http-nio-8081-exec-3] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - User HuyTea1 successfully authorized
-2025-10-11 14:50:30 [http-nio-8081-exec-3] DEBUG [LoggingServiceImp] - [security_shared] RequiresAuthAspect - User HuyTea1 successfully authorized for method: add with roles: ADMIN, TEACHER and permissions: TEACHER_WRITE
-2025-10-11 14:50:30 [http-nio-8081-exec-3] INFO  [LoggingServiceImp] - [qlgv] TeacherController - Create teachers API called successfully by user : HuyTea1
-2025-10-11 14:50:30 [http-nio-8081-exec-3] INFO  [LoggingServiceImp] - [qlgv] TeacherServiceImp - Teacher ID: 0, Operation: CREATE
-2025-10-11 14:50:30 [http-nio-8081-exec-3] INFO  [LoggingServiceImp] - [qlgv] TeacherServiceImp - Create Teachers Successfully
-2025-10-11 14:50:30 [http-nio-8081-exec-3] INFO  [LoggingServiceImp] - [qlgv] TeacherServiceImp - Del cache key = teachers:all , after create teachers : teachers:all
-2025-10-11 14:50:34 [http-nio-8081-exec-1] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Calling security module with URL: http://localhost:8083/auth/validate to validate token
-2025-10-11 14:50:35 [http-nio-8081-exec-1] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Successfully retrieved user from security module: HuyTea1
-2025-10-11 14:50:35 [http-nio-8081-exec-1] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - User HuyTea1 successfully authorized
-2025-10-11 14:50:35 [http-nio-8081-exec-1] DEBUG [LoggingServiceImp] - [security_shared] RequiresAuthAspect - User HuyTea1 successfully authorized for method: add with roles: ADMIN, TEACHER and permissions: TEACHER_WRITE
-2025-10-11 14:50:35 [http-nio-8081-exec-1] INFO  [LoggingServiceImp] - [qlgv] TeacherController - Create teachers API called successfully by user : HuyTea1
-2025-10-11 14:50:35 [http-nio-8081-exec-1] INFO  [LoggingServiceImp] - [qlgv] TeacherServiceImp - Teacher ID: 0, Operation: CREATE
-2025-10-11 14:50:35 [http-nio-8081-exec-1] INFO  [LoggingServiceImp] - [qlgv] TeacherServiceImp - Create Teachers Successfully
-2025-10-11 14:50:35 [http-nio-8081-exec-1] INFO  [LoggingServiceImp] - [qlgv] TeacherServiceImp - Del cache key = teachers:all , after create teachers : teachers:all
-2025-10-11 14:50:39 [http-nio-8081-exec-4] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Calling security module with URL: http://localhost:8083/auth/validate to validate token
-2025-10-11 14:50:39 [http-nio-8081-exec-4] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Successfully retrieved user from security module: HuyTea1
-2025-10-11 14:50:39 [http-nio-8081-exec-4] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - User HuyTea1 successfully authorized
-2025-10-11 14:50:39 [http-nio-8081-exec-4] DEBUG [LoggingServiceImp] - [security_shared] RequiresAuthAspect - User HuyTea1 successfully authorized for method: add with roles: ADMIN, TEACHER and permissions: TEACHER_WRITE
-2025-10-11 14:50:39 [http-nio-8081-exec-4] INFO  [LoggingServiceImp] - [qlgv] TeacherController - Create teachers API called successfully by user : HuyTea1
-2025-10-11 14:50:39 [http-nio-8081-exec-4] INFO  [LoggingServiceImp] - [qlgv] TeacherServiceImp - Teacher ID: 0, Operation: CREATE
-2025-10-11 14:50:39 [http-nio-8081-exec-4] INFO  [LoggingServiceImp] - [qlgv] TeacherServiceImp - Create Teachers Successfully
-2025-10-11 14:50:39 [http-nio-8081-exec-4] INFO  [LoggingServiceImp] - [qlgv] TeacherServiceImp - Del cache key = teachers:all , after create teachers : teachers:all
-2025-10-11 14:50:45 [http-nio-8081-exec-5] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Calling security module with URL: http://localhost:8083/auth/validate to validate token
-2025-10-11 14:50:45 [http-nio-8081-exec-5] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Successfully retrieved user from security module: HuyTea1
-2025-10-11 14:50:45 [http-nio-8081-exec-5] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - User HuyTea1 successfully authorized
-2025-10-11 14:50:45 [http-nio-8081-exec-5] DEBUG [LoggingServiceImp] - [security_shared] RequiresAuthAspect - User HuyTea1 successfully authorized for method: add with roles: ADMIN, TEACHER and permissions: TEACHER_WRITE
-2025-10-11 14:50:45 [http-nio-8081-exec-5] INFO  [LoggingServiceImp] - [qlgv] TeacherController - Create teachers API called successfully by user : HuyTea1
-2025-10-11 14:50:45 [http-nio-8081-exec-5] INFO  [LoggingServiceImp] - [qlgv] TeacherServiceImp - Teacher ID: 0, Operation: CREATE
-2025-10-11 14:50:45 [http-nio-8081-exec-5] INFO  [LoggingServiceImp] - [qlgv] TeacherServiceImp - Create Teachers Successfully
-2025-10-11 14:50:45 [http-nio-8081-exec-5] INFO  [LoggingServiceImp] - [qlgv] TeacherServiceImp - Del cache key = teachers:all , after create teachers : teachers:all
-2025-10-11 14:50:49 [http-nio-8081-exec-6] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Calling security module with URL: http://localhost:8083/auth/validate to validate token
-2025-10-11 14:50:49 [http-nio-8081-exec-6] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Successfully retrieved user from security module: HuyTea1
-2025-10-11 14:50:49 [http-nio-8081-exec-6] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - User HuyTea1 successfully authorized
-2025-10-11 14:50:49 [http-nio-8081-exec-6] DEBUG [LoggingServiceImp] - [security_shared] RequiresAuthAspect - User HuyTea1 successfully authorized for method: add with roles: ADMIN, TEACHER and permissions: TEACHER_WRITE
-2025-10-11 14:50:49 [http-nio-8081-exec-6] INFO  [LoggingServiceImp] - [qlgv] TeacherController - Create teachers API called successfully by user : HuyTea1
-2025-10-11 14:50:49 [http-nio-8081-exec-6] INFO  [LoggingServiceImp] - [qlgv] TeacherServiceImp - Teacher ID: 0, Operation: CREATE
-2025-10-11 14:50:49 [http-nio-8081-exec-6] INFO  [LoggingServiceImp] - [qlgv] TeacherServiceImp - Create Teachers Successfully
-2025-10-11 14:50:49 [http-nio-8081-exec-6] INFO  [LoggingServiceImp] - [qlgv] TeacherServiceImp - Del cache key = teachers:all , after create teachers : teachers:all
-2025-10-11 14:50:53 [http-nio-8081-exec-8] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Calling security module with URL: http://localhost:8083/auth/validate to validate token
-2025-10-11 14:50:53 [http-nio-8081-exec-8] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Successfully retrieved user from security module: HuyTea1
-2025-10-11 14:50:53 [http-nio-8081-exec-8] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - User HuyTea1 successfully authorized
-2025-10-11 14:50:53 [http-nio-8081-exec-8] DEBUG [LoggingServiceImp] - [security_shared] RequiresAuthAspect - User HuyTea1 successfully authorized for method: add with roles: ADMIN, TEACHER and permissions: TEACHER_WRITE
-2025-10-11 14:50:53 [http-nio-8081-exec-8] INFO  [LoggingServiceImp] - [qlgv] TeacherController - Create teachers API called successfully by user : HuyTea1
-2025-10-11 14:50:53 [http-nio-8081-exec-8] INFO  [LoggingServiceImp] - [qlgv] TeacherServiceImp - Teacher ID: 0, Operation: CREATE
-2025-10-11 14:50:53 [http-nio-8081-exec-8] INFO  [LoggingServiceImp] - [qlgv] TeacherServiceImp - Create Teachers Successfully
-2025-10-11 14:50:53 [http-nio-8081-exec-8] INFO  [LoggingServiceImp] - [qlgv] TeacherServiceImp - Del cache key = teachers:all , after create teachers : teachers:all
-2025-10-11 14:50:57 [http-nio-8081-exec-7] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Calling security module with URL: http://localhost:8083/auth/validate to validate token
-2025-10-11 14:50:57 [http-nio-8081-exec-7] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Successfully retrieved user from security module: HuyTea1
-2025-10-11 14:50:57 [http-nio-8081-exec-7] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - User HuyTea1 successfully authorized
-2025-10-11 14:50:57 [http-nio-8081-exec-7] DEBUG [LoggingServiceImp] - [security_shared] RequiresAuthAspect - User HuyTea1 successfully authorized for method: add with roles: ADMIN, TEACHER and permissions: TEACHER_WRITE
-2025-10-11 14:50:57 [http-nio-8081-exec-7] INFO  [LoggingServiceImp] - [qlgv] TeacherController - Create teachers API called successfully by user : HuyTea1
-2025-10-11 14:50:57 [http-nio-8081-exec-7] INFO  [LoggingServiceImp] - [qlgv] TeacherServiceImp - Teacher ID: 0, Operation: CREATE
-2025-10-11 14:50:57 [http-nio-8081-exec-7] INFO  [LoggingServiceImp] - [qlgv] TeacherServiceImp - Create Teachers Successfully
-2025-10-11 14:50:57 [http-nio-8081-exec-7] INFO  [LoggingServiceImp] - [qlgv] TeacherServiceImp - Del cache key = teachers:all , after create teachers : teachers:all
-2025-10-11 14:51:02 [http-nio-8081-exec-9] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Calling security module with URL: http://localhost:8083/auth/validate to validate token
-2025-10-11 14:51:02 [http-nio-8081-exec-9] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Successfully retrieved user from security module: HuyTea1
-2025-10-11 14:51:02 [http-nio-8081-exec-9] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - User HuyTea1 successfully authorized
-2025-10-11 14:51:02 [http-nio-8081-exec-9] DEBUG [LoggingServiceImp] - [security_shared] RequiresAuthAspect - User HuyTea1 successfully authorized for method: getPaged with roles: ADMIN, TEACHER and permissions: TEACHER_READ
-2025-10-11 14:51:02 [http-nio-8081-exec-9] INFO  [LoggingServiceImp] - [qlgv] TeacherController - Get paged teachers API called successfully by user: HuyTea1 - Page: 0, Size: 3, Sort: id : asc
-2025-10-11 14:51:02 [http-nio-8081-exec-9] INFO  [LoggingServiceImp] - [qlgv] TeacherServiceImp - Get paged data from Redis cache : teachers:paged:page=0:size=3:sort=id:asc
-2025-10-11 14:51:12 [http-nio-8081-exec-10] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Calling security module with URL: http://localhost:8083/auth/validate to validate token
-2025-10-11 14:51:12 [http-nio-8081-exec-10] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Successfully retrieved user from security module: HuyTea1
-2025-10-11 14:51:12 [http-nio-8081-exec-10] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - User HuyTea1 successfully authorized
-2025-10-11 14:51:12 [http-nio-8081-exec-10] DEBUG [LoggingServiceImp] - [security_shared] RequiresAuthAspect - User HuyTea1 successfully authorized for method: getPaged with roles: ADMIN, TEACHER and permissions: TEACHER_READ
-2025-10-11 14:51:12 [http-nio-8081-exec-10] INFO  [LoggingServiceImp] - [qlgv] TeacherController - Get paged teachers API called successfully by user: HuyTea1 - Page: 0, Size: 3, Sort: id : asc
-2025-10-11 14:51:12 [http-nio-8081-exec-10] INFO  [LoggingServiceImp] - [qlgv] TeacherServiceImp - Get paged data from Redis cache : teachers:paged:page=0:size=3:sort=id:asc
-2025-10-11 15:05:30 [background-preinit] DEBUG [logging] - Logging Provider: org.jboss.logging.Slf4jLoggerProvider found via system property
-2025-10-11 15:05:30 [restartedMain] INFO  [QlgvApplication] - Starting QlgvApplication using Java 17.0.16 with PID 6588 (D:\project IntelliJ Ultimate\modules-parent\qlgv\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlgv)
-2025-10-11 15:05:30 [restartedMain] DEBUG [QlgvApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
-2025-10-11 15:05:30 [restartedMain] INFO  [QlgvApplication] - No active profile set, falling back to 1 default profile: "default"
-2025-10-11 15:05:33 [restartedMain] DEBUG [InternalLoggerFactory] - Using SLF4J as the default logging framework
-2025-10-11 15:05:34 [restartedMain] WARN  [HikariConfig] - HikariPool-1 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
-2025-10-11 15:05:35 [restartedMain] WARN  [deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-10-11 15:05:35 [restartedMain] WARN  [deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
-2025-10-11 15:05:38 [restartedMain] WARN  [JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-10-11 15:05:38 [restartedMain] DEBUG [Mappings] - 
-	c.c.Q.c.RedisController:
-	{GET [/redis/keys/{pattern}]}: getKeysByPattern(String)
-	{GET [/redis/set/{key}]}: getSet(String)
-	{GET [/redis/list/{key}]}: getList(String)
-	{GET [/redis/zset/{key}]}: getZSet(String)
-	{GET [/redis/ttl/{key}]}: getTTL(String)
-	{GET [/redis/keys]}: getAllKeys()
-	{GET [/redis/info]}: getRedisInfo()
-	{DELETE [/redis/keys]}: deleteAllKeys()
-	{DELETE [/redis/key/{key}]}: deleteKey(String)
-	{GET [/redis/value/{key}]}: getValue(String)
-	{GET [/redis/hash/{key}]}: getHash(String)
-	{GET [/redis/type/{key}]}: getKeyType(String)
-2025-10-11 15:05:38 [restartedMain] DEBUG [Mappings] - 
-	c.c.Q.c.TeacherController:
-	{GET [/teachers/paged]}: getPaged(int,int,String,String,String,UserDto)
-	{POST [/teachers]}: add(CreateTeacherModelRequest,String,UserDto)
-	{GET [/teachers]}: get(String,UserDto)
-	{PUT [/teachers]}: update(TeacherModelRequest,String,UserDto)
-	{DELETE [/teachers]}: delete(List,String,UserDto)
-	{GET [/teachers/public/studentsByTeacher]}: getStudentsFromQLSV(String)
-2025-10-11 15:05:38 [restartedMain] DEBUG [Mappings] - 
-	o.s.b.a.w.s.e.BasicErrorController:
-	{ [/error]}: error(HttpServletRequest)
-	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
-2025-10-11 15:05:38 [restartedMain] DEBUG [Mappings] - 'beanNameHandlerMapping' {}
-2025-10-11 15:05:38 [restartedMain] DEBUG [Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
-2025-10-11 15:05:38 [restartedMain] WARN  [ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
-2025-10-11 15:05:38 [restartedMain] DEBUG [Loggers] - Using Slf4j logging framework
-2025-10-11 15:05:40 [restartedMain] INFO  [QlgvApplication] - Started QlgvApplication in 10.527 seconds (process running for 11.301)
-2025-10-11 15:06:17 [http-nio-8081-exec-4] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Calling security module with URL: http://localhost:8083/auth/validate to validate token
-2025-10-11 15:06:18 [http-nio-8081-exec-4] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Successfully retrieved user from security module: HuyTea1
-2025-10-11 15:06:18 [http-nio-8081-exec-4] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - User HuyTea1 successfully authorized
-2025-10-11 15:06:18 [http-nio-8081-exec-4] DEBUG [LoggingServiceImp] - [security_shared] RequiresAuthAspect - User HuyTea1 successfully authorized for method: getPaged with roles: ADMIN, TEACHER and permissions: TEACHER_READ
-2025-10-11 15:06:18 [http-nio-8081-exec-4] INFO  [LoggingServiceImp] - [qlgv] TeacherController - Get paged teachers API called successfully by user: HuyTea1 - Page: 0, Size: 3, Sort: id : asc
-2025-10-11 15:06:18 [http-nio-8081-exec-4] WARN  [LoggingServiceImp] - [qlgv] TeacherServiceImp - Not found paged cache, query DB
-2025-10-11 15:06:18 [http-nio-8081-exec-4] INFO  [LoggingServiceImp] - [qlgv] TeacherServiceImp - Teacher ID: 1, Operation: GET_PAGED
-2025-10-11 15:06:18 [http-nio-8081-exec-4] INFO  [LoggingServiceImp] - [qlgv] TeacherServiceImp - Teacher ID: 2, Operation: GET_PAGED
-2025-10-11 15:06:18 [http-nio-8081-exec-4] INFO  [LoggingServiceImp] - [qlgv] TeacherServiceImp - Teacher ID: 3, Operation: GET_PAGED
-2025-10-11 15:06:18 [http-nio-8081-exec-4] INFO  [LoggingServiceImp] - [qlgv] TeacherServiceImp - Gets Paged Teachers Successfully
-2025-10-11 15:06:19 [http-nio-8081-exec-4] INFO  [LoggingServiceImp] - [qlgv] TeacherServiceImp - Save paged cache to Redis : teachers:paged:page=0:size=3:sort=id:asc
-2025-10-11 15:06:37 [http-nio-8081-exec-1] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Calling security module with URL: http://localhost:8083/auth/validate to validate token
-2025-10-11 15:06:37 [http-nio-8081-exec-1] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Successfully retrieved user from security module: HuyTea1
-2025-10-11 15:06:37 [http-nio-8081-exec-1] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - User HuyTea1 successfully authorized
-2025-10-11 15:06:37 [http-nio-8081-exec-1] DEBUG [LoggingServiceImp] - [security_shared] RequiresAuthAspect - User HuyTea1 successfully authorized for method: getPaged with roles: ADMIN, TEACHER and permissions: TEACHER_READ
-2025-10-11 15:06:37 [http-nio-8081-exec-1] INFO  [LoggingServiceImp] - [qlgv] TeacherController - Get paged teachers API called successfully by user: HuyTea1 - Page: 1, Size: 3, Sort: id : asc
-2025-10-11 15:06:37 [http-nio-8081-exec-1] WARN  [LoggingServiceImp] - [qlgv] TeacherServiceImp - Not found paged cache, query DB
-2025-10-11 15:06:37 [http-nio-8081-exec-1] INFO  [LoggingServiceImp] - [qlgv] TeacherServiceImp - Teacher ID: 4, Operation: GET_PAGED
-2025-10-11 15:06:37 [http-nio-8081-exec-1] INFO  [LoggingServiceImp] - [qlgv] TeacherServiceImp - Teacher ID: 5, Operation: GET_PAGED
-2025-10-11 15:06:37 [http-nio-8081-exec-1] INFO  [LoggingServiceImp] - [qlgv] TeacherServiceImp - Teacher ID: 6, Operation: GET_PAGED
-2025-10-11 15:06:37 [http-nio-8081-exec-1] INFO  [LoggingServiceImp] - [qlgv] TeacherServiceImp - Gets Paged Teachers Successfully
-2025-10-11 15:06:37 [http-nio-8081-exec-1] INFO  [LoggingServiceImp] - [qlgv] TeacherServiceImp - Save paged cache to Redis : teachers:paged:page=1:size=3:sort=id:asc
-2025-10-11 15:06:44 [http-nio-8081-exec-3] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Calling security module with URL: http://localhost:8083/auth/validate to validate token
-2025-10-11 15:06:44 [http-nio-8081-exec-3] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Successfully retrieved user from security module: HuyTea1
-2025-10-11 15:06:44 [http-nio-8081-exec-3] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - User HuyTea1 successfully authorized
-2025-10-11 15:06:44 [http-nio-8081-exec-3] DEBUG [LoggingServiceImp] - [security_shared] RequiresAuthAspect - User HuyTea1 successfully authorized for method: getPaged with roles: ADMIN, TEACHER and permissions: TEACHER_READ
-2025-10-11 15:06:44 [http-nio-8081-exec-3] INFO  [LoggingServiceImp] - [qlgv] TeacherController - Get paged teachers API called successfully by user: HuyTea1 - Page: 2, Size: 3, Sort: id : asc
-2025-10-11 15:06:44 [http-nio-8081-exec-3] WARN  [LoggingServiceImp] - [qlgv] TeacherServiceImp - Not found paged cache, query DB
-2025-10-11 15:06:44 [http-nio-8081-exec-3] INFO  [LoggingServiceImp] - [qlgv] TeacherServiceImp - Teacher ID: 7, Operation: GET_PAGED
-2025-10-11 15:06:44 [http-nio-8081-exec-3] INFO  [LoggingServiceImp] - [qlgv] TeacherServiceImp - Teacher ID: 8, Operation: GET_PAGED
-2025-10-11 15:06:44 [http-nio-8081-exec-3] INFO  [LoggingServiceImp] - [qlgv] TeacherServiceImp - Teacher ID: 9, Operation: GET_PAGED
-2025-10-11 15:06:44 [http-nio-8081-exec-3] INFO  [LoggingServiceImp] - [qlgv] TeacherServiceImp - Gets Paged Teachers Successfully
-2025-10-11 15:06:44 [http-nio-8081-exec-3] INFO  [LoggingServiceImp] - [qlgv] TeacherServiceImp - Save paged cache to Redis : teachers:paged:page=2:size=3:sort=id:asc
+2025-10-30 17:21:13 [main] DEBUG [Mappings] - 'beanNameHandlerMapping' {}
+2025-10-30 17:21:13 [main] DEBUG [Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
+2025-10-30 17:21:13 [main] WARN  [ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2025-10-30 17:21:13 [main] DEBUG [InternalLoggerFactory] - Using SLF4J as the default logging framework
+2025-10-30 17:21:13 [main] DEBUG [Loggers] - Using Slf4j logging framework
+2025-10-30 17:21:14 [main] INFO  [QlgvApplicationTests] - Started QlgvApplicationTests in 9.186 seconds (process running for 10.289)

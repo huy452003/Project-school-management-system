@@ -1,33 +1,122 @@
-2025-10-29 20:57:20 [background-preinit] DEBUG [logging] - Logging Provider: org.jboss.logging.Slf4jLoggerProvider found via system property
-2025-10-29 20:57:20 [main] INFO  [SecurityApplication] - Starting SecurityApplication using Java 17.0.16 with PID 11028 (D:\project IntelliJ Ultimate\modules-parent\security\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\security)
-2025-10-29 20:57:20 [main] DEBUG [SecurityApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
-2025-10-29 20:57:20 [main] INFO  [SecurityApplication] - No active profile set, falling back to 1 default profile: "default"
-2025-10-29 20:57:29 [main] DEBUG [InternalLoggerFactory] - Using SLF4J as the default logging framework
-2025-10-29 20:57:32 [main] WARN  [deprecation] - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-10-29 20:57:38 [main] WARN  [JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-10-29 20:57:38 [main] DEBUG [JwtAuthFilter] - Filter 'jwtAuthFilter' configured for use
-2025-10-29 20:57:38 [main] WARN  [AnnotationConfigServletWebServerApplicationContext] - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'authController': Unsatisfied dependency expressed through field 'authService': Error creating bean with name 'authService' defined in file [D:\project IntelliJ Ultimate\modules-parent\security\target\classes\com\security\services\AuthService.class]: Failed to instantiate [com.security.services.AuthService]: Constructor threw exception
-2025-10-29 20:57:38 [main] WARN  [WebappClassLoaderBase] - The web application [ROOT] appears to have started a thread named [Thread-3] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
- java.base@17.0.16/sun.net.dns.ResolverConfigurationImpl.notifyAddrChange0(Native Method)
- java.base@17.0.16/sun.net.dns.ResolverConfigurationImpl$AddressChangeListener.run(ResolverConfigurationImpl.java:176)
-2025-10-29 20:57:38 [main] ERROR [SpringApplication] - Application run failed
-org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'authController': Unsatisfied dependency expressed through field 'authService': Error creating bean with name 'authService' defined in file [D:\project IntelliJ Ultimate\modules-parent\security\target\classes\com\security\services\AuthService.class]: Failed to instantiate [com.security.services.AuthService]: Constructor threw exception
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:788)
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:768)
-	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:146)
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:509)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1459)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:606)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:529)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:339)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:373)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:337)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.instantiateSingleton(DefaultListableBeanFactory.java:1222)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingleton(DefaultListableBeanFactory.java:1188)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:1123)
-	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:987)
-	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:627)
+2025-10-30 14:56:54 [background-preinit] DEBUG [logging] - Logging Provider: org.jboss.logging.Slf4jLoggerProvider found via system property
+2025-10-30 14:56:54 [main] INFO  [SecurityApplication] - Starting SecurityApplication using Java 17.0.16 with PID 6724 (D:\project IntelliJ Ultimate\modules-parent\security\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\security)
+2025-10-30 14:56:54 [main] DEBUG [SecurityApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
+2025-10-30 14:56:54 [main] INFO  [SecurityApplication] - No active profile set, falling back to 1 default profile: "default"
+2025-10-30 14:56:58 [main] DEBUG [InternalLoggerFactory] - Using SLF4J as the default logging framework
+2025-10-30 14:57:01 [main] WARN  [deprecation] - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-10-30 14:57:08 [main] WARN  [JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-10-30 14:57:09 [main] DEBUG [JwtAuthFilter] - Filter 'jwtAuthFilter' configured for use
+2025-10-30 14:57:09 [main] WARN  [InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer] - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2025-10-30 14:57:09 [main] DEBUG [Mappings] - 
+	c.s.c.AuthController:
+	{POST [/auth/register]}: register(Register,String)
+	{POST [/auth/logout]}: logout(String,String)
+	{POST [/auth/login]}: login(Login,String)
+	{POST [/auth/refresh]}: refreshToken(String,String)
+	{GET [/auth/decode]}: decodeToken(String,String)
+	{GET [/auth/validate]}: validateToken(String,String)
+2025-10-30 14:57:09 [main] DEBUG [Mappings] - 
+	o.s.b.a.w.s.e.BasicErrorController:
+	{ [/error]}: error(HttpServletRequest)
+	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
+2025-10-30 14:57:09 [main] DEBUG [Mappings] - 'beanNameHandlerMapping' {}
+2025-10-30 14:57:10 [main] DEBUG [Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
+2025-10-30 14:57:11 [main] DEBUG [Loggers] - Using Slf4j logging framework
+2025-10-30 14:57:13 [main] INFO  [SecurityApplication] - Started SecurityApplication in 19.896 seconds (process running for 20.847)
+2025-10-30 15:13:22 [http-nio-8083-exec-4] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Processing request: /auth/register
+2025-10-30 15:13:23 [http-nio-8083-exec-4] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Skipping JWT validation for public endpoint: /auth/register
+2025-10-30 15:13:35 [http-nio-8083-exec-4] INFO  [LoggingServiceImp] - [security] AuthController - Register API Calling... by user: HuyS2
+2025-10-30 15:13:42 [http-nio-8083-exec-4] INFO  [LoggingServiceImp] - [security] AuthService - Register attempt for username: HuyS2
+2025-10-30 15:14:44 [http-nio-8083-exec-4] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - userEvent sent to topic: user-events - with entity id: [2]
+2025-10-30 15:14:44 [kafka-producer-network-thread | security-producer-1] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - Message sent successfully to topic: user-events, partition: 0, offset: 86, key: [2]
+2025-10-30 15:16:35 [http-nio-8083-exec-4] INFO  [LoggingServiceImp] - [security] AuthController - User registered successfully: HuyS2
+2025-10-30 16:43:56 [background-preinit] DEBUG [logging] - Logging Provider: org.jboss.logging.Slf4jLoggerProvider found via system property
+2025-10-30 16:43:56 [main] INFO  [SecurityApplication] - Starting SecurityApplication using Java 17.0.16 with PID 7092 (D:\project IntelliJ Ultimate\modules-parent\security\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\security)
+2025-10-30 16:43:56 [main] DEBUG [SecurityApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
+2025-10-30 16:43:56 [main] INFO  [SecurityApplication] - No active profile set, falling back to 1 default profile: "default"
+2025-10-30 16:44:00 [main] DEBUG [InternalLoggerFactory] - Using SLF4J as the default logging framework
+2025-10-30 16:44:01 [main] WARN  [deprecation] - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-10-30 16:44:06 [main] WARN  [JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-10-30 16:44:06 [main] DEBUG [JwtAuthFilter] - Filter 'jwtAuthFilter' configured for use
+2025-10-30 16:44:06 [main] WARN  [InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer] - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2025-10-30 16:44:07 [main] DEBUG [Mappings] - 
+	c.s.c.AuthController:
+	{POST [/auth/register]}: register(Register,String)
+	{POST [/auth/logout]}: logout(String,String)
+	{POST [/auth/login]}: login(Login,String)
+	{POST [/auth/refresh]}: refreshToken(String,String)
+	{GET [/auth/decode]}: decodeToken(String,String)
+	{GET [/auth/validate]}: validateToken(String,String)
+2025-10-30 16:44:07 [main] DEBUG [Mappings] - 
+	o.s.b.a.w.s.e.BasicErrorController:
+	{ [/error]}: error(HttpServletRequest)
+	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
+2025-10-30 16:44:07 [main] DEBUG [Mappings] - 'beanNameHandlerMapping' {}
+2025-10-30 16:44:07 [main] DEBUG [Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
+2025-10-30 16:44:08 [main] DEBUG [Loggers] - Using Slf4j logging framework
+2025-10-30 16:44:10 [main] INFO  [SecurityApplication] - Started SecurityApplication in 14.728 seconds (process running for 15.696)
+2025-10-30 16:44:12 [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] WARN  [NetworkClient] - [Consumer clientId=consumer-default-group-1, groupId=default-group] Error while fetching metadata with correlation id 2 : {profile-events=UNKNOWN_TOPIC_OR_PARTITION}
+2025-10-30 16:44:12 [org.springframework.kafka.KafkaListenerEndpointContainer#1-0-C-1] WARN  [NetworkClient] - [Consumer clientId=consumer-default-group-2, groupId=default-group] Error while fetching metadata with correlation id 2 : {user-events-dlq=UNKNOWN_TOPIC_OR_PARTITION}
+2025-10-30 16:44:12 [org.springframework.kafka.KafkaListenerEndpointContainer#1-0-C-1] WARN  [NetworkClient] - [Consumer clientId=consumer-default-group-2, groupId=default-group] Error while fetching metadata with correlation id 8 : {user-events-dlq=UNKNOWN_TOPIC_OR_PARTITION}
+2025-10-30 16:45:29 [http-nio-8083-exec-1] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Processing request: /auth/register
+2025-10-30 16:45:30 [http-nio-8083-exec-1] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Skipping JWT validation for public endpoint: /auth/register
+2025-10-30 16:45:39 [http-nio-8083-exec-1] INFO  [LoggingServiceImp] - [security] AuthController - Register API Calling... by user: HuyS3
+2025-10-30 16:45:41 [http-nio-8083-exec-1] INFO  [LoggingServiceImp] - [security] AuthService - Register attempt for username: HuyS3
+2025-10-30 16:46:07 [http-nio-8083-exec-1] WARN  [SqlExceptionHelper] - SQL Error: 1364, SQLState: HY000
+2025-10-30 16:46:07 [http-nio-8083-exec-1] ERROR [SqlExceptionHelper] - Field 'enabled' doesn't have a default value
+2025-10-30 16:47:02 [background-preinit] DEBUG [logging] - Logging Provider: org.jboss.logging.Slf4jLoggerProvider found via system property
+2025-10-30 16:47:02 [main] INFO  [SecurityApplication] - Starting SecurityApplication using Java 17.0.16 with PID 7648 (D:\project IntelliJ Ultimate\modules-parent\security\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\security)
+2025-10-30 16:47:02 [main] DEBUG [SecurityApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
+2025-10-30 16:47:02 [main] INFO  [SecurityApplication] - No active profile set, falling back to 1 default profile: "default"
+2025-10-30 16:47:08 [main] DEBUG [InternalLoggerFactory] - Using SLF4J as the default logging framework
+2025-10-30 16:47:12 [main] WARN  [deprecation] - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-10-30 16:47:16 [main] WARN  [JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-10-30 16:47:17 [main] DEBUG [JwtAuthFilter] - Filter 'jwtAuthFilter' configured for use
+2025-10-30 16:47:17 [main] WARN  [InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer] - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2025-10-30 16:47:17 [main] DEBUG [Mappings] - 
+	c.s.c.AuthController:
+	{POST [/auth/register]}: register(Register,String)
+	{POST [/auth/login]}: login(Login,String)
+	{POST [/auth/refresh]}: refreshToken(String,String)
+	{GET [/auth/decode]}: decodeToken(String,String)
+	{GET [/auth/validate]}: validateToken(String,String)
+	{POST [/auth/logout]}: logout(String,String)
+2025-10-30 16:47:17 [main] DEBUG [Mappings] - 
+	o.s.b.a.w.s.e.BasicErrorController:
+	{ [/error]}: error(HttpServletRequest)
+	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
+2025-10-30 16:47:17 [main] DEBUG [Mappings] - 'beanNameHandlerMapping' {}
+2025-10-30 16:47:17 [main] DEBUG [Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
+2025-10-30 16:47:18 [main] DEBUG [Loggers] - Using Slf4j logging framework
+2025-10-30 16:47:20 [main] INFO  [SecurityApplication] - Started SecurityApplication in 19.065 seconds (process running for 19.977)
+2025-10-30 16:48:23 [background-preinit] DEBUG [logging] - Logging Provider: org.jboss.logging.Slf4jLoggerProvider found via system property
+2025-10-30 16:48:23 [main] INFO  [SecurityApplication] - Starting SecurityApplication using Java 17.0.16 with PID 8816 (D:\project IntelliJ Ultimate\modules-parent\security\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\security)
+2025-10-30 16:48:23 [main] DEBUG [SecurityApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
+2025-10-30 16:48:23 [main] INFO  [SecurityApplication] - No active profile set, falling back to 1 default profile: "default"
+2025-10-30 16:48:26 [main] WARN  [AnnotationConfigServletWebServerApplicationContext] - Exception encountered during context initialization - cancelling refresh attempt: java.lang.NoClassDefFoundError: Role
+2025-10-30 16:48:26 [main] ERROR [SpringApplication] - Application run failed
+java.lang.NoClassDefFoundError: Role
+	at java.base/java.lang.Class.getDeclaredMethods0(Native Method)
+	at java.base/java.lang.Class.privateGetDeclaredMethods(Class.java:3402)
+	at java.base/java.lang.Class.privateGetPublicMethods(Class.java:3427)
+	at java.base/java.lang.Class.getMethods(Class.java:2019)
+	at org.springframework.data.util.ReactiveWrappers.usesReactiveType(ReactiveWrappers.java:141)
+	at org.springframework.data.repository.core.support.AbstractRepositoryMetadata.isReactiveRepository(AbstractRepositoryMetadata.java:135)
+	at org.springframework.data.repository.config.RepositoryConfigurationExtensionSupport.useRepositoryConfiguration(RepositoryConfigurationExtensionSupport.java:344)
+	at org.springframework.data.repository.config.RepositoryConfigurationExtensionSupport.getRepositoryConfigurations(RepositoryConfigurationExtensionSupport.java:98)
+	at org.springframework.data.repository.config.RepositoryConfigurationDelegate.registerRepositoriesIn(RepositoryConfigurationDelegate.java:170)
+	at org.springframework.boot.autoconfigure.data.AbstractRepositoryConfigurationSourceSupport.registerBeanDefinitions(AbstractRepositoryConfigurationSourceSupport.java:62)
+	at org.springframework.context.annotation.ConfigurationClassBeanDefinitionReader.lambda$loadBeanDefinitionsFromRegistrars$1(ConfigurationClassBeanDefinitionReader.java:397)
+	at java.base/java.util.LinkedHashMap.forEach(LinkedHashMap.java:721)
+	at org.springframework.context.annotation.ConfigurationClassBeanDefinitionReader.loadBeanDefinitionsFromRegistrars(ConfigurationClassBeanDefinitionReader.java:396)
+	at org.springframework.context.annotation.ConfigurationClassBeanDefinitionReader.loadBeanDefinitionsForConfigurationClass(ConfigurationClassBeanDefinitionReader.java:149)
+	at org.springframework.context.annotation.ConfigurationClassBeanDefinitionReader.loadBeanDefinitions(ConfigurationClassBeanDefinitionReader.java:121)
+	at org.springframework.context.annotation.ConfigurationClassPostProcessor.processConfigBeanDefinitions(ConfigurationClassPostProcessor.java:430)
+	at org.springframework.context.annotation.ConfigurationClassPostProcessor.postProcessBeanDefinitionRegistry(ConfigurationClassPostProcessor.java:290)
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanDefinitionRegistryPostProcessors(PostProcessorRegistrationDelegate.java:349)
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:118)
+	at org.springframework.context.support.AbstractApplicationContext.invokeBeanFactoryPostProcessors(AbstractApplicationContext.java:791)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:609)
 	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
 	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:753)
 	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:439)
@@ -35,243 +124,119 @@ org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1362)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1351)
 	at com.security.SecurityApplication.main(SecurityApplication.java:14)
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'authService' defined in file [D:\project IntelliJ Ultimate\modules-parent\security\target\classes\com\security\services\AuthService.class]: Failed to instantiate [com.security.services.AuthService]: Constructor threw exception
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateBean(AbstractAutowireCapableBeanFactory.java:1357)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1242)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:569)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:529)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:339)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:373)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:337)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1682)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1628)
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:785)
-	... 22 common frames omitted
-Caused by: org.springframework.beans.BeanInstantiationException: Failed to instantiate [com.security.services.AuthService]: Constructor threw exception
-	at org.springframework.beans.BeanUtils.instantiateClass(BeanUtils.java:222)
-	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:122)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateBean(AbstractAutowireCapableBeanFactory.java:1351)
-	... 32 common frames omitted
-Caused by: java.lang.Error: Unresolved compilation problems: 
-	ProfileOrchestrationService cannot be resolved to a type
-	The method getGender() from the type Register refers to the missing type Gender
-	ProfileOrchestrationService cannot be resolved to a type
-	The method getGender() from the type UserEntity refers to the missing type Gender
-	The method getGender() from the type UserEntity refers to the missing type Gender
-	The method getGender() from the type UserEntity refers to the missing type Gender
-
-	at com.security.services.AuthService.<init>(AuthService.java:55)
-	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
-	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:77)
-	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
-	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:500)
-	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:481)
-	at org.springframework.beans.BeanUtils.instantiateClass(BeanUtils.java:196)
-	... 34 common frames omitted
-2025-10-29 20:59:46 [background-preinit] DEBUG [logging] - Logging Provider: org.jboss.logging.Slf4jLoggerProvider found via system property
-2025-10-29 20:59:46 [main] INFO  [SecurityApplication] - Starting SecurityApplication using Java 17.0.16 with PID 8712 (D:\project IntelliJ Ultimate\modules-parent\security\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\security)
-2025-10-29 20:59:46 [main] DEBUG [SecurityApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
-2025-10-29 20:59:46 [main] INFO  [SecurityApplication] - No active profile set, falling back to 1 default profile: "default"
-2025-10-29 20:59:55 [main] DEBUG [InternalLoggerFactory] - Using SLF4J as the default logging framework
-2025-10-29 20:59:58 [main] WARN  [deprecation] - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-10-29 21:00:03 [main] WARN  [JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-10-29 21:00:03 [main] DEBUG [JwtAuthFilter] - Filter 'jwtAuthFilter' configured for use
-2025-10-29 21:00:03 [main] WARN  [InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer] - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
-2025-10-29 21:00:03 [main] WARN  [AnnotationConfigServletWebServerApplicationContext] - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'authController': Unsatisfied dependency expressed through field 'authService': Error creating bean with name 'authService': Unsatisfied dependency expressed through field 'profileOrchestrationService': Error creating bean with name 'profileOrchestrationService': Unsatisfied dependency expressed through field 'restTemplate': No qualifying bean of type 'org.springframework.web.client.RestTemplate' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
-2025-10-29 21:00:03 [redisson-netty-1-14] ERROR [rejectedExecution] - Failed to submit a listener notification task. Event loop shut down?
-java.util.concurrent.RejectedExecutionException: event executor terminated
-	at io.netty.util.concurrent.SingleThreadEventExecutor.reject(SingleThreadEventExecutor.java:934)
-	at io.netty.util.concurrent.SingleThreadEventExecutor.offerTask(SingleThreadEventExecutor.java:353)
-	at io.netty.util.concurrent.SingleThreadEventExecutor.addTask(SingleThreadEventExecutor.java:346)
-	at io.netty.util.concurrent.SingleThreadEventExecutor.execute(SingleThreadEventExecutor.java:836)
-	at io.netty.util.concurrent.SingleThreadEventExecutor.execute0(SingleThreadEventExecutor.java:827)
-	at io.netty.util.concurrent.SingleThreadEventExecutor.execute(SingleThreadEventExecutor.java:817)
-	at io.netty.util.concurrent.DefaultPromise.safeExecute(DefaultPromise.java:878)
-	at io.netty.util.concurrent.DefaultPromise.notifyListeners(DefaultPromise.java:513)
-	at io.netty.util.concurrent.DefaultPromise.setValue0(DefaultPromise.java:649)
-	at io.netty.util.concurrent.DefaultPromise.setSuccess0(DefaultPromise.java:638)
-	at io.netty.util.concurrent.DefaultPromise.setSuccess(DefaultPromise.java:110)
-	at io.netty.channel.group.DefaultChannelGroupFuture.setSuccess0(DefaultChannelGroupFuture.java:200)
-	at io.netty.channel.group.DefaultChannelGroupFuture.access$400(DefaultChannelGroupFuture.java:41)
-	at io.netty.channel.group.DefaultChannelGroupFuture$1.operationComplete(DefaultChannelGroupFuture.java:75)
-	at io.netty.channel.group.DefaultChannelGroupFuture$1.operationComplete(DefaultChannelGroupFuture.java:48)
-	at io.netty.util.concurrent.DefaultPromise.notifyListener0(DefaultPromise.java:603)
-	at io.netty.util.concurrent.DefaultPromise.notifyListenersNow(DefaultPromise.java:570)
-	at io.netty.util.concurrent.DefaultPromise.access$200(DefaultPromise.java:36)
-	at io.netty.util.concurrent.DefaultPromise$1.run(DefaultPromise.java:516)
-	at io.netty.util.concurrent.AbstractEventExecutor.runTask(AbstractEventExecutor.java:173)
-	at io.netty.util.concurrent.AbstractEventExecutor.safeExecute(AbstractEventExecutor.java:166)
-	at io.netty.util.concurrent.SingleThreadEventExecutor.runAllTasks(SingleThreadEventExecutor.java:472)
-	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:569)
-	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:998)
-	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
-	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
-	at java.base/java.lang.Thread.run(Thread.java:840)
-2025-10-29 21:00:03 [main] WARN  [WebappClassLoaderBase] - The web application [ROOT] appears to have started a thread named [Thread-3] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
- java.base@17.0.16/sun.net.dns.ResolverConfigurationImpl.notifyAddrChange0(Native Method)
- java.base@17.0.16/sun.net.dns.ResolverConfigurationImpl$AddressChangeListener.run(ResolverConfigurationImpl.java:176)
-2025-10-29 21:00:03 [main] ERROR [LoggingFailureAnalysisReporter] - 
-
-***************************
-APPLICATION FAILED TO START
-***************************
-
-Description:
-
-Field restTemplate in com.security.services.ProfileOrchestrationService required a bean of type 'org.springframework.web.client.RestTemplate' that could not be found.
-
-The injection point has the following annotations:
-	- @org.springframework.beans.factory.annotation.Autowired(required=true)
-
-
-Action:
-
-Consider defining a bean of type 'org.springframework.web.client.RestTemplate' in your configuration.
-
-2025-10-29 21:07:00 [background-preinit] DEBUG [logging] - Logging Provider: org.jboss.logging.Slf4jLoggerProvider found via system property
-2025-10-29 21:07:00 [main] INFO  [SecurityApplication] - Starting SecurityApplication using Java 17.0.16 with PID 5264 (D:\project IntelliJ Ultimate\modules-parent\security\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\security)
-2025-10-29 21:07:00 [main] DEBUG [SecurityApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
-2025-10-29 21:07:00 [main] INFO  [SecurityApplication] - No active profile set, falling back to 1 default profile: "default"
-2025-10-29 21:07:06 [main] DEBUG [InternalLoggerFactory] - Using SLF4J as the default logging framework
-2025-10-29 21:07:08 [main] WARN  [deprecation] - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-10-29 21:07:13 [main] WARN  [JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-10-29 21:07:13 [main] DEBUG [JwtAuthFilter] - Filter 'jwtAuthFilter' configured for use
-2025-10-29 21:07:13 [main] WARN  [InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer] - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
-2025-10-29 21:07:13 [main] WARN  [AnnotationConfigServletWebServerApplicationContext] - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'authController': Unsatisfied dependency expressed through field 'authService': Error creating bean with name 'authService': Unsatisfied dependency expressed through field 'profileOrchestrationService': Error creating bean with name 'profileOrchestrationService': Unsatisfied dependency expressed through field 'restTemplate': No qualifying bean of type 'org.springframework.web.client.RestTemplate' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
-2025-10-29 21:07:13 [main] WARN  [WebappClassLoaderBase] - The web application [ROOT] appears to have started a thread named [Thread-3] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
- java.base@17.0.16/sun.net.dns.ResolverConfigurationImpl.notifyAddrChange0(Native Method)
- java.base@17.0.16/sun.net.dns.ResolverConfigurationImpl$AddressChangeListener.run(ResolverConfigurationImpl.java:176)
-2025-10-29 21:07:13 [main] ERROR [LoggingFailureAnalysisReporter] - 
-
-***************************
-APPLICATION FAILED TO START
-***************************
-
-Description:
-
-Field restTemplate in com.security.services.ProfileOrchestrationService required a bean of type 'org.springframework.web.client.RestTemplate' that could not be found.
-
-The injection point has the following annotations:
-	- @org.springframework.beans.factory.annotation.Autowired(required=true)
-
-
-Action:
-
-Consider defining a bean of type 'org.springframework.web.client.RestTemplate' in your configuration.
-
-2025-10-29 21:08:08 [background-preinit] DEBUG [logging] - Logging Provider: org.jboss.logging.Slf4jLoggerProvider found via system property
-2025-10-29 21:08:09 [main] INFO  [SecurityApplication] - Starting SecurityApplication using Java 17.0.16 with PID 15412 (D:\project IntelliJ Ultimate\modules-parent\security\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\security)
-2025-10-29 21:08:09 [main] DEBUG [SecurityApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
-2025-10-29 21:08:09 [main] INFO  [SecurityApplication] - No active profile set, falling back to 1 default profile: "default"
-2025-10-29 21:08:15 [main] DEBUG [InternalLoggerFactory] - Using SLF4J as the default logging framework
-2025-10-29 21:08:17 [main] WARN  [deprecation] - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-10-29 21:08:22 [main] WARN  [JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-10-29 21:08:22 [main] DEBUG [JwtAuthFilter] - Filter 'jwtAuthFilter' configured for use
-2025-10-29 21:08:22 [main] WARN  [InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer] - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
-2025-10-29 21:08:22 [main] DEBUG [Mappings] - 
+Caused by: java.lang.ClassNotFoundException: Role
+	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:641)
+	at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(ClassLoaders.java:188)
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:525)
+	... 28 common frames omitted
+2025-10-30 16:49:10 [background-preinit] DEBUG [logging] - Logging Provider: org.jboss.logging.Slf4jLoggerProvider found via system property
+2025-10-30 16:49:10 [main] INFO  [SecurityApplication] - Starting SecurityApplication using Java 17.0.16 with PID 13016 (D:\project IntelliJ Ultimate\modules-parent\security\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\security)
+2025-10-30 16:49:10 [main] DEBUG [SecurityApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
+2025-10-30 16:49:10 [main] INFO  [SecurityApplication] - No active profile set, falling back to 1 default profile: "default"
+2025-10-30 16:49:14 [main] WARN  [AnnotationConfigServletWebServerApplicationContext] - Exception encountered during context initialization - cancelling refresh attempt: java.lang.NoClassDefFoundError: Role
+2025-10-30 16:49:14 [main] ERROR [SpringApplication] - Application run failed
+java.lang.NoClassDefFoundError: Role
+	at java.base/java.lang.Class.getDeclaredMethods0(Native Method)
+	at java.base/java.lang.Class.privateGetDeclaredMethods(Class.java:3402)
+	at java.base/java.lang.Class.privateGetPublicMethods(Class.java:3427)
+	at java.base/java.lang.Class.getMethods(Class.java:2019)
+	at org.springframework.data.util.ReactiveWrappers.usesReactiveType(ReactiveWrappers.java:141)
+	at org.springframework.data.repository.core.support.AbstractRepositoryMetadata.isReactiveRepository(AbstractRepositoryMetadata.java:135)
+	at org.springframework.data.repository.config.RepositoryConfigurationExtensionSupport.useRepositoryConfiguration(RepositoryConfigurationExtensionSupport.java:344)
+	at org.springframework.data.repository.config.RepositoryConfigurationExtensionSupport.getRepositoryConfigurations(RepositoryConfigurationExtensionSupport.java:98)
+	at org.springframework.data.repository.config.RepositoryConfigurationDelegate.registerRepositoriesIn(RepositoryConfigurationDelegate.java:170)
+	at org.springframework.boot.autoconfigure.data.AbstractRepositoryConfigurationSourceSupport.registerBeanDefinitions(AbstractRepositoryConfigurationSourceSupport.java:62)
+	at org.springframework.context.annotation.ConfigurationClassBeanDefinitionReader.lambda$loadBeanDefinitionsFromRegistrars$1(ConfigurationClassBeanDefinitionReader.java:397)
+	at java.base/java.util.LinkedHashMap.forEach(LinkedHashMap.java:721)
+	at org.springframework.context.annotation.ConfigurationClassBeanDefinitionReader.loadBeanDefinitionsFromRegistrars(ConfigurationClassBeanDefinitionReader.java:396)
+	at org.springframework.context.annotation.ConfigurationClassBeanDefinitionReader.loadBeanDefinitionsForConfigurationClass(ConfigurationClassBeanDefinitionReader.java:149)
+	at org.springframework.context.annotation.ConfigurationClassBeanDefinitionReader.loadBeanDefinitions(ConfigurationClassBeanDefinitionReader.java:121)
+	at org.springframework.context.annotation.ConfigurationClassPostProcessor.processConfigBeanDefinitions(ConfigurationClassPostProcessor.java:430)
+	at org.springframework.context.annotation.ConfigurationClassPostProcessor.postProcessBeanDefinitionRegistry(ConfigurationClassPostProcessor.java:290)
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanDefinitionRegistryPostProcessors(PostProcessorRegistrationDelegate.java:349)
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:118)
+	at org.springframework.context.support.AbstractApplicationContext.invokeBeanFactoryPostProcessors(AbstractApplicationContext.java:791)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:609)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:753)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:439)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:318)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1362)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1351)
+	at com.security.SecurityApplication.main(SecurityApplication.java:14)
+Caused by: java.lang.ClassNotFoundException: Role
+	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:641)
+	at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(ClassLoaders.java:188)
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:525)
+	... 28 common frames omitted
+2025-10-30 16:50:28 [background-preinit] DEBUG [logging] - Logging Provider: org.jboss.logging.Slf4jLoggerProvider found via system property
+2025-10-30 16:50:28 [main] INFO  [SecurityApplication] - Starting SecurityApplication using Java 17.0.16 with PID 1452 (D:\project IntelliJ Ultimate\modules-parent\security\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\security)
+2025-10-30 16:50:28 [main] DEBUG [SecurityApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
+2025-10-30 16:50:28 [main] INFO  [SecurityApplication] - No active profile set, falling back to 1 default profile: "default"
+2025-10-30 16:50:33 [main] DEBUG [InternalLoggerFactory] - Using SLF4J as the default logging framework
+2025-10-30 16:50:35 [main] WARN  [deprecation] - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-10-30 16:50:41 [main] WARN  [JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-10-30 16:50:41 [main] DEBUG [JwtAuthFilter] - Filter 'jwtAuthFilter' configured for use
+2025-10-30 16:50:41 [main] WARN  [InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer] - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2025-10-30 16:50:41 [main] DEBUG [Mappings] - 
 	c.s.c.AuthController:
 	{POST [/auth/register]}: register(Register,String)
+	{POST [/auth/logout]}: logout(String,String)
 	{POST [/auth/login]}: login(Login,String)
 	{POST [/auth/refresh]}: refreshToken(String,String)
 	{GET [/auth/decode]}: decodeToken(String,String)
 	{GET [/auth/validate]}: validateToken(String,String)
-	{POST [/auth/logout]}: logout(String,String)
-2025-10-29 21:08:22 [main] DEBUG [Mappings] - 
+2025-10-30 16:50:41 [main] DEBUG [Mappings] - 
 	o.s.b.a.w.s.e.BasicErrorController:
 	{ [/error]}: error(HttpServletRequest)
 	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
-2025-10-29 21:08:22 [main] DEBUG [Mappings] - 'beanNameHandlerMapping' {}
-2025-10-29 21:08:23 [main] DEBUG [Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
-2025-10-29 21:08:24 [main] DEBUG [Loggers] - Using Slf4j logging framework
-2025-10-29 21:08:25 [main] INFO  [SecurityApplication] - Started SecurityApplication in 17.3 seconds (process running for 18.246)
-2025-10-29 21:09:38 [http-nio-8083-exec-3] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Processing request: /auth/register
-2025-10-29 21:09:38 [http-nio-8083-exec-3] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Skipping JWT validation for public endpoint: /auth/register
-2025-10-29 21:10:19 [http-nio-8083-exec-4] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Processing request: /auth/register
-2025-10-29 21:10:28 [http-nio-8083-exec-4] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Skipping JWT validation for public endpoint: /auth/register
-2025-10-29 21:11:09 [http-nio-8083-exec-7] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Processing request: /auth/register
-2025-10-29 21:11:09 [http-nio-8083-exec-7] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Skipping JWT validation for public endpoint: /auth/register
-2025-10-29 21:11:39 [http-nio-8083-exec-5] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Processing request: /auth/register
-2025-10-29 21:11:42 [http-nio-8083-exec-5] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Skipping JWT validation for public endpoint: /auth/register
-2025-10-29 21:14:03 [http-nio-8083-exec-10] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Processing request: /auth/register
-2025-10-29 21:14:18 [http-nio-8083-exec-10] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Skipping JWT validation for public endpoint: /auth/register
-2025-10-29 21:14:26 [http-nio-8083-exec-3] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Processing request: /auth/register
-2025-10-29 21:14:39 [http-nio-8083-exec-3] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Skipping JWT validation for public endpoint: /auth/register
-2025-10-29 21:16:29 [http-nio-8083-exec-4] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Processing request: /auth/register
-2025-10-29 21:16:43 [http-nio-8083-exec-4] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Skipping JWT validation for public endpoint: /auth/register
-2025-10-29 21:21:06 [http-nio-8083-exec-7] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Processing request: /auth/register
-2025-10-29 21:21:08 [http-nio-8083-exec-7] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Skipping JWT validation for public endpoint: /auth/register
-2025-10-29 21:21:36 [background-preinit] DEBUG [logging] - Logging Provider: org.jboss.logging.Slf4jLoggerProvider found via system property
-2025-10-29 21:21:36 [main] INFO  [SecurityApplication] - Starting SecurityApplication using Java 17.0.16 with PID 16960 (D:\project IntelliJ Ultimate\modules-parent\security\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\security)
-2025-10-29 21:21:36 [main] DEBUG [SecurityApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
-2025-10-29 21:21:36 [main] INFO  [SecurityApplication] - No active profile set, falling back to 1 default profile: "default"
-2025-10-29 21:21:43 [main] DEBUG [InternalLoggerFactory] - Using SLF4J as the default logging framework
-2025-10-29 21:21:45 [main] WARN  [deprecation] - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-10-29 21:21:50 [main] WARN  [JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-10-29 21:21:50 [main] DEBUG [JwtAuthFilter] - Filter 'jwtAuthFilter' configured for use
-2025-10-29 21:21:51 [main] WARN  [InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer] - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
-2025-10-29 21:21:51 [main] DEBUG [Mappings] - 
+2025-10-30 16:50:41 [main] DEBUG [Mappings] - 'beanNameHandlerMapping' {}
+2025-10-30 16:50:42 [main] DEBUG [Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
+2025-10-30 16:50:43 [main] DEBUG [Loggers] - Using Slf4j logging framework
+2025-10-30 16:50:45 [main] INFO  [SecurityApplication] - Started SecurityApplication in 18.313 seconds (process running for 19.366)
+2025-10-30 16:53:16 [background-preinit] DEBUG [logging] - Logging Provider: org.jboss.logging.Slf4jLoggerProvider found via system property
+2025-10-30 16:53:16 [main] INFO  [SecurityApplication] - Starting SecurityApplication using Java 17.0.16 with PID 9300 (D:\project IntelliJ Ultimate\modules-parent\security\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\security)
+2025-10-30 16:53:16 [main] DEBUG [SecurityApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
+2025-10-30 16:53:16 [main] INFO  [SecurityApplication] - No active profile set, falling back to 1 default profile: "default"
+2025-10-30 16:53:21 [main] DEBUG [InternalLoggerFactory] - Using SLF4J as the default logging framework
+2025-10-30 16:53:23 [main] WARN  [deprecation] - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-10-30 16:53:28 [main] WARN  [JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-10-30 16:53:29 [main] DEBUG [JwtAuthFilter] - Filter 'jwtAuthFilter' configured for use
+2025-10-30 16:53:29 [main] WARN  [InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer] - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2025-10-30 16:53:29 [main] DEBUG [Mappings] - 
 	c.s.c.AuthController:
 	{POST [/auth/register]}: register(Register,String)
 	{POST [/auth/logout]}: logout(String,String)
-	{POST [/auth/refresh]}: refreshToken(String,String)
-	{GET [/auth/validate]}: validateToken(String,String)
-	{POST [/auth/login]}: login(Login,String)
-	{GET [/auth/decode]}: decodeToken(String,String)
-2025-10-29 21:21:51 [main] DEBUG [Mappings] - 
-	o.s.b.a.w.s.e.BasicErrorController:
-	{ [/error]}: error(HttpServletRequest)
-	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
-2025-10-29 21:21:51 [main] DEBUG [Mappings] - 'beanNameHandlerMapping' {}
-2025-10-29 21:21:51 [main] DEBUG [Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
-2025-10-29 21:22:13 [main] DEBUG [Loggers] - Using Slf4j logging framework
-2025-10-29 21:22:14 [main] INFO  [SecurityApplication] - Started SecurityApplication in 38.94 seconds (process running for 39.843)
-2025-10-29 21:23:07 [http-nio-8083-exec-2] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Processing request: /auth/register
-2025-10-29 21:23:07 [http-nio-8083-exec-2] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Skipping JWT validation for public endpoint: /auth/register
-2025-10-29 21:23:16 [http-nio-8083-exec-2] INFO  [LoggingServiceImp] - [security] com.security.controllers.AuthController - Register API Calling... by user: HuyS1
-2025-10-29 21:24:00 [http-nio-8083-exec-2] INFO  [LoggingServiceImp] - [security] AuthService - Register attempt for username: HuyS1
-2025-10-29 21:24:44 [http-nio-8083-exec-2] INFO  [LoggingServiceImp] - [security] ProfileOrchestrationService - Creating profile for type: STUDENT
-2025-10-29 21:24:45 [http-nio-8083-exec-2] ERROR [LoggingServiceImp] - [security] ProfileOrchestrationService - Failed to create student profile for userId: 1: 401  on POST request for "http://localhost:8080/students/create-by-user-id": [no body]
-2025-10-29 21:25:52 [http-nio-8083-exec-5] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Processing request: /auth/register
-2025-10-29 21:25:52 [http-nio-8083-exec-5] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Skipping JWT validation for public endpoint: /auth/register
-2025-10-29 21:25:53 [http-nio-8083-exec-5] INFO  [LoggingServiceImp] - [security] com.security.controllers.AuthController - Register API Calling... by user: HuyS1
-2025-10-29 21:25:55 [http-nio-8083-exec-5] INFO  [LoggingServiceImp] - [security] AuthService - Register attempt for username: HuyS1
-2025-10-29 21:26:14 [http-nio-8083-exec-5] INFO  [LoggingServiceImp] - [security] ProfileOrchestrationService - Creating profile for type: STUDENT
-2025-10-29 21:27:35 [http-nio-8083-exec-5] ERROR [LoggingServiceImp] - [security] ProfileOrchestrationService - Failed to create student profile for userId: 2: 401  on POST request for "http://localhost:8080/students/create-by-user-id": [no body]
-2025-10-29 22:05:32 [background-preinit] DEBUG [logging] - Logging Provider: org.jboss.logging.Slf4jLoggerProvider found via system property
-2025-10-29 22:05:32 [main] INFO  [SecurityApplication] - Starting SecurityApplication using Java 17.0.16 with PID 13328 (D:\project IntelliJ Ultimate\modules-parent\security\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\security)
-2025-10-29 22:05:32 [main] DEBUG [SecurityApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
-2025-10-29 22:05:32 [main] INFO  [SecurityApplication] - No active profile set, falling back to 1 default profile: "default"
-2025-10-29 22:05:38 [main] DEBUG [InternalLoggerFactory] - Using SLF4J as the default logging framework
-2025-10-29 22:05:43 [main] WARN  [deprecation] - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-10-29 22:05:50 [main] WARN  [JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-10-29 22:05:50 [main] DEBUG [JwtAuthFilter] - Filter 'jwtAuthFilter' configured for use
-2025-10-29 22:05:50 [main] WARN  [InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer] - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
-2025-10-29 22:05:51 [main] DEBUG [Mappings] - 
-	c.s.c.AuthController:
-	{POST [/auth/register]}: register(Register,String)
 	{POST [/auth/login]}: login(Login,String)
 	{POST [/auth/refresh]}: refreshToken(String,String)
 	{GET [/auth/validate]}: validateToken(String,String)
 	{GET [/auth/decode]}: decodeToken(String,String)
-	{POST [/auth/logout]}: logout(String,String)
-2025-10-29 22:05:51 [main] DEBUG [Mappings] - 
+2025-10-30 16:53:29 [main] DEBUG [Mappings] - 
 	o.s.b.a.w.s.e.BasicErrorController:
 	{ [/error]}: error(HttpServletRequest)
 	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
-2025-10-29 22:05:51 [main] DEBUG [Mappings] - 'beanNameHandlerMapping' {}
-2025-10-29 22:05:51 [main] DEBUG [Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
-2025-10-29 22:05:52 [main] DEBUG [Loggers] - Using Slf4j logging framework
-2025-10-29 22:05:54 [main] INFO  [SecurityApplication] - Started SecurityApplication in 22.783 seconds (process running for 23.734)
-2025-10-29 22:06:33 [http-nio-8083-exec-2] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Processing request: /auth/register
-2025-10-29 22:06:33 [http-nio-8083-exec-2] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Skipping JWT validation for public endpoint: /auth/register
-2025-10-29 22:06:36 [http-nio-8083-exec-2] INFO  [LoggingServiceImp] - [security] AuthController - Register API Calling... by user: HuyS1
-2025-10-29 22:06:41 [http-nio-8083-exec-2] INFO  [LoggingServiceImp] - [security] AuthService - Register attempt for username: HuyS1
-2025-10-29 22:07:09 [http-nio-8083-exec-2] INFO  [LoggingServiceImp] - [security] ProfileOrchestrationService - Creating profile for type: STUDENT
-2025-10-29 22:08:11 [http-nio-8083-exec-2] INFO  [LoggingServiceImp] - [security] ProfileOrchestrationService - Student profile created for userId: 1 with graduate: true
-2025-10-29 22:08:23 [http-nio-8083-exec-2] INFO  [LoggingServiceImp] - [security] AuthController - User registered successfully: HuyS1
-2025-10-29 22:09:42 [http-nio-8083-exec-6] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Processing request: /auth/login
-2025-10-29 22:09:42 [http-nio-8083-exec-6] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Skipping JWT validation for public endpoint: /auth/login
-2025-10-29 22:09:42 [http-nio-8083-exec-6] INFO  [LoggingServiceImp] - [security] AuthController - Login API calling... by user: HuyS1
-2025-10-29 22:09:42 [http-nio-8083-exec-6] INFO  [LoggingServiceImp] - [security] AuthService - Login attempt for username: HuyS1
-2025-10-29 22:09:42 [http-nio-8083-exec-6] INFO  [LoggingServiceImp] - [security] AuthController - User logged in successfully: HuyS1
+2025-10-30 16:53:29 [main] DEBUG [Mappings] - 'beanNameHandlerMapping' {}
+2025-10-30 16:53:29 [main] DEBUG [Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
+2025-10-30 16:53:31 [main] DEBUG [Loggers] - Using Slf4j logging framework
+2025-10-30 16:53:32 [main] INFO  [SecurityApplication] - Started SecurityApplication in 17.432 seconds (process running for 18.373)
+2025-10-30 16:54:22 [http-nio-8083-exec-2] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Processing request: /auth/register
+2025-10-30 16:54:22 [http-nio-8083-exec-2] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Skipping JWT validation for public endpoint: /auth/register
+2025-10-30 16:54:31 [http-nio-8083-exec-2] INFO  [LoggingServiceImp] - [security] AuthController - Register API Calling... by user: HuyS3
+2025-10-30 16:54:36 [http-nio-8083-exec-2] INFO  [LoggingServiceImp] - [security] AuthService - Register attempt for username: HuyS3
+2025-10-30 16:55:15 [kafka-producer-network-thread | security-producer-1] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - Message sent successfully to topic: user-events, partition: 0, offset: 87, key: [1]
+2025-10-30 16:55:15 [http-nio-8083-exec-2] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - userEvent sent to topic: user-events - with entity id: [1]
+2025-10-30 16:56:36 [http-nio-8083-exec-2] INFO  [LoggingServiceImp] - [security] AuthController - User registered successfully: HuyS3
+2025-10-30 16:59:00 [http-nio-8083-exec-5] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Processing request: /auth/register
+2025-10-30 16:59:00 [http-nio-8083-exec-5] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Skipping JWT validation for public endpoint: /auth/register
+2025-10-30 16:59:02 [http-nio-8083-exec-5] INFO  [LoggingServiceImp] - [security] AuthController - Register API Calling... by user: HuyS3
+2025-10-30 16:59:04 [http-nio-8083-exec-5] INFO  [LoggingServiceImp] - [security] AuthService - Register attempt for username: HuyS3
+2025-10-30 16:59:04 [http-nio-8083-exec-5] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - userEvent sent to topic: user-events - with entity id: [2]
+2025-10-30 16:59:04 [kafka-producer-network-thread | security-producer-1] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - Message sent successfully to topic: user-events, partition: 0, offset: 88, key: [2]
+2025-10-30 16:59:04 [http-nio-8083-exec-5] INFO  [LoggingServiceImp] - [security] AuthController - User registered successfully: HuyS3
+2025-10-30 17:00:55 [http-nio-8083-exec-9] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Processing request: /auth/register
+2025-10-30 17:00:56 [http-nio-8083-exec-9] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Skipping JWT validation for public endpoint: /auth/register
+2025-10-30 17:01:15 [http-nio-8083-exec-9] INFO  [LoggingServiceImp] - [security] AuthController - Register API Calling... by user: HuyS3
+2025-10-30 17:01:17 [http-nio-8083-exec-9] INFO  [LoggingServiceImp] - [security] AuthService - Register attempt for username: HuyS3
+2025-10-30 17:01:32 [kafka-producer-network-thread | security-producer-1] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - Message sent successfully to topic: user-events, partition: 0, offset: 89, key: [3]
+2025-10-30 17:01:32 [http-nio-8083-exec-9] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - userEvent sent to topic: user-events - with entity id: [3]
+2025-10-30 17:01:58 [http-nio-8083-exec-9] INFO  [LoggingServiceImp] - [security] AuthController - User registered successfully: HuyS3

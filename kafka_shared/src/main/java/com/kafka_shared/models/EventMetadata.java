@@ -14,9 +14,6 @@ public interface EventMetadata {
     // lấy type của entity
     default String getEntityType() {
         String className = this.getClass().getSimpleName();
-        if (className.endsWith("Event")) {
-            return className.substring(0, className.length() - 5).toLowerCase() + "Event";
-        }
-        return className.toLowerCase();
+        return className.substring(0, className.length() - 5).toLowerCase() + "Event";
     }
 }

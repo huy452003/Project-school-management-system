@@ -9,7 +9,7 @@ import com.model_shared.models.user.UserDto;
 import java.util.List;
 
 public interface StudentService {
-    StudentModel createByUserId(UserDto user);
+    void createByUserId(UserDto user);
     List<StudentModel> gets();
     // List<StudentEntity> creates(List<CreateStudentModel> studentModels);
     // List<StudentEntity> updates(List<StudentModel> studentModels);

@@ -54,32 +54,6 @@ public class StudentController {
                 .build();
     }
 
-    @PostMapping("/internal/create-by-user-id")
-    ResponseEntity<Response<StudentModel>> createByUserId(
-            @RequestBody Map<String, Object> body,
-            @RequestHeader(value = "Accept-Language", defaultValue = "en") String acceptLanguage,
-            @CurrentUser UserDto currentUser
-    ){
-        Locale locale = Locale.forLanguageTag(acceptLanguage);
-        LogContext logContext = getLogContext("createByUserId");
-
-        loggingService.logInfo("Create student profile API called successfully by user: " + currentUser.getUserName(), logContext);
-
-        UserDto userDto = objectMapper.convertValue(body.get("user"), UserDto.class);
-
-        StudentModel student = studentServiceImp.createByUserId(userDto);
-
-        Response<StudentModel> response = new Response<>(
-                200,
-                messageSource.getMessage("response.message.createSuccess", null, locale),
-                "StudentsModel",
-                null,
-                student
-        );
-        return ResponseEntity.status(response.getStatus()).body(response);
-    }
-
-
     // @GetMapping("/paged")
     // @RequiresAuth(roles = {"ADMIN", "STUDENT"}, permissions = {"STUDENT_READ"})
     // ResponseEntity<Response<PagedResponseModel<StudentModel>>> getPaged(

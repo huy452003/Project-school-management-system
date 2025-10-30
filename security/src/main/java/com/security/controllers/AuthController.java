@@ -21,10 +21,10 @@ import org.springframework.web.bind.annotation.*;
 
 import jakarta.validation.Valid;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import com.security.repositories.UserRepo;
 
@@ -166,17 +166,16 @@ public class AuthController {
 
             UserDto userDto = new UserDto();
             userDto.setUserId(user.getUserId());
+            userDto.setType(user.getType());
             userDto.setUserName(user.getUsername());
             userDto.setFirstName(user.getFirstName());
             userDto.setLastName(user.getLastName());
             userDto.setAge(user.getAge());
             userDto.setGender(user.getGender());
             userDto.setBirth(user.getBirth());
-            userDto.setRole(user.getRole().name());
-            userDto.setPermissions(user.getPermissions().stream()
-                    .map(Enum::name)
-                    .collect(Collectors.toList()));
-            userDto.setEnabled(user.isEnabled());
+            userDto.setRole(user.getRole());
+            userDto.setPermissions(user.getPermissions());
+            userDto.setStatus(user.getStatus());
 
             Response<UserDto> response = new Response<>(
                     200,
@@ -211,6 +210,51 @@ public class AuthController {
         );
 
         loggingService.logInfo("Token decoded successfully", logContext);
+        return ResponseEntity.status(response.getStatus()).body(response);
+    }
+    
+    @GetMapping("/check-status")
+    public ResponseEntity<Response<Map<String, Object>>> checkAccountStatus(
+        @RequestHeader("Authorization") String authHeader,
+        @RequestHeader(value = "Accept-Language", defaultValue = "en") String acceptLanguage
+    ){
+        Locale locale = Locale.forLanguageTag(acceptLanguage);
+        LogContext logContext = getLogContext("checkAccountStatus");
+
+        loggingService.logInfo("checkAccountStatus API Calling...", logContext);
+        String token = authHeader.substring(7);
+        
+        String username = authService.getUsernameFromToken(token);
+        UserEntity user = userRepo.findByUserName(username).orElseThrow(
+                () -> new NotFoundExceptionHandle("", List.of(username), "Security-Model")
+        );
+        
+        Map<String, Object> statusInfo = new HashMap<>();
+        statusInfo.put("status", user.getStatus().name());
+        statusInfo.put("username", user.getUsername());
+        statusInfo.put("userId", user.getUserId());
+        
+        // Get status message from message source
+        String statusMessageKey = switch (user.getStatus()) {
+            case PENDING -> "response.status.pending";
+            case ENABLED -> "response.status.enabled";
+            case FAILED -> "response.status.failed";
+            case DISABLED -> "response.status.disabled";
+        };
+        
+        String statusMessage = messageSource.getMessage(statusMessageKey, null, locale);
+        statusInfo.put("statusMessage", statusMessage);
+        statusInfo.put("canLogin", user.getStatus() == com.model_shared.enums.Status.ENABLED);
+
+        Response<Map<String, Object>> response = new Response<>(
+                200,
+                messageSource.getMessage("response.message.checkStatusSuccess", null, locale),
+                "Security-Model",
+                null,
+                statusInfo
+        );
+
+        loggingService.logInfo("Account status checked for user: " + username, logContext);
         return ResponseEntity.status(response.getStatus()).body(response);
     }
 

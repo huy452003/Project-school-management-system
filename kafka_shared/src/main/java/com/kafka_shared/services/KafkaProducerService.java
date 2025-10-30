@@ -28,6 +28,9 @@ public class KafkaProducerService {
     @Value("${kafka.topics.user-events:user-events}")
     private String userEventsTopic;
 
+    @Value("${kafka.topics.user-events-profile:profile-events}")
+    private String profileEventsTopic;
+
     @Value("${kafka.topics.notifications:notifications}")
     private String notificationsTopic;
 
@@ -111,6 +114,10 @@ public class KafkaProducerService {
     // gửi user event đến user-events topic
     public <T extends KafkaMessage & EventMetadata> void sendUserEvent(T event) {
         sendEvent(event, userEventsTopic);
+    }
+
+    public <T extends KafkaMessage & EventMetadata> void sendProfileEvent(T event) {
+        sendEvent(event, profileEventsTopic);
     }
 
     // gửi notification đến notifications topic

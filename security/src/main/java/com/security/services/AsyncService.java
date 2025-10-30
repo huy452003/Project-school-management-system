@@ -10,7 +10,10 @@ import com.logging.services.LoggingService;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.GrantedAuthority;
 import java.util.stream.Collectors;
-import java.util.List;
+import java.util.Set;
+import com.model_shared.enums.Role;
+import com.model_shared.enums.Permission;
+import com.model_shared.models.user.UserDto;
 
 @Service
 public class AsyncService {
@@ -32,22 +35,23 @@ public class AsyncService {
     public void sendLoginEvent(UserDetails userDetails) {
         try {
             
-            String role = userDetails.getAuthorities().stream()
+            Role role = Role.valueOf(userDetails.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
                 .filter(authority -> !authority.contains("_"))  // ← Tìm authority đơn giản như "STUDENT"
                 .findFirst()
-                .orElse("USER");
+                .orElseThrow(() -> new RuntimeException("User role not found")));
 
-            List<String> permissions = userDetails.getAuthorities().stream()
+            Set<Permission> permissions = userDetails.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
                 .filter(authority -> authority.contains("_"))
-                .collect(Collectors.toList());
+                .map(Permission::valueOf)
+                .collect(Collectors.toSet());
             
-            UserEvent loginEvent = UserEvent.userLogin(
-                userDetails.getUsername(), 
-                role, 
-                permissions
-            );
+            UserDto user = new UserDto();
+            user.setUserName(userDetails.getUsername());
+            user.setRole(role);
+            user.setPermissions(permissions);
+            UserEvent loginEvent = UserEvent.userLogin(user);
 
             kafkaProducerService.sendUserEvent(loginEvent);
 

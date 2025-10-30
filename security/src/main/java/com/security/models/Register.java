@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.model_shared.enums.Gender;
-import com.security.enums.Type;
+import com.model_shared.enums.Type;
 
 @Data
 @AllArgsConstructor

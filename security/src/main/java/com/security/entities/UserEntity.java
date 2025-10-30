@@ -11,9 +11,10 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.model_shared.enums.Gender;
-import com.security.enums.Permission;
-import com.security.enums.Role;
-import com.security.enums.Type;
+import com.model_shared.enums.Permission;
+import com.model_shared.enums.Role;
+import com.model_shared.enums.Status;
+import com.model_shared.enums.Type;
 
 import java.time.LocalDate;
 import java.util.Collection;
@@ -69,10 +70,14 @@ public class UserEntity implements UserDetails {
     @Column(name = "permission")
     private Set<Permission> permissions = new HashSet<>();
 
-    private boolean enabled = true;
-    private boolean accountNonExpired = true;
-    private boolean credentialsNonExpired = true;
-    private boolean accountNonLocked = true;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status")
+    private Status status = Status.PENDING;
+
+    // private boolean enabled = true;
+    // private boolean accountNonExpired = true;
+    // private boolean credentialsNonExpired = true;
+    // private boolean accountNonLocked = true;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -92,23 +97,23 @@ public class UserEntity implements UserDetails {
         return this.userName;
     }
 
-    @Override
-    public boolean isAccountNonExpired() {
-        return accountNonExpired;
-    }
+    // @Override
+    // public boolean isAccountNonExpired() {
+    //     return true;
+    // }
 
-    @Override
-    public boolean isAccountNonLocked() {
-        return accountNonLocked;
-    }
+    // @Override
+    // public boolean isAccountNonLocked() {
+    //     return true;
+    // }
 
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return credentialsNonExpired;
-    }
+    // @Override
+    // public boolean isCredentialsNonExpired() {
+    //     return true;
+    // }
 
     @Override
     public boolean isEnabled() {
-        return enabled;
+        return status.equals(Status.ENABLED);
     }
 }

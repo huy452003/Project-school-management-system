@@ -75,6 +75,12 @@
             <groupId>com.common</groupId>
             <artifactId>handle_exceptions</artifactId>
         </dependency>
+
+        <!-- Shared Models -->
+        <dependency>
+            <groupId>com.common</groupId>
+            <artifactId>model_shared</artifactId>
+        </dependency>
         
         <!-- Test -->
         <dependency>

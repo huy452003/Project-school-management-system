@@ -3,16 +3,15 @@ package com.kafka_shared.models;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import java.util.List;
+
+import com.model_shared.models.user.UserDto;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 public class UserEvent extends KafkaMessage implements EventMetadata {
-    private String userName;
+    private UserDto user;
     private String action; // REGISTERED, LOGIN, LOGOUT
-    private String role;
-    private List<String> permissions;
     
     public UserEvent(String eventType, String source, String destination) {
         super(eventType, source, destination);
@@ -20,12 +19,12 @@ public class UserEvent extends KafkaMessage implements EventMetadata {
 
     @Override
     public String getEntityId() {
-        return this.userName;
+        return this.user.getUserId().toString();
     }
 
     @Override
     public String getEntityDisplayName() {
-        return this.userName;
+        return this.user.getUserName();
     }
 
     @Override
@@ -33,39 +32,43 @@ public class UserEvent extends KafkaMessage implements EventMetadata {
         return this.action;
     }
 
-    public static UserEvent userRegistered(String userName, String role, List<String> permissions) {
+    public static UserEvent userRegistered(UserDto user) {
         UserEvent userEvent = new UserEvent(
-            "USER_EVENT", 
+            "USER_REGISTERED", 
             "security", 
             "all");
-        userEvent.setUserName(userName);
+        userEvent.setUser(user);
         userEvent.setAction("REGISTERED");
-        userEvent.setRole(role);
-        userEvent.setPermissions(permissions);
         return userEvent;
     }
 
-    public static UserEvent userLogin(String userName, String role, List<String> permissions) {
+    public static UserEvent ProfileCreated(UserEvent profile) {
         UserEvent userEvent = new UserEvent(
-            "USER_EVENT", 
+            "PROFILE_CREATED", 
             "security", 
             "all");
-        userEvent.setUserName(userName);
+        userEvent.setUser(profile.getUser());
+        userEvent.setAction("PROFILE_CREATED");
+        return userEvent;
+    }
+
+    public static UserEvent userLogin(UserDto user) {
+        UserEvent userEvent = new UserEvent(
+            "USER_LOGIN", 
+            "security", 
+            "all");
+        userEvent.setUser(user);
         userEvent.setAction("LOGIN");
-        userEvent.setRole(role);
-        userEvent.setPermissions(permissions);
         return userEvent;
     }
-
-    public static UserEvent userLogout(String userName, String role, List<String> permissions) {
+    
+    public static UserEvent userLogout(UserDto user) {
         UserEvent userEvent = new UserEvent(
-            "USER_EVENT", 
+            "USER_LOGOUT", 
             "security", 
             "all");
-        userEvent.setUserName(userName);
+        userEvent.setUser(user);
         userEvent.setAction("LOGOUT");
-        userEvent.setRole(role);
-        userEvent.setPermissions(permissions);
         return userEvent;
     }
 

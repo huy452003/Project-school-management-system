@@ -5,10 +5,14 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import java.util.List;
+import java.util.Set;
 import java.time.LocalDate;
 import com.model_shared.enums.Gender;
 import java.util.Map;
+import com.model_shared.enums.Type;
+import com.model_shared.enums.Role;
+import com.model_shared.enums.Permission;
+import com.model_shared.enums.Status;
 
 @Data
 @Builder
@@ -16,6 +20,7 @@ import java.util.Map;
 @AllArgsConstructor
 @Setter
 public class UserDto {
+    private Type type;
     private Integer userId;
     private String userName;
     private String firstName;
@@ -23,8 +28,8 @@ public class UserDto {
     private Integer age;
     private Gender gender;
     private LocalDate birth;
-    private String role;
-    private List<String> permissions;
-    private boolean enabled;
+    private Role role;
+    private Set<Permission> permissions;
+    private Status status;
     private Map<String, Object> profileData;
 }

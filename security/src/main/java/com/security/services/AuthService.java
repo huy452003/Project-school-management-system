@@ -6,8 +6,6 @@ import com.handle_exceptions.NotFoundExceptionHandle;
 import com.handle_exceptions.UnauthorizedExceptionHandle;
 import com.security.config.JwtConfig;
 import com.security.entities.UserEntity;
-import com.security.enums.Permission;
-import com.security.enums.Role;
 import com.security.models.Login;
 import com.security.models.Register;
 import com.security.models.SecurityResponse;
@@ -21,6 +19,13 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import com.kafka_shared.services.KafkaProducerService;
+import com.kafka_shared.models.UserEvent;
+import com.model_shared.models.user.UserDto;
+import com.model_shared.enums.Permission;
+import com.model_shared.enums.Role;
+import com.model_shared.enums.Type;
+import com.model_shared.enums.Status;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -48,7 +53,7 @@ public class AuthService {
     @Autowired
     BlacklistService blacklistService;
     @Autowired
-    ProfileOrchestrationService profileOrchestrationService;
+    KafkaProducerService kafkaProducerService;
 
 
     private LogContext getLogContext(String methodName) {
@@ -72,9 +77,21 @@ public class AuthService {
 
         loggingService.logInfo("Register attempt for username: " + logContext.getUserId(), logContext);
 
+        // Kiểm tra username đã tồn tại chưa
         if(userRepo.existsByUserName(request.getUsername())){
-            loggingService.logDebug("Username already exists", logContext);
-            throw new ConflictExceptionHandle("", List.of(request.getUsername()) , "Security-Model");
+            // Kiểm tra xem user có status FAILED không, nếu có thì có thể cho phép register lại
+            UserEntity existingUser = userRepo.findByUserName(request.getUsername()).orElse(null);
+            if (existingUser != null && existingUser.getStatus() == Status.FAILED) {
+                loggingService.logInfo("Username exists with FAILED status, allowing re-registration: " + request.getUsername(), logContext);
+                
+                // Xóa user FAILED cũ để cho phép register lại
+                userRepo.delete(existingUser);
+                
+                loggingService.logInfo("Deleted FAILED user to allow re-registration: " + request.getUsername(), logContext);
+            } else {
+                loggingService.logDebug("Username already exists with active status", logContext);
+                throw new ConflictExceptionHandle("", List.of(request.getUsername()) , "Security-Model");
+            }
         }
 
         // kiểm tra xem role ADMIN có tồn tại trong hệ thống không và chỉ chấp nhận 1 ADMIN
@@ -95,36 +112,57 @@ public class AuthService {
                 .birth(request.getBirth())
                 .role(userRole)
                 .permissions(convertToPermissions(request.getPermissions(), userRole))
-                .enabled(true)
-                .accountNonExpired(true)
-                .accountNonLocked(true)
-                .credentialsNonExpired(true)
+                .status(Status.PENDING)
+                // .accountNonExpired(true)
+                // .accountNonLocked(true)
+                // .credentialsNonExpired(true)
                 .build();
 
         userRepo.save(user);
 
-        profileOrchestrationService.createProfile(user, request);
+        Map<String, Object> profileData = new HashMap<>();
+        if(request.getType() == Type.STUDENT){
+            profileData.put("graduate", (Boolean) request.getProfileData().get("graduate"));
+        } else {
+            profileData = null;
+        }
+
+        UserDto userDto = new UserDto();
+        userDto.setType(user.getType());
+        userDto.setUserId(user.getUserId());
+        userDto.setUserName(user.getUsername());
+        userDto.setFirstName(user.getFirstName());
+        userDto.setLastName(user.getLastName());
+        userDto.setAge(user.getAge());
+        userDto.setGender(user.getGender());
+        userDto.setBirth(user.getBirth());
+        userDto.setRole(user.getRole());
+        userDto.setPermissions(user.getPermissions());
+        userDto.setStatus(user.getStatus());
+        userDto.setProfileData(profileData);
+
+        UserEvent userEvent = UserEvent.userRegistered(userDto);
+        kafkaProducerService.sendUserEvent(userEvent);
 
         // Tạo custom claims cho token
         Map<String, Object> claim = new HashMap<>();
         claim.put("role", user.getRole().name());
         claim.put("permissions", user.getPermissions().stream()
-                .map(Enum::name)
-                .collect(Collectors.toList()));
+                .map(Permission::name)
+                .collect(Collectors.toSet()));
         
         String accessToken = jwtService.generateToken(claim, user);
         String refreshToken = jwtService.generateRefreshToken(claim, user);
 
         return SecurityResponse.builder()
+                .status(user.getStatus())
                 .userId(user.getUserId())
                 .userName(user.getUsername())
                 .age(user.getAge())
                 .gender(user.getGender())
                 .birth(user.getBirth())
-                .role(user.getRole().name())
-                .permissions(user.getPermissions().stream()
-                        .map(Enum::name)
-                        .collect(Collectors.toList()))
+                .role(user.getRole())
+                .permissions(user.getPermissions())
                 .accessToken(accessToken)
                 .expires(formatExpirationTime(jwtConfig.getExpiration()))
                 .refreshToken(refreshToken)
@@ -166,26 +204,46 @@ public class AuthService {
                         "", List.of(request.getUsername()), "Security-Model")
                 );
 
+        // Kiểm tra status của user
+        if (user.getStatus() == Status.FAILED) {
+            loggingService.logWarn("Login attempt for user with FAILED status: " + user.getUsername(), logContext);
+            throw new ForbiddenExceptionHandle(
+                "Account creation failed",
+                "Your account creation process failed. Please contact administrator or register again."
+            );
+        } else if (user.getStatus() == Status.PENDING) {
+            loggingService.logWarn("Login attempt for user with PENDING status: " + user.getUsername(), logContext);
+            throw new ForbiddenExceptionHandle(
+                "Account pending",
+                "Your account is still being created. Please wait a moment and try again."
+            );
+        } else if (user.getStatus() == Status.DISABLED) {
+            loggingService.logWarn("Login attempt for disabled user: " + user.getUsername(), logContext);
+            throw new ForbiddenExceptionHandle(
+                "Account disabled",
+                "Your account has been disabled. Please contact administrator."
+            );
+        }
+
         // Tạo custom claims cho token
         Map<String, Object> claim = new HashMap<>();
         claim.put("role", user.getRole().name());
         claim.put("permissions", user.getPermissions().stream()
-                .map(Enum::name)
-                .collect(Collectors.toList()));
+                .map(Permission::name)
+                .collect(Collectors.toSet()));
         
         String accessToken = jwtService.generateToken(claim, user);
         String refreshToken = jwtService.generateRefreshToken(claim, user);
 
         return SecurityResponse.builder()
+                .status(user.getStatus())
                 .userId(user.getUserId())
                 .userName(user.getUsername())
                 .age(user.getAge())
                 .gender(user.getGender())
                 .birth(user.getBirth())
-                .role(user.getRole().name())
-                .permissions(user.getPermissions().stream()
-                        .map(Enum::name)
-                        .collect(Collectors.toList()))
+                .role(user.getRole())
+                .permissions(user.getPermissions())
                 .accessToken(accessToken)
                 .expires(formatExpirationTime(jwtConfig.getExpiration()))
                 .refreshToken(refreshToken)
@@ -240,21 +298,20 @@ public class AuthService {
         Map<String, Object> accessClaims = new HashMap<>();
         accessClaims.put("role", user.getRole().name());
         accessClaims.put("permissions", user.getPermissions().stream()
-                .map(Enum::name)
-                .collect(Collectors.toList()));
+                .map(Permission::name)
+                .collect(Collectors.toSet()));
         
         String newAccessToken = jwtService.generateToken(accessClaims, user);
 
         return SecurityResponse.builder()
+                .status(user.getStatus())
                 .userId(user.getUserId())
                 .userName(user.getUsername())
                 .age(user.getAge())
                 .gender(user.getGender())
                 .birth(user.getBirth())
-                .role(user.getRole().name())
-                .permissions(user.getPermissions().stream()
-                        .map(Enum::name)
-                        .collect(Collectors.toList()))
+                .role(user.getRole())
+                .permissions(user.getPermissions())
                 .accessToken(newAccessToken)
                 .expires(formatExpirationTime(jwtConfig.getExpiration()))
                 .refreshToken(refreshToken)
@@ -308,5 +365,4 @@ public class AuthService {
         return permissions;
     }
 
-    
 }

@@ -29,6 +29,7 @@ import java.util.Collections;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
+import org.springframework.transaction.annotation.Transactional;
 
 
 @Service
@@ -59,7 +60,10 @@ public class StudentServiceImp implements StudentService {
     }
 
     @Override
-    public StudentModel createByUserId(UserDto user) {
+    @Transactional(rollbackFor = Exception.class)
+    public void createByUserId(UserDto user) {
+        // throw new RuntimeException("FAKE ERROR FOR TESTING DLQ");
+        
         LogContext logContext = getLogContext("createByUserId");
 
         if (studentRepo.existsByUserId(user.getUserId())) {
@@ -72,17 +76,9 @@ public class StudentServiceImp implements StudentService {
         student.setGraduate((Boolean) user.getProfileData().get("graduate"));
         studentRepo.save(student);
 
-        // Map to StudentModel with enriched user data
-        StudentModel studentModel = new StudentModel();
-        studentModel.setId(student.getId());
-        studentModel.setUser(user);
-
-        // Invalidate caches
         redisTemplate.delete(STUDENT_CACHE_KEY);
         loggingService.logInfo("Del cache key: " + STUDENT_CACHE_KEY + " after create student", logContext);
-
         loggingService.logInfo("Created student profile for userId: " + user.getUserId(), logContext);
-        return studentModel;
     }
 
     @Override

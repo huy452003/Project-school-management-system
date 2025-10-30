@@ -1,4 +1,4 @@
-package com.security.enums;
+package com.model_shared.enums;
 
 public enum Permission {
     STUDENT_READ,

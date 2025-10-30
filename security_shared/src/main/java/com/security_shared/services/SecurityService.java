@@ -16,7 +16,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import com.model_shared.enums.Role;
+import com.model_shared.enums.Permission;
+
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class SecurityService {
@@ -99,7 +103,7 @@ public class SecurityService {
                 "Token may be invalid, expired, or blacklisted");
         }
 
-        boolean isAdmin = "ADMIN".equals(user.getRole());
+        boolean isAdmin = Role.ADMIN.equals(user.getRole());
 
         // Kiểm tra roles
         if (!isAdmin && !hasRequiredRole(user, requiredRoles)) {
@@ -131,9 +135,9 @@ public class SecurityService {
             return true;
         }
         
-        String userRole = user.getRole();
+        Role userRole = user.getRole();
         for (String requiredRole : requiredRoles) {
-            if ("ADMIN".equals(userRole) || requiredRole.equals(userRole)) {
+            if (Role.ADMIN.equals(userRole) || requiredRole.equals(userRole.name())) {
                 return true;
             }
         }
@@ -146,11 +150,11 @@ public class SecurityService {
         }
         
         // ADMIN có tất cả permissions
-        if ("ADMIN".equals(user.getRole())) {
+        if (Role.ADMIN.equals(user.getRole())) {
             return true;
         }
         
-        List<String> userPermissions = user.getPermissions();
+        Set<Permission> userPermissions = user.getPermissions();
         if (userPermissions == null) {
             return false;
         }
