@@ -38,8 +38,8 @@ public class UserEntity implements UserDetails {
     @Column(name = "type")
     private Type type;
 
-    @Column(name = "user_name", unique = true)
-    private String userName;
+    @Column(name = "username", unique = true)
+    private String username;
 
     @Column(name = "password")
     private String password;
@@ -94,7 +94,7 @@ public class UserEntity implements UserDetails {
 
     @Override
     public String getUsername() {
-        return this.userName;
+        return this.username;
     }
 
     // @Override

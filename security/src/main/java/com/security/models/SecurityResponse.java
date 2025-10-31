@@ -18,7 +18,7 @@ import com.model_shared.enums.Status;
 public class SecurityResponse {
     private Status status;
     private Integer userId;
-    private String userName;
+    private String username;
     private Integer age;
     private Gender gender;
     private LocalDate birth;

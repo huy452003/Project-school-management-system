@@ -3,23 +3,15 @@ package com.common.QLSV.services.imp;
 import com.common.QLSV.entities.StudentEntity;
 import com.common.QLSV.repositories.StudentRepo;
 import com.common.QLSV.services.StudentService;
-import com.model_shared.models.pages.PagedResponseModel;
-import com.model_shared.models.pages.PagedRequestModel;
-import com.model_shared.models.student.CreateStudentModel;
 import com.model_shared.models.student.StudentModel;
 import com.logging.services.LoggingService;
 import com.logging.models.LogContext;
 import com.handle_exceptions.NotFoundExceptionHandle;
-import com.handle_exceptions.ConflictExceptionHandle;
+import com.handle_exceptions.ServiceUnavailableExceptionHandle;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.web.client.RestTemplate;
 import com.model_shared.models.user.UserDto;
-import com.model_shared.models.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -66,11 +58,21 @@ public class StudentServiceImp implements StudentService {
         
         LogContext logContext = getLogContext("createByUserId");
 
-        if (studentRepo.existsByUserId(user.getUserId())) {
-            loggingService.logWarn("Student profile already exists for userId: " + user.getUserId(), logContext);
-            throw new ConflictExceptionHandle("", List.of(String.valueOf(user.getUserId())), "StudentModel");
+        // Kiểm tra xem đã có student với userId này chưa
+        StudentEntity existingStudent = studentRepo.findByUserId(user.getUserId()).orElse(null);
+        
+        if (existingStudent != null) {
+            loggingService.logWarn("Student profile already exists for userId: " + user.getUserId() + 
+                ". This may be orphaned from previous failed registration. Deleting and recreating...", logContext);
+            
+            // Xóa student cũ (orphaned) để tạo lại
+            studentRepo.delete(existingStudent);
+            studentRepo.flush(); // Flush để đảm bảo DELETE thực thi trước INSERT
+            
+            loggingService.logInfo("Deleted orphaned student for userId: " + user.getUserId(), logContext);
         }
 
+        // Tạo student mới
         StudentEntity student = new StudentEntity();
         student.setUserId(user.getUserId());
         student.setGraduate((Boolean) user.getProfileData().get("graduate"));
@@ -101,7 +103,7 @@ public class StudentServiceImp implements StudentService {
         }
 
         // Enrich with user data from Security
-        List<StudentModel> studentModels = enrichStudentsWithUserData(studentEntities, logContext);
+        List<StudentModel> studentModels = loadStudentsWithUserData(studentEntities, logContext);
         
         loggingService.logInfo("Gets Student Successfully", logContext);
 
@@ -112,7 +114,7 @@ public class StudentServiceImp implements StudentService {
         return studentModels;
     }
 
-    private List<StudentModel> enrichStudentsWithUserData(List<StudentEntity> studentEntities, LogContext logContext) {
+    private List<StudentModel> loadStudentsWithUserData(List<StudentEntity> studentEntities, LogContext logContext) {
         try {
             // Collect all userIds
             List<Integer> userIds = studentEntities.stream()
@@ -120,19 +122,22 @@ public class StudentServiceImp implements StudentService {
                     .distinct()
                     .toList();
 
-            // Call Security batch endpoint
-            java.util.Map<String, Object> requestBody = new java.util.HashMap<>();
+            // Call Security batch endpoint (internal API trả về List trực tiếp để tối ưu)
+            Map<String, Object> requestBody = new HashMap<>();
             requestBody.put("ids", userIds);
 
-            Response<List<UserDto>> response = restTemplate.postForObject(
+            @SuppressWarnings("unchecked")
+            List<Object> dataFromUsers = restTemplate.postForObject(
                     securityBaseUrl + "/auth/internal/users/batch",
                     requestBody,
-                    Response.class
+                    List.class
             );
 
-            Map<Integer, UserDto> usersById = new java.util.HashMap<>();
-            if (response != null && response.getData() != null) {
-                for (UserDto user : response.getData()) {
+            Map<Integer, UserDto> usersById = new HashMap<>();
+            if (dataFromUsers != null) {
+                for (Object obj : dataFromUsers) {
+                    // Convert LinkedHashMap sang UserDto
+                    UserDto user = objectMapper.convertValue(obj, UserDto.class);
                     usersById.put(user.getUserId(), user);
                 }
             }
@@ -160,25 +165,12 @@ public class StudentServiceImp implements StudentService {
 
             return studentModels;
         } catch (Exception e) {
-            loggingService.logError("Failed to enrich student data with user info", e, logContext);
-            // Fallback: return students without user data (create minimal UserDto with graduate)
-            List<StudentModel> studentModels = new ArrayList<>();
-            for (StudentEntity studentEntity : studentEntities) {
-                // Create minimal UserDto with graduate in profileData
-                Map<String, Object> profileData = new HashMap<>();
-                profileData.put("graduate", studentEntity.getGraduate());
-                
-                UserDto minimalUser = UserDto.builder()
-                        .userId(studentEntity.getUserId())
-                        .profileData(profileData)
-                        .build();
-                
-                StudentModel studentModel = new StudentModel();
-                studentModel.setId(studentEntity.getId());
-                studentModel.setUser(minimalUser);
-                studentModels.add(studentModel);
-            }
-            return studentModels;
+            loggingService.logError("Failed to enrich student data with user info from Security service", e, logContext);
+            throw new ServiceUnavailableExceptionHandle(
+                "Cannot retrieve user information from Security service",
+                "Security service may be down or experiencing issues. Please try again later.",
+                "Security"
+            );
         }
     }
 

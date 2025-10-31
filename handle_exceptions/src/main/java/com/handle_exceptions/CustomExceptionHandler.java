@@ -128,7 +128,7 @@ public class CustomExceptionHandler {
         Response<?> response = new Response<>(
                 401,
                 messageSource.getMessage("response.error.unauthorized", null, locale),
-                "Security-Model",
+                "Security",
                 error,
                 null
         );
@@ -148,11 +148,34 @@ public class CustomExceptionHandler {
         Response<?> response = new Response<>(
                 403,
                 messageSource.getMessage("response.error.forbidden", null, locale),
-                "Security-Model",
+                "Security",
                 error,
                 null
         );
         return ResponseEntity.status(403).body(response);
+    }
+
+    @ResponseStatus(HttpStatus.SERVICE_UNAVAILABLE)
+    @ExceptionHandler(ServiceUnavailableExceptionHandle.class)
+    ResponseEntity<Response<?>> serviceUnavailableExceptionHandler(ServiceUnavailableExceptionHandle e) {
+        Locale locale = LocaleContextHolder.getLocale();
+        Map<String, String> error = new HashMap<>();
+        error.put("Error", e.getMessage());
+        if (e.getModelName() != null) {
+            error.put("ModelName", e.getModelName());
+        }
+        if (e.getDetails() != null) {
+            error.put("Details", e.getDetails());
+        }
+        
+        Response<?> response = new Response<>(
+                503,
+                messageSource.getMessage("response.error.serviceUnavailable", null, locale),
+                e.getModelName(),
+                error,
+                null
+        );
+        return ResponseEntity.status(503).body(response);
     }
 
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)

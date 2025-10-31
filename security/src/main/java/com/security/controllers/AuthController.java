@@ -20,11 +20,13 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import jakarta.validation.Valid;
+import org.modelmapper.ModelMapper;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import com.security.repositories.UserRepo;
 
@@ -44,6 +46,9 @@ public class AuthController {
 
     @Autowired
     private ReloadableResourceBundleMessageSource messageSource;
+    
+    @Autowired
+    private ModelMapper modelMapper;
 
     private LogContext getLogContext(String methodName) {
         return LogContext.builder()
@@ -160,22 +165,12 @@ public class AuthController {
         String token = authHeader.substring(7); 
 
             String username = authService.getUsernameFromToken(token);
-            UserEntity user = userRepo.findByUserName(username).orElseThrow(
+            UserEntity user = userRepo.findByUsername(username).orElseThrow(
                     () -> new NotFoundExceptionHandle("", List.of(username), "Security-Model")
             );
 
-            UserDto userDto = new UserDto();
-            userDto.setUserId(user.getUserId());
-            userDto.setType(user.getType());
-            userDto.setUserName(user.getUsername());
-            userDto.setFirstName(user.getFirstName());
-            userDto.setLastName(user.getLastName());
-            userDto.setAge(user.getAge());
-            userDto.setGender(user.getGender());
-            userDto.setBirth(user.getBirth());
-            userDto.setRole(user.getRole());
-            userDto.setPermissions(user.getPermissions());
-            userDto.setStatus(user.getStatus());
+            // Convert using ModelMapper
+            UserDto userDto = modelMapper.map(user, UserDto.class);
 
             Response<UserDto> response = new Response<>(
                     200,
@@ -213,6 +208,35 @@ public class AuthController {
         return ResponseEntity.status(response.getStatus()).body(response);
     }
     
+    @PostMapping("/internal/users/batch")
+    public ResponseEntity<List<UserDto>> getUsersByIds(
+            @RequestBody Map<String, List<Integer>> request
+    ) {
+        LogContext logContext = getLogContext("getUsersByIds");
+        
+        List<Integer> userIds = request.get("ids");
+        
+        if (userIds == null || userIds.isEmpty()) {
+            loggingService.logWarn("Empty userIds list in batch request", logContext);
+            return ResponseEntity.ok(List.of());
+        }
+        
+        loggingService.logInfo("Batch getting users, count: " + userIds.size(), logContext);
+        
+        // Lấy tất cả users theo IDs
+        List<UserEntity> entities = userRepo.findAllById(userIds);
+        
+        // Convert sang UserDto using ModelMapper
+        List<UserDto> userDtos = entities.stream()
+                .map(entity -> modelMapper.map(entity, UserDto.class))
+                .collect(Collectors.toList());
+        
+        loggingService.logInfo("Successfully retrieved " + userDtos.size() + " users", logContext);
+        
+        // Internal API: Trả về data trực tiếp, không cần Response wrapper
+        return ResponseEntity.ok(userDtos);
+    }
+    
     @GetMapping("/check-status")
     public ResponseEntity<Response<Map<String, Object>>> checkAccountStatus(
         @RequestHeader("Authorization") String authHeader,
@@ -225,7 +249,7 @@ public class AuthController {
         String token = authHeader.substring(7);
         
         String username = authService.getUsernameFromToken(token);
-        UserEntity user = userRepo.findByUserName(username).orElseThrow(
+        UserEntity user = userRepo.findByUsername(username).orElseThrow(
                 () -> new NotFoundExceptionHandle("", List.of(username), "Security-Model")
         );
         

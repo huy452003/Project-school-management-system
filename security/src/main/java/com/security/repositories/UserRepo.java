@@ -14,9 +14,9 @@ import java.util.Optional;
 
 @Repository
 public interface UserRepo extends JpaRepository<UserEntity, Integer> {
-    Optional<UserEntity> findByUserName(String userName);
+    Optional<UserEntity> findByUsername(String username);
     Optional<UserEntity> findByUserId(Integer userId);
-    boolean existsByUserName(String userName);
+    boolean existsByUsername(String username);
     boolean existsByUserId(Integer userId);
     long countByRole(Role role);
     

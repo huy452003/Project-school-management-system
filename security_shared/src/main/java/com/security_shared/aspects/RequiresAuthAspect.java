@@ -89,7 +89,7 @@ public class RequiresAuthAspect {
             }
         }
         
-        loggingService.logDebug("User " + currentUser.getUserName() 
+        loggingService.logDebug("User " + currentUser.getUsername() 
         + " successfully authorized for method: " + method.getName()
         + " with roles: " + String.join(", ", requiresAuth.roles())
         + " and permissions: " + String.join(", ", requiresAuth.permissions()), logContext);

@@ -66,7 +66,7 @@ public class SecurityService {
                 if (responseBody != null && responseBody.getData() != null) {
                     UserDto user = responseBody.getData();
                     loggingService.logDebug("Successfully retrieved user from security module: " 
-                            + user.getUserName(), logContext);
+                            + user.getUsername(), logContext);
                     return user;
                 }
             }
@@ -125,7 +125,7 @@ public class SecurityService {
                 "User does not have required permissions: " + requiredPermissionsStr);
         }
 
-        loggingService.logDebug("User " + user.getUserName() + " successfully authorized", logContext);
+        loggingService.logDebug("User " + user.getUsername() + " successfully authorized", logContext);
         return user;
     }
 
@@ -159,9 +159,16 @@ public class SecurityService {
             return false;
         }
         
+        // Convert String sang Permission enum để so sánh
         for (String requiredPermission : requiredPermissions) {
-            if (userPermissions.contains(requiredPermission)) {
-                return true;
+            try {
+                Permission permissionEnum = Permission.valueOf(requiredPermission);
+                if (userPermissions.contains(permissionEnum)) {
+                    return true;
+                }
+            } catch (IllegalArgumentException e) {
+                // Invalid permission string, skip
+                loggingService.logWarn("Invalid permission string: " + requiredPermission, getLogContext("hasRequiredPermission"));
             }
         }
         return false;

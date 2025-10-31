@@ -26,6 +26,7 @@ import com.model_shared.enums.Permission;
 import com.model_shared.enums.Role;
 import com.model_shared.enums.Type;
 import com.model_shared.enums.Status;
+import org.modelmapper.ModelMapper;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -54,6 +55,8 @@ public class AuthService {
     BlacklistService blacklistService;
     @Autowired
     KafkaProducerService kafkaProducerService;
+    @Autowired
+    ModelMapper modelMapper;
 
 
     private LogContext getLogContext(String methodName) {
@@ -78,16 +81,13 @@ public class AuthService {
         loggingService.logInfo("Register attempt for username: " + logContext.getUserId(), logContext);
 
         // Kiểm tra username đã tồn tại chưa
-        if(userRepo.existsByUserName(request.getUsername())){
+        UserEntity existingUser = null;
+        if(userRepo.existsByUsername(request.getUsername())){
             // Kiểm tra xem user có status FAILED không, nếu có thì có thể cho phép register lại
-            UserEntity existingUser = userRepo.findByUserName(request.getUsername()).orElse(null);
+            existingUser = userRepo.findByUsername(request.getUsername()).orElse(null);
             if (existingUser != null && existingUser.getStatus() == Status.FAILED) {
-                loggingService.logInfo("Username exists with FAILED status, allowing re-registration: " + request.getUsername(), logContext);
-                
-                // Xóa user FAILED cũ để cho phép register lại
-                userRepo.delete(existingUser);
-                
-                loggingService.logInfo("Deleted FAILED user to allow re-registration: " + request.getUsername(), logContext);
+                loggingService.logInfo("Username exists with FAILED status, allowing re-registration by reusing userId: " 
+                    + existingUser.getUserId(), logContext);
             } else {
                 loggingService.logDebug("Username already exists with active status", logContext);
                 throw new ConflictExceptionHandle("", List.of(request.getUsername()) , "Security-Model");
@@ -101,22 +101,40 @@ public class AuthService {
         }
 
         Role userRole = Role.valueOf(request.getRole().toUpperCase());
-        UserEntity user = UserEntity.builder()
-                .type(request.getType())
-                .userName(request.getUsername())
-                .password(passwordEncoder.encode(request.getPassword()))
-                .firstName(request.getFirstName())
-                .lastName(request.getLastName())
-                .age(request.getAge())
-                .gender(request.getGender())
-                .birth(request.getBirth())
-                .role(userRole)
-                .permissions(convertToPermissions(request.getPermissions(), userRole))
-                .status(Status.PENDING)
-                // .accountNonExpired(true)
-                // .accountNonLocked(true)
-                // .credentialsNonExpired(true)
-                .build();
+        
+        UserEntity user;
+        if (existingUser != null) {
+            // Re-registration: UPDATE user FAILED thay vì tạo mới
+            // Giữ nguyên userId để tránh lủng lỗ
+            user = existingUser;
+            user.setType(request.getType());
+            user.setPassword(passwordEncoder.encode(request.getPassword()));
+            user.setFirstName(request.getFirstName());
+            user.setLastName(request.getLastName());
+            user.setAge(request.getAge());
+            user.setGender(request.getGender());
+            user.setBirth(request.getBirth());
+            user.setRole(userRole);
+            user.setPermissions(convertToPermissions(request.getPermissions(), userRole));
+            user.setStatus(Status.PENDING);
+            
+            loggingService.logInfo("Reusing existing userId: " + user.getUserId() + " for re-registration", logContext);
+        } else {
+            // New registration: Tạo user mới
+            user = UserEntity.builder()
+                    .type(request.getType())
+                    .username(request.getUsername())
+                    .password(passwordEncoder.encode(request.getPassword()))
+                    .firstName(request.getFirstName())
+                    .lastName(request.getLastName())
+                    .age(request.getAge())
+                    .gender(request.getGender())
+                    .birth(request.getBirth())
+                    .role(userRole)
+                    .permissions(convertToPermissions(request.getPermissions(), userRole))
+                    .status(Status.PENDING)
+                    .build();
+        }
 
         userRepo.save(user);
 
@@ -127,18 +145,10 @@ public class AuthService {
             profileData = null;
         }
 
-        UserDto userDto = new UserDto();
-        userDto.setType(user.getType());
-        userDto.setUserId(user.getUserId());
-        userDto.setUserName(user.getUsername());
-        userDto.setFirstName(user.getFirstName());
-        userDto.setLastName(user.getLastName());
-        userDto.setAge(user.getAge());
-        userDto.setGender(user.getGender());
-        userDto.setBirth(user.getBirth());
-        userDto.setRole(user.getRole());
-        userDto.setPermissions(user.getPermissions());
-        userDto.setStatus(user.getStatus());
+        // Convert UserEntity → UserDto using ModelMapper
+        UserDto userDto = modelMapper.map(user, UserDto.class);
+        
+        // Set custom field (profileData - không có trong UserEntity)
         userDto.setProfileData(profileData);
 
         UserEvent userEvent = UserEvent.userRegistered(userDto);
@@ -157,7 +167,7 @@ public class AuthService {
         return SecurityResponse.builder()
                 .status(user.getStatus())
                 .userId(user.getUserId())
-                .userName(user.getUsername())
+                .username(user.getUsername())
                 .age(user.getAge())
                 .gender(user.getGender())
                 .birth(user.getBirth())
@@ -170,27 +180,6 @@ public class AuthService {
                 .build();
     }
 
-    public TokenInfo decodeToken(String token){
-        LogContext logContext = getLogContext("decodeToken");
-        try{
-            TokenInfo tokenInfo = TokenInfo.builder()
-                .username(jwtService.extractUsername(token))
-                .role(jwtService.extractRole(token))
-                .permissions(jwtService.extractPermissions(token))
-                .expiration(formatExpirationTime(jwtService.extractExpiration(token).getTime()))
-                .issuedAt(formatExpirationTime(jwtService.extractIssuedAt(token).getTime()))
-                .jti(jwtService.extractJTI(token))
-                .isExpired(jwtService.isTokenExpired(token))
-                .build();
-
-            loggingService.logInfo("Token decoded successfully", logContext);
-            return tokenInfo;
-        }catch(Exception e){
-            loggingService.logError("Error decoding token", e, logContext);
-            return null;
-        }
-    }
-
     public SecurityResponse login(Login request){
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword())
@@ -199,7 +188,7 @@ public class AuthService {
         logContext.setUserId(request.getUsername());
 
         loggingService.logInfo("Login attempt for username: " + logContext.getUserId(), logContext);
-        UserEntity user = userRepo.findByUserName(request.getUsername())
+        UserEntity user = userRepo.findByUsername(request.getUsername())
                 .orElseThrow(() -> new NotFoundExceptionHandle(
                         "", List.of(request.getUsername()), "Security-Model")
                 );
@@ -238,7 +227,7 @@ public class AuthService {
         return SecurityResponse.builder()
                 .status(user.getStatus())
                 .userId(user.getUserId())
-                .userName(user.getUsername())
+                .username(user.getUsername())
                 .age(user.getAge())
                 .gender(user.getGender())
                 .birth(user.getBirth())
@@ -285,7 +274,7 @@ public class AuthService {
             , "User has been logged out from all devices");
         }
 
-        UserEntity user = userRepo.findByUserName(username)
+        UserEntity user = userRepo.findByUsername(username)
                 .orElseThrow(() -> new NotFoundExceptionHandle(
                         "", List.of(username),"Security-Model")
                 );
@@ -306,7 +295,7 @@ public class AuthService {
         return SecurityResponse.builder()
                 .status(user.getStatus())
                 .userId(user.getUserId())
-                .userName(user.getUsername())
+                .username(user.getUsername())
                 .age(user.getAge())
                 .gender(user.getGender())
                 .birth(user.getBirth())
@@ -317,6 +306,27 @@ public class AuthService {
                 .refreshToken(refreshToken)
                 .refExpires(formatExpirationTime(jwtService.extractExpiration(refreshToken).getTime()))
                 .build();
+    }
+
+    public TokenInfo decodeToken(String token){
+        LogContext logContext = getLogContext("decodeToken");
+        try{
+            TokenInfo tokenInfo = TokenInfo.builder()
+                .username(jwtService.extractUsername(token))
+                .role(jwtService.extractRole(token))
+                .permissions(jwtService.extractPermissions(token))
+                .expiration(formatExpirationTime(jwtService.extractExpiration(token).getTime()))
+                .issuedAt(formatExpirationTime(jwtService.extractIssuedAt(token).getTime()))
+                .jti(jwtService.extractJTI(token))
+                .isExpired(jwtService.isTokenExpired(token))
+                .build();
+
+            loggingService.logInfo("Token decoded successfully", logContext);
+            return tokenInfo;
+        }catch(Exception e){
+            loggingService.logError("Error decoding token", e, logContext);
+            return null;
+        }
     }
 
     public String getUsernameFromToken(String token) {

@@ -148,6 +148,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
      private boolean isPublicEndpoint(String uri) {
          return uri.equals("/auth/register") ||
-                uri.equals("/auth/login");
+                uri.equals("/auth/login") ||
+                uri.startsWith("/auth/internal/");  // Internal APIs cho module-to-module
      }
 }

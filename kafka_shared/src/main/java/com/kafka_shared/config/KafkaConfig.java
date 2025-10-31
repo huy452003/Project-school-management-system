@@ -83,6 +83,11 @@ public class KafkaConfig {
             new FixedBackOff(1000L, 3L) 
         );
         
+        // ⚠️ CRITICAL: Với MANUAL_IMMEDIATE ack mode, cần config này
+        // để DefaultErrorHandler tự động commit offset sau khi recoverer xử lý
+        // Nếu không, message sẽ được xử lý lại sau khi restart
+        errorHandler.setCommitRecovered(true);
+        
         factory.setCommonErrorHandler(errorHandler);
         
         return factory;

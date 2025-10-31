@@ -66,10 +66,13 @@ public class RetryFailureHandlerService implements ConsumerRecordRecoverer {
                 );
                 
                 loggingService.logWarn(
-                    String.format("Successfully sent %s event to DLQ: %s", 
+                    String.format("Successfully sent %s event to DLQ: %s. Message will be skipped (offset will advance).", 
                         eventMetadata.getEntityType(), event.getEventId()),
                     getLogContext("accept")
                 );
+                
+                // ✅ Return bình thường → Kafka auto-acknowledge → Skip message
+                // Đây là behavior CHUẨN: Message lỗi vào DLQ, offset tăng, consumer tiếp tục
                 
             } else {
                 // xử lý record không phải KafkaMessage (ví dụ: lỗi deserialization)
@@ -103,10 +106,18 @@ public class RetryFailureHandlerService implements ConsumerRecordRecoverer {
             
         } catch (Exception e) {
             loggingService.logError(
-                String.format("Error in retry failure handler: %s", e.getMessage()),
+                String.format("Error in retry failure handler: %s. Acknowledging anyway to prevent consumer blocking.", 
+                    e.getMessage()),
                 e,
                 getLogContext("accept")
             );
+            // ⚠️ KHÔNG throw exception ra ngoài
+            // → Kafka sẽ auto-acknowledge
+            // → Consumer tiếp tục process message tiếp theo
+            // → Message lỗi đã ở trong DLQ hoặc notification
         }
+        
+        // ✅ Return bình thường → Kafka auto-acknowledge offset
+        // Điều này đảm bảo consumer KHÔNG bị stuck ở message lỗi
     }
 }

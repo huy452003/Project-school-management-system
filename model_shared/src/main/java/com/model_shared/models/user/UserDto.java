@@ -22,7 +22,7 @@ import com.model_shared.enums.Status;
 public class UserDto {
     private Type type;
     private Integer userId;
-    private String userName;
+    private String username;
     private String firstName;
     private String lastName;
     private Integer age;

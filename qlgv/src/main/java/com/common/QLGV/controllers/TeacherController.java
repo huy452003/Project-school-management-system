@@ -56,7 +56,7 @@ public class TeacherController {
         Locale locale = Locale.forLanguageTag(acceptLanguage);
         LogContext logContext = getLogContext("get");
 
-        loggingService.logInfo("Get teachers API called successfully by user: " + currentUser.getUserName()
+        loggingService.logInfo("Get teachers API called successfully by user: " + currentUser.getUsername()
                 , logContext);
 
         List<TeacherModel> teacherModels = teacherServiceImp.gets();
@@ -83,7 +83,7 @@ public class TeacherController {
 
         List<CreateTeacherModel> createTeacherModels = req.getTeachers();
 
-        loggingService.logInfo("Create teachers API called successfully by user : " + currentUser.getUserName()
+        loggingService.logInfo("Create teachers API called successfully by user : " + currentUser.getUsername()
                 , logContext);
 
         List<TeacherEntity> studentEntities = teacherServiceImp.creates(createTeacherModels);
@@ -110,7 +110,7 @@ public class TeacherController {
 
         List<TeacherModel> teacherModels = req.getTeachers();
 
-        loggingService.logInfo("Update teachers API called successfully by user : " + currentUser.getUserName()
+        loggingService.logInfo("Update teachers API called successfully by user : " + currentUser.getUsername()
                 , logContext);
 
         List<TeacherEntity> studentEntities = teacherServiceImp.updates(teacherModels);
@@ -136,7 +136,7 @@ public class TeacherController {
         LogContext logContext = getLogContext("delete");
 
 
-        loggingService.logInfo("Delete teachers API called successfully by user : " + currentUser.getUserName()
+        loggingService.logInfo("Delete teachers API called successfully by user : " + currentUser.getUsername()
                 , logContext);
 
         teacherServiceImp.deletes(studentModels);
@@ -198,7 +198,7 @@ public class TeacherController {
 
         loggingService.logInfo(String.format(
                 "Get paged teachers API called successfully by user: %s - Page: %d, Size: %d, Sort: %s : %s", 
-                currentUser.getUserName(), page, size, sortBy, sortDirection), logContext);
+                currentUser.getUsername(), page, size, sortBy, sortDirection), logContext);
         
         PagedRequestModel pagedRequest = new PagedRequestModel(page, size, sortBy, sortDirection);
         PagedResponseModel<TeacherModel> pagedResponse = teacherServiceImp.getsPaged(pagedRequest);
@@ -228,7 +228,7 @@ public class TeacherController {
         Locale locale = Locale.forLanguageTag(acceptLanguage);
         LogContext logContext = getLogContext("filter");
 
-        loggingService.logInfo("Filter teachers API called successfully by user: " + currentUser.getUserName(), logContext);
+        loggingService.logInfo("Filter teachers API called successfully by user: " + currentUser.getUsername(), logContext);
         List<TeacherModel> teacherModels = teacherServiceImp.filter(id, firstName, lastName, age, gender);
         Response<List<TeacherModel>> response = new Response<>(
                 200,

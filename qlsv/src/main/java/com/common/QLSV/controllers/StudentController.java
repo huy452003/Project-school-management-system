@@ -68,7 +68,7 @@ public class StudentController {
     //     Locale locale = Locale.forLanguageTag(acceptLanguage);
     //     LogContext logContext = getLogContext("getPaged");
         
-    //     loggingService.logInfo("Get paged students API called successfully by user: " + currentUser.getUserName()
+    //     loggingService.logInfo("Get paged students API called successfully by user: " + currentUser.getUsername()
     //             + " - Page: " + page + ", Size: " + size + ", Sort: " + sortBy + " " + sortDirection, logContext);
 
     //     PagedRequestModel pagedRequest = new PagedRequestModel(page, size, sortBy, sortDirection);
@@ -100,7 +100,7 @@ public class StudentController {
 //         Locale locale = Locale.forLanguageTag(acceptLanguage);
 //         LogContext logContext = getLogContext("filter");
 //         loggingService.logInfo(
-//                 "Filter students API called successfully by user: " + currentUser.getUserName()
+//                 "Filter students API called successfully by user: " + currentUser.getUsername()
 //                 , logContext
 //         );
 
@@ -116,63 +116,28 @@ public class StudentController {
 //     }
     
 
-    // @GetMapping("")
-    // @RequiresAuth(roles = {"ADMIN", "STUDENT"}, permissions = {"STUDENT_READ"})
-    // ResponseEntity<Response<List<StudentModel>>> get(
-    //         @RequestHeader(value = "Accept-Language", defaultValue = "en") String acceptLanguage,
-    //         @CurrentUser UserDto currentUser)
-    // {
-    //     Locale locale = Locale.forLanguageTag(acceptLanguage);
-    //     LogContext logContext = getLogContext("get");
+    @GetMapping("")
+    @RequiresAuth(roles = {"ADMIN", "STUDENT"}, permissions = {"STUDENT_READ"})
+    ResponseEntity<Response<List<StudentModel>>> get(
+            @RequestHeader(value = "Accept-Language", defaultValue = "en") String acceptLanguage,
+            @CurrentUser UserDto currentUser)
+    {
+        Locale locale = Locale.forLanguageTag(acceptLanguage);
+        LogContext logContext = getLogContext("get");
         
-    //     loggingService.logInfo("Get students API called successfully by user: " + currentUser.getUserName()
-    //             , logContext);
+        loggingService.logInfo("Get students API called successfully by user: " + currentUser.getUsername()
+                , logContext);
 
-    //     List<StudentModel> studentModels = studentServiceImp.gets();
-    //     Response<List<StudentModel>> response = new Response<>(
-    //             200
-    //             , messageSource.getMessage("response.message.getSuccess", null, locale)
-    //             , "StudentsModel"
-    //             , null
-    //             , studentModels
-    //     );
-    //     return ResponseEntity.status(response.getStatus()).body(response);
-    // }
-
-    // @PostMapping("")
-    // @RequiresAuth(roles = {"ADMIN", "STUDENT"}, permissions = {"STUDENT_WRITE"})
-    // ResponseEntity<Response<List<CreateStudentModel>>> add(
-    //         @Valid @RequestBody CreateStudentModelRequest req,
-    //         @RequestHeader(value = "Accept-Language", defaultValue = "en") String acceptLanguage,
-    //         @CurrentUser UserDto currentUser)
-    // {
-    //     Locale locale = Locale.forLanguageTag(acceptLanguage);
-    //     LogContext logContext = getLogContext("add");
-
-    //     List<CreateStudentModel> studentModels = req.getStudents();
-    //     loggingService.logInfo("Create students API called successfully by user: " + currentUser.getUserName(), logContext);
-    //     studentServiceImp.creates(studentModels);
-        
-    //     // Send Kafka events for each created student
-    //     for (CreateStudentModel studentModel : studentModels) {
-    //         String fullName = studentModel.getFirstName() + " " + studentModel.getLastName();
-    //         StudentEvent studentEvent = StudentEvent.studentCreated(
-    //             "temp-id-" + System.currentTimeMillis(), // Temporary ID since CreateStudentModel doesn't have ID
-    //             fullName
-    //         );
-    //         kafkaProducerService.sendStudentEvent(studentEvent);
-    //         loggingService.logInfo("Sent student created event for student: " + fullName, logContext);
-    //     }
-        
-    //     Response<List<CreateStudentModel>> response = new Response<>(
-    //                 200
-    //                 , messageSource.getMessage("response.message.createSuccess", null, locale)
-    //                 , "StudentsModel"
-    //                 , null
-    //                 , studentModels
-    //         );
-    //         return ResponseEntity.status(response.getStatus()).body(response);
-    // }
+        List<StudentModel> studentModels = studentServiceImp.gets();
+        Response<List<StudentModel>> response = new Response<>(
+                200
+                , messageSource.getMessage("response.message.getSuccess", null, locale)
+                , "StudentsModel"
+                , null
+                , studentModels
+        );
+        return ResponseEntity.status(response.getStatus()).body(response);
+    }
 
     // @PutMapping("")
     // @RequiresAuth(roles = {"ADMIN", "STUDENT"}, permissions = {"STUDENT_WRITE"})
@@ -185,7 +150,7 @@ public class StudentController {
     //     LogContext logContext = getLogContext("update");
 
     //     List<StudentModel> studentModels = req.getStudents();
-    //     loggingService.logInfo("Update students API called successfully by user: " + currentUser.getUserName(), logContext);
+    //     loggingService.logInfo("Update students API called successfully by user: " + currentUser.getUsername(), logContext);
     //     studentServiceImp.updates(studentModels);
         
     //     // Send Kafka events for each updated student
@@ -218,7 +183,7 @@ public class StudentController {
     // {
     //     Locale locale = Locale.forLanguageTag(acceptLanguage);
     //     LogContext logContext = getLogContext("delete");
-    //     loggingService.logInfo("Delete students API called successfully by user : " + currentUser.getUserName()
+    //     loggingService.logInfo("Delete students API called successfully by user : " + currentUser.getUsername()
     //             , logContext);
     //     studentServiceImp.deletes(studentModels);
         

@@ -24,7 +24,7 @@ public class UserEvent extends KafkaMessage implements EventMetadata {
 
     @Override
     public String getEntityDisplayName() {
-        return this.user.getUserName();
+        return this.user.getUsername();
     }
 
     @Override
