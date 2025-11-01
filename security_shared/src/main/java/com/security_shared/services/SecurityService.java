@@ -2,6 +2,7 @@ package com.security_shared.services;
 
 import com.model_shared.models.Response;
 import com.model_shared.models.user.UserDto;
+import com.model_shared.models.user.UpdateUserDto;
 import com.handle_exceptions.UnauthorizedExceptionHandle;
 import com.handle_exceptions.ForbiddenExceptionHandle;
 import com.logging.models.LogContext;
@@ -21,6 +22,10 @@ import com.model_shared.enums.Permission;
 
 import java.util.List;
 import java.util.Set;
+import java.util.Map;
+import java.util.HashMap;
+import com.handle_exceptions.ServiceUnavailableExceptionHandle;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Service
 public class SecurityService {
@@ -30,6 +35,9 @@ public class SecurityService {
 
     @Autowired
     private LoggingService loggingService;
+
+    @Autowired
+    private ObjectMapper objectMapper;
 
     @Value("${security.base-url:http://localhost:8083}")
     private String securityBaseUrl;
@@ -172,5 +180,90 @@ public class SecurityService {
             }
         }
         return false;
+    }
+
+    public Map<Integer, UserDto> getUsersByIds(List<Integer> userIds) {
+        LogContext logContext = getLogContext("getUsersByIds");
+        
+        if (userIds == null || userIds.isEmpty()) {
+            loggingService.logDebug("Empty userIds list provided", logContext);
+            return new HashMap<>();
+        }
+
+        try {
+            Map<String, Object> requestBody = new HashMap<>();
+            requestBody.put("ids", userIds);
+
+            loggingService.logDebug("Calling security internal API to batch get users, count: " + userIds.size(), logContext);
+
+            @SuppressWarnings("unchecked")
+            List<Object> dataFromUsers = restTemplate.postForObject(
+                    securityBaseUrl + "/auth/internal/users/batch",
+                    requestBody,
+                    List.class
+            );
+
+            Map<Integer, UserDto> usersById = new HashMap<>();
+            if (dataFromUsers != null) {
+                for (Object obj : dataFromUsers) {
+                    // Convert LinkedHashMap sang UserDto
+                    UserDto user = objectMapper.convertValue(obj, UserDto.class);
+                    usersById.put(user.getUserId(), user);
+                }
+                loggingService.logDebug("Successfully retrieved " + usersById.size() + " users", logContext);
+            }
+
+            return usersById;
+        } catch (Exception e) {
+            loggingService.logError("Failed to get users from Security service", e, logContext);
+            throw new ServiceUnavailableExceptionHandle(
+                "Cannot retrieve user information from Security service",
+                "Security service may be down or experiencing issues. Please try again later.",
+                "Security"
+            );
+        }
+    }
+
+    /**
+     * Update user - Internal API call
+     * @param updateUserDto UpdateUserDto with updated data
+     * @return Updated UserDto
+     */
+    public UserDto updateUser(UpdateUserDto updateUserDto) {
+        LogContext logContext = getLogContext("updateUser");
+        
+        if (updateUserDto == null || updateUserDto.getUserId() == null) {
+            loggingService.logWarn("Invalid user data provided for update", logContext);
+            throw new IllegalArgumentException("UpdateUserDto and userId must not be null");
+        }
+
+        try {
+            loggingService.logDebug("Calling security internal API to update user: " + updateUserDto.getUserId(), logContext);
+
+            ResponseEntity<UserDto> response = restTemplate.postForEntity(
+                    securityBaseUrl + "/auth/internal/users/update",
+                    updateUserDto,
+                    UserDto.class
+            );
+
+            if (response.getStatusCode().is2xxSuccessful() && response.getBody() != null) {
+                loggingService.logDebug("Successfully updated user: " + updateUserDto.getUserId(), logContext);
+                return response.getBody();
+            }
+
+            loggingService.logWarn("Failed to update user. Status: " + response.getStatusCode(), logContext);
+            throw new ServiceUnavailableExceptionHandle(
+                "Failed to update user in Security service",
+                "Security service returned non-success status",
+                "Security"
+            );
+        } catch (Exception e) {
+            loggingService.logError("Failed to update user in Security service", e, logContext);
+            throw new ServiceUnavailableExceptionHandle(
+                "Cannot update user information in Security service",
+                "Security service may be down or experiencing issues. Please try again later.",
+                "Security"
+            );
+        }
     }
 }

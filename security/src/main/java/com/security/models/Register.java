@@ -9,15 +9,16 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.PastOrPresent;
 import java.time.LocalDate;
-import java.util.List;
+import java.util.Set;
 import java.util.Map;
 
 import com.model_shared.enums.Gender;
+import com.model_shared.enums.Permission;
+import com.model_shared.enums.Role;
 import com.model_shared.enums.Type;
 
 @Data
@@ -26,43 +27,47 @@ import com.model_shared.enums.Type;
 @Builder
 public class Register {
 
-    @NotNull(message = "{validate.type.notBlank}")
+    @NotNull(message = "{validate.user.type.notNull}")
     private Type type;
 
-    @NotBlank(message = "{validate.userName.notBlank}")
-    @Size(min = 3, max = 50, message = "Username must be between 3 and 50 characters")
+    @NotBlank(message = "{validate.user.username.notBlank}")
+    @NotNull(message = "{validate.user.username.notNull}")
+    @Size(min = 3, max = 50, message = "{validate.user.username.size}")
     private String username;
     
-    @NotBlank(message = "{validate.password.notBlank}")
-    @Size(min = 6, message = "Password must be at least 6 characters")
+    @NotBlank(message = "{validate.user.password.notBlank}")
+    @NotNull(message = "{validate.user.password.notNull}")
+    @Size(min = 6, message = "{validate.user.password.size}")
     private String password;
     
-    @NotBlank(message = "{validate.firstName.notBlank}")
-    @Size(max = 50, message = "{validate.firstName.size}")
+    @NotBlank(message = "{validate.user.firstName.notBlank}")
+    @NotNull(message = "{validate.user.firstName.notNull}")
+    @Size(max = 50, message = "{validate.user.firstName.size}")
     private String firstName;
     
-    @NotBlank(message = "{validate.lastName.notBlank}")
-    @Size(max = 50, message = "{validate.lastName.size}")
+    @NotBlank(message = "{validate.user.lastName.notBlank}")
+    @NotNull(message = "{validate.user.lastName.notNull}")
+    @Size(max = 50, message = "{validate.user.lastName.size}")
     private String lastName;
     
-    @NotNull(message = "{validate.age.notNull}")
-    @Min(value = 1, message = "{validate.age.min}")
-    @Max(value = 99, message = "{validate.age.max}")
+    @NotNull(message = "{validate.user.age.notNull}")
+    @Min(value = 1, message = "{validate.user.age.min}")
+    @Max(value = 99, message = "{validate.user.age.max}")
     private Integer age;
 
-    @NotNull(message = "{validate.gender.notNull}")
+    @NotNull(message = "{validate.user.gender.notNull}")
     private Gender gender;
 
     @JsonFormat(pattern = "dd-MM-yyyy")
-    @PastOrPresent(message = "{validate.birth.check}")
-    @NotNull(message = "{validate.birth.notNull}")
+    @PastOrPresent(message = "{validate.user.birth.pastOrPresent}")
+    @NotNull(message = "{validate.user.birth.notNull}")
     private LocalDate birth;
     
-    @NotBlank(message = "{validate.role.notBlank}")
-    @Pattern(regexp = "^(ADMIN|TEACHER|STUDENT)$", message = "{validate.role.invalidType}")
-    private String role;
+    @NotNull(message = "{validate.user.role.notNull}")
+    private Role role;
     
-    private List<String> permissions;
+    @NotNull(message = "{validate.user.permissions.notNull}")
+    private Set<Permission> permissions;
     
     private Map<String, Object> profileData;
 }

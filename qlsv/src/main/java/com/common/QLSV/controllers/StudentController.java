@@ -7,10 +7,8 @@ import com.security_shared.annotations.CurrentUser;
 import com.model_shared.models.Response;
 import com.model_shared.models.pages.PagedResponseModel;
 import com.model_shared.models.pages.PagedRequestModel;
-import com.model_shared.models.student.CreateStudentModel;
 import com.model_shared.models.student.StudentModel;
-import com.model_shared.models.student.request.CreateStudentModelRequest;
-import com.model_shared.models.student.request.StudentModelRequest;
+import com.model_shared.models.user.UpdateEntityModel;
 import com.model_shared.models.user.UserDto;
 import com.logging.services.LoggingService;
 import com.logging.models.LogContext;
@@ -139,40 +137,39 @@ public class StudentController {
         return ResponseEntity.status(response.getStatus()).body(response);
     }
 
-    // @PutMapping("")
-    // @RequiresAuth(roles = {"ADMIN", "STUDENT"}, permissions = {"STUDENT_WRITE"})
-    // ResponseEntity<Response<List<StudentModel>>> update(
-    //         @Valid @RequestBody StudentModelRequest req,
-    //         @RequestHeader(value = "Accept-Language", defaultValue = "en") String acceptLanguage,
-    //         @CurrentUser UserDto currentUser)
-    // {
-    //     Locale locale = Locale.forLanguageTag(acceptLanguage);
-    //     LogContext logContext = getLogContext("update");
+    @PutMapping("/{id}")
+    @RequiresAuth(roles = {"ADMIN", "STUDENT"}, permissions = {"STUDENT_WRITE"})
+    ResponseEntity<Response<StudentModel>> update(
+            @PathVariable("id") Integer id,
+            @Valid @RequestBody UpdateEntityModel req,
+            @RequestHeader(value = "Accept-Language", defaultValue = "en") String acceptLanguage,
+            @CurrentUser UserDto currentUser)
+    {
+        Locale locale = Locale.forLanguageTag(acceptLanguage);
+        LogContext logContext = getLogContext("update");
 
-    //     List<StudentModel> studentModels = req.getStudents();
-    //     loggingService.logInfo("Update students API called successfully by user: " + currentUser.getUsername(), logContext);
-    //     studentServiceImp.updates(studentModels);
+        loggingService.logInfo("Update students API called successfully by user: " + currentUser.getUsername(), logContext);
+        req.setId(id);
+        StudentModel student = studentServiceImp.update(req);
         
-    //     // Send Kafka events for each updated student
-    //     for (StudentModel studentModel : studentModels) {
-    //         String fullName = studentModel.getFirstName() + " " + studentModel.getLastName();
-    //         StudentEvent studentEvent = StudentEvent.studentUpdated(
-    //             studentModel.getId().toString(),
-    //             fullName
-    //         );
-    //         kafkaProducerService.sendStudentEvent(studentEvent);
-    //         loggingService.logInfo("Sent student updated event for student: " + fullName, logContext);
-    //     }
+        // Send Kafka events for each updated student
+        String fullName = student.getUser().getFirstName() + " " + student.getUser().getLastName();
+            StudentEvent studentEvent = StudentEvent.studentUpdated(
+                student.getId().toString(),
+                fullName
+            );
+            kafkaProducerService.sendStudentEvent(studentEvent);
+            loggingService.logInfo("Sent student updated event for student: " + fullName, logContext);
         
-    //     Response<List<StudentModel>> response = new Response<>(
-    //             200
-    //             , messageSource.getMessage("response.message.updateSuccess", null, locale)
-    //             , "StudentsModel"
-    //             , null
-    //             , studentModels
-    //         );
-    //         return ResponseEntity.status(response.getStatus()).body(response);
-    // }
+        Response<StudentModel> response = new Response<>(
+                200
+                , messageSource.getMessage("response.message.updateSuccess", null, locale)
+                , "StudentsModel"
+                , null
+                , student
+            );
+            return ResponseEntity.status(response.getStatus()).body(response);
+    }
 
     // @DeleteMapping("")
     // @RequiresAuth(roles = {"ADMIN", "STUDENT"}, permissions = {"STUDENT_DELETE"})

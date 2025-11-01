@@ -12,6 +12,7 @@ import com.security.models.SecurityResponse;
 import com.security.models.TokenInfo;
 import com.security.services.AuthService;
 import lombok.extern.slf4j.Slf4j;
+import com.model_shared.models.user.UpdateUserDto;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
@@ -235,6 +236,35 @@ public class AuthController {
         
         // Internal API: Trả về data trực tiếp, không cần Response wrapper
         return ResponseEntity.ok(userDtos);
+    }
+
+    @PostMapping("/internal/users/update")
+    public ResponseEntity<UserDto> updateUser(
+        @Valid @RequestBody UpdateUserDto updateUserDto
+    ){
+        LogContext logContext = getLogContext("updateUser");
+        
+        loggingService.logInfo("updateUser API Calling... for userId: " + updateUserDto.getUserId(), logContext);
+        
+        UserEntity userEntity = userRepo.findById(updateUserDto.getUserId()).orElseThrow(
+                () -> new NotFoundExceptionHandle("", List.of(updateUserDto.getUserId().toString()), "Security-Model")
+        );
+        
+        // Update profile data (all fields in UpdateUserDto are required and validated)
+        userEntity.setFirstName(updateUserDto.getFirstName());
+        userEntity.setLastName(updateUserDto.getLastName());
+        userEntity.setAge(updateUserDto.getAge());
+        userEntity.setGender(updateUserDto.getGender());
+        userEntity.setBirth(updateUserDto.getBirth());
+        
+        // Note: Role, permissions, status, username, type are NOT updated via internal API
+        // These require proper authorization and should be handled by Security module endpoints
+        
+        userRepo.save(userEntity);
+        loggingService.logInfo("Updated user profile for userId: " + updateUserDto.getUserId(), logContext);
+        
+        UserDto userDto = modelMapper.map(userEntity, UserDto.class);
+        return ResponseEntity.ok(userDto);
     }
     
     @GetMapping("/check-status")

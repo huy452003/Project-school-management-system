@@ -5,15 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-import java.util.Set;
 import java.time.LocalDate;
 import com.model_shared.enums.Gender;
 import java.util.Map;
-import com.model_shared.enums.Type;
-import com.model_shared.enums.Role;
-import com.model_shared.enums.Permission;
-import com.model_shared.enums.Status;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.PastOrPresent;
@@ -24,17 +18,9 @@ import jakarta.validation.constraints.Max;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Setter
-public class UserDto {
-    @NotNull(message = "{validate.user.type.notNull}")
-    private Type type;
-
+public class UpdateUserDto {
     @NotNull(message = "{validate.user.userId.notNull}")
     private Integer userId;
-
-    @NotBlank(message = "{validate.user.username.notBlank}")
-    @NotNull(message = "{validate.user.username.notNull}")
-    private String username;
 
     @NotBlank(message = "{validate.user.firstName.notBlank}")
     @NotNull(message = "{validate.user.firstName.notNull}")
@@ -57,14 +43,6 @@ public class UserDto {
     @PastOrPresent(message = "{validate.user.birth.pastOrPresent}")
     private LocalDate birth;
 
-    @NotNull(message = "{validate.user.role.notNull}")
-    private Role role;
-
-    @NotNull(message = "{validate.user.permissions.notNull}")
-    private Set<Permission> permissions;
-
-    @NotNull(message = "{validate.user.status.notNull}")
-    private Status status;
-
     private Map<String, Object> profileData;
 }
+

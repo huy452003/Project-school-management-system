@@ -95,12 +95,12 @@ public class AuthService {
         }
 
         // kiểm tra xem role ADMIN có tồn tại trong hệ thống không và chỉ chấp nhận 1 ADMIN
-        Role requestedRole = Role.valueOf(request.getRole().toUpperCase());
+        Role requestedRole = Role.valueOf(request.getRole().name());
         if (requestedRole == Role.ADMIN) {
             validateAdminRoleAssignment(logContext);
         }
 
-        Role userRole = Role.valueOf(request.getRole().toUpperCase());
+        Role userRole = Role.valueOf(request.getRole().name());
         
         UserEntity user;
         if (existingUser != null) {
@@ -115,7 +115,7 @@ public class AuthService {
             user.setGender(request.getGender());
             user.setBirth(request.getBirth());
             user.setRole(userRole);
-            user.setPermissions(convertToPermissions(request.getPermissions(), userRole));
+            user.setPermissions(request.getPermissions());
             user.setStatus(Status.PENDING);
             
             loggingService.logInfo("Reusing existing userId: " + user.getUserId() + " for re-registration", logContext);
@@ -131,7 +131,7 @@ public class AuthService {
                     .gender(request.getGender())
                     .birth(request.getBirth())
                     .role(userRole)
-                    .permissions(convertToPermissions(request.getPermissions(), userRole))
+                    .permissions(request.getPermissions())
                     .status(Status.PENDING)
                     .build();
         }
@@ -352,27 +352,21 @@ public class AuthService {
         loggingService.logInfo("First ADMIN user being created - this is allowed", logContext);
     }
 
-    private Set<Permission> convertToPermissions(List<String> permissionStrings, Role role) {
-        Set<Permission> permissions = new HashSet<>();
+    private Set<Permission> convertToPermissions(Set<Permission> permissions, Role role) {
+        Set<Permission> newPermissions = new HashSet<>();
         
         // ADMIN tự động có tất cả permissions
         if (role == Role.ADMIN) {
-            permissions.addAll(List.of(Permission.values()));
+            newPermissions.addAll(List.of(Permission.values()));
             loggingService.logDebug("ADMIN role assigned all permissions automatically", getLogContext("convertToPermissions"));
-            return permissions;
+            return newPermissions;
         }
         
         // Các role khác cần permissions cụ thể
-        if (permissionStrings != null && !permissionStrings.isEmpty()) {
-            for (String permissionStr : permissionStrings) {
-                try {
-                    permissions.add(Permission.valueOf(permissionStr.toUpperCase()));
-                } catch (IllegalArgumentException e) {
-                    loggingService.logWarn("Invalid permission: " + permissionStr, getLogContext("convertToPermissions"));
-                }
-            }
+        if (permissions != null && !permissions.isEmpty()) {
+            newPermissions.addAll(permissions);
         }
-        return permissions;
+        return newPermissions;
     }
 
 }

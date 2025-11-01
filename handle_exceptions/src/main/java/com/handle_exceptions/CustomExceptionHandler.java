@@ -68,7 +68,14 @@ public class CustomExceptionHandler {
                 key = key.substring(1, key.length() - 1);
             }
             String msg = messageSource.getMessage(key != null ? key : fe.getField(), null, key != null ? key : fe.getField(), locale);
-            errors.put(fe.getField(), msg);
+            
+            // Extract field name without nested object prefix (e.g., "user.firstName" -> "firstName")
+            String fieldName = fe.getField();
+            if (fieldName.contains(".")) {
+                fieldName = fieldName.substring(fieldName.lastIndexOf(".") + 1);
+            }
+            
+            errors.put(fieldName, msg);
         });
 
         Response<?> resp = new Response<>(
@@ -87,15 +94,29 @@ public class CustomExceptionHandler {
         Locale locale = LocaleContextHolder.getLocale();
         Map<String, String> errors = new HashMap<>();
         Throwable cause = ex.getMostSpecificCause();
-        String modelName = "Request-Model"; // Generic model name instead of hardcoded TeacherModel
 
         if (cause instanceof InvalidFormatException || cause instanceof MismatchedInputException) {
             List<JsonMappingException.Reference> path = ((JsonMappingException) cause).getPath();
             if (!path.isEmpty()) {
                 String field = path.get(path.size() - 1).getFieldName();
-                String key = String.format("validate.%s.invalidType", field);
-                String msg = messageSource.getMessage(key, null,
-                        field + " không đúng định dạng.", locale);
+                
+                // Try validate.user.{field}.invalidType first (for user-related fields)
+                String key = String.format("validate.user.%s.invalidType", field);
+                String msg = messageSource.getMessage(key, null, locale);
+                
+                // If message equals key (not found), try validate.{field}.invalidType
+                if (msg.equals(key)) {
+                    key = String.format("validate.%s.invalidType", field);
+                    msg = messageSource.getMessage(key, null, locale);
+                }
+                
+                // If still not found (msg equals key), use default message based on locale
+                if (msg.equals(key)) {
+                    msg = locale.getLanguage().equals("vi") 
+                            ? field + " không đúng định dạng." 
+                            : field + " is invalid format.";
+                }
+                
                 errors.put(field, msg);
             }
         } else {
@@ -107,7 +128,7 @@ public class CustomExceptionHandler {
         Response<?> response = new Response<>(
                 400,
                 messageSource.getMessage("response.error.validateFailed", null, locale),
-                modelName,
+                "Request-Model",
                 errors,
                 null
         );

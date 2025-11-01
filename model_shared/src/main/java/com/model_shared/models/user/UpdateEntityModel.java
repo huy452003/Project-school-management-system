@@ -1,4 +1,4 @@
-package com.model_shared.models.student;
+package com.model_shared.models.user;
 
 import jakarta.validation.constraints.*;
 import jakarta.validation.Valid;
@@ -7,16 +7,16 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-import com.model_shared.models.user.UserDto;
-
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @ToString
-public class StudentModel {
+public class UpdateEntityModel {
     
     private Integer id;
 
     @NotNull(message = "{validate.user.notNull}")
-    private UserDto user;
+    @Valid
+    private UpdateUserDto user;
 }
+
