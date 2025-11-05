@@ -17,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
 import com.model_shared.enums.Role;
 import com.model_shared.enums.Permission;
 
@@ -25,6 +26,7 @@ import java.util.Set;
 import java.util.Map;
 import java.util.HashMap;
 import com.handle_exceptions.ServiceUnavailableExceptionHandle;
+import com.handle_exceptions.NotFoundExceptionHandle;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Service
@@ -224,11 +226,6 @@ public class SecurityService {
         }
     }
 
-    /**
-     * Update user - Internal API call
-     * @param updateUserDto UpdateUserDto with updated data
-     * @return Updated UserDto
-     */
     public UserDto updateUser(UpdateUserDto updateUserDto) {
         LogContext logContext = getLogContext("updateUser");
         
@@ -251,19 +248,72 @@ public class SecurityService {
                 return response.getBody();
             }
 
+            if(response.getStatusCode().value() == 404) {
+                loggingService.logWarn("User not found. Status: " + response.getStatusCode(), logContext);
+                throw new NotFoundExceptionHandle("", List.of(updateUserDto.getUserId().toString()), "Security-Model");
+            }
+
             loggingService.logWarn("Failed to update user. Status: " + response.getStatusCode(), logContext);
             throw new ServiceUnavailableExceptionHandle(
                 "Failed to update user in Security service",
                 "Security service returned non-success status",
-                "Security"
+                "Security-Model"
             );
         } catch (Exception e) {
             loggingService.logError("Failed to update user in Security service", e, logContext);
             throw new ServiceUnavailableExceptionHandle(
                 "Cannot update user information in Security service",
                 "Security service may be down or experiencing issues. Please try again later.",
-                "Security"
+                "Security-Model"
             );
         }
+    }
+
+    public List<Integer> deleteUsers(List<Integer> userIds) {
+        LogContext logContext = getLogContext("deleteUsers");
+        
+        if (userIds == null || userIds.isEmpty()) {
+            loggingService.logWarn("Empty userIds list provided", logContext);
+            return new ArrayList<>();
+        }
+
+        try {
+            loggingService.logDebug("Calling security internal API to delete users: " + userIds, logContext);
+
+            ResponseEntity<List<Integer>> response = restTemplate.exchange(
+                    securityBaseUrl + "/auth/internal/users/delete",
+                    HttpMethod.DELETE,
+                    new HttpEntity<>(userIds),
+                    new ParameterizedTypeReference<>() {}
+            );
+
+            if (response.getStatusCode().is2xxSuccessful() && response.getBody() != null) {
+                loggingService.logDebug("Successfully deleted users: " + userIds, logContext);
+                return response.getBody();
+            }
+
+            if (response.getStatusCode().value() == 404) {
+                loggingService.logWarn("Users not found. Status: " + response.getStatusCode(), logContext);
+                throw new NotFoundExceptionHandle("", userIds.stream().map(String::valueOf).toList(), "Security-Model");
+            }
+
+            loggingService.logWarn("Failed to delete users. Status: " + response.getStatusCode(), logContext);
+            throw new ServiceUnavailableExceptionHandle(
+                "Failed to delete users in Security service",
+                "Security service returned non-success status: " + response.getStatusCode(),
+                "Security-Model"
+            );
+            
+        } catch (NotFoundExceptionHandle e) {
+            throw e;
+        } catch (Exception e) {
+            loggingService.logError("Failed to delete users in Security service", e, logContext);
+            throw new ServiceUnavailableExceptionHandle(
+                "Cannot delete users in Security service",
+                "Security service may be down or experiencing issues. Please try again later.",
+                "Security-Model"
+            );
+        }
+
     }
 }

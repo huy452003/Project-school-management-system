@@ -10,7 +10,9 @@ import com.handle_exceptions.NotFoundExceptionHandle;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.transaction.annotation.Isolation;
 
+import com.model_shared.enums.Status;
 import com.model_shared.models.user.UpdateEntityModel;
 import com.model_shared.models.user.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,9 +23,13 @@ import com.security_shared.services.SecurityService;
 import java.util.List;
 import java.util.Collections;
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.Map;
+import java.util.Set;
 import java.util.HashMap;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.retry.annotation.Retryable;
+import org.springframework.dao.OptimisticLockingFailureException;
 
 
 @Service
@@ -74,34 +80,30 @@ public class StudentServiceImp implements StudentService {
             throw new NotFoundExceptionHandle("", Collections.emptyList(), "StudentModel");
         }
 
-        // Collect all userIds
         List<Integer> userIds = studentEntities.stream()
                 .map(StudentEntity::getUserId)
                 .distinct()
                 .toList();
 
-        // Get users from Security via SecurityService
         Map<Integer, UserDto> usersById = securityService.getUsersByIds(userIds);
-
-        // Map to StudentModel with enriched user data
         List<StudentModel> studentModels = new ArrayList<>();
+
         for (StudentEntity studentEntity : studentEntities) {
             UserDto userDto = usersById.get(studentEntity.getUserId());
             
-            // Sync graduate to user.profileData
-            if (userDto != null) {
+            if (userDto != null && userDto.getStatus().equals(Status.ENABLED)) {
                 if (userDto.getProfileData() == null) {
                     userDto.setProfileData(new HashMap<>());
                 }
                 userDto.getProfileData().put("graduate", studentEntity.getGraduate());
+                
+                StudentModel studentModel = new StudentModel();
+                studentModel.setId(studentEntity.getId());
+                studentModel.setUser(userDto);
+                
+                studentModels.add(studentModel);
+                loggingService.logStudentOperation("GET", studentEntity.getId(), logContext);
             }
-            
-            StudentModel studentModel = new StudentModel();
-            studentModel.setId(studentEntity.getId());
-            studentModel.setUser(userDto);
-            
-            studentModels.add(studentModel);
-            loggingService.logStudentOperation("GET", studentEntity.getId(), logContext);
         }
 
         loggingService.logInfo("Gets Student Successfully", logContext);
@@ -114,7 +116,8 @@ public class StudentServiceImp implements StudentService {
     }
 
     @Override
-    @Transactional(rollbackFor = Exception.class)
+    @Retryable(value = {OptimisticLockingFailureException.class}, maxAttempts = 3)
+    @Transactional(rollbackFor = Exception.class, isolation = Isolation.REPEATABLE_READ)
     public void createByUserId(UserDto user) {
         // throw new RuntimeException("FAKE ERROR FOR TESTING DLQ");
         
@@ -146,53 +149,50 @@ public class StudentServiceImp implements StudentService {
     }
 
     @Override
-    @Transactional(rollbackFor = Exception.class)
-    public StudentModel update(UpdateEntityModel req) {
+    @Retryable(value = {OptimisticLockingFailureException.class}, maxAttempts = 3)
+    @Transactional(rollbackFor = Exception.class, isolation = Isolation.REPEATABLE_READ)
+    public StudentModel update(UpdateEntityModel studentUpdate) {
         LogContext logContext = getLogContext("update");
 
-        if (req == null || req.getId() == null) {
-            throw new NotFoundExceptionHandle("", List.of("Student ID is required"), "StudentModel");
-        }
-
-        if (req.getUser() == null || req.getUser().getUserId() == null) {
+        if (studentUpdate.getUser() == null || studentUpdate.getUser().getUserId() == null) {
             throw new NotFoundExceptionHandle("", List.of("User data is required"), "StudentModel");
         }
 
-        // 1. Find StudentEntity by id
-        StudentEntity studentEntity = studentRepo.findById(req.getId())
+        StudentEntity studentEntity = studentRepo.findById(studentUpdate.getId())
                 .orElseThrow(() -> new NotFoundExceptionHandle("", 
-                    List.of(String.valueOf(req.getId())), "StudentModel"));
+                    List.of(String.valueOf(studentUpdate.getId())), "StudentModel"));
 
-        // 2. Verify userId matches (security check)
-        if (!studentEntity.getUserId().equals(req.getUser().getUserId())) {
+        if (!studentEntity.getUserId().equals(studentUpdate.getUser().getUserId())) {
             throw new NotFoundExceptionHandle("", 
                 List.of("User ID mismatch with Student"), "StudentModel");
         }
 
-        UserDto updatedUser = securityService.updateUser(req.getUser());
-        loggingService.logInfo("Updated user data for userId: " + updatedUser.getUserId(), logContext);
-
-        // 4. Update StudentEntity (graduate field)
-        if (req.getUser().getProfileData() != null && 
-            req.getUser().getProfileData().containsKey("graduate")) {
-            Boolean graduate = (Boolean) req.getUser().getProfileData().get("graduate");
+        // Update student entity TRƯỚC (trong transaction - có thể rollback nếu có lỗi)
+        if (studentUpdate.getUser().getProfileData() != null && 
+            studentUpdate.getUser().getProfileData().containsKey("graduate")) {
+            Boolean graduate = (Boolean) studentUpdate.getUser().getProfileData().get("graduate");
             studentEntity.setGraduate(graduate);
             studentRepo.save(studentEntity);
             loggingService.logInfo("Updated graduate status for student id: " + studentEntity.getId(), logContext);
         }
 
-        // 5. Sync graduate to updatedUser.profileData
+        // Gọi security service SAU để update user
+        // Nếu security service lỗi → throw exception → Spring @Transactional sẽ rollback toàn bộ transaction
+        // → student entity KHÔNG bị update (an toàn)
+        // Transaction chỉ commit khi method return thành công (không có exception)
+        UserDto updatedUser = securityService.updateUser(studentUpdate.getUser());
+        loggingService.logInfo("Updated user data for userId: " + updatedUser.getUserId(), logContext);
+
         if (updatedUser.getProfileData() == null) {
             updatedUser.setProfileData(new HashMap<>());
         }
         updatedUser.getProfileData().put("graduate", studentEntity.getGraduate());
 
-        // 6. Build and return updated StudentModel
         StudentModel updatedStudentModel = new StudentModel();
-        updatedStudentModel.setId(req.getId());
+        updatedStudentModel.setId(studentUpdate.getId());
         updatedStudentModel.setUser(updatedUser);
 
-        loggingService.logStudentOperation("UPDATE", req.getId(), logContext);
+        loggingService.logStudentOperation("UPDATE", studentUpdate.getId(), logContext);
         loggingService.logInfo("Update Student Successfully", logContext);
 
         redisTemplate.delete(STUDENT_CACHE_KEY);
@@ -201,36 +201,61 @@ public class StudentServiceImp implements StudentService {
         return updatedStudentModel;
     }
 
-    // @Override
-    // public Boolean deletes(List<StudentModel> StudentModels) {
-    //     LogContext logContext = getLogContext("deletes");
+    @Override
+    @Retryable(value = {OptimisticLockingFailureException.class}, maxAttempts = 3)
+    @Transactional(rollbackFor = Exception.class, isolation = Isolation.REPEATABLE_READ)
+    public Boolean deletes(List<Integer> userIds) {
+        LogContext logContext = getLogContext("deletes");
 
-    //     List<StudentEntity> listDelete = new ArrayList<>();
-    //     List<String> listIDNotFound = new ArrayList<>();
-    //     for (StudentModel StudentModel : StudentModels) {
-    //         StudentEntity studentEntity = modelMapper.map(StudentModel, StudentEntity.class);
-    //         if (studentRepo.findById(studentEntity.getId()).isPresent()) {
-    //             listDelete.add(studentEntity);
-    //             loggingService.logStudentOperation("DELETE", studentEntity.getId(), logContext);
-    //         } else {
-    //             listIDNotFound.add(String.valueOf(studentEntity.getId()));
-    //         }
-    //     }
+        // Validate và loại bỏ duplicate userIds
+        Set<Integer> uniqueUserIds = new LinkedHashSet<>();
+        List<Integer> duplicates = new ArrayList<>();
+        for (Integer userId : userIds) {
+            if (!uniqueUserIds.add(userId)) {
+                duplicates.add(userId);
+            }
+        }
+        
+        if (!duplicates.isEmpty()) {
+            loggingService.logWarn("Duplicate userIds detected in delete request: " + duplicates 
+                + ". They will be processed only once.", logContext);
+        }
+        
+        List<Integer> uniqueUserIdsList = new ArrayList<>(uniqueUserIds);
 
-    //     if (!listIDNotFound.isEmpty()) {
-    //         loggingService.logError("Found IDs not exist: " + listIDNotFound, null, logContext);
-    //         throw new NotFoundExceptionHandle("", listIDNotFound,"StudentModel");
-    //     }
+        List<String> listIDNotFound = new ArrayList<>();
+        List<StudentEntity> studentEntitiesToDelete = new ArrayList<>();
+        
+        for(Integer userId : uniqueUserIdsList) {
+            StudentEntity studentEntity = studentRepo.findByUserId(userId)
+                    .orElse(null);
+            if (studentEntity != null) {
+                studentEntitiesToDelete.add(studentEntity);
+            } else {
+                listIDNotFound.add(String.valueOf(userId));
+            }
+        }
+        
+        if (!listIDNotFound.isEmpty()) {
+            loggingService.logError("Found IDs not exist: " + listIDNotFound, null, logContext);
+            throw new NotFoundExceptionHandle("", listIDNotFound, "StudentModel");
+        }
 
-    //     studentRepo.deleteAll(listDelete);
-    //     loggingService.logInfo("Delete Students Successfully", logContext);
+        // Xóa student entities TRƯỚC (trong transaction - có thể rollback nếu có lỗi)
+        // Nếu student xóa thành công, transaction sẽ commit
+        studentRepo.deleteAll(studentEntitiesToDelete);
+        loggingService.logInfo("Deleted students with userIds: " + uniqueUserIdsList, logContext);
 
-
-    //     redisTemplate.delete(STUDENT_CACHE_KEY);
-    //     loggingService.logInfo("Del cache key: " + STUDENT_CACHE_KEY + " after del students", logContext);
-
-    //     return true;
-    // }
+        // Gọi security service SAU để xóa users
+        // Nếu security service lỗi → throw exception → sẽ rollback toàn bộ → student không mât (an toàn)
+        // Transaction chỉ commit khi method return thành công (không có exception)
+        List<Integer> deletedUserIds = securityService.deleteUsers(uniqueUserIdsList);
+        loggingService.logInfo("Deleted users with ids: " + deletedUserIds, logContext);
+        
+        redisTemplate.delete(STUDENT_CACHE_KEY);
+        loggingService.logInfo("Del cache key: " + STUDENT_CACHE_KEY + " after del students", logContext);
+        return true;
+    }
 
     // @Override
     // public PagedResponseModel<StudentModel> getsPaged(PagedRequestModel pagedRequest) {

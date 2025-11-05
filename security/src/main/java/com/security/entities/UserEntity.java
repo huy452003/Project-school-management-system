@@ -79,6 +79,10 @@ public class UserEntity implements UserDetails {
     // private boolean credentialsNonExpired = true;
     // private boolean accountNonLocked = true;
 
+    @Version
+    @Column(name = "version")
+    private Long version;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         // Combine role and permissions into authorities

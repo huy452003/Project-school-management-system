@@ -3,6 +3,7 @@ package com.common.QLSV;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.retry.annotation.EnableRetry;
 
 @SpringBootApplication(exclude = {
 	org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration.class,
@@ -13,6 +14,7 @@ import org.springframework.context.annotation.ComponentScan;
 @ComponentScan(basePackages = 
 	{"com.common.QLSV", "com.handle_exceptions", "com.logging", "com.model_shared.config", "com.kafka_shared", "com.security_shared"}
 )
+@EnableRetry
 public class QlsvApplication {
 
 	public static void main(String[] args) {

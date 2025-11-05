@@ -53,13 +53,12 @@ public class StudentEvent extends KafkaMessage implements EventMetadata {
         return studentEvent;
     }
 
-    public static StudentEvent studentDeleted(String id, String fullName) {
+    public static StudentEvent studentDeleted(String id) {
         StudentEvent studentEvent = new StudentEvent(
             "STUDENT_EVENT", 
             "qlsv", 
             "all");
         studentEvent.setId(id);
-        studentEvent.setFullName(fullName);
         studentEvent.setAction("DELETED");
         return studentEvent;
     }

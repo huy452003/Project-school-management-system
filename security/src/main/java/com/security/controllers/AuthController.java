@@ -2,6 +2,7 @@ package com.security.controllers;
 
 import com.model_shared.models.Response;
 import com.model_shared.models.user.UserDto;
+import com.model_shared.enums.Status;
 import com.handle_exceptions.NotFoundExceptionHandle;
 import com.logging.models.LogContext;
 import com.logging.services.LoggingService;
@@ -23,10 +24,13 @@ import org.springframework.web.bind.annotation.*;
 import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.security.repositories.UserRepo;
@@ -250,21 +254,146 @@ public class AuthController {
                 () -> new NotFoundExceptionHandle("", List.of(updateUserDto.getUserId().toString()), "Security-Model")
         );
         
-        // Update profile data (all fields in UpdateUserDto are required and validated)
+        // Check và log warning nếu user đang DISABLED (cho phép update nhưng có warning)
+        if (userEntity.getStatus().equals(Status.DISABLED)) {
+            loggingService.logWarn("Updating user with DISABLED status for userId: " + updateUserDto.getUserId() 
+                + ". User is disabled but update is allowed.", logContext);
+        }
+        
         userEntity.setFirstName(updateUserDto.getFirstName());
         userEntity.setLastName(updateUserDto.getLastName());
         userEntity.setAge(updateUserDto.getAge());
         userEntity.setGender(updateUserDto.getGender());
         userEntity.setBirth(updateUserDto.getBirth());
         
-        // Note: Role, permissions, status, username, type are NOT updated via internal API
-        // These require proper authorization and should be handled by Security module endpoints
-        
         userRepo.save(userEntity);
         loggingService.logInfo("Updated user profile for userId: " + updateUserDto.getUserId(), logContext);
         
         UserDto userDto = modelMapper.map(userEntity, UserDto.class);
         return ResponseEntity.ok(userDto);
+    }
+
+    @DeleteMapping("/internal/users/delete")
+    public ResponseEntity<List<Integer>> deleteUser(
+        @RequestBody List<Integer> req
+    ){
+        LogContext logContext = getLogContext("deleteUser");
+
+        Set<Integer> uniqueUserIds = new LinkedHashSet<>();
+        List<Integer> duplicates = new ArrayList<>();
+        for (Integer userId : req) {
+            if (!uniqueUserIds.add(userId)) {
+                duplicates.add(userId);
+            }
+        }
+        if (!duplicates.isEmpty()) {
+            loggingService.logWarn("Duplicate userIds detected in input: " + duplicates + ". They will be processed only once.", logContext);
+        }
+
+        List<Integer> userIds = new ArrayList<>(uniqueUserIds);
+
+        for (Integer userId : userIds) {
+            UserEntity userEntity = userRepo.findById(userId).orElseThrow(
+                () -> new NotFoundExceptionHandle("", List.of(userId.toString()), "Security-Model")
+            );
+            userRepo.delete(userEntity);
+            loggingService.logInfo("Deleted user with id: " + userId, logContext);
+        }
+        
+        return ResponseEntity.ok(userIds);
+    }
+
+    @PatchMapping("/internal/users/disable")
+    public ResponseEntity<Response<List<Integer>>> disableUsers(
+        @RequestBody List<Integer> req,
+        @RequestHeader(value = "Accept-Language", defaultValue = "en") String acceptLanguage
+    ){
+        LogContext logContext = getLogContext("disableUsers");
+        Locale locale = Locale.forLanguageTag(acceptLanguage);
+
+        Set<Integer> uniqueUserIds = new LinkedHashSet<>();
+        List<Integer> duplicates = new ArrayList<>();
+        for (Integer userId : req) {
+            if (!uniqueUserIds.add(userId)) {
+                duplicates.add(userId);
+            }
+        }
+        
+        if (!duplicates.isEmpty()) {
+            loggingService.logWarn("Duplicate userIds detected in input: " + duplicates + ". They will be processed only once.", logContext);
+        }
+        
+        List<Integer> userIds = new ArrayList<>(uniqueUserIds);
+
+        for (Integer userId : userIds) {
+            UserEntity userEntity = userRepo.findById(userId).orElseThrow(
+                () -> new NotFoundExceptionHandle("", List.of(userId.toString()), "Security-Model")
+            );
+            
+            // Check nếu user đã DISABLED
+            if (userEntity.getStatus() == Status.DISABLED) {
+                loggingService.logWarn("User with id: " + userId + " is already DISABLED. Skipping (idempotent operation).", logContext);
+                continue;
+            }
+            
+            userEntity.setStatus(Status.DISABLED);
+            userRepo.save(userEntity);
+            loggingService.logInfo("Disabled user with id: " + userId, logContext);
+        }
+        
+        Response<List<Integer>> response = new Response<>(
+                200,
+                messageSource.getMessage("response.message.disableUsersSuccess", null, locale),
+                "Security-Model",
+                null,
+                null
+        );
+        return ResponseEntity.status(response.getStatus()).body(response);
+    }
+
+    @PatchMapping("/internal/users/enable")
+    public ResponseEntity<Response<List<Integer>>> enableUsers(
+        @RequestBody List<Integer> req,
+        @RequestHeader(value = "Accept-Language", defaultValue = "en") String acceptLanguage
+    ){
+        LogContext logContext = getLogContext("enableUsers");
+        Locale locale = Locale.forLanguageTag(acceptLanguage);
+
+        Set<Integer> uniqueUserIds = new LinkedHashSet<>();
+        List<Integer> duplicates = new ArrayList<>();
+        for (Integer userId : req) {
+            if (!uniqueUserIds.add(userId)) {
+                duplicates.add(userId);
+            }
+        }
+        
+        if (!duplicates.isEmpty()) {
+            loggingService.logWarn("Duplicate userIds detected in input: " + duplicates + ". They will be processed only once.", logContext);
+        }
+        
+        List<Integer> userIds = new ArrayList<>(uniqueUserIds);
+
+        for (Integer userId : userIds) {
+            UserEntity userEntity = userRepo.findById(userId).orElseThrow(
+                () -> new NotFoundExceptionHandle("", List.of(userId.toString()), "Security-Model")
+            );
+            if (userEntity.getStatus() == Status.ENABLED) {
+                loggingService.logWarn("User with id: " + userId + " is already ENABLED. Skipping (idempotent operation).", logContext);
+                continue;
+            }
+            userEntity.setStatus(Status.ENABLED);
+            userRepo.save(userEntity);
+            loggingService.logInfo("Enabled user with id: " + userId, logContext);
+        }
+
+        Response<List<Integer>> response = new Response<>(
+                200,
+                messageSource.getMessage("response.message.enableUsersSuccess", null, locale),
+                "Security-Model",
+                null,
+                null
+        );
+        return ResponseEntity.status(response.getStatus()).body(response);
     }
     
     @GetMapping("/check-status")

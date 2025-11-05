@@ -152,7 +152,6 @@ public class StudentController {
         req.setId(id);
         StudentModel student = studentServiceImp.update(req);
         
-        // Send Kafka events for each updated student
         String fullName = student.getUser().getFirstName() + " " + student.getUser().getLastName();
             StudentEvent studentEvent = StudentEvent.studentUpdated(
                 student.getId().toString(),
@@ -171,39 +170,36 @@ public class StudentController {
             return ResponseEntity.status(response.getStatus()).body(response);
     }
 
-    // @DeleteMapping("")
-    // @RequiresAuth(roles = {"ADMIN", "STUDENT"}, permissions = {"STUDENT_DELETE"})
-    // ResponseEntity<Response<List<StudentModel>>> delete(
-    //         @RequestBody List<StudentModel> studentModels,
-    //         @RequestHeader(value = "Accept-Language", defaultValue = "en") String acceptLanguage,
-    //         @CurrentUser UserDto currentUser)
-    // {
-    //     Locale locale = Locale.forLanguageTag(acceptLanguage);
-    //     LogContext logContext = getLogContext("delete");
-    //     loggingService.logInfo("Delete students API called successfully by user : " + currentUser.getUsername()
-    //             , logContext);
-    //     studentServiceImp.deletes(studentModels);
+    @DeleteMapping("")
+    @RequiresAuth(roles = {"ADMIN", "STUDENT"}, permissions = {"STUDENT_DELETE"})
+    ResponseEntity<Response<List<StudentModel>>> delete(
+            @RequestBody List<Integer> userIds,
+            @RequestHeader(value = "Accept-Language", defaultValue = "en") String acceptLanguage,
+            @CurrentUser UserDto currentUser)
+    {
+        Locale locale = Locale.forLanguageTag(acceptLanguage);
+        LogContext logContext = getLogContext("delete");
+        loggingService.logInfo("Delete students API called successfully by user : " + currentUser.getUsername()
+                , logContext);
+        studentServiceImp.deletes(userIds);
         
-    //     // Send Kafka events for each deleted student BEFORE deletion
-    //     for (StudentModel studentModel : studentModels) {
-    //         String fullName = studentModel.getFirstName() + " " + studentModel.getLastName();
-    //         StudentEvent studentEvent = StudentEvent.studentDeleted(
-    //             studentModel.getId().toString(),
-    //             fullName
-    //         );
-    //         kafkaProducerService.sendStudentEvent(studentEvent);
-    //         loggingService.logInfo("Sent student deleted event for student: " + fullName, logContext);
-    //     }
+        for (Integer userId : userIds) {
+            StudentEvent studentEvent = StudentEvent.studentDeleted(
+                userId.toString()
+            );
+            kafkaProducerService.sendStudentEvent(studentEvent);
+            loggingService.logInfo("Sent student deleted event for student: " + userId, logContext);
+        }
 
-    //         Response<List<StudentModel>> response = new Response<>(
-    //                 200
-    //                 , messageSource.getMessage("response.message.deleteSuccess", null, locale)
-    //                 , "StudentsModel",
-    //                 null,
-    //                 null
-    //         );
-    //         return ResponseEntity.status(response.getStatus()).body(response);
-    // }
+            Response<List<StudentModel>> response = new Response<>(
+                    200
+                    , messageSource.getMessage("response.message.deleteSuccess", null, locale)
+                    , "StudentsModel",
+                    null,
+                    null
+            );
+            return ResponseEntity.status(response.getStatus()).body(response);
+    }
 
     // @GetMapping("/public")
     // ResponseEntity<Response<List<StudentModel>>> public_get(

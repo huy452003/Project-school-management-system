@@ -34,4 +34,8 @@ public class TeacherEntity {
     private Gender gender;
     @Column(name ="birth")
     private LocalDate birth;
+
+    @Version
+    @Column(name = "version")
+    private Long version;
 }

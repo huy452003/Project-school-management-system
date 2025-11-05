@@ -21,4 +21,8 @@ public class StudentEntity{
     
     @Column(name ="graduate")
     private Boolean graduate;
+
+    @Version
+    @Column(name = "version")
+    private Long version;
 }

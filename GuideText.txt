@@ -1,67 +1,611 @@
 
+
+###( Guide Note 159)###
++ Vấn đề N+1 Query:
+  - Định nghĩa: Khi có N entity cha, và mỗi entity cha có quan hệ với entity con (OneToMany, ManyToMany)
+    Nếu sử dụng FetchType.LAZY và truy cập relationship trong vòng lặp -> sẽ phát sinh N+1 queries
+    + 1 query để lấy N entity cha
+    + N queries để lấy entity con cho mỗi entity cha
+    + Vấn đề N+1 Query - Pattern gây ra:
+
+  - Pattern chính xác: "Trong vòng lặp, dùng 1 entity để find N entity có quan hệ với nó"
+  - Cụ thể:
+    1. Query 1 lần để lấy N entity cha: findAll(), findByStatus(), etc.
+    2. Loop qua N entity cha
+    3. Trong loop, mỗi lần truy cập relationship (getCourses(), getStudents(), etc.) 
+       → Trigger 1 query mới để lấy entity con
+    4. Kết quả: 1 query (lấy N cha) + N queries (lấy con cho mỗi cha) = N+1 queries
+    
+  - Ví dụ cụ thể:
+    // BƯỚC 1: Query 1 lần lấy N entity cha
+    List<Teacher> teachers = teacherRepo.findAll();  
+    // SQL: SELECT * FROM teachers  (1 query)
+    
+    // BƯỚC 2: Loop qua N teachers
+    for (Teacher teacher : teachers) {  // Giả sử có 10 teachers
+        // BƯỚC 3: Trong loop, truy cập relationship
+        List<Course> courses = teacher.getCourses();  
+        // SQL: SELECT * FROM courses WHERE teacher_id = ?  (10 queries - 1 cho mỗi teacher)
+        // Query 1: WHERE teacher_id = 1
+        // Query 2: WHERE teacher_id = 2
+        // ...
+        // Query 10: WHERE teacher_id = 10
+    }
+    // Tổng: 1 + 10 = 11 queries (N+1 problem với N=10)
+    
+  - Điều kiện để xảy ra N+1:
+    + Entity có relationship với FetchType.LAZY (mặc định)
+    + Query lấy nhiều entity cha (findAll, findByStatus, etc.)
+    + Trong vòng lặp, truy cập relationship của entity cha
+    + Relationship chưa được fetch trước (không dùng JOIN FETCH, Entity Graph, etc.)
+    
+  - Tại sao gọi là N+1?
+    + 1 query đầu tiên: lấy N entity cha (findAll() → SELECT * FROM teachers)
+    + N queries tiếp theo: trong vòng lặp, mỗi entity cha trigger 1 query để lấy entity con 
+      (teacher.getCourses() → SELECT * FROM courses WHERE teacher_id = ?)
+      → Với N=10 teachers → có 10 queries riêng biệt
+    + Tổng = 1 + N = N+1 queries
+    + Ví dụ: N=10 → 1 + 10 = 11 queries (thay vì chỉ 1 query với JOIN)
+    
+  - Giải pháp:
+    1. Entity Graph (Spring Data JPA):
+       @EntityGraph(attributePaths = {"courses"})
+       @Query("SELECT t FROM Teacher t")
+       List<Teacher> findAllWithCourses();
+       // Hoặc:
+       @EntityGraph(attributePaths = {"courses"})
+       List<Teacher> findAll();
+
+      * Ưu điểm:
+        - Linh hoạt: có thể reuse method findAll() với/không Entity Graph
+        - Dễ đọc, dễ maintain: annotation rõ ràng
+        - Tích hợp tốt với Spring Data JPA
+        - Có thể combine nhiều relationships: @EntityGraph(attributePaths = {"courses", "students"})
+        - Có thể dùng với pagination (Pageable)
+      * Nhược điểm:
+        - Chỉ dùng được với Spring Data JPA (không dùng được với EntityManager trực tiếp)
+      * Khi nào dùng: Khi dùng Spring Data JPA và cần linh hoạt fetch relationships
+
+      * Tại sao @EntityGraph ngăn được N+1?
+         - Cơ chế hoạt động:
+           1. @EntityGraph báo cho Hibernate/JPA biết: "Khi query Teacher, cũng fetch luôn courses"
+           2. Hibernate sẽ tự động thêm LEFT JOIN vào SQL query
+           3. Thay vì query riêng biệt, tất cả dữ liệu được lấy trong 1 query duy nhất
+         
+         - SQL được generate:
+           KHÔNG dùng @EntityGraph (N+1):
+             Query 1: SELECT * FROM teachers
+             Query 2: SELECT * FROM courses WHERE teacher_id = 1
+             Query 3: SELECT * FROM courses WHERE teacher_id = 2
+             ... (N queries)
+           
+           CÓ dùng @EntityGraph (1 query):
+             SELECT t.*, c.* 
+             FROM teachers t 
+             LEFT JOIN courses c ON t.id = c.teacher_id
+             → Tất cả dữ liệu được lấy trong 1 query, Hibernate tự động map vào entities
+         
+         - Cơ chế bên trong:
+           + @EntityGraph tạo một "fetch plan" cho Hibernate
+           + Hibernate thay đổi SQL query từ SELECT t.* thành SELECT t.*, c.* với JOIN
+           + Khi map kết quả, Hibernate tự động populate courses vào mỗi Teacher entity
+           + Tất cả courses đã được load sẵn trong memory → không cần query thêm khi gọi getCourses()
+         
+         - Tại sao không còn N+1?
+           + Trước: getCourses() trong loop → trigger query mới (LAZY loading)
+           + Sau: getCourses() chỉ đọc từ memory (đã được fetch sẵn) → không có query mới
+           + Kết quả: 1 query duy nhất thay vì N+1 queries
+    
+  - Lưu ý:
+    + Luôn dùng DISTINCT khi JOIN FETCH để tránh duplicate results
+    + Kiểm tra SQL logs (spring.jpa.show-sql=true) để phát hiện N+1
+    + Test với dữ liệu thực tế để chọn giải pháp phù hợp
+    + Có thể combine: Entity Graph + DTO Projection cho API endpoints
+
+
+###( Guide Note 161)###
++ Các loại Index trong MySQL:
+  
+  1. PRIMARY KEY (Clustered Index):
+     - Định nghĩa: Index tự động tạo khi khai báo PRIMARY KEY, là clustered index (dữ liệu được sắp xếp theo PK)
+     - Ví dụ:
+       CREATE TABLE users (
+           user_id INT PRIMARY KEY AUTO_INCREMENT,  -- Tự động tạo PRIMARY KEY index
+           username VARCHAR(50),
+           email VARCHAR(100)
+       );
+       -- Hoặc trong JPA:
+       @Id
+       @GeneratedValue(strategy = GenerationType.IDENTITY)
+       private Integer userId;  -- Tự động tạo PRIMARY KEY index
+     
+     - Lợi ích:
+       + Tốc độ truy vấn nhanh nhất: O(log n) để tìm kiếm
+       + Dữ liệu được sắp xếp vật lý theo PK → range queries rất nhanh
+       + Tự động UNIQUE → đảm bảo tính duy nhất
+       + Foreign key references hiệu quả
+       + Mỗi bảng chỉ có 1 PRIMARY KEY → tối ưu storage
+     
+     - Tác hại:
+       + Chỉ có 1 PRIMARY KEY per table
+       + Khi update PK → phải rebuild toàn bộ table (rất chậm)
+       + PK nên là INT/BIGINT → nếu dùng VARCHAR/UUID sẽ chậm hơn
+       + Insert vào giữa PK sequence → có thể gây page split (fragmentation)
+     
+     - Khi nào dùng: Luôn dùng cho mỗi table (best practice)
+  
+  2. UNIQUE INDEX:
+     - Định nghĩa: Index đảm bảo giá trị duy nhất, cho phép NULL (nhưng chỉ 1 NULL)
+     - Ví dụ:
+       CREATE TABLE users (
+           user_id INT PRIMARY KEY,
+           username VARCHAR(50) UNIQUE,  -- Tự động tạo UNIQUE index
+           email VARCHAR(100),
+           UNIQUE KEY uk_email (email)  -- Tạo UNIQUE index thủ công
+       );
+       -- Hoặc trong JPA:
+       @Column(name = "username", unique = true)  -- Tự động tạo UNIQUE index
+       private String username;
+     
+     - Lợi ích:
+       + Đảm bảo tính duy nhất dữ liệu
+       + Tốc độ lookup nhanh: O(log n)
+       + Tối ưu cho WHERE clause với = operator
+       + Có thể có nhiều UNIQUE indexes per table
+     
+     - Tác hại:
+       + Tốn thêm storage (phải lưu index structure)
+       + Chậm hơn khi INSERT/UPDATE (phải check uniqueness)
+       + Nếu có nhiều NULL → có thể gây vấn đề (MySQL chỉ cho phép 1 NULL trong UNIQUE)
+     
+     - Khi nào dùng: Khi cần đảm bảo tính duy nhất (username, email, phone, etc.)
+  
+  3. INDEX (Non-unique, Non-clustered):
+     - Định nghĩa: Index thông thường, không đảm bảo tính duy nhất, tăng tốc độ truy vấn
+     - Ví dụ:
+       CREATE TABLE students (
+           id INT PRIMARY KEY,
+           first_name VARCHAR(50),
+           last_name VARCHAR(50),
+           age INT,
+           INDEX idx_first_name (first_name),  -- Index cho first_name
+           INDEX idx_age (age)  -- Index cho age
+       );
+       -- Hoặc trong JPA (phải dùng @Table):
+       @Table(name = "students", indexes = {
+           @Index(name = "idx_first_name", columnList = "first_name"),
+           @Index(name = "idx_age", columnList = "age")
+       })
+     
+     - Lợi ích:
+       + Tăng tốc độ SELECT queries đáng kể: O(log n) thay vì O(n) full table scan
+       + Tối ưu cho WHERE, ORDER BY, JOIN
+       + Có thể tạo nhiều indexes per table
+       + Giảm I/O operations
+     
+     - Tác hại:
+       + Tốn storage: mỗi index cần thêm ~20-30% storage
+       + Chậm INSERT/UPDATE/DELETE: phải update index structure
+       + Index không được sử dụng nếu query không match (waste storage)
+       + Quá nhiều indexes → chậm write operations
+     
+     - Khi nào dùng: 
+       + Columns thường dùng trong WHERE clause (foreign keys)
+       + Columns dùng trong JOIN
+       + Columns dùng trong ORDER BY
+       + Không nên tạo quá nhiều (rule of thumb: < 5-7 indexes per table)
+  
+  4. COMPOSITE INDEX (Multi-column Index):
+     - Định nghĩa: Index trên nhiều columns, thứ tự columns rất quan trọng
+     - Ví dụ:
+       CREATE TABLE orders (
+           id INT PRIMARY KEY,
+           user_id INT,
+           status VARCHAR(20),
+           created_at DATETIME,
+           INDEX idx_user_status (user_id, status),  -- Composite index
+           INDEX idx_status_created (status, created_at)  -- Thứ tự khác
+       );
+       -- Hoặc trong JPA:
+       @Table(name = "orders", indexes = {
+           @Index(name = "idx_user_status", columnList = "user_id,status")
+       })
+     
+     - Lợi ích:
+       + Tối ưu queries với nhiều WHERE conditions
+       + Có thể dùng cho "leftmost prefix": idx(a,b,c) dùng được cho (a), (a,b), (a,b,c)
+       + Giảm số lượng indexes cần thiết
+       + Tốt cho queries phức tạp
+     
+     - Tác hại:
+       + Thứ tự columns rất quan trọng → phải thiết kế cẩn thận
+       + Chỉ dùng được nếu query match leftmost prefix
+       + Ví dụ: idx(user_id, status) KHÔNG dùng được cho query chỉ có WHERE status = ?
+       + Tốn storage hơn single-column index
+     
+     - Khi nào dùng:
+       + Queries thường filter theo nhiều columns cùng lúc
+       + Cần tối ưu ORDER BY với WHERE
+       + Rule: đặt column có selectivity cao (nhiều giá trị unique) trước
+  
+  5. FULLTEXT INDEX:
+     - Định nghĩa: Index đặc biệt cho full-text search, chỉ dùng với MyISAM hoặc InnoDB (MySQL 5.6+)
+     - Ví dụ:
+       CREATE TABLE articles (
+           id INT PRIMARY KEY,
+           title VARCHAR(200),
+           content TEXT,
+           FULLTEXT INDEX ft_title_content (title, content)
+       );
+       -- Query:
+       SELECT * FROM articles 
+       WHERE MATCH(title, content) AGAINST('spring boot' IN NATURAL LANGUAGE MODE);
+     
+     - Lợi ích:
+       + Tối ưu cho full-text search (tìm kiếm văn bản)
+       + Hỗ trợ relevance ranking
+       + Nhanh hơn nhiều so với LIKE '%keyword%'
+       + Hỗ trợ stop words, stemming
+     
+     - Tác hại:
+       + Chỉ dùng được với TEXT/VARCHAR columns
+       + Tốn nhiều storage
+       + Chỉ dùng được với MATCH...AGAINST syntax
+       + Không dùng được cho exact match
+       + Cần rebuild khi update (có thể chậm)
+     
+     - Khi nào dùng: Khi cần tìm kiếm văn bản (search engine, articles, comments, etc.)
+  
+  6. COVERING INDEX (Index-Only Scan):
+     - Định nghĩa: Index chứa tất cả columns cần thiết cho query → không cần đọc table data
+     - Ví dụ:
+       CREATE TABLE students (
+           id INT PRIMARY KEY,
+           first_name VARCHAR(50),
+           last_name VARCHAR(50),
+           age INT,
+           -- Covering index: chứa tất cả columns trong SELECT
+           INDEX idx_covering (first_name, last_name, age)
+       );
+       -- Query được optimize:
+       SELECT first_name, last_name, age FROM students WHERE first_name = 'John';
+       -- MySQL chỉ đọc từ index, không cần đọc table → rất nhanh
+      
+     - Lợi ích:
+       + Rất nhanh: không cần đọc table data (index-only scan)
+       + Giảm I/O operations đáng kể
+       + Tốt cho read-heavy workloads
+     
+     - Tác hại:
+       + Index size lớn hơn (chứa nhiều columns)
+       + Chậm INSERT/UPDATE (phải update nhiều columns trong index)
+       + Chỉ hiệu quả nếu query chỉ select columns trong index
+     
+     - Khi nào dùng: 
+       + Read-heavy queries
+       + Queries chỉ select một số columns cụ thể
+       + Khi index columns cover toàn bộ SELECT clause
+
+    * MySQL tự động sử dụng index - KHÔNG cần khai báo trong query:
+         - MySQL Query Optimizer tự động phân tích query và chọn index phù hợp nhất
+         - Bạn KHÔNG cần khai báo index trong query (khác với một số DB khác có thể hint index)
+         - MySQL tự động quyết định dựa trên:
+           + Columns trong WHERE clause
+           + Columns trong SELECT clause
+           + Statistics của table (số lượng rows, distribution, etc.)
+           + Cost estimation (ước tính chi phí)
+         
+         - Cách MySQL quyết định sử dụng index:
+           1. MySQL phân tích query: SELECT first_name, last_name, age WHERE first_name = 'John'
+           2. MySQL kiểm tra các indexes có sẵn:
+              - idx_covering (first_name, last_name, age) → Covering index
+              - idx_first_name (first_name) → Partial index
+              - PRIMARY KEY (id)
+           3. MySQL ước tính cost cho mỗi index:
+              - idx_covering: Cost thấp (index-only scan, không cần đọc table)
+              - idx_first_name: Cost cao hơn (cần đọc table để lấy last_name, age)
+              - PRIMARY KEY: Cost rất cao (full table scan)
+           4. MySQL chọn index có cost thấp nhất: idx_covering
+           5. MySQL tự động sử dụng index đó → Bạn không cần làm gì
+         
+         - Ví dụ tất cả các loại index đều tự động:
+           -- PRIMARY KEY - Tự động sử dụng
+           SELECT * FROM students WHERE id = 1;  -- MySQL tự dùng PRIMARY KEY
+           
+           -- UNIQUE INDEX - Tự động sử dụng
+           SELECT * FROM users WHERE username = 'john';  -- MySQL tự dùng UNIQUE index trên username
+           
+           -- INDEX - Tự động sử dụng
+           SELECT * FROM students WHERE first_name = 'John';  -- MySQL tự dùng index trên first_name
+           
+           -- COMPOSITE INDEX - Tự động sử dụng
+           SELECT * FROM orders WHERE user_id = 1 AND status = 'PENDING';  -- MySQL tự dùng composite index
+           
+           -- COVERING INDEX - Tự động sử dụng
+           SELECT first_name, last_name, age FROM students WHERE first_name = 'John';
+           -- MySQL tự dùng covering index (nếu có)
+         
+         - Khi nào MySQL KHÔNG sử dụng index?
+           + Query không match với index (không có WHERE clause phù hợp)
+           + Full table scan nhanh hơn (table quá nhỏ)
+           + Index có selectivity thấp (quá nhiều duplicate values)
+           + Query có function trên column: WHERE UPPER(first_name) = 'JOHN' (không dùng index)
+           + Query có LIKE với wildcard đầu: WHERE first_name LIKE '%John' (không dùng index)
+           + Query có toán tử NOT: WHERE first_name != 'John' (có thể không dùng index)
+         
+         - Cách kiểm tra MySQL có dùng index hay không:
+           EXPLAIN SELECT first_name, last_name, age FROM students WHERE first_name = 'John';
+           
+           Kết quả:
+           +----+-------------+----------+------+---------------+----------------+---------+-------+------+-------------+
+           | id | select_type | table    | type | possible_keys | key            | key_len | ref   | rows | Extra       |
+           +----+-------------+----------+------+---------------+----------------+---------+-------+------+-------------+
+           |  1 | SIMPLE      | students | ref  | idx_covering  | idx_covering   | 203     | const |    2 | Using index|
+           +----+-------------+----------+------+---------------+----------------+---------+-------+------+-------------+
+           
+           Giải thích:
+           - key: idx_covering → MySQL đã chọn index này
+           - Extra: "Using index" → Index-only scan (covering index)
+           - Nếu Extra: "Using where; Using index" → Dùng index nhưng cần filter thêm
+           - Nếu key: NULL → MySQL KHÔNG dùng index (full table scan)
+  
+  - Best Practices:
+    + Tạo index cho foreign keys (tự động trong một số DB, nhưng nên check)
+    + Index columns thường dùng trong WHERE, JOIN, ORDER BY
+    + Sử dụng EXPLAIN để kiểm tra index usage
+    + Monitor index usage: DROP indexes không được sử dụng
+    + Cân bằng giữa read performance và write performance
+    + Composite index: đặt column có selectivity cao trước
+    + Tránh index trên columns có nhiều NULL values
+    + Index trên columns có data type nhỏ (INT tốt hơn VARCHAR)
+  
+  - Cách kiểm tra index usage trong MySQL:
+    SELECT * FROM sys.schema_unused_indexes;  -- MySQL 5.7+
+    SHOW INDEX FROM table_name;
+    EXPLAIN SELECT ...;  -- Xem execution plan
+
+
+###( Guide Note 163)###
++ Vấn đề Race Condition / Lost Update:
+  - Khi 2 requests cùng lúc update cùng 1 record:
+    Request 1: Đọc balance = 100, Update balance = 100 + 50 = 150
+    Request 2: Đọc balance = 100, Update balance = 100 - 30 = 70
+    Kết quả: balance = 70 (mất update của Request 1) ❌
+  
+  - MySQL - Giải pháp:
+  → KHUYẾN NGHỊ CHUNG CHO MYSQL:
+         - Ưu tiên: Optimistic Locking (@Version) + @Transactional
+
+         * Optimistic Locking (@Version) - KHUYẾN NGHỊ CHO HẦU HẾT TRƯỜNG HỢP ⭐⭐⭐⭐⭐
+         - Phổ biến nhất: Được dùng trong hầu hết các ứng dụng Spring Boot
+         - Tối ưu: Không blocking, hiệu suất cao, phù hợp với read-heavy workloads
+         - Dễ implement: Chỉ cần thêm @Version field
+         - Spring Data JPA tự động xử lý version checking
+         - Khi nào dùng: 90% các trường hợp (ít conflict, read-heavy)
+         - Ví dụ: User management, product inventory (ít conflict), order processing (read-heavy)
+
+         * @Transactional (Isolation Level) - BẮT BUỘC ⭐⭐⭐⭐⭐
+         - Luôn luôn dùng: Cho mọi operations phức tạp
+         - Default: REPEATABLE_READ (InnoDB) - đã đủ tốt cho hầu hết trường hợp
+         - Không cần thay đổi isolation level trừ khi có vấn đề cụ thể
+         - Kết hợp: Thường dùng với Optimistic hoặc Pessimistic locking
+
+    * Cách thực hiện:
+    Bước 1: Thêm @Version field vào Entity
+       @Entity
+       @Table(name = "users")
+       public class User {
+           @Id
+           @GeneratedValue(strategy = GenerationType.IDENTITY)
+           private Long id;
+           
+           @Version  // ← Thêm field này để enable optimistic locking
+           private Long version;  // Spring Data JPA tự động quản lý
+           
+           private BigDecimal balance;
+           // ... other fields
+       }
+    
+    Bước 2: Sử dụng @Transactional với Optimistic Locking
+       @Service
+       public class UserService {
+           @Autowired
+           private UserRepository userRepo;
+           
+           // Với retry mechanism (khuyến nghị)
+           @Retryable(value = {OptimisticLockingFailureException.class}, maxAttempts = 3)
+           @Transactional(rollbackFor = Exception.class)
+           public void updateBalanceWithRetry(Long userId, BigDecimal amount) {
+               User user = userRepo.findById(userId)
+                   .orElseThrow(() -> new NotFoundException("User not found"));
+               
+               user.setBalance(user.getBalance().add(amount));
+               userRepo.save(user);
+           }
+       }
+    
+    * Cơ chế hoạt động chi tiết:
+      - Đúng! Khi thêm @Version vào entity:
+        1. Mỗi entity có version nhất định (bắt đầu từ 0 hoặc 1)
+        2. Khi SELECT: Entity được load với version hiện tại
+           VD: User(id=1, balance=100, version=5)
+        3. Khi UPDATE: Spring Data JPA tự động:
+           - Tăng version: version = version + 1
+           - Check version trong WHERE clause: WHERE id = ? AND version = ?
+           - SQL: UPDATE users SET balance = ?, version = version + 1 
+                  WHERE id = ? AND version = ?
+        4. Nếu version khác → 0 rows affected → OptimisticLockingFailureException
+        5. Exception → @Transactional rollback → Tất cả changes trong transaction bị rollback
+        6. @Retryable tự động retry với version mới → Nếu thành công thì commit
+      
+      - Ví dụ cụ thể với 2 requests cùng lúc:
+        Database: User(id=1, balance=100, version=5)
+        
+        Request 1 (Thread 1):
+          - BEGIN TRANSACTION
+          - SELECT: User(id=1, balance=100, version=5)  ← Load với version=5
+          - Calculate: balance = 100 + 50 = 150
+          - UPDATE: UPDATE users SET balance=150, version=6 WHERE id=1 AND version=5
+          - COMMIT → Success, version=6
+        
+        Request 2 (Thread 2) - xảy ra cùng lúc:
+          - BEGIN TRANSACTION
+          - SELECT: User(id=1, balance=100, version=5)  ← Vẫn load version=5 (chưa commit Request 1)
+          - Calculate: balance = 100 - 30 = 70
+          - UPDATE: UPDATE users SET balance=70, version=6 WHERE id=1 AND version=5
+          - Database check: version hiện tại = 6 (Request 1 đã update) ≠ 5
+          - 0 rows affected → OptimisticLockingFailureException
+          - @Transactional rollback → Changes bị rollback
+          - @Retryable retry:
+            - SELECT lại: User(id=1, balance=150, version=6)  ← Load version mới
+            - Calculate: balance = 150 - 30 = 120
+            - UPDATE: UPDATE users SET balance=120, version=7 WHERE id=1 AND version=6
+            - COMMIT → Success, version=7
+          - Kết quả: balance=120 (đúng) ✅
+      
+      - Nếu không có @Version:
+        Request 1: UPDATE balance=150
+        Request 2: UPDATE balance=70
+        Kết quả: balance=70 (mất update của Request 1) ❌
+      
+      - Tóm lại:
+        + @Version: Mỗi entity có version → mỗi thao tác có version nhất định
+        + Khi xong thao tác: Version được tăng (version = version + 1)
+        + Nếu khác version: Throw OptimisticLockingFailureException
+        + Exception → Rollback (tất cả changes trong transaction)
+        + @Retryable: Tự động retry với version mới → Nếu thành công thì commit
+        + Nếu retry fail (sau maxAttempts) → Throw exception cuối cùng
+    
+    - Isolation levels (có thể config nếu cần):
+       @Transactional(isolation = Isolation.REPEATABLE_READ)  // Default InnoDB
+       // Hoặc:
+       @Transactional(isolation = Isolation.READ_COMMITTED)   // Default MySQL
+       // Không nên thay đổi trừ khi có vấn đề cụ thể
+    
+    - Xử lý OptimisticLockingFailureException:
+      + Retry mechanism: @Retryable (Spring Retry) hoặc manual retry
+      + Log conflict để monitor
+      + Return error message cho user nếu retry fail
+    
+    - Ưu điểm của kết hợp này:
+      + @Transactional: Đảm bảo ACID, rollback nếu có lỗi
+      + @Version: Đảm bảo không có lost update, không blocking
+      + Hiệu suất cao: Không block như pessimistic locking
+      + Tự động: Spring Data JPA xử lý version checking
+    
+    - Lưu ý:
+      + Luôn dùng @Transactional với Optimistic Locking
+      + Nên có retry mechanism cho OptimisticLockingFailureException
+      + Monitor số lượng conflicts để đánh giá có cần chuyển sang Pessimistic Locking không
+  
+
+  - Redis - Giải pháp:
+  → KHUYẾN NGHỊ CHUNG CHO REDIS:
+    - Ưu tiên: INCR/DECR (nếu chỉ cần increment/decrement)
+
+    INCR/DECR - ĐƠN GIẢN NHẤT, TỐI ƯU NHẤT ⭐⭐⭐⭐⭐
+         - Phổ biến nhất: Dùng cho counters, simple increments
+         - Tối ưu: Atomic, không cần lock, hiệu suất cao nhất
+         - Dễ implement: 1 dòng code
+         - Khi nào dùng: Khi chỉ cần increment/decrement số
+         - Ví dụ: View counters, like counts, vote counts
+
+    * Redis INCR/DECR (Atomic Operations):
+       public void incrementBalance(String userId, BigDecimal amount) {
+           String key = "user:balance:" + userId;
+           redisTemplate.opsForValue().increment(key, amount.doubleValue());
+       }
+       - Cơ chế: INCR/DECR là atomic operations
+       - Ưu điểm: Đơn giản, atomic, không cần lock
+       - Nhược điểm: Chỉ dùng được cho số (integer/float)
+       - Khi nào dùng: Khi chỉ cần increment/decrement số
+  
+  
+  - Best Practices:
+    + MySQL: 
+      - Ưu tiên Optimistic Locking (@Version) cho hầu hết trường hợp
+      - Dùng Pessimistic Locking chỉ khi thực sự cần (nhiều conflicts)
+      - Luôn dùng @Transactional với isolation level mặc định (REPEATABLE_READ)
+      - Retry mechanism cho OptimisticLockingFailureException
+    + Redis:
+      - Ưu tiên atomic operations (INCR/DECR, Lua scripts) khi có thể
+      - Dùng distributed locks (SETNX) cho critical operations
+      - Tránh WATCH + MULTI/EXEC nếu có thể dùng Lua scripts
+    + Cả 2:
+      - Monitor và log locking conflicts để optimize
+      - Test với concurrent load để đảm bảo solution hoạt động
+      - Có retry mechanism cho optimistic locking conflicts
+
+
+
+###( Guide Note 166)###
+
+###( Guide Note 169)###
+
+
 ###( Guide Note 172)###
 - Sử dụng HashMap khi:
-+ tối ưu cho Single-threaded application
-+ Cần performance tối đa
-+ Không cần thread safety
-+ Có thể chấp nhận null keys/values
-- Sử dụng ConcurrentHashMap khi:
-+ tối ưu cho Multi-threaded application
-+ có (CAS) là một atomic operation cho phép thay đổi giá trị chỉ khi giá trị hiện tại khớp với giá trị mong đợi.
-ví dụ Chỉ 1 thread thành công, các thread khác retry nên không dẫn đến overwirite data
-+ Cần thread safety : Thread Safety là khả năng của code có thể được sử dụng an toàn bởi
-nhiều thread đồng thời mà không gây ra lỗi hoặc hành vi không mong đợi.
-+ Read-heavy workloads
-+ Cần high concurrency
-+ Không thể chấp nhận null keys/values
+    + tối ưu cho Single-threaded application
+    + Cần performance tối đa
+    + Không cần thread safety
+    + Có thể chấp nhận null keys/values
+    - Sử dụng ConcurrentHashMap khi:
+    + tối ưu cho Multi-threaded application
+    + có (CAS) là một atomic operation cho phép thay đổi giá trị chỉ khi giá trị hiện tại khớp với giá trị mong đợi.
+    ví dụ Chỉ 1 thread thành công, các thread khác retry nên không dẫn đến overwirite data
+    + Cần thread safety : Thread Safety là khả năng của code có thể được sử dụng an toàn bởi
+    nhiều thread đồng thời mà không gây ra lỗi hoặc hành vi không mong đợi.
+    + Read-heavy workloads
+    + Cần high concurrency
+    + Không thể chấp nhận null keys/values
 
---> sử dụng HashMap trong Single-threaded để tối ưu performance,
-sử dụng ConcurrentHashMap trong Multi-threaded để đảm bảo data không mất, bị lỗi,...
+    --> sử dụng HashMap trong Single-threaded để tối ưu performance,
+    sử dụng ConcurrentHashMap trong Multi-threaded để đảm bảo data không mất, bị lỗi,...
             VD:
-* HashMap (UNSAFE) - Lost Data
-// Thread A: map.put("key100", 100)
-// Thread B: map.put("key200", 200)
-// Cả 2 đều hash đến bucket index 5
+    * HashMap (UNSAFE) - Lost Data
+    // Thread A: map.put("key100", 100)
+    // Thread B: map.put("key200", 200)
+    // Cả 2 đều hash đến bucket index 5
 
-// Timeline HashMap:
-// Thread A: read table[5] = null
-// Thread B: read table[5] = null  (cùng lúc)
-// Thread A: write table[5] = node100
-// Thread B: write table[5] = node200  (OVERWRITE!)
+    // Timeline HashMap:
+    // Thread A: read table[5] = null
+    // Thread B: read table[5] = null  (cùng lúc)
+    // Thread A: write table[5] = node100
+    // Thread B: write table[5] = node200  (OVERWRITE!)
 
-// Kết quả: "key100" bị mất!
-// map.get("key100") = null
-// map.get("key200") = 200
+    // Kết quả: "key100" bị mất!
+    // map.get("key100") = null
+    // map.get("key200") = 200
 
-* ConcurrentHashMap (SAFE) - No Lost Data
-// Thread A: map.put("key100", 100)
-// Thread B: map.put("key200", 200)
-// Cả 2 đều hash đến bucket index 5
+    * ConcurrentHashMap (SAFE) - No Lost Data
+    // Thread A: map.put("key100", 100)
+    // Thread B: map.put("key200", 200)
+    // Cả 2 đều hash đến bucket index 5
 
-// Timeline ConcurrentHashMap:
-// Thread A: casTabAt(table, 5, null, node100) -> true (thành công)
-// Thread B: casTabAt(table, 5, null, node200) -> false (thất bại)
+    // Timeline ConcurrentHashMap:
+    // Thread A: casTabAt(table, 5, null, node100) -> true (thành công)
+    // Thread B: casTabAt(table, 5, null, node200) -> false (thất bại)
 
-// Thread B retry với synchronized block:
-// Thread B: synchronized(node100) {
-//     // Add node200 vào linked list
-//     node100.next = node200
-// }
+    // Thread B retry với synchronized block:
+    // Thread B: synchronized(node100) {
+    //     // Add node200 vào linked list
+    //     node100.next = node200
+    // }
 
-// Kết quả: Cả 2 entries đều được lưu!
-// map.get("key100") = 100
-// map.get("key200") = 200
+    // Kết quả: Cả 2 entries đều được lưu!
+    // map.get("key100") = 100
+    // map.get("key200") = 200
 
 ###( Guide Note 174)###
 - Set sẽ bỏ qua phần tử đã tồn tại và trả về false, không thực hiện bất kỳ hành vi nào thêm.
 
 ###( Guide Note 176)###
 - tốc độ truy vấn:
-+ ArrayList query qua index nên tốc độ cao, còn LinkedList phải query từ đầu
+    + ArrayList query qua index nên tốc độ cao, còn LinkedList phải query từ đầu
 - thêm,xóa:
-+ khi thêm phần tử mới vào đầu hay giữa danh sách ArrayList phải chuyển các phần tử cũ sang phải để nhường chỗ(index) cho
+    + khi thêm phần tử mới vào đầu hay giữa danh sách ArrayList phải chuyển các phần tử cũ sang phải để nhường chỗ(index) cho
 phần tử Mới
-+ vì mỗi data trong LinkedList chứa luôn vị trí (con trỏ) của node đó, chỉ cần thay đổi vị trí con trỏ của các node để thêm mới
+    + vì mỗi data trong LinkedList chứa luôn vị trí (con trỏ) của node đó, chỉ cần thay đổi vị trí con trỏ của các node để thêm mới
 
 - thêm nữa là LinkedList nó có thể thay đổi kích thước và thêm/xóa phần tử mà không ảnh hưởng đến các phần tử khác
 - còn ArrayList khi mở rộng (resize) phải tạo 1 list mới và copy + thay đổi index của các phần 
@@ -111,26 +655,25 @@ A -> B -> X -> C -> D  <- Chỉ cập nhật con trỏ B.next và C.prev
 
 
 ###( Guide Note 179)###
-
 - Auto-configuration & Starters: Giảm cấu hình rườm rà, “bật là chạy” với spring-boot-starter-*.
-+ Spring Boot tự đăng ký bean phù hợp.
-+ có Spring Security filter chain tối thiểu.
-+ tự động cấu hình server mặc định ( tomcat ).
-+ Web MVC mặc định: DispatcherServlet, message converters (Jackson), static resources.
-+ Logging (Logback) và cấu hình level qua properties `logging.*`.
-+ DataSource (Hikari) + JdbcTemplate khi có driver JDBC.
-+ JPA/Hibernate: EntityManagerFactory, TransactionManager, DDL auto khi thêm starter JPA.
-+ Cache abstraction + provider (Caffeine/Redis/Ehcache) khi có dependency phù hợp.
-+ Validation: Hibernate Validator, hỗ trợ `@Valid` cho MVC và beans.
-+ Scheduling/Async: `TaskScheduler`, `TaskExecutor` khi bật `@EnableScheduling`/`@EnableAsync`.
-+ Cấu hình externalized: profiles, `application-*.properties/yaml`, environment binding `@ConfigurationProperties`.
-+ CORS, multipart upload, compression, HTTP/2, graceful shutdown theo `server.*` và `spring.mvc.*`.
+    + Spring Boot tự đăng ký bean phù hợp.
+    + có Spring Security filter chain tối thiểu.
+    + tự động cấu hình server mặc định ( tomcat ).
+    + Web MVC mặc định: DispatcherServlet, message converters (Jackson), static resources.
+    + Logging (Logback) và cấu hình level qua properties `logging.*`.
+    + DataSource (Hikari) + JdbcTemplate khi có driver JDBC.
+    + JPA/Hibernate: EntityManagerFactory, TransactionManager, DDL auto khi thêm starter JPA.
+    + Cache abstraction + provider (Caffeine/Redis/Ehcache) khi có dependency phù hợp.
+    + Validation: Hibernate Validator, hỗ trợ `@Valid` cho MVC và beans.
+    + Scheduling/Async: `TaskScheduler`, `TaskExecutor` khi bật `@EnableScheduling`/`@EnableAsync`.
+    + Cấu hình externalized: profiles, `application-*.properties/yaml`, environment binding `@ConfigurationProperties`.
+    + CORS, multipart upload, compression, HTTP/2, graceful shutdown theo `server.*` và `spring.mvc.*`.
 
 - Sẵn sàng cloud-native và observable
-+ Tối ưu runtime AOT + GraalVM native image cho startup nhanh, footprint thấp.
-+ Đóng gói & cấu hình cloud
-Build OCI image nhanh (buildpacks, layered JAR).
-Externalized config + profiles (application-*.yml, env vars).
+    + Tối ưu runtime AOT + GraalVM native image cho startup nhanh, footprint thấp.
+    + Đóng gói & cấu hình cloud
+    Build OCI image nhanh (buildpacks, layered JAR).
+    Externalized config + profiles (application-*.yml, env vars).
 
 - Cộng đồng và tài nguyên: Kho GitHub của Spring Boot có lượng sao, issue, PR, release rất lớn, phản ánh mức độ sử dụng rộng rãi và hoạt động sôi nổi.
 - Spring Data/Security/Validation/Batch: Xử lý CRUD, bảo mật, validation, batch job theo chuẩn thống nhất, hạn chế code nền.0

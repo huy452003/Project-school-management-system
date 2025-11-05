@@ -12,7 +12,7 @@ public interface StudentService {
     List<StudentModel> gets();
     void createByUserId(UserDto user);
     StudentModel update(UpdateEntityModel req);
-    // Boolean deletes(List<StudentModel> StudentModel);
+    Boolean deletes(List<Integer> userIds);
     // PagedResponseModel<StudentModel> getsPaged(PagedRequestModel paginationRequest);
     // List<StudentModel> filter(Integer id, String firstName, String lastName, Integer age, Gender gender, Boolean graduate);
 }

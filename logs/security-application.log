@@ -1,156 +1,39 @@
-2025-11-01 09:24:53 [background-preinit] DEBUG [logging] - Logging Provider: org.jboss.logging.Slf4jLoggerProvider found via system property
-2025-11-01 09:24:53 [main] INFO  [SecurityApplication] - Starting SecurityApplication using Java 17.0.16 with PID 2232 (D:\project IntelliJ Ultimate\modules-parent\security\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\security)
-2025-11-01 09:24:53 [main] DEBUG [SecurityApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
-2025-11-01 09:24:53 [main] INFO  [SecurityApplication] - No active profile set, falling back to 1 default profile: "default"
-2025-11-01 09:24:57 [main] DEBUG [InternalLoggerFactory] - Using SLF4J as the default logging framework
-2025-11-01 09:25:00 [main] WARN  [deprecation] - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-11-01 09:25:10 [main] WARN  [JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-11-01 09:25:11 [main] DEBUG [JwtAuthFilter] - Filter 'jwtAuthFilter' configured for use
-2025-11-01 09:25:11 [main] WARN  [InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer] - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
-2025-11-01 09:25:12 [main] DEBUG [Mappings] - 
+2025-11-04 20:45:31 [background-preinit] DEBUG [logging] - Logging Provider: org.jboss.logging.Slf4jLoggerProvider found via system property
+2025-11-04 20:45:32 [main] INFO  [SecurityApplication] - Starting SecurityApplication using Java 17.0.16 with PID 6536 (D:\project IntelliJ Ultimate\modules-parent\security\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\security)
+2025-11-04 20:45:32 [main] DEBUG [SecurityApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
+2025-11-04 20:45:32 [main] INFO  [SecurityApplication] - No active profile set, falling back to 1 default profile: "default"
+2025-11-04 20:45:38 [main] DEBUG [InternalLoggerFactory] - Using SLF4J as the default logging framework
+2025-11-04 20:45:41 [main] WARN  [deprecation] - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-11-04 20:45:47 [main] WARN  [JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-11-04 20:45:47 [main] DEBUG [JwtAuthFilter] - Filter 'jwtAuthFilter' configured for use
+2025-11-04 20:45:48 [main] WARN  [InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer] - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2025-11-04 20:45:48 [main] DEBUG [Mappings] - 
 	c.s.c.AuthController:
 	{POST [/auth/register]}: register(Register,String)
-	{POST [/auth/logout]}: logout(String,String)
 	{POST [/auth/login]}: login(Login,String)
-	{POST [/auth/internal/users/batch]}: getUsersByIds(Map)
-	{GET [/auth/decode]}: decodeToken(String,String)
-	{GET [/auth/validate]}: validateToken(String,String)
 	{POST [/auth/refresh]}: refreshToken(String,String)
-	{POST [/auth/internal/users/update]}: updateUser(UserDto)
+	{GET [/auth/validate]}: validateToken(String,String)
+	{POST [/auth/internal/users/update]}: updateUser(UpdateUserDto)
+	{GET [/auth/decode]}: decodeToken(String,String)
+	{POST [/auth/internal/users/batch]}: getUsersByIds(Map)
+	{PATCH [/auth/internal/users/disable]}: disableUsers(List,String)
+	{DELETE [/auth/internal/users/delete]}: deleteUser(List)
+	{PATCH [/auth/internal/users/enable]}: enableUsers(List,String)
 	{GET [/auth/check-status]}: checkAccountStatus(String,String)
-2025-11-01 09:25:12 [main] DEBUG [Mappings] - 
+	{POST [/auth/logout]}: logout(String,String)
+2025-11-04 20:45:48 [main] DEBUG [Mappings] - 
 	o.s.b.a.w.s.e.BasicErrorController:
 	{ [/error]}: error(HttpServletRequest)
 	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
-2025-11-01 09:25:12 [main] DEBUG [Mappings] - 'beanNameHandlerMapping' {}
-2025-11-01 09:25:12 [main] DEBUG [Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
-2025-11-01 09:25:14 [main] DEBUG [Loggers] - Using Slf4j logging framework
-2025-11-01 09:25:16 [main] INFO  [SecurityApplication] - Started SecurityApplication in 24.025 seconds (process running for 24.806)
-2025-11-01 09:26:00 [scheduling-1] INFO  [LoggingServiceImp] - [security] PendingUserTimeoutService - Starting scheduled check for PENDING user timeout...
-2025-11-01 09:26:00 [scheduling-1] INFO  [LoggingServiceImp] - [security] PendingUserTimeoutService - No PENDING users found
-2025-11-01 09:26:27 [http-nio-8083-exec-1] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Processing request: /auth/login
-2025-11-01 09:26:27 [http-nio-8083-exec-1] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Skipping JWT validation for public endpoint: /auth/login
-2025-11-01 09:26:27 [http-nio-8083-exec-1] INFO  [LoggingServiceImp] - [security] AuthController - Login API calling... by user: HuyS1
-2025-11-01 09:26:27 [http-nio-8083-exec-1] INFO  [LoggingServiceImp] - [security] AuthService - Login attempt for username: HuyS1
-2025-11-01 09:26:27 [http-nio-8083-exec-1] INFO  [LoggingServiceImp] - [security] AuthController - User logged in successfully: HuyS1
-2025-11-01 09:26:38 [http-nio-8083-exec-4] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Processing request: /auth/validate
-2025-11-01 09:26:38 [http-nio-8083-exec-4] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Extracted username from JWT: HuyS1
-2025-11-01 09:26:38 [http-nio-8083-exec-4] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Successfully authenticated user: HuyS1
-2025-11-01 09:26:39 [http-nio-8083-exec-4] INFO  [LoggingServiceImp] - [security] AuthController - validate API Calling...
-2025-11-01 09:26:39 [http-nio-8083-exec-4] INFO  [LoggingServiceImp] - [security] AuthController - Token validated successfully for user: HuyS1
-2025-11-01 09:26:39 [LoginEvent-1] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - userEvent sent to topic: user-events - with entity id: [1]
-2025-11-01 09:26:39 [LoginEvent-1] INFO  [LoggingServiceImp] - [security] AsyncService - Login event sent successfully for user: HuyS1
-2025-11-01 09:26:39 [kafka-producer-network-thread | security-producer-1] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - Message sent successfully to topic: user-events, partition: 0, offset: 18, key: [1]
-2025-11-01 09:28:00 [scheduling-1] INFO  [LoggingServiceImp] - [security] PendingUserTimeoutService - Starting scheduled check for PENDING user timeout...
-2025-11-01 09:28:00 [scheduling-1] INFO  [LoggingServiceImp] - [security] PendingUserTimeoutService - No PENDING users found
-2025-11-01 09:28:14 [http-nio-8083-exec-5] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Processing request: /auth/validate
-2025-11-01 09:28:14 [http-nio-8083-exec-5] ERROR [LoggingServiceImp] - [security] JwtAuthFilter - Error processing JWT token: JWT expired 1439623273 milliseconds ago at 2025-10-15T10:34:31.000Z. Current time: 2025-11-01T02:28:14.273Z. Allowed clock skew: 0 milliseconds.: JWT expired 1439623273 milliseconds ago at 2025-10-15T10:34:31.000Z. Current time: 2025-11-01T02:28:14.273Z. Allowed clock skew: 0 milliseconds.
-2025-11-01 09:28:29 [http-nio-8083-exec-9] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Processing request: /auth/validate
-2025-11-01 09:28:29 [http-nio-8083-exec-9] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Extracted username from JWT: HuyS1
-2025-11-01 09:28:29 [http-nio-8083-exec-9] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Successfully authenticated user: HuyS1
-2025-11-01 09:28:29 [LoginEvent-2] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - userEvent sent to topic: user-events - with entity id: [1]
-2025-11-01 09:28:29 [LoginEvent-2] INFO  [LoggingServiceImp] - [security] AsyncService - Login event sent successfully for user: HuyS1
-2025-11-01 09:28:29 [http-nio-8083-exec-9] INFO  [LoggingServiceImp] - [security] AuthController - validate API Calling...
-2025-11-01 09:28:29 [kafka-producer-network-thread | security-producer-1] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - Message sent successfully to topic: user-events, partition: 0, offset: 19, key: [1]
-2025-11-01 09:28:29 [http-nio-8083-exec-9] INFO  [LoggingServiceImp] - [security] AuthController - Token validated successfully for user: HuyS1
-2025-11-01 09:29:35 [http-nio-8083-exec-1] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Processing request: /auth/login
-2025-11-01 09:29:35 [http-nio-8083-exec-1] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Skipping JWT validation for public endpoint: /auth/login
-2025-11-01 09:29:35 [http-nio-8083-exec-1] INFO  [LoggingServiceImp] - [security] AuthController - Login API calling... by user: HuyS1
-2025-11-01 09:29:35 [http-nio-8083-exec-1] INFO  [LoggingServiceImp] - [security] AuthService - Login attempt for username: HuyS1
-2025-11-01 09:29:35 [http-nio-8083-exec-1] INFO  [LoggingServiceImp] - [security] AuthController - User logged in successfully: HuyS1
-2025-11-01 09:29:47 [http-nio-8083-exec-4] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Processing request: /auth/check-status
-2025-11-01 09:29:47 [http-nio-8083-exec-4] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Extracted username from JWT: HuyS1
-2025-11-01 09:29:47 [http-nio-8083-exec-4] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Successfully authenticated user: HuyS1
-2025-11-01 09:29:47 [LoginEvent-1] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - userEvent sent to topic: user-events - with entity id: [1]
-2025-11-01 09:29:47 [LoginEvent-1] INFO  [LoggingServiceImp] - [security] AsyncService - Login event sent successfully for user: HuyS1
-2025-11-01 09:29:47 [http-nio-8083-exec-4] INFO  [LoggingServiceImp] - [security] AuthController - checkAccountStatus API Calling...
-2025-11-01 09:29:47 [kafka-producer-network-thread | security-producer-1] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - Message sent successfully to topic: user-events, partition: 0, offset: 20, key: [1]
-2025-11-01 09:29:47 [http-nio-8083-exec-4] INFO  [LoggingServiceImp] - [security] AuthController - Account status checked for user: HuyS1
-2025-11-01 09:29:54 [http-nio-8083-exec-3] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Processing request: /auth/validate
-2025-11-01 09:29:54 [http-nio-8083-exec-3] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Extracted username from JWT: HuyS1
-2025-11-01 09:29:54 [http-nio-8083-exec-3] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Successfully authenticated user: HuyS1
-2025-11-01 09:29:54 [LoginEvent-2] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - userEvent sent to topic: user-events - with entity id: [1]
-2025-11-01 09:29:54 [LoginEvent-2] INFO  [LoggingServiceImp] - [security] AsyncService - Login event sent successfully for user: HuyS1
-2025-11-01 09:29:54 [http-nio-8083-exec-3] INFO  [LoggingServiceImp] - [security] AuthController - validate API Calling...
-2025-11-01 09:29:54 [kafka-producer-network-thread | security-producer-1] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - Message sent successfully to topic: user-events, partition: 0, offset: 21, key: [1]
-2025-11-01 09:29:54 [http-nio-8083-exec-3] INFO  [LoggingServiceImp] - [security] AuthController - Token validated successfully for user: HuyS1
-2025-11-01 09:29:59 [http-nio-8083-exec-7] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Processing request: /auth/login
-2025-11-01 09:29:59 [http-nio-8083-exec-7] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Skipping JWT validation for public endpoint: /auth/login
-2025-11-01 09:29:59 [http-nio-8083-exec-7] INFO  [LoggingServiceImp] - [security] AuthController - Login API calling... by user: HuyS2
-2025-11-01 09:29:59 [http-nio-8083-exec-7] INFO  [LoggingServiceImp] - [security] AuthService - Login attempt for username: HuyS2
-2025-11-01 09:29:59 [http-nio-8083-exec-7] INFO  [LoggingServiceImp] - [security] AuthController - User logged in successfully: HuyS2
-2025-11-01 09:30:00 [scheduling-1] INFO  [LoggingServiceImp] - [security] PendingUserTimeoutService - Starting scheduled check for PENDING user timeout...
-2025-11-01 09:30:00 [scheduling-1] INFO  [LoggingServiceImp] - [security] PendingUserTimeoutService - No PENDING users found
-2025-11-01 09:30:05 [http-nio-8083-exec-5] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Processing request: /auth/validate
-2025-11-01 09:30:05 [http-nio-8083-exec-5] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Extracted username from JWT: HuyS2
-2025-11-01 09:30:05 [http-nio-8083-exec-5] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Successfully authenticated user: HuyS2
-2025-11-01 09:30:05 [LoginEvent-1] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - userEvent sent to topic: user-events - with entity id: [2]
-2025-11-01 09:30:05 [LoginEvent-1] INFO  [LoggingServiceImp] - [security] AsyncService - Login event sent successfully for user: HuyS2
-2025-11-01 09:30:05 [http-nio-8083-exec-5] INFO  [LoggingServiceImp] - [security] AuthController - validate API Calling...
-2025-11-01 09:30:05 [kafka-producer-network-thread | security-producer-1] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - Message sent successfully to topic: user-events, partition: 0, offset: 22, key: [2]
-2025-11-01 09:30:05 [http-nio-8083-exec-5] INFO  [LoggingServiceImp] - [security] AuthController - Token validated successfully for user: HuyS2
-2025-11-01 09:30:18 [http-nio-8083-exec-8] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Processing request: /auth/login
-2025-11-01 09:30:18 [http-nio-8083-exec-8] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Skipping JWT validation for public endpoint: /auth/login
-2025-11-01 09:30:18 [http-nio-8083-exec-8] INFO  [LoggingServiceImp] - [security] AuthController - Login API calling... by user: HuyS1
-2025-11-01 09:30:18 [http-nio-8083-exec-8] INFO  [LoggingServiceImp] - [security] AuthService - Login attempt for username: HuyS1
-2025-11-01 09:30:18 [http-nio-8083-exec-8] INFO  [LoggingServiceImp] - [security] AuthController - User logged in successfully: HuyS1
-2025-11-01 09:30:25 [http-nio-8083-exec-9] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Processing request: /auth/validate
-2025-11-01 09:30:25 [http-nio-8083-exec-9] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Extracted username from JWT: HuyS1
-2025-11-01 09:30:25 [http-nio-8083-exec-9] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Successfully authenticated user: HuyS1
-2025-11-01 09:30:25 [LoginEvent-2] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - userEvent sent to topic: user-events - with entity id: [1]
-2025-11-01 09:30:25 [LoginEvent-2] INFO  [LoggingServiceImp] - [security] AsyncService - Login event sent successfully for user: HuyS1
-2025-11-01 09:30:25 [http-nio-8083-exec-9] INFO  [LoggingServiceImp] - [security] AuthController - validate API Calling...
-2025-11-01 09:30:25 [kafka-producer-network-thread | security-producer-1] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - Message sent successfully to topic: user-events, partition: 0, offset: 23, key: [1]
-2025-11-01 09:30:25 [http-nio-8083-exec-9] INFO  [LoggingServiceImp] - [security] AuthController - Token validated successfully for user: HuyS1
-2025-11-01 09:30:33 [http-nio-8083-exec-6] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Processing request: /auth/validate
-2025-11-01 09:30:33 [http-nio-8083-exec-6] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Extracted username from JWT: HuyS1
-2025-11-01 09:30:33 [http-nio-8083-exec-6] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Successfully authenticated user: HuyS1
-2025-11-01 09:30:33 [LoginEvent-1] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - userEvent sent to topic: user-events - with entity id: [1]
-2025-11-01 09:30:33 [LoginEvent-1] INFO  [LoggingServiceImp] - [security] AsyncService - Login event sent successfully for user: HuyS1
-2025-11-01 09:30:33 [http-nio-8083-exec-6] INFO  [LoggingServiceImp] - [security] AuthController - validate API Calling...
-2025-11-01 09:30:33 [kafka-producer-network-thread | security-producer-1] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - Message sent successfully to topic: user-events, partition: 0, offset: 24, key: [1]
-2025-11-01 09:30:33 [http-nio-8083-exec-6] INFO  [LoggingServiceImp] - [security] AuthController - Token validated successfully for user: HuyS1
-2025-11-01 09:30:33 [http-nio-8083-exec-10] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Processing request: /auth/internal/users/update
-2025-11-01 09:30:33 [http-nio-8083-exec-10] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Skipping JWT validation for public endpoint: /auth/internal/users/update
-2025-11-01 09:30:33 [http-nio-8083-exec-10] INFO  [LoggingServiceImp] - [security] AuthController - updateUser API Calling... for userId: 1
-2025-11-01 09:30:33 [http-nio-8083-exec-10] INFO  [LoggingServiceImp] - [security] AuthController - Updated user profile for userId: 1
-2025-11-01 09:31:05 [http-nio-8083-exec-2] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Processing request: /auth/validate
-2025-11-01 09:31:05 [http-nio-8083-exec-2] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Extracted username from JWT: HuyS1
-2025-11-01 09:31:05 [http-nio-8083-exec-2] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Successfully authenticated user: HuyS1
-2025-11-01 09:31:05 [LoginEvent-2] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - userEvent sent to topic: user-events - with entity id: [1]
-2025-11-01 09:31:05 [LoginEvent-2] INFO  [LoggingServiceImp] - [security] AsyncService - Login event sent successfully for user: HuyS1
-2025-11-01 09:31:05 [http-nio-8083-exec-2] INFO  [LoggingServiceImp] - [security] AuthController - validate API Calling...
-2025-11-01 09:31:05 [kafka-producer-network-thread | security-producer-1] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - Message sent successfully to topic: user-events, partition: 0, offset: 25, key: [1]
-2025-11-01 09:31:05 [http-nio-8083-exec-2] INFO  [LoggingServiceImp] - [security] AuthController - Token validated successfully for user: HuyS1
-2025-11-01 09:31:05 [http-nio-8083-exec-1] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Processing request: /auth/internal/users/batch
-2025-11-01 09:31:05 [http-nio-8083-exec-1] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Skipping JWT validation for public endpoint: /auth/internal/users/batch
-2025-11-01 09:31:05 [http-nio-8083-exec-1] INFO  [LoggingServiceImp] - [security] AuthController - Batch getting users, count: 5
-2025-11-01 09:31:05 [http-nio-8083-exec-1] INFO  [LoggingServiceImp] - [security] AuthController - Successfully retrieved 5 users
-2025-11-01 09:31:46 [http-nio-8083-exec-3] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Processing request: /auth/validate
-2025-11-01 09:31:46 [http-nio-8083-exec-3] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Extracted username from JWT: HuyS1
-2025-11-01 09:31:46 [http-nio-8083-exec-3] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Successfully authenticated user: HuyS1
-2025-11-01 09:31:46 [LoginEvent-1] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - userEvent sent to topic: user-events - with entity id: [1]
-2025-11-01 09:31:46 [LoginEvent-1] INFO  [LoggingServiceImp] - [security] AsyncService - Login event sent successfully for user: HuyS1
-2025-11-01 09:31:46 [http-nio-8083-exec-3] INFO  [LoggingServiceImp] - [security] AuthController - validate API Calling...
-2025-11-01 09:31:46 [kafka-producer-network-thread | security-producer-1] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - Message sent successfully to topic: user-events, partition: 0, offset: 26, key: [1]
-2025-11-01 09:31:46 [http-nio-8083-exec-3] INFO  [LoggingServiceImp] - [security] AuthController - Token validated successfully for user: HuyS1
-2025-11-01 09:31:46 [http-nio-8083-exec-7] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Processing request: /auth/internal/users/update
-2025-11-01 09:31:46 [http-nio-8083-exec-7] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Skipping JWT validation for public endpoint: /auth/internal/users/update
-2025-11-01 09:31:46 [http-nio-8083-exec-7] INFO  [LoggingServiceImp] - [security] AuthController - updateUser API Calling... for userId: 1
-2025-11-01 09:31:46 [http-nio-8083-exec-7] INFO  [LoggingServiceImp] - [security] AuthController - Updated user profile for userId: 1
-2025-11-01 09:32:00 [scheduling-1] INFO  [LoggingServiceImp] - [security] PendingUserTimeoutService - Starting scheduled check for PENDING user timeout...
-2025-11-01 09:32:00 [scheduling-1] INFO  [LoggingServiceImp] - [security] PendingUserTimeoutService - No PENDING users found
-2025-11-01 09:34:00 [scheduling-1] INFO  [LoggingServiceImp] - [security] PendingUserTimeoutService - Starting scheduled check for PENDING user timeout...
-2025-11-01 09:34:00 [scheduling-1] INFO  [LoggingServiceImp] - [security] PendingUserTimeoutService - No PENDING users found
-2025-11-01 09:36:00 [scheduling-1] INFO  [LoggingServiceImp] - [security] PendingUserTimeoutService - Starting scheduled check for PENDING user timeout...
-2025-11-01 09:36:00 [scheduling-1] INFO  [LoggingServiceImp] - [security] PendingUserTimeoutService - No PENDING users found
-2025-11-01 09:38:00 [scheduling-1] INFO  [LoggingServiceImp] - [security] PendingUserTimeoutService - Starting scheduled check for PENDING user timeout...
-2025-11-01 09:38:00 [scheduling-1] INFO  [LoggingServiceImp] - [security] PendingUserTimeoutService - No PENDING users found
-2025-11-01 09:40:00 [scheduling-1] INFO  [LoggingServiceImp] - [security] PendingUserTimeoutService - Starting scheduled check for PENDING user timeout...
-2025-11-01 09:40:00 [scheduling-1] INFO  [LoggingServiceImp] - [security] PendingUserTimeoutService - No PENDING users found
-2025-11-01 09:42:00 [scheduling-1] INFO  [LoggingServiceImp] - [security] PendingUserTimeoutService - Starting scheduled check for PENDING user timeout...
-2025-11-01 09:42:00 [scheduling-1] INFO  [LoggingServiceImp] - [security] PendingUserTimeoutService - No PENDING users found
-2025-11-01 09:44:00 [scheduling-1] INFO  [LoggingServiceImp] - [security] PendingUserTimeoutService - Starting scheduled check for PENDING user timeout...
-2025-11-01 09:44:00 [scheduling-1] INFO  [LoggingServiceImp] - [security] PendingUserTimeoutService - No PENDING users found
-2025-11-01 09:46:00 [scheduling-1] INFO  [LoggingServiceImp] - [security] PendingUserTimeoutService - Starting scheduled check for PENDING user timeout...
-2025-11-01 09:46:00 [scheduling-1] INFO  [LoggingServiceImp] - [security] PendingUserTimeoutService - No PENDING users found
+2025-11-04 20:45:48 [main] DEBUG [Mappings] - 'beanNameHandlerMapping' {}
+2025-11-04 20:45:48 [main] DEBUG [Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
+2025-11-04 20:45:50 [main] DEBUG [Loggers] - Using Slf4j logging framework
+2025-11-04 20:45:52 [main] INFO  [SecurityApplication] - Started SecurityApplication in 21.124 seconds (process running for 22.252)
+2025-11-04 20:46:00 [scheduling-1] INFO  [LoggingServiceImp] - [security] PendingUserTimeoutService - Starting scheduled check for PENDING user timeout...
+2025-11-04 20:46:00 [scheduling-1] INFO  [LoggingServiceImp] - [security] PendingUserTimeoutService - No PENDING users found
+2025-11-04 20:47:50 [http-nio-8083-exec-2] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Processing request: /auth/internal/users/enable
+2025-11-04 20:47:50 [http-nio-8083-exec-2] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Skipping JWT validation for public endpoint: /auth/internal/users/enable
+2025-11-04 20:47:50 [http-nio-8083-exec-2] INFO  [LoggingServiceImp] - [security] AuthController - Enabled user with id: 2
+2025-11-04 20:47:50 [http-nio-8083-exec-2] INFO  [LoggingServiceImp] - [security] AuthController - Enabled user with id: 3
+2025-11-04 20:48:00 [scheduling-1] INFO  [LoggingServiceImp] - [security] PendingUserTimeoutService - Starting scheduled check for PENDING user timeout...
+2025-11-04 20:48:00 [scheduling-1] INFO  [LoggingServiceImp] - [security] PendingUserTimeoutService - No PENDING users found

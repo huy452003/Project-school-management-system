@@ -26,4 +26,7 @@ public interface UserRepo extends JpaRepository<UserEntity, Integer> {
     // Tìm các user PENDING được tạo trước một thời điểm nhất định
     @Query("SELECT u FROM UserEntity u WHERE u.status = :status AND u.userId <= :maxUserId")
     List<UserEntity> findByStatusAndUserIdLessThanEqual(@Param("status") Status status, @Param("maxUserId") Integer maxUserId);
+
+    @Query("SELECT MAX(u.userId) FROM UserEntity u")
+    Optional<Integer> findMaxUserId();
 }

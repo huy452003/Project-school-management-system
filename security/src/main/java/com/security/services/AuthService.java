@@ -27,6 +27,9 @@ import com.model_shared.enums.Role;
 import com.model_shared.enums.Type;
 import com.model_shared.enums.Status;
 import org.modelmapper.ModelMapper;
+import org.springframework.retry.annotation.Retryable;
+import org.springframework.dao.OptimisticLockingFailureException;
+import org.springframework.transaction.annotation.Isolation;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -73,7 +76,8 @@ public class AuthService {
         return expirationTime.format(formatter);
     }
 
-    @Transactional(rollbackFor = Exception.class)
+    @Retryable(value = {OptimisticLockingFailureException.class}, maxAttempts = 3)
+    @Transactional(rollbackFor = Exception.class, isolation = Isolation.REPEATABLE_READ)
     public SecurityResponse register(Register request){
         LogContext logContext = getLogContext("register");
         logContext.setUserId(request.getUsername());

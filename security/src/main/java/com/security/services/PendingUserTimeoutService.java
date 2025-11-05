@@ -67,10 +67,7 @@ public class PendingUserTimeoutService {
             // Nếu user mới nhất có userId = 100, và timeout là 5 phút
             // Thì user có userId <= (100 - số user được tạo trong 5 phút) là timeout
             
-            Integer latestUserId = userRepo.findAll().stream()
-                    .mapToInt(UserEntity::getUserId)
-                    .max()
-                    .orElse(0);
+            Integer latestUserId = userRepo.findMaxUserId().orElse(0);
             
             int failedCount = 0;
             

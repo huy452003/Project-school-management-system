@@ -27,7 +27,7 @@ public class CustomExceptionHandler {
     ResponseEntity<Response<?>> notFoundExceptionHandler(NotFoundExceptionHandle e) {
         Locale locale = LocaleContextHolder.getLocale();
         Map<String, String> error = new HashMap<>();
-        error.put("Error", "ID:" + e.getListNotFounds().toString());
+        error.put("Error", "IDs:" + e.getListNotFounds().toString());
         
         Response<?> response = new Response<>(
                 404,
