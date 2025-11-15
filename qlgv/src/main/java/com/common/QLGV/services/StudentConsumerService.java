@@ -14,7 +14,7 @@ import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Service;
 
 @Service
-public class StudentEventConsumerService extends KafkaConsumerService<StudentEvent> {
+public class StudentConsumerService extends KafkaConsumerService<StudentEvent> {
 
     @Autowired
     private LoggingService loggingService;

@@ -3,7 +3,6 @@ package com.common.QLSV.services.imp;
 import com.common.QLSV.entities.StudentEntity;
 import com.common.QLSV.repositories.StudentRepo;
 import com.common.QLSV.services.StudentService;
-import com.model_shared.models.student.StudentModel;
 import com.logging.services.LoggingService;
 import com.logging.models.LogContext;
 import com.handle_exceptions.NotFoundExceptionHandle;
@@ -13,6 +12,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.transaction.annotation.Isolation;
 
 import com.model_shared.enums.Status;
+import com.model_shared.models.user.EntityModel;
 import com.model_shared.models.user.UpdateEntityModel;
 import com.model_shared.models.user.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,14 +62,14 @@ public class StudentServiceImp implements StudentService {
     }
 
     @Override
-    public List<StudentModel> gets() {
+    public List<EntityModel> gets() {
         LogContext logContext = getLogContext("gets");
 
         Object cached = redisTemplate.opsForValue().get(STUDENT_CACHE_KEY);
         if (cached != null) {
             loggingService.logInfo("Get data from Redis cache : " + STUDENT_CACHE_KEY, logContext);
             @SuppressWarnings("unchecked")
-            List<StudentModel> cachedList = (List<StudentModel>) cached;
+            List<EntityModel> cachedList = (List<EntityModel>) cached;
             return cachedList;
         }
         loggingService.logWarn("Not found cache, Query DB", logContext);
@@ -86,7 +86,7 @@ public class StudentServiceImp implements StudentService {
                 .toList();
 
         Map<Integer, UserDto> usersById = securityService.getUsersByIds(userIds);
-        List<StudentModel> studentModels = new ArrayList<>();
+        List<EntityModel> studentModels = new ArrayList<>();
 
         for (StudentEntity studentEntity : studentEntities) {
             UserDto userDto = usersById.get(studentEntity.getUserId());
@@ -97,7 +97,7 @@ public class StudentServiceImp implements StudentService {
                 }
                 userDto.getProfileData().put("graduate", studentEntity.getGraduate());
                 
-                StudentModel studentModel = new StudentModel();
+                EntityModel studentModel = new EntityModel();
                 studentModel.setId(studentEntity.getId());
                 studentModel.setUser(userDto);
                 
@@ -106,7 +106,7 @@ public class StudentServiceImp implements StudentService {
             }
         }
 
-        loggingService.logInfo("Gets Student Successfully", logContext);
+        loggingService.logInfo("Gets Students Successfully", logContext);
 
         redisTemplate.opsForValue()
                 .set(STUDENT_CACHE_KEY, studentModels);
@@ -151,54 +151,52 @@ public class StudentServiceImp implements StudentService {
     @Override
     @Retryable(value = {OptimisticLockingFailureException.class}, maxAttempts = 3)
     @Transactional(rollbackFor = Exception.class, isolation = Isolation.REPEATABLE_READ)
-    public StudentModel update(UpdateEntityModel studentUpdate) {
+    public EntityModel update(UpdateEntityModel req) {
         LogContext logContext = getLogContext("update");
 
-        if (studentUpdate.getUser() == null || studentUpdate.getUser().getUserId() == null) {
-            throw new NotFoundExceptionHandle("", List.of("User data is required"), "StudentModel");
+        if (req.getUser() == null || req.getUser().getUserId() == null) {
+            throw new NotFoundExceptionHandle("", Collections.emptyList(), "StudentModel");
         }
 
-        StudentEntity studentEntity = studentRepo.findById(studentUpdate.getId())
+        StudentEntity studentEntity = studentRepo.findById(req.getId())
                 .orElseThrow(() -> new NotFoundExceptionHandle("", 
-                    List.of(String.valueOf(studentUpdate.getId())), "StudentModel"));
+                    List.of(String.valueOf(req.getId())), "StudentModel"));
 
-        if (!studentEntity.getUserId().equals(studentUpdate.getUser().getUserId())) {
-            throw new NotFoundExceptionHandle("", 
-                List.of("User ID mismatch with Student"), "StudentModel");
+        if (!studentEntity.getUserId().equals(req.getUser().getUserId())) {
+            throw new NotFoundExceptionHandle("", Collections.emptyList(), "StudentModel");
         }
 
         // Update student entity TRƯỚC (trong transaction - có thể rollback nếu có lỗi)
-        if (studentUpdate.getUser().getProfileData() != null && 
-            studentUpdate.getUser().getProfileData().containsKey("graduate")) {
-            Boolean graduate = (Boolean) studentUpdate.getUser().getProfileData().get("graduate");
+        if (req.getUser().getProfileData() != null && 
+            req.getUser().getProfileData().containsKey("graduate")) {
+            Boolean graduate = (Boolean) req.getUser().getProfileData().get("graduate");
             studentEntity.setGraduate(graduate);
             studentRepo.save(studentEntity);
-            loggingService.logInfo("Updated graduate status for student id: " + studentEntity.getId(), logContext);
+
+            loggingService.logStudentOperation("UPDATE", req.getId(), logContext);
+            loggingService.logInfo("Update Student Successfully", logContext);
         }
 
         // Gọi security service SAU để update user
         // Nếu security service lỗi → throw exception → Spring @Transactional sẽ rollback toàn bộ transaction
         // → student entity KHÔNG bị update (an toàn)
         // Transaction chỉ commit khi method return thành công (không có exception)
-        UserDto updatedUser = securityService.updateUser(studentUpdate.getUser());
-        loggingService.logInfo("Updated user data for userId: " + updatedUser.getUserId(), logContext);
+        UserDto user = securityService.updateUser(req.getUser());
+        loggingService.logInfo("Updated user data for userId: " + user.getUserId(), logContext);
 
-        if (updatedUser.getProfileData() == null) {
-            updatedUser.setProfileData(new HashMap<>());
+        if (user.getProfileData() == null) {
+            user.setProfileData(new HashMap<>());
         }
-        updatedUser.getProfileData().put("graduate", studentEntity.getGraduate());
+        user.getProfileData().put("graduate", studentEntity.getGraduate());
 
-        StudentModel updatedStudentModel = new StudentModel();
-        updatedStudentModel.setId(studentUpdate.getId());
-        updatedStudentModel.setUser(updatedUser);
-
-        loggingService.logStudentOperation("UPDATE", studentUpdate.getId(), logContext);
-        loggingService.logInfo("Update Student Successfully", logContext);
+        EntityModel studentModel = new EntityModel();
+        studentModel.setId(req.getId());
+        studentModel.setUser(user);
 
         redisTemplate.delete(STUDENT_CACHE_KEY);
-        loggingService.logInfo("Del cache key: " + STUDENT_CACHE_KEY + " after update students", logContext);
+        loggingService.logInfo("Del cache key: " + STUDENT_CACHE_KEY + " after update student", logContext);
 
-        return updatedStudentModel;
+        return studentModel;
     }
 
     @Override

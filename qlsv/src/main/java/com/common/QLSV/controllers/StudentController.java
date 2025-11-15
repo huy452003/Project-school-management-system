@@ -1,13 +1,10 @@
 package com.common.QLSV.controllers;
 
-import com.model_shared.enums.Gender;
 import com.common.QLSV.services.imp.StudentServiceImp;
 import com.security_shared.annotations.RequiresAuth;
 import com.security_shared.annotations.CurrentUser;
 import com.model_shared.models.Response;
-import com.model_shared.models.pages.PagedResponseModel;
-import com.model_shared.models.pages.PagedRequestModel;
-import com.model_shared.models.student.StudentModel;
+import com.model_shared.models.user.EntityModel;
 import com.model_shared.models.user.UpdateEntityModel;
 import com.model_shared.models.user.UserDto;
 import com.logging.services.LoggingService;
@@ -26,9 +23,6 @@ import java.util.Locale;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-
-import java.util.Map;
 
 @RestController
 @RequestMapping("/students")
@@ -50,6 +44,113 @@ public class StudentController {
                 .className(this.getClass().getSimpleName())
                 .methodName(methodName)
                 .build();
+    }
+
+    @GetMapping("")
+    @RequiresAuth(roles = {"ADMIN", "STUDENT"}, permissions = {"STUDENT_READ"})
+    ResponseEntity<Response<List<EntityModel>>> get(
+            @RequestHeader(value = "Accept-Language", defaultValue = "en") String acceptLanguage,
+            @CurrentUser UserDto currentUser)
+    {
+        Locale locale = Locale.forLanguageTag(acceptLanguage);
+        LogContext logContext = getLogContext("get");
+        
+        loggingService.logInfo("Get students API called successfully by user: " + currentUser.getUsername()
+                , logContext);
+
+        List<EntityModel> entityModels = studentServiceImp.gets();
+        Response<List<EntityModel>> response = new Response<>(
+                200
+                , messageSource.getMessage("response.message.getSuccess", null, locale)
+                , "StudentsModel"
+                , null
+                , entityModels
+        );
+        return ResponseEntity.status(response.status()).body(response);
+    }
+
+    @PutMapping("/{id}")
+    @RequiresAuth(roles = {"ADMIN", "STUDENT"}, permissions = {"STUDENT_WRITE"})
+    ResponseEntity<Response<EntityModel>> update(
+            @PathVariable("id") Integer id,
+            @Valid @RequestBody UpdateEntityModel req,
+            @RequestHeader(value = "Accept-Language", defaultValue = "en") String acceptLanguage,
+            @CurrentUser UserDto currentUser)
+    {
+        Locale locale = Locale.forLanguageTag(acceptLanguage);
+        LogContext logContext = getLogContext("update");
+
+        loggingService.logInfo("Update students API called successfully by user: " + currentUser.getUsername(), logContext);
+        req.setId(id);
+        EntityModel student = studentServiceImp.update(req);
+        
+        String fullName = student.getUser().getFirstName() + " " + student.getUser().getLastName();
+            StudentEvent studentEvent = StudentEvent.studentUpdated(
+                student.getId().toString(),
+                fullName
+            );
+            kafkaProducerService.sendStudentEvent(studentEvent);
+            loggingService.logInfo("Sent student updated event for student: " + fullName, logContext);
+        
+        Response<EntityModel> response = new Response<>(
+                200
+                , messageSource.getMessage("response.message.updateSuccess", null, locale)
+                , "StudentsModel"
+                , null
+                , student
+            );
+            return ResponseEntity.status(response.status()).body(response);
+    }
+
+    @DeleteMapping("")
+    @RequiresAuth(roles = {"ADMIN", "STUDENT"}, permissions = {"STUDENT_DELETE"})
+    ResponseEntity<Response<List<EntityModel>>> delete(
+            @RequestBody List<Integer> userIds,
+            @RequestHeader(value = "Accept-Language", defaultValue = "en") String acceptLanguage,
+            @CurrentUser UserDto currentUser)
+    {
+        Locale locale = Locale.forLanguageTag(acceptLanguage);
+        LogContext logContext = getLogContext("delete");
+        loggingService.logInfo("Delete students API called successfully by user : " + currentUser.getUsername()
+                , logContext);
+        studentServiceImp.deletes(userIds);
+        
+        for (Integer userId : userIds) {
+            StudentEvent studentEvent = StudentEvent.studentDeleted(
+                userId.toString()
+            );
+            kafkaProducerService.sendStudentEvent(studentEvent);
+            loggingService.logInfo("Sent student deleted event for student: " + userId, logContext);
+        }
+
+            Response<List<EntityModel>> response = new Response<>(
+                    200
+                    , messageSource.getMessage("response.message.deleteSuccess", null, locale)
+                    , "StudentsModel",
+                    null,
+                    null
+            );
+            return ResponseEntity.status(response.status()).body(response);
+    }
+
+    @GetMapping("/public")
+    ResponseEntity<Response<List<EntityModel>>> public_get(
+            @RequestHeader(value = "Accept-Language"
+                    , defaultValue = "en") String acceptLanguage)
+    {
+        Locale locale = Locale.forLanguageTag(acceptLanguage);
+        LogContext logContext = getLogContext("public_get");
+
+        loggingService.logInfo("Get students public API called successfully ", logContext);
+        List<EntityModel> studentModels = studentServiceImp.gets();
+        Response<List<EntityModel>> response = new Response<>(
+                200
+                , messageSource.getMessage("response.message.getSuccess", null, locale)
+                , "StudentsModel"
+                , null
+                , studentModels
+        );
+        return ResponseEntity.status(response.status()).body(response);
     }
 
     // @GetMapping("/paged")
@@ -112,113 +213,5 @@ public class StudentController {
 //         );
 //         return ResponseEntity.status(response.getStatus()).body(response);
 //     }
-    
-
-    @GetMapping("")
-    @RequiresAuth(roles = {"ADMIN", "STUDENT"}, permissions = {"STUDENT_READ"})
-    ResponseEntity<Response<List<StudentModel>>> get(
-            @RequestHeader(value = "Accept-Language", defaultValue = "en") String acceptLanguage,
-            @CurrentUser UserDto currentUser)
-    {
-        Locale locale = Locale.forLanguageTag(acceptLanguage);
-        LogContext logContext = getLogContext("get");
-        
-        loggingService.logInfo("Get students API called successfully by user: " + currentUser.getUsername()
-                , logContext);
-
-        List<StudentModel> studentModels = studentServiceImp.gets();
-        Response<List<StudentModel>> response = new Response<>(
-                200
-                , messageSource.getMessage("response.message.getSuccess", null, locale)
-                , "StudentsModel"
-                , null
-                , studentModels
-        );
-        return ResponseEntity.status(response.getStatus()).body(response);
-    }
-
-    @PutMapping("/{id}")
-    @RequiresAuth(roles = {"ADMIN", "STUDENT"}, permissions = {"STUDENT_WRITE"})
-    ResponseEntity<Response<StudentModel>> update(
-            @PathVariable("id") Integer id,
-            @Valid @RequestBody UpdateEntityModel req,
-            @RequestHeader(value = "Accept-Language", defaultValue = "en") String acceptLanguage,
-            @CurrentUser UserDto currentUser)
-    {
-        Locale locale = Locale.forLanguageTag(acceptLanguage);
-        LogContext logContext = getLogContext("update");
-
-        loggingService.logInfo("Update students API called successfully by user: " + currentUser.getUsername(), logContext);
-        req.setId(id);
-        StudentModel student = studentServiceImp.update(req);
-        
-        String fullName = student.getUser().getFirstName() + " " + student.getUser().getLastName();
-            StudentEvent studentEvent = StudentEvent.studentUpdated(
-                student.getId().toString(),
-                fullName
-            );
-            kafkaProducerService.sendStudentEvent(studentEvent);
-            loggingService.logInfo("Sent student updated event for student: " + fullName, logContext);
-        
-        Response<StudentModel> response = new Response<>(
-                200
-                , messageSource.getMessage("response.message.updateSuccess", null, locale)
-                , "StudentsModel"
-                , null
-                , student
-            );
-            return ResponseEntity.status(response.getStatus()).body(response);
-    }
-
-    @DeleteMapping("")
-    @RequiresAuth(roles = {"ADMIN", "STUDENT"}, permissions = {"STUDENT_DELETE"})
-    ResponseEntity<Response<List<StudentModel>>> delete(
-            @RequestBody List<Integer> userIds,
-            @RequestHeader(value = "Accept-Language", defaultValue = "en") String acceptLanguage,
-            @CurrentUser UserDto currentUser)
-    {
-        Locale locale = Locale.forLanguageTag(acceptLanguage);
-        LogContext logContext = getLogContext("delete");
-        loggingService.logInfo("Delete students API called successfully by user : " + currentUser.getUsername()
-                , logContext);
-        studentServiceImp.deletes(userIds);
-        
-        for (Integer userId : userIds) {
-            StudentEvent studentEvent = StudentEvent.studentDeleted(
-                userId.toString()
-            );
-            kafkaProducerService.sendStudentEvent(studentEvent);
-            loggingService.logInfo("Sent student deleted event for student: " + userId, logContext);
-        }
-
-            Response<List<StudentModel>> response = new Response<>(
-                    200
-                    , messageSource.getMessage("response.message.deleteSuccess", null, locale)
-                    , "StudentsModel",
-                    null,
-                    null
-            );
-            return ResponseEntity.status(response.getStatus()).body(response);
-    }
-
-    // @GetMapping("/public")
-    // ResponseEntity<Response<List<StudentModel>>> public_get(
-    //         @RequestHeader(value = "Accept-Language"
-    //                 , defaultValue = "en") String acceptLanguage)
-    // {
-    //     Locale locale = Locale.forLanguageTag(acceptLanguage);
-    //     LogContext logContext = getLogContext("public_get");
-
-    //     loggingService.logInfo("Get students public API called successfully ", logContext);
-    //     List<StudentModel> studentModels = studentServiceImp.gets();
-    //     Response<List<StudentModel>> response = new Response<>(
-    //             200
-    //             , messageSource.getMessage("response.message.getSuccess", null, locale)
-    //             , "StudentsModel"
-    //             , null
-    //             , studentModels
-    //     );
-    //     return ResponseEntity.status(response.getStatus()).body(response);
-    // }
 
 }

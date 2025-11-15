@@ -148,25 +148,25 @@ bảo vệ , nhưng method không sử dụng annotation thì được xem là p
 
 * new 26/10/2025, phạm vi : (Spring boot và MySQL).
 
-- ss giữa AOP(module security_shared) và SecurityConfig(module security) tôi đã cấu hình.
-để tránh duplicate.
+- ss giữa AOP(module security_shared) và SecurityConfig(module security) tôi đã cấu hình.    =     =
+để tránh duplicate.       
 
-- Nếu như có 1000 req gửi cùng lúc trong 1s và gửi liên tục trong 5s thì làm cách nào 
-để bảo vệ API, khi mà service die phải làm cách nào để khôi phục ser ngay.
+- Nếu như có 1000 req gửi cùng lúc trong 1s và gửi liên tục trong 5s thì làm cách nào 	  =
+để bảo vệ API, khi mà service die phải làm cách nào để khôi phục ser ngay.	
 ( tìm giải pháp để bảo vệ API trong tình huống trên và khắc phục hậu quả khi ser die ).
 
 - lý thuyết + thực hành.
-1/ nghiên cứu vấn đề n+1 trong db, cho ví dụ và giải pháp để giải quyết.
+1/ nghiên cứu vấn đề n+1 trong db, cho ví dụ và giải pháp để giải quyết.     =
 
-2/ các loại index trong db. Làm ví dụ từng loại và nêu lợi ích, tác hại của nó.
+2/ các loại index trong db. Làm ví dụ từng loại và nêu lợi ích, tác hại của nó.       =
 
-3/ ( cả MySQL và Redis ) xử lý nếu như cùng 1 thời điểm mà có 2 câu lệnh update data thì nên
+3/ ( cả MySQL và Redis ) xử lý nếu như cùng 1 thời điểm mà có 2 câu lệnh update data thì nên    =
 làm gì để tránh data không đồng bộ. Khi nào sẽ áp dụng ở redis (Spring boot), MySql (Spring boot).
 
-4/ liệt kê các design pattern tôi đang dùng trong projcet hiện tại và hãy giải thích các design này
-, sau đó gợi ý thêm các design pattern có thể thêm vào được.		
+4/ liệt kê các design pattern tôi đang dùng trong projcet hiện tại và hãy giải thích các design này     =
+, sau đó gợi ý thêm các design pattern có thể thêm vào được.	
 
-5/ record trong java 17.
+5/ record trong java 17.	=
 
 - lý thuyết.
 6/ HashMap và ConcurrentHashMap ss cơ chế bên trong.    =

@@ -1,19 +1,16 @@
-package com.model_shared.models.student;
+package com.model_shared.models.user;
 
 import jakarta.validation.constraints.*;
-import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-import com.model_shared.models.user.UserDto;
-
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @ToString
-public class StudentModel {
+public class EntityModel {
     
     private Integer id;
 

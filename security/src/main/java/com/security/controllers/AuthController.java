@@ -84,7 +84,7 @@ public class AuthController {
                 securityResponse
         );
         loggingService.logInfo("User registered successfully: " + logContext.getUserId(), logContext);
-        return ResponseEntity.status(response.getStatus()).body(response);
+        return ResponseEntity.status(response.status()).body(response);
     }
 
     @PostMapping("/login")
@@ -94,7 +94,7 @@ public class AuthController {
     ){
         Locale locale = Locale.forLanguageTag(acceptLanguage);
         LogContext logContext = getLogContext("login");
-        logContext.setUserId(request.getUsername());
+        logContext.setUserId(request.username());
 
         loggingService.logInfo("Login API calling... by user: " + logContext.getUserId(), logContext);
         SecurityResponse securityResponse = authService.login(request);
@@ -106,7 +106,7 @@ public class AuthController {
                 securityResponse
         );
         loggingService.logInfo("User logged in successfully: " + logContext.getUserId(), logContext);
-        return ResponseEntity.status(response.getStatus()).body(response);
+        return ResponseEntity.status(response.status()).body(response);
     }
 
     @PostMapping("/logout")
@@ -132,7 +132,7 @@ public class AuthController {
 
         loggingService.logInfo("User logged out from all devices successfully: " + logoutResponse.get("username")
         + " at timestamp: " + logoutResponse.get("timestamp"), logContext);
-        return ResponseEntity.status(response.getStatus()).body(response);
+        return ResponseEntity.status(response.status()).body(response);
     }
 
     @PostMapping("/refresh")
@@ -154,7 +154,7 @@ public class AuthController {
                 securityResponse
         );
         loggingService.logInfo("refreshToken successfully", logContext);
-        return ResponseEntity.status(response.getStatus()).body(response);
+        return ResponseEntity.status(response.status()).body(response);
     }
 
     @GetMapping("/validate")
@@ -186,7 +186,7 @@ public class AuthController {
             );
 
             loggingService.logInfo("Token validated successfully for user: " + username, logContext);
-            return ResponseEntity.status(response.getStatus()).body(response);
+            return ResponseEntity.status(response.status()).body(response);
     }
 
     @GetMapping("/decode")
@@ -210,7 +210,7 @@ public class AuthController {
         );
 
         loggingService.logInfo("Token decoded successfully", logContext);
-        return ResponseEntity.status(response.getStatus()).body(response);
+        return ResponseEntity.status(response.status()).body(response);
     }
     
     @PostMapping("/internal/users/batch")
@@ -348,7 +348,7 @@ public class AuthController {
                 null,
                 null
         );
-        return ResponseEntity.status(response.getStatus()).body(response);
+        return ResponseEntity.status(response.status()).body(response);
     }
 
     @PatchMapping("/internal/users/enable")
@@ -393,7 +393,7 @@ public class AuthController {
                 null,
                 null
         );
-        return ResponseEntity.status(response.getStatus()).body(response);
+        return ResponseEntity.status(response.status()).body(response);
     }
     
     @GetMapping("/check-status")
@@ -438,7 +438,7 @@ public class AuthController {
         );
 
         loggingService.logInfo("Account status checked for user: " + username, logContext);
-        return ResponseEntity.status(response.getStatus()).body(response);
+        return ResponseEntity.status(response.status()).body(response);
     }
 
 }

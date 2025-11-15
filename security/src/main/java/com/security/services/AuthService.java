@@ -142,11 +142,12 @@ public class AuthService {
 
         userRepo.save(user);
 
-        Map<String, Object> profileData = new HashMap<>();
-        if(request.getType() == Type.STUDENT){
-            profileData.put("graduate", (Boolean) request.getProfileData().get("graduate"));
-        } else {
-            profileData = null;
+        Map<String, Object> profileData = null;
+        if(request.getType() == Type.STUDENT && request.getProfileData() != null && !request.getProfileData().isEmpty()){
+            profileData = new HashMap<>();
+            if(request.getProfileData().containsKey("graduate")){
+                profileData.put("graduate", request.getProfileData().get("graduate"));
+            }
         }
 
         // Convert UserEntity → UserDto using ModelMapper
@@ -186,15 +187,15 @@ public class AuthService {
 
     public SecurityResponse login(Login request){
         authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword())
+                new UsernamePasswordAuthenticationToken(request.username(), request.password())
         );
         LogContext logContext = getLogContext("login");
-        logContext.setUserId(request.getUsername());
+        logContext.setUserId(request.username());
 
         loggingService.logInfo("Login attempt for username: " + logContext.getUserId(), logContext);
-        UserEntity user = userRepo.findByUsername(request.getUsername())
+        UserEntity user = userRepo.findByUsername(request.username())
                 .orElseThrow(() -> new NotFoundExceptionHandle(
-                        "", List.of(request.getUsername()), "Security-Model")
+                        "", List.of(request.username()), "Security-Model")
                 );
 
         // Kiểm tra status của user

@@ -1,7 +1,59 @@
+* new 26/10/2025
+
+###( Guide Note 154)###
+* Giải pháp bảo vệ API khi bị flood:
+    - Khái niệm "flood" (DDoS/traffic spike): lượng request tăng đột biến trong thời gian ngắn
+    làm nghẽn tài nguyên.
+    - Đặt API Gateway/Reverse Proxy (ví dụ: Spring Cloud Gateway, Kong, Nginx) phía trước để:
+       +  Rate limiting (giới hạn tốc độ): áp dụng thuật toán token bucket hoặc sliding window
+       để chỉ cho phép X request trong mỗi đơn vị thời gian.
+       +  Throttling (làm chậm): trì hoãn hoặc giảm tốc các request vượt ngưỡng thay vì đóng hoàn toàn.
+       +  IP blocking/Geo blocking: chặn các địa chỉ IP hoặc vùng địa lý bất thường.
+    - Áp dụng Bulkhead pattern: chia nhỏ tài nguyên (thread pool, connection pool) cho từng
+    nhóm tác vụ. Nếu một nhóm bị đầy, nhóm khác vẫn hoạt động.
+    - Circuit Breaker + TimeLimiter (Resilience4j):
+       +  Circuit Breaker: theo dõi lỗi/timeout. Khi vượt ngưỡng sẽ "mở" để từ chối request
+       và gọi fallback.
+       +  TimeLimiter: giới hạn thời gian thực thi; nếu quá hạn sẽ hủy call để tránh treo thread.
+    - Retry có kiểm soát: dùng `@Retryable` với backoff (tăng thời gian giữa các lần retry)
+    và giới hạn số lần để tránh gây thêm áp lực.
+    - Message queue (Kafka, RabbitMQ) hoặc hàng đợi nội bộ: nhận request rồi xử lý bất đồng bộ
+    qua worker, giúp API trả lời nhanh hơn (202 Accepted) thay vì xử lý ngay.
+    - Cache (Redis, Caffeine):
+       +  Cache layer trước database để trả lại dữ liệu cũ nhanh chóng.
+       +  Response cache/fallback cache: lưu response gần nhất đề phòng downstream chết.
+    - Web Application Firewall (WAF): lớp bảo vệ phân tích lưu lượng, chặn bot, SQL injection,
+    request bất thường (AWS WAF, Cloudflare, ModSecurity).
+    - CDN (Content Delivery Network): với API tĩnh (GraphQL schema, public data) có thể cache
+    toàn cầu giảm tải.
+    - Load shedding: khi hệ thống quá tải, ưu tiên request quan trọng, trả lỗi 503 cho request
+    ít quan trọng để bảo vệ lõi.
+
+  * Khôi phục nhanh khi service die:
+    - Autoscaling & Rolling restart:
+       +  Kubernetes Horizontal Pod Autoscaler: tự tăng số pod khi CPU/RPS cao, giảm khi rảnh.
+       +  Liveness/Readiness probe: nếu pod chết, kubelet tự khởi động lại; readiness đảm bảo chỉ
+       nhận traffic khi đã sẵn sàng.
+    - Blue-Green/Canary Deploy: chạy song song phiên bản mới và cũ. Nếu sự cố, quay lại phiên bản
+    ổn định tức thì.
+    - Immutable infrastructure: build container image (Docker) bất biến, deploy tự động qua CI/CD
+    (Jenkins, GitHub Actions) để phục hồi nhanh.
+    - Externalized state:
+       +  Database/Redis/S3 lưu trạng thái, tránh mất dữ liệu khi pod chết.
+       +  Khi khởi động lại thực hiện warm-up (nạp cache, tải cấu hình), replay queue/outbox để
+       đồng bộ dữ liệu.
+    - Observability:
+       +  Metrics (Prometheus/Grafana), logs (ELK, Loki), tracing (Zipkin, Jaeger) giúp phát hiện lỗi,
+       thời gian phản hồi, tỷ lệ lỗi.
+       +  Alerting: cảnh báo qua Slack, Email, PagerDuty ngay khi có spike hoặc pod down.
+    - Chaos Engineering (nâng cao): dùng Chaos Monkey hoặc kube-monkey để thử nghiệm service die
+    đột ngột, đảm bảo quy trình tự hồi phục hoạt động.
+    - Runbook: tài liệu từng bước khôi phục, liên hệ, lệnh cần chạy; team on-call dựa vào đó để xử lý
+    nhanh.
 
 
 ###( Guide Note 159)###
-+ Vấn đề N+1 Query:
+* Vấn đề N+1 Query:
   - Định nghĩa: Khi có N entity cha, và mỗi entity cha có quan hệ với entity con (OneToMany, ManyToMany)
     Nếu sử dụng FetchType.LAZY và truy cập relationship trong vòng lặp -> sẽ phát sinh N+1 queries
     + 1 query để lấy N entity cha
@@ -104,8 +156,7 @@
 
 
 ###( Guide Note 161)###
-+ Các loại Index trong MySQL:
-  
+* Các loại Index trong MySQL:
   1. PRIMARY KEY (Clustered Index):
      - Định nghĩa: Index tự động tạo khi khai báo PRIMARY KEY, là clustered index (dữ liệu được sắp xếp theo PK)
      - Ví dụ:
@@ -366,7 +417,7 @@
 
 
 ###( Guide Note 163)###
-+ Vấn đề Race Condition / Lost Update:
+* Vấn đề Race Condition / Lost Update:
   - Khi 2 requests cùng lúc update cùng 1 record:
     Request 1: Đọc balance = 100, Update balance = 100 + 50 = 150
     Request 2: Đọc balance = 100, Update balance = 100 - 30 = 70
@@ -537,125 +588,812 @@
       - Có retry mechanism cho optimistic locking conflicts
 
 
-
 ###( Guide Note 166)###
+* DESIGN PATTERNS ĐANG SỬ DỤNG:
+
+  1. Builder Pattern ⭐⭐⭐⭐⭐
+     - Mục đích: Xây dựng object phức tạp một cách linh hoạt
+     - Cách dùng: Lombok @Builder annotation
+     - Ví dụ trong code:
+       @Builder
+       public class UserDto { ... }
+       UserDto user = UserDto.builder()
+           .username("john")
+           .firstName("John")
+           .build();
+     - Lợi ích: Code sạch, dễ đọc, không cần constructor với nhiều tham số
+     - File: UserDto.java, Register.java, LogContext.java
+
+  2. Repository Pattern ⭐⭐⭐⭐⭐
+     - Mục đích: Tách biệt logic truy cập database khỏi business logic
+     - Cách dùng: Spring Data JPA Repository
+     - Ví dụ trong code:
+       @Repository
+       public interface UserRepo extends JpaRepository<UserEntity, Integer> {
+           Optional<UserEntity> findByUsername(String username);
+       }
+     - Lợi ích: Tự động generate query methods, dễ test, dễ maintain
+     - File: UserRepo.java, StudentRepo.java, TeacherRepo.java
+
+  3. Service Layer Pattern ⭐⭐⭐⭐⭐
+     - Mục đích: Tách biệt business logic khỏi controller và repository
+     - Cách dùng: Interface + Implementation
+     - Ví dụ trong code:
+       public interface StudentService { ... }
+       @Service
+       public class StudentServiceImp implements StudentService { ... }
+     - Lợi ích: Dễ test, dễ thay đổi implementation, tuân thủ SOLID
+     - File: StudentService.java, StudentServiceImp.java
+
+  4. DTO (Data Transfer Object) Pattern ⭐⭐⭐⭐⭐
+     - Mục đích: Tách biệt entity (database) với data truyền qua API
+     - Cách dùng: Tạo các class DTO riêng
+     - Ví dụ trong code:
+       UserDto, StudentModel, TeacherModel, Register, Login
+     - Lợi ích: Bảo mật (che dấu password), linh hoạt (khác với entity structure)
+     - File: UserDto.java, StudentModel.java, Register.java
+
+  5. AOP / Proxy Pattern ⭐⭐⭐⭐⭐
+     - Mục đích: Thêm cross-cutting concerns (logging, security) mà không thay đổi code
+     - Cách dùng: @Aspect, @Around, @Before, @After
+     - Ví dụ trong code:
+       @Aspect
+       @Around("@annotation(RequiresAuth)")
+       public Object validateAuth(ProceedingJoinPoint joinPoint) { ... }
+     - Lợi ích: Tách biệt concerns, tái sử dụng code, không xâm nhập business logic
+     - File: RequiresAuthAspect.java
+
+  6. Factory Pattern ⭐⭐⭐⭐
+     - Mục đích: Tạo objects mà không cần biết class cụ thể
+     - Cách dùng: @Bean, @Configuration trong Spring
+     - Ví dụ trong code:
+       @Configuration
+       public class ApplicationConfig {
+           @Bean
+           public PasswordEncoder passwordEncoder() {
+               return new BCryptPasswordEncoder();
+           }
+       }
+     - Lợi ích: Centralized object creation, dễ test, dễ thay đổi implementation
+     - File: ApplicationConfig.java, KafkaConfig.java, RedisConfig.java
+
+  7. Template Method Pattern ⭐⭐⭐⭐
+     - Mục đích: Định nghĩa skeleton của algorithm, để subclass implement các bước cụ thể
+     - Cách dùng: Abstract class với abstract method
+     - Ví dụ trong code:
+       public abstract class KafkaConsumerService<T> {
+           public void handleEvent(...) {
+               processEvent(event);  // Template method
+               acknowledgment.acknowledge();
+           }
+           protected abstract void processEvent(T event);  // Subclass implement
+       }
+     - Lợi ích: Tái sử dụng code, dễ extend, consistent structure
+     - File: KafkaConsumerService.java
+
+  8. Strategy Pattern ⭐⭐⭐
+     - Mục đích: Chọn algorithm lúc runtime
+     - Cách dùng: Switch case, enum, hoặc interface với nhiều implementation
+     - Ví dụ trong code:
+       switch (event.getAction()) {
+           case "CREATED": handleStudentCreated(event); break;
+           case "UPDATED": handleStudentUpdated(event); break;
+       }
+     - Lợi ích: Dễ thêm strategy mới, tách biệt logic
+     - File: StudentEventConsumerService.java, NotificationService.java
+
+  9. Chain of Responsibility Pattern ⭐⭐⭐⭐
+     - Mục đích: Xử lý request qua một chuỗi handlers
+     - Cách dùng: Spring Security Filter Chain
+     - Ví dụ trong code:
+       SecurityFilterChain -> JwtAuthFilter -> Controller
+     - Lợi ích: Tách biệt concerns, dễ thêm/bớt filter
+     - File: SecurityConfig.java, JwtAuthFilter.java
+
+  10. Singleton Pattern ⭐⭐⭐⭐⭐
+      - Mục đích: Đảm bảo chỉ có 1 instance của class
+      - Cách dùng: Spring @Component, @Service, @Repository (mặc định singleton)
+      - Ví dụ trong code:
+        @Service
+        public class StudentServiceImp { ... }  // Chỉ có 1 instance
+      - Lợi ích: Tiết kiệm memory, shared state
+      - File: Tất cả @Service, @Component classes
+
+  11. Dependency Injection Pattern ⭐⭐⭐⭐⭐
+      - Mục đích: Giảm coupling giữa các components
+      - Cách dùng: @Autowired, constructor injection
+      - Ví dụ trong code:
+        @Service
+        public class StudentServiceImp {
+            @Autowired
+            private StudentRepo studentRepo;
+        }
+      - Lợi ích: Loose coupling, dễ test, dễ maintain
+      - File: Tất cả service classes
+
+  12. Exception Handler Pattern ⭐⭐⭐⭐
+      - Mục đích: Centralized exception handling
+      - Cách dùng: @ControllerAdvice, @ExceptionHandler
+      - Ví dụ trong code:
+        @RestControllerAdvice
+        public class CustomExceptionHandler {
+            @ExceptionHandler(NotFoundExceptionHandle.class)
+            ResponseEntity<Response<?>> notFoundExceptionHandler(...) { ... }
+        }
+      - Lợi ích: Consistent error responses, dễ maintain
+      - File: CustomExceptionHandler.java
+
+  13. Adapter Pattern ⭐⭐⭐
+      - Mục đích: Chuyển đổi interface của một class sang interface khác
+      - Cách dùng: RestTemplate để gọi REST API
+      - Ví dụ trong code:
+        SecurityService sử dụng RestTemplate để gọi Security module API
+      - Lợi ích: Tích hợp với external systems
+      - File: SecurityService.java, RestTemplateConfig.java
+
+  14. Observer Pattern ⭐⭐⭐⭐
+      - Mục đích: Notify multiple objects khi có event
+      - Cách dùng: Kafka @KafkaListener
+      - Ví dụ trong code:
+        @KafkaListener(topics = "student-events")
+        public void handleStudentEvent(...) { ... }
+      - Lợi ích: Decoupled communication, event-driven architecture
+      - File: StudentEventConsumerService.java, NotificationConsumerService.java
+
+  15. Facade Pattern ⭐⭐⭐
+      - Mục đích: Cung cấp interface đơn giản cho complex subsystem
+      - Cách dùng: SecurityService facade cho Security module
+      - Ví dụ trong code:
+        SecurityService.validateAndAuthorize() - ẩn complexity của RestTemplate calls
+      - Lợi ích: Simplified interface, hide complexity
+      - File: SecurityService.java
+
+  - DESIGN PATTERNS CÓ THỂ THÊM VÀO:
+
+    1. Circuit Breaker Pattern ⭐⭐⭐⭐⭐
+      - Mục đích: Prevent cascade failures khi service down
+      - Ứng dụng:
+        + Khi SecurityService gọi Security module API
+        + External API calls
+        + Database connections
+      - Ví dụ:
+        @CircuitBreaker(name = "security-service", fallbackMethod = "fallback")
+        public UserDto validateToken(String token) { ... }
+      - Lợi ích: Prevent cascade failures, graceful degradation
+      - Tool: Spring Cloud Circuit Breaker, Resilience4j
+      
+      * GIẢI THÍCH CHI TIẾT:
+      
+      - Vấn đề cần giải quyết:
+        + Khi SecurityService gọi Security module API, nếu Security module DOWN:
+          → RestTemplate.exchange() sẽ throw exception (Connection refused, Timeout, etc.)
+          → Mỗi request phải chờ timeout (có thể 30s, 60s) → User experience rất tệ
+          → Tất cả requests bị block → Cascade failure → Toàn bộ system chết
+        + Ví dụ thực tế:
+          Request 1: Gọi Security API → Timeout 30s → Fail
+          Request 2: Gọi Security API → Timeout 30s → Fail
+          Request 3: Gọi Security API → Timeout 30s → Fail
+          ... (1000 requests cùng lúc)
+          → Tất cả requests bị block → System không thể xử lý request nào khác
+      
+      - Cơ chế hoạt động (3 trạng thái):
+        
+        1. CLOSED (Trạng thái bình thường):
+            + Requests được gửi bình thường
+            + Circuit Breaker theo dõi số lượng failures
+            + Nếu failure rate < threshold → Giữ nguyên CLOSED
+            + Ví dụ: Failure rate < 50% → CLOSED
+        
+        2. OPEN (Circuit mở - Bỏ qua service):
+            + Khi failure rate >= threshold (VD: 50% failures trong 10 requests)
+            + Circuit Breaker tự động chuyển sang OPEN
+            + Tất cả requests bị reject NGAY LẬP TỨC (không gọi service)
+            + Gọi fallback method ngay lập tức
+            + Sau một thời gian (waitDurationInOpenState), chuyển sang HALF_OPEN
+            + Lợi ích: Tránh lãng phí resources, trả về response nhanh
+        
+        3. HALF_OPEN (Thử nghiệm):
+            + Sau waitDurationInOpenState (VD: 60s), chuyển sang HALF_OPEN
+            + Cho phép một số requests (permittedNumberOfCallsInHalfOpenState) đi qua
+            + Nếu thành công → Chuyển về CLOSED
+            + Nếu fail → Chuyển về OPEN (tiếp tục wait)
+            + Mục đích: Kiểm tra xem service đã recover chưa
+      
+      - Ví dụ cụ thể với SecurityService:
+
+      **CACHING + THROW EXCEPTION (KHUYẾN NGHỊ cho Authentication)**
+        
+        BƯỚC 1: Thêm dependency (pom.xml):
+        <dependency>
+            <groupId>io.github.resilience4j</groupId>
+            <artifactId>resilience4j-spring-boot3</artifactId>
+            <version>2.1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
+        
+        BƯỚC 2: Configuration - Tạo trong model_shared (Config chung cho toàn bộ project):
+        
+        Vì model_shared là nơi tập trung các config chung, nên tạo Circuit Breaker Config ở đây.
+        Tất cả các module sử dụng model_shared sẽ tự động có Circuit Breaker config này.
+        
+        Đã tạo file: model_shared/src/main/java/com/model_shared/config/Resilience4jCircuitBreakerConfig.java
+        
+        @Configuration
+        public class Resilience4jCircuitBreakerConfig {
+            @Bean
+            @ConditionalOnMissingBean
+            public CircuitBreakerConfigCustomizer securityServiceCircuitBreakerCustomizer() {
+                return CircuitBreakerConfigCustomizer.of("security-service", builder -> {
+                    builder
+                        .slidingWindowSize(10)  # Số lượng requests để tính failure rate
+                        .minimumNumberOfCalls(5)  # Phải có ít nhất 5 calls mới tính failure rate
+                        .permittedNumberOfCallsInHalfOpenState(3)  # Cho phép 3 calls trong HALF_OPEN
+                        .automaticTransitionFromOpenToHalfOpenEnabled(true)
+                        .waitDurationInOpenState(Duration.ofSeconds(60))  # Đợi 60s trước khi chuyển sang HALF_OPEN
+                        .failureRateThreshold(50f)  # 50% failures → OPEN
+                        .slowCallRateThreshold(100f)  # 100% slow calls → OPEN
+                        .slowCallDurationThreshold(Duration.ofSeconds(2))  # Call > 2s được tính là slow
+                        .eventConsumerBufferSize(10)
+                        .recordExceptions(
+                            java.net.ConnectException.class,
+                            java.net.SocketTimeoutException.class,
+                            org.springframework.web.client.ResourceAccessException.class
+                        )
+                        .ignoreExceptions(
+                            com.handle_exceptions.UnauthorizedExceptionHandle.class,
+                            com.handle_exceptions.ForbiddenExceptionHandle.class
+                        );
+                });
+            }
+        }
+        
+        Lưu ý:
+        + Config này được đặt trong model_shared → Tất cả module sử dụng model_shared sẽ có config này
+        + Module sử dụng có thể override bằng cách thêm vào application.properties nếu cần:
+          resilience4j.circuitbreaker.instances.security-service.failureRateThreshold=30
+        + Có thể thêm các Circuit Breaker config khác cho các service khác (payment-service, etc.)
+        + Không cần config gì thêm trong module sử dụng (qlsv, qlgv) - Config tự động được load
+        
+        BƯỚC 3: Implement trong SecurityService:
+        
+        ⚠️ QUAN TRỌNG 1: Fallback method PHẢI có cùng return type với method chính!
+        - Không thể để void nếu method chính không phải void
+        - Fallback strategy: Throw exception (không return giá trị)
+        
+        ⚠️ QUAN TRỌNG 2: Try-Catch trong method chính và Circuit Breaker
+        - Circuit Breaker intercept ở AOP level (SAU KHI method throw exception)
+        - Try-catch trong method chính VẪN thực thi bình thường
+        - Catch block vẫn throw exception → Circuit Breaker intercept và chặn lại
+        - Exception từ method chính KHÔNG được propagate (Circuit Breaker catch và suppress)
+        - Circuit Breaker gọi fallback method
+        - Fallback throw exception → Exception này propagate lên caller
+        - Vậy chỉ có 1 exception được throw (từ fallback), KHÔNG phải 2 lần!
+        
+        Flow khi có exception (CHI TIẾT):
+        1. Method chính thực thi try-catch (VẪN chạy bình thường)
+        2. RestTemplate throw exception (Connection refused, Timeout, etc.)
+        3. Catch block catch exception và throw ServiceUnavailableExceptionHandle
+            ✅ Catch block VẪN thực thi: log error, throw exception
+        4. Circuit Breaker intercept exception (ở AOP level, SAU khi method throw)
+            ✅ Circuit Breaker chặn exception từ method chính (suppress, không propagate)
+        5. Circuit Breaker gọi fallback method
+        6. Fallback method throw exception (exception mới)
+        7. Exception từ fallback propagate lên caller
+        
+        → Try-catch trong method chính VẪN thực thi và throw exception
+        → Exception được throw bị Circuit Breaker chặn lại (intercept và suppress)
+        → Circuit Breaker gọi fallback → Fallback throw exception mới
+        → Chỉ có 1 exception được throw (từ fallback), không phải 2 lần!
+        
+        Tóm tắt:
+        - Catch block vẫn throw exception → Bị Circuit Breaker chặn lại
+        - Circuit Breaker gọi fallback → Fallback throw exception mới
+        - Exception từ fallback propagate lên caller
+        
+        ⚠️ QUAN TRỌNG 3: Nên bỏ try-catch trong method chính khi có Circuit Breaker?
+        - KHÔNG! Try-catch vẫn cần để xử lý business logic (404, validation, etc.)
+        - Circuit Breaker chỉ catch exception và gọi fallback
+        - Try-catch giúp xử lý các trường hợp đặc biệt (404, 403, etc.)
+        - KHUYẾN NGHỊ: Giữ try-catch cho business logic, để Circuit Breaker handle technical failures
+        
+        @Service
+        public class SecurityService {
+            @Autowired
+            private RestTemplate restTemplate;
+            
+            @CircuitBreaker(name = "security-service", fallbackMethod = "validateTokenFallback")
+            public UserDto validateTokenAndGetUser(String token) {
+                // Gọi Security module API
+                ResponseEntity<Response<UserDto>> response = restTemplate.exchange(
+                    securityBaseUrl + "/auth/validate",
+                    HttpMethod.GET,
+                    new HttpEntity<>(headers),
+                    new ParameterizedTypeReference<>() {}
+                );
+                
+                return response.getBody().getData();
+            }
+            
+            // Fallback method - Gọi khi circuit OPEN hoặc service down
+            // 
+            // LƯU Ý QUAN TRỌNG về Parameters:
+            // Resilience4j TỰ ĐỘNG truyền parameters từ method chính vào fallback method:
+            // 1. Tất cả parameters từ method chính (theo thứ tự) → token
+            // 2. Exception/Throwable ở cuối (OPTIONAL - không bắt buộc) → e
+            //
+            // Exception parameter là OPTIONAL - Có thể có hoặc không:
+            //
+            // CÁCH 1: Có Exception parameter (KHUYẾN NGHỊ) ⭐⭐⭐⭐⭐
+            // Method chính: validateTokenAndGetUser(String token)
+            // Fallback: validateTokenFallback(String token, Exception e)
+            // → Có thể log exception, xử lý theo loại exception, etc.
+            //
+            // CÁCH 2: Không có Exception parameter ⭐⭐⭐
+            // Method chính: validateTokenAndGetUser(String token)
+            // Fallback: validateTokenFallback(String token)
+            // → Vẫn hoạt động, nhưng không biết exception là gì
+            //
+            // Nếu method chính không có parameters:
+            // Method chính: getUser()
+            // Fallback: getUserFallback(Throwable e)  // Chỉ có Exception parameter
+            // Hoặc: getUserFallback()  // Không có Exception parameter
+            //
+            
+            public UserDto validateTokenFallback(String token, Exception e) {
+                LogContext logContext = getLogContext("validateTokenFallback");
+                loggingService.logError("Security service unavailable, using fallback", e, logContext);
+                
+                // STRATEGY: Caching + Throw Exception (KHUYẾN NGHỊ cho Authentication)
+                // 
+                // 1. Thử lấy từ cache trước (nếu có)
+                // 2. Nếu không có cache → Throw exception (không thể authenticate)
+                //
+                // Lý do:
+                // - Authentication là critical operation → Không thể return default user (security risk)
+                // - Cache giúp giảm load khi service tạm thời down
+                // - Nếu không có cache → Phải throw exception để user biết cần retry
+                
+                // Thử lấy từ cache (Redis)
+                String cacheKey = "user:token:" + token;
+                UserDto cachedUser = redisTemplate.opsForValue().get(cacheKey);
+                
+                if (cachedUser != null) {
+                    loggingService.logWarn("Using cached user data due to service unavailability: " 
+                        + cachedUser.getUsername(), logContext);
+                    return cachedUser;
+                }
+                
+                // Không có cache → Throw exception
+                throw new ServiceUnavailableExceptionHandle(
+                    "Security service is currently unavailable",
+                    "Please try again later"
+                );
+            }
+            
+            // Lưu ý: Cần cache user khi validate thành công (trong method chính):
+            // @CircuitBreaker(name = "security-service", fallbackMethod = "validateTokenFallback")
+            // public UserDto validateTokenAndGetUser(String token) {
+            //     // ... validate token ...
+            //     UserDto user = response.getBody().getData();
+            //     
+            //     // Cache user với TTL ngắn (5-10 phút) để giảm load nhưng vẫn đảm bảo security
+            //     String cacheKey = "user:token:" + token;
+            //     redisTemplate.opsForValue().set(cacheKey, user, Duration.ofMinutes(5));
+            //     
+            //     return user;
+            // }
+        }
+        
+        BƯỚC 4: Flow hoạt động:
+        
+        Scenario 1: Service hoạt động bình thường (CLOSED):
+          Request 1: validateToken() → Success → Circuit: CLOSED
+          Request 2: validateToken() → Success → Circuit: CLOSED
+          Request 3: validateToken() → Success → Circuit: CLOSED
+          → Tất cả requests đi qua bình thường
+        
+        Scenario 2: Service bắt đầu fail (CLOSED → OPEN):
+          Request 1: validateToken() → Success → Circuit: CLOSED (1/1 success)
+          Request 2: validateToken() → Fail → Circuit: CLOSED (1/2 success, 50% failure)
+          Request 3: validateToken() → Fail → Circuit: CLOSED (1/3 success, 66% failure)
+          Request 4: validateToken() → Fail → Circuit: CLOSED (1/4 success, 75% failure)
+          Request 5: validateToken() → Fail → Circuit: CLOSED (1/5 success, 80% failure)
+          → Failure rate = 80% > 50% threshold
+          → Circuit chuyển sang OPEN
+        
+        Scenario 3: Circuit OPEN (Bỏ qua service):
+          Request 6: validateToken() → Circuit OPEN → Reject ngay → Gọi fallback()
+          Request 7: validateToken() → Circuit OPEN → Reject ngay → Gọi fallback()
+          Request 8: validateToken() → Circuit OPEN → Reject ngay → Gọi fallback()
+          → Tất cả requests bị reject ngay, không gọi service
+          → Response time: < 1ms (rất nhanh)
+          → Đợi 60s (waitDurationInOpenState)
+        
+        Scenario 4: Circuit HALF_OPEN (Thử nghiệm):
+          Sau 60s → Circuit chuyển sang HALF_OPEN
+          Request 9: validateToken() → Cho phép đi qua → Nếu Success → Circuit: CLOSED
+          Request 10: validateToken() → Cho phép đi qua → Nếu Fail → Circuit: OPEN (tiếp tục wait)
+        
+      - So sánh CÓ/KHÔNG Circuit Breaker:
+        
+        KHÔNG có Circuit Breaker:
+          Request 1: validateToken() → Timeout 30s → Fail
+          Request 2: validateToken() → Timeout 30s → Fail
+          Request 3: validateToken() → Timeout 30s → Fail
+          ... (1000 requests)
+          → Tất cả requests phải chờ 30s → Tổng thời gian: 30,000s
+          → System bị block, không thể xử lý request khác
+          → User experience: Rất tệ
+        
+        CÓ Circuit Breaker:
+          Request 1-5: validateToken() → Fail → Circuit: OPEN
+          Request 6+: validateToken() → Circuit OPEN → Reject ngay → Fallback (< 1ms)
+          → Response time: < 1ms (rất nhanh)
+          → System không bị block
+          → User experience: Tốt hơn (nhận được error message nhanh)
+          → Sau 60s, tự động thử lại (HALF_OPEN) để check service đã recover chưa
+      
+      - Best Practices:
+        + Luôn có fallback method → Tránh throw exception không cần thiết
+        + Fallback strategy phụ thuộc vào loại operation (xem chi tiết bên dưới)
+        + Monitor circuit breaker state → Log khi chuyển trạng thái
+        + Tune configuration dựa trên business requirements:
+          - High availability → Lower failureRateThreshold (VD: 30%)
+          - Performance critical → Lower slowCallDurationThreshold (VD: 1s)
+        + Combine với Retry Pattern → Retry trước, Circuit Breaker sau
+        + Metrics & Monitoring → Track circuit breaker state changes
+
+    2. Decorator Pattern ⭐⭐⭐
+      - Mục đích: Thêm behavior động vào object
+      - Ứng dụng:
+        + Caching decorator cho service methods
+        + Retry decorator cho API calls
+        + Logging decorator
+      - Ví dụ:
+        @Cacheable
+        @Retryable
+        public StudentModel getStudent() { ... }
+      - Lợi ích: Flexible behavior addition, không cần modify existing code
+
+    3. Memento Pattern ⭐⭐⭐
+      - Mục đích: Save và restore state của object
+      - Ứng dụng:
+        + Version history cho entities
+        + Undo/redo functionality
+        + Backup/restore data
+      - Ví dụ:
+        class StudentMemento {
+            private StudentEntity state;
+            // Save state
+        }
+      - Lợi ích: Track changes, restore previous states
+
+    4. State Pattern ⭐⭐⭐
+      - Mục đích: Thay đổi behavior dựa trên state
+      - Ứng dụng:
+        + User status (PENDING, ENABLED, DISABLED)
+        + Order status workflow
+        + Entity lifecycle management
+      - Ví dụ:
+        interface UserState {
+            void handle(UserEntity user);
+        }
+        class PendingState implements UserState { ... }
+      - Lợi ích: Clean state transitions, dễ test
+
+    5. Visitor Pattern ⭐⭐
+      - Mục đích: Thêm operations vào object structure mà không modify objects
+      - Ứng dụng:
+        + Export data (JSON, XML, CSV)
+        + Validation across different entities
+        + Report generation
+      - Ví dụ:
+        interface EntityVisitor {
+            void visit(StudentEntity student);
+            void visit(TeacherEntity teacher);
+        }
+      - Lợi ích: Open/Closed principle, dễ thêm operations mới
+
+    6. Specification Pattern ⭐⭐⭐⭐
+      - Mục đích: Encapsulate business rules, reusable predicates
+      - Ứng dụng:
+        + Complex filtering logic
+        + Query building
+        + Business rule validation
+      - Ví dụ:
+        interface Specification<T> {
+            boolean isSatisfiedBy(T entity);
+        }
+        class GraduateStudentSpec implements Specification<Student> { ... }
+      - Lợi ích: Reusable business rules, dễ test, dễ combine
+
+    7. Unit of Work Pattern ⭐⭐⭐⭐⭐
+      - Mục đích: Track changes và commit tất cả cùng lúc
+      - Ứng dụng:
+        + Transaction management (đã có @Transactional nhưng có thể improve)
+        + Batch operations
+        + Change tracking
+      - Ví dụ:
+        @Transactional
+        public void updateStudentAndUser() {
+            // All changes tracked và committed together
+        }
+      - Lợi ích: Consistency, transaction management
+
+    8. CQRS (Command Query Responsibility Segregation) ⭐⭐⭐⭐
+      - Mục đích: Tách biệt read và write operations
+      - Ứng dụng:
+        + Separate read models (DTOs) và write models (Entities)
+        + Optimize read performance với denormalized data
+        + Event sourcing với Kafka
+      - Ví dụ:
+        Command: CreateStudentCommand, UpdateStudentCommand
+        Query: StudentQueryService (có thể dùng Redis cache)
+      - Lợi ích: Scale read/write independently, optimize performance
+
+    9. Command Pattern ⭐⭐⭐⭐
+      - Mục đích: Encapsulate requests như objects, hỗ trợ undo/redo
+      - Ứng dụng: 
+        + Event handling system (đã có nhưng chưa structured)
+        + Audit logging (track user actions)
+        + Transaction rollback commands
+      - Ví dụ:
+        interface Command {
+            void execute();
+            void undo();
+        }
+        class CreateStudentCommand implements Command { ... }
+      - Lợi ích: Queue requests, log operations, undo/redo
+
+    10. Retry Pattern (Đã có @Retryable nhưng có thể improve) ⭐⭐⭐⭐
+        - Mục đích: Retry failed operations với exponential backoff
+        - Ứng dụng:
+          + API calls
+          + Database operations
+          + Kafka message processing
+        - Cải thiện:
+          + Exponential backoff strategy
+          + Circuit breaker integration
+          + Metrics tracking
+        - Lợi ích: Resilience, better error handling
+
+  + KHUYẾN NGHỊ ƯU TIÊN THÊM:
+    1. Circuit Breaker Pattern (Resilience4j) - RẤT QUAN TRỌNG cho microservices
+    2. Specification Pattern - Cho complex filtering logic
+    3. CQRS - Nếu có nhiều read operations
+    4. State Pattern - Cho entity lifecycle management
+    5. Command Pattern - Cho audit logging và undo/redo	
+
 
 ###( Guide Note 169)###
+* RECORD TRONG JAVA 17:
+  1. KHÁI NIỆM:
+  - có nhiều điểm tương đồng với Lombok.
+  - Record là một loại class đặc biệt được thiết kế trong java 17
+  để tạo các lớp dữ liệu bất biến (immutable data classes).
+  -> vì thế không có setter, không có kế thừa
+  - Record tự động tạo các phương thức thường dùng
+  (constructor, getters, equals, hashCode, toString).
+  - không dùng getter mà dùng tên biến để gọi.
+  - không cần thêm access modifier ( mặc định là private final ).
+  - có thể tùy chỉnh constructor nhưng lúc này java sẽ không tự tạo
+  constructor mặc định của record.
+  - Record có thể sử dụng validation và Jackson annotations
+
+  2. CÚ PHÁP CƠ BẢN:
+
+     Cú pháp:
+     ```
+     public record TênRecord(KiểuDữLiệu1 tênTrường1, KiểuDữLiệu2 tênTrường2, ...) {
+         // Optional: Custom methods, constructors, static fields
+     }
+     ```
+     
+     Ví dụ đơn giản:
+     ```java
+     public record User(int id, String username, String email) {}
+     
+     // Sử dụng:
+     User user = new User(1, "john", "john@example.com");
+     -> lúc này các biến là final.
+
+
+  3. SO SÁNH RECORD VỚI LOMBOK:
+     
+     Lombok (@Data, @Getter, @Setter):
+     ```java
+     @Data
+     @AllArgsConstructor
+     @NoArgsConstructor
+     public class UserDto {
+         private Integer userId;
+         private String username;
+     }
+     ```
+     
+     Record (tương đương):
+     ```java
+     public record UserDto(Integer userId, String username) {}
+     ```
+     
+     Lợi ích Record so với Lombok:
+     - Không cần dependency Lombok
+     - Built-in Java feature (không cần annotation processing)
+     - Immutable mặc định (an toàn hơn)
+     - Code ngắn gọn hơn
+     - Performance tốt hơn (không cần bytecode generation)
+     
+     Hạn chế Record so với Lombok:
+     - Không hỗ trợ @Builder (phải tự implement)
+     - Không hỗ trợ @Setter (immutable mặc định)
+     - Không hỗ trợ @NoArgsConstructor (phải có ít nhất 1 field)
+     - Không hỗ trợ custom getter/setter names
+
+  4. RECORD VỚI SPRING BOOT:
+
+      Record DTOs:
+        public record CreateUserDto(
+            @NotBlank 
+            String username,
+            String name,
+            @NotNull @Min(1) @Max(99) 
+            Integer age
+            @JsonFormat(pattern = "dd-MM-yyyy")
+            LocalDate birthDate
+        ) {}
+     
+     
+      Response Wrapper:
+        ```java
+        public record response<T>(
+            int status,
+            String message,
+            T data
+        ) {}
+
+  5. KHI NÀO NÊN DÙNG RECORD:
+      
+      ✅ NÊN DÙNG RECORD KHI:
+      - Tạo DTO (Data Transfer Object) cho API requests/responses
+      - Tạo value objects (immutable data carriers)
+      - Tạo data classes đơn giản (không có logic phức tạp)
+      - Cần immutable objects (thread-safe, an toàn)
+      - Muốn giảm boilerplate code
+      - Muốn không phụ thuộc vào Lombok
+      
+      ❌ KHÔNG NÊN DÙNG RECORD KHI:
+      - Cần mutable objects (có setter, thay đổi giá trị)
+      - Cần Builder pattern (phải tự implement)
+      - Cần kế thừa (record là final)
+      - Cần instance fields bổ sung (ngoài khai báo record)
+      - Cần complex business logic trong class
+      - Cần JPA Entity (Entity phải là class, không phải record)
+      
+      ⚠️ LƯU Ý: JPA Entity KHÔNG thể là record vì:
+      - Entity cần mutable (Hibernate cần set fields)
+      - Entity cần @Id, @GeneratedValue, @Column, etc. (không tương thích với record)
+      - Entity cần proxy để lazy loading (record không hỗ trợ)
 
 
 ###( Guide Note 172)###
-- Sử dụng HashMap khi:
+* HashMap và ConcurrentHashMap
+  - Sử dụng HashMap khi:
     + tối ưu cho Single-threaded application
     + Cần performance tối đa
     + Không cần thread safety
     + Có thể chấp nhận null keys/values
-    - Sử dụng ConcurrentHashMap khi:
-    + tối ưu cho Multi-threaded application
-    + có (CAS) là một atomic operation cho phép thay đổi giá trị chỉ khi giá trị hiện tại khớp với giá trị mong đợi.
-    ví dụ Chỉ 1 thread thành công, các thread khác retry nên không dẫn đến overwirite data
-    + Cần thread safety : Thread Safety là khả năng của code có thể được sử dụng an toàn bởi
-    nhiều thread đồng thời mà không gây ra lỗi hoặc hành vi không mong đợi.
-    + Read-heavy workloads
-    + Cần high concurrency
-    + Không thể chấp nhận null keys/values
+  - Sử dụng ConcurrentHashMap khi:
+  + tối ưu cho Multi-threaded application
+  + có (CAS) là một atomic operation cho phép thay đổi giá trị chỉ khi giá trị hiện tại khớp với giá trị mong đợi.
+  ví dụ Chỉ 1 thread thành công, các thread khác retry nên không dẫn đến overwirite data
+  + Cần thread safety : Thread Safety là khả năng của code có thể được sử dụng an toàn bởi
+  nhiều thread đồng thời mà không gây ra lỗi hoặc hành vi không mong đợi.
+  + Read-heavy workloads
+  + Cần high concurrency
+  + Không thể chấp nhận null keys/values
 
     --> sử dụng HashMap trong Single-threaded để tối ưu performance,
     sử dụng ConcurrentHashMap trong Multi-threaded để đảm bảo data không mất, bị lỗi,...
             VD:
-    * HashMap (UNSAFE) - Lost Data
-    // Thread A: map.put("key100", 100)
-    // Thread B: map.put("key200", 200)
-    // Cả 2 đều hash đến bucket index 5
+  * HashMap (UNSAFE) - Lost Data
+     Thread A: map.put("key100", 100)
+     Thread B: map.put("key200", 200)
+     Cả 2 đều hash đến bucket index 5
 
-    // Timeline HashMap:
-    // Thread A: read table[5] = null
-    // Thread B: read table[5] = null  (cùng lúc)
-    // Thread A: write table[5] = node100
-    // Thread B: write table[5] = node200  (OVERWRITE!)
+     Timeline HashMap:
+     Thread A: read table[5] = null
+     Thread B: read table[5] = null  (cùng lúc)
+     Thread A: write table[5] = node100
+     Thread B: write table[5] = node200  (OVERWRITE!)
 
-    // Kết quả: "key100" bị mất!
-    // map.get("key100") = null
-    // map.get("key200") = 200
+     Kết quả: "key100" bị mất!
+     map.get("key100") = null
+     map.get("key200") = 200
 
-    * ConcurrentHashMap (SAFE) - No Lost Data
-    // Thread A: map.put("key100", 100)
-    // Thread B: map.put("key200", 200)
-    // Cả 2 đều hash đến bucket index 5
+  * ConcurrentHashMap (SAFE) - No Lost Data
+     Thread A: map.put("key100", 100)
+     Thread B: map.put("key200", 200)
+     Cả 2 đều hash đến bucket index 5
 
-    // Timeline ConcurrentHashMap:
-    // Thread A: casTabAt(table, 5, null, node100) -> true (thành công)
-    // Thread B: casTabAt(table, 5, null, node200) -> false (thất bại)
+     Timeline ConcurrentHashMap:
+     Thread A: casTabAt(table, 5, null, node100) -> true (thành công)
+     Thread B: casTabAt(table, 5, null, node200) -> false (thất bại)
 
-    // Thread B retry với synchronized block:
-    // Thread B: synchronized(node100) {
-    //     // Add node200 vào linked list
-    //     node100.next = node200
-    // }
+     Thread B retry với synchronized block:
+     Thread B: synchronized(node100) {
+         // Add node200 vào linked list
+         node100.next = node200
+    }
 
-    // Kết quả: Cả 2 entries đều được lưu!
-    // map.get("key100") = 100
-    // map.get("key200") = 200
+     Kết quả: Cả 2 entries đều được lưu!
+     map.get("key100") = 100
+     map.get("key200") = 200
+
 
 ###( Guide Note 174)###
 - Set sẽ bỏ qua phần tử đã tồn tại và trả về false, không thực hiện bất kỳ hành vi nào thêm.
 
 ###( Guide Note 176)###
-- tốc độ truy vấn:
+* ArrayList và LinkedList
+  - tốc độ truy vấn:
     + ArrayList query qua index nên tốc độ cao, còn LinkedList phải query từ đầu
-- thêm,xóa:
+  - thêm,xóa:
     + khi thêm phần tử mới vào đầu hay giữa danh sách ArrayList phải chuyển các phần tử cũ sang phải để nhường chỗ(index) cho
-phần tử Mới
+    phần tử Mới
     + vì mỗi data trong LinkedList chứa luôn vị trí (con trỏ) của node đó, chỉ cần thay đổi vị trí con trỏ của các node để thêm mới
 
-- thêm nữa là LinkedList nó có thể thay đổi kích thước và thêm/xóa phần tử mà không ảnh hưởng đến các phần tử khác
-- còn ArrayList khi mở rộng (resize) phải tạo 1 list mới và copy + thay đổi index của các phần 
-
-- LinkedList tự động tạo 2 biến first và last khi khởi tạo danh sách, tự động gắn 2 biến này thành phần tử đầu tiên thêm vào danh sách
-và sẽ tự động gắn lại khi thêm/xóa.
+  - thêm nữa là LinkedList nó có thể thay đổi kích thước và thêm/xóa phần tử mà không ảnh hưởng đến các phần tử khác
+  - còn ArrayList khi mở rộng (resize) phải tạo 1 list mới và copy + thay đổi index của các phần 
+  - LinkedList tự động tạo 2 biến first và last khi khởi tạo danh sách, tự động gắn 2 biến này thành phần tử đầu tiên thêm vào danh sách
+  và sẽ tự động gắn lại khi thêm/xóa.
 
     VD: ArrayList
-[0][1][2][3][4]  <- Thêm vào vị trí 2
-     ↓
-[0][1][X][2][3][4]  <- Phải dịch chuyển 2,3,4 sang phải
+  [0][1][2][3][4]  <- Thêm vào vị trí 2
+      ↓
+  [0][1][X][2][3][4]  <- Phải dịch chuyển 2,3,4 sang phải
 
-// Trước khi thêm X vào vị trí 2
-elementData: [A][B][C][D][E][null][null][null]
-index:        0  1  2  3  4   5    6    7
+  // Trước khi thêm X vào vị trí 2
+  elementData: [A][B][C][D][E][null][null][null]
+  index:        0  1  2  3  4   5    6    7
 
-// Gọi System.arraycopy
-System.arraycopy(elementData, 2, elementData,  3,      3);
-//                   ↑        ↑        ↑       ↑       ↑
-//                  src     srcPos    dest  destPos  length   
-                             (2)              (3)     (3)
-//                   ↑        ↑        ↑       ↑       ↑
-//                  mảng     cắt      dán     dán     độ
-//                   sẽ      tại      vào     vào     dài
-//                  thao    vị trí    mảng    từ       3
-//                  tác       2       cũ     index     3
+  // Gọi System.arraycopy
+  System.arraycopy(elementData, 2, elementData,  3,      3);
+  //                   ↑        ↑        ↑       ↑       ↑
+  //                  src     srcPos    dest  destPos  length   
+                              (2)              (3)     (3)
+  //                   ↑        ↑        ↑       ↑       ↑
+  //                  mảng     cắt      dán     dán     độ
+  //                   sẽ      tại      vào     vào     dài
+  //                  thao    vị trí    mảng    từ       3
+  //                  tác       2       cũ     index     3
 
-    VD: LinkedList
-A -> B -> C -> D  <- Thêm X vào giữa B và C
-     ↓
-A -> B -> X -> C -> D  <- Chỉ cập nhật con trỏ B.next và C.prev
-(gắn vị trí phía sau B lúc này là C = X và gắn vị trí phía trước C lúc này là B = X).
-                
-                 Tạo node mới với thông tin đầy đủ
-    Node<E> newNode = new Node<>(current.prev, element, current);
-                            ↑        ↑           ↑        ↑
-                            prev     B           X        C
-    
-    // Cập nhật con trỏ
-    if (current.prev != null) {
-        current.prev.next = newNode;  // B.next = X
-    }
-    current.prev = newNode;  // C.prev = X
+      VD: LinkedList
+  A -> B -> C -> D  <- Thêm X vào giữa B và C
+      ↓
+  A -> B -> X -> C -> D  <- Chỉ cập nhật con trỏ B.next và C.prev
+  (gắn vị trí phía sau B lúc này là C = X và gắn vị trí phía trước C lúc này là B = X).
+                  
+                  Tạo node mới với thông tin đầy đủ
+      Node<E> newNode = new Node<>(current.prev, element, current);
+                              ↑        ↑           ↑        ↑
+                              prev     B           X        C
+      
+      // Cập nhật con trỏ
+      if (current.prev != null) {
+          current.prev.next = newNode;  // B.next = X
+      }
+      current.prev = newNode;  // C.prev = X
 
---> ArrayList tốt cho truy cập ngẫu nhiên và thêm vào cuối
-    LinkedList tốt cho thao tác đầu/cuối/giữa và cấu trúc Queue/Stack
+  --> ArrayList tốt cho truy cập ngẫu nhiên và thêm vào cuối
+      LinkedList tốt cho thao tác đầu/cuối/giữa và cấu trúc Queue/Stack
 
 
 ###( Guide Note 179)###
-- Auto-configuration & Starters: Giảm cấu hình rườm rà, “bật là chạy” với spring-boot-starter-*.
+* Tại sao spring boot lại tốt nhất hiện tại?
+  - Auto-configuration & Starters: Giảm cấu hình rườm rà, "bật là chạy" với spring-boot-starter-*.
     + Spring Boot tự đăng ký bean phù hợp.
     + có Spring Security filter chain tối thiểu.
     + tự động cấu hình server mặc định ( tomcat ).
@@ -669,14 +1407,16 @@ A -> B -> X -> C -> D  <- Chỉ cập nhật con trỏ B.next và C.prev
     + Cấu hình externalized: profiles, `application-*.properties/yaml`, environment binding `@ConfigurationProperties`.
     + CORS, multipart upload, compression, HTTP/2, graceful shutdown theo `server.*` và `spring.mvc.*`.
 
-- Sẵn sàng cloud-native và observable
+  - Sẵn sàng cloud-native và observable
     + Tối ưu runtime AOT + GraalVM native image cho startup nhanh, footprint thấp.
     + Đóng gói & cấu hình cloud
     Build OCI image nhanh (buildpacks, layered JAR).
     Externalized config + profiles (application-*.yml, env vars).
 
-- Cộng đồng và tài nguyên: Kho GitHub của Spring Boot có lượng sao, issue, PR, release rất lớn, phản ánh mức độ sử dụng rộng rãi và hoạt động sôi nổi.
-- Spring Data/Security/Validation/Batch: Xử lý CRUD, bảo mật, validation, batch job theo chuẩn thống nhất, hạn chế code nền.0
+  - Cộng đồng và tài nguyên: Kho GitHub của Spring Boot có lượng sao, issue, PR, release rất lớn, phản ánh mức độ sử dụng rộng rãi và hoạt động sôi nổi.
+  - Spring Data/Security/Validation/Batch: Xử lý CRUD, bảo mật, validation, batch job theo chuẩn thống nhất, hạn chế code nền.
+
+
 
 
 

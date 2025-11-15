@@ -14,7 +14,6 @@ import org.springframework.kafka.support.KafkaHeaders;
 import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.kafka.support.Acknowledgment;    
 import org.springframework.transaction.annotation.Transactional;
-import com.model_shared.enums.Type;
 
 @Service
 public class ConsumerService {
@@ -42,8 +41,7 @@ public class ConsumerService {
         LogContext logContext = getLogContext("handleUserCreateWithProfile");
         
         try {
-            if(profile.getUser().getType().equals(Type.STUDENT)){
-                UserEntity user = userRepo.findByUserId(profile.getUser().getUserId())
+            UserEntity user = userRepo.findByUserId(profile.getUser().getUserId())
                     .orElse(null);
                 
                 if (user == null) {
@@ -56,6 +54,11 @@ public class ConsumerService {
                     return;
                 }
                 
+                // Fix version field nếu null (cho entity cũ không có version)
+                if (user.getVersion() == null) {
+                    user.setVersion(0L);
+                }
+                
                 user.setStatus(Status.ENABLED);
                 userRepo.save(user);
                 
@@ -65,12 +68,6 @@ public class ConsumerService {
                 
                 // TODO: Gửi notification đến client (WebSocket/SSE)
                 // Notification: "Tài khoản đã được kích hoạt thành công!"
-                    
-            } else {
-                loggingService.logInfo(
-                    "User is not a student, skipping with user id: " + profile.getUser().getUserId()
-                    , logContext);
-            }
             
             // Acknowledge nếu xử lý thành công
             acknowledgment.acknowledge();
@@ -95,8 +92,7 @@ public class ConsumerService {
                                    Acknowledgment acknowledgment) {
         LogContext logContext = getLogContext("handleUserEventDLQ"); 
         try {
-            if(userEvent.getUser().getType().equals(Type.STUDENT)){
-                UserEntity user = userRepo.findByUserId(userEvent.getUser().getUserId())
+            UserEntity user = userRepo.findByUserId(userEvent.getUser().getUserId())
                     .orElse(null);
                 
                 if (user == null) {
@@ -109,6 +105,11 @@ public class ConsumerService {
                     return;
                 }
                 
+                // Fix version field nếu null (cho entity cũ không có version)
+                if (user.getVersion() == null) {
+                    user.setVersion(0L);
+                }
+                
                 user.setStatus(Status.FAILED);
                 userRepo.save(user);
                 
@@ -118,12 +119,6 @@ public class ConsumerService {
                 
                 // TODO: Gửi notification đến client (WebSocket/SSE)
                 // Notification: "Đăng ký thất bại. Vui lòng thử lại!"
-                        
-            } else {
-                loggingService.logInfo(
-                    "User is not a student, skipping rollback with user id: " + userEvent.getUser().getUserId()
-                    , logContext);
-            }
             
         } catch (Exception e) {
             loggingService.logError(

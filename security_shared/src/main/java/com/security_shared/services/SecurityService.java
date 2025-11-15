@@ -3,8 +3,12 @@ package com.security_shared.services;
 import com.model_shared.models.Response;
 import com.model_shared.models.user.UserDto;
 import com.model_shared.models.user.UpdateUserDto;
+import com.model_shared.enums.Role;
+import com.model_shared.enums.Permission;
 import com.handle_exceptions.UnauthorizedExceptionHandle;
 import com.handle_exceptions.ForbiddenExceptionHandle;
+import com.handle_exceptions.ServiceUnavailableExceptionHandle;
+import com.handle_exceptions.NotFoundExceptionHandle;
 import com.logging.models.LogContext;
 import com.logging.services.LoggingService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,16 +22,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
-import com.model_shared.enums.Role;
-import com.model_shared.enums.Permission;
-
 import java.util.List;
 import java.util.Set;
 import java.util.Map;
 import java.util.HashMap;
-import com.handle_exceptions.ServiceUnavailableExceptionHandle;
-import com.handle_exceptions.NotFoundExceptionHandle;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import java.time.Duration;
+import org.springframework.data.redis.core.RedisTemplate;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 
 @Service
 public class SecurityService {
@@ -41,6 +43,9 @@ public class SecurityService {
     @Autowired
     private ObjectMapper objectMapper;
 
+    @Autowired
+    private RedisTemplate<String, Object> redisTemplate;
+
     @Value("${security.base-url:http://localhost:8083}")
     private String securityBaseUrl;
 
@@ -52,6 +57,7 @@ public class SecurityService {
                 .build();
     }
 
+    @CircuitBreaker(name = "security-service", fallbackMethod = "validateTokenAndGetUserFallback")
     public UserDto validateTokenAndGetUser(String token) {
         LogContext logContext = getLogContext("validateTokenAndGetUser");
         
@@ -73,10 +79,14 @@ public class SecurityService {
 
             if (response.getStatusCode().is2xxSuccessful() && response.getBody() != null) {
                 Response<UserDto> responseBody = response.getBody();
-                if (responseBody != null && responseBody.getData() != null) {
-                    UserDto user = responseBody.getData();
-                    loggingService.logDebug("Successfully retrieved user from security module: " 
-                            + user.getUsername(), logContext);
+                if (responseBody != null && responseBody.data() != null) {
+                    UserDto user = responseBody.data();
+
+                    String cacheKey = "user:token:" + token;
+                    redisTemplate.opsForValue().set(cacheKey, user, Duration.ofMinutes(5));
+
+                    loggingService.logDebug(String.format("Successfully retrieved user from security module: %s and cached in Redis"
+                        + " with key: %s", user.getUsername(), cacheKey), logContext);
                     return user;
                 }
             }
@@ -139,6 +149,24 @@ public class SecurityService {
         return user;
     }
 
+    public UserDto validateTokenAndGetUserFallback(String token, Exception e) {
+        LogContext logContext = getLogContext("validateTokenAndGetUserFallback");
+
+        String cacheKey = "user:token:" + token;
+        Object cached = redisTemplate.opsForValue().get(cacheKey);
+        if (cached != null) {
+            loggingService.logInfo("Using cached user data due to service unavailability: " 
+                + " with key: " + cacheKey, logContext);
+            @SuppressWarnings("unchecked")
+            UserDto cachedUser = (UserDto) cached;
+            return cachedUser;
+        }
+        loggingService.logError("No cached user data found, throwing ServiceUnavailableException", e, logContext);
+        throw new ServiceUnavailableExceptionHandle(
+            "Security service is currently unavailable",
+            "Please try again later"
+        );
+    }
 
     public boolean hasRequiredRole(UserDto user, String[] requiredRoles) {
         if (requiredRoles == null || requiredRoles.length == 0) {
@@ -184,6 +212,7 @@ public class SecurityService {
         return false;
     }
 
+    @CircuitBreaker(name = "security-service", fallbackMethod = "getUsersByIdsFallback")
     public Map<Integer, UserDto> getUsersByIds(List<Integer> userIds) {
         LogContext logContext = getLogContext("getUsersByIds");
         
@@ -226,6 +255,7 @@ public class SecurityService {
         }
     }
 
+    @CircuitBreaker(name = "security-service", fallbackMethod = "updateUserFallback")
     public UserDto updateUser(UpdateUserDto updateUserDto) {
         LogContext logContext = getLogContext("updateUser");
         
@@ -269,6 +299,7 @@ public class SecurityService {
         }
     }
 
+    @CircuitBreaker(name = "security-service", fallbackMethod = "deleteUsersFallback")
     public List<Integer> deleteUsers(List<Integer> userIds) {
         LogContext logContext = getLogContext("deleteUsers");
         
@@ -314,6 +345,35 @@ public class SecurityService {
                 "Security-Model"
             );
         }
+    }
 
+    public Map<Integer, UserDto> getUsersByIdsFallback(List<Integer> userIds, Exception e) {
+        LogContext logContext = getLogContext("getUsersByIdsFallback");
+        loggingService.logError("Exception during batch get users: ", e, logContext);
+        throw new ServiceUnavailableExceptionHandle(
+            "Cannot retrieve user information from Security service",
+            "Security service may be down or experiencing issues. Please try again later.",
+            "Security-Model"
+        );
+    }
+
+    public UserDto updateUserFallback(UpdateUserDto updateUserDto, Exception e) {
+        LogContext logContext = getLogContext("updateUserFallback");
+        loggingService.logError("Exception during update user: ", e, logContext);
+        throw new ServiceUnavailableExceptionHandle(
+            "Cannot update user information in Security service",
+            "Security service may be down or experiencing issues. Please try again later.",
+            "Security-Model"
+        );
+    }
+
+    public List<Integer> deleteUsersFallback(List<Integer> userIds, Exception e) {
+        LogContext logContext = getLogContext("deleteUsersFallback");
+        loggingService.logError("Exception during delete users: ", e, logContext);
+        throw new ServiceUnavailableExceptionHandle(
+            "Cannot delete users in Security service",
+            "Security service may be down or experiencing issues. Please try again later.",
+            "Security-Model"
+        );
     }
 }

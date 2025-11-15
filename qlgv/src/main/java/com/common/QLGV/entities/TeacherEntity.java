@@ -21,19 +21,9 @@ public class TeacherEntity {
     @Column(name ="id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column(name = "user_name", unique = true)
-    private String userName;
-    @Column(name ="firstName")
-    private String firstName;
-    @Column(name ="lastName")
-    private String lastName;
-    @Column(name ="age")
-    private int age;
-    @Enumerated(EnumType.STRING)
-    @Column(name = "gender")
-    private Gender gender;
-    @Column(name ="birth")
-    private LocalDate birth;
+
+    @Column(name = "user_id", nullable = false, unique = true)
+    private Integer userId;
 
     @Version
     @Column(name = "version")

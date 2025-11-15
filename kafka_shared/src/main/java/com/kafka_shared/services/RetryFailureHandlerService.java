@@ -35,8 +35,8 @@ public class RetryFailureHandlerService implements ConsumerRecordRecoverer {
     public void accept(ConsumerRecord<?, ?> record, Exception exception) {
         try {
             loggingService.logError(
-                String.format("All retry attempts exhausted for record: topic=%s, partition=%d, offset=%d, key=%s", 
-                    record.topic(), record.partition(), record.offset(), record.key()),
+                String.format("All retry attempts exhausted for record: topic=%s, partition=%d, offset=%d, key=%s, error=%s", 
+                    record.topic(), record.partition(), record.offset(), record.key(), exception.getMessage()),
                 exception,
                 getLogContext("accept")
             );
