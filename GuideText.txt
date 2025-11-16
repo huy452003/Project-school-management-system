@@ -801,7 +801,7 @@
       
       - Ví dụ cụ thể với SecurityService:
 
-      **CACHING + THROW EXCEPTION (KHUYẾN NGHỊ cho Authentication)**
+      ** CACHING + THROW EXCEPTION (KHUYẾN NGHỊ cho Authentication) **
         
         BƯỚC 1: Thêm dependency (pom.xml):
         <dependency>
