@@ -9,16 +9,20 @@ import org.springframework.context.annotation.Configuration;
 import java.time.Duration;
 
 /**
- * Circuit Breaker Configuration cho toàn bộ project
+ * Circuit Breaker Configuration - FALLBACK ONLY
  * 
- * Config này được đặt trong model_shared vì đây là nơi tập trung các config chung.
- * Tất cả các module sử dụng model_shared sẽ tự động có Circuit Breaker config này.
+ * ⚠️ LƯU Ý QUAN TRỌNG:
+ * - Với Resilience4j Spring Boot 3, cách tốt nhất là cấu hình trong application.properties
+ * - Config này CHỈ là fallback/default values cho các module chưa có config trong properties
+ * - Spring Boot ưu tiên: application.properties > Java @Bean config
  * 
- * LƯU Ý: Với Resilience4j Spring Boot 3, cách tốt nhất vẫn là cấu hình trong application.properties
- * của module sử dụng. Config này chỉ là fallback/default values.
+ * KHUYẾN NGHỊ:
+ * - Đặt config trong application.properties của từng module (qlsv, qlgv, security)
+ * - Config này sẽ tự động bị override nếu có config trong properties
  * 
- * Module sử dụng có thể override bằng cách thêm vào application.properties:
- * resilience4j.circuitbreaker.instances.security-service.failureRateThreshold=30
+ * Ví dụ override trong application.properties:
+ * resilience4j.circuitbreaker.instances.security-service.failureRateThreshold=50
+ * resilience4j.circuitbreaker.instances.security-service.slidingWindowSize=10
  */
 @Configuration
 public class Resilience4jCircuitBreakerConfig {
@@ -29,8 +33,10 @@ public class Resilience4jCircuitBreakerConfig {
      * Được sử dụng bởi SecurityService trong security_shared module
      * khi gọi Security module API
      * 
-     * Lưu ý: Config này chỉ hoạt động nếu không có config trong application.properties
+     * ⚠️ FALLBACK ONLY: Config này chỉ hoạt động nếu KHÔNG có config trong application.properties
      * Resilience4j Spring Boot 3 ưu tiên config từ properties file
+     * 
+     * Nếu module có config trong application.properties → Properties sẽ override config này
      */
     @Bean
     @ConditionalOnMissingBean(name = "securityServiceCircuitBreakerConfig")

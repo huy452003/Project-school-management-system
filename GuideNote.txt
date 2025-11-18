@@ -179,15 +179,13 @@ hiểu cơ chế hoạt động bên trong.
 9/ Tại sao spring boot lại tốt nhất hiện tại? (trả lời + dẫn chứng).    =
 
 
-
-
 * new 16/11/2025 : Demo lại
 
-1/ thêm Rate limiting.
+1/ thêm Rate limiting.                  =
 
 2/ IP blocking/Geo blocking.
 
-3/ thêm Circuit Breaker cho student.
+3/ thêm Circuit Breaker cho student.               =
 
 4/ tìm hiểu về propagation , isolation.
 

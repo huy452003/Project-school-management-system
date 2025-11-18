@@ -12,6 +12,8 @@ import com.logging.models.LogContext;
 import com.kafka_shared.models.StudentEvent;
 import com.kafka_shared.services.KafkaProducerService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.handle_exceptions.TooManyRequestsExceptionHandle;
+import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
@@ -48,6 +50,7 @@ public class StudentController {
 
     @GetMapping("")
     @RequiresAuth(roles = {"ADMIN", "STUDENT"}, permissions = {"STUDENT_READ"})
+    @RateLimiter(name = "student-controller", fallbackMethod = "getRateLimitFallback")
     ResponseEntity<Response<List<EntityModel>>> get(
             @RequestHeader(value = "Accept-Language", defaultValue = "en") String acceptLanguage,
             @CurrentUser UserDto currentUser)
@@ -69,8 +72,29 @@ public class StudentController {
         return ResponseEntity.status(response.status()).body(response);
     }
 
+    public ResponseEntity<Response<List<EntityModel>>> getRateLimitFallback(
+            @RequestHeader(value = "Accept-Language", defaultValue = "en") String acceptLanguage,
+            @CurrentUser UserDto currentUser,
+            io.github.resilience4j.ratelimiter.RequestNotPermitted ex) {
+        Locale locale = Locale.forLanguageTag(acceptLanguage);
+        LogContext logContext = getLogContext("getRateLimitFallback");
+        
+        loggingService.logWarn("Rate limit exceeded for GET API: '/students' by user: " + 
+            (currentUser != null ? currentUser.getUsername() : "anonymous"), logContext);
+        
+        Long retryAfterSeconds = 60L;
+        String message = messageSource.getMessage("response.error.rateLimitExceeded", 
+            new Object[]{retryAfterSeconds}, locale);
+        throw new TooManyRequestsExceptionHandle(
+            message,
+            "StudentModel",
+            retryAfterSeconds
+        );
+    }
+
     @PutMapping("/{id}")
     @RequiresAuth(roles = {"ADMIN", "STUDENT"}, permissions = {"STUDENT_WRITE"})
+    @RateLimiter(name = "student-controller", fallbackMethod = "updateRateLimitFallback")
     ResponseEntity<Response<EntityModel>> update(
             @PathVariable("id") Integer id,
             @Valid @RequestBody UpdateEntityModel req,
@@ -102,8 +126,31 @@ public class StudentController {
             return ResponseEntity.status(response.status()).body(response);
     }
 
+    public ResponseEntity<Response<EntityModel>> updateRateLimitFallback(
+            @PathVariable("id") Integer id,
+            @Valid @RequestBody UpdateEntityModel req,
+            @RequestHeader(value = "Accept-Language", defaultValue = "en") String acceptLanguage,
+            @CurrentUser UserDto currentUser,
+            io.github.resilience4j.ratelimiter.RequestNotPermitted ex) {
+        Locale locale = Locale.forLanguageTag(acceptLanguage);
+        LogContext logContext = getLogContext("updateRateLimitFallback");
+        
+        loggingService.logWarn("Rate limit exceeded for PUT API: '/students/" + id + "' by user: " + 
+            (currentUser != null ? currentUser.getUsername() : "anonymous"), logContext);
+        
+        Long retryAfterSeconds = 60L;
+        String message = messageSource.getMessage("response.error.rateLimitExceededUpdate", 
+            new Object[]{retryAfterSeconds}, locale);
+        throw new TooManyRequestsExceptionHandle(
+            message,
+            "StudentModel",
+            retryAfterSeconds
+        );
+    }
+
     @DeleteMapping("")
     @RequiresAuth(roles = {"ADMIN", "STUDENT"}, permissions = {"STUDENT_DELETE"})
+    @RateLimiter(name = "student-controller", fallbackMethod = "deleteRateLimitFallback")
     ResponseEntity<Response<List<EntityModel>>> delete(
             @RequestBody List<Integer> userIds,
             @RequestHeader(value = "Accept-Language", defaultValue = "en") String acceptLanguage,
@@ -133,6 +180,27 @@ public class StudentController {
             return ResponseEntity.status(response.status()).body(response);
     }
 
+    public ResponseEntity<Response<List<EntityModel>>> deleteRateLimitFallback(
+            @RequestBody List<Integer> userIds,
+            @RequestHeader(value = "Accept-Language", defaultValue = "en") String acceptLanguage,
+            @CurrentUser UserDto currentUser,
+            io.github.resilience4j.ratelimiter.RequestNotPermitted ex) {
+        Locale locale = Locale.forLanguageTag(acceptLanguage);
+        LogContext logContext = getLogContext("deleteRateLimitFallback");
+        
+        loggingService.logWarn("Rate limit exceeded for DELETE API: '/students' by user: " + 
+            (currentUser != null ? currentUser.getUsername() : "anonymous"), logContext);
+        
+        Long retryAfterSeconds = 60L;
+        String message = messageSource.getMessage("response.error.rateLimitExceededDelete", 
+            new Object[]{retryAfterSeconds}, locale);
+        throw new TooManyRequestsExceptionHandle(
+            message,
+            "StudentModel",
+            retryAfterSeconds
+        );
+    }
+
     @GetMapping("/public")
     ResponseEntity<Response<List<EntityModel>>> public_get(
             @RequestHeader(value = "Accept-Language"
@@ -152,6 +220,7 @@ public class StudentController {
         );
         return ResponseEntity.status(response.status()).body(response);
     }
+
 
     // @GetMapping("/paged")
     // @RequiresAuth(roles = {"ADMIN", "STUDENT"}, permissions = {"STUDENT_READ"})

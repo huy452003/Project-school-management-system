@@ -199,6 +199,39 @@ public class CustomExceptionHandler {
         return ResponseEntity.status(503).body(response);
     }
 
+    @ResponseStatus(HttpStatus.TOO_MANY_REQUESTS)
+    @ExceptionHandler(TooManyRequestsExceptionHandle.class)
+    ResponseEntity<Response<?>> tooManyRequestsExceptionHandler(TooManyRequestsExceptionHandle e) {
+        Locale locale = LocaleContextHolder.getLocale();
+        Map<String, String> error = new HashMap<>();
+        error.put("Error", e.getMessage());
+        if (e.getModelName() != null) {
+            error.put("ModelName", e.getModelName());
+        }
+        if (e.getDetails() != null) {
+            error.put("Details", e.getDetails());
+        }
+        if (e.getRetryAfterSeconds() != null) {
+            error.put("RetryAfterSeconds", String.valueOf(e.getRetryAfterSeconds()));
+        }
+        
+        Response<?> response = new Response<>(
+                429,
+                messageSource.getMessage("response.error.tooManyRequests", null, locale),
+                e.getModelName() != null ? e.getModelName() : "RateLimit",
+                error,
+                null
+        );
+        
+        // Add Retry-After header
+        ResponseEntity.BodyBuilder responseBuilder = ResponseEntity.status(429);
+        if (e.getRetryAfterSeconds() != null) {
+            responseBuilder.header("Retry-After", String.valueOf(e.getRetryAfterSeconds()));
+        }
+        
+        return responseBuilder.body(response);
+    }
+
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(Exception.class)
     ResponseEntity<Response<?>> exceptionHandler(Exception e) {

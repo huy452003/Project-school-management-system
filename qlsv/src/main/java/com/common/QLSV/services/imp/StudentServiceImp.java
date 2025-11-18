@@ -6,6 +6,7 @@ import com.common.QLSV.services.StudentService;
 import com.logging.services.LoggingService;
 import com.logging.models.LogContext;
 import com.handle_exceptions.NotFoundExceptionHandle;
+import com.handle_exceptions.ServiceUnavailableExceptionHandle;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.client.RestTemplate;
@@ -30,6 +31,7 @@ import java.util.HashMap;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.retry.annotation.Retryable;
 import org.springframework.dao.OptimisticLockingFailureException;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 
 
 @Service
@@ -62,6 +64,7 @@ public class StudentServiceImp implements StudentService {
     }
 
     @Override
+    @CircuitBreaker(name = "qlsv-service", fallbackMethod = "getsFallback")
     public List<EntityModel> gets() {
         LogContext logContext = getLogContext("gets");
 
@@ -115,9 +118,27 @@ public class StudentServiceImp implements StudentService {
         return studentModels;
     }
 
+    public List<EntityModel> getsFallback(Exception e) {
+        LogContext logContext = getLogContext("getsFallback");
+        loggingService.logError("Exception in gets method , call fallback method ", e, logContext);
+
+        String cacheKey = STUDENT_CACHE_KEY;
+        Object cached = redisTemplate.opsForValue().get(cacheKey);
+        if (cached != null) {
+            loggingService.logInfo("Using cached data due to service unavailability: " + cacheKey, logContext);
+            @SuppressWarnings("unchecked")
+            List<EntityModel> cachedList = (List<EntityModel>) cached;
+            return cachedList;
+        }
+
+        loggingService.logError("No cached data found, throwing ServiceUnavailableException", e, logContext);
+        throw new ServiceUnavailableExceptionHandle("QLSV service is currently unavailable", "Please try again later");
+    }
+
     @Override
     @Retryable(value = {OptimisticLockingFailureException.class}, maxAttempts = 3)
     @Transactional(rollbackFor = Exception.class, isolation = Isolation.REPEATABLE_READ)
+    @CircuitBreaker(name = "qlsv-service", fallbackMethod = "createFallback")
     public void createByUserId(UserDto user) {
         // throw new RuntimeException("FAKE ERROR FOR TESTING DLQ");
         
@@ -148,9 +169,17 @@ public class StudentServiceImp implements StudentService {
         loggingService.logInfo("Created student profile for userId: " + user.getUserId(), logContext);
     }
 
+    public void createFallback(Exception e) {
+        LogContext logContext = getLogContext("createFallback");
+        loggingService.logError("Exception in create method, calling fallback method", e, logContext);
+        loggingService.logError("Failed to create student profile, service is currently unavailable", e, logContext);
+        throw new ServiceUnavailableExceptionHandle("QLSV service is currently unavailable", "Please try again later");
+    }
+
     @Override
     @Retryable(value = {OptimisticLockingFailureException.class}, maxAttempts = 3)
     @Transactional(rollbackFor = Exception.class, isolation = Isolation.REPEATABLE_READ)
+    @CircuitBreaker(name = "qlsv-service", fallbackMethod = "updateFallback")
     public EntityModel update(UpdateEntityModel req) {
         LogContext logContext = getLogContext("update");
 
@@ -199,9 +228,17 @@ public class StudentServiceImp implements StudentService {
         return studentModel;
     }
 
+    public EntityModel updateFallback(Exception e) {
+        LogContext logContext = getLogContext("updateFallback");
+        loggingService.logError("Exception in update method, calling fallback method", e, logContext);
+        loggingService.logError("Failed to update student profile, service is currently unavailable", e, logContext);
+        throw new ServiceUnavailableExceptionHandle("QLSV service is currently unavailable", "Please try again later");
+    }
+
     @Override
     @Retryable(value = {OptimisticLockingFailureException.class}, maxAttempts = 3)
     @Transactional(rollbackFor = Exception.class, isolation = Isolation.REPEATABLE_READ)
+    @CircuitBreaker(name = "qlsv-service", fallbackMethod = "deletesFallback")
     public Boolean deletes(List<Integer> userIds) {
         LogContext logContext = getLogContext("deletes");
 
@@ -254,6 +291,14 @@ public class StudentServiceImp implements StudentService {
         loggingService.logInfo("Del cache key: " + STUDENT_CACHE_KEY + " after del students", logContext);
         return true;
     }
+
+    public Boolean deletesFallback(Exception e) {
+        LogContext logContext = getLogContext("deletesFallback");
+        loggingService.logError("Exception in deletes method, calling fallback method", e, logContext);
+        loggingService.logError("Failed to delete students, service is currently unavailable", e, logContext);
+        throw new ServiceUnavailableExceptionHandle("QLSV service is currently unavailable", "Please try again later");
+    }
+
 
     // @Override
     // public PagedResponseModel<StudentModel> getsPaged(PagedRequestModel pagedRequest) {
