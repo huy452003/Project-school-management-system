@@ -176,6 +176,32 @@ public class CustomExceptionHandler {
         return ResponseEntity.status(403).body(response);
     }
 
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    @ExceptionHandler(IpBlockedExceptionHandle.class)
+    ResponseEntity<Response<?>> ipBlockedExceptionHandler(IpBlockedExceptionHandle e) {
+        Locale locale = LocaleContextHolder.getLocale();
+        Map<String, String> error = new HashMap<>();
+        error.put("Error", e.getMessage());
+        if (e.getDetails() != null) {
+            error.put("Details", e.getDetails());
+        }
+        if (e.getIpAddress() != null) {
+            error.put("IpAddress", e.getIpAddress());
+        }
+        if (e.getReason() != null) {
+            error.put("Reason", e.getReason());
+        }
+        
+        Response<?> response = new Response<>(
+                403,
+                messageSource.getMessage("response.error.ipBlocked", null, locale),
+                "Security",
+                error,
+                null
+        );
+        return ResponseEntity.status(403).body(response);
+    }
+
     @ResponseStatus(HttpStatus.SERVICE_UNAVAILABLE)
     @ExceptionHandler(ServiceUnavailableExceptionHandle.class)
     ResponseEntity<Response<?>> serviceUnavailableExceptionHandler(ServiceUnavailableExceptionHandle e) {

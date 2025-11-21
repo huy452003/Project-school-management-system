@@ -12,7 +12,7 @@ import com.security.models.Register;
 import com.security.models.SecurityResponse;
 import com.security.models.TokenInfo;
 import com.security.services.AuthService;
-import lombok.extern.slf4j.Slf4j;
+import com.security.services.IpBlockingService;
 import com.model_shared.models.user.UpdateUserDto;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +35,6 @@ import java.util.stream.Collectors;
 
 import com.security.repositories.UserRepo;
 
-@Slf4j
 @RestController
 @RequestMapping("/auth")
 @Validated
@@ -54,6 +53,9 @@ public class AuthController {
     
     @Autowired
     private ModelMapper modelMapper;
+    
+    @Autowired
+    private IpBlockingService ipBlockingService;
 
     private LogContext getLogContext(String methodName) {
         return LogContext.builder()
@@ -439,6 +441,31 @@ public class AuthController {
 
         loggingService.logInfo("Account status checked for user: " + username, logContext);
         return ResponseEntity.status(response.status()).body(response);
+    }
+    
+    // Internal API để track IP violation (gọi từ các module khác)
+    @PostMapping("/internal/ip/track-violation")
+    public ResponseEntity<Map<String, String>> trackIpViolation(
+        @RequestBody Map<String, String> request
+    ) {
+        LogContext logContext = getLogContext("trackIpViolation");
+        
+        String ipAddress = request.get("ipAddress");
+        if (ipAddress == null || ipAddress.isEmpty()) {
+            Map<String, String> error = new HashMap<>();
+            error.put("error", "IP address is required");
+            return ResponseEntity.badRequest().body(error);
+        }
+        
+        // Track IP violation (tăng counter và auto-block nếu vượt threshold)
+        ipBlockingService.incrementBlockedCountAndAutoBlock(ipAddress);
+        loggingService.logInfo("Tracked IP violation for IP: " + ipAddress, logContext);
+        
+        Map<String, String> response = new HashMap<>();
+        response.put("status", "success");
+        response.put("message", "IP violation tracked");
+        response.put("ipAddress", ipAddress);
+        return ResponseEntity.ok(response);
     }
 
 }

@@ -100,6 +100,10 @@
 			<groupId>com.common</groupId>
 			<artifactId>kafka_shared</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>com.common</groupId>
+			<artifactId>security_shared</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>

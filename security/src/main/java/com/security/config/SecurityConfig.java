@@ -15,6 +15,9 @@ public class SecurityConfig {
 
     @Autowired
     private JwtAuthFilter jwtAuthFilter;
+    
+    @Autowired
+    private IpGeoBlockingFilter ipGeoBlockingFilter;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -26,6 +29,8 @@ public class SecurityConfig {
                 ,"/auth/internal/**").permitAll()
                 .anyRequest().authenticated()
             )
+            // IP/Geo blocking filter chạy TRƯỚC JWT filter để block sớm nhất
+            .addFilterBefore(ipGeoBlockingFilter, JwtAuthFilter.class)
             .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
         
         return http.build();

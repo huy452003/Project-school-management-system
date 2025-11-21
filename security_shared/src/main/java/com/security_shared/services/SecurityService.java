@@ -376,4 +376,43 @@ public class SecurityService {
             "Security-Model"
         );
     }
+    
+    @CircuitBreaker(name = "security-service", fallbackMethod = "trackIpViolationFallback")
+    public void trackIpViolation(String ipAddress) {
+        LogContext logContext = getLogContext("trackIpViolation");
+        
+        if (ipAddress == null || ipAddress.isEmpty()) {
+            loggingService.logWarn("Invalid IP address provided for tracking", logContext);
+            return;
+        }
+        
+        try {
+            loggingService.logDebug("Calling security internal API to track IP violation: " + ipAddress, logContext);
+            
+            Map<String, String> request = new HashMap<>();
+            request.put("ipAddress", ipAddress);
+            
+            ResponseEntity<Map<String, String>> response = restTemplate.exchange(
+                securityBaseUrl + "/auth/internal/ip/track-violation",
+                HttpMethod.POST,
+                new HttpEntity<>(request),
+                new ParameterizedTypeReference<Map<String, String>>() {}
+            );
+            
+            if (response.getStatusCode().is2xxSuccessful()) {
+                loggingService.logDebug("Successfully tracked IP violation for: " + ipAddress, logContext);
+            } else {
+                loggingService.logWarn("Failed to track IP violation. Status: " + response.getStatusCode(), logContext);
+            }
+        } catch (Exception e) {
+            loggingService.logError("Failed to track IP violation in Security service", e, logContext);
+            // Không throw exception để tránh ảnh hưởng đến flow chính
+        }
+    }
+    
+    public void trackIpViolationFallback(String ipAddress, Exception e) {
+        LogContext logContext = getLogContext("trackIpViolationFallback");
+        loggingService.logError("Exception during track IP violation: " + ipAddress, e, logContext);
+        // Không throw exception để tránh ảnh hưởng đến flow chính
+    }
 }

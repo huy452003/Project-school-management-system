@@ -3,7 +3,9 @@ package com.common.QLSV.controllers;
 import com.common.QLSV.services.imp.StudentServiceImp;
 import com.security_shared.annotations.RequiresAuth;
 import com.security_shared.annotations.CurrentUser;
+import com.security_shared.services.SecurityService;
 import com.model_shared.models.Response;
+import com.model_shared.utils.IpAddressUtils;
 import com.model_shared.models.user.EntityModel;
 import com.model_shared.models.user.UpdateEntityModel;
 import com.model_shared.models.user.UserDto;
@@ -15,6 +17,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.handle_exceptions.TooManyRequestsExceptionHandle;
 import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
 import jakarta.validation.Valid;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.http.ResponseEntity;
@@ -39,6 +42,9 @@ public class StudentController {
     KafkaProducerService kafkaProducerService;
     @Autowired
     ObjectMapper objectMapper;
+    
+    @Autowired
+    SecurityService securityService;
 
     private LogContext getLogContext(String methodName) {
         return LogContext.builder()
@@ -75,12 +81,18 @@ public class StudentController {
     public ResponseEntity<Response<List<EntityModel>>> getRateLimitFallback(
             @RequestHeader(value = "Accept-Language", defaultValue = "en") String acceptLanguage,
             @CurrentUser UserDto currentUser,
+            HttpServletRequest request,
             io.github.resilience4j.ratelimiter.RequestNotPermitted ex) {
         Locale locale = Locale.forLanguageTag(acceptLanguage);
         LogContext logContext = getLogContext("getRateLimitFallback");
         
+        String ipAddress = IpAddressUtils.getClientIpAddress(request);
+        // Track IP violation (tăng counter và auto-block nếu vượt threshold)
+        securityService.trackIpViolation(ipAddress);
+        
         loggingService.logWarn("Rate limit exceeded for GET API: '/students' by user: " + 
-            (currentUser != null ? currentUser.getUsername() : "anonymous"), logContext);
+            (currentUser != null ? currentUser.getUsername() : "anonymous") + 
+            " from IP: " + ipAddress, logContext);
         
         Long retryAfterSeconds = 60L;
         String message = messageSource.getMessage("response.error.rateLimitExceeded", 
@@ -131,12 +143,18 @@ public class StudentController {
             @Valid @RequestBody UpdateEntityModel req,
             @RequestHeader(value = "Accept-Language", defaultValue = "en") String acceptLanguage,
             @CurrentUser UserDto currentUser,
+            HttpServletRequest request,
             io.github.resilience4j.ratelimiter.RequestNotPermitted ex) {
         Locale locale = Locale.forLanguageTag(acceptLanguage);
         LogContext logContext = getLogContext("updateRateLimitFallback");
         
+        String ipAddress = IpAddressUtils.getClientIpAddress(request);
+        // Track IP violation (tăng counter và auto-block nếu vượt threshold)
+        securityService.trackIpViolation(ipAddress);
+        
         loggingService.logWarn("Rate limit exceeded for PUT API: '/students/" + id + "' by user: " + 
-            (currentUser != null ? currentUser.getUsername() : "anonymous"), logContext);
+            (currentUser != null ? currentUser.getUsername() : "anonymous") + 
+            " from IP: " + ipAddress, logContext);
         
         Long retryAfterSeconds = 60L;
         String message = messageSource.getMessage("response.error.rateLimitExceededUpdate", 
@@ -184,12 +202,18 @@ public class StudentController {
             @RequestBody List<Integer> userIds,
             @RequestHeader(value = "Accept-Language", defaultValue = "en") String acceptLanguage,
             @CurrentUser UserDto currentUser,
+            HttpServletRequest request,
             io.github.resilience4j.ratelimiter.RequestNotPermitted ex) {
         Locale locale = Locale.forLanguageTag(acceptLanguage);
         LogContext logContext = getLogContext("deleteRateLimitFallback");
         
+        String ipAddress = IpAddressUtils.getClientIpAddress(request);
+        // Track IP violation (tăng counter và auto-block nếu vượt threshold)
+        securityService.trackIpViolation(ipAddress);
+        
         loggingService.logWarn("Rate limit exceeded for DELETE API: '/students' by user: " + 
-            (currentUser != null ? currentUser.getUsername() : "anonymous"), logContext);
+            (currentUser != null ? currentUser.getUsername() : "anonymous") + 
+            " from IP: " + ipAddress, logContext);
         
         Long retryAfterSeconds = 60L;
         String message = messageSource.getMessage("response.error.rateLimitExceededDelete", 
@@ -199,26 +223,6 @@ public class StudentController {
             "StudentModel",
             retryAfterSeconds
         );
-    }
-
-    @GetMapping("/public")
-    ResponseEntity<Response<List<EntityModel>>> public_get(
-            @RequestHeader(value = "Accept-Language"
-                    , defaultValue = "en") String acceptLanguage)
-    {
-        Locale locale = Locale.forLanguageTag(acceptLanguage);
-        LogContext logContext = getLogContext("public_get");
-
-        loggingService.logInfo("Get students public API called successfully ", logContext);
-        List<EntityModel> studentModels = studentServiceImp.gets();
-        Response<List<EntityModel>> response = new Response<>(
-                200
-                , messageSource.getMessage("response.message.getSuccess", null, locale)
-                , "StudentsModel"
-                , null
-                , studentModels
-        );
-        return ResponseEntity.status(response.status()).body(response);
     }
 
 
