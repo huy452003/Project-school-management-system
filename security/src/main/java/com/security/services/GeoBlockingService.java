@@ -2,7 +2,9 @@ package com.security.services;
 
 import com.logging.models.LogContext;
 import com.logging.services.LoggingService;
+import com.handle_exceptions.NotFoundExceptionHandle;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
@@ -19,6 +21,7 @@ import java.util.concurrent.TimeUnit;
 public class GeoBlockingService {
     
     @Autowired
+    @Qualifier("customStringRedisTemplate")
     private RedisTemplate<String, String> redisTemplate;
     
     @Autowired
@@ -197,25 +200,49 @@ public class GeoBlockingService {
     public void addCountryToBlacklist(String countryCode) {
         redisTemplate.opsForValue().set(REDIS_COUNTRY_BLACKLIST_PREFIX + countryCode.toUpperCase(), "1");
         LogContext logContext = getLogContext("addCountryToBlacklist");
-        loggingService.logInfo("Added country to blacklist: " + countryCode, logContext);
+        loggingService.logInfo("Admin added country to blacklist: " + countryCode, logContext);
     }
     
     public void addCountryToWhitelist(String countryCode) {
         redisTemplate.opsForValue().set(REDIS_COUNTRY_WHITELIST_PREFIX + countryCode.toUpperCase(), "1");
         LogContext logContext = getLogContext("addCountryToWhitelist");
-        loggingService.logInfo("Added country to whitelist: " + countryCode, logContext);
+        loggingService.logInfo("Admin added country to whitelist: " + countryCode, logContext);
     }
     
     public void removeCountryFromBlacklist(String countryCode) {
-        redisTemplate.delete(REDIS_COUNTRY_BLACKLIST_PREFIX + countryCode.toUpperCase());
         LogContext logContext = getLogContext("removeCountryFromBlacklist");
-        loggingService.logInfo("Removed country from blacklist: " + countryCode, logContext);
+        
+        // Check xem country có trong blacklist (Redis) không trước khi xóa
+        Boolean existsInRedis = redisTemplate.hasKey(REDIS_COUNTRY_BLACKLIST_PREFIX + countryCode.toUpperCase());
+        if (!existsInRedis) {
+            loggingService.logWarn("Attempt to remove country from blacklist that doesn't exist: " + countryCode, logContext);
+            throw new NotFoundExceptionHandle(
+                "Country not found in blacklist",
+                List.of(countryCode.toUpperCase()),
+                "IpGeoManagement"
+            );
+        }
+        
+        redisTemplate.delete(REDIS_COUNTRY_BLACKLIST_PREFIX + countryCode.toUpperCase());
+        loggingService.logInfo("Admin removed country from blacklist: " + countryCode, logContext);
     }
     
     public void removeCountryFromWhitelist(String countryCode) {
-        redisTemplate.delete(REDIS_COUNTRY_WHITELIST_PREFIX + countryCode.toUpperCase());
         LogContext logContext = getLogContext("removeCountryFromWhitelist");
-        loggingService.logInfo("Removed country from whitelist: " + countryCode, logContext);
+        
+        // Check xem country có trong whitelist (Redis) không trước khi xóa
+        Boolean existsInRedis = redisTemplate.hasKey(REDIS_COUNTRY_WHITELIST_PREFIX + countryCode.toUpperCase());
+        if (!existsInRedis) {
+            loggingService.logWarn("Attempt to remove country from whitelist that doesn't exist: " + countryCode, logContext);
+            throw new NotFoundExceptionHandle(
+                "Country not found in whitelist",
+                List.of(countryCode.toUpperCase()),
+                "IpGeoManagement"
+            );
+        }
+        
+        redisTemplate.delete(REDIS_COUNTRY_WHITELIST_PREFIX + countryCode.toUpperCase());
+        loggingService.logInfo("Admin removed country from whitelist: " + countryCode, logContext);
     }
     
     public String getBlockReason(String ipAddress) {

@@ -89,6 +89,29 @@ public class CustomExceptionHandler {
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(ValidationExceptionHandle.class)
+    ResponseEntity<Response<?>> validationExceptionHandler(ValidationExceptionHandle e) {
+        Locale locale = LocaleContextHolder.getLocale();
+        Map<String, String> error = new HashMap<>();
+        error.put("Error", e.getMessage());
+        if (e.getDetails() != null) {
+            error.put("Details", e.getDetails());
+        }
+        if (e.getInvalidFields() != null && !e.getInvalidFields().isEmpty()) {
+            error.put("InvalidFields", e.getInvalidFields().toString());
+        }
+        
+        Response<?> response = new Response<>(
+                400,
+                messageSource.getMessage("response.error.validateFailed", null, locale),
+                e.getModelName() != null ? e.getModelName() : "Request-Model",
+                error,
+                null
+        );
+        return ResponseEntity.badRequest().body(response);
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ResponseEntity<Response<?>> handleInvalidFormat(HttpMessageNotReadableException ex) {
         Locale locale = LocaleContextHolder.getLocale();

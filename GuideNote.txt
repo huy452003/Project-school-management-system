@@ -183,16 +183,16 @@ hiểu cơ chế hoạt động bên trong.
 
 1/ thêm Rate limiting.                  =
 
-2/ IP blocking/Geo blocking.
+2/ IP blocking/Geo blocking.             =
 
 3/ thêm Circuit Breaker cho student.               =
 
-4/ tìm hiểu về propagation , isolation.
+4/ tìm hiểu về propagation , isolation.             =
 
-5/ ss giữa Mysql và Redis.
+5/ ss giữa Mysql và Redis.                      =
 
-6/ ss giữa Jpa và Hibernate.
+6/ ss giữa Jpa và Hibernate.                     =
 
-7/ tìm hiểu level cache trong Hibernate.
+7/ tìm hiểu level cache trong Hibernate.             =
 
-8/ tìm hiểu giữa single node redis và multi node redis.
+8/ tìm hiểu giữa single node redis và multi node redis.         =

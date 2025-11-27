@@ -90,8 +90,9 @@ public class UserEntity implements UserDetails {
                 .map(permission -> new SimpleGrantedAuthority(permission.name()))
                 .collect(Collectors.toList());
         
-        // Add role as authority
-        authorities.add(new SimpleGrantedAuthority(role.name()));
+        // Add role as authority với prefix "ROLE_" để Spring Security @PreAuthorize("hasRole('ADMIN')") hoạt động đúng
+        // Spring Security's hasRole() tự động thêm prefix "ROLE_" khi check, nên cần set authority là "ROLE_ADMIN"
+        authorities.add(new SimpleGrantedAuthority("ROLE_" + role.name()));
         
         return authorities;
     }

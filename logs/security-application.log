@@ -1,26 +1,121 @@
-2025-11-14 19:35:39 [background-preinit] DEBUG [logging] - Logging Provider: org.jboss.logging.Slf4jLoggerProvider found via system property
-2025-11-14 19:35:39 [main] INFO  [SecurityApplication] - Starting SecurityApplication using Java 17.0.16 with PID 9640 (D:\project IntelliJ Ultimate\modules-parent\security\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\security)
-2025-11-14 19:35:39 [main] DEBUG [SecurityApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
-2025-11-14 19:35:39 [main] INFO  [SecurityApplication] - No active profile set, falling back to 1 default profile: "default"
-2025-11-14 19:35:44 [main] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
-2025-11-14 19:35:44 [main] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
-2025-11-14 19:35:44 [main] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
-2025-11-14 19:35:44 [main] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
-2025-11-14 19:35:44 [main] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
-2025-11-14 19:35:44 [main] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
-2025-11-14 19:35:44 [main] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
-2025-11-14 19:35:44 [main] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
-2025-11-14 19:35:44 [main] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
-2025-11-14 19:35:44 [main] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
-2025-11-14 19:35:44 [main] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
-2025-11-14 19:35:44 [main] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
-2025-11-14 19:35:52 [main] DEBUG [InternalLoggerFactory] - Using SLF4J as the default logging framework
-2025-11-14 19:35:53 [main] ERROR [TomcatStarter] - Error starting Tomcat context. Exception: org.springframework.beans.factory.BeanCreationException. Message: Error creating bean with name 'jwtAuthFilter': Lookup method resolution failed
-2025-11-14 19:35:53 [main] WARN  [AnnotationConfigServletWebServerApplicationContext] - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Unable to start web server
-2025-11-14 19:35:53 [main] ERROR [SpringApplication] - Application run failed
-org.springframework.context.ApplicationContextException: Unable to start web server
-	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.onRefresh(ServletWebServerApplicationContext.java:170)
-	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:621)
+2025-11-21 20:03:36 [background-preinit] DEBUG [logging] - Logging Provider: org.jboss.logging.Slf4jLoggerProvider found via system property
+2025-11-21 20:03:36 [main] INFO  [SecurityApplication] - Starting SecurityApplication using Java 17.0.16 with PID 15208 (D:\project IntelliJ Ultimate\modules-parent\security\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\security)
+2025-11-21 20:03:36 [main] DEBUG [SecurityApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
+2025-11-21 20:03:36 [main] INFO  [SecurityApplication] - No active profile set, falling back to 1 default profile: "default"
+2025-11-21 20:03:39 [main] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
+2025-11-21 20:03:39 [main] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
+2025-11-21 20:03:39 [main] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
+2025-11-21 20:03:39 [main] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
+2025-11-21 20:03:39 [main] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
+2025-11-21 20:03:39 [main] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
+2025-11-21 20:03:39 [main] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
+2025-11-21 20:03:39 [main] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
+2025-11-21 20:03:39 [main] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
+2025-11-21 20:03:39 [main] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
+2025-11-21 20:03:39 [main] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
+2025-11-21 20:03:39 [main] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
+2025-11-21 20:03:43 [main] DEBUG [InternalLoggerFactory] - Using SLF4J as the default logging framework
+2025-11-21 20:03:44 [main] ERROR [TomcatStarter] - Error starting Tomcat context. Exception: org.springframework.beans.factory.UnsatisfiedDependencyException. Message: Error creating bean with name 'ipGeoBlockingFilter': Unsatisfied dependency expressed through field 'ipBlockingService': Error creating bean with name 'ipBlockingService': Unsatisfied dependency expressed through field 'redisTemplate': No qualifying bean of type 'org.springframework.data.redis.core.RedisTemplate<java.lang.String, java.lang.String>' available: expected single matching bean but found 2: customStringRedisTemplate,stringRedisTemplate
+2025-11-21 20:03:44 [main] WARN  [AnnotationConfigServletWebServerApplicationContext] - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Unable to start web server
+2025-11-21 20:03:44 [main] ERROR [LoggingFailureAnalysisReporter] - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Field redisTemplate in com.security.services.IpBlockingService required a single bean, but 2 were found:
+	- customStringRedisTemplate: defined by method 'stringRedisTemplate' in class path resource [com/model_shared/config/RedisConfig.class]
+	- stringRedisTemplate: defined by method 'stringRedisTemplate' in class path resource [org/redisson/spring/starter/RedissonAutoConfigurationV2.class]
+
+This may be due to missing parameter name information
+
+Action:
+
+Consider marking one of the beans as @Primary, updating the consumer to accept multiple beans, or using @Qualifier to identify the bean that should be consumed
+
+Ensure that your compiler is configured to use the '-parameters' flag.
+You may need to update both your build tool settings as well as your IDE.
+(See https://github.com/spring-projects/spring-framework/wiki/Spring-Framework-6.1-Release-Notes#parameter-name-retention)
+
+
+2025-11-21 20:06:22 [background-preinit] DEBUG [logging] - Logging Provider: org.jboss.logging.Slf4jLoggerProvider found via system property
+2025-11-21 20:06:22 [main] INFO  [SecurityApplication] - Starting SecurityApplication using Java 17.0.16 with PID 10736 (D:\project IntelliJ Ultimate\modules-parent\security\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\security)
+2025-11-21 20:06:22 [main] DEBUG [SecurityApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
+2025-11-21 20:06:22 [main] INFO  [SecurityApplication] - No active profile set, falling back to 1 default profile: "default"
+2025-11-21 20:06:25 [main] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
+2025-11-21 20:06:25 [main] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
+2025-11-21 20:06:25 [main] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
+2025-11-21 20:06:25 [main] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
+2025-11-21 20:06:25 [main] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
+2025-11-21 20:06:25 [main] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
+2025-11-21 20:06:25 [main] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
+2025-11-21 20:06:25 [main] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
+2025-11-21 20:06:25 [main] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
+2025-11-21 20:06:25 [main] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
+2025-11-21 20:06:25 [main] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
+2025-11-21 20:06:25 [main] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
+2025-11-21 20:06:29 [main] DEBUG [InternalLoggerFactory] - Using SLF4J as the default logging framework
+2025-11-21 20:06:31 [main] WARN  [JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-11-21 20:06:34 [main] WARN  [deprecation] - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-11-21 20:06:41 [main] DEBUG [IpGeoBlockingFilter] - Filter 'ipGeoBlockingFilter' configured for use
+2025-11-21 20:06:41 [main] DEBUG [JwtAuthFilter] - Filter 'jwtAuthFilter' configured for use
+2025-11-21 20:06:41 [main] WARN  [InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer] - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2025-11-21 20:06:41 [main] DEBUG [Mappings] - 
+	c.s.c.AuthController:
+	{POST [/auth/register]}: register(Register,String)
+	{POST [/auth/logout]}: logout(String,String)
+	{PATCH [/auth/internal/users/enable]}: enableUsers(List,String)
+	{GET [/auth/check-status]}: checkAccountStatus(String,String)
+	{POST [/auth/internal/ip/track-violation]}: trackIpViolation(Map)
+	{POST [/auth/login]}: login(Login,String)
+	{POST [/auth/refresh]}: refreshToken(String,String)
+	{GET [/auth/validate]}: validateToken(String,String)
+	{GET [/auth/decode]}: decodeToken(String,String)
+	{POST [/auth/internal/users/batch]}: getUsersByIds(Map)
+	{DELETE [/auth/internal/users/delete]}: deleteUser(List)
+	{POST [/auth/internal/users/update]}: updateUser(UpdateUserDto)
+	{PATCH [/auth/internal/users/disable]}: disableUsers(List,String)
+2025-11-21 20:06:41 [main] DEBUG [Mappings] - 
+	c.s.c.IpGeoManagementController:
+	{DELETE [/admin/ip-geo/ip/whitelist/{ipAddress}]}: removeIpFromWhitelist(String,String,UserDto)
+	{POST [/admin/ip-geo/geo/whitelist]}: addCountryToWhitelist(CountryCode,String,UserDto)
+	{DELETE [/admin/ip-geo/geo/whitelist/{countryCode}]}: removeCountryFromWhitelist(String,String,UserDto)
+	{DELETE [/admin/ip-geo/geo/blacklist/{countryCode}]}: removeCountryFromBlacklist(String,String,UserDto)
+	{DELETE [/admin/ip-geo/ip/blacklist/{ipAddress}]}: removeIpFromBlacklist(String,String,UserDto)
+	{POST [/admin/ip-geo/geo/blacklist]}: addCountryToBlacklist(CountryCode,String,UserDto)
+	{POST [/admin/ip-geo/ip/whitelist]}: addIpToWhitelist(IpAddress,String,UserDto)
+	{POST [/admin/ip-geo/ip/blacklist]}: addIpToBlacklist(IpAddress,String,UserDto)
+	{GET [/admin/ip-geo/ip/status/{ipAddress}]}: getIpStatus(String,String,UserDto)
+2025-11-21 20:06:41 [main] DEBUG [Mappings] - 
+	o.s.b.a.w.s.e.BasicErrorController:
+	{ [/error]}: error(HttpServletRequest)
+	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
+2025-11-21 20:06:41 [main] DEBUG [Mappings] - 'beanNameHandlerMapping' {}
+2025-11-21 20:06:41 [main] DEBUG [Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
+2025-11-21 20:06:43 [main] WARN  [AnnotationConfigServletWebServerApplicationContext] - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration': Unsatisfied dependency expressed through method 'setFilterChains' parameter 0: Error creating bean with name 'securityFilterChain' defined in class path resource [com/security/config/SecurityConfig.class]: Failed to instantiate [org.springframework.security.web.SecurityFilterChain]: Factory method 'securityFilterChain' threw exception with message: The Filter class com.security.config.JwtAuthFilter does not have a registered order
+2025-11-21 20:06:43 [main] WARN  [WebappClassLoaderBase] - The web application [ROOT] appears to have started a thread named [Thread-3] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.base@17.0.16/sun.net.dns.ResolverConfigurationImpl.notifyAddrChange0(Native Method)
+ java.base@17.0.16/sun.net.dns.ResolverConfigurationImpl$AddressChangeListener.run(ResolverConfigurationImpl.java:176)
+2025-11-21 20:06:43 [main] ERROR [SpringApplication] - Application run failed
+org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration': Unsatisfied dependency expressed through method 'setFilterChains' parameter 0: Error creating bean with name 'securityFilterChain' defined in class path resource [com/security/config/SecurityConfig.class]: Failed to instantiate [org.springframework.security.web.SecurityFilterChain]: Factory method 'securityFilterChain' threw exception with message: The Filter class com.security.config.JwtAuthFilter does not have a registered order
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredMethodElement.resolveMethodArguments(AutowiredAnnotationBeanPostProcessor.java:896)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredMethodElement.inject(AutowiredAnnotationBeanPostProcessor.java:849)
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:146)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:509)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1459)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:606)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:529)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:339)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:373)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:337)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.instantiateSingleton(DefaultListableBeanFactory.java:1222)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingleton(DefaultListableBeanFactory.java:1188)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:1123)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:987)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:627)
 	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
 	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:753)
 	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:439)
@@ -28,428 +123,374 @@ org.springframework.context.ApplicationContextException: Unable to start web ser
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1362)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1351)
 	at com.security.SecurityApplication.main(SecurityApplication.java:18)
-Caused by: org.springframework.boot.web.server.WebServerException: Unable to start embedded Tomcat
-	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.initialize(TomcatWebServer.java:147)
-	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.<init>(TomcatWebServer.java:107)
-	at org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory.getTomcatWebServer(TomcatServletWebServerFactory.java:517)
-	at org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory.getWebServer(TomcatServletWebServerFactory.java:219)
-	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.createWebServer(ServletWebServerApplicationContext.java:193)
-	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.onRefresh(ServletWebServerApplicationContext.java:167)
-	... 8 common frames omitted
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'jwtAuthFilter': Lookup method resolution failed
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.checkLookupMethods(AutowiredAnnotationBeanPostProcessor.java:498)
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.determineCandidateConstructors(AutowiredAnnotationBeanPostProcessor.java:368)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.determineConstructorsFromBeanPostProcessors(AbstractAutowireCapableBeanFactory.java:1334)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1229)
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'securityFilterChain' defined in class path resource [com/security/config/SecurityConfig.class]: Failed to instantiate [org.springframework.security.web.SecurityFilterChain]: Factory method 'securityFilterChain' threw exception with message: The Filter class com.security.config.JwtAuthFilter does not have a registered order
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:657)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:645)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1375)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1205)
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:569)
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:529)
 	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:339)
 	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:373)
 	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:337)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:207)
-	at org.springframework.boot.web.servlet.ServletContextInitializerBeans.getOrderedBeansOfType(ServletContextInitializerBeans.java:230)
-	at org.springframework.boot.web.servlet.ServletContextInitializerBeans.addAsRegistrationBean(ServletContextInitializerBeans.java:184)
-	at org.springframework.boot.web.servlet.ServletContextInitializerBeans.addAsRegistrationBean(ServletContextInitializerBeans.java:179)
-	at org.springframework.boot.web.servlet.ServletContextInitializerBeans.addAdaptableBeans(ServletContextInitializerBeans.java:164)
-	at org.springframework.boot.web.servlet.ServletContextInitializerBeans.<init>(ServletContextInitializerBeans.java:96)
-	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.getServletContextInitializerBeans(ServletWebServerApplicationContext.java:271)
-	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.selfInitialize(ServletWebServerApplicationContext.java:245)
-	at org.springframework.boot.web.embedded.tomcat.TomcatStarter.onStartup(TomcatStarter.java:52)
-	at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:4464)
-	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:164)
-	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1203)
-	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1193)
-	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
-	at org.apache.tomcat.util.threads.InlineExecutorService.execute(InlineExecutorService.java:75)
-	at java.base/java.util.concurrent.AbstractExecutorService.submit(AbstractExecutorService.java:145)
-	at org.apache.catalina.core.ContainerBase.startInternal(ContainerBase.java:749)
-	at org.apache.catalina.core.StandardHost.startInternal(StandardHost.java:772)
-	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:164)
-	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1203)
-	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1193)
-	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
-	at org.apache.tomcat.util.threads.InlineExecutorService.execute(InlineExecutorService.java:75)
-	at java.base/java.util.concurrent.AbstractExecutorService.submit(AbstractExecutorService.java:145)
-	at org.apache.catalina.core.ContainerBase.startInternal(ContainerBase.java:749)
-	at org.apache.catalina.core.StandardEngine.startInternal(StandardEngine.java:203)
-	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:164)
-	at org.apache.catalina.core.StandardService.startInternal(StandardService.java:412)
-	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:164)
-	at org.apache.catalina.core.StandardServer.startInternal(StandardServer.java:870)
-	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:164)
-	at org.apache.catalina.startup.Tomcat.start(Tomcat.java:438)
-	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.initialize(TomcatWebServer.java:128)
-	... 13 common frames omitted
-Caused by: java.lang.IllegalStateException: Failed to introspect Class [com.security.config.JwtAuthFilter] from ClassLoader [jdk.internal.loader.ClassLoaders$AppClassLoader@60e53b93]
-	at org.springframework.util.ReflectionUtils.getDeclaredMethods(ReflectionUtils.java:483)
-	at org.springframework.util.ReflectionUtils.doWithLocalMethods(ReflectionUtils.java:320)
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.checkLookupMethods(AutowiredAnnotationBeanPostProcessor.java:476)
-	... 54 common frames omitted
-Caused by: java.lang.NoClassDefFoundError: com/handle_exceptions/UnauthorizedExceptionHandle
-	at java.base/java.lang.Class.getDeclaredMethods0(Native Method)
-	at java.base/java.lang.Class.privateGetDeclaredMethods(Class.java:3402)
-	at java.base/java.lang.Class.getDeclaredMethods(Class.java:2504)
-	at org.springframework.util.ReflectionUtils.getDeclaredMethods(ReflectionUtils.java:465)
-	... 56 common frames omitted
-Caused by: java.lang.ClassNotFoundException: com.handle_exceptions.UnauthorizedExceptionHandle
-	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:641)
-	at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(ClassLoaders.java:188)
-	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:525)
-	... 60 common frames omitted
-2025-11-14 19:36:25 [background-preinit] DEBUG [logging] - Logging Provider: org.jboss.logging.Slf4jLoggerProvider found via system property
-2025-11-14 19:36:25 [main] INFO  [SecurityApplication] - Starting SecurityApplication using Java 17.0.16 with PID 4800 (D:\project IntelliJ Ultimate\modules-parent\security\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\security)
-2025-11-14 19:36:25 [main] DEBUG [SecurityApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
-2025-11-14 19:36:25 [main] INFO  [SecurityApplication] - No active profile set, falling back to 1 default profile: "default"
-2025-11-14 19:36:28 [main] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
-2025-11-14 19:36:28 [main] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
-2025-11-14 19:36:28 [main] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
-2025-11-14 19:36:28 [main] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
-2025-11-14 19:36:28 [main] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
-2025-11-14 19:36:28 [main] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
-2025-11-14 19:36:28 [main] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
-2025-11-14 19:36:28 [main] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
-2025-11-14 19:36:28 [main] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
-2025-11-14 19:36:28 [main] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
-2025-11-14 19:36:28 [main] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
-2025-11-14 19:36:28 [main] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
-2025-11-14 19:36:31 [main] DEBUG [InternalLoggerFactory] - Using SLF4J as the default logging framework
-2025-11-14 19:36:33 [main] WARN  [deprecation] - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-11-14 19:36:37 [main] WARN  [JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-11-14 19:36:38 [main] DEBUG [JwtAuthFilter] - Filter 'jwtAuthFilter' configured for use
-2025-11-14 19:36:38 [main] WARN  [InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer] - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
-2025-11-14 19:36:39 [main] DEBUG [Mappings] - 
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202)
+	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:254)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.addCandidateEntry(DefaultListableBeanFactory.java:1992)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.findAutowireCandidates(DefaultListableBeanFactory.java:1956)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveMultipleBeanCollection(DefaultListableBeanFactory.java:1846)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveMultipleBeans(DefaultListableBeanFactory.java:1814)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1689)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1628)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredMethodElement.resolveMethodArguments(AutowiredAnnotationBeanPostProcessor.java:888)
+	... 22 common frames omitted
+Caused by: org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.springframework.security.web.SecurityFilterChain]: Factory method 'securityFilterChain' threw exception with message: The Filter class com.security.config.JwtAuthFilter does not have a registered order
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.lambda$instantiate$0(SimpleInstantiationStrategy.java:199)
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiateWithFactoryMethod(SimpleInstantiationStrategy.java:88)
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:168)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:653)
+	... 39 common frames omitted
+Caused by: java.lang.IllegalArgumentException: The Filter class com.security.config.JwtAuthFilter does not have a registered order
+	at org.springframework.security.config.annotation.web.builders.HttpSecurity.addFilterAtOffsetOf(HttpSecurity.java:3406)
+	at org.springframework.security.config.annotation.web.builders.HttpSecurity.addFilterBefore(HttpSecurity.java:3399)
+	at com.security.config.SecurityConfig.securityFilterChain(SecurityConfig.java:32)
+	at com.security.config.SecurityConfig$$SpringCGLIB$$0.CGLIB$securityFilterChain$0(<generated>)
+	at com.security.config.SecurityConfig$$SpringCGLIB$$FastClass$$1.invoke(<generated>)
+	at org.springframework.cglib.proxy.MethodProxy.invokeSuper(MethodProxy.java:258)
+	at org.springframework.context.annotation.ConfigurationClassEnhancer$BeanMethodInterceptor.intercept(ConfigurationClassEnhancer.java:393)
+	at com.security.config.SecurityConfig$$SpringCGLIB$$0.securityFilterChain(<generated>)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.lambda$instantiate$0(SimpleInstantiationStrategy.java:171)
+	... 42 common frames omitted
+2025-11-21 20:09:19 [background-preinit] DEBUG [logging] - Logging Provider: org.jboss.logging.Slf4jLoggerProvider found via system property
+2025-11-21 20:09:19 [main] INFO  [SecurityApplication] - Starting SecurityApplication using Java 17.0.16 with PID 11044 (D:\project IntelliJ Ultimate\modules-parent\security\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\security)
+2025-11-21 20:09:19 [main] DEBUG [SecurityApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
+2025-11-21 20:09:19 [main] INFO  [SecurityApplication] - No active profile set, falling back to 1 default profile: "default"
+2025-11-21 20:09:22 [main] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
+2025-11-21 20:09:22 [main] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
+2025-11-21 20:09:22 [main] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
+2025-11-21 20:09:22 [main] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
+2025-11-21 20:09:22 [main] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
+2025-11-21 20:09:22 [main] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
+2025-11-21 20:09:22 [main] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
+2025-11-21 20:09:22 [main] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
+2025-11-21 20:09:22 [main] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
+2025-11-21 20:09:22 [main] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
+2025-11-21 20:09:22 [main] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
+2025-11-21 20:09:22 [main] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
+2025-11-21 20:09:26 [main] DEBUG [InternalLoggerFactory] - Using SLF4J as the default logging framework
+2025-11-21 20:09:29 [main] WARN  [JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-11-21 20:09:31 [main] WARN  [deprecation] - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-11-21 20:09:37 [main] DEBUG [IpGeoBlockingFilter] - Filter 'ipGeoBlockingFilter' configured for use
+2025-11-21 20:09:37 [main] DEBUG [JwtAuthFilter] - Filter 'jwtAuthFilter' configured for use
+2025-11-21 20:09:38 [main] WARN  [InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer] - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2025-11-21 20:09:39 [main] DEBUG [Mappings] - 
+	c.s.c.AuthController:
+	{POST [/auth/register]}: register(Register,String)
+	{POST [/auth/login]}: login(Login,String)
+	{POST [/auth/refresh]}: refreshToken(String,String)
+	{POST [/auth/internal/users/update]}: updateUser(UpdateUserDto)
+	{PATCH [/auth/internal/users/disable]}: disableUsers(List,String)
+	{POST [/auth/internal/users/batch]}: getUsersByIds(Map)
+	{GET [/auth/decode]}: decodeToken(String,String)
+	{DELETE [/auth/internal/users/delete]}: deleteUser(List)
+	{PATCH [/auth/internal/users/enable]}: enableUsers(List,String)
+	{GET [/auth/validate]}: validateToken(String,String)
+	{POST [/auth/internal/ip/track-violation]}: trackIpViolation(Map)
+	{GET [/auth/check-status]}: checkAccountStatus(String,String)
+	{POST [/auth/logout]}: logout(String,String)
+2025-11-21 20:09:39 [main] DEBUG [Mappings] - 
+	c.s.c.IpGeoManagementController:
+	{DELETE [/admin/ip-geo/geo/blacklist/{countryCode}]}: removeCountryFromBlacklist(String,String,UserDto)
+	{POST [/admin/ip-geo/ip/blacklist]}: addIpToBlacklist(IpAddress,String,UserDto)
+	{POST [/admin/ip-geo/ip/whitelist]}: addIpToWhitelist(IpAddress,String,UserDto)
+	{GET [/admin/ip-geo/ip/status/{ipAddress}]}: getIpStatus(String,String,UserDto)
+	{DELETE [/admin/ip-geo/ip/blacklist/{ipAddress}]}: removeIpFromBlacklist(String,String,UserDto)
+	{DELETE [/admin/ip-geo/geo/whitelist/{countryCode}]}: removeCountryFromWhitelist(String,String,UserDto)
+	{POST [/admin/ip-geo/geo/blacklist]}: addCountryToBlacklist(CountryCode,String,UserDto)
+	{POST [/admin/ip-geo/geo/whitelist]}: addCountryToWhitelist(CountryCode,String,UserDto)
+	{DELETE [/admin/ip-geo/ip/whitelist/{ipAddress}]}: removeIpFromWhitelist(String,String,UserDto)
+2025-11-21 20:09:39 [main] DEBUG [Mappings] - 
+	o.s.b.a.w.s.e.BasicErrorController:
+	{ [/error]}: error(HttpServletRequest)
+	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
+2025-11-21 20:09:39 [main] DEBUG [Mappings] - 'beanNameHandlerMapping' {}
+2025-11-21 20:09:39 [main] DEBUG [Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
+2025-11-21 20:09:41 [main] WARN  [AnnotationConfigServletWebServerApplicationContext] - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration': Unsatisfied dependency expressed through method 'setFilterChains' parameter 0: Error creating bean with name 'securityFilterChain' defined in class path resource [com/security/config/SecurityConfig.class]: Failed to instantiate [org.springframework.security.web.SecurityFilterChain]: Factory method 'securityFilterChain' threw exception with message: The Filter class com.security.config.JwtAuthFilter does not have a registered order
+2025-11-21 20:09:41 [main] WARN  [WebappClassLoaderBase] - The web application [ROOT] appears to have started a thread named [Thread-3] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.base@17.0.16/sun.net.dns.ResolverConfigurationImpl.notifyAddrChange0(Native Method)
+ java.base@17.0.16/sun.net.dns.ResolverConfigurationImpl$AddressChangeListener.run(ResolverConfigurationImpl.java:176)
+2025-11-21 20:09:41 [main] ERROR [SpringApplication] - Application run failed
+org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration': Unsatisfied dependency expressed through method 'setFilterChains' parameter 0: Error creating bean with name 'securityFilterChain' defined in class path resource [com/security/config/SecurityConfig.class]: Failed to instantiate [org.springframework.security.web.SecurityFilterChain]: Factory method 'securityFilterChain' threw exception with message: The Filter class com.security.config.JwtAuthFilter does not have a registered order
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredMethodElement.resolveMethodArguments(AutowiredAnnotationBeanPostProcessor.java:896)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredMethodElement.inject(AutowiredAnnotationBeanPostProcessor.java:849)
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:146)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:509)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1459)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:606)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:529)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:339)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:373)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:337)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.instantiateSingleton(DefaultListableBeanFactory.java:1222)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingleton(DefaultListableBeanFactory.java:1188)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:1123)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:987)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:627)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:753)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:439)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:318)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1362)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1351)
+	at com.security.SecurityApplication.main(SecurityApplication.java:18)
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'securityFilterChain' defined in class path resource [com/security/config/SecurityConfig.class]: Failed to instantiate [org.springframework.security.web.SecurityFilterChain]: Factory method 'securityFilterChain' threw exception with message: The Filter class com.security.config.JwtAuthFilter does not have a registered order
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:657)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:645)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1375)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1205)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:569)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:529)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:339)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:373)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:337)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202)
+	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:254)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.addCandidateEntry(DefaultListableBeanFactory.java:1992)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.findAutowireCandidates(DefaultListableBeanFactory.java:1956)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveMultipleBeanCollection(DefaultListableBeanFactory.java:1846)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveMultipleBeans(DefaultListableBeanFactory.java:1814)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1689)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1628)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredMethodElement.resolveMethodArguments(AutowiredAnnotationBeanPostProcessor.java:888)
+	... 22 common frames omitted
+Caused by: org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.springframework.security.web.SecurityFilterChain]: Factory method 'securityFilterChain' threw exception with message: The Filter class com.security.config.JwtAuthFilter does not have a registered order
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.lambda$instantiate$0(SimpleInstantiationStrategy.java:199)
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiateWithFactoryMethod(SimpleInstantiationStrategy.java:88)
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:168)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:653)
+	... 39 common frames omitted
+Caused by: java.lang.IllegalArgumentException: The Filter class com.security.config.JwtAuthFilter does not have a registered order
+	at org.springframework.security.config.annotation.web.builders.HttpSecurity.addFilterAtOffsetOf(HttpSecurity.java:3406)
+	at org.springframework.security.config.annotation.web.builders.HttpSecurity.addFilterBefore(HttpSecurity.java:3399)
+	at com.security.config.SecurityConfig.securityFilterChain(SecurityConfig.java:32)
+	at com.security.config.SecurityConfig$$SpringCGLIB$$0.CGLIB$securityFilterChain$0(<generated>)
+	at com.security.config.SecurityConfig$$SpringCGLIB$$FastClass$$1.invoke(<generated>)
+	at org.springframework.cglib.proxy.MethodProxy.invokeSuper(MethodProxy.java:258)
+	at org.springframework.context.annotation.ConfigurationClassEnhancer$BeanMethodInterceptor.intercept(ConfigurationClassEnhancer.java:393)
+	at com.security.config.SecurityConfig$$SpringCGLIB$$0.securityFilterChain(<generated>)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.lambda$instantiate$0(SimpleInstantiationStrategy.java:171)
+	... 42 common frames omitted
+2025-11-21 20:13:57 [background-preinit] DEBUG [logging] - Logging Provider: org.jboss.logging.Slf4jLoggerProvider found via system property
+2025-11-21 20:13:57 [main] INFO  [SecurityApplication] - Starting SecurityApplication using Java 17.0.16 with PID 14520 (D:\project IntelliJ Ultimate\modules-parent\security\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\security)
+2025-11-21 20:13:57 [main] DEBUG [SecurityApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
+2025-11-21 20:13:57 [main] INFO  [SecurityApplication] - No active profile set, falling back to 1 default profile: "default"
+2025-11-21 20:14:00 [main] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
+2025-11-21 20:14:00 [main] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
+2025-11-21 20:14:00 [main] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
+2025-11-21 20:14:00 [main] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
+2025-11-21 20:14:00 [main] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
+2025-11-21 20:14:00 [main] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
+2025-11-21 20:14:00 [main] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
+2025-11-21 20:14:00 [main] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
+2025-11-21 20:14:00 [main] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
+2025-11-21 20:14:00 [main] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
+2025-11-21 20:14:00 [main] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
+2025-11-21 20:14:00 [main] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
+2025-11-21 20:14:04 [main] DEBUG [InternalLoggerFactory] - Using SLF4J as the default logging framework
+2025-11-21 20:14:08 [main] WARN  [JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-11-21 20:14:11 [main] WARN  [deprecation] - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-11-21 20:14:17 [main] DEBUG [IpGeoBlockingFilter] - Filter 'ipGeoBlockingFilter' configured for use
+2025-11-21 20:14:17 [main] DEBUG [JwtAuthFilter] - Filter 'jwtAuthFilter' configured for use
+2025-11-21 20:14:18 [main] WARN  [InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer] - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2025-11-21 20:14:19 [main] DEBUG [Mappings] - 
 	c.s.c.AuthController:
 	{POST [/auth/register]}: register(Register,String)
 	{POST [/auth/logout]}: logout(String,String)
 	{POST [/auth/login]}: login(Login,String)
-	{GET [/auth/decode]}: decodeToken(String,String)
-	{POST [/auth/internal/users/batch]}: getUsersByIds(Map)
 	{POST [/auth/refresh]}: refreshToken(String,String)
-	{GET [/auth/validate]}: validateToken(String,String)
-	{PATCH [/auth/internal/users/disable]}: disableUsers(List,String)
-	{POST [/auth/internal/users/update]}: updateUser(UpdateUserDto)
-	{DELETE [/auth/internal/users/delete]}: deleteUser(List)
 	{GET [/auth/check-status]}: checkAccountStatus(String,String)
+	{POST [/auth/internal/users/batch]}: getUsersByIds(Map)
+	{DELETE [/auth/internal/users/delete]}: deleteUser(List)
+	{POST [/auth/internal/users/update]}: updateUser(UpdateUserDto)
+	{PATCH [/auth/internal/users/disable]}: disableUsers(List,String)
 	{PATCH [/auth/internal/users/enable]}: enableUsers(List,String)
-2025-11-14 19:36:39 [main] DEBUG [Mappings] - 
+	{GET [/auth/decode]}: decodeToken(String,String)
+	{POST [/auth/internal/ip/track-violation]}: trackIpViolation(Map)
+	{GET [/auth/validate]}: validateToken(String,String)
+2025-11-21 20:14:19 [main] DEBUG [Mappings] - 
+	c.s.c.IpGeoManagementController:
+	{POST [/admin/ip-geo/ip/blacklist]}: addIpToBlacklist(IpAddress,String,UserDto)
+	{POST [/admin/ip-geo/ip/whitelist]}: addIpToWhitelist(IpAddress,String,UserDto)
+	{GET [/admin/ip-geo/ip/status/{ipAddress}]}: getIpStatus(String,String,UserDto)
+	{DELETE [/admin/ip-geo/ip/whitelist/{ipAddress}]}: removeIpFromWhitelist(String,String,UserDto)
+	{DELETE [/admin/ip-geo/geo/blacklist/{countryCode}]}: removeCountryFromBlacklist(String,String,UserDto)
+	{POST [/admin/ip-geo/geo/whitelist]}: addCountryToWhitelist(CountryCode,String,UserDto)
+	{DELETE [/admin/ip-geo/geo/whitelist/{countryCode}]}: removeCountryFromWhitelist(String,String,UserDto)
+	{POST [/admin/ip-geo/geo/blacklist]}: addCountryToBlacklist(CountryCode,String,UserDto)
+	{DELETE [/admin/ip-geo/ip/blacklist/{ipAddress}]}: removeIpFromBlacklist(String,String,UserDto)
+2025-11-21 20:14:19 [main] DEBUG [Mappings] - 
 	o.s.b.a.w.s.e.BasicErrorController:
 	{ [/error]}: error(HttpServletRequest)
 	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
-2025-11-14 19:36:39 [main] DEBUG [Mappings] - 'beanNameHandlerMapping' {}
-2025-11-14 19:36:39 [main] DEBUG [Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
-2025-11-14 19:36:41 [main] DEBUG [Loggers] - Using Slf4j logging framework
-2025-11-14 19:36:42 [main] INFO  [SecurityApplication] - Started SecurityApplication in 17.576 seconds (process running for 18.244)
-2025-11-14 19:36:56 [http-nio-8083-exec-2] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Processing request: /auth/login
-2025-11-14 19:36:56 [http-nio-8083-exec-2] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Skipping JWT validation for public endpoint: /auth/login
-2025-11-14 19:36:56 [http-nio-8083-exec-2] INFO  [LoggingServiceImp] - [security] AuthController - Login API calling... by user: HuyS1
-2025-11-14 19:36:56 [http-nio-8083-exec-2] INFO  [LoggingServiceImp] - [security] AuthService - Login attempt for username: HuyS1
-2025-11-14 19:36:56 [http-nio-8083-exec-2] INFO  [LoggingServiceImp] - [security] AuthController - User logged in successfully: HuyS1
-2025-11-14 19:38:00 [scheduling-1] INFO  [LoggingServiceImp] - [security] PendingUserTimeoutService - Starting scheduled check for PENDING user timeout...
-2025-11-14 19:38:00 [scheduling-1] INFO  [LoggingServiceImp] - [security] PendingUserTimeoutService - No PENDING users found
-2025-11-14 19:38:35 [http-nio-8083-exec-5] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Processing request: /auth/register
-2025-11-14 19:38:35 [http-nio-8083-exec-5] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Skipping JWT validation for public endpoint: /auth/register
-2025-11-14 19:40:00 [scheduling-1] INFO  [LoggingServiceImp] - [security] PendingUserTimeoutService - Starting scheduled check for PENDING user timeout...
-2025-11-14 19:40:00 [scheduling-1] INFO  [LoggingServiceImp] - [security] PendingUserTimeoutService - No PENDING users found
-2025-11-14 19:42:00 [scheduling-1] INFO  [LoggingServiceImp] - [security] PendingUserTimeoutService - Starting scheduled check for PENDING user timeout...
-2025-11-14 19:42:00 [scheduling-1] INFO  [LoggingServiceImp] - [security] PendingUserTimeoutService - No PENDING users found
-2025-11-14 19:44:00 [scheduling-1] INFO  [LoggingServiceImp] - [security] PendingUserTimeoutService - Starting scheduled check for PENDING user timeout...
-2025-11-14 19:44:00 [scheduling-1] INFO  [LoggingServiceImp] - [security] PendingUserTimeoutService - No PENDING users found
-2025-11-14 19:50:47 [background-preinit] DEBUG [logging] - Logging Provider: org.jboss.logging.Slf4jLoggerProvider found via system property
-2025-11-14 19:50:47 [main] INFO  [SecurityApplication] - Starting SecurityApplication using Java 17.0.16 with PID 14164 (D:\project IntelliJ Ultimate\modules-parent\security\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\security)
-2025-11-14 19:50:47 [main] DEBUG [SecurityApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
-2025-11-14 19:50:47 [main] INFO  [SecurityApplication] - No active profile set, falling back to 1 default profile: "default"
-2025-11-14 19:50:49 [main] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
-2025-11-14 19:50:49 [main] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
-2025-11-14 19:50:49 [main] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
-2025-11-14 19:50:49 [main] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
-2025-11-14 19:50:49 [main] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
-2025-11-14 19:50:49 [main] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
-2025-11-14 19:50:49 [main] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
-2025-11-14 19:50:49 [main] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
-2025-11-14 19:50:49 [main] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
-2025-11-14 19:50:49 [main] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
-2025-11-14 19:50:49 [main] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
-2025-11-14 19:50:49 [main] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
-2025-11-14 19:50:54 [main] DEBUG [InternalLoggerFactory] - Using SLF4J as the default logging framework
-2025-11-14 19:50:57 [main] WARN  [deprecation] - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-11-14 19:51:04 [main] WARN  [JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-11-14 19:51:05 [main] DEBUG [JwtAuthFilter] - Filter 'jwtAuthFilter' configured for use
-2025-11-14 19:51:05 [main] WARN  [InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer] - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
-2025-11-14 19:51:06 [main] DEBUG [Mappings] - 
+2025-11-21 20:14:19 [main] DEBUG [Mappings] - 'beanNameHandlerMapping' {}
+2025-11-21 20:14:19 [main] DEBUG [Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
+2025-11-21 20:14:21 [main] DEBUG [Loggers] - Using Slf4j logging framework
+2025-11-21 20:14:24 [main] INFO  [SecurityApplication] - Started SecurityApplication in 27.158 seconds (process running for 28.461)
+2025-11-21 20:16:00 [scheduling-1] INFO  [LoggingServiceImp] - [security] PendingUserTimeoutService - Starting scheduled check for PENDING user timeout...
+2025-11-21 20:16:00 [scheduling-1] INFO  [LoggingServiceImp] - [security] PendingUserTimeoutService - No PENDING users found
+2025-11-21 20:18:00 [scheduling-1] INFO  [LoggingServiceImp] - [security] PendingUserTimeoutService - Starting scheduled check for PENDING user timeout...
+2025-11-21 20:18:00 [scheduling-1] INFO  [LoggingServiceImp] - [security] PendingUserTimeoutService - No PENDING users found
+2025-11-21 20:20:00 [scheduling-1] INFO  [LoggingServiceImp] - [security] PendingUserTimeoutService - Starting scheduled check for PENDING user timeout...
+2025-11-21 20:20:00 [scheduling-1] INFO  [LoggingServiceImp] - [security] PendingUserTimeoutService - No PENDING users found
+2025-11-21 20:22:00 [scheduling-1] INFO  [LoggingServiceImp] - [security] PendingUserTimeoutService - Starting scheduled check for PENDING user timeout...
+2025-11-21 20:22:00 [scheduling-1] INFO  [LoggingServiceImp] - [security] PendingUserTimeoutService - No PENDING users found
+2025-11-21 20:24:00 [scheduling-1] INFO  [LoggingServiceImp] - [security] PendingUserTimeoutService - Starting scheduled check for PENDING user timeout...
+2025-11-21 20:24:00 [scheduling-1] INFO  [LoggingServiceImp] - [security] PendingUserTimeoutService - No PENDING users found
+2025-11-21 20:30:44 [background-preinit] DEBUG [logging] - Logging Provider: org.jboss.logging.Slf4jLoggerProvider found via system property
+2025-11-21 20:30:44 [main] INFO  [SecurityApplication] - Starting SecurityApplication using Java 17.0.16 with PID 14400 (D:\project IntelliJ Ultimate\modules-parent\security\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\security)
+2025-11-21 20:30:44 [main] DEBUG [SecurityApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
+2025-11-21 20:30:44 [main] INFO  [SecurityApplication] - No active profile set, falling back to 1 default profile: "default"
+2025-11-21 20:30:47 [main] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
+2025-11-21 20:30:47 [main] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
+2025-11-21 20:30:47 [main] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
+2025-11-21 20:30:47 [main] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
+2025-11-21 20:30:47 [main] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
+2025-11-21 20:30:47 [main] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
+2025-11-21 20:30:47 [main] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
+2025-11-21 20:30:47 [main] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
+2025-11-21 20:30:47 [main] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
+2025-11-21 20:30:47 [main] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
+2025-11-21 20:30:47 [main] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
+2025-11-21 20:30:47 [main] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
+2025-11-21 20:30:51 [main] DEBUG [InternalLoggerFactory] - Using SLF4J as the default logging framework
+2025-11-21 20:30:55 [main] WARN  [JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-11-21 20:30:59 [main] WARN  [deprecation] - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-11-21 20:31:05 [main] DEBUG [IpGeoBlockingFilter] - Filter 'ipGeoBlockingFilter' configured for use
+2025-11-21 20:31:05 [main] DEBUG [JwtAuthFilter] - Filter 'jwtAuthFilter' configured for use
+2025-11-21 20:31:05 [main] WARN  [InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer] - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2025-11-21 20:31:06 [main] DEBUG [Mappings] - 
+	c.s.c.AuthController:
+	{POST [/auth/register]}: register(Register,String)
+	{POST [/auth/login]}: login(Login,String)
+	{POST [/auth/refresh]}: refreshToken(String,String)
+	{GET [/auth/decode]}: decodeToken(String,String)
+	{POST [/auth/internal/users/batch]}: getUsersByIds(Map)
+	{GET [/auth/validate]}: validateToken(String,String)
+	{DELETE [/auth/internal/users/delete]}: deleteUser(List)
+	{PATCH [/auth/internal/users/disable]}: disableUsers(List,String)
+	{POST [/auth/internal/users/update]}: updateUser(UpdateUserDto)
+	{GET [/auth/check-status]}: checkAccountStatus(String,String)
+	{POST [/auth/internal/ip/track-violation]}: trackIpViolation(Map)
+	{PATCH [/auth/internal/users/enable]}: enableUsers(List,String)
+	{POST [/auth/logout]}: logout(String,String)
+2025-11-21 20:31:06 [main] DEBUG [Mappings] - 
+	c.s.c.IpGeoManagementController:
+	{GET [/admin/ip-geo/ip/status/{ipAddress}]}: getIpStatus(String,String,UserDto)
+	{POST [/admin/ip-geo/ip/whitelist]}: addIpToWhitelist(IpAddress,String,UserDto)
+	{POST [/admin/ip-geo/ip/blacklist]}: addIpToBlacklist(IpAddress,String,UserDto)
+	{DELETE [/admin/ip-geo/ip/whitelist/{ipAddress}]}: removeIpFromWhitelist(String,String,UserDto)
+	{DELETE [/admin/ip-geo/ip/blacklist/{ipAddress}]}: removeIpFromBlacklist(String,String,UserDto)
+	{POST [/admin/ip-geo/geo/whitelist]}: addCountryToWhitelist(CountryCode,String,UserDto)
+	{DELETE [/admin/ip-geo/geo/whitelist/{countryCode}]}: removeCountryFromWhitelist(String,String,UserDto)
+	{POST [/admin/ip-geo/geo/blacklist]}: addCountryToBlacklist(CountryCode,String,UserDto)
+	{DELETE [/admin/ip-geo/geo/blacklist/{countryCode}]}: removeCountryFromBlacklist(String,String,UserDto)
+2025-11-21 20:31:06 [main] DEBUG [Mappings] - 
+	o.s.b.a.w.s.e.BasicErrorController:
+	{ [/error]}: error(HttpServletRequest)
+	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
+2025-11-21 20:31:06 [main] DEBUG [Mappings] - 'beanNameHandlerMapping' {}
+2025-11-21 20:31:06 [main] DEBUG [Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
+2025-11-21 20:31:09 [main] DEBUG [Loggers] - Using Slf4j logging framework
+2025-11-21 20:31:12 [main] INFO  [SecurityApplication] - Started SecurityApplication in 28.315 seconds (process running for 29.378)
+2025-11-21 20:31:15 [http-nio-8083-exec-1] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Processing request: /auth/register
+2025-11-21 20:31:15 [http-nio-8083-exec-1] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Skipping JWT validation for public endpoint: /auth/register
+2025-11-21 20:31:15 [http-nio-8083-exec-1] DEBUG [LoggingServiceImp] - [security] IpGeoBlockingFilter - Bypassing IP/Geo blocking for endpoint: /auth/register
+2025-11-21 21:32:21 [background-preinit] DEBUG [logging] - Logging Provider: org.jboss.logging.Slf4jLoggerProvider found via system property
+2025-11-21 21:32:21 [main] INFO  [SecurityApplication] - Starting SecurityApplication using Java 17.0.16 with PID 15376 (D:\project IntelliJ Ultimate\modules-parent\security\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\security)
+2025-11-21 21:32:21 [main] DEBUG [SecurityApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
+2025-11-21 21:32:21 [main] INFO  [SecurityApplication] - No active profile set, falling back to 1 default profile: "default"
+2025-11-21 21:32:24 [main] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
+2025-11-21 21:32:24 [main] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
+2025-11-21 21:32:24 [main] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
+2025-11-21 21:32:24 [main] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
+2025-11-21 21:32:24 [main] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
+2025-11-21 21:32:24 [main] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
+2025-11-21 21:32:24 [main] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
+2025-11-21 21:32:24 [main] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
+2025-11-21 21:32:24 [main] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
+2025-11-21 21:32:24 [main] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
+2025-11-21 21:32:24 [main] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
+2025-11-21 21:32:24 [main] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
+2025-11-21 21:32:29 [main] DEBUG [InternalLoggerFactory] - Using SLF4J as the default logging framework
+2025-11-21 21:32:32 [main] WARN  [JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-11-21 21:32:35 [main] WARN  [deprecation] - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-11-21 21:32:40 [main] DEBUG [IpGeoBlockingFilter] - Filter 'ipGeoBlockingFilter' configured for use
+2025-11-21 21:32:40 [main] DEBUG [JwtAuthFilter] - Filter 'jwtAuthFilter' configured for use
+2025-11-21 21:32:41 [main] WARN  [InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer] - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2025-11-21 21:32:41 [main] DEBUG [Mappings] - 
 	c.s.c.AuthController:
 	{POST [/auth/register]}: register(Register,String)
 	{POST [/auth/logout]}: logout(String,String)
-	{POST [/auth/login]}: login(Login,String)
-	{POST [/auth/refresh]}: refreshToken(String,String)
+	{GET [/auth/decode]}: decodeToken(String,String)
 	{GET [/auth/validate]}: validateToken(String,String)
 	{POST [/auth/internal/users/batch]}: getUsersByIds(Map)
-	{GET [/auth/decode]}: decodeToken(String,String)
-	{DELETE [/auth/internal/users/delete]}: deleteUser(List)
+	{POST [/auth/refresh]}: refreshToken(String,String)
 	{PATCH [/auth/internal/users/disable]}: disableUsers(List,String)
 	{POST [/auth/internal/users/update]}: updateUser(UpdateUserDto)
+	{DELETE [/auth/internal/users/delete]}: deleteUser(List)
+	{POST [/auth/internal/ip/track-violation]}: trackIpViolation(Map)
 	{PATCH [/auth/internal/users/enable]}: enableUsers(List,String)
 	{GET [/auth/check-status]}: checkAccountStatus(String,String)
-2025-11-14 19:51:06 [main] DEBUG [Mappings] - 
+	{POST [/auth/login]}: login(Login,String)
+2025-11-21 21:32:41 [main] DEBUG [Mappings] - 
+	c.s.c.IpGeoManagementController:
+	{POST [/admin/ip-geo/ip/blacklist]}: addIpToBlacklist(IpAddress,String)
+	{POST [/admin/ip-geo/ip/whitelist]}: addIpToWhitelist(IpAddress,String)
+	{GET [/admin/ip-geo/ip/status/{ipAddress}]}: getIpStatus(String,String)
+	{DELETE [/admin/ip-geo/geo/whitelist/{countryCode}]}: removeCountryFromWhitelist(String,String)
+	{POST [/admin/ip-geo/geo/blacklist]}: addCountryToBlacklist(CountryCode,String)
+	{DELETE [/admin/ip-geo/ip/whitelist/{ipAddress}]}: removeIpFromWhitelist(String,String)
+	{DELETE [/admin/ip-geo/ip/blacklist/{ipAddress}]}: removeIpFromBlacklist(String,String)
+	{DELETE [/admin/ip-geo/geo/blacklist/{countryCode}]}: removeCountryFromBlacklist(String,String)
+	{POST [/admin/ip-geo/geo/whitelist]}: addCountryToWhitelist(CountryCode,String)
+2025-11-21 21:32:41 [main] DEBUG [Mappings] - 
 	o.s.b.a.w.s.e.BasicErrorController:
 	{ [/error]}: error(HttpServletRequest)
 	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
-2025-11-14 19:51:06 [main] DEBUG [Mappings] - 'beanNameHandlerMapping' {}
-2025-11-14 19:51:07 [main] DEBUG [Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
-2025-11-14 19:51:11 [main] DEBUG [Loggers] - Using Slf4j logging framework
-2025-11-14 19:51:14 [main] INFO  [SecurityApplication] - Started SecurityApplication in 27.897 seconds (process running for 29.512)
-2025-11-14 19:52:00 [scheduling-1] INFO  [LoggingServiceImp] - [security] PendingUserTimeoutService - Starting scheduled check for PENDING user timeout...
-2025-11-14 19:52:01 [scheduling-1] INFO  [LoggingServiceImp] - [security] PendingUserTimeoutService - No PENDING users found
-2025-11-14 19:52:45 [http-nio-8083-exec-4] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Processing request: /auth/register
-2025-11-14 19:52:45 [http-nio-8083-exec-4] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Skipping JWT validation for public endpoint: /auth/register
-2025-11-14 19:54:00 [scheduling-1] INFO  [LoggingServiceImp] - [security] PendingUserTimeoutService - Starting scheduled check for PENDING user timeout...
-2025-11-14 19:54:00 [scheduling-1] INFO  [LoggingServiceImp] - [security] PendingUserTimeoutService - No PENDING users found
-2025-11-14 19:56:00 [scheduling-1] INFO  [LoggingServiceImp] - [security] PendingUserTimeoutService - Starting scheduled check for PENDING user timeout...
-2025-11-14 19:56:00 [scheduling-1] INFO  [LoggingServiceImp] - [security] PendingUserTimeoutService - No PENDING users found
-2025-11-14 20:30:28 [background-preinit] DEBUG [logging] - Logging Provider: org.jboss.logging.Slf4jLoggerProvider found via system property
-2025-11-14 20:30:28 [main] INFO  [SecurityApplication] - Starting SecurityApplication using Java 17.0.16 with PID 10988 (D:\project IntelliJ Ultimate\modules-parent\security\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\security)
-2025-11-14 20:30:28 [main] DEBUG [SecurityApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
-2025-11-14 20:30:28 [main] INFO  [SecurityApplication] - No active profile set, falling back to 1 default profile: "default"
-2025-11-14 20:30:33 [main] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
-2025-11-14 20:30:33 [main] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
-2025-11-14 20:30:33 [main] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
-2025-11-14 20:30:33 [main] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
-2025-11-14 20:30:33 [main] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
-2025-11-14 20:30:33 [main] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
-2025-11-14 20:30:33 [main] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
-2025-11-14 20:30:33 [main] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
-2025-11-14 20:30:34 [main] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
-2025-11-14 20:30:34 [main] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
-2025-11-14 20:30:34 [main] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
-2025-11-14 20:30:34 [main] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
-2025-11-14 20:30:43 [main] DEBUG [InternalLoggerFactory] - Using SLF4J as the default logging framework
-2025-11-14 20:30:49 [main] WARN  [deprecation] - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-11-14 20:31:08 [main] WARN  [JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-11-14 20:31:09 [main] DEBUG [JwtAuthFilter] - Filter 'jwtAuthFilter' configured for use
-2025-11-14 20:31:11 [main] WARN  [InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer] - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
-2025-11-14 20:31:14 [main] DEBUG [Mappings] - 
-	c.s.c.AuthController:
-	{POST [/auth/register]}: register(Register,String)
-	{POST [/auth/logout]}: logout(String,String)
-	{GET [/auth/decode]}: decodeToken(String,String)
-	{POST [/auth/internal/users/update]}: updateUser(UpdateUserDto)
-	{POST [/auth/internal/users/batch]}: getUsersByIds(Map)
-	{GET [/auth/validate]}: validateToken(String,String)
-	{GET [/auth/check-status]}: checkAccountStatus(String,String)
-	{DELETE [/auth/internal/users/delete]}: deleteUser(List)
-	{PATCH [/auth/internal/users/disable]}: disableUsers(List,String)
-	{PATCH [/auth/internal/users/enable]}: enableUsers(List,String)
-	{POST [/auth/refresh]}: refreshToken(String,String)
-	{POST [/auth/login]}: login(Login,String)
-2025-11-14 20:31:14 [main] DEBUG [Mappings] - 
-	o.s.b.a.w.s.e.BasicErrorController:
-	{ [/error]}: error(HttpServletRequest)
-	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
-2025-11-14 20:31:14 [main] DEBUG [Mappings] - 'beanNameHandlerMapping' {}
-2025-11-14 20:31:15 [main] DEBUG [Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
-2025-11-14 20:31:23 [main] DEBUG [Loggers] - Using Slf4j logging framework
-2025-11-14 20:31:28 [main] INFO  [SecurityApplication] - Started SecurityApplication in 60.822 seconds (process running for 62.679)
-2025-11-14 20:31:53 [background-preinit] DEBUG [logging] - Logging Provider: org.jboss.logging.Slf4jLoggerProvider found via system property
-2025-11-14 20:31:53 [main] INFO  [SecurityApplication] - Starting SecurityApplication using Java 17.0.16 with PID 6720 (D:\project IntelliJ Ultimate\modules-parent\security\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\security)
-2025-11-14 20:31:53 [main] DEBUG [SecurityApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
-2025-11-14 20:31:53 [main] INFO  [SecurityApplication] - No active profile set, falling back to 1 default profile: "default"
-2025-11-14 20:31:55 [main] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
-2025-11-14 20:31:56 [main] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
-2025-11-14 20:31:56 [main] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
-2025-11-14 20:31:56 [main] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
-2025-11-14 20:31:56 [main] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
-2025-11-14 20:31:56 [main] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
-2025-11-14 20:31:56 [main] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
-2025-11-14 20:31:56 [main] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
-2025-11-14 20:31:56 [main] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
-2025-11-14 20:31:56 [main] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
-2025-11-14 20:31:56 [main] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
-2025-11-14 20:31:56 [main] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
-2025-11-14 20:32:00 [main] DEBUG [InternalLoggerFactory] - Using SLF4J as the default logging framework
-2025-11-14 20:32:02 [main] WARN  [deprecation] - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-11-14 20:32:07 [main] WARN  [JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-11-14 20:32:08 [main] DEBUG [JwtAuthFilter] - Filter 'jwtAuthFilter' configured for use
-2025-11-14 20:32:08 [main] WARN  [InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer] - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
-2025-11-14 20:32:09 [main] DEBUG [Mappings] - 
-	c.s.c.AuthController:
-	{POST [/auth/register]}: register(Register,String)
-	{POST [/auth/logout]}: logout(String,String)
-	{POST [/auth/refresh]}: refreshToken(String,String)
-	{POST [/auth/login]}: login(Login,String)
-	{GET [/auth/validate]}: validateToken(String,String)
-	{GET [/auth/decode]}: decodeToken(String,String)
-	{POST [/auth/internal/users/update]}: updateUser(UpdateUserDto)
-	{POST [/auth/internal/users/batch]}: getUsersByIds(Map)
-	{GET [/auth/check-status]}: checkAccountStatus(String,String)
-	{PATCH [/auth/internal/users/enable]}: enableUsers(List,String)
-	{DELETE [/auth/internal/users/delete]}: deleteUser(List)
-	{PATCH [/auth/internal/users/disable]}: disableUsers(List,String)
-2025-11-14 20:32:09 [main] DEBUG [Mappings] - 
-	o.s.b.a.w.s.e.BasicErrorController:
-	{ [/error]}: error(HttpServletRequest)
-	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
-2025-11-14 20:32:09 [main] DEBUG [Mappings] - 'beanNameHandlerMapping' {}
-2025-11-14 20:32:09 [main] DEBUG [Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
-2025-11-14 20:32:11 [main] DEBUG [Loggers] - Using Slf4j logging framework
-2025-11-14 20:32:14 [main] INFO  [SecurityApplication] - Started SecurityApplication in 21.81 seconds (process running for 23.181)
-2025-11-14 20:32:25 [http-nio-8083-exec-5] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Processing request: /auth/register
-2025-11-14 20:32:26 [http-nio-8083-exec-5] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Skipping JWT validation for public endpoint: /auth/register
-2025-11-14 20:32:29 [http-nio-8083-exec-5] INFO  [LoggingServiceImp] - [security] AuthController - Register API Calling... by user: HuyT1
-2025-11-14 20:32:33 [http-nio-8083-exec-5] INFO  [LoggingServiceImp] - [security] AuthService - Register attempt for username: HuyT1
-2025-11-14 20:32:38 [http-nio-8083-exec-5] INFO  [LoggingServiceImp] - [security] AuthService - Username exists with FAILED status, allowing re-registration by reusing userId: 6
-2025-11-14 20:32:39 [http-nio-8083-exec-5] INFO  [LoggingServiceImp] - [security] AuthService - Reusing existing userId: 6 for re-registration
-2025-11-14 20:32:40 [http-nio-8083-exec-5] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - userEvent sent to topic: user-events - with entity id: [6]
-2025-11-14 20:32:40 [kafka-producer-network-thread | security-producer-1] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - Message sent successfully to topic: user-events, partition: 0, offset: 48, key: [6]
-2025-11-14 20:32:41 [http-nio-8083-exec-5] INFO  [LoggingServiceImp] - [security] AuthController - User registered successfully: HuyT1
-2025-11-14 20:33:54 [http-nio-8083-exec-9] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Processing request: /auth/check-status
-2025-11-14 20:33:54 [http-nio-8083-exec-9] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Extracted username from JWT: HuyT1
-2025-11-14 20:33:54 [http-nio-8083-exec-9] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Successfully authenticated user: HuyT1
-2025-11-14 20:33:54 [http-nio-8083-exec-9] INFO  [LoggingServiceImp] - [security] AuthController - checkAccountStatus API Calling...
-2025-11-14 20:33:54 [LoginEvent-1] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - userEvent sent to topic: user-events - with entity id: [6]
-2025-11-14 20:33:54 [LoginEvent-1] INFO  [LoggingServiceImp] - [security] AsyncService - Login event sent successfully for user: HuyT1
-2025-11-14 20:33:54 [kafka-producer-network-thread | security-producer-1] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - Message sent successfully to topic: user-events, partition: 0, offset: 49, key: [6]
-2025-11-14 20:33:54 [http-nio-8083-exec-9] INFO  [LoggingServiceImp] - [security] AuthController - Account status checked for user: HuyT1
-2025-11-14 20:34:00 [scheduling-1] INFO  [LoggingServiceImp] - [security] PendingUserTimeoutService - Starting scheduled check for PENDING user timeout...
-2025-11-14 20:34:00 [scheduling-1] INFO  [LoggingServiceImp] - [security] PendingUserTimeoutService - Found 1 PENDING users to check
-2025-11-14 20:34:00 [scheduling-1] INFO  [LoggingServiceImp] - [security] PendingUserTimeoutService - All PENDING users are within timeout threshold
-2025-11-14 20:35:00 [http-nio-8083-exec-7] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Processing request: /auth/check-status
-2025-11-14 20:35:00 [http-nio-8083-exec-7] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Extracted username from JWT: HuyT1
-2025-11-14 20:35:00 [http-nio-8083-exec-7] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Successfully authenticated user: HuyT1
-2025-11-14 20:35:00 [LoginEvent-2] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - userEvent sent to topic: user-events - with entity id: [6]
-2025-11-14 20:35:00 [http-nio-8083-exec-7] INFO  [LoggingServiceImp] - [security] AuthController - checkAccountStatus API Calling...
-2025-11-14 20:35:00 [LoginEvent-2] INFO  [LoggingServiceImp] - [security] AsyncService - Login event sent successfully for user: HuyT1
-2025-11-14 20:35:00 [kafka-producer-network-thread | security-producer-1] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - Message sent successfully to topic: user-events, partition: 0, offset: 50, key: [6]
-2025-11-14 20:35:00 [http-nio-8083-exec-7] INFO  [LoggingServiceImp] - [security] AuthController - Account status checked for user: HuyT1
-2025-11-14 20:36:00 [scheduling-1] INFO  [LoggingServiceImp] - [security] PendingUserTimeoutService - Starting scheduled check for PENDING user timeout...
-2025-11-14 20:36:00 [scheduling-1] INFO  [LoggingServiceImp] - [security] PendingUserTimeoutService - Found 1 PENDING users to check
-2025-11-14 20:36:00 [scheduling-1] INFO  [LoggingServiceImp] - [security] PendingUserTimeoutService - All PENDING users are within timeout threshold
-2025-11-14 20:36:01 [http-nio-8083-exec-10] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Processing request: /auth/check-status
-2025-11-14 20:36:01 [http-nio-8083-exec-10] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Extracted username from JWT: HuyT1
-2025-11-14 20:36:01 [http-nio-8083-exec-10] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Successfully authenticated user: HuyT1
-2025-11-14 20:36:01 [LoginEvent-1] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - userEvent sent to topic: user-events - with entity id: [6]
-2025-11-14 20:36:01 [LoginEvent-1] INFO  [LoggingServiceImp] - [security] AsyncService - Login event sent successfully for user: HuyT1
-2025-11-14 20:36:01 [http-nio-8083-exec-10] INFO  [LoggingServiceImp] - [security] AuthController - checkAccountStatus API Calling...
-2025-11-14 20:36:01 [kafka-producer-network-thread | security-producer-1] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - Message sent successfully to topic: user-events, partition: 0, offset: 51, key: [6]
-2025-11-14 20:36:01 [http-nio-8083-exec-10] INFO  [LoggingServiceImp] - [security] AuthController - Account status checked for user: HuyT1
-2025-11-14 20:36:18 [http-nio-8083-exec-2] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Processing request: /auth/internal/users/disable
-2025-11-14 20:36:18 [http-nio-8083-exec-2] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Skipping JWT validation for public endpoint: /auth/internal/users/disable
-2025-11-14 20:36:18 [http-nio-8083-exec-2] INFO  [LoggingServiceImp] - [security] AuthController - Disabled user with id: 6
-2025-11-14 20:36:29 [http-nio-8083-exec-1] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Processing request: /auth/register
-2025-11-14 20:36:29 [http-nio-8083-exec-1] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Skipping JWT validation for public endpoint: /auth/register
-2025-11-14 20:36:31 [http-nio-8083-exec-1] INFO  [LoggingServiceImp] - [security] AuthController - Register API Calling... by user: HuyT1
-2025-11-14 20:36:33 [http-nio-8083-exec-1] INFO  [LoggingServiceImp] - [security] AuthService - Register attempt for username: HuyT1
-2025-11-14 20:36:33 [http-nio-8083-exec-1] DEBUG [LoggingServiceImp] - [security] AuthService - Username already exists with active status
-2025-11-14 20:37:10 [http-nio-8083-exec-5] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Processing request: /auth/register
-2025-11-14 20:37:10 [http-nio-8083-exec-5] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Skipping JWT validation for public endpoint: /auth/register
-2025-11-14 20:37:12 [http-nio-8083-exec-5] INFO  [LoggingServiceImp] - [security] AuthController - Register API Calling... by user: HuyT1
-2025-11-14 20:37:19 [http-nio-8083-exec-5] INFO  [LoggingServiceImp] - [security] AuthService - Register attempt for username: HuyT1
-2025-11-14 20:37:52 [http-nio-8083-exec-5] DEBUG [LoggingServiceImp] - [security] AuthService - Username already exists with active status
-2025-11-14 20:38:00 [scheduling-1] INFO  [LoggingServiceImp] - [security] PendingUserTimeoutService - Starting scheduled check for PENDING user timeout...
-2025-11-14 20:38:00 [scheduling-1] INFO  [LoggingServiceImp] - [security] PendingUserTimeoutService - No PENDING users found
-2025-11-14 20:39:40 [http-nio-8083-exec-9] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Processing request: /auth/register
-2025-11-14 20:39:40 [http-nio-8083-exec-9] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Skipping JWT validation for public endpoint: /auth/register
-2025-11-14 20:39:41 [http-nio-8083-exec-9] INFO  [LoggingServiceImp] - [security] AuthController - Register API Calling... by user: HuyT1
-2025-11-14 20:39:43 [http-nio-8083-exec-9] INFO  [LoggingServiceImp] - [security] AuthService - Register attempt for username: HuyT1
-2025-11-14 20:39:57 [http-nio-8083-exec-9] INFO  [LoggingServiceImp] - [security] AuthService - Username exists with FAILED status, allowing re-registration by reusing userId: 6
-2025-11-14 20:40:00 [scheduling-1] INFO  [LoggingServiceImp] - [security] PendingUserTimeoutService - Starting scheduled check for PENDING user timeout...
-2025-11-14 20:40:00 [scheduling-1] INFO  [LoggingServiceImp] - [security] PendingUserTimeoutService - No PENDING users found
-2025-11-14 20:40:05 [http-nio-8083-exec-9] INFO  [LoggingServiceImp] - [security] AuthService - Reusing existing userId: 6 for re-registration
-2025-11-14 20:40:07 [kafka-producer-network-thread | security-producer-1] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - Message sent successfully to topic: user-events, partition: 0, offset: 52, key: [6]
-2025-11-14 20:40:07 [http-nio-8083-exec-9] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - userEvent sent to topic: user-events - with entity id: [6]
-2025-11-14 20:40:10 [http-nio-8083-exec-9] INFO  [LoggingServiceImp] - [security] AuthController - User registered successfully: HuyT1
-2025-11-14 20:40:47 [org.springframework.kafka.KafkaListenerEndpointContainer#1-0-C-1] INFO  [LoggingServiceImp] - [security] ConsumerService - Successfully processed user create profile with user id: 6
-2025-11-14 20:41:18 [http-nio-8083-exec-7] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Processing request: /auth/check-status
-2025-11-14 20:41:18 [http-nio-8083-exec-7] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Extracted username from JWT: HuyT1
-2025-11-14 20:41:18 [http-nio-8083-exec-7] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Successfully authenticated user: HuyT1
-2025-11-14 20:41:18 [LoginEvent-2] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - userEvent sent to topic: user-events - with entity id: [6]
-2025-11-14 20:41:18 [LoginEvent-2] INFO  [LoggingServiceImp] - [security] AsyncService - Login event sent successfully for user: HuyT1
-2025-11-14 20:41:18 [http-nio-8083-exec-7] INFO  [LoggingServiceImp] - [security] AuthController - checkAccountStatus API Calling...
-2025-11-14 20:41:18 [kafka-producer-network-thread | security-producer-1] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - Message sent successfully to topic: user-events, partition: 0, offset: 53, key: [6]
-2025-11-14 20:41:18 [http-nio-8083-exec-7] INFO  [LoggingServiceImp] - [security] AuthController - Account status checked for user: HuyT1
-2025-11-14 20:41:50 [http-nio-8083-exec-10] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Processing request: /auth/validate
-2025-11-14 20:41:50 [http-nio-8083-exec-10] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Extracted username from JWT: HuyT1
-2025-11-14 20:41:51 [http-nio-8083-exec-10] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Successfully authenticated user: HuyT1
-2025-11-14 20:41:51 [LoginEvent-1] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - userEvent sent to topic: user-events - with entity id: [6]
-2025-11-14 20:41:51 [LoginEvent-1] INFO  [LoggingServiceImp] - [security] AsyncService - Login event sent successfully for user: HuyT1
-2025-11-14 20:41:51 [http-nio-8083-exec-10] INFO  [LoggingServiceImp] - [security] AuthController - validate API Calling...
-2025-11-14 20:41:51 [kafka-producer-network-thread | security-producer-1] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - Message sent successfully to topic: user-events, partition: 0, offset: 54, key: [6]
-2025-11-14 20:41:51 [http-nio-8083-exec-10] INFO  [LoggingServiceImp] - [security] AuthController - Token validated successfully for user: HuyT1
-2025-11-14 20:42:00 [scheduling-1] INFO  [LoggingServiceImp] - [security] PendingUserTimeoutService - Starting scheduled check for PENDING user timeout...
-2025-11-14 20:42:00 [scheduling-1] INFO  [LoggingServiceImp] - [security] PendingUserTimeoutService - No PENDING users found
-2025-11-14 20:42:59 [http-nio-8083-exec-5] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Processing request: /auth/internal/users/batch
-2025-11-14 20:43:00 [http-nio-8083-exec-5] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Skipping JWT validation for public endpoint: /auth/internal/users/batch
-2025-11-14 20:43:01 [http-nio-8083-exec-5] INFO  [LoggingServiceImp] - [security] AuthController - Batch getting users, count: 1
-2025-11-14 20:43:01 [http-nio-8083-exec-5] INFO  [LoggingServiceImp] - [security] AuthController - Successfully retrieved 1 users
-2025-11-14 20:44:00 [scheduling-1] INFO  [LoggingServiceImp] - [security] PendingUserTimeoutService - Starting scheduled check for PENDING user timeout...
-2025-11-14 20:44:00 [scheduling-1] INFO  [LoggingServiceImp] - [security] PendingUserTimeoutService - No PENDING users found
-2025-11-14 20:45:04 [http-nio-8083-exec-9] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Processing request: /auth/register
-2025-11-14 20:45:04 [http-nio-8083-exec-9] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Skipping JWT validation for public endpoint: /auth/register
-2025-11-14 20:45:05 [http-nio-8083-exec-9] INFO  [LoggingServiceImp] - [security] AuthController - Register API Calling... by user: HuyT2
-2025-11-14 20:45:06 [http-nio-8083-exec-9] INFO  [LoggingServiceImp] - [security] AuthService - Register attempt for username: HuyT2
-2025-11-14 20:45:06 [http-nio-8083-exec-9] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - userEvent sent to topic: user-events - with entity id: [7]
-2025-11-14 20:45:06 [kafka-producer-network-thread | security-producer-1] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - Message sent successfully to topic: user-events, partition: 0, offset: 55, key: [7]
-2025-11-14 20:45:06 [http-nio-8083-exec-9] INFO  [LoggingServiceImp] - [security] AuthController - User registered successfully: HuyT2
-2025-11-14 20:45:08 [org.springframework.kafka.KafkaListenerEndpointContainer#1-0-C-1] INFO  [LoggingServiceImp] - [security] ConsumerService - Successfully processed user create profile with user id: 7
-2025-11-14 20:45:21 [http-nio-8083-exec-3] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Processing request: /auth/validate
-2025-11-14 20:45:21 [http-nio-8083-exec-3] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Extracted username from JWT: HuyT1
-2025-11-14 20:45:21 [http-nio-8083-exec-3] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Successfully authenticated user: HuyT1
-2025-11-14 20:45:21 [LoginEvent-2] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - userEvent sent to topic: user-events - with entity id: [6]
-2025-11-14 20:45:21 [LoginEvent-2] INFO  [LoggingServiceImp] - [security] AsyncService - Login event sent successfully for user: HuyT1
-2025-11-14 20:45:21 [http-nio-8083-exec-3] INFO  [LoggingServiceImp] - [security] AuthController - validate API Calling...
-2025-11-14 20:45:21 [kafka-producer-network-thread | security-producer-1] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - Message sent successfully to topic: user-events, partition: 0, offset: 56, key: [6]
-2025-11-14 20:45:21 [http-nio-8083-exec-3] INFO  [LoggingServiceImp] - [security] AuthController - Token validated successfully for user: HuyT1
-2025-11-14 20:45:39 [http-nio-8083-exec-6] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Processing request: /auth/internal/users/batch
-2025-11-14 20:45:39 [http-nio-8083-exec-6] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Skipping JWT validation for public endpoint: /auth/internal/users/batch
-2025-11-14 20:45:39 [http-nio-8083-exec-6] INFO  [LoggingServiceImp] - [security] AuthController - Batch getting users, count: 2
-2025-11-14 20:45:39 [http-nio-8083-exec-6] INFO  [LoggingServiceImp] - [security] AuthController - Successfully retrieved 2 users
-2025-11-14 20:45:52 [http-nio-8083-exec-7] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Processing request: /auth/validate
-2025-11-14 20:45:52 [http-nio-8083-exec-7] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Extracted username from JWT: HuyT1
-2025-11-14 20:45:52 [http-nio-8083-exec-7] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Successfully authenticated user: HuyT1
-2025-11-14 20:45:52 [LoginEvent-1] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - userEvent sent to topic: user-events - with entity id: [6]
-2025-11-14 20:45:52 [http-nio-8083-exec-7] INFO  [LoggingServiceImp] - [security] AuthController - validate API Calling...
-2025-11-14 20:45:52 [LoginEvent-1] INFO  [LoggingServiceImp] - [security] AsyncService - Login event sent successfully for user: HuyT1
-2025-11-14 20:45:52 [kafka-producer-network-thread | security-producer-1] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - Message sent successfully to topic: user-events, partition: 0, offset: 57, key: [6]
-2025-11-14 20:45:52 [http-nio-8083-exec-7] INFO  [LoggingServiceImp] - [security] AuthController - Token validated successfully for user: HuyT1
-2025-11-14 20:46:00 [scheduling-1] INFO  [LoggingServiceImp] - [security] PendingUserTimeoutService - Starting scheduled check for PENDING user timeout...
-2025-11-14 20:46:00 [scheduling-1] INFO  [LoggingServiceImp] - [security] PendingUserTimeoutService - No PENDING users found
-2025-11-14 20:48:00 [scheduling-1] INFO  [LoggingServiceImp] - [security] PendingUserTimeoutService - Starting scheduled check for PENDING user timeout...
-2025-11-14 20:48:00 [scheduling-1] INFO  [LoggingServiceImp] - [security] PendingUserTimeoutService - No PENDING users found
-2025-11-14 20:49:52 [http-nio-8083-exec-1] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Processing request: /auth/validate
-2025-11-14 20:49:52 [http-nio-8083-exec-1] ERROR [LoggingServiceImp] - [security] JwtAuthFilter - Error processing JWT token: JWT expired 5380690391 milliseconds ago at 2025-09-13T07:11:42.000Z. Current time: 2025-11-14T13:49:52.391Z. Allowed clock skew: 0 milliseconds.: JWT expired 5380690391 milliseconds ago at 2025-09-13T07:11:42.000Z. Current time: 2025-11-14T13:49:52.391Z. Allowed clock skew: 0 milliseconds.
-2025-11-14 20:50:00 [scheduling-1] INFO  [LoggingServiceImp] - [security] PendingUserTimeoutService - Starting scheduled check for PENDING user timeout...
-2025-11-14 20:50:00 [scheduling-1] INFO  [LoggingServiceImp] - [security] PendingUserTimeoutService - No PENDING users found
-2025-11-14 20:50:12 [http-nio-8083-exec-5] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Processing request: /auth/validate
-2025-11-14 20:50:12 [http-nio-8083-exec-5] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Extracted username from JWT: HuyT1
-2025-11-14 20:50:12 [http-nio-8083-exec-5] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Successfully authenticated user: HuyT1
-2025-11-14 20:50:12 [LoginEvent-2] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - userEvent sent to topic: user-events - with entity id: [6]
-2025-11-14 20:50:12 [LoginEvent-2] INFO  [LoggingServiceImp] - [security] AsyncService - Login event sent successfully for user: HuyT1
-2025-11-14 20:50:12 [http-nio-8083-exec-5] INFO  [LoggingServiceImp] - [security] AuthController - validate API Calling...
-2025-11-14 20:50:12 [kafka-producer-network-thread | security-producer-1] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - Message sent successfully to topic: user-events, partition: 0, offset: 58, key: [6]
-2025-11-14 20:50:12 [http-nio-8083-exec-5] INFO  [LoggingServiceImp] - [security] AuthController - Token validated successfully for user: HuyT1
-2025-11-14 20:52:00 [scheduling-1] INFO  [LoggingServiceImp] - [security] PendingUserTimeoutService - Starting scheduled check for PENDING user timeout...
-2025-11-14 20:52:00 [scheduling-1] INFO  [LoggingServiceImp] - [security] PendingUserTimeoutService - No PENDING users found
-2025-11-14 20:52:39 [http-nio-8083-exec-8] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Processing request: /auth/validate
-2025-11-14 20:52:39 [http-nio-8083-exec-8] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Extracted username from JWT: HuyT1
-2025-11-14 20:52:39 [http-nio-8083-exec-8] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Successfully authenticated user: HuyT1
-2025-11-14 20:52:39 [LoginEvent-1] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - userEvent sent to topic: user-events - with entity id: [6]
-2025-11-14 20:52:39 [http-nio-8083-exec-8] INFO  [LoggingServiceImp] - [security] AuthController - validate API Calling...
-2025-11-14 20:52:39 [LoginEvent-1] INFO  [LoggingServiceImp] - [security] AsyncService - Login event sent successfully for user: HuyT1
-2025-11-14 20:52:39 [kafka-producer-network-thread | security-producer-1] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - Message sent successfully to topic: user-events, partition: 0, offset: 59, key: [6]
-2025-11-14 20:52:39 [http-nio-8083-exec-8] INFO  [LoggingServiceImp] - [security] AuthController - Token validated successfully for user: HuyT1
-2025-11-14 20:53:11 [http-nio-8083-exec-9] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Processing request: /auth/internal/users/update
-2025-11-14 20:53:13 [http-nio-8083-exec-9] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Skipping JWT validation for public endpoint: /auth/internal/users/update
-2025-11-14 20:53:13 [http-nio-8083-exec-9] INFO  [LoggingServiceImp] - [security] AuthController - updateUser API Calling... for userId: 6
-2025-11-14 20:53:13 [http-nio-8083-exec-9] INFO  [LoggingServiceImp] - [security] AuthController - Updated user profile for userId: 6
-2025-11-14 20:53:56 [http-nio-8083-exec-3] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Processing request: /auth/validate
-2025-11-14 20:53:56 [http-nio-8083-exec-3] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Extracted username from JWT: HuyT1
-2025-11-14 20:53:56 [http-nio-8083-exec-3] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Successfully authenticated user: HuyT1
-2025-11-14 20:53:56 [LoginEvent-2] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - userEvent sent to topic: user-events - with entity id: [6]
-2025-11-14 20:53:56 [LoginEvent-2] INFO  [LoggingServiceImp] - [security] AsyncService - Login event sent successfully for user: HuyT1
-2025-11-14 20:53:56 [http-nio-8083-exec-3] INFO  [LoggingServiceImp] - [security] AuthController - validate API Calling...
-2025-11-14 20:53:56 [kafka-producer-network-thread | security-producer-1] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - Message sent successfully to topic: user-events, partition: 0, offset: 60, key: [6]
-2025-11-14 20:53:56 [http-nio-8083-exec-3] INFO  [LoggingServiceImp] - [security] AuthController - Token validated successfully for user: HuyT1
-2025-11-14 20:54:00 [scheduling-1] INFO  [LoggingServiceImp] - [security] PendingUserTimeoutService - Starting scheduled check for PENDING user timeout...
-2025-11-14 20:54:00 [scheduling-1] INFO  [LoggingServiceImp] - [security] PendingUserTimeoutService - No PENDING users found
-2025-11-14 20:54:06 [http-nio-8083-exec-6] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Processing request: /auth/internal/users/batch
-2025-11-14 20:54:06 [http-nio-8083-exec-6] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Skipping JWT validation for public endpoint: /auth/internal/users/batch
-2025-11-14 20:54:06 [http-nio-8083-exec-6] INFO  [LoggingServiceImp] - [security] AuthController - Batch getting users, count: 2
-2025-11-14 20:54:06 [http-nio-8083-exec-6] INFO  [LoggingServiceImp] - [security] AuthController - Successfully retrieved 2 users
+2025-11-21 21:32:41 [main] DEBUG [Mappings] - 'beanNameHandlerMapping' {}
+2025-11-21 21:32:41 [main] DEBUG [Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
+2025-11-21 21:32:44 [main] DEBUG [Loggers] - Using Slf4j logging framework
+2025-11-21 21:32:46 [main] INFO  [SecurityApplication] - Started SecurityApplication in 26.012 seconds (process running for 26.735)
+2025-11-21 21:32:54 [http-nio-8083-exec-3] DEBUG [LoggingServiceImp] - [security] IpGeoBlockingFilter - Checking IP/Geo blocking for IP: 127.0.0.1, URI: /admin/ip-geo/ip/whitelist
+2025-11-21 21:32:54 [http-nio-8083-exec-3] DEBUG [LoggingServiceImp] - [security] IpGeoBlockingFilter - IP/Geo check passed for IP: 127.0.0.1
+2025-11-21 21:32:54 [http-nio-8083-exec-3] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Processing request: /admin/ip-geo/ip/whitelist
+2025-11-21 21:32:54 [http-nio-8083-exec-3] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Extracted username from JWT: ADMIN
+2025-11-21 21:32:54 [http-nio-8083-exec-3] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Successfully authenticated user: ADMIN
+2025-11-21 21:32:55 [LoginEvent-1] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - userEvent sent to topic: user-events - with entity id: [8]
+2025-11-21 21:32:55 [LoginEvent-1] INFO  [LoggingServiceImp] - [security] AsyncService - Login event sent successfully for user: ADMIN
+2025-11-21 21:32:55 [kafka-producer-network-thread | security-producer-1] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - Message sent successfully to topic: user-events, partition: 0, offset: 70, key: [8]
+2025-11-21 21:33:44 [http-nio-8083-exec-10] DEBUG [LoggingServiceImp] - [security] IpGeoBlockingFilter - Checking IP/Geo blocking for IP: 127.0.0.1, URI: /auth/login
+2025-11-21 21:33:44 [http-nio-8083-exec-10] DEBUG [LoggingServiceImp] - [security] IpGeoBlockingFilter - IP/Geo check passed for IP: 127.0.0.1
+2025-11-21 21:33:44 [http-nio-8083-exec-10] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Processing request: /auth/login
+2025-11-21 21:33:44 [http-nio-8083-exec-10] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Skipping JWT validation for public endpoint: /auth/login
+2025-11-21 21:33:44 [http-nio-8083-exec-10] INFO  [LoggingServiceImp] - [security] AuthController - Login API calling... by user: ADMIN
+2025-11-21 21:33:44 [http-nio-8083-exec-10] INFO  [LoggingServiceImp] - [security] AuthService - Login attempt for username: ADMIN
+2025-11-21 21:33:44 [http-nio-8083-exec-10] INFO  [LoggingServiceImp] - [security] AuthController - User logged in successfully: ADMIN
+2025-11-21 21:33:59 [http-nio-8083-exec-5] DEBUG [LoggingServiceImp] - [security] IpGeoBlockingFilter - Checking IP/Geo blocking for IP: 127.0.0.1, URI: /admin/ip-geo/ip/whitelist
+2025-11-21 21:33:59 [http-nio-8083-exec-5] DEBUG [LoggingServiceImp] - [security] IpGeoBlockingFilter - IP/Geo check passed for IP: 127.0.0.1
+2025-11-21 21:33:59 [http-nio-8083-exec-5] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Processing request: /admin/ip-geo/ip/whitelist
+2025-11-21 21:33:59 [http-nio-8083-exec-5] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Extracted username from JWT: ADMIN
+2025-11-21 21:33:59 [http-nio-8083-exec-5] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Successfully authenticated user: ADMIN
+2025-11-21 21:33:59 [LoginEvent-2] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - userEvent sent to topic: user-events - with entity id: [8]
+2025-11-21 21:33:59 [LoginEvent-2] INFO  [LoggingServiceImp] - [security] AsyncService - Login event sent successfully for user: ADMIN
+2025-11-21 21:33:59 [kafka-producer-network-thread | security-producer-1] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - Message sent successfully to topic: user-events, partition: 0, offset: 71, key: [8]
+2025-11-21 21:34:00 [scheduling-1] INFO  [LoggingServiceImp] - [security] PendingUserTimeoutService - Starting scheduled check for PENDING user timeout...
+2025-11-21 21:34:00 [scheduling-1] INFO  [LoggingServiceImp] - [security] PendingUserTimeoutService - No PENDING users found

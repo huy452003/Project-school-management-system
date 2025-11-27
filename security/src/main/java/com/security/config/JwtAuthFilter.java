@@ -2,7 +2,6 @@ package com.security.config;
 
 import com.security.services.JwtService;
 import com.security.services.BlacklistService;
-import com.security.services.AsyncService;
 import com.logging.services.LoggingService;
 import com.logging.models.LogContext;
 import com.handle_exceptions.UnauthorizedExceptionHandle;
@@ -12,7 +11,6 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -25,7 +23,6 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 
-@Slf4j
 @Component
 public class JwtAuthFilter extends OncePerRequestFilter {
     @Autowired
@@ -36,8 +33,6 @@ public class JwtAuthFilter extends OncePerRequestFilter {
     LoggingService loggingService;
     @Autowired
     BlacklistService blacklistService;
-    @Autowired
-    AsyncService asyncService;
 
     @Autowired
     @Qualifier("handlerExceptionResolver")
@@ -58,15 +53,14 @@ public class JwtAuthFilter extends OncePerRequestFilter {
             @NonNull FilterChain filterChain) throws ServletException, IOException {
         
         LogContext logContext = getLogContext("doFilterInternal");
-        
+
         loggingService.logDebug("Processing request: " + request.getRequestURI(), logContext);
         String authHeader = request.getHeader("Authorization");
         String jwt;
         String username;
                 
-                // nếu là public endpoint thì skip jwt validation,
-                // vì JwtAuthFilter chạy trước nên xử lý thêm ở đây sẽ hiệu quả hơn
-
+        // nếu là public endpoint thì skip jwt validation,
+        // vì JwtAuthFilter chạy trước nên xử lý thêm ở đây sẽ hiệu quả hơn
         if (isPublicEndpoint(request.getRequestURI())) {
              loggingService.logDebug("Skipping JWT validation for public endpoint: "+ request.getRequestURI()
                      , logContext);
@@ -117,7 +111,6 @@ public class JwtAuthFilter extends OncePerRequestFilter {
                     lúc này có thể gửi thêm data (không nhạy cảm) sang endpoint ở service khác
                     nhưng chỉ nên gửi các bất đồng bộ như kafka message tránh làm chậm response
                     */
-                    asyncService.sendLoginEvent(userDetails);
                 } else {
                     loggingService.logWarn("Invalid JWT token for user:" + username, logContext);
                     UnauthorizedExceptionHandle exception = new UnauthorizedExceptionHandle(

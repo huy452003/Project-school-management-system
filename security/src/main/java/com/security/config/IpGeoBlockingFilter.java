@@ -13,7 +13,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.lang.NonNull;
-import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -21,6 +20,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+
+import org.springframework.stereotype.Component;
 
 @Component
 public class IpGeoBlockingFilter extends OncePerRequestFilter {
@@ -38,9 +39,13 @@ public class IpGeoBlockingFilter extends OncePerRequestFilter {
     @Qualifier("handlerExceptionResolver")
     private HandlerExceptionResolver handlerExceptionResolver;
     
-    // Các endpoint được bypass (bỏ qua) IP/Geo blocking
-    @Value("${security.ip.geo.bypass.endpoints:/auth/register,/auth/login,/public/health}")
+    // Các endpoint được bypass (bỏ qua) IP/Geo blocking hoàn toàn
+    @Value("${security.ip.geo.bypass.endpoints:/auth/internal/**}")
     private String bypassEndpoints;
+    
+    // Các endpoint dùng policy linh hoạt (chỉ block manual blacklist, không block auto-blacklist)
+    @Value("${security.ip.geo.relaxed.endpoints:/auth/register,/auth/login}")
+    private String relaxedEndpoints;
     
     private LogContext getLogContext(String methodName) {
         return LogContext.builder()
@@ -57,10 +62,12 @@ public class IpGeoBlockingFilter extends OncePerRequestFilter {
             @NonNull FilterChain filterChain) throws ServletException, IOException {
         
         LogContext logContext = getLogContext("doFilterInternal");
+  
         String requestUri = request.getRequestURI();
         
+        // Bypass hoàn toàn (không check gì cả) - cho internal APIs
         if (isBypassEndpoint(requestUri)) {
-            loggingService.logDebug("Bypassing IP/Geo blocking for endpoint: " + requestUri, logContext);
+            loggingService.logDebug("Bypassing IP/Geo blocking completely for endpoint: " + requestUri, logContext);
             filterChain.doFilter(request, response);
             return;
         }
@@ -70,10 +77,25 @@ public class IpGeoBlockingFilter extends OncePerRequestFilter {
         loggingService.logDebug("Checking IP/Geo blocking for IP: " + ipAddress + ", URI: " + requestUri, logContext);
         
         try {
-            // 1. Check IP blocking trước
-            if (ipBlockingService.isIpBlocked(ipAddress)) {
-                String reason = ipBlockingService.getBlockReason(ipAddress);
-                loggingService.logWarn("IP blocked: " + ipAddress + ", Reason: " + reason, logContext);
+            // 1. Check IP blocking với policy phù hợp
+            boolean isBlocked;
+            if (isRelaxedEndpoint(requestUri)) {
+                // Register/Login: Chỉ block manual blacklist, không block auto-blacklist (temporary)
+                // Mục đích: Cho phép legitimate users đăng ký/đăng nhập ngay cả khi bị auto-block tạm thời
+                isBlocked = ipBlockingService.isIpBlockedForAuth(ipAddress);
+                if (isBlocked) {
+                    loggingService.logWarn("IP " + ipAddress + " blocked for auth endpoint (manual blacklist only)", logContext);
+                }
+            } else {
+                // Các endpoint khác: Block cả manual và auto-blacklist
+                isBlocked = ipBlockingService.isIpBlocked(ipAddress);
+            }
+            
+            if (isBlocked) {
+                String reason = isRelaxedEndpoint(requestUri) 
+                    ? ipBlockingService.getBlockReasonForAuth(ipAddress)
+                    : ipBlockingService.getBlockReason(ipAddress);
+                loggingService.logWarn("IP blocked: " + ipAddress + ", Reason: " + reason + ", URI: " + requestUri, logContext);
                 
                 IpBlockedExceptionHandle exception = new IpBlockedExceptionHandle(
                     "Access denied: IP address is blocked",
@@ -121,7 +143,23 @@ public class IpGeoBlockingFilter extends OncePerRequestFilter {
         
         List<String> bypassList = Arrays.asList(bypassEndpoints.split(","));
         for (String endpoint : bypassList) {
-            if (uri.equals(endpoint.trim()) || uri.startsWith(endpoint.trim())) {
+            String trimmed = endpoint.trim();
+            if (uri.equals(trimmed) || uri.startsWith(trimmed)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    private boolean isRelaxedEndpoint(String uri) {
+        if (relaxedEndpoints == null || relaxedEndpoints.isEmpty()) {
+            return false;
+        }
+        
+        List<String> relaxedList = Arrays.asList(relaxedEndpoints.split(","));
+        for (String endpoint : relaxedList) {
+            String trimmed = endpoint.trim();
+            if (uri.equals(trimmed) || uri.startsWith(trimmed)) {
                 return true;
             }
         }

@@ -66,7 +66,6 @@ public class Register {
     @NotNull(message = "{validate.user.role.notNull}")
     private Role role;
     
-    @NotNull(message = "{validate.user.permissions.notNull}")
     private Set<Permission> permissions;
     
     private Map<String, Object> profileData;

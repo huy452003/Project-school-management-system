@@ -56,6 +56,9 @@ public class AuthController {
     
     @Autowired
     private IpBlockingService ipBlockingService;
+    
+    @Autowired
+    private com.security.services.AsyncService asyncService;
 
     private LogContext getLogContext(String methodName) {
         return LogContext.builder()
@@ -100,6 +103,9 @@ public class AuthController {
 
         loggingService.logInfo("Login API calling... by user: " + logContext.getUserId(), logContext);
         SecurityResponse securityResponse = authService.login(request);
+        
+        asyncService.sendLoginEvent(securityResponse);
+        
         Response<SecurityResponse> response = new Response<>(
                 200,
                 messageSource.getMessage("response.message.loginSuccess",null,locale),
@@ -214,6 +220,8 @@ public class AuthController {
         loggingService.logInfo("Token decoded successfully", logContext);
         return ResponseEntity.status(response.status()).body(response);
     }
+
+    // Internal API
     
     @PostMapping("/internal/users/batch")
     public ResponseEntity<List<UserDto>> getUsersByIds(
@@ -397,7 +405,33 @@ public class AuthController {
         );
         return ResponseEntity.status(response.status()).body(response);
     }
-    
+
+    // Internal API để track IP violation (gọi từ các module khác)
+    @PostMapping("/internal/ip/track-violation")
+    public ResponseEntity<Map<String, String>> trackIpViolation(
+        @RequestBody Map<String, String> request
+    ) {
+        LogContext logContext = getLogContext("trackIpViolation");
+        
+        String ipAddress = request.get("ipAddress");
+        if (ipAddress == null || ipAddress.isEmpty()) {
+            Map<String, String> error = new HashMap<>();
+            error.put("error", "IP address is required");
+            return ResponseEntity.badRequest().body(error);
+        }
+        
+        // Track IP violation (tăng counter và auto-block nếu vượt threshold)
+        ipBlockingService.incrementBlockedCountAndAutoBlock(ipAddress);
+        loggingService.logInfo("Tracked IP violation for IP: " + ipAddress, logContext);
+        
+        Map<String, String> response = new HashMap<>();
+        response.put("status", "success");
+        response.put("message", "IP violation tracked");
+        response.put("ipAddress", ipAddress);
+        return ResponseEntity.ok(response);
+    }
+
+    // check account status
     @GetMapping("/check-status")
     public ResponseEntity<Response<Map<String, Object>>> checkAccountStatus(
         @RequestHeader("Authorization") String authHeader,
@@ -443,29 +477,6 @@ public class AuthController {
         return ResponseEntity.status(response.status()).body(response);
     }
     
-    // Internal API để track IP violation (gọi từ các module khác)
-    @PostMapping("/internal/ip/track-violation")
-    public ResponseEntity<Map<String, String>> trackIpViolation(
-        @RequestBody Map<String, String> request
-    ) {
-        LogContext logContext = getLogContext("trackIpViolation");
-        
-        String ipAddress = request.get("ipAddress");
-        if (ipAddress == null || ipAddress.isEmpty()) {
-            Map<String, String> error = new HashMap<>();
-            error.put("error", "IP address is required");
-            return ResponseEntity.badRequest().body(error);
-        }
-        
-        // Track IP violation (tăng counter và auto-block nếu vượt threshold)
-        ipBlockingService.incrementBlockedCountAndAutoBlock(ipAddress);
-        loggingService.logInfo("Tracked IP violation for IP: " + ipAddress, logContext);
-        
-        Map<String, String> response = new HashMap<>();
-        response.put("status", "success");
-        response.put("message", "IP violation tracked");
-        response.put("ipAddress", ipAddress);
-        return ResponseEntity.ok(response);
-    }
+    
 
 }

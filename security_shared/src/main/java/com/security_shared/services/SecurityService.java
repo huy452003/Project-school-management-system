@@ -57,50 +57,6 @@ public class SecurityService {
                 .build();
     }
 
-    @CircuitBreaker(name = "security-service", fallbackMethod = "validateTokenAndGetUserFallback")
-    public UserDto validateTokenAndGetUser(String token) {
-        LogContext logContext = getLogContext("validateTokenAndGetUser");
-        
-        try {
-            HttpHeaders headers = new HttpHeaders();
-            headers.set("Authorization", "Bearer " + token);
-            
-            HttpEntity<String> entity = new HttpEntity<>(headers);
-
-            loggingService.logDebug("Calling security module with URL: " + securityBaseUrl + "/auth/validate" 
-                    + " to validate token", logContext);
-
-            ResponseEntity<Response<UserDto>> response = restTemplate.exchange(
-                securityBaseUrl + "/auth/validate",
-                HttpMethod.GET,
-                entity,
-                new ParameterizedTypeReference<>() {}
-            );
-
-            if (response.getStatusCode().is2xxSuccessful() && response.getBody() != null) {
-                Response<UserDto> responseBody = response.getBody();
-                if (responseBody != null && responseBody.data() != null) {
-                    UserDto user = responseBody.data();
-
-                    String cacheKey = "user:token:" + token;
-                    redisTemplate.opsForValue().set(cacheKey, user, Duration.ofMinutes(5));
-
-                    loggingService.logDebug(String.format("Successfully retrieved user from security module: %s and cached in Redis"
-                        + " with key: %s", user.getUsername(), cacheKey), logContext);
-                    return user;
-                }
-            }
-            
-            loggingService.logWarn("Failed to get valid response from security module. Status: " 
-                    + response.getStatusCode() + " Body: " + response.getBody(), logContext);
-            return null;
-            
-        } catch (Exception e) {
-            loggingService.logError("Exception during token validation: ", e, logContext);
-            return null;
-        }
-    }
-
     public UserDto validateAndAuthorize(String authHeader, String[] requiredRoles, String[] requiredPermissions) {
         LogContext logContext = getLogContext("validateAndAuthorize");
         
@@ -147,6 +103,50 @@ public class SecurityService {
 
         loggingService.logDebug("User " + user.getUsername() + " successfully authorized", logContext);
         return user;
+    }
+
+    @CircuitBreaker(name = "security-service", fallbackMethod = "validateTokenAndGetUserFallback")
+    public UserDto validateTokenAndGetUser(String token) {
+        LogContext logContext = getLogContext("validateTokenAndGetUser");
+        
+        try {
+            HttpHeaders headers = new HttpHeaders();
+            headers.set("Authorization", "Bearer " + token);
+            
+            HttpEntity<String> entity = new HttpEntity<>(headers);
+
+            loggingService.logDebug("Calling security module with URL: " + securityBaseUrl + "/auth/validate" 
+                    + " to validate token", logContext);
+
+            ResponseEntity<Response<UserDto>> response = restTemplate.exchange(
+                securityBaseUrl + "/auth/validate",
+                HttpMethod.GET,
+                entity,
+                new ParameterizedTypeReference<>() {}
+            );
+
+            if (response.getStatusCode().is2xxSuccessful() && response.getBody() != null) {
+                Response<UserDto> responseBody = response.getBody();
+                if (responseBody != null && responseBody.data() != null) {
+                    UserDto user = responseBody.data();
+
+                    String cacheKey = "user:token:" + token;
+                    redisTemplate.opsForValue().set(cacheKey, user, Duration.ofMinutes(5));
+
+                    loggingService.logDebug(String.format("Successfully retrieved user from security module: %s and cached in Redis"
+                        + " with key: %s", user.getUsername(), cacheKey), logContext);
+                    return user;
+                }
+            }
+            
+            loggingService.logWarn("Failed to get valid response from security module. Status: " 
+                    + response.getStatusCode() + " Body: " + response.getBody(), logContext);
+            return null;
+            
+        } catch (Exception e) {
+            loggingService.logError("Exception during token validation: ", e, logContext);
+            return null;
+        }
     }
 
     public UserDto validateTokenAndGetUserFallback(String token, Exception e) {
@@ -377,42 +377,42 @@ public class SecurityService {
         );
     }
     
-    @CircuitBreaker(name = "security-service", fallbackMethod = "trackIpViolationFallback")
-    public void trackIpViolation(String ipAddress) {
-        LogContext logContext = getLogContext("trackIpViolation");
+    @CircuitBreaker(name = "security-service", fallbackMethod = "sendIpViolationFallback")
+    public void sendIpViolation(String ipAddress) {
+        LogContext logContext = getLogContext("sendIpViolation");
         
         if (ipAddress == null || ipAddress.isEmpty()) {
-            loggingService.logWarn("Invalid IP address provided for tracking", logContext);
+            loggingService.logWarn("Invalid IP address provided for sending", logContext);
             return;
         }
         
         try {
-            loggingService.logDebug("Calling security internal API to track IP violation: " + ipAddress, logContext);
+            loggingService.logDebug("Calling security internal API to send IP violation: " + ipAddress, logContext);
             
-            Map<String, String> request = new HashMap<>();
-            request.put("ipAddress", ipAddress);
-            
-            ResponseEntity<Map<String, String>> response = restTemplate.exchange(
+            ResponseEntity<String> response = restTemplate.exchange(
                 securityBaseUrl + "/auth/internal/ip/track-violation",
                 HttpMethod.POST,
-                new HttpEntity<>(request),
-                new ParameterizedTypeReference<Map<String, String>>() {}
+                new HttpEntity<>(ipAddress),
+                new ParameterizedTypeReference<String>() {}
             );
             
             if (response.getStatusCode().is2xxSuccessful()) {
-                loggingService.logDebug("Successfully tracked IP violation for: " + ipAddress, logContext);
+                loggingService.logDebug("Successfully sent IP violation for: " + ipAddress, logContext);
             } else {
-                loggingService.logWarn("Failed to track IP violation. Status: " + response.getStatusCode(), logContext);
+                loggingService.logWarn("Failed to send IP violation. Status: " + response.getStatusCode(), logContext);
             }
         } catch (Exception e) {
-            loggingService.logError("Failed to track IP violation in Security service", e, logContext);
-            // Không throw exception để tránh ảnh hưởng đến flow chính
+            loggingService.logError("Failed to send IP violation in Security service", e, logContext);
         }
     }
     
-    public void trackIpViolationFallback(String ipAddress, Exception e) {
-        LogContext logContext = getLogContext("trackIpViolationFallback");
-        loggingService.logError("Exception during track IP violation: " + ipAddress, e, logContext);
-        // Không throw exception để tránh ảnh hưởng đến flow chính
+    public void sendIpViolationFallback(String ipAddress, Exception e) {
+        LogContext logContext = getLogContext("sendIpViolationFallback");
+        loggingService.logError("Exception during send IP violation: " + ipAddress, e, logContext);
+        throw new ServiceUnavailableExceptionHandle(
+            "Cannot send IP violation in Security service",
+            "Security service may be down or experiencing issues. Please try again later.",
+            "Security-Model"
+        );
     }
 }

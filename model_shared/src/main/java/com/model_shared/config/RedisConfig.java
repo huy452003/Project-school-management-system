@@ -30,6 +30,7 @@ public class RedisConfig {
                 .setAddress("redis://127.0.0.1:6379");
         return Redisson.create(config);
     }
+    
     @Bean
     public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory connectionFactory) {
         RedisTemplate<String, Object> template = new RedisTemplate<>();

@@ -1418,6 +1418,1169 @@
 
 
 
+* new 16/11/2025
+
+###( Guide Note 190)###
+** về propagation , isolation.
+  * PROPAGATION (Transaction Propagation) - Cách transaction lan truyền giữa các method:
+    - Định nghĩa: Quyết định cách transaction hoạt động khi method có @Transactional được gọi từ method khác cũng có @Transactional
+    
+    - Các loại Propagation:
+    1. REQUIRED (Mặc định - Default): không cần phải khai báo 
+      + Nếu đã có transaction → tham gia vào transaction đó
+      + Nếu chưa có transaction → tạo transaction mới
+      + VD: Method A (có @Transactional) gọi Method B (có @Transactional) → B tham gia transaction của A
+      + Code: @Transactional(propagation = Propagation.REQUIRED)
+      + Use case: 90% trường hợp, dùng khi muốn tất cả operations trong cùng 1 transaction
+    
+    2. REQUIRES_NEW:
+      + Luôn tạo transaction MỚI, bất kể đã có transaction hay chưa
+      + Transaction mới độc lập hoàn toàn với transaction cũ
+      + Nếu transaction mới rollback → không ảnh hưởng transaction cũ
+      + Nếu transaction cũ rollback → transaction mới vẫn commit (đã commit rồi)
+      + Code: @Transactional(propagation = Propagation.REQUIRES_NEW)
+      + Use case: Logging, audit trail, gửi email/notification (không muốn bị rollback khi main transaction fail)
+      + Ví dụ:
+        @Service
+        public class OrderService {
+            @Transactional(propagation = Propagation.REQUIRED)
+            public void createOrder(Order order) {
+                orderRepo.save(order);  // Trong transaction chính
+                logService.logOrder(order);  // Gọi method có REQUIRES_NEW
+                // Nếu logService.logOrder() fail → transaction mới rollback
+                // Nhưng transaction chính VẪN TIẾP TỤC (không bị ảnh hưởng)
+            }
+        }
+        
+        @Service
+        public class LogService {
+            @Transactional(propagation = Propagation.REQUIRES_NEW)
+            public void logOrder(Order order) {
+                // Transaction MỚI, độc lập
+                // Nếu fail → chỉ rollback transaction này
+                logRepo.save(new Log("Order created", order.getId()));
+            }
+        }
+    
+    3. NESTED:
+      + Tạo "savepoint" trong transaction hiện tại (nếu có)
+      + Nếu chưa có transaction → tạo transaction mới (giống REQUIRED)
+      + Nếu transaction con rollback → chỉ rollback đến savepoint, transaction cha vẫn tiếp tục
+      + Nếu transaction cha rollback → transaction con cũng rollback
+      + Code: @Transactional(propagation = Propagation.NESTED)
+      + Use case: MySQL không hỗ trợ (chỉ hỗ trợ Oracle, PostgreSQL)
+      + Lưu ý: Với MySQL/InnoDB → dùng REQUIRES_NEW thay thế
+    
+    4. SUPPORTS:
+      + Nếu đã có transaction → tham gia vào
+      + Nếu chưa có transaction → chạy KHÔNG có transaction
+      + Code: @Transactional(propagation = Propagation.SUPPORTS)
+      + Use case: Method có thể chạy với hoặc không có transaction (read-only operations)
+    
+    5. NOT_SUPPORTED:
+      + Tạm dừng transaction hiện tại (nếu có)
+      + Chạy method KHÔNG có transaction
+      + Sau khi method xong → tiếp tục transaction cũ
+      + Code: @Transactional(propagation = Propagation.NOT_SUPPORTED)
+      + Use case: Gọi code không hỗ trợ transaction (VD: JMS, file I/O)
+    
+    6. MANDATORY:
+      + BẮT BUỘC phải có transaction
+      + Nếu chưa có transaction → throw IllegalTransactionStateException
+      + Code: @Transactional(propagation = Propagation.MANDATORY)
+      + Use case: Đảm bảo method chỉ được gọi trong transaction
+    
+    7. NEVER:
+      + BẮT BUỘC KHÔNG được có transaction
+      + Nếu đã có transaction → throw IllegalTransactionStateException
+      + Code: @Transactional(propagation = Propagation.NEVER)
+      + Use case: Method không được gọi trong transaction (hiếm dùng)
+
+  * ISOLATION (Transaction Isolation Level) - Mức độ cô lập giữa các transaction:
+    - Định nghĩa: Quyết định transaction này "nhìn thấy" dữ liệu của transaction khác như thế nào
+    
+    - Các vấn đề có thể xảy ra (concurrency problems):
+    1. Dirty Read: Đọc dữ liệu chưa commit từ transaction khác
+      VD: Transaction A update balance = 200 (chưa commit)
+          Transaction B đọc balance = 200
+          Transaction A rollback → balance = 100
+          Transaction B đã dùng dữ liệu sai (200)
+    
+    2. Non-Repeatable Read: Đọc cùng 1 row 2 lần nhưng giá trị khác nhau
+      VD: Transaction A đọc balance = 100
+          Transaction B update balance = 200 và commit
+          Transaction A đọc lại balance = 200 (khác lần 1)
+    
+    3. Phantom Read: Đọc cùng 1 query 2 lần nhưng số lượng rows khác nhau
+      VD: Transaction A SELECT COUNT(*) FROM orders WHERE status='PENDING' → 5 rows
+          Transaction B INSERT INTO orders ... (status='PENDING') và commit
+          Transaction A SELECT lại → 6 rows (thêm 1 row)
+    
+    4. Lost Update: 2 transaction cùng update 1 row, update sau ghi đè update trước
+      VD: Transaction A: balance = balance + 50 (từ 100 → 150)
+          Transaction B: balance = balance - 30 (từ 100 → 70) - đọc 100 cũ
+          Kết quả: balance = 70 (mất update của A)
+    
+    - Các Isolation Level (từ thấp → cao):
+    1. READ_UNCOMMITTED (Level 0):
+      + Cho phép: Dirty Read, Non-Repeatable Read, Phantom Read
+      + Code: @Transactional(isolation = Isolation.READ_UNCOMMITTED)
+      + MySQL: Không hỗ trợ (InnoDB không có level này)
+      + Use case: Hiếm dùng, chỉ khi cần performance cao và không quan tâm data consistency
+    
+    2. READ_COMMITTED (Level 1):
+      + Ngăn chặn: Dirty Read
+      + Vẫn cho phép: Non-Repeatable Read, Phantom Read
+      + Code: @Transactional(isolation = Isolation.READ_COMMITTED)
+      + MySQL Default: Đây là default của MySQL (nhưng InnoDB dùng REPEATABLE_READ)
+      + Use case: Phù hợp cho hầu hết ứng dụng, cân bằng giữa performance và consistency
+    
+    3. REPEATABLE_READ (Level 2):
+      + Ngăn chặn: Dirty Read, Non-Repeatable Read
+      + Vẫn cho phép: Phantom Read (nhưng InnoDB ngăn luôn bằng Next-Key Locking)
+      + Code: @Transactional(isolation = Isolation.REPEATABLE_READ)
+      + MySQL InnoDB Default: Đây là default của InnoDB
+      + Use case: ⭐ KHUYẾN NGHỊ cho hầu hết trường hợp (đã dùng trong project)
+      + Cơ chế: Sử dụng MVCC (Multi-Version Concurrency Control)
+        - Mỗi transaction có "snapshot" của data tại thời điểm bắt đầu
+        - Đọc data từ snapshot, không bị ảnh hưởng bởi transaction khác
+        - InnoDB dùng Next-Key Locking để ngăn Phantom Read
+    
+    4. SERIALIZABLE (Level 3):
+      + Ngăn chặn: Tất cả (Dirty Read, Non-Repeatable Read, Phantom Read)
+      + Code: @Transactional(isolation = Isolation.SERIALIZABLE)
+      + Cơ chế: Lock toàn bộ rows được đọc/ghi → chạy tuần tự (serial)
+      + Nhược điểm: Performance thấp nhất (nhiều lock, nhiều blocking)
+      + Use case: Chỉ dùng khi cần data consistency tuyệt đối, chấp nhận performance thấp
+    
+    - So sánh Isolation Levels:
+      Level              | Dirty Read | Non-Repeatable | Phantom Read | Performance
+      -------------------|------------|----------------|--------------|------------
+      READ_UNCOMMITTED   |     ✓      |       ✓        |      ✓       |    Cao nhất
+      READ_COMMITTED     |     ✗      |       ✓        |      ✓       |    Cao
+      REPEATABLE_READ    |     ✗      |       ✗        |      ✗*      |    Trung bình ⭐
+      SERIALIZABLE       |     ✗      |       ✗        |      ✗       |    Thấp nhất
+      * InnoDB ngăn Phantom Read bằng Next-Key Locking
+    
+    - Ví dụ cụ thể với REPEATABLE_READ (đang dùng trong project):
+      Database: User(id=1, balance=100)
+      
+      Transaction A (REPEATABLE_READ):
+        BEGIN TRANSACTION
+        SELECT balance FROM users WHERE id=1;  → balance = 100 (snapshot tại thời điểm này)
+        // Transaction B update balance = 200 và commit
+        SELECT balance FROM users WHERE id=1;  → balance = 100 (vẫn đọc từ snapshot, không thấy update của B)
+        UPDATE users SET balance=150 WHERE id=1;  → Success
+        COMMIT → balance = 150
+      
+      Transaction B (REPEATABLE_READ):
+        BEGIN TRANSACTION
+        SELECT balance FROM users WHERE id=1;  → 100 (snapshot riêng)
+        UPDATE users SET balance=200 WHERE id=1;  → Success
+        COMMIT → balance = 200
+        // Nếu commit sau A → balance = 200 (ghi đè)
+        // Nếu commit trước A → A vẫn thấy 100 (snapshot), nhưng update sẽ conflict
+      
+    - Kết hợp Propagation + Isolation trong project:
+      @Retryable(value = {OptimisticLockingFailureException.class}, maxAttempts = 3)
+      @Transactional(
+          rollbackFor = Exception.class,
+          isolation = Isolation.REPEATABLE_READ,  // Ngăn dirty read, non-repeatable read
+          propagation = Propagation.REQUIRED      // Mặc định, tham gia transaction hiện tại
+      )
+      public EntityModel update(UpdateEntityModel req) {
+          // Code...
+      }
+    
+    - Khi nào dùng Isolation Level nào?
+      + REPEATABLE_READ (default InnoDB): ⭐ Dùng cho 90% trường hợp
+      + READ_COMMITTED: Dùng khi cần performance cao hơn, chấp nhận non-repeatable read
+      + SERIALIZABLE: Chỉ dùng khi cần consistency tuyệt đối (hiếm)
+    
+    - Lưu ý:
+      + Isolation level cao hơn → Performance thấp hơn (nhiều lock hơn)
+      + MySQL InnoDB mặc định REPEATABLE_READ đã đủ tốt
+      + Kết hợp với Optimistic Locking (@Version) để tránh Lost Update
+      + Không nên thay đổi isolation level trừ khi có vấn đề cụ thể về concurrency
+
+    
+
+###( Guide Note 192)###
+* SO SÁNH MYSQL VÀ REDIS:
+
+  1. ĐỊNH NGHĨA VÀ MỤC ĐÍCH:
+    - MySQL:
+      + Relational Database Management System (RDBMS)
+      + Lưu trữ dữ liệu persistent (bền vững), có cấu trúc
+      + Dùng cho: User data, orders, products, transactions (dữ liệu quan trọng)
+      + Đảm bảo ACID (Atomicity, Consistency, Isolation, Durability)
+    
+    - Redis:
+      + In-Memory Data Structure Store (NoSQL)
+      + Lưu trữ dữ liệu tạm thời trong RAM (nhanh nhưng mất khi restart)
+      + Dùng cho: Cache, session storage, rate limiting, real-time data
+      + Không đảm bảo ACID (không phải database chính)
+
+  2. KIẾU DỮ LIỆU:
+    - MySQL:
+      + Relational (bảng, cột, rows)
+      + Có foreign keys, relationships
+      + Schema rõ ràng (phải định nghĩa trước)
+      + VD: Users table, Orders table, Products table
+    
+    - Redis:
+      + Key-Value store (đơn giản nhất)
+      + Các data structures: String, Hash, List, Set, Sorted Set
+      + Không có schema (flexible)
+      + VD: "user:123" → User object, "cache:students" → List<Student>
+
+  3. PERSISTENCE (ĐỘ BỀN):
+    - MySQL:
+      + Lưu trên disk (persistent)
+      + Dữ liệu không mất khi restart server
+      + Backup/restore dễ dàng
+      + Phù hợp cho dữ liệu quan trọng
+    
+    - Redis:
+      + Mặc định: Chỉ lưu trong RAM (volatile)
+      + Có thể config persistence (RDB snapshot, AOF log) nhưng không đảm bảo 100%
+      + Dữ liệu có thể mất khi restart (nếu không config persistence)
+      + Phù hợp cho dữ liệu tạm thời, có thể tái tạo
+
+  4. PERFORMANCE:
+    - MySQL:
+      + Chậm hơn Redis (đọc/ghi từ disk)
+      + Query phức tạp có thể chậm (JOIN, GROUP BY)
+      + Tối ưu bằng index
+      + Latency: ~1-10ms (tùy query)
+    
+    - Redis:
+      + Rất nhanh (đọc/ghi từ RAM)
+      + Operations đơn giản, atomic
+      + Latency: ~0.1-1ms
+      + Throughput: 100,000+ ops/sec
+
+  5. QUERY LANGUAGE:
+    - MySQL:
+      + SQL (Structured Query Language)
+      + Phức tạp: SELECT, JOIN, GROUP BY, HAVING, subqueries
+      + VD: SELECT u.*, o.total FROM users u JOIN orders o ON u.id = o.user_id
+    
+    - Redis:
+      + Commands (không phải SQL)
+      + Đơn giản: GET, SET, INCR, HSET, LPUSH, SADD
+      + VD: GET user:123, SET cache:students "data", INCR rate:limit:ip
+
+  6. TRANSACTIONS:
+    - MySQL:
+      + Hỗ trợ đầy đủ transactions (ACID)
+      + @Transactional trong Spring Boot
+      + Rollback khi có lỗi
+      + Isolation levels (READ_COMMITTED, REPEATABLE_READ, SERIALIZABLE)
+    
+    - Redis:
+      + Có transactions nhưng không đảm bảo ACID
+      + MULTI/EXEC commands
+      + Không có rollback thực sự
+      + Atomic operations (INCR, DECR, SETNX)
+
+  7. SCALABILITY:
+    - MySQL:
+      + Vertical scaling (tăng RAM, CPU)
+      + Horizontal scaling khó (replication, sharding phức tạp)
+      + Master-Slave replication
+    
+    - Redis:
+      + Cả vertical và horizontal scaling
+      + Redis Cluster (sharding tự động)
+      + Master-Slave replication
+      + Dễ scale hơn MySQL
+
+  8. USE CASES TRONG PROJECT:
+    - MySQL (Dữ liệu chính):
+      + UserEntity, StudentEntity, TeacherEntity
+      + Dữ liệu quan trọng, cần persistent
+      + Quan hệ giữa các bảng (foreign keys)
+      + Transactions phức tạp
+    
+    - Redis (Cache/Temporary):
+      + Cache danh sách students: redisTemplate.set("STUDENT_CACHE_KEY", students)
+      + IP blocking/whitelist: redisTemplate.hasKey("ip:whitelist:" + ip)
+      + Rate limiting: redisTemplate.opsForValue().increment("rate:limit:" + ip)
+      + Session storage (nếu dùng)
+      + Real-time data (counters, leaderboards)
+
+  9. KẾT HỢP MYSQL + REDIS (Pattern phổ biến):
+    - Cache-Aside Pattern:
+      1. Check Redis cache trước
+      2. Nếu có → return từ cache
+      3. Nếu không → query MySQL
+      4. Lưu kết quả vào Redis
+      5. Return data
+    
+    - Ví dụ trong project:
+      @Override
+      public List<EntityModel> gets() {
+          // 1. Check Redis cache
+          Object cached = redisTemplate.opsForValue().get(STUDENT_CACHE_KEY);
+          if (cached != null) {
+              return (List<EntityModel>) cached;  // Return từ cache
+          }
+          
+          // 2. Query MySQL
+          List<StudentEntity> students = studentRepo.findAll();
+          List<EntityModel> models = convertToModels(students);
+          
+          // 3. Save to Redis
+          redisTemplate.opsForValue().set(STUDENT_CACHE_KEY, models);
+          
+          return models;
+      }
+
+  10. KHI NÀO DÙNG MYSQL, KHI NÀO DÙNG REDIS:
+    - Dùng MySQL khi:
+      + Dữ liệu quan trọng, cần persistent
+      + Cần relationships, foreign keys
+      + Cần transactions phức tạp
+      + Cần query phức tạp (JOIN, GROUP BY)
+      + Dữ liệu không thay đổi thường xuyên
+    
+    - Dùng Redis khi:
+      + Cần performance cao (đọc nhanh)
+      + Dữ liệu tạm thời, có thể tái tạo
+      + Cache để giảm load MySQL
+      + Rate limiting, session storage
+      + Real-time counters, leaderboards
+      + Dữ liệu thay đổi thường xuyên
+
+  11. BẢNG SO SÁNH TỔNG QUAN:
+    Tiêu chí          | MySQL                    | Redis
+    ------------------|--------------------------|--------------------------
+    Loại              | RDBMS (Relational)       | NoSQL (Key-Value)
+    Storage           | Disk (persistent)        | RAM (volatile)
+    Data Model        | Tables, Rows, Columns    | Key-Value, Data Structures
+    Query Language    | SQL                     | Commands (GET, SET, etc.)
+    Performance       | Chậm hơn (~1-10ms)      | Nhanh hơn (~0.1-1ms)
+    Transactions      | ACID đầy đủ             | Không đảm bảo ACID
+    Persistence       | Luôn persistent         | Cần config (RDB/AOF)
+    Use Case          | Dữ liệu chính           | Cache, temporary data
+    Scalability       | Khó scale horizontal    | Dễ scale horizontal
+    Complexity        | Phức tạp (JOIN, etc.)   | Đơn giản (key-value)
+
+  12. BEST PRACTICES:
+    - MySQL:
+      + Dùng cho dữ liệu chính, quan trọng
+      + Luôn có backup strategy
+      + Tối ưu queries với index
+      + Dùng connection pooling (HikariCP)
+      + Monitor slow queries
+    
+    - Redis:
+      + Dùng cho cache, không phải database chính
+      + Set TTL (Time To Live) cho cache
+      + Monitor memory usage
+      + Có strategy khi Redis down (fallback to MySQL)
+      + Không lưu dữ liệu quan trọng chỉ trong Redis
+
+  13. VÍ DỤ CỤ THỂ TRONG PROJECT:
+    - MySQL:
+      + UserEntity → Lưu thông tin user (username, password, role)
+      + StudentEntity → Lưu thông tin student (userId, graduate)
+      + Quan hệ: UserEntity có thể có StudentEntity hoặc TeacherEntity
+    
+    - Redis:
+      + Cache students list: "STUDENT_CACHE_KEY" → List<EntityModel>
+      + IP whitelist: "ip:whitelist:192.168.1.1" → "true"
+      + Rate limiting: "rate:limit:192.168.1.1" → counter
+      + Delete cache khi update: redisTemplate.delete("STUDENT_CACHE_KEY")
+
+  14. KẾT LUẬN:
+    - MySQL và Redis BỔ SUNG cho nhau, không thay thế
+    - MySQL: Database chính, lưu dữ liệu persistent
+    - Redis: Cache layer, tăng performance, giảm load MySQL
+    - Pattern: MySQL (source of truth) + Redis (cache layer) = High performance system
+
+
+
+###( Guide Note 194)###
+* SO SÁNH JPA VÀ HIBERNATE:
+
+    1. ĐỊNH NGHĨA:
+    - JPA (Java Persistence API):
+        + Là một SPECIFICATION (đặc tả kỹ thuật)
+        + Định nghĩa các interface, annotation, và cách làm việc với database
+        + KHÔNG phải implementation (không phải code thực thi)
+        + Giống như "bản thiết kế" của một ngôi nhà
+    
+    - Hibernate:
+        + Là một IMPLEMENTATION của JPA specification
+        + Code thực thi, làm việc thực sự với database
+        + Giống như "ngôi nhà thực tế" được xây theo bản thiết kế
+        + Có thể dùng độc lập (không cần JPA) hoặc implement JPA
+
+    2. MỐI QUAN HỆ:
+    - JPA = Interface/Specification (như "contract")
+    - Hibernate = Implementation (code thực thi)
+    - Tương tự như: List (interface) và ArrayList (implementation)
+    
+    - Ví dụ:
+        JPA: "Phải có method save(), findById(), delete()"
+        Hibernate: Code thực thi các method đó
+
+    3. JPA SPECIFICATION BAO GỒM:
+    - Annotations:
+        + @Entity, @Table, @Id, @GeneratedValue
+        + @Column, @OneToMany, @ManyToOne, @ManyToMany
+        + @Version, @Transient, @Temporal
+    
+    - Interfaces:
+        + EntityManager (quản lý entities)
+        + EntityManagerFactory (tạo EntityManager)
+        + Query, TypedQuery (thực thi queries)
+        + Criteria API (type-safe queries)
+    
+    - Entity Lifecycle:
+        + Persist, Merge, Remove, Refresh, Detach
+        + Transaction management
+
+    4. HIBERNATE IMPLEMENTATION:
+    - Implement tất cả JPA specification
+    - Thêm nhiều tính năng riêng:
+        + Hibernate-specific annotations (@Immutable, @NaturalId)
+        + Hibernate Session API (bên cạnh JPA EntityManager)
+        + HQL (Hibernate Query Language) - mạnh hơn JPQL
+        + Native SQL support
+        + Caching (first-level, second-level)
+        + Lazy loading, Eager loading
+        + Connection pooling
+
+    5. TRONG PROJECT CỦA BẠN:
+    - JPA Annotations (từ jakarta.persistence):
+        @Entity
+        @Table(name = "Students")
+        public class StudentEntity {
+            @Id
+            @GeneratedValue(strategy = GenerationType.IDENTITY)
+            private Integer id;
+            
+            @Version
+            private Long version;
+        }
+        → Đây là JPA specification
+    
+    - Spring Data JPA (sử dụng JPA):
+        public interface StudentRepo extends JpaRepository<StudentEntity, Integer> {
+            Optional<StudentEntity> findByUserId(Integer userId);
+        }
+        → Spring Data JPA dùng JPA specification
+    
+    - Hibernate (implementation thực tế):
+        spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL8Dialect
+        → Hibernate là implementation thực thi JPA
+
+    6. CÁCH HOẠT ĐỘNG:
+    - Khi bạn dùng Spring Data JPA:
+        1. Bạn viết code theo JPA specification (annotations, interfaces)
+        2. Spring Data JPA sử dụng JPA EntityManager
+        3. Hibernate (implementation) thực thi các operations
+        4. Hibernate generate SQL và execute trên database
+    
+    - Flow:
+        Code (JPA annotations) 
+        → Spring Data JPA (JPA EntityManager)
+        → Hibernate (implementation)
+        → SQL queries
+        → MySQL Database
+
+    7. CÓ THỂ DÙNG HIBERNATE KHÔNG CẦN JPA:
+    - Có! Hibernate có thể dùng độc lập:
+        + Hibernate Session API (thay vì EntityManager)
+        + HQL (thay vì JPQL)
+        + Hibernate-specific annotations
+    
+    - Nhưng trong Spring Boot, thường dùng JPA (chuẩn) và Hibernate là implementation
+
+    8. CÁC IMPLEMENTATION KHÁC CỦA JPA:
+    - Hibernate (phổ biến nhất, mạnh nhất)
+    - EclipseLink (Oracle)
+    - OpenJPA (Apache)
+    - DataNucleus
+    
+    - Tất cả đều implement JPA specification, có thể thay thế nhau
+
+    9. SO SÁNH CHI TIẾT:
+    - JPA:
+        + Specification (interface)
+        + Chuẩn Java EE/Jakarta EE
+        + Portable (có thể đổi implementation)
+        + Ít tính năng hơn (chỉ specification)
+        + Dùng annotations từ jakarta.persistence.*
+    
+    - Hibernate:
+        + Implementation (code thực thi)
+        + Mạnh mẽ, nhiều tính năng
+        + Có thể dùng độc lập hoặc implement JPA
+        + Nhiều tính năng riêng (HQL, caching, etc.)
+        + Dùng annotations từ org.hibernate.annotations.*
+
+    10. VÍ DỤ CỤ THỂ:
+        - JPA Specification:
+        @Entity
+        @Table(name = "users")
+        public class User {
+            @Id
+            @GeneratedValue(strategy = GenerationType.IDENTITY)
+            private Long id;
+        }
+        → Bất kỳ JPA implementation nào cũng hiểu
+        
+        - Hibernate Implementation:
+        Khi bạn gọi: userRepo.save(user)
+        → Spring Data JPA (JPA layer)
+        → Hibernate (implementation)
+        → SQL: INSERT INTO users (...) VALUES (...)
+        → MySQL execute
+
+    11. SPRING DATA JPA:
+        - Spring Data JPA là abstraction layer trên JPA
+        - Giúp giảm boilerplate code
+        - Tự động implement repository methods
+        - Vẫn dùng JPA specification, Hibernate là implementation
+        
+        - Ví dụ:
+        public interface StudentRepo extends JpaRepository<StudentEntity, Integer> {
+            // Chỉ cần khai báo method signature
+            Optional<StudentEntity> findByUserId(Integer userId);
+            // Spring Data JPA tự động implement
+            // → Sử dụng JPA EntityManager
+            // → Hibernate thực thi
+        }
+
+    12. KHI NÀO DÙNG JPA, KHI NÀO DÙNG HIBERNATE:
+        - Dùng JPA (specification) khi:
+        + Muốn code portable (có thể đổi implementation)
+        + Muốn tuân theo chuẩn Java
+        + Làm việc với Spring Data JPA
+        + Muốn code dễ maintain
+        
+        - Dùng Hibernate trực tiếp khi:
+        + Cần tính năng đặc biệt của Hibernate
+        + Cần HQL (Hibernate Query Language)
+        + Cần Hibernate Session API
+        + Tối ưu performance với Hibernate-specific features
+
+    13. BẢNG SO SÁNH:
+        Tiêu chí          | JPA                          | Hibernate
+        ------------------|------------------------------|--------------------------
+        Loại              | Specification (Interface)    | Implementation (Code)
+        Mục đích          | Định nghĩa "làm thế nào"     | Thực thi "làm như thế"
+        Annotations       | jakarta.persistence.*        | org.hibernate.annotations.*
+        Query Language    | JPQL (Java Persistence QL)   | HQL (Hibernate QL)
+        API               | EntityManager                | Session
+        Portable          | Có (đổi được implementation) | Không (specific Hibernate)
+        Tính năng         | Cơ bản (theo spec)           | Nhiều (ngoài spec)
+        Spring Boot       | Dùng qua Spring Data JPA     | Implementation mặc định
+
+    14. TRONG PROJECT CỦA BẠN:
+        - Dependencies:
+        spring-boot-starter-data-jpa
+        → Bao gồm: JPA API + Hibernate implementation
+        
+        - Configuration:
+        spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL8Dialect
+        → Cấu hình Hibernate (implementation)
+        
+        - Code:
+        @Entity, @Table, @Id → JPA annotations
+        JpaRepository → Spring Data JPA (dùng JPA)
+        Hibernate thực thi → Generate SQL → MySQL
+
+    15. KẾT LUẬN:
+        - JPA và Hibernate KHÔNG phải đối thủ, mà là specification và implementation
+        - JPA: "Bản thiết kế" (specification)
+        - Hibernate: "Ngôi nhà thực tế" (implementation)
+        - Trong Spring Boot: Dùng JPA specification, Hibernate là implementation mặc định
+        - Pattern: Code (JPA) → Spring Data JPA → Hibernate → SQL → Database
+        - Không cần chọn giữa JPA và Hibernate, dùng cả 2 (JPA spec + Hibernate impl)
+
+
+
+###( Guide Note 196)###
+* CÁC CACHE LEVELS TRONG HIBERNATE:
+
+  1. TỔNG QUAN:
+    - Hibernate có 3 loại cache:
+      1. First-Level Cache (Session Cache) - Mặc định, luôn bật
+      2. Second-Level Cache (SessionFactory Cache) - Tùy chọn, cần config
+      3. Query Cache - Tùy chọn, cần config
+    
+    - Mục đích: Giảm số lần query database, tăng performance
+
+  2. FIRST-LEVEL CACHE (Session Cache):
+    - Định nghĩa:
+      + Cache trong phạm vi một Hibernate Session (EntityManager)
+      + Tự động bật, không cần config
+      + Scope: Chỉ trong một transaction/session
+      + Mất khi session đóng
+    
+    - Cách hoạt động:
+      + Khi query entity lần đầu → Lưu vào cache
+      + Query cùng entity lần 2 → Lấy từ cache (không query DB)
+      + Chỉ áp dụng trong cùng một session
+    
+    - Ví dụ:
+      @Transactional
+      public void example() {
+          // Lần 1: Query database
+          StudentEntity s1 = studentRepo.findById(1).get();
+          // SQL: SELECT * FROM Students WHERE id = 1
+          
+          // Lần 2: Lấy từ First-Level Cache (không query DB)
+          StudentEntity s2 = studentRepo.findById(1).get();
+          // KHÔNG có SQL query → Lấy từ cache
+          
+          // s1 và s2 là cùng một object instance (identity)
+          assert s1 == s2;  // true
+      }
+    
+    - Đặc điểm:
+      + Tự động, không cần config
+      + Scope: Một session/transaction
+      + Mất khi session đóng
+      + Không share giữa các sessions
+      + Giúp tránh duplicate queries trong cùng session
+
+  3. SECOND-LEVEL CACHE (SessionFactory Cache):
+    - Định nghĩa:
+      + Cache ở mức SessionFactory (shared giữa tất cả sessions)
+      + Cần config và enable
+      + Scope: Toàn bộ application
+      + Persist giữa các sessions
+    
+    - Cách hoạt động:
+      + Session 1 query entity → Lưu vào Second-Level Cache
+      + Session 2 query cùng entity → Lấy từ Second-Level Cache (không query DB)
+      + Share giữa tất cả sessions trong cùng application
+    
+    - Cấu hình (application.properties):
+      # Enable Second-Level Cache
+      spring.jpa.properties.hibernate.cache.use_second_level_cache=true
+      spring.jpa.properties.hibernate.cache.region.factory_class=org.hibernate.cache.jcache.JCacheRegionFactory
+      
+      # Provider (ví dụ: Ehcache, Hazelcast, Redis)
+      # Cần dependency: hibernate-jcache, cache-api
+    
+    - Enable cho Entity:
+      @Entity
+      @Cacheable  // Enable Second-Level Cache cho entity này
+      @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+      @Table(name = "Students")
+      public class StudentEntity {
+          // ...
+      }
+    
+    - Cache Concurrency Strategies:
+      + READ_ONLY: Chỉ đọc, không update (immutable data)
+      + READ_WRITE: Đọc và ghi, dùng version để invalidate
+      + NONSTRICT_READ_WRITE: Đọc và ghi, không strict consistency
+      + TRANSACTIONAL: Transactional cache (JTA only)
+    
+    - Ví dụ:
+      // Session 1
+      @Transactional
+      public void session1() {
+          StudentEntity s1 = studentRepo.findById(1).get();
+          // SQL: SELECT * FROM Students WHERE id = 1
+          // → Lưu vào Second-Level Cache
+      }
+      
+      // Session 2 (khác transaction)
+      @Transactional
+      public void session2() {
+          StudentEntity s2 = studentRepo.findById(1).get();
+          // KHÔNG có SQL query → Lấy từ Second-Level Cache
+      }
+    
+    - Providers:
+      + Ehcache (phổ biến)
+      + Hazelcast (distributed)
+      + Redis (distributed, external)
+      + Infinispan (distributed)
+    
+    - Lưu ý:
+      + Cần config provider
+      + Tốn memory (lưu entities trong cache)
+      + Cần invalidate khi update/delete
+      + Không phù hợp cho data thay đổi thường xuyên
+
+  4. QUERY CACHE:
+    - Định nghĩa:
+      + Cache kết quả của queries (không phải entities)
+      + Cache theo query và parameters
+      + Cần enable Second-Level Cache trước
+    
+    - Cách hoạt động:
+      + Query lần 1 với params → Lưu kết quả vào cache
+      + Query lần 2 với cùng params → Lấy từ cache
+      + Cache key = query + parameters
+    
+    - Cấu hình:
+      # Enable Query Cache
+      spring.jpa.properties.hibernate.cache.use_query_cache=true
+    
+    - Sử dụng:
+      @QueryHints(@QueryHint(name = "org.hibernate.cacheable", value = "true"))
+      @Query("SELECT s FROM StudentEntity s WHERE s.graduate = :graduate")
+      List<StudentEntity> findByGraduate(@Param("graduate") Boolean graduate);
+    
+    - Ví dụ:
+      // Lần 1
+      List<StudentEntity> list1 = repo.findByGraduate(true);
+      // SQL: SELECT * FROM Students WHERE graduate = true
+      // → Lưu kết quả vào Query Cache
+      
+      // Lần 2 (cùng params)
+      List<StudentEntity> list2 = repo.findByGraduate(true);
+      // KHÔNG có SQL query → Lấy từ Query Cache
+      
+      // Lần 3 (khác params)
+      List<StudentEntity> list3 = repo.findByGraduate(false);
+      // SQL: SELECT * FROM Students WHERE graduate = false
+      // → Query mới vì params khác
+    
+    - Lưu ý:
+      + Chỉ cache khi dùng @QueryHint với cacheable=true
+      + Cache theo query + parameters
+      + Cần invalidate khi data thay đổi
+      + Không phù hợp cho queries động
+
+  5. SO SÁNH CÁC CACHE LEVELS:
+    Tiêu chí          | First-Level      | Second-Level     | Query Cache
+    ------------------|------------------|------------------|------------------
+    Scope             | 1 Session        | All Sessions     | All Sessions
+    Config            | Tự động          | Cần config       | Cần config
+    Persist           | Không (mất khi   | Có (giữa         | Có (giữa
+                      | session đóng)    | sessions)        | sessions)
+    Share             | Không            | Có               | Có
+    Cache gì          | Entities         | Entities         | Query results
+    Use case          | Tránh duplicate  | Share entities   | Cache queries
+                      | trong session    | giữa sessions    | với params
+
+  6. VÍ DỤ TỔNG HỢP:
+    @Entity
+    @Cacheable
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    public class StudentEntity { ... }
+    
+    @Repository
+    public interface StudentRepo extends JpaRepository<StudentEntity, Integer> {
+        @QueryHints(@QueryHint(name = "org.hibernate.cacheable", value = "true"))
+        @Query("SELECT s FROM StudentEntity s WHERE s.graduate = :graduate")
+        List<StudentEntity> findByGraduate(@Param("graduate") Boolean graduate);
+    }
+    
+    // Flow khi query:
+    // 1. Check First-Level Cache (trong session hiện tại)
+    // 2. Check Second-Level Cache (nếu có)
+    // 3. Check Query Cache (nếu query có cacheable)
+    // 4. Query database nếu không có trong cache
+
+  7. KHI NÀO DÙNG CACHE NÀO:
+    - First-Level Cache:
+      + Luôn dùng (tự động)
+      + Không cần config
+      + Giúp tránh duplicate queries trong cùng transaction
+    
+    - Second-Level Cache:
+      + Dùng khi: Data ít thay đổi, đọc nhiều
+      + Ví dụ: Reference data, configuration, lookup tables
+      + Không dùng khi: Data thay đổi thường xuyên, cần real-time
+    
+    - Query Cache:
+      + Dùng khi: Query cố định, params ít thay đổi
+      + Ví dụ: Reports, dashboards, static queries
+      + Không dùng khi: Queries động, params thay đổi nhiều
+
+  8. INVALIDATION (XÓA CACHE):
+    - Khi update/delete entity:
+      + First-Level Cache: Tự động invalidate trong session
+      + Second-Level Cache: Cần config strategy (READ_WRITE tự động invalidate)
+      + Query Cache: Cần invalidate thủ công hoặc dùng timestamp
+    
+    - Cách invalidate:
+      @CacheEvict(value = "StudentEntity", allEntries = true)
+      public void updateStudent(StudentEntity student) {
+          studentRepo.save(student);
+          // → Invalidate Second-Level Cache cho StudentEntity
+      }
+
+  9. BEST PRACTICES:
+    - First-Level Cache:
+      + Luôn dùng (tự động)
+      + Không cần quan tâm
+    
+    - Second-Level Cache:
+      + Chỉ cache entities ít thay đổi
+      + Monitor memory usage
+      + Dùng READ_WRITE strategy cho most cases
+      + Invalidate khi cần
+    
+    - Query Cache:
+      + Chỉ cache queries cố định
+      + Monitor cache hit rate
+      + Invalidate khi data thay đổi
+    
+    - Lưu ý:
+      + Cache không phải lúc nào cũng tốt
+      + Cần balance giữa performance và memory
+      + Monitor cache statistics
+
+  10. TRONG PROJECT CỦA BẠN:
+      - Hiện tại: Chưa config Hibernate cache
+      - Đang dùng: Redis cache (application-level)
+      - Có thể thêm: Second-Level Cache cho entities ít thay đổi
+      
+      - So sánh Redis Cache vs Hibernate Cache:
+        Redis Cache:
+          + Application-level (không phụ thuộc Hibernate)
+          + Có thể share giữa nhiều applications
+          + External (cần Redis server)
+          + Flexible (cache bất kỳ data gì)
+        
+        Hibernate Cache:
+          + ORM-level (tích hợp với Hibernate)
+          + Chỉ trong một application
+          + Internal (trong JVM hoặc external provider)
+          + Chỉ cache entities/queries
+
+  11. KẾT LUẬN:
+      - First-Level Cache: Tự động, luôn có, scope một session
+      - Second-Level Cache: Cần config, share giữa sessions, cho entities
+      - Query Cache: Cần config, cache query results, cho queries
+      - Pattern: First-Level (auto) + Second-Level (optional) + Query Cache (optional)
+      - Redis Cache: Application-level, khác với Hibernate cache
+
+
+
+###( Guide Note 198)###
+* SO SÁNH SINGLE NODE REDIS VÀ MULTI NODE REDIS:
+
+  1. SINGLE NODE REDIS:
+    - Định nghĩa:
+      + Chỉ có 1 Redis server instance
+      + Tất cả data lưu trên 1 server
+      + Đơn giản, dễ setup
+    
+    - Cấu hình trong project (hiện tại):
+      @Bean
+      public RedissonClient redisson() {
+          Config config = new Config();
+          config.useSingleServer()
+                  .setAddress("redis://127.0.0.1:6379");
+          return Redisson.create(config);
+      }
+    
+    - Ưu điểm:
+      + Đơn giản: Chỉ cần 1 server
+      + Dễ setup: Không cần config phức tạp
+      + Chi phí thấp: Chỉ cần 1 server
+      + Phù hợp: Development, testing, small applications
+      + Latency thấp: Không có network overhead giữa nodes
+    
+    - Nhược điểm:
+      + Single Point of Failure (SPOF): Nếu server die → mất toàn bộ
+      + Không có High Availability: Không có backup
+      + Không scale được: Giới hạn bởi 1 server
+      + Không có data replication: Mất data nếu server die
+      + Memory limit: Giới hạn bởi RAM của 1 server
+
+  2. MULTI NODE REDIS:
+    - Định nghĩa:
+      + Nhiều Redis server instances
+      + Data được phân tán hoặc replicate
+      + Có High Availability
+    
+    - Các kiến trúc Multi Node:
+      a) Redis Replication (Master-Slave):
+          - 1 Master (ghi) + N Slaves (đọc)
+          - Master replicate data sang Slaves
+          - Nếu Master die → Promote 1 Slave thành Master
+          - Use case: Read scaling, backup
+      
+      b) Redis Sentinel: ( bản nâng cấp của Replication với các sentinel)
+          - Monitor Master-Slave setup
+          - Tự động failover khi Master die
+          - High Availability
+          - Use case: Production với HA requirement
+      
+      c) Redis Cluster: ( Giống như nhiều nhà kho, mỗi nhà kho chỉ lưu một loại hàng ,
+                          Hàng được phân loại và đưa vào nhà kho tương ứng )
+          - Sharding data across multiple nodes
+          - Automatic failover
+          - Horizontal scaling
+          - Use case: Large scale, distributed cache
+
+  3. REDIS REPLICATION (MASTER-SLAVE):
+    - Kiến trúc:
+      Master (Write) → Replicate → Slave 1 (Read)
+                            → Slave 2 (Read)
+                            → Slave 3 (Read)
+    
+    - Cách hoạt động:
+      + Master nhận tất cả write operations
+      + Master replicate data sang tất cả Slaves
+      + Slaves chỉ đọc (read-only)
+      + Client đọc từ Slaves, ghi vào Master
+    
+    - Cấu hình:
+      # Master config (redis.conf)
+      # Không cần config đặc biệt
+      
+      # Slave config (redis.conf)
+      replicaof <master-ip> <master-port>
+      replica-read-only yes
+    
+    - Ưu điểm:
+      + Read scaling: Nhiều Slaves đọc song song
+      + Backup: Slaves là backup của Master
+      + High Availability: Có thể promote Slave thành Master
+    
+    - Nhược điểm:
+      + Không scale write: Chỉ 1 Master ghi
+      + Replication lag: Slaves có thể lag sau Master
+      + Manual failover: Cần promote Slave thủ công
+
+  4. REDIS SENTINEL:
+    - Kiến trúc:
+      Sentinel 1 ─┐
+      Sentinel 2 ─┼─ Monitor → Master ─→ Slaves
+      Sentinel 3 ─┘
+    
+    - Cách hoạt động:
+      + Sentinels monitor Master và Slaves
+      + Nếu Master die → Sentinels tự động promote 1 Slave thành Master
+      + Client connect qua Sentinel (không connect trực tiếp Master)
+      + Sentinel tự động redirect đến Master mới
+    
+    - Cấu hình:
+      # Sentinel config (sentinel.conf)
+      sentinel monitor mymaster 127.0.0.1 6379 2
+      sentinel down-after-milliseconds mymaster 5000
+      sentinel failover-timeout mymaster 10000
+    
+    - Cấu hình trong Spring Boot:
+      @Bean
+      public RedissonClient redisson() {
+          Config config = new Config();
+          config.useSentinelServers()
+                  .setMasterName("mymaster")
+                  .addSentinelAddress("redis://127.0.0.1:26379")
+                  .addSentinelAddress("redis://127.0.0.1:26380")
+                  .addSentinelAddress("redis://127.0.0.1:26381");
+          return Redisson.create(config);
+      }
+
+    - Data flow thực tế
+      1. Client → Sentinel: "Master ở đâu?"
+        Sentinel → Client: "Master ở 127.0.0.1:6379"
+      
+      2. Client → Master: SET key "value"
+        Master → Client: OK
+        
+      3. Master → Slave 1: Replicate data
+        Master → Slave 2: Replicate data
+        
+      → Sentinel KHÔNG tham gia vào data flow!
+      → Sentinel chỉ giúp client tìm Master!
+    
+    - Ưu điểm:
+      + Automatic failover: Tự động khi Master die
+      + High Availability: Không có downtime
+      + Monitor: Sentinels monitor health
+      + Production-ready: Phù hợp cho production
+    
+    - Nhược điểm:
+      + Phức tạp hơn: Cần config Sentinels
+      + Vẫn chỉ 1 Master ghi: Không scale write
+      + Cần ít nhất 3 Sentinels: Để đảm bảo quorum
+
+  5. REDIS CLUSTER:
+    - Kiến trúc:
+      Node 1 (Slot 0-5460)    Node 2 (Slot 5461-10922)   Node 3 (Slot 10923-16383)
+      Node 4 (Replica of 1)   Node 5 (Replica of 2)     Node 6 (Replica of 3)
+    
+    - Cách hoạt động:
+      + Data được shard thành 16384 slots
+      + Mỗi node quản lý một số slots
+      + Client tự động route đến node đúng
+      + Mỗi node có 1 replica (backup)
+      + Automatic failover khi node die
+    
+    - Cấu hình:
+      # Cluster config (redis.conf)
+      cluster-enabled yes
+      cluster-config-file nodes.conf
+      cluster-node-timeout 5000
+    
+    - Cấu hình trong Spring Boot:
+      @Bean
+      public RedissonClient redisson() {
+          Config config = new Config();
+          config.useClusterServers()
+                  .addNodeAddress("redis://127.0.0.1:7000")
+                  .addNodeAddress("redis://127.0.0.1:7001")
+                  .addNodeAddress("redis://127.0.0.1:7002")
+                  .addNodeAddress("redis://127.0.0.1:7003")
+                  .addNodeAddress("redis://127.0.0.1:7004")
+                  .addNodeAddress("redis://127.0.0.1:7005");
+          return Redisson.create(config);
+      }
+    
+    - Ưu điểm:
+      + Horizontal scaling: Thêm nodes để scale
+      + Automatic sharding: Data tự động phân tán
+      + Automatic failover: Tự động khi node die
+      + High Availability: Mỗi node có replica
+      + Scale cả read và write: Nhiều nodes xử lý
+    
+    - Nhược điểm:
+      + Phức tạp nhất: Cần nhiều nodes
+      + Multi-key operations: Một số operations không support
+      + Chi phí cao: Cần nhiều servers
+      + Overhead: Network communication giữa nodes
+
+  6. SO SÁNH CHI TIẾT:
+    Tiêu chí          | Single Node    | Replication     | Sentinel       | Cluster
+    ------------------|----------------|-----------------|----------------|------------------
+    Số nodes          | 1              | 2+ (1M + NS)    | 3+ (1M+NS+3S)  | 6+ (3M+3R)
+    High Availability | Không          | Manual          | Automatic      | Automatic
+    Failover          | Không          | Manual          | Automatic      | Automatic
+    Read Scaling      | Không          | Có (Slaves)     | Có (Slaves)    | Có (All nodes)
+    Write Scaling     | Không          | Không           | Không          | Có (Sharding)
+    Setup             | Đơn giản       | Trung bình      | Phức tạp       | Rất phức tạp
+    Chi phí           | Thấp           | Trung bình      | Trung bình     | Cao
+    Use case          | Dev/Test       | Read-heavy      | Production     | Large scale
+    Data loss risk    | Cao            | Trung bình      | Thấp           | Rất thấp
+
+  7. KHI NÀO DÙNG CÁI NÀO:
+    - Single Node:
+      + Development, testing
+      + Small applications
+      + Không cần High Availability
+      + Budget hạn chế
+      + Low traffic
+    
+    - Replication (Master-Slave):
+      + Read-heavy applications
+      + Cần backup data
+      + Có thể chấp nhận manual failover
+      + Medium traffic
+    
+    - Sentinel:
+      + Production applications
+      + Cần High Availability
+      + Cần automatic failover
+      + Medium to high traffic
+      + Không cần scale write
+    
+    - Cluster:
+      + Large scale applications
+      + Cần scale cả read và write
+      + Very high traffic
+      + Distributed systems
+      + Cần horizontal scaling
+
+  8. TRONG PROJECT CỦA BẠN:
+    - Hiện tại: Single Node Redis
+      config.useSingleServer()
+      .setAddress("redis://127.0.0.1:6379");
+    
+    - Phù hợp cho: Development, testing
+    
+    - Nếu chuyển sang Production:
+      + Nên dùng Sentinel (nếu không cần scale write)
+      + Hoặc Cluster (nếu cần scale write )
+      + Cần update config trong RedisConfig.java
+
+  9. MIGRATION TỪ SINGLE NODE SANG MULTI NODE:
+    - Bước 1: Setup Redis Replication/Sentinel/Cluster
+    - Bước 2: Update config trong Spring Boot
+    - Bước 3: Test failover scenarios
+    - Bước 4: Deploy và monitor
+    
+    - Ví dụ migration sang Sentinel:
+      // Cũ (Single Node)
+      config.useSingleServer()
+              .setAddress("redis://127.0.0.1:6379");
+      
+      // Mới (Sentinel)
+      config.useSentinelServers()
+              .setMasterName("mymaster")
+              .addSentinelAddress("redis://127.0.0.1:26379")
+              .addSentinelAddress("redis://127.0.0.1:26380")
+              .addSentinelAddress("redis://127.0.0.1:26381");
+
+  10. BEST PRACTICES:
+      - Development: Single Node (đơn giản)
+      - Staging: Replication hoặc Sentinel (test HA)
+      - Production: Sentinel hoặc Cluster (HA + scaling)
+      - Monitor: Luôn monitor Redis health
+      - Backup: Có strategy backup data
+      - Testing: Test failover scenarios trước khi deploy
+
+  11. KẾT LUẬN:
+      - Single Node: Đơn giản, phù hợp dev/test
+      - Replication: Read scaling, backup
+      - Sentinel: Production với HA, automatic failover
+      - Cluster: Large scale, horizontal scaling
+      - Chọn theo: Requirements (HA, scaling, complexity, cost)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

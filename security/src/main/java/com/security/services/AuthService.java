@@ -4,6 +4,7 @@ import com.handle_exceptions.ConflictExceptionHandle;
 import com.handle_exceptions.ForbiddenExceptionHandle;
 import com.handle_exceptions.NotFoundExceptionHandle;
 import com.handle_exceptions.UnauthorizedExceptionHandle;
+import com.handle_exceptions.ValidationExceptionHandle;
 import com.security.config.JwtConfig;
 import com.security.entities.UserEntity;
 import com.security.models.Login;
@@ -106,6 +107,19 @@ public class AuthService {
 
         Role userRole = Role.valueOf(request.getRole().name());
         
+        // Validate permissions: Các role khác ADMIN phải có permissions
+        if (userRole != Role.ADMIN && (request.getPermissions() == null || request.getPermissions().isEmpty())) {
+            loggingService.logWarn("Registration attempt without permissions for non-ADMIN role: " + userRole, logContext);
+            throw new ValidationExceptionHandle(
+                "Permissions are required for non-ADMIN roles",
+                List.of("permissions"),
+                "Security-Model"
+            );
+        }
+        
+        // Convert permissions: ADMIN tự động có tất cả permissions
+        Set<Permission> finalPermissions = convertToPermissions(request.getPermissions(), userRole);
+        
         UserEntity user;
         if (existingUser != null) {
             // Re-registration: UPDATE user FAILED thay vì tạo mới
@@ -119,7 +133,7 @@ public class AuthService {
             user.setGender(request.getGender());
             user.setBirth(request.getBirth());
             user.setRole(userRole);
-            user.setPermissions(request.getPermissions());
+            user.setPermissions(finalPermissions); // Sử dụng permissions đã convert
             user.setStatus(Status.PENDING);
             
             loggingService.logInfo("Reusing existing userId: " + user.getUserId() + " for re-registration", logContext);
@@ -135,29 +149,36 @@ public class AuthService {
                     .gender(request.getGender())
                     .birth(request.getBirth())
                     .role(userRole)
-                    .permissions(request.getPermissions())
+                    .permissions(finalPermissions) // Sử dụng permissions đã convert
                     .status(Status.PENDING)
                     .build();
         }
 
-        userRepo.save(user);
-
-        Map<String, Object> profileData = null;
-        if(request.getType() == Type.STUDENT && request.getProfileData() != null && !request.getProfileData().isEmpty()){
-            profileData = new HashMap<>();
-            if(request.getProfileData().containsKey("graduate")){
-                profileData.put("graduate", request.getProfileData().get("graduate"));
+        if (userRole == Role.ADMIN) {
+            user.setStatus(Status.ENABLED);
+            userRepo.save(user);
+            loggingService.logInfo("ADMIN user registered and enabled immediately (no entity creation needed)", logContext);
+        } else {
+            userRepo.save(user);
+            
+            Map<String, Object> profileData = null;
+            if(request.getType() == Type.STUDENT && request.getProfileData() != null && !request.getProfileData().isEmpty()){
+                profileData = new HashMap<>();
+                if(request.getProfileData().containsKey("graduate")){
+                    profileData.put("graduate", request.getProfileData().get("graduate"));
+                }
             }
+
+            // Convert UserEntity → UserDto using ModelMapper
+            UserDto userDto = modelMapper.map(user, UserDto.class);
+            
+            // Set custom field (profileData - không có trong UserEntity)
+            userDto.setProfileData(profileData);
+
+            UserEvent userEvent = UserEvent.userRegistered(userDto);
+            kafkaProducerService.sendUserEvent(userEvent);
+            loggingService.logInfo("User registered event sent to Kafka for " + user.getType() + " user", logContext);
         }
-
-        // Convert UserEntity → UserDto using ModelMapper
-        UserDto userDto = modelMapper.map(user, UserDto.class);
-        
-        // Set custom field (profileData - không có trong UserEntity)
-        userDto.setProfileData(profileData);
-
-        UserEvent userEvent = UserEvent.userRegistered(userDto);
-        kafkaProducerService.sendUserEvent(userEvent);
 
         // Tạo custom claims cho token
         Map<String, Object> claim = new HashMap<>();

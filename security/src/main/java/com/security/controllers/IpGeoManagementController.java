@@ -1,16 +1,18 @@
 package com.security.controllers;
 
 import com.model_shared.models.Response;
+import com.security.models.IpAddress;
+import com.security.models.CountryCode;
 import com.logging.models.LogContext;
 import com.logging.services.LoggingService;
 import com.security.services.IpBlockingService;
 import com.security.services.GeoBlockingService;
-import com.security_shared.annotations.RequiresAuth;
-import com.security_shared.annotations.CurrentUser;
+import com.security.utils.SecurityUtils;
 import com.model_shared.models.user.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -33,6 +35,9 @@ public class IpGeoManagementController {
     @Autowired
     private ReloadableResourceBundleMessageSource messageSource;
     
+    @Autowired
+    private SecurityUtils securityUtils;
+    
     private LogContext getLogContext(String methodName) {
         return LogContext.builder()
             .module("security")
@@ -41,133 +46,211 @@ public class IpGeoManagementController {
             .build();
     }
     
-    // ========================================
     // IP WHITELIST MANAGEMENT
-    // ========================================
     
     @PostMapping("/ip/whitelist")
-    @RequiresAuth(roles = {"ADMIN"})
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Response<String>> addIpToWhitelist(
-            @RequestBody Map<String, String> request,
-            @RequestHeader(value = "Accept-Language", defaultValue = "en") String acceptLanguage,
-            @CurrentUser UserDto currentUser) {
+            @RequestBody IpAddress req,
+            @RequestHeader(value = "Accept-Language", defaultValue = "en") String acceptLanguage) {
         Locale locale = Locale.forLanguageTag(acceptLanguage);
         LogContext logContext = getLogContext("addIpToWhitelist");
         
-        String ipAddress = request.get("ipAddress");
-        if (ipAddress == null || ipAddress.isEmpty()) {
-            Response<String> response = new Response<>(
-                400,
-                "IP address is required",
-                "IpGeoManagement",
-                null,
-                null
-            );
-            return ResponseEntity.badRequest().body(response);
-        }
-        
-        ipBlockingService.addToWhitelist(ipAddress);
-        loggingService.logInfo("Admin " + currentUser.getUsername() + " added IP to whitelist: " + ipAddress, logContext);
+        UserDto currentUser = securityUtils.getCurrentUserDto();
+        ipBlockingService.addToWhitelist(req.ipAddress());
+        loggingService.logInfo((currentUser != null ? currentUser.getUsername() : "unknown") + 
+            " added IP to whitelist: " + req.ipAddress(), logContext);
         
         Response<String> response = new Response<>(
             200,
-            messageSource.getMessage("response.message.updateSuccess", null, locale),
+            messageSource.getMessage("response.message.ipAddressAddedToWhitelistSuccess", null, locale),
             "IpGeoManagement",
             null,
-            "IP " + ipAddress + " added to whitelist successfully"
+            "IP " + req.ipAddress()
         );
         return ResponseEntity.ok(response);
     }
     
     @DeleteMapping("/ip/whitelist/{ipAddress}")
-    @RequiresAuth(roles = {"ADMIN"})
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Response<String>> removeIpFromWhitelist(
             @PathVariable String ipAddress,
-            @RequestHeader(value = "Accept-Language", defaultValue = "en") String acceptLanguage,
-            @CurrentUser UserDto currentUser) {
+            @RequestHeader(value = "Accept-Language", defaultValue = "en") String acceptLanguage) {
         Locale locale = Locale.forLanguageTag(acceptLanguage);
         LogContext logContext = getLogContext("removeIpFromWhitelist");
         
+        UserDto currentUser = securityUtils.getCurrentUserDto();
         ipBlockingService.removeFromWhitelist(ipAddress);
-        loggingService.logInfo("Admin " + currentUser.getUsername() + " removed IP from whitelist: " + ipAddress, logContext);
+        loggingService.logInfo((currentUser != null ? currentUser.getUsername() : "unknown") + 
+            " removed IP from whitelist: " + ipAddress, logContext);
         
         Response<String> response = new Response<>(
             200,
-            messageSource.getMessage("response.message.deleteSuccess", null, locale),
+            messageSource.getMessage("response.message.ipAddressRemovedFromWhitelistSuccess", null, locale),
             "IpGeoManagement",
             null,
-            "IP " + ipAddress + " removed from whitelist successfully"
+            "IP " + ipAddress
         );
         return ResponseEntity.ok(response);
     }
     
-    // ========================================
     // IP BLACKLIST MANAGEMENT
-    // ========================================
-    
+     
     @PostMapping("/ip/blacklist")
-    @RequiresAuth(roles = {"ADMIN"})
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Response<String>> addIpToBlacklist(
-            @RequestBody Map<String, String> request,
-            @RequestHeader(value = "Accept-Language", defaultValue = "en") String acceptLanguage,
-            @CurrentUser UserDto currentUser) {
+            @RequestBody IpAddress req,
+            @RequestHeader(value = "Accept-Language", defaultValue = "en") String acceptLanguage) {
         Locale locale = Locale.forLanguageTag(acceptLanguage);
         LogContext logContext = getLogContext("addIpToBlacklist");
         
-        String ipAddress = request.get("ipAddress");
-        if (ipAddress == null || ipAddress.isEmpty()) {
-            Response<String> response = new Response<>(
-                400,
-                "IP address is required",
-                "IpGeoManagement",
-                null,
-                null
-            );
-            return ResponseEntity.badRequest().body(response);
-        }
-        
-        ipBlockingService.addToBlacklist(ipAddress);
-        loggingService.logInfo("Admin " + currentUser.getUsername() + " added IP to blacklist: " + ipAddress, logContext);
+        UserDto currentUser = securityUtils.getCurrentUserDto();
+        ipBlockingService.addToBlacklist(req.ipAddress());
+        loggingService.logInfo((currentUser != null ? currentUser.getUsername() : "unknown") + 
+            " added IP to blacklist: " + req.ipAddress(), logContext);
         
         Response<String> response = new Response<>(
             200,
-            messageSource.getMessage("response.message.updateSuccess", null, locale),
+            messageSource.getMessage("response.message.ipAddressAddedToBlacklistSuccess", null, locale),
             "IpGeoManagement",
             null,
-            "IP " + ipAddress + " added to blacklist successfully"
+            "IP " + req.ipAddress()
         );
         return ResponseEntity.ok(response);
     }
     
     @DeleteMapping("/ip/blacklist/{ipAddress}")
-    @RequiresAuth(roles = {"ADMIN"})
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Response<String>> removeIpFromBlacklist(
             @PathVariable String ipAddress,
-            @RequestHeader(value = "Accept-Language", defaultValue = "en") String acceptLanguage,
-            @CurrentUser UserDto currentUser) {
+            @RequestHeader(value = "Accept-Language", defaultValue = "en") String acceptLanguage) {
         Locale locale = Locale.forLanguageTag(acceptLanguage);
         LogContext logContext = getLogContext("removeIpFromBlacklist");
         
+        UserDto currentUser = securityUtils.getCurrentUserDto();
         ipBlockingService.removeFromBlacklist(ipAddress);
-        loggingService.logInfo("Admin " + currentUser.getUsername() + " removed IP from blacklist: " + ipAddress, logContext);
+        loggingService.logInfo((currentUser != null ? currentUser.getUsername() : "unknown") + 
+            " removed IP from blacklist: " + ipAddress, logContext);
         
         Response<String> response = new Response<>(
             200,
             messageSource.getMessage("response.message.deleteSuccess", null, locale),
             "IpGeoManagement",
             null,
-            "IP " + ipAddress + " removed from blacklist successfully"
+            "IP " + ipAddress
+        );
+        return ResponseEntity.ok(response);
+    }
+     
+    // GEO WHITELIST MANAGEMENT
+
+    @PostMapping("/geo/whitelist")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<Response<String>> addCountryToWhitelist(
+            @RequestBody CountryCode req,
+            @RequestHeader(value = "Accept-Language", defaultValue = "en") String acceptLanguage) {
+        Locale locale = Locale.forLanguageTag(acceptLanguage);
+        LogContext logContext = getLogContext("addCountryToWhitelist");
+        
+        UserDto currentUser = securityUtils.getCurrentUserDto();
+        geoBlockingService.addCountryToWhitelist(req.countryCode().toUpperCase());
+        loggingService.logInfo((currentUser != null ? currentUser.getUsername() : "unknown") + 
+            " added country to whitelist: " + req.countryCode().toUpperCase(), logContext);
+        
+        Response<String> response = new Response<>(
+            200,
+            messageSource.getMessage("response.message.ipAddressAddedToGeoWhitelistSuccess", null, locale),
+            "IpGeoManagement",
+            null,
+            "Country " + req.countryCode().toUpperCase()
         );
         return ResponseEntity.ok(response);
     }
     
+    @DeleteMapping("/geo/whitelist/{countryCode}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<Response<String>> removeCountryFromWhitelist(
+            @PathVariable String countryCode,
+            @RequestHeader(value = "Accept-Language", defaultValue = "en") String acceptLanguage) {
+        Locale locale = Locale.forLanguageTag(acceptLanguage);
+        LogContext logContext = getLogContext("removeCountryFromWhitelist");
+        
+        UserDto currentUser = securityUtils.getCurrentUserDto();
+        geoBlockingService.removeCountryFromWhitelist(countryCode.toUpperCase());
+        loggingService.logInfo((currentUser != null ? currentUser.getUsername() : "unknown") + 
+            " removed country from whitelist: " + countryCode.toUpperCase(), logContext);
+        
+        Response<String> response = new Response<>(
+            200,
+            messageSource.getMessage("response.message.ipAddressRemovedFromGeoWhitelistSuccess", null, locale),
+            "IpGeoManagement",
+            null,
+            "Country " + countryCode.toUpperCase()
+        );
+        return ResponseEntity.ok(response);
+    }
+
+    // GEO BLACKLIST MANAGEMENT
+    
+    @PostMapping("/geo/blacklist")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<Response<String>> addCountryToBlacklist(
+            @RequestBody CountryCode req,
+            @RequestHeader(value = "Accept-Language", defaultValue = "en") String acceptLanguage) {
+        Locale locale = Locale.forLanguageTag(acceptLanguage);
+        LogContext logContext = getLogContext("addCountryToBlacklist");
+        
+        UserDto currentUser = securityUtils.getCurrentUserDto();
+        geoBlockingService.addCountryToBlacklist(req.countryCode().toUpperCase());
+        loggingService.logInfo((currentUser != null ? currentUser.getUsername() : "unknown") + 
+            " added country to blacklist: " + req.countryCode().toUpperCase(), logContext);
+        
+        Response<String> response = new Response<>(
+            200,
+            messageSource.getMessage("response.message.ipAddressAddedToGeoBlacklistSuccess", null, locale),
+            "IpGeoManagement",
+            null,
+            "Country " + req.countryCode().toUpperCase()
+        );
+        return ResponseEntity.ok(response);
+    }
+    
+    @DeleteMapping("/geo/blacklist/{countryCode}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<Response<String>> removeCountryFromBlacklist(
+            @PathVariable String countryCode,
+            @RequestHeader(value = "Accept-Language", defaultValue = "en") String acceptLanguage) {
+        Locale locale = Locale.forLanguageTag(acceptLanguage);
+        LogContext logContext = getLogContext("removeCountryFromBlacklist");
+        
+        UserDto currentUser = securityUtils.getCurrentUserDto();
+        geoBlockingService.removeCountryFromBlacklist(countryCode.toUpperCase());
+        loggingService.logInfo((currentUser != null ? currentUser.getUsername() : "unknown") + 
+            " removed country from blacklist: " + countryCode.toUpperCase(), logContext);
+        
+        Response<String> response = new Response<>(
+            200,
+            messageSource.getMessage("response.message.ipAddressRemovedFromGeoBlacklistSuccess", null, locale),
+            "IpGeoManagement",
+            null,
+            "Country " + countryCode.toUpperCase()
+        );
+        return ResponseEntity.ok(response);
+    }
+    
+    // IP STATUS MANAGEMENT
+
     @GetMapping("/ip/status/{ipAddress}")
-    @RequiresAuth(roles = {"ADMIN"})
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Response<Map<String, Object>>> getIpStatus(
             @PathVariable String ipAddress,
-            @RequestHeader(value = "Accept-Language", defaultValue = "en") String acceptLanguage,
-            @CurrentUser UserDto currentUser) {
+            @RequestHeader(value = "Accept-Language", defaultValue = "en") String acceptLanguage) {
         Locale locale = Locale.forLanguageTag(acceptLanguage);
+        LogContext logContext = getLogContext("getIpStatus");
+        
+        UserDto currentUser = securityUtils.getCurrentUserDto();
+        loggingService.logInfo((currentUser != null ? currentUser.getUsername() : "unknown") + 
+            " checked IP status for: " + ipAddress, logContext);
         
         Long blockedCount = ipBlockingService.getBlockedCount(ipAddress);
         boolean isAutoBlacklisted = ipBlockingService.isIpAutoBlacklisted(ipAddress);
@@ -192,132 +275,6 @@ public class IpGeoManagementController {
             "IpGeoManagement",
             null,
             data
-        );
-        return ResponseEntity.ok(response);
-    }
-    
-    @GetMapping("/ip/blocked-count/{ipAddress}")
-    @RequiresAuth(roles = {"ADMIN"})
-    public ResponseEntity<Response<Map<String, Object>>> getIpBlockedCount(
-            @PathVariable String ipAddress,
-            @RequestHeader(value = "Accept-Language", defaultValue = "en") String acceptLanguage,
-            @CurrentUser UserDto currentUser) {
-        // Redirect to getIpStatus
-        return getIpStatus(ipAddress, acceptLanguage, currentUser);
-    }
-    
-    // ========================================
-    // GEO BLOCKING MANAGEMENT
-    // ========================================
-    
-    @PostMapping("/geo/blacklist")
-    @RequiresAuth(roles = {"ADMIN"})
-    public ResponseEntity<Response<String>> addCountryToBlacklist(
-            @RequestBody Map<String, String> request,
-            @RequestHeader(value = "Accept-Language", defaultValue = "en") String acceptLanguage,
-            @CurrentUser UserDto currentUser) {
-        Locale locale = Locale.forLanguageTag(acceptLanguage);
-        LogContext logContext = getLogContext("addCountryToBlacklist");
-        
-        String countryCode = request.get("countryCode");
-        if (countryCode == null || countryCode.isEmpty()) {
-            Response<String> response = new Response<>(
-                400,
-                "Country code is required (ISO 3166-1 alpha-2, e.g., CN, US, VN)",
-                "IpGeoManagement",
-                null,
-                null
-            );
-            return ResponseEntity.badRequest().body(response);
-        }
-        
-        geoBlockingService.addCountryToBlacklist(countryCode.toUpperCase());
-        loggingService.logInfo("Admin " + currentUser.getUsername() + " added country to blacklist: " + countryCode, logContext);
-        
-        Response<String> response = new Response<>(
-            200,
-            messageSource.getMessage("response.message.updateSuccess", null, locale),
-            "IpGeoManagement",
-            null,
-            "Country " + countryCode.toUpperCase() + " added to blacklist successfully"
-        );
-        return ResponseEntity.ok(response);
-    }
-    
-    @DeleteMapping("/geo/blacklist/{countryCode}")
-    @RequiresAuth(roles = {"ADMIN"})
-    public ResponseEntity<Response<String>> removeCountryFromBlacklist(
-            @PathVariable String countryCode,
-            @RequestHeader(value = "Accept-Language", defaultValue = "en") String acceptLanguage,
-            @CurrentUser UserDto currentUser) {
-        Locale locale = Locale.forLanguageTag(acceptLanguage);
-        LogContext logContext = getLogContext("removeCountryFromBlacklist");
-        
-        geoBlockingService.removeCountryFromBlacklist(countryCode.toUpperCase());
-        loggingService.logInfo("Admin " + currentUser.getUsername() + " removed country from blacklist: " + countryCode, logContext);
-        
-        Response<String> response = new Response<>(
-            200,
-            messageSource.getMessage("response.message.deleteSuccess", null, locale),
-            "IpGeoManagement",
-            null,
-            "Country " + countryCode.toUpperCase() + " removed from blacklist successfully"
-        );
-        return ResponseEntity.ok(response);
-    }
-    
-    @PostMapping("/geo/whitelist")
-    @RequiresAuth(roles = {"ADMIN"})
-    public ResponseEntity<Response<String>> addCountryToWhitelist(
-            @RequestBody Map<String, String> request,
-            @RequestHeader(value = "Accept-Language", defaultValue = "en") String acceptLanguage,
-            @CurrentUser UserDto currentUser) {
-        Locale locale = Locale.forLanguageTag(acceptLanguage);
-        LogContext logContext = getLogContext("addCountryToWhitelist");
-        
-        String countryCode = request.get("countryCode");
-        if (countryCode == null || countryCode.isEmpty()) {
-            Response<String> response = new Response<>(
-                400,
-                "Country code is required (ISO 3166-1 alpha-2, e.g., CN, US, VN)",
-                "IpGeoManagement",
-                null,
-                null
-            );
-            return ResponseEntity.badRequest().body(response);
-        }
-        
-        geoBlockingService.addCountryToWhitelist(countryCode.toUpperCase());
-        loggingService.logInfo("Admin " + currentUser.getUsername() + " added country to whitelist: " + countryCode, logContext);
-        
-        Response<String> response = new Response<>(
-            200,
-            messageSource.getMessage("response.message.updateSuccess", null, locale),
-            "IpGeoManagement",
-            null,
-            "Country " + countryCode.toUpperCase() + " added to whitelist successfully"
-        );
-        return ResponseEntity.ok(response);
-    }
-    
-    @DeleteMapping("/geo/whitelist/{countryCode}")
-    @RequiresAuth(roles = {"ADMIN"})
-    public ResponseEntity<Response<String>> removeCountryFromWhitelist(
-            @PathVariable String countryCode,
-            @RequestHeader(value = "Accept-Language", defaultValue = "en") String acceptLanguage,
-            @CurrentUser UserDto currentUser) {
-        Locale locale = Locale.forLanguageTag(acceptLanguage);
-        LogContext logContext = getLogContext("removeCountryFromWhitelist");
-        
-        geoBlockingService.removeCountryFromWhitelist(countryCode.toUpperCase());
-        loggingService.logInfo("Admin " + currentUser.getUsername() + " removed country from whitelist: " + countryCode, logContext);
-        
-        Response<String> response = new Response<>(
-            200,
-            messageSource.getMessage("response.message.deleteSuccess", null, locale),
-            "IpGeoManagement",
-            null,
-            "Country " + countryCode.toUpperCase() + " removed from whitelist successfully"
         );
         return ResponseEntity.ok(response);
     }

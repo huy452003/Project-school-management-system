@@ -2,7 +2,9 @@ package com.security.services;
 
 import com.logging.models.LogContext;
 import com.logging.services.LoggingService;
+import com.handle_exceptions.NotFoundExceptionHandle;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
@@ -18,6 +20,7 @@ import java.util.concurrent.TimeUnit;
 public class IpBlockingService {
     
     @Autowired
+    @Qualifier("customStringRedisTemplate")
     private RedisTemplate<String, String> redisTemplate;
     
     @Autowired
@@ -139,17 +142,46 @@ public class IpBlockingService {
         return false;
     }
     
-    // Thêm vào auto-blacklist
-    private void addToAutoBlacklist(String ipAddress) {
-        long ttlSeconds = parseDurationToSeconds(autoBlockDuration);
-        redisTemplate.opsForValue().set(
-            REDIS_IP_AUTO_BLACKLIST_PREFIX + ipAddress, 
-            "1", 
-            ttlSeconds, 
-            TimeUnit.SECONDS
-        );
-        LogContext logContext = getLogContext("addToAutoBlacklist");
-        loggingService.logWarn("Auto-blacklisted IP: " + ipAddress + " for " + autoBlockDuration, logContext);
+    public boolean isIpBlockedForAuth(String ipAddress) {
+        if (!ipBlockingEnabled) {
+            return false;
+        }
+        
+        LogContext logContext = getLogContext("isIpBlockedForAuth");
+        
+        if ("whitelist".equalsIgnoreCase(blockingMode)) {
+            if (!isIpWhitelisted(ipAddress)) {
+                loggingService.logWarn("IP " + ipAddress + " is not in whitelist (whitelist mode) for auth endpoint", logContext);
+                return true; // Block nếu không có trong whitelist
+            }
+            return false;
+        }
+        
+        if ("blacklist".equalsIgnoreCase(blockingMode)) {
+            // Chỉ check manual blacklist (admin block) và properties blacklist
+            // KHÔNG block auto-blacklist (temporary) để cho phép legitimate users
+            Boolean inManualBlacklist = redisTemplate.hasKey(REDIS_IP_BLACKLIST_PREFIX + ipAddress);
+            if (inManualBlacklist) {
+                loggingService.logWarn("IP " + ipAddress + " is manually blacklisted (auth endpoint)", logContext);
+                return true;
+            }
+            
+            // Check properties blacklist
+            if (blacklistFromProperties != null && !blacklistFromProperties.isEmpty()) {
+                List<String> blacklist = Arrays.asList(blacklistFromProperties.split(","));
+                for (String ip : blacklist) {
+                    if (ip.trim().equals(ipAddress) || matchesIpPattern(ip.trim(), ipAddress)) {
+                        loggingService.logWarn("IP " + ipAddress + " is in properties blacklist (auth endpoint)", logContext);
+                        return true;
+                    }
+                }
+            }
+            
+            // KHÔNG block auto-blacklist ở đây - cho phép register/login
+            return false;
+        }
+        
+        return false;
     }
     
     // Tăng số lần IP bị block và tự động blacklist nếu vượt threshold
@@ -192,6 +224,19 @@ public class IpBlockingService {
                 loggingService.logWarn("IP " + ipAddress + " auto-blacklisted after " + count + " violations (threshold: " + autoBlockThreshold + ")", logContext);
             }
         }
+    }
+
+    // Thêm vào auto-blacklist
+    private void addToAutoBlacklist(String ipAddress) {
+        long ttlSeconds = parseDurationToSeconds(autoBlockDuration);
+        redisTemplate.opsForValue().set(
+            REDIS_IP_AUTO_BLACKLIST_PREFIX + ipAddress, 
+            "1", 
+            ttlSeconds, 
+            TimeUnit.SECONDS
+        );
+        LogContext logContext = getLogContext("addToAutoBlacklist");
+        loggingService.logWarn("Auto-blacklisted IP: " + ipAddress + " for " + autoBlockDuration, logContext);
     }
     
     // chuyển đổi thời gian cấu hình ở properties thành seconds với các đơn vị s, m, h, d
@@ -275,6 +320,31 @@ public class IpBlockingService {
         return "UNKNOWN";
     }
     
+    /**
+     * Get block reason cho auth endpoints (chỉ manual blacklist)
+     */
+    public String getBlockReasonForAuth(String ipAddress) {
+        Boolean isManualBlocked = redisTemplate.hasKey(REDIS_IP_BLACKLIST_PREFIX + ipAddress);
+        if (Boolean.TRUE.equals(isManualBlocked)) {
+            return "MANUAL_BLACKLISTED";
+        }
+        
+        if ("whitelist".equalsIgnoreCase(blockingMode)) {
+            return "NOT_WHITELISTED";
+        } else if ("blacklist".equalsIgnoreCase(blockingMode)) {
+            // Check properties blacklist
+            if (blacklistFromProperties != null && !blacklistFromProperties.isEmpty()) {
+                List<String> blacklist = Arrays.asList(blacklistFromProperties.split(","));
+                for (String ip : blacklist) {
+                    if (ip.trim().equals(ipAddress) || matchesIpPattern(ip.trim(), ipAddress)) {
+                        return "PROPERTIES_BLACKLISTED";
+                    }
+                }
+            }
+        }
+        return "UNKNOWN";
+    }
+    
     // Kiểm tra IP có bị auto-blacklist không 
     public boolean isIpAutoBlacklisted(String ipAddress) {
         Boolean inAutoBlacklist = redisTemplate.hasKey(REDIS_IP_AUTO_BLACKLIST_PREFIX + ipAddress);
@@ -290,7 +360,7 @@ public class IpBlockingService {
     public void addToWhitelist(String ipAddress) {
         redisTemplate.opsForValue().set(REDIS_IP_WHITELIST_PREFIX + ipAddress, "1");
         LogContext logContext = getLogContext("addToWhitelist");
-        loggingService.logInfo("Added IP to whitelist: " + ipAddress, logContext);
+        loggingService.logInfo("Admin added IP to whitelist: " + ipAddress, logContext);
     }
 
     public void addToBlacklist(String ipAddress) {
@@ -299,20 +369,45 @@ public class IpBlockingService {
         // Thêm vào manual blacklist (permanent)
         redisTemplate.opsForValue().set(REDIS_IP_BLACKLIST_PREFIX + ipAddress, "1");
         LogContext logContext = getLogContext("addToBlacklist");
-        loggingService.logInfo("Added IP to manual blacklist (permanent): " + ipAddress, logContext);
+        loggingService.logInfo("Admin added IP to manual blacklist (permanent): " + ipAddress, logContext);
     }
 
     public void removeFromWhitelist(String ipAddress) {
-        redisTemplate.delete(REDIS_IP_WHITELIST_PREFIX + ipAddress);
         LogContext logContext = getLogContext("removeFromWhitelist");
-        loggingService.logInfo("Removed IP from whitelist: " + ipAddress, logContext);
+        
+        // Check xem IP có trong whitelist (Redis) không trước khi xóa
+        Boolean existsInRedis = redisTemplate.hasKey(REDIS_IP_WHITELIST_PREFIX + ipAddress);
+        if (!existsInRedis) {
+            loggingService.logWarn("Attempt to remove IP from whitelist that doesn't exist: " + ipAddress, logContext);
+            throw new NotFoundExceptionHandle(
+                "IP address not found in whitelist",
+                List.of(ipAddress),
+                "IpGeoManagement"
+            );
+        }
+        
+        redisTemplate.delete(REDIS_IP_WHITELIST_PREFIX + ipAddress);
+        loggingService.logInfo("Admin removed IP from whitelist: " + ipAddress, logContext);
     }
     
     public void removeFromBlacklist(String ipAddress) {
-        redisTemplate.delete(REDIS_IP_BLACKLIST_PREFIX + ipAddress);
-        redisTemplate.delete(REDIS_IP_AUTO_BLACKLIST_PREFIX + ipAddress);
         LogContext logContext = getLogContext("removeFromBlacklist");
-        loggingService.logInfo("Removed IP from blacklist: " + ipAddress, logContext);
+        
+        // Check xem IP có trong manual blacklist (Redis) không trước khi xóa
+        // Lưu ý: Chỉ check manual blacklist, không check auto-blacklist vì auto-blacklist sẽ tự expire
+        Boolean existsInManualBlacklist = redisTemplate.hasKey(REDIS_IP_BLACKLIST_PREFIX + ipAddress);
+        if (!existsInManualBlacklist) {
+            loggingService.logWarn("Attempt to remove IP from blacklist that doesn't exist: " + ipAddress, logContext);
+            throw new NotFoundExceptionHandle(
+                "IP address not found in blacklist",
+                List.of(ipAddress),
+                "IpGeoManagement"
+            );
+        }
+        
+        redisTemplate.delete(REDIS_IP_BLACKLIST_PREFIX + ipAddress);
+        redisTemplate.delete(REDIS_IP_AUTO_BLACKLIST_PREFIX + ipAddress); // Xóa cả auto-blacklist nếu có
+        loggingService.logInfo("Admin removed IP from blacklist: " + ipAddress, logContext);
     }
 
     public Long getBlockedCount(String ipAddress) {

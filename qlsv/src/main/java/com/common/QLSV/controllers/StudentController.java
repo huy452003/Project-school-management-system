@@ -22,6 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import io.github.resilience4j.ratelimiter.RequestNotPermitted;
 
 import java.util.List;
 import java.util.Locale;
@@ -54,6 +55,8 @@ public class StudentController {
                 .build();
     }
 
+
+    // Get
     @GetMapping("")
     @RequiresAuth(roles = {"ADMIN", "STUDENT"}, permissions = {"STUDENT_READ"})
     @RateLimiter(name = "student-controller", fallbackMethod = "getRateLimitFallback")
@@ -82,13 +85,13 @@ public class StudentController {
             @RequestHeader(value = "Accept-Language", defaultValue = "en") String acceptLanguage,
             @CurrentUser UserDto currentUser,
             HttpServletRequest request,
-            io.github.resilience4j.ratelimiter.RequestNotPermitted ex) {
+            RequestNotPermitted ex) {
         Locale locale = Locale.forLanguageTag(acceptLanguage);
         LogContext logContext = getLogContext("getRateLimitFallback");
         
         String ipAddress = IpAddressUtils.getClientIpAddress(request);
-        // Track IP violation (tăng counter và auto-block nếu vượt threshold)
-        securityService.trackIpViolation(ipAddress);
+        
+        securityService.sendIpViolation(ipAddress);
         
         loggingService.logWarn("Rate limit exceeded for GET API: '/students' by user: " + 
             (currentUser != null ? currentUser.getUsername() : "anonymous") + 
@@ -104,6 +107,7 @@ public class StudentController {
         );
     }
 
+    // Update
     @PutMapping("/{id}")
     @RequiresAuth(roles = {"ADMIN", "STUDENT"}, permissions = {"STUDENT_WRITE"})
     @RateLimiter(name = "student-controller", fallbackMethod = "updateRateLimitFallback")
@@ -144,13 +148,13 @@ public class StudentController {
             @RequestHeader(value = "Accept-Language", defaultValue = "en") String acceptLanguage,
             @CurrentUser UserDto currentUser,
             HttpServletRequest request,
-            io.github.resilience4j.ratelimiter.RequestNotPermitted ex) {
+            RequestNotPermitted ex) {
         Locale locale = Locale.forLanguageTag(acceptLanguage);
         LogContext logContext = getLogContext("updateRateLimitFallback");
         
         String ipAddress = IpAddressUtils.getClientIpAddress(request);
         // Track IP violation (tăng counter và auto-block nếu vượt threshold)
-        securityService.trackIpViolation(ipAddress);
+        securityService.sendIpViolation(ipAddress);
         
         loggingService.logWarn("Rate limit exceeded for PUT API: '/students/" + id + "' by user: " + 
             (currentUser != null ? currentUser.getUsername() : "anonymous") + 
@@ -166,6 +170,7 @@ public class StudentController {
         );
     }
 
+    // Delete
     @DeleteMapping("")
     @RequiresAuth(roles = {"ADMIN", "STUDENT"}, permissions = {"STUDENT_DELETE"})
     @RateLimiter(name = "student-controller", fallbackMethod = "deleteRateLimitFallback")
@@ -203,13 +208,13 @@ public class StudentController {
             @RequestHeader(value = "Accept-Language", defaultValue = "en") String acceptLanguage,
             @CurrentUser UserDto currentUser,
             HttpServletRequest request,
-            io.github.resilience4j.ratelimiter.RequestNotPermitted ex) {
+            RequestNotPermitted ex) {
         Locale locale = Locale.forLanguageTag(acceptLanguage);
         LogContext logContext = getLogContext("deleteRateLimitFallback");
         
         String ipAddress = IpAddressUtils.getClientIpAddress(request);
         // Track IP violation (tăng counter và auto-block nếu vượt threshold)
-        securityService.trackIpViolation(ipAddress);
+        securityService.sendIpViolation(ipAddress);
         
         loggingService.logWarn("Rate limit exceeded for DELETE API: '/students' by user: " + 
             (currentUser != null ? currentUser.getUsername() : "anonymous") + 
