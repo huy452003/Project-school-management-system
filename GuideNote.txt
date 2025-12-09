@@ -179,11 +179,11 @@ hiểu cơ chế hoạt động bên trong.
 9/ Tại sao spring boot lại tốt nhất hiện tại? (trả lời + dẫn chứng).    =
 
 
-* new 16/11/2025 : Demo lại
+** new 16/11/2025 : Demo lại
 
 1/ thêm Rate limiting.                  =
 
-2/ IP blocking/Geo blocking.             =
+2/ IP blocking/Geo blocking.                 =
 
 3/ thêm Circuit Breaker cho student.               =
 
@@ -196,3 +196,16 @@ hiểu cơ chế hoạt động bên trong.
 7/ tìm hiểu level cache trong Hibernate.             =
 
 8/ tìm hiểu giữa single node redis và multi node redis.         =
+
+
+** new 7/12/2025:
+
+1/ cách hoạt động của index khi query 'like' trong db, index với 1 số method trong db.
+ 
+2/ viết 1 api để test trường hợp update data đồng thời (2 luồng trở lên) để giả lập tình huống
+từ 2 req update cùng lúc 1 user_id.
+
+3/ sau khi tạo access token sẽ set 1 biến môi trường cho token đó để sử dụng cho api tiếp theo.
+
+4/ tìm hiểu kĩ lại cơ chế của HashMap và ConcurrentHashMap từ bước insert , update , remove và
+lý do vì sao ConcurrentHashMap lại hỗ trợ tốt cho multi-threads.

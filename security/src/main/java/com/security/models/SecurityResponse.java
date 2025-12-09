@@ -22,6 +22,8 @@ public class SecurityResponse {
     private Integer age;
     private Gender gender;
     private LocalDate birth;
+    private String phoneNumber;
+    private String email;
     private Role role;
     private Set<Permission> permissions;
     private String accessToken;

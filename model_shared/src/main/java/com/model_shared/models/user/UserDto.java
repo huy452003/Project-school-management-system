@@ -19,6 +19,8 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.PastOrPresent;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Size;
 
 @Data
 @Builder
@@ -56,6 +58,16 @@ public class UserDto {
     @NotNull(message = "{validate.user.birth.notNull}")
     @PastOrPresent(message = "{validate.user.birth.pastOrPresent}")
     private LocalDate birth;
+
+    @NotBlank(message = "{validate.user.phoneNumber.notBlank}")
+    @NotNull(message = "{validate.user.phoneNumber.notNull}")
+    @Size(max = 11, min = 10, message = "{validate.user.phoneNumber.size}")
+    private String phoneNumber;
+
+    @NotBlank(message = "{validate.user.email.notBlank}")
+    @NotNull(message = "{validate.user.email.notNull}")
+    @Email(message = "{validate.user.email.type}")
+    private String email;
 
     @NotNull(message = "{validate.user.role.notNull}")
     private Role role;

@@ -14,6 +14,13 @@ import com.security.models.TokenInfo;
 import com.security.services.AuthService;
 import com.security.services.IpBlockingService;
 import com.model_shared.models.user.UpdateUserDto;
+import com.model_shared.models.user.AdminUpdateUserDto;
+import com.handle_exceptions.ValidationExceptionHandle;
+import com.security.utils.SecurityUtils;
+import com.security.services.AsyncService;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.retry.annotation.Retryable;
+import org.springframework.dao.OptimisticLockingFailureException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
@@ -23,6 +30,8 @@ import org.springframework.web.bind.annotation.*;
 
 import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
+import org.springframework.security.access.prepost.PreAuthorize;
+
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -58,7 +67,10 @@ public class AuthController {
     private IpBlockingService ipBlockingService;
     
     @Autowired
-    private com.security.services.AsyncService asyncService;
+    private AsyncService asyncService;
+    
+    @Autowired
+    private SecurityUtils securityUtils;
 
     private LogContext getLogContext(String methodName) {
         return LogContext.builder()
@@ -224,6 +236,7 @@ public class AuthController {
     // Internal API
     
     @PostMapping("/internal/users/batch")
+    @Transactional
     public ResponseEntity<List<UserDto>> getUsersByIds(
             @RequestBody Map<String, List<Integer>> request
     ) {
@@ -253,6 +266,8 @@ public class AuthController {
     }
 
     @PostMapping("/internal/users/update")
+    @Retryable(retryFor = {OptimisticLockingFailureException.class}, maxAttempts = 3)
+    @Transactional(rollbackFor = Exception.class)
     public ResponseEntity<UserDto> updateUser(
         @Valid @RequestBody UpdateUserDto updateUserDto
     ){
@@ -260,30 +275,37 @@ public class AuthController {
         
         loggingService.logInfo("updateUser API Calling... for userId: " + updateUserDto.getUserId(), logContext);
         
-        UserEntity userEntity = userRepo.findById(updateUserDto.getUserId()).orElseThrow(
-                () -> new NotFoundExceptionHandle("", List.of(updateUserDto.getUserId().toString()), "Security-Model")
-        );
-        
-        // Check và log warning nếu user đang DISABLED (cho phép update nhưng có warning)
-        if (userEntity.getStatus().equals(Status.DISABLED)) {
-            loggingService.logWarn("Updating user with DISABLED status for userId: " + updateUserDto.getUserId() 
-                + ". User is disabled but update is allowed.", logContext);
+        try {
+            UserEntity userEntity = userRepo.findById(updateUserDto.getUserId()).orElseThrow(
+                    () -> new NotFoundExceptionHandle("", List.of(updateUserDto.getUserId().toString()), "Security-Model")
+            );
+            
+            // Check và log warning nếu user đang DISABLED (cho phép update nhưng có warning)
+            if (userEntity.getStatus().equals(Status.DISABLED)) {
+                loggingService.logWarn("Updating user with DISABLED status for userId: " + updateUserDto.getUserId() 
+                    + ". User is disabled but update is allowed.", logContext);
+            }
+            
+            userEntity.setFirstName(updateUserDto.getFirstName());
+            userEntity.setLastName(updateUserDto.getLastName());
+            userEntity.setAge(updateUserDto.getAge());
+            userEntity.setGender(updateUserDto.getGender());
+            userEntity.setBirth(updateUserDto.getBirth());
+            
+            UserEntity savedEntity = userRepo.saveAndFlush(userEntity);
+            
+            loggingService.logInfo("Updated user profile for userId: " + updateUserDto.getUserId(), logContext);
+            
+            UserDto userDto = modelMapper.map(savedEntity, UserDto.class);
+            return ResponseEntity.ok(userDto);
+        } catch (Exception e) {
+            loggingService.logError("Failed to update user for userId: " + updateUserDto.getUserId() + ". Exception: " + e.getClass().getSimpleName() + " - " + e.getMessage(), e, logContext);
+            throw e; // Re-throw để @Transactional rollback
         }
-        
-        userEntity.setFirstName(updateUserDto.getFirstName());
-        userEntity.setLastName(updateUserDto.getLastName());
-        userEntity.setAge(updateUserDto.getAge());
-        userEntity.setGender(updateUserDto.getGender());
-        userEntity.setBirth(updateUserDto.getBirth());
-        
-        userRepo.save(userEntity);
-        loggingService.logInfo("Updated user profile for userId: " + updateUserDto.getUserId(), logContext);
-        
-        UserDto userDto = modelMapper.map(userEntity, UserDto.class);
-        return ResponseEntity.ok(userDto);
     }
 
     @DeleteMapping("/internal/users/delete")
+    @Transactional
     public ResponseEntity<List<Integer>> deleteUser(
         @RequestBody List<Integer> req
     ){
@@ -429,6 +451,49 @@ public class AuthController {
         response.put("message", "IP violation tracked");
         response.put("ipAddress", ipAddress);
         return ResponseEntity.ok(response);
+    }
+
+    // Update role, permissions, username, password, status - chỉ cho ADMIN
+    @PutMapping("/users/{userId}/admin-update")
+    @PreAuthorize("hasRole('ADMIN')")
+    @Retryable(retryFor = {OptimisticLockingFailureException.class}, maxAttempts = 3)
+    @Transactional(rollbackFor = Exception.class)
+    public ResponseEntity<Response<UserDto>> adminUpdateUser(
+        @PathVariable("userId") Integer userId,
+        @Valid @RequestBody AdminUpdateUserDto updateDto,
+        @RequestHeader(value = "Accept-Language", defaultValue = "en") String acceptLanguage
+    ) {
+        Locale locale = Locale.forLanguageTag(acceptLanguage);
+        LogContext logContext = getLogContext("updateRoleAndPermissions");
+        
+        loggingService.logInfo("adminUpdateUser API Calling... for userId: " + userId, logContext);
+        loggingService.logInfo("adminUpdateUser - updateDto: userId=" + updateDto.getUserId() + 
+            ", role=" + updateDto.getRole() + ", username=" + updateDto.getUsername() + 
+            ", status=" + updateDto.getStatus() + ", password=" + (updateDto.getPassword() != null ? "***" : "null"), logContext);
+        
+        // Lấy current user từ SecurityUtils
+        UserDto currentUser = securityUtils.getCurrentUserDto();
+        // Validate userId trong path phải khớp với userId trong body
+        if (!userId.equals(updateDto.getUserId())) {
+            throw new ValidationExceptionHandle(
+                "User ID in path does not match user ID in body",
+                List.of("userId"),
+                "Security-Model"
+            );
+        }
+                
+        UserDto updatedUser = authService.adminUpdateUser(updateDto, currentUser);
+                
+        Response<UserDto> response = new Response<>(
+            200,
+            messageSource.getMessage("response.message.updateSuccess", null, locale),
+            "Security-Model",
+            null,
+            updatedUser
+        );
+                
+        loggingService.logInfo("Successfully updated user by ADMIN for userId: " + userId, logContext);
+        return ResponseEntity.status(response.status()).body(response);
     }
 
     // check account status

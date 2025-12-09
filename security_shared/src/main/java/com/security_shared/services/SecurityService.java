@@ -389,11 +389,20 @@ public class SecurityService {
         try {
             loggingService.logDebug("Calling security internal API to send IP violation: " + ipAddress, logContext);
             
-            ResponseEntity<String> response = restTemplate.exchange(
+            // Tạo request body với Map để đảm bảo Content-Type là application/json
+            Map<String, String> requestBody = new HashMap<>();
+            requestBody.put("ipAddress", ipAddress);
+            
+            // Set Content-Type header
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(org.springframework.http.MediaType.APPLICATION_JSON);
+            HttpEntity<Map<String, String>> requestEntity = new HttpEntity<>(requestBody, headers);
+            
+            ResponseEntity<Map<String, String>> response = restTemplate.exchange(
                 securityBaseUrl + "/auth/internal/ip/track-violation",
                 HttpMethod.POST,
-                new HttpEntity<>(ipAddress),
-                new ParameterizedTypeReference<String>() {}
+                requestEntity,
+                new ParameterizedTypeReference<Map<String, String>>() {}
             );
             
             if (response.getStatusCode().is2xxSuccessful()) {

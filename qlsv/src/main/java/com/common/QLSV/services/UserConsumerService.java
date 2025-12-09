@@ -48,13 +48,13 @@ public class UserConsumerService extends KafkaConsumerService<UserEvent> {
             }
             
             if (userEvent.getUser().getType().equals(Type.STUDENT)) {
+                // handleEvent() sẽ tự động acknowledge, không cần acknowledge lại
                 handleEvent(userEvent, topic, partition, offset, acknowledgment, "qlsv");
             } else {
                 loggingService.logWarn("User event is not a student", logContext);
                 acknowledgment.acknowledge();
                 return;
             }
-            acknowledgment.acknowledge();
             loggingService.logInfo("Successfully processed user event", logContext);
         } catch (Exception e) {
             loggingService.logError("Failed to process user event", e, logContext);

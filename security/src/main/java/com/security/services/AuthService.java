@@ -5,6 +5,7 @@ import com.handle_exceptions.ForbiddenExceptionHandle;
 import com.handle_exceptions.NotFoundExceptionHandle;
 import com.handle_exceptions.UnauthorizedExceptionHandle;
 import com.handle_exceptions.ValidationExceptionHandle;
+
 import com.security.config.JwtConfig;
 import com.security.entities.UserEntity;
 import com.security.models.Login;
@@ -132,6 +133,8 @@ public class AuthService {
             user.setAge(request.getAge());
             user.setGender(request.getGender());
             user.setBirth(request.getBirth());
+            user.setPhoneNumber(request.getPhoneNumber());
+            user.setEmail(request.getEmail());
             user.setRole(userRole);
             user.setPermissions(finalPermissions); // Sử dụng permissions đã convert
             user.setStatus(Status.PENDING);
@@ -148,6 +151,8 @@ public class AuthService {
                     .age(request.getAge())
                     .gender(request.getGender())
                     .birth(request.getBirth())
+                    .phoneNumber(request.getPhoneNumber())
+                    .email(request.getEmail())
                     .role(userRole)
                     .permissions(finalPermissions) // Sử dụng permissions đã convert
                     .status(Status.PENDING)
@@ -159,14 +164,12 @@ public class AuthService {
             userRepo.save(user);
             loggingService.logInfo("ADMIN user registered and enabled immediately (no entity creation needed)", logContext);
         } else {
+
             userRepo.save(user);
-            
             Map<String, Object> profileData = null;
-            if(request.getType() == Type.STUDENT && request.getProfileData() != null && !request.getProfileData().isEmpty()){
+            if(request.getProfileData() != null && !request.getProfileData().isEmpty()){
                 profileData = new HashMap<>();
-                if(request.getProfileData().containsKey("graduate")){
-                    profileData.put("graduate", request.getProfileData().get("graduate"));
-                }
+                profileData.putAll(request.getProfileData());
             }
 
             // Convert UserEntity → UserDto using ModelMapper
@@ -197,6 +200,8 @@ public class AuthService {
                 .age(user.getAge())
                 .gender(user.getGender())
                 .birth(user.getBirth())
+                .phoneNumber(user.getPhoneNumber())
+                .email(user.getEmail()) 
                 .role(user.getRole())
                 .permissions(user.getPermissions())
                 .accessToken(accessToken)
@@ -257,6 +262,8 @@ public class AuthService {
                 .age(user.getAge())
                 .gender(user.getGender())
                 .birth(user.getBirth())
+                .phoneNumber(user.getPhoneNumber())
+                .email(user.getEmail()) 
                 .role(user.getRole())
                 .permissions(user.getPermissions())
                 .accessToken(accessToken)
@@ -393,6 +400,109 @@ public class AuthService {
             newPermissions.addAll(permissions);
         }
         return newPermissions;
+    }
+
+    @Retryable(value = {OptimisticLockingFailureException.class}, maxAttempts = 3)
+    @Transactional(rollbackFor = Exception.class, isolation = Isolation.REPEATABLE_READ)
+    public UserDto adminUpdateUser(com.model_shared.models.user.AdminUpdateUserDto updateDto, UserDto currentUser) {
+        LogContext logContext = getLogContext("adminUpdateUser");
+        
+        // Kiểm tra chỉ ADMIN mới được update
+        if (currentUser == null || currentUser.getRole() != Role.ADMIN) {
+            throw new ForbiddenExceptionHandle(
+                "Only ADMIN can update user information",
+                "Insufficient privileges"
+            );
+        }
+        
+        UserEntity userEntity = userRepo.findById(updateDto.getUserId())
+                .orElseThrow(() -> new NotFoundExceptionHandle(
+                    "User not found",
+                    List.of(updateDto.getUserId().toString()),
+                    "Security-Model"
+                ));
+        
+        Role oldRole = userEntity.getRole();
+        
+        // Ngăn chặn thay đổi role hoàn toàn
+        // Lý do: Mỗi role có dữ liệu riêng (StudentEntity/TeacherEntity), 
+        // thay đổi role sẽ gây mất dữ liệu hoặc inconsistency
+        // Nếu muốn thay đổi role, nên set status = FAILED và yêu cầu user đăng ký lại
+        if (oldRole != updateDto.getRole()) {
+            throw new ValidationExceptionHandle(
+                "Cannot change user role from " + oldRole + " to " + updateDto.getRole() + 
+                ". Each role has specific data (StudentEntity/TeacherEntity). " +
+                "To change role, set user status to FAILED and require re-registration with the new role.",
+                List.of("role"),
+                "Security-Model"
+            );
+        }
+        
+        // Convert và update permissions
+        Set<Permission> finalPermissions = convertToPermissions(updateDto.getPermissions(), updateDto.getRole());
+        userEntity.setPermissions(finalPermissions);
+        
+        // Update username nếu có
+        if (updateDto.getUsername() != null && !updateDto.getUsername().trim().isEmpty()) {
+            String newUsername = updateDto.getUsername().trim();
+            // Validate username length
+            if (newUsername.length() < 3 || newUsername.length() > 50) {
+                throw new ValidationExceptionHandle(
+                    "Username must be between 3 and 50 characters",
+                    List.of("username"),
+                    "Security-Model"
+                );
+            }
+            // Kiểm tra username đã tồn tại chưa (trừ chính user này)
+            if (userRepo.existsByUsernameAndUserIdNot(newUsername, updateDto.getUserId())) {
+                throw new ConflictExceptionHandle(
+                    "",
+                    List.of(newUsername),
+                    "Security-Model"
+                );
+            }
+            userEntity.setUsername(newUsername);
+            loggingService.logInfo("Updated username for userId: " + updateDto.getUserId() + " to " + newUsername, logContext);
+        }
+        
+        // Update password nếu có
+        if (updateDto.getPassword() != null && !updateDto.getPassword().trim().isEmpty()) {
+            String newPassword = updateDto.getPassword().trim();
+            // Validate password length
+            if (newPassword.length() < 6) {
+                throw new ValidationExceptionHandle(
+                    "Password must be at least 6 characters",
+                    List.of("password"),
+                    "Security-Model"
+                );
+            }
+            userEntity.setPassword(passwordEncoder.encode(newPassword));
+            loggingService.logInfo("Updated password for userId: " + updateDto.getUserId(), logContext);
+        }
+        
+        // Update status - luôn update (required field)
+        if (updateDto.getStatus() != null) {
+            Status newStatus = updateDto.getStatus();
+            Status oldStatus = userEntity.getStatus();
+            userEntity.setStatus(newStatus);
+            loggingService.logInfo("Updated status for userId: " + updateDto.getUserId() + " from " + oldStatus + " to " + newStatus, logContext);
+        } else {
+            loggingService.logWarn("Status is null in updateDto for userId: " + updateDto.getUserId() + ", keeping existing status: " + userEntity.getStatus(), logContext);
+        }
+        
+        UserEntity savedEntity = userRepo.saveAndFlush(userEntity);
+        
+        loggingService.logInfo(String.format(
+            "Admin updated user for userId: %d - Role: %s -> %s, Permissions: %s, Username: %s, Status: %s",
+            updateDto.getUserId(),
+            oldRole,
+            updateDto.getRole(),
+            finalPermissions,
+            updateDto.getUsername() != null ? "updated" : "unchanged",
+            updateDto.getStatus() != null ? updateDto.getStatus() : "unchanged"
+        ), logContext);
+        
+        return modelMapper.map(savedEntity, UserDto.class);
     }
 
 }

@@ -60,6 +60,12 @@ public class UserEntity implements UserDetails {
     @Column(name ="birth")
     private LocalDate birth;
 
+    @Column(name = "phone_number")
+    private String phoneNumber;
+
+    @Column(name = "email")
+    private String email;
+
     @Enumerated(EnumType.STRING)
     @Column(name = "role")
     private Role role;

@@ -18,6 +18,15 @@ public class StudentEntity{
 
     @Column(name = "user_id", nullable = false, unique = true)
     private Integer userId;
+
+    @Column(name = "score")
+    private Double score;
+
+    @Column(name = "class")
+    private String schoolClass;
+
+    @Column(name = "major")
+    private String major;
     
     @Column(name ="graduate")
     private Boolean graduate;

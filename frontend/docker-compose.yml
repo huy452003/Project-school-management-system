@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: school-management-frontend
+    ports:
+      - "3000:3000"
+    volumes:
+      # Mount source code để hot reload
+      - .:/app
+      # Exclude node_modules để dùng node_modules trong container
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+    networks:
+      - school-network
+    # Restart policy
+    restart: unless-stopped
+
+networks:
+  school-network:
+    driver: bridge
+

@@ -1,49 +1,427 @@
-2025-11-21 20:08:35 [background-preinit] DEBUG [logging] - Logging Provider: org.jboss.logging.Slf4jLoggerProvider found via system property
-2025-11-21 20:08:35 [main] INFO  [QlgvApplicationTests] - Starting QlgvApplicationTests using Java 17.0.16 with PID 4912 (started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlgv)
-2025-11-21 20:08:35 [main] DEBUG [QlgvApplicationTests] - Running with Spring Boot v3.5.0, Spring v6.2.7
-2025-11-21 20:08:35 [main] INFO  [QlgvApplicationTests] - No active profile set, falling back to 1 default profile: "default"
-2025-11-21 20:08:37 [main] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
-2025-11-21 20:08:37 [main] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
-2025-11-21 20:08:37 [main] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
-2025-11-21 20:08:37 [main] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
-2025-11-21 20:08:37 [main] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
-2025-11-21 20:08:37 [main] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
-2025-11-21 20:08:37 [main] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
-2025-11-21 20:08:37 [main] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
-2025-11-21 20:08:37 [main] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
-2025-11-21 20:08:37 [main] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
-2025-11-21 20:08:37 [main] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
-2025-11-21 20:08:37 [main] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
-2025-11-21 20:08:40 [main] WARN  [HikariConfig] - HikariPool-1 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
-2025-11-21 20:08:40 [main] WARN  [deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-11-21 20:08:40 [main] WARN  [deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
-2025-11-21 20:08:44 [main] WARN  [JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-11-21 20:08:44 [main] DEBUG [Mappings] - 
+2025-12-09 22:21:45 [background-preinit] DEBUG [logging] - Logging Provider: org.jboss.logging.Slf4jLoggerProvider found via system property
+2025-12-09 22:21:45 [restartedMain] INFO  [QlgvApplication] - Starting QlgvApplication using Java 17.0.16 with PID 10680 (D:\project IntelliJ Ultimate\modules-parent\qlgv\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlgv)
+2025-12-09 22:21:45 [restartedMain] DEBUG [QlgvApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
+2025-12-09 22:21:45 [restartedMain] INFO  [QlgvApplication] - No active profile set, falling back to 1 default profile: "default"
+2025-12-09 22:21:49 [restartedMain] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
+2025-12-09 22:21:49 [restartedMain] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
+2025-12-09 22:21:49 [restartedMain] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
+2025-12-09 22:21:49 [restartedMain] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
+2025-12-09 22:21:49 [restartedMain] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
+2025-12-09 22:21:49 [restartedMain] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
+2025-12-09 22:21:49 [restartedMain] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
+2025-12-09 22:21:49 [restartedMain] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
+2025-12-09 22:21:49 [restartedMain] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
+2025-12-09 22:21:49 [restartedMain] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
+2025-12-09 22:21:49 [restartedMain] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
+2025-12-09 22:21:49 [restartedMain] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
+2025-12-09 22:21:54 [restartedMain] DEBUG [InternalLoggerFactory] - Using SLF4J as the default logging framework
+2025-12-09 22:21:57 [restartedMain] WARN  [HikariConfig] - HikariPool-1 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
+2025-12-09 22:21:57 [restartedMain] WARN  [deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-12-09 22:21:57 [restartedMain] WARN  [deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-12-09 22:22:07 [restartedMain] WARN  [JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-12-09 22:22:07 [restartedMain] DEBUG [Mappings] - 
 	c.c.Q.c.RedisController:
 	{GET [/redis/value/{key}]}: getValue(String)
 	{GET [/redis/hash/{key}]}: getHash(String)
-	{GET [/redis/set/{key}]}: getSet(String)
-	{GET [/redis/ttl/{key}]}: getTTL(String)
-	{GET [/redis/list/{key}]}: getList(String)
-	{DELETE [/redis/key/{key}]}: deleteKey(String)
-	{GET [/redis/keys]}: getAllKeys()
-	{GET [/redis/keys/{pattern}]}: getKeysByPattern(String)
-	{GET [/redis/zset/{key}]}: getZSet(String)
-	{GET [/redis/info]}: getRedisInfo()
-	{DELETE [/redis/keys]}: deleteAllKeys()
 	{GET [/redis/type/{key}]}: getKeyType(String)
-2025-11-21 20:08:44 [main] DEBUG [Mappings] - 
+	{GET [/redis/keys/{pattern}]}: getKeysByPattern(String)
+	{GET [/redis/keys]}: getAllKeys()
+	{DELETE [/redis/keys]}: deleteAllKeys()
+	{GET [/redis/ttl/{key}]}: getTTL(String)
+	{GET [/redis/info]}: getRedisInfo()
+	{DELETE [/redis/key/{key}]}: deleteKey(String)
+	{GET [/redis/list/{key}]}: getList(String)
+	{GET [/redis/zset/{key}]}: getZSet(String)
+	{GET [/redis/set/{key}]}: getSet(String)
+2025-12-09 22:22:07 [restartedMain] DEBUG [Mappings] - 
 	c.c.Q.c.TeacherController:
 	{GET [/teachers]}: get(String,UserDto)
 	{PUT [/teachers/{id}]}: update(Integer,UpdateEntityModel,String,UserDto)
+	{GET [/teachers/filter]}: filter(Integer,String,String,Integer,Gender,String,String,String,String,String,UserDto)
 	{DELETE [/teachers]}: delete(List,String,UserDto)
-2025-11-21 20:08:44 [main] DEBUG [Mappings] - 
+	{DELETE [/teachers/cache]}: clearCache(String,UserDto)
+	{GET [/teachers/{userId}]}: getByUserId(Integer,String,UserDto)
+	{GET [/teachers/paged]}: getPaged(int,int,String,String,String,UserDto)
+	{GET [/teachers/{classManaging}/students]}: getStudentsByClassManaging(String,String,String,UserDto)
+2025-12-09 22:22:07 [restartedMain] DEBUG [Mappings] - 
 	o.s.b.a.w.s.e.BasicErrorController:
 	{ [/error]}: error(HttpServletRequest)
 	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
-2025-11-21 20:08:44 [main] DEBUG [Mappings] - 'beanNameHandlerMapping' {}
-2025-11-21 20:08:44 [main] DEBUG [Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
-2025-11-21 20:08:45 [main] WARN  [ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
-2025-11-21 20:08:45 [main] DEBUG [InternalLoggerFactory] - Using SLF4J as the default logging framework
-2025-11-21 20:08:45 [main] DEBUG [Loggers] - Using Slf4j logging framework
-2025-11-21 20:08:47 [main] INFO  [QlgvApplicationTests] - Started QlgvApplicationTests in 11.955 seconds (process running for 12.985)
+2025-12-09 22:22:07 [restartedMain] DEBUG [Mappings] - 'beanNameHandlerMapping' {}
+2025-12-09 22:22:08 [restartedMain] DEBUG [Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
+2025-12-09 22:22:09 [restartedMain] WARN  [ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2025-12-09 22:22:10 [restartedMain] DEBUG [Loggers] - Using Slf4j logging framework
+2025-12-09 22:22:12 [restartedMain] WARN  [OptionalLiveReloadServer] - Unable to start LiveReload server
+2025-12-09 22:22:13 [restartedMain] INFO  [QlgvApplication] - Started QlgvApplication in 29.167 seconds (process running for 30.244)
+2025-12-09 22:22:58 [org.springframework.kafka.KafkaListenerEndpointContainer#1-0-C-1] WARN  [LoggingServiceImp] - [qlgv] UserConsumerService - User or user type is null in event. Skipping.
+2025-12-09 22:23:12 [org.springframework.kafka.KafkaListenerEndpointContainer#1-0-C-1] WARN  [LoggingServiceImp] - [qlgv] UserConsumerService - User or user type is null in event. Skipping.
+2025-12-09 22:23:14 [http-nio-8081-exec-3] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Calling security module with URL: http://localhost:8083/auth/validate to validate token
+2025-12-09 22:23:14 [http-nio-8081-exec-3] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Successfully retrieved user from security module: HuyT1 and cached in Redis with key: user:token:eyJhbGciOiJIUzM4NCJ9.eyJyb2xlIjoiVEVBQ0hFUiIsInBlcm1pc3Npb25zIjpbIlRFQUNIRVJfUkVBRCJdLCJzdWIiOiJIdXlUMSIsImp0aSI6IjJhY2YwNjFkLTg0YmItNDJhYi04YmJhLWNlMDE1YWNmMjZlNiIsImlhdCI6MTc2NTI5Mzc5MiwiZXhwIjoxNzY1Mjk3MzkyfQ.Diq8dL36cCR_ABsZiQ_pmbc-W03EGeQvt_f4j5pVQiHpT4kMORxklKDWkLXDPp1Y
+2025-12-09 22:23:14 [http-nio-8081-exec-3] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - User HuyT1 successfully authorized
+2025-12-09 22:23:14 [http-nio-8081-exec-3] DEBUG [LoggingServiceImp] - [security_shared] RequiresAuthAspect - User HuyT1 successfully authorized for method: getByUserId with roles: ADMIN, TEACHER and permissions: TEACHER_READ
+2025-12-09 22:23:14 [http-nio-8081-exec-3] DEBUG [RateLimiterAspect] - Created or retrieved rate limiter 'teacher-controller' with period: 'PT1M'; limit for period: '100'; timeout: 'PT0S'; method: 'com.common.QLGV.controllers.TeacherController#getByUserId'
+2025-12-09 22:23:14 [http-nio-8081-exec-3] INFO  [LoggingServiceImp] - [qlgv] TeacherController - Get teacher by userId: 3 called successfully by user: HuyT1
+2025-12-09 22:23:14 [http-nio-8081-exec-3] DEBUG [CircuitBreakerAspect] - Created or retrieved circuit breaker 'qlgv-service' with failure rate '50.0' for method: 'com.common.QLGV.services.imp.TeacherServiceImp#getByUserId'
+2025-12-09 22:23:14 [http-nio-8081-exec-3] WARN  [LoggingServiceImp] - [qlgv] TeacherServiceImp - Not found cache for userId: 3, query DB
+2025-12-09 22:23:14 [http-nio-8081-exec-3] DEBUG [CircuitBreakerAspect] - Created or retrieved circuit breaker 'security-service' with failure rate '50.0' for method: 'com.security_shared.services.SecurityService#getUsersByIds'
+2025-12-09 22:23:14 [http-nio-8081-exec-3] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Calling security internal API to batch get users, count: 1
+2025-12-09 22:23:15 [http-nio-8081-exec-3] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Successfully retrieved 1 users
+2025-12-09 22:23:15 [http-nio-8081-exec-3] DEBUG [CircuitBreakerStateMachine] - CircuitBreaker 'security-service' succeeded:
+2025-12-09 22:23:15 [http-nio-8081-exec-3] INFO  [LoggingServiceImp] - [qlgv] TeacherServiceImp - Save cache to Redis : teachers:user:3
+2025-12-09 22:23:15 [http-nio-8081-exec-3] INFO  [LoggingServiceImp] - [qlgv] TeacherServiceImp - Get teacher by userId: 3 Successfully
+2025-12-09 22:23:15 [http-nio-8081-exec-3] DEBUG [CircuitBreakerStateMachine] - CircuitBreaker 'qlgv-service' succeeded:
+2025-12-09 22:23:15 [http-nio-8081-exec-7] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Calling security module with URL: http://localhost:8083/auth/validate to validate token
+2025-12-09 22:23:15 [http-nio-8081-exec-6] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Calling security module with URL: http://localhost:8083/auth/validate to validate token
+2025-12-09 22:23:15 [http-nio-8081-exec-7] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Successfully retrieved user from security module: HuyT1 and cached in Redis with key: user:token:eyJhbGciOiJIUzM4NCJ9.eyJyb2xlIjoiVEVBQ0hFUiIsInBlcm1pc3Npb25zIjpbIlRFQUNIRVJfUkVBRCJdLCJzdWIiOiJIdXlUMSIsImp0aSI6IjJhY2YwNjFkLTg0YmItNDJhYi04YmJhLWNlMDE1YWNmMjZlNiIsImlhdCI6MTc2NTI5Mzc5MiwiZXhwIjoxNzY1Mjk3MzkyfQ.Diq8dL36cCR_ABsZiQ_pmbc-W03EGeQvt_f4j5pVQiHpT4kMORxklKDWkLXDPp1Y
+2025-12-09 22:23:15 [http-nio-8081-exec-7] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - User HuyT1 successfully authorized
+2025-12-09 22:23:15 [http-nio-8081-exec-7] DEBUG [LoggingServiceImp] - [security_shared] RequiresAuthAspect - User HuyT1 successfully authorized for method: getByUserId with roles: ADMIN, TEACHER and permissions: TEACHER_READ
+2025-12-09 22:23:15 [http-nio-8081-exec-7] DEBUG [RateLimiterAspect] - Created or retrieved rate limiter 'teacher-controller' with period: 'PT1M'; limit for period: '100'; timeout: 'PT0S'; method: 'com.common.QLGV.controllers.TeacherController#getByUserId'
+2025-12-09 22:23:15 [http-nio-8081-exec-7] INFO  [LoggingServiceImp] - [qlgv] TeacherController - Get teacher by userId: 3 called successfully by user: HuyT1
+2025-12-09 22:23:15 [http-nio-8081-exec-7] DEBUG [CircuitBreakerAspect] - Created or retrieved circuit breaker 'qlgv-service' with failure rate '50.0' for method: 'com.common.QLGV.services.imp.TeacherServiceImp#getByUserId'
+2025-12-09 22:23:15 [http-nio-8081-exec-6] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Successfully retrieved user from security module: HuyT1 and cached in Redis with key: user:token:eyJhbGciOiJIUzM4NCJ9.eyJyb2xlIjoiVEVBQ0hFUiIsInBlcm1pc3Npb25zIjpbIlRFQUNIRVJfUkVBRCJdLCJzdWIiOiJIdXlUMSIsImp0aSI6IjJhY2YwNjFkLTg0YmItNDJhYi04YmJhLWNlMDE1YWNmMjZlNiIsImlhdCI6MTc2NTI5Mzc5MiwiZXhwIjoxNzY1Mjk3MzkyfQ.Diq8dL36cCR_ABsZiQ_pmbc-W03EGeQvt_f4j5pVQiHpT4kMORxklKDWkLXDPp1Y
+2025-12-09 22:23:15 [http-nio-8081-exec-7] INFO  [LoggingServiceImp] - [qlgv] TeacherServiceImp - Get teacher by userId from cache: teachers:user:3
+2025-12-09 22:23:15 [http-nio-8081-exec-6] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - User HuyT1 successfully authorized
+2025-12-09 22:23:15 [http-nio-8081-exec-7] DEBUG [CircuitBreakerStateMachine] - CircuitBreaker 'qlgv-service' succeeded:
+2025-12-09 22:23:15 [http-nio-8081-exec-6] DEBUG [LoggingServiceImp] - [security_shared] RequiresAuthAspect - User HuyT1 successfully authorized for method: getStudentsByClassManaging with roles: ADMIN, TEACHER and permissions: TEACHER_READ
+2025-12-09 22:23:15 [http-nio-8081-exec-6] DEBUG [RateLimiterAspect] - Created or retrieved rate limiter 'teacher-controller' with period: 'PT1M'; limit for period: '100'; timeout: 'PT0S'; method: 'com.common.QLGV.controllers.TeacherController#getStudentsByClassManaging'
+2025-12-09 22:23:15 [http-nio-8081-exec-6] INFO  [LoggingServiceImp] - [qlgv] TeacherController - Get students by classManaging: A1 called successfully by user: HuyT1
+2025-12-09 22:23:15 [http-nio-8081-exec-6] DEBUG [CircuitBreakerAspect] - Created or retrieved circuit breaker 'qlgv-service' with failure rate '50.0' for method: 'com.common.QLGV.services.imp.TeacherServiceImp#getStudentsByClassManaging'
+2025-12-09 22:23:15 [http-nio-8081-exec-6] WARN  [LoggingServiceImp] - [qlgv] TeacherServiceImp - Not found cache for classManaging: A1query DB
+2025-12-09 22:23:15 [http-nio-8081-exec-6] INFO  [LoggingServiceImp] - [qlgv] TeacherServiceImp - Getting students for classManaging: A1
+2025-12-09 22:23:15 [http-nio-8081-exec-6] INFO  [LoggingServiceImp] - [qlgv] StudentServiceFromTeacher - Calling QLSV API: http://localhost:8080/students/by-class/A1 for schoolClass: A1
+2025-12-09 22:23:15 [http-nio-8081-exec-6] INFO  [LoggingServiceImp] - [qlgv] StudentServiceFromTeacher - Successfully retrieved 20 students for schoolClass: A1
+2025-12-09 22:23:15 [http-nio-8081-exec-6] INFO  [LoggingServiceImp] - [qlgv] TeacherServiceImp - Found 20 students for classManaging: A1
+2025-12-09 22:23:15 [http-nio-8081-exec-6] INFO  [LoggingServiceImp] - [qlgv] TeacherServiceImp - Save cache to Redis : teachers:classManaging:A1
+2025-12-09 22:23:15 [http-nio-8081-exec-6] INFO  [LoggingServiceImp] - [qlgv] TeacherServiceImp - Get students by classManaging: A1 From teacher Successfully
+2025-12-09 22:23:15 [http-nio-8081-exec-6] DEBUG [CircuitBreakerStateMachine] - CircuitBreaker 'qlgv-service' succeeded:
+2025-12-09 22:23:15 [http-nio-8081-exec-4] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Calling security module with URL: http://localhost:8083/auth/validate to validate token
+2025-12-09 22:23:15 [http-nio-8081-exec-4] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Successfully retrieved user from security module: HuyT1 and cached in Redis with key: user:token:eyJhbGciOiJIUzM4NCJ9.eyJyb2xlIjoiVEVBQ0hFUiIsInBlcm1pc3Npb25zIjpbIlRFQUNIRVJfUkVBRCJdLCJzdWIiOiJIdXlUMSIsImp0aSI6IjJhY2YwNjFkLTg0YmItNDJhYi04YmJhLWNlMDE1YWNmMjZlNiIsImlhdCI6MTc2NTI5Mzc5MiwiZXhwIjoxNzY1Mjk3MzkyfQ.Diq8dL36cCR_ABsZiQ_pmbc-W03EGeQvt_f4j5pVQiHpT4kMORxklKDWkLXDPp1Y
+2025-12-09 22:23:15 [http-nio-8081-exec-4] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - User HuyT1 successfully authorized
+2025-12-09 22:23:15 [http-nio-8081-exec-4] DEBUG [LoggingServiceImp] - [security_shared] RequiresAuthAspect - User HuyT1 successfully authorized for method: getStudentsByClassManaging with roles: ADMIN, TEACHER and permissions: TEACHER_READ
+2025-12-09 22:23:15 [http-nio-8081-exec-4] DEBUG [RateLimiterAspect] - Created or retrieved rate limiter 'teacher-controller' with period: 'PT1M'; limit for period: '100'; timeout: 'PT0S'; method: 'com.common.QLGV.controllers.TeacherController#getStudentsByClassManaging'
+2025-12-09 22:23:15 [http-nio-8081-exec-4] INFO  [LoggingServiceImp] - [qlgv] TeacherController - Get students by classManaging: A1 called successfully by user: HuyT1
+2025-12-09 22:23:15 [http-nio-8081-exec-4] DEBUG [CircuitBreakerAspect] - Created or retrieved circuit breaker 'qlgv-service' with failure rate '50.0' for method: 'com.common.QLGV.services.imp.TeacherServiceImp#getStudentsByClassManaging'
+2025-12-09 22:23:15 [http-nio-8081-exec-4] INFO  [LoggingServiceImp] - [qlgv] TeacherServiceImp - Get students by classManaging : A1 from cache: teachers:classManaging:A1
+2025-12-09 22:23:15 [http-nio-8081-exec-4] DEBUG [CircuitBreakerStateMachine] - CircuitBreaker 'qlgv-service' succeeded:
+2025-12-09 22:23:19 [http-nio-8081-exec-10] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Calling security module with URL: http://localhost:8083/auth/validate to validate token
+2025-12-09 22:23:19 [http-nio-8081-exec-10] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Successfully retrieved user from security module: HuyT1 and cached in Redis with key: user:token:eyJhbGciOiJIUzM4NCJ9.eyJyb2xlIjoiVEVBQ0hFUiIsInBlcm1pc3Npb25zIjpbIlRFQUNIRVJfUkVBRCJdLCJzdWIiOiJIdXlUMSIsImp0aSI6IjJhY2YwNjFkLTg0YmItNDJhYi04YmJhLWNlMDE1YWNmMjZlNiIsImlhdCI6MTc2NTI5Mzc5MiwiZXhwIjoxNzY1Mjk3MzkyfQ.Diq8dL36cCR_ABsZiQ_pmbc-W03EGeQvt_f4j5pVQiHpT4kMORxklKDWkLXDPp1Y
+2025-12-09 22:23:19 [http-nio-8081-exec-10] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - User HuyT1 successfully authorized
+2025-12-09 22:23:19 [http-nio-8081-exec-10] DEBUG [LoggingServiceImp] - [security_shared] RequiresAuthAspect - User HuyT1 successfully authorized for method: getStudentsByClassManaging with roles: ADMIN, TEACHER and permissions: TEACHER_READ
+2025-12-09 22:23:19 [http-nio-8081-exec-10] DEBUG [RateLimiterAspect] - Created or retrieved rate limiter 'teacher-controller' with period: 'PT1M'; limit for period: '100'; timeout: 'PT0S'; method: 'com.common.QLGV.controllers.TeacherController#getStudentsByClassManaging'
+2025-12-09 22:23:19 [http-nio-8081-exec-10] INFO  [LoggingServiceImp] - [qlgv] TeacherController - Get students by classManaging: A1 called successfully by user: HuyT1
+2025-12-09 22:23:19 [http-nio-8081-exec-10] DEBUG [CircuitBreakerAspect] - Created or retrieved circuit breaker 'qlgv-service' with failure rate '50.0' for method: 'com.common.QLGV.services.imp.TeacherServiceImp#getStudentsByClassManaging'
+2025-12-09 22:23:19 [http-nio-8081-exec-10] INFO  [LoggingServiceImp] - [qlgv] TeacherServiceImp - Get students by classManaging : A1 from cache: teachers:classManaging:A1
+2025-12-09 22:23:19 [http-nio-8081-exec-10] DEBUG [CircuitBreakerStateMachine] - CircuitBreaker 'qlgv-service' succeeded:
+2025-12-09 22:23:40 [http-nio-8081-exec-8] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Calling security module with URL: http://localhost:8083/auth/validate to validate token
+2025-12-09 22:23:40 [http-nio-8081-exec-8] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Successfully retrieved user from security module: HuyT1 and cached in Redis with key: user:token:eyJhbGciOiJIUzM4NCJ9.eyJyb2xlIjoiVEVBQ0hFUiIsInBlcm1pc3Npb25zIjpbIlRFQUNIRVJfUkVBRCJdLCJzdWIiOiJIdXlUMSIsImp0aSI6IjJhY2YwNjFkLTg0YmItNDJhYi04YmJhLWNlMDE1YWNmMjZlNiIsImlhdCI6MTc2NTI5Mzc5MiwiZXhwIjoxNzY1Mjk3MzkyfQ.Diq8dL36cCR_ABsZiQ_pmbc-W03EGeQvt_f4j5pVQiHpT4kMORxklKDWkLXDPp1Y
+2025-12-09 22:23:40 [http-nio-8081-exec-8] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - User HuyT1 successfully authorized
+2025-12-09 22:23:40 [http-nio-8081-exec-8] DEBUG [LoggingServiceImp] - [security_shared] RequiresAuthAspect - User HuyT1 successfully authorized for method: getByUserId with roles: ADMIN, TEACHER and permissions: TEACHER_READ
+2025-12-09 22:23:40 [http-nio-8081-exec-8] DEBUG [RateLimiterAspect] - Created or retrieved rate limiter 'teacher-controller' with period: 'PT1M'; limit for period: '100'; timeout: 'PT0S'; method: 'com.common.QLGV.controllers.TeacherController#getByUserId'
+2025-12-09 22:23:40 [http-nio-8081-exec-8] INFO  [LoggingServiceImp] - [qlgv] TeacherController - Get teacher by userId: 3 called successfully by user: HuyT1
+2025-12-09 22:23:40 [http-nio-8081-exec-8] DEBUG [CircuitBreakerAspect] - Created or retrieved circuit breaker 'qlgv-service' with failure rate '50.0' for method: 'com.common.QLGV.services.imp.TeacherServiceImp#getByUserId'
+2025-12-09 22:23:40 [http-nio-8081-exec-8] INFO  [LoggingServiceImp] - [qlgv] TeacherServiceImp - Get teacher by userId from cache: teachers:user:3
+2025-12-09 22:23:40 [http-nio-8081-exec-8] DEBUG [CircuitBreakerStateMachine] - CircuitBreaker 'qlgv-service' succeeded:
+2025-12-09 22:23:40 [http-nio-8081-exec-1] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Calling security module with URL: http://localhost:8083/auth/validate to validate token
+2025-12-09 22:23:40 [http-nio-8081-exec-1] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Successfully retrieved user from security module: HuyT1 and cached in Redis with key: user:token:eyJhbGciOiJIUzM4NCJ9.eyJyb2xlIjoiVEVBQ0hFUiIsInBlcm1pc3Npb25zIjpbIlRFQUNIRVJfUkVBRCJdLCJzdWIiOiJIdXlUMSIsImp0aSI6IjJhY2YwNjFkLTg0YmItNDJhYi04YmJhLWNlMDE1YWNmMjZlNiIsImlhdCI6MTc2NTI5Mzc5MiwiZXhwIjoxNzY1Mjk3MzkyfQ.Diq8dL36cCR_ABsZiQ_pmbc-W03EGeQvt_f4j5pVQiHpT4kMORxklKDWkLXDPp1Y
+2025-12-09 22:23:40 [http-nio-8081-exec-1] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - User HuyT1 successfully authorized
+2025-12-09 22:23:40 [http-nio-8081-exec-1] DEBUG [LoggingServiceImp] - [security_shared] RequiresAuthAspect - User HuyT1 successfully authorized for method: getStudentsByClassManaging with roles: ADMIN, TEACHER and permissions: TEACHER_READ
+2025-12-09 22:23:40 [http-nio-8081-exec-1] DEBUG [RateLimiterAspect] - Created or retrieved rate limiter 'teacher-controller' with period: 'PT1M'; limit for period: '100'; timeout: 'PT0S'; method: 'com.common.QLGV.controllers.TeacherController#getStudentsByClassManaging'
+2025-12-09 22:23:40 [http-nio-8081-exec-1] INFO  [LoggingServiceImp] - [qlgv] TeacherController - Get students by classManaging: A1 called successfully by user: HuyT1
+2025-12-09 22:23:40 [http-nio-8081-exec-1] DEBUG [CircuitBreakerAspect] - Created or retrieved circuit breaker 'qlgv-service' with failure rate '50.0' for method: 'com.common.QLGV.services.imp.TeacherServiceImp#getStudentsByClassManaging'
+2025-12-09 22:23:40 [http-nio-8081-exec-1] INFO  [LoggingServiceImp] - [qlgv] TeacherServiceImp - Get students by classManaging : A1 from cache: teachers:classManaging:A1
+2025-12-09 22:23:40 [http-nio-8081-exec-1] DEBUG [CircuitBreakerStateMachine] - CircuitBreaker 'qlgv-service' succeeded:
+2025-12-09 22:23:41 [http-nio-8081-exec-3] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Calling security module with URL: http://localhost:8083/auth/validate to validate token
+2025-12-09 22:23:41 [http-nio-8081-exec-3] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Successfully retrieved user from security module: HuyT1 and cached in Redis with key: user:token:eyJhbGciOiJIUzM4NCJ9.eyJyb2xlIjoiVEVBQ0hFUiIsInBlcm1pc3Npb25zIjpbIlRFQUNIRVJfUkVBRCJdLCJzdWIiOiJIdXlUMSIsImp0aSI6IjJhY2YwNjFkLTg0YmItNDJhYi04YmJhLWNlMDE1YWNmMjZlNiIsImlhdCI6MTc2NTI5Mzc5MiwiZXhwIjoxNzY1Mjk3MzkyfQ.Diq8dL36cCR_ABsZiQ_pmbc-W03EGeQvt_f4j5pVQiHpT4kMORxklKDWkLXDPp1Y
+2025-12-09 22:23:41 [http-nio-8081-exec-3] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - User HuyT1 successfully authorized
+2025-12-09 22:23:41 [http-nio-8081-exec-3] DEBUG [LoggingServiceImp] - [security_shared] RequiresAuthAspect - User HuyT1 successfully authorized for method: getStudentsByClassManaging with roles: ADMIN, TEACHER and permissions: TEACHER_READ
+2025-12-09 22:23:41 [http-nio-8081-exec-3] DEBUG [RateLimiterAspect] - Created or retrieved rate limiter 'teacher-controller' with period: 'PT1M'; limit for period: '100'; timeout: 'PT0S'; method: 'com.common.QLGV.controllers.TeacherController#getStudentsByClassManaging'
+2025-12-09 22:23:41 [http-nio-8081-exec-3] INFO  [LoggingServiceImp] - [qlgv] TeacherController - Get students by classManaging: A1 called successfully by user: HuyT1
+2025-12-09 22:23:41 [http-nio-8081-exec-3] DEBUG [CircuitBreakerAspect] - Created or retrieved circuit breaker 'qlgv-service' with failure rate '50.0' for method: 'com.common.QLGV.services.imp.TeacherServiceImp#getStudentsByClassManaging'
+2025-12-09 22:23:41 [http-nio-8081-exec-3] INFO  [LoggingServiceImp] - [qlgv] TeacherServiceImp - Get students by classManaging : A1 from cache: teachers:classManaging:A1
+2025-12-09 22:23:41 [http-nio-8081-exec-3] DEBUG [CircuitBreakerStateMachine] - CircuitBreaker 'qlgv-service' succeeded:
+2025-12-09 22:25:06 [org.springframework.kafka.KafkaListenerEndpointContainer#1-0-C-1] WARN  [LoggingServiceImp] - [qlgv] UserConsumerService - User or user type is null in event. Skipping.
+2025-12-09 22:26:51 [org.springframework.kafka.KafkaListenerEndpointContainer#1-0-C-1] WARN  [LoggingServiceImp] - [qlgv] UserConsumerService - User or user type is null in event. Skipping.
+2025-12-09 22:26:52 [http-nio-8081-exec-6] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Calling security module with URL: http://localhost:8083/auth/validate to validate token
+2025-12-09 22:26:52 [http-nio-8081-exec-6] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Successfully retrieved user from security module: HuyT1 and cached in Redis with key: user:token:eyJhbGciOiJIUzM4NCJ9.eyJyb2xlIjoiVEVBQ0hFUiIsInBlcm1pc3Npb25zIjpbIlRFQUNIRVJfUkVBRCJdLCJzdWIiOiJIdXlUMSIsImp0aSI6IjU3ZDZiMWZhLWI2YjMtNDMwNi04NjA1LTJkM2RmYjNiNGVlOSIsImlhdCI6MTc2NTI5NDAxMSwiZXhwIjoxNzY1Mjk3NjExfQ.d0ktNvtcOqoy1l_jX08L1R1VP2i7R2XvPh0ELnyWmDuXhxY5Bdqeb5eekKGgBkmF
+2025-12-09 22:26:52 [http-nio-8081-exec-6] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - User HuyT1 successfully authorized
+2025-12-09 22:26:52 [http-nio-8081-exec-6] DEBUG [LoggingServiceImp] - [security_shared] RequiresAuthAspect - User HuyT1 successfully authorized for method: getByUserId with roles: ADMIN, TEACHER and permissions: TEACHER_READ
+2025-12-09 22:26:52 [http-nio-8081-exec-6] DEBUG [RateLimiterAspect] - Created or retrieved rate limiter 'teacher-controller' with period: 'PT1M'; limit for period: '100'; timeout: 'PT0S'; method: 'com.common.QLGV.controllers.TeacherController#getByUserId'
+2025-12-09 22:26:52 [http-nio-8081-exec-6] INFO  [LoggingServiceImp] - [qlgv] TeacherController - Get teacher by userId: 3 called successfully by user: HuyT1
+2025-12-09 22:26:52 [http-nio-8081-exec-6] DEBUG [CircuitBreakerAspect] - Created or retrieved circuit breaker 'qlgv-service' with failure rate '50.0' for method: 'com.common.QLGV.services.imp.TeacherServiceImp#getByUserId'
+2025-12-09 22:26:52 [http-nio-8081-exec-6] INFO  [LoggingServiceImp] - [qlgv] TeacherServiceImp - Get teacher by userId from cache: teachers:user:3
+2025-12-09 22:26:52 [http-nio-8081-exec-6] DEBUG [CircuitBreakerStateMachine] - CircuitBreaker 'qlgv-service' succeeded:
+2025-12-09 22:26:52 [http-nio-8081-exec-4] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Calling security module with URL: http://localhost:8083/auth/validate to validate token
+2025-12-09 22:26:52 [http-nio-8081-exec-10] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Calling security module with URL: http://localhost:8083/auth/validate to validate token
+2025-12-09 22:26:52 [http-nio-8081-exec-4] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Successfully retrieved user from security module: HuyT1 and cached in Redis with key: user:token:eyJhbGciOiJIUzM4NCJ9.eyJyb2xlIjoiVEVBQ0hFUiIsInBlcm1pc3Npb25zIjpbIlRFQUNIRVJfUkVBRCJdLCJzdWIiOiJIdXlUMSIsImp0aSI6IjU3ZDZiMWZhLWI2YjMtNDMwNi04NjA1LTJkM2RmYjNiNGVlOSIsImlhdCI6MTc2NTI5NDAxMSwiZXhwIjoxNzY1Mjk3NjExfQ.d0ktNvtcOqoy1l_jX08L1R1VP2i7R2XvPh0ELnyWmDuXhxY5Bdqeb5eekKGgBkmF
+2025-12-09 22:26:52 [http-nio-8081-exec-4] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - User HuyT1 successfully authorized
+2025-12-09 22:26:52 [http-nio-8081-exec-4] DEBUG [LoggingServiceImp] - [security_shared] RequiresAuthAspect - User HuyT1 successfully authorized for method: getByUserId with roles: ADMIN, TEACHER and permissions: TEACHER_READ
+2025-12-09 22:26:52 [http-nio-8081-exec-4] DEBUG [RateLimiterAspect] - Created or retrieved rate limiter 'teacher-controller' with period: 'PT1M'; limit for period: '100'; timeout: 'PT0S'; method: 'com.common.QLGV.controllers.TeacherController#getByUserId'
+2025-12-09 22:26:52 [http-nio-8081-exec-4] INFO  [LoggingServiceImp] - [qlgv] TeacherController - Get teacher by userId: 3 called successfully by user: HuyT1
+2025-12-09 22:26:52 [http-nio-8081-exec-4] DEBUG [CircuitBreakerAspect] - Created or retrieved circuit breaker 'qlgv-service' with failure rate '50.0' for method: 'com.common.QLGV.services.imp.TeacherServiceImp#getByUserId'
+2025-12-09 22:26:52 [http-nio-8081-exec-10] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Successfully retrieved user from security module: HuyT1 and cached in Redis with key: user:token:eyJhbGciOiJIUzM4NCJ9.eyJyb2xlIjoiVEVBQ0hFUiIsInBlcm1pc3Npb25zIjpbIlRFQUNIRVJfUkVBRCJdLCJzdWIiOiJIdXlUMSIsImp0aSI6IjU3ZDZiMWZhLWI2YjMtNDMwNi04NjA1LTJkM2RmYjNiNGVlOSIsImlhdCI6MTc2NTI5NDAxMSwiZXhwIjoxNzY1Mjk3NjExfQ.d0ktNvtcOqoy1l_jX08L1R1VP2i7R2XvPh0ELnyWmDuXhxY5Bdqeb5eekKGgBkmF
+2025-12-09 22:26:52 [http-nio-8081-exec-4] INFO  [LoggingServiceImp] - [qlgv] TeacherServiceImp - Get teacher by userId from cache: teachers:user:3
+2025-12-09 22:26:52 [http-nio-8081-exec-10] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - User HuyT1 successfully authorized
+2025-12-09 22:26:52 [http-nio-8081-exec-4] DEBUG [CircuitBreakerStateMachine] - CircuitBreaker 'qlgv-service' succeeded:
+2025-12-09 22:26:52 [http-nio-8081-exec-10] DEBUG [LoggingServiceImp] - [security_shared] RequiresAuthAspect - User HuyT1 successfully authorized for method: getStudentsByClassManaging with roles: ADMIN, TEACHER and permissions: TEACHER_READ
+2025-12-09 22:26:52 [http-nio-8081-exec-10] DEBUG [RateLimiterAspect] - Created or retrieved rate limiter 'teacher-controller' with period: 'PT1M'; limit for period: '100'; timeout: 'PT0S'; method: 'com.common.QLGV.controllers.TeacherController#getStudentsByClassManaging'
+2025-12-09 22:26:52 [http-nio-8081-exec-10] INFO  [LoggingServiceImp] - [qlgv] TeacherController - Get students by classManaging: A1 called successfully by user: HuyT1
+2025-12-09 22:26:52 [http-nio-8081-exec-10] DEBUG [CircuitBreakerAspect] - Created or retrieved circuit breaker 'qlgv-service' with failure rate '50.0' for method: 'com.common.QLGV.services.imp.TeacherServiceImp#getStudentsByClassManaging'
+2025-12-09 22:26:52 [http-nio-8081-exec-10] INFO  [LoggingServiceImp] - [qlgv] TeacherServiceImp - Get students by classManaging : A1 from cache: teachers:classManaging:A1
+2025-12-09 22:26:52 [http-nio-8081-exec-10] DEBUG [CircuitBreakerStateMachine] - CircuitBreaker 'qlgv-service' succeeded:
+2025-12-09 22:26:52 [http-nio-8081-exec-9] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Calling security module with URL: http://localhost:8083/auth/validate to validate token
+2025-12-09 22:26:52 [http-nio-8081-exec-9] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Successfully retrieved user from security module: HuyT1 and cached in Redis with key: user:token:eyJhbGciOiJIUzM4NCJ9.eyJyb2xlIjoiVEVBQ0hFUiIsInBlcm1pc3Npb25zIjpbIlRFQUNIRVJfUkVBRCJdLCJzdWIiOiJIdXlUMSIsImp0aSI6IjU3ZDZiMWZhLWI2YjMtNDMwNi04NjA1LTJkM2RmYjNiNGVlOSIsImlhdCI6MTc2NTI5NDAxMSwiZXhwIjoxNzY1Mjk3NjExfQ.d0ktNvtcOqoy1l_jX08L1R1VP2i7R2XvPh0ELnyWmDuXhxY5Bdqeb5eekKGgBkmF
+2025-12-09 22:26:52 [http-nio-8081-exec-9] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - User HuyT1 successfully authorized
+2025-12-09 22:26:52 [http-nio-8081-exec-9] DEBUG [LoggingServiceImp] - [security_shared] RequiresAuthAspect - User HuyT1 successfully authorized for method: getStudentsByClassManaging with roles: ADMIN, TEACHER and permissions: TEACHER_READ
+2025-12-09 22:26:52 [http-nio-8081-exec-9] DEBUG [RateLimiterAspect] - Created or retrieved rate limiter 'teacher-controller' with period: 'PT1M'; limit for period: '100'; timeout: 'PT0S'; method: 'com.common.QLGV.controllers.TeacherController#getStudentsByClassManaging'
+2025-12-09 22:26:52 [http-nio-8081-exec-9] INFO  [LoggingServiceImp] - [qlgv] TeacherController - Get students by classManaging: A1 called successfully by user: HuyT1
+2025-12-09 22:26:52 [http-nio-8081-exec-9] DEBUG [CircuitBreakerAspect] - Created or retrieved circuit breaker 'qlgv-service' with failure rate '50.0' for method: 'com.common.QLGV.services.imp.TeacherServiceImp#getStudentsByClassManaging'
+2025-12-09 22:26:52 [http-nio-8081-exec-9] INFO  [LoggingServiceImp] - [qlgv] TeacherServiceImp - Get students by classManaging : A1 from cache: teachers:classManaging:A1
+2025-12-09 22:26:52 [http-nio-8081-exec-9] DEBUG [CircuitBreakerStateMachine] - CircuitBreaker 'qlgv-service' succeeded:
+2025-12-09 22:27:00 [http-nio-8081-exec-8] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Calling security module with URL: http://localhost:8083/auth/validate to validate token
+2025-12-09 22:27:00 [http-nio-8081-exec-8] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Successfully retrieved user from security module: HuyT1 and cached in Redis with key: user:token:eyJhbGciOiJIUzM4NCJ9.eyJyb2xlIjoiVEVBQ0hFUiIsInBlcm1pc3Npb25zIjpbIlRFQUNIRVJfUkVBRCJdLCJzdWIiOiJIdXlUMSIsImp0aSI6IjU3ZDZiMWZhLWI2YjMtNDMwNi04NjA1LTJkM2RmYjNiNGVlOSIsImlhdCI6MTc2NTI5NDAxMSwiZXhwIjoxNzY1Mjk3NjExfQ.d0ktNvtcOqoy1l_jX08L1R1VP2i7R2XvPh0ELnyWmDuXhxY5Bdqeb5eekKGgBkmF
+2025-12-09 22:27:00 [http-nio-8081-exec-8] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - User HuyT1 successfully authorized
+2025-12-09 22:27:00 [http-nio-8081-exec-8] DEBUG [LoggingServiceImp] - [security_shared] RequiresAuthAspect - User HuyT1 successfully authorized for method: getStudentsByClassManaging with roles: ADMIN, TEACHER and permissions: TEACHER_READ
+2025-12-09 22:27:00 [http-nio-8081-exec-8] DEBUG [RateLimiterAspect] - Created or retrieved rate limiter 'teacher-controller' with period: 'PT1M'; limit for period: '100'; timeout: 'PT0S'; method: 'com.common.QLGV.controllers.TeacherController#getStudentsByClassManaging'
+2025-12-09 22:27:00 [http-nio-8081-exec-8] INFO  [LoggingServiceImp] - [qlgv] TeacherController - Get students by classManaging: A1 called successfully by user: HuyT1
+2025-12-09 22:27:00 [http-nio-8081-exec-8] DEBUG [CircuitBreakerAspect] - Created or retrieved circuit breaker 'qlgv-service' with failure rate '50.0' for method: 'com.common.QLGV.services.imp.TeacherServiceImp#getStudentsByClassManaging'
+2025-12-09 22:27:00 [http-nio-8081-exec-8] INFO  [LoggingServiceImp] - [qlgv] TeacherServiceImp - Get students by classManaging : A1 from cache: teachers:classManaging:A1
+2025-12-09 22:27:00 [http-nio-8081-exec-8] DEBUG [CircuitBreakerStateMachine] - CircuitBreaker 'qlgv-service' succeeded:
+2025-12-09 22:27:23 [http-nio-8081-exec-2] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Calling security module with URL: http://localhost:8083/auth/validate to validate token
+2025-12-09 22:27:23 [http-nio-8081-exec-2] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Successfully retrieved user from security module: HuyT1 and cached in Redis with key: user:token:eyJhbGciOiJIUzM4NCJ9.eyJyb2xlIjoiVEVBQ0hFUiIsInBlcm1pc3Npb25zIjpbIlRFQUNIRVJfUkVBRCJdLCJzdWIiOiJIdXlUMSIsImp0aSI6IjU3ZDZiMWZhLWI2YjMtNDMwNi04NjA1LTJkM2RmYjNiNGVlOSIsImlhdCI6MTc2NTI5NDAxMSwiZXhwIjoxNzY1Mjk3NjExfQ.d0ktNvtcOqoy1l_jX08L1R1VP2i7R2XvPh0ELnyWmDuXhxY5Bdqeb5eekKGgBkmF
+2025-12-09 22:27:23 [http-nio-8081-exec-2] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - User HuyT1 successfully authorized
+2025-12-09 22:27:23 [http-nio-8081-exec-2] DEBUG [LoggingServiceImp] - [security_shared] RequiresAuthAspect - User HuyT1 successfully authorized for method: getStudentsByClassManaging with roles: ADMIN, TEACHER and permissions: TEACHER_READ
+2025-12-09 22:27:23 [http-nio-8081-exec-2] DEBUG [RateLimiterAspect] - Created or retrieved rate limiter 'teacher-controller' with period: 'PT1M'; limit for period: '100'; timeout: 'PT0S'; method: 'com.common.QLGV.controllers.TeacherController#getStudentsByClassManaging'
+2025-12-09 22:27:23 [http-nio-8081-exec-2] INFO  [LoggingServiceImp] - [qlgv] TeacherController - Get students by classManaging: A1 called successfully by user: HuyT1
+2025-12-09 22:27:23 [http-nio-8081-exec-2] DEBUG [CircuitBreakerAspect] - Created or retrieved circuit breaker 'qlgv-service' with failure rate '50.0' for method: 'com.common.QLGV.services.imp.TeacherServiceImp#getStudentsByClassManaging'
+2025-12-09 22:27:23 [http-nio-8081-exec-2] INFO  [LoggingServiceImp] - [qlgv] TeacherServiceImp - Get students by classManaging : A1 from cache: teachers:classManaging:A1
+2025-12-09 22:27:23 [http-nio-8081-exec-2] DEBUG [CircuitBreakerStateMachine] - CircuitBreaker 'qlgv-service' succeeded:
+2025-12-09 22:29:37 [http-nio-8081-exec-5] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Calling security module with URL: http://localhost:8083/auth/validate to validate token
+2025-12-09 22:29:37 [http-nio-8081-exec-5] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Successfully retrieved user from security module: HuyT1 and cached in Redis with key: user:token:eyJhbGciOiJIUzM4NCJ9.eyJyb2xlIjoiVEVBQ0hFUiIsInBlcm1pc3Npb25zIjpbIlRFQUNIRVJfUkVBRCJdLCJzdWIiOiJIdXlUMSIsImp0aSI6IjU3ZDZiMWZhLWI2YjMtNDMwNi04NjA1LTJkM2RmYjNiNGVlOSIsImlhdCI6MTc2NTI5NDAxMSwiZXhwIjoxNzY1Mjk3NjExfQ.d0ktNvtcOqoy1l_jX08L1R1VP2i7R2XvPh0ELnyWmDuXhxY5Bdqeb5eekKGgBkmF
+2025-12-09 22:29:37 [http-nio-8081-exec-5] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - User HuyT1 successfully authorized
+2025-12-09 22:29:37 [http-nio-8081-exec-5] DEBUG [LoggingServiceImp] - [security_shared] RequiresAuthAspect - User HuyT1 successfully authorized for method: getStudentsByClassManaging with roles: ADMIN, TEACHER and permissions: TEACHER_READ
+2025-12-09 22:29:37 [http-nio-8081-exec-5] DEBUG [RateLimiterAspect] - Created or retrieved rate limiter 'teacher-controller' with period: 'PT1M'; limit for period: '100'; timeout: 'PT0S'; method: 'com.common.QLGV.controllers.TeacherController#getStudentsByClassManaging'
+2025-12-09 22:29:37 [http-nio-8081-exec-5] INFO  [LoggingServiceImp] - [qlgv] TeacherController - Get students by classManaging: A1 called successfully by user: HuyT1
+2025-12-09 22:29:37 [http-nio-8081-exec-5] DEBUG [CircuitBreakerAspect] - Created or retrieved circuit breaker 'qlgv-service' with failure rate '50.0' for method: 'com.common.QLGV.services.imp.TeacherServiceImp#getStudentsByClassManaging'
+2025-12-09 22:29:37 [http-nio-8081-exec-5] INFO  [LoggingServiceImp] - [qlgv] TeacherServiceImp - Get students by classManaging : A1 from cache: teachers:classManaging:A1
+2025-12-09 22:29:37 [http-nio-8081-exec-5] DEBUG [CircuitBreakerStateMachine] - CircuitBreaker 'qlgv-service' succeeded:
+2025-12-09 22:29:57 [http-nio-8081-exec-7] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Calling security module with URL: http://localhost:8083/auth/validate to validate token
+2025-12-09 22:29:57 [http-nio-8081-exec-7] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Successfully retrieved user from security module: HuyT1 and cached in Redis with key: user:token:eyJhbGciOiJIUzM4NCJ9.eyJyb2xlIjoiVEVBQ0hFUiIsInBlcm1pc3Npb25zIjpbIlRFQUNIRVJfUkVBRCJdLCJzdWIiOiJIdXlUMSIsImp0aSI6IjU3ZDZiMWZhLWI2YjMtNDMwNi04NjA1LTJkM2RmYjNiNGVlOSIsImlhdCI6MTc2NTI5NDAxMSwiZXhwIjoxNzY1Mjk3NjExfQ.d0ktNvtcOqoy1l_jX08L1R1VP2i7R2XvPh0ELnyWmDuXhxY5Bdqeb5eekKGgBkmF
+2025-12-09 22:29:57 [http-nio-8081-exec-7] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - User HuyT1 successfully authorized
+2025-12-09 22:29:57 [http-nio-8081-exec-7] DEBUG [LoggingServiceImp] - [security_shared] RequiresAuthAspect - User HuyT1 successfully authorized for method: getStudentsByClassManaging with roles: ADMIN, TEACHER and permissions: TEACHER_READ
+2025-12-09 22:29:57 [http-nio-8081-exec-7] DEBUG [RateLimiterAspect] - Created or retrieved rate limiter 'teacher-controller' with period: 'PT1M'; limit for period: '100'; timeout: 'PT0S'; method: 'com.common.QLGV.controllers.TeacherController#getStudentsByClassManaging'
+2025-12-09 22:29:57 [http-nio-8081-exec-7] INFO  [LoggingServiceImp] - [qlgv] TeacherController - Get students by classManaging: A1 called successfully by user: HuyT1
+2025-12-09 22:29:57 [http-nio-8081-exec-7] DEBUG [CircuitBreakerAspect] - Created or retrieved circuit breaker 'qlgv-service' with failure rate '50.0' for method: 'com.common.QLGV.services.imp.TeacherServiceImp#getStudentsByClassManaging'
+2025-12-09 22:29:57 [http-nio-8081-exec-7] INFO  [LoggingServiceImp] - [qlgv] TeacherServiceImp - Get students by classManaging : A1 from cache: teachers:classManaging:A1
+2025-12-09 22:29:57 [http-nio-8081-exec-7] DEBUG [CircuitBreakerStateMachine] - CircuitBreaker 'qlgv-service' succeeded:
+2025-12-09 22:32:18 [restartedMain] INFO  [QlgvApplication] - Starting QlgvApplication using Java 17.0.16 with PID 10680 (D:\project IntelliJ Ultimate\modules-parent\qlgv\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlgv)
+2025-12-09 22:32:18 [restartedMain] DEBUG [QlgvApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
+2025-12-09 22:32:18 [restartedMain] INFO  [QlgvApplication] - No active profile set, falling back to 1 default profile: "default"
+2025-12-09 22:32:21 [restartedMain] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
+2025-12-09 22:32:21 [restartedMain] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
+2025-12-09 22:32:21 [restartedMain] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
+2025-12-09 22:32:21 [restartedMain] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
+2025-12-09 22:32:21 [restartedMain] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
+2025-12-09 22:32:21 [restartedMain] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
+2025-12-09 22:32:21 [restartedMain] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
+2025-12-09 22:32:21 [restartedMain] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
+2025-12-09 22:32:21 [restartedMain] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
+2025-12-09 22:32:21 [restartedMain] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
+2025-12-09 22:32:21 [restartedMain] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
+2025-12-09 22:32:21 [restartedMain] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
+2025-12-09 22:32:23 [restartedMain] WARN  [HikariConfig] - HikariPool-2 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
+2025-12-09 22:32:23 [restartedMain] WARN  [deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-12-09 22:32:23 [restartedMain] WARN  [deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-12-09 22:32:25 [restartedMain] WARN  [JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-12-09 22:32:25 [restartedMain] DEBUG [Mappings] - 
+	c.c.Q.c.RedisController:
+	{GET [/redis/value/{key}]}: getValue(String)
+	{GET [/redis/hash/{key}]}: getHash(String)
+	{GET [/redis/type/{key}]}: getKeyType(String)
+	{GET [/redis/keys/{pattern}]}: getKeysByPattern(String)
+	{GET [/redis/keys]}: getAllKeys()
+	{DELETE [/redis/keys]}: deleteAllKeys()
+	{GET [/redis/ttl/{key}]}: getTTL(String)
+	{GET [/redis/info]}: getRedisInfo()
+	{DELETE [/redis/key/{key}]}: deleteKey(String)
+	{GET [/redis/list/{key}]}: getList(String)
+	{GET [/redis/zset/{key}]}: getZSet(String)
+	{GET [/redis/set/{key}]}: getSet(String)
+2025-12-09 22:32:25 [restartedMain] DEBUG [Mappings] - 
+	c.c.Q.c.TeacherController:
+	{GET [/teachers]}: get(String,UserDto)
+	{PUT [/teachers/{id}]}: update(Integer,UpdateEntityModel,String,UserDto)
+	{GET [/teachers/filter]}: filter(Integer,String,String,Integer,Gender,String,String,String,String,String,UserDto)
+	{DELETE [/teachers]}: delete(List,String,UserDto)
+	{DELETE [/teachers/cache]}: clearCache(String,UserDto)
+	{GET [/teachers/{userId}]}: getByUserId(Integer,String,UserDto)
+	{GET [/teachers/paged]}: getPaged(int,int,String,String,String,UserDto)
+	{GET [/teachers/{classManaging}/students]}: getStudentsByClassManaging(String,String,String,UserDto)
+2025-12-09 22:32:25 [restartedMain] DEBUG [Mappings] - 
+	o.s.b.a.w.s.e.BasicErrorController:
+	{ [/error]}: error(HttpServletRequest)
+	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
+2025-12-09 22:32:25 [restartedMain] DEBUG [Mappings] - 'beanNameHandlerMapping' {}
+2025-12-09 22:32:25 [restartedMain] DEBUG [Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
+2025-12-09 22:32:25 [restartedMain] WARN  [ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2025-12-09 22:32:27 [restartedMain] WARN  [OptionalLiveReloadServer] - Unable to start LiveReload server
+2025-12-09 22:32:28 [restartedMain] INFO  [QlgvApplication] - Started QlgvApplication in 9.494 seconds (process running for 644.871)
+2025-12-09 22:32:30 [restartedMain] INFO  [QlgvApplication] - Starting QlgvApplication using Java 17.0.16 with PID 10680 (D:\project IntelliJ Ultimate\modules-parent\qlgv\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlgv)
+2025-12-09 22:32:30 [restartedMain] DEBUG [QlgvApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
+2025-12-09 22:32:30 [restartedMain] INFO  [QlgvApplication] - No active profile set, falling back to 1 default profile: "default"
+2025-12-09 22:32:31 [restartedMain] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
+2025-12-09 22:32:31 [restartedMain] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
+2025-12-09 22:32:31 [restartedMain] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
+2025-12-09 22:32:31 [restartedMain] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
+2025-12-09 22:32:31 [restartedMain] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
+2025-12-09 22:32:31 [restartedMain] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
+2025-12-09 22:32:31 [restartedMain] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
+2025-12-09 22:32:31 [restartedMain] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
+2025-12-09 22:32:31 [restartedMain] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
+2025-12-09 22:32:31 [restartedMain] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
+2025-12-09 22:32:31 [restartedMain] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
+2025-12-09 22:32:31 [restartedMain] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
+2025-12-09 22:32:32 [restartedMain] WARN  [HikariConfig] - HikariPool-3 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
+2025-12-09 22:32:32 [restartedMain] WARN  [deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-12-09 22:32:32 [restartedMain] WARN  [deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-12-09 22:32:34 [restartedMain] WARN  [JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-12-09 22:32:34 [restartedMain] DEBUG [Mappings] - 
+	c.c.Q.c.RedisController:
+	{GET [/redis/value/{key}]}: getValue(String)
+	{GET [/redis/hash/{key}]}: getHash(String)
+	{GET [/redis/type/{key}]}: getKeyType(String)
+	{GET [/redis/keys/{pattern}]}: getKeysByPattern(String)
+	{GET [/redis/keys]}: getAllKeys()
+	{DELETE [/redis/keys]}: deleteAllKeys()
+	{GET [/redis/ttl/{key}]}: getTTL(String)
+	{GET [/redis/info]}: getRedisInfo()
+	{DELETE [/redis/key/{key}]}: deleteKey(String)
+	{GET [/redis/list/{key}]}: getList(String)
+	{GET [/redis/zset/{key}]}: getZSet(String)
+	{GET [/redis/set/{key}]}: getSet(String)
+2025-12-09 22:32:34 [restartedMain] DEBUG [Mappings] - 
+	c.c.Q.c.TeacherController:
+	{GET [/teachers]}: get(String,UserDto)
+	{PUT [/teachers/{id}]}: update(Integer,UpdateEntityModel,String,UserDto)
+	{GET [/teachers/filter]}: filter(Integer,String,String,Integer,Gender,String,String,String,String,String,UserDto)
+	{DELETE [/teachers]}: delete(List,String,UserDto)
+	{DELETE [/teachers/cache]}: clearCache(String,UserDto)
+	{GET [/teachers/{userId}]}: getByUserId(Integer,String,UserDto)
+	{GET [/teachers/paged]}: getPaged(int,int,String,String,String,UserDto)
+	{GET [/teachers/{classManaging}/students]}: getStudentsByClassManaging(String,String,String,UserDto)
+2025-12-09 22:32:34 [restartedMain] DEBUG [Mappings] - 
+	o.s.b.a.w.s.e.BasicErrorController:
+	{ [/error]}: error(HttpServletRequest)
+	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
+2025-12-09 22:32:34 [restartedMain] DEBUG [Mappings] - 'beanNameHandlerMapping' {}
+2025-12-09 22:32:34 [restartedMain] DEBUG [Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
+2025-12-09 22:32:34 [restartedMain] WARN  [ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2025-12-09 22:32:36 [restartedMain] WARN  [OptionalLiveReloadServer] - Unable to start LiveReload server
+2025-12-09 22:32:36 [restartedMain] INFO  [QlgvApplication] - Started QlgvApplication in 6.302 seconds (process running for 653.307)
+2025-12-09 22:32:37 [http-nio-8081-exec-1] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Calling security module with URL: http://localhost:8083/auth/validate to validate token
+2025-12-09 22:32:37 [http-nio-8081-exec-1] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Successfully retrieved user from security module: HuyT1 and cached in Redis with key: user:token:eyJhbGciOiJIUzM4NCJ9.eyJyb2xlIjoiVEVBQ0hFUiIsInBlcm1pc3Npb25zIjpbIlRFQUNIRVJfUkVBRCJdLCJzdWIiOiJIdXlUMSIsImp0aSI6IjU3ZDZiMWZhLWI2YjMtNDMwNi04NjA1LTJkM2RmYjNiNGVlOSIsImlhdCI6MTc2NTI5NDAxMSwiZXhwIjoxNzY1Mjk3NjExfQ.d0ktNvtcOqoy1l_jX08L1R1VP2i7R2XvPh0ELnyWmDuXhxY5Bdqeb5eekKGgBkmF
+2025-12-09 22:32:37 [http-nio-8081-exec-1] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - User HuyT1 successfully authorized
+2025-12-09 22:32:37 [http-nio-8081-exec-1] DEBUG [LoggingServiceImp] - [security_shared] RequiresAuthAspect - User HuyT1 successfully authorized for method: getByUserId with roles: ADMIN, TEACHER and permissions: TEACHER_READ
+2025-12-09 22:32:37 [http-nio-8081-exec-1] DEBUG [RateLimiterAspect] - Created or retrieved rate limiter 'teacher-controller' with period: 'PT1M'; limit for period: '100'; timeout: 'PT0S'; method: 'com.common.QLGV.controllers.TeacherController#getByUserId'
+2025-12-09 22:32:37 [http-nio-8081-exec-1] INFO  [LoggingServiceImp] - [qlgv] TeacherController - Get teacher by userId: 3 called successfully by user: HuyT1
+2025-12-09 22:32:37 [http-nio-8081-exec-1] DEBUG [CircuitBreakerAspect] - Created or retrieved circuit breaker 'qlgv-service' with failure rate '50.0' for method: 'com.common.QLGV.services.imp.TeacherServiceImp#getByUserId'
+2025-12-09 22:32:37 [http-nio-8081-exec-1] INFO  [LoggingServiceImp] - [qlgv] TeacherServiceImp - Get teacher by userId from cache: teachers:user:3
+2025-12-09 22:32:37 [http-nio-8081-exec-1] DEBUG [CircuitBreakerStateMachine] - CircuitBreaker 'qlgv-service' succeeded:
+2025-12-09 22:32:37 [http-nio-8081-exec-3] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Calling security module with URL: http://localhost:8083/auth/validate to validate token
+2025-12-09 22:32:37 [http-nio-8081-exec-2] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Calling security module with URL: http://localhost:8083/auth/validate to validate token
+2025-12-09 22:32:37 [http-nio-8081-exec-3] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Successfully retrieved user from security module: HuyT1 and cached in Redis with key: user:token:eyJhbGciOiJIUzM4NCJ9.eyJyb2xlIjoiVEVBQ0hFUiIsInBlcm1pc3Npb25zIjpbIlRFQUNIRVJfUkVBRCJdLCJzdWIiOiJIdXlUMSIsImp0aSI6IjU3ZDZiMWZhLWI2YjMtNDMwNi04NjA1LTJkM2RmYjNiNGVlOSIsImlhdCI6MTc2NTI5NDAxMSwiZXhwIjoxNzY1Mjk3NjExfQ.d0ktNvtcOqoy1l_jX08L1R1VP2i7R2XvPh0ELnyWmDuXhxY5Bdqeb5eekKGgBkmF
+2025-12-09 22:32:37 [http-nio-8081-exec-3] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - User HuyT1 successfully authorized
+2025-12-09 22:32:37 [http-nio-8081-exec-3] DEBUG [LoggingServiceImp] - [security_shared] RequiresAuthAspect - User HuyT1 successfully authorized for method: getByUserId with roles: ADMIN, TEACHER and permissions: TEACHER_READ
+2025-12-09 22:32:37 [http-nio-8081-exec-3] DEBUG [RateLimiterAspect] - Created or retrieved rate limiter 'teacher-controller' with period: 'PT1M'; limit for period: '100'; timeout: 'PT0S'; method: 'com.common.QLGV.controllers.TeacherController#getByUserId'
+2025-12-09 22:32:37 [http-nio-8081-exec-3] INFO  [LoggingServiceImp] - [qlgv] TeacherController - Get teacher by userId: 3 called successfully by user: HuyT1
+2025-12-09 22:32:37 [http-nio-8081-exec-3] DEBUG [CircuitBreakerAspect] - Created or retrieved circuit breaker 'qlgv-service' with failure rate '50.0' for method: 'com.common.QLGV.services.imp.TeacherServiceImp#getByUserId'
+2025-12-09 22:32:37 [http-nio-8081-exec-3] INFO  [LoggingServiceImp] - [qlgv] TeacherServiceImp - Get teacher by userId from cache: teachers:user:3
+2025-12-09 22:32:37 [http-nio-8081-exec-3] DEBUG [CircuitBreakerStateMachine] - CircuitBreaker 'qlgv-service' succeeded:
+2025-12-09 22:32:37 [http-nio-8081-exec-2] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Successfully retrieved user from security module: HuyT1 and cached in Redis with key: user:token:eyJhbGciOiJIUzM4NCJ9.eyJyb2xlIjoiVEVBQ0hFUiIsInBlcm1pc3Npb25zIjpbIlRFQUNIRVJfUkVBRCJdLCJzdWIiOiJIdXlUMSIsImp0aSI6IjU3ZDZiMWZhLWI2YjMtNDMwNi04NjA1LTJkM2RmYjNiNGVlOSIsImlhdCI6MTc2NTI5NDAxMSwiZXhwIjoxNzY1Mjk3NjExfQ.d0ktNvtcOqoy1l_jX08L1R1VP2i7R2XvPh0ELnyWmDuXhxY5Bdqeb5eekKGgBkmF
+2025-12-09 22:32:37 [http-nio-8081-exec-2] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - User HuyT1 successfully authorized
+2025-12-09 22:32:37 [http-nio-8081-exec-2] DEBUG [LoggingServiceImp] - [security_shared] RequiresAuthAspect - User HuyT1 successfully authorized for method: getStudentsByClassManaging with roles: ADMIN, TEACHER and permissions: TEACHER_READ
+2025-12-09 22:32:37 [http-nio-8081-exec-2] DEBUG [RateLimiterAspect] - Created or retrieved rate limiter 'teacher-controller' with period: 'PT1M'; limit for period: '100'; timeout: 'PT0S'; method: 'com.common.QLGV.controllers.TeacherController#getStudentsByClassManaging'
+2025-12-09 22:32:37 [http-nio-8081-exec-2] INFO  [LoggingServiceImp] - [qlgv] TeacherController - Get students by classManaging: A1 called successfully by user: HuyT1
+2025-12-09 22:32:37 [http-nio-8081-exec-2] DEBUG [CircuitBreakerAspect] - Created or retrieved circuit breaker 'qlgv-service' with failure rate '50.0' for method: 'com.common.QLGV.services.imp.TeacherServiceImp#getStudentsByClassManaging'
+2025-12-09 22:32:37 [http-nio-8081-exec-4] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Calling security module with URL: http://localhost:8083/auth/validate to validate token
+2025-12-09 22:32:37 [http-nio-8081-exec-2] INFO  [LoggingServiceImp] - [qlgv] TeacherServiceImp - Get students by classManaging : A1 from cache: teachers:classManaging:A1
+2025-12-09 22:32:37 [http-nio-8081-exec-2] DEBUG [CircuitBreakerStateMachine] - CircuitBreaker 'qlgv-service' succeeded:
+2025-12-09 22:32:37 [http-nio-8081-exec-7] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Calling security module with URL: http://localhost:8083/auth/validate to validate token
+2025-12-09 22:32:37 [http-nio-8081-exec-4] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Successfully retrieved user from security module: HuyT1 and cached in Redis with key: user:token:eyJhbGciOiJIUzM4NCJ9.eyJyb2xlIjoiVEVBQ0hFUiIsInBlcm1pc3Npb25zIjpbIlRFQUNIRVJfUkVBRCJdLCJzdWIiOiJIdXlUMSIsImp0aSI6IjU3ZDZiMWZhLWI2YjMtNDMwNi04NjA1LTJkM2RmYjNiNGVlOSIsImlhdCI6MTc2NTI5NDAxMSwiZXhwIjoxNzY1Mjk3NjExfQ.d0ktNvtcOqoy1l_jX08L1R1VP2i7R2XvPh0ELnyWmDuXhxY5Bdqeb5eekKGgBkmF
+2025-12-09 22:32:37 [http-nio-8081-exec-4] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - User HuyT1 successfully authorized
+2025-12-09 22:32:37 [http-nio-8081-exec-4] DEBUG [LoggingServiceImp] - [security_shared] RequiresAuthAspect - User HuyT1 successfully authorized for method: getByUserId with roles: ADMIN, TEACHER and permissions: TEACHER_READ
+2025-12-09 22:32:37 [http-nio-8081-exec-4] DEBUG [RateLimiterAspect] - Created or retrieved rate limiter 'teacher-controller' with period: 'PT1M'; limit for period: '100'; timeout: 'PT0S'; method: 'com.common.QLGV.controllers.TeacherController#getByUserId'
+2025-12-09 22:32:37 [http-nio-8081-exec-4] INFO  [LoggingServiceImp] - [qlgv] TeacherController - Get teacher by userId: 3 called successfully by user: HuyT1
+2025-12-09 22:32:37 [http-nio-8081-exec-4] DEBUG [CircuitBreakerAspect] - Created or retrieved circuit breaker 'qlgv-service' with failure rate '50.0' for method: 'com.common.QLGV.services.imp.TeacherServiceImp#getByUserId'
+2025-12-09 22:32:37 [http-nio-8081-exec-4] INFO  [LoggingServiceImp] - [qlgv] TeacherServiceImp - Get teacher by userId from cache: teachers:user:3
+2025-12-09 22:32:37 [http-nio-8081-exec-4] DEBUG [CircuitBreakerStateMachine] - CircuitBreaker 'qlgv-service' succeeded:
+2025-12-09 22:32:37 [http-nio-8081-exec-7] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Successfully retrieved user from security module: HuyT1 and cached in Redis with key: user:token:eyJhbGciOiJIUzM4NCJ9.eyJyb2xlIjoiVEVBQ0hFUiIsInBlcm1pc3Npb25zIjpbIlRFQUNIRVJfUkVBRCJdLCJzdWIiOiJIdXlUMSIsImp0aSI6IjU3ZDZiMWZhLWI2YjMtNDMwNi04NjA1LTJkM2RmYjNiNGVlOSIsImlhdCI6MTc2NTI5NDAxMSwiZXhwIjoxNzY1Mjk3NjExfQ.d0ktNvtcOqoy1l_jX08L1R1VP2i7R2XvPh0ELnyWmDuXhxY5Bdqeb5eekKGgBkmF
+2025-12-09 22:32:37 [http-nio-8081-exec-7] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - User HuyT1 successfully authorized
+2025-12-09 22:32:37 [http-nio-8081-exec-7] DEBUG [LoggingServiceImp] - [security_shared] RequiresAuthAspect - User HuyT1 successfully authorized for method: getStudentsByClassManaging with roles: ADMIN, TEACHER and permissions: TEACHER_READ
+2025-12-09 22:32:37 [http-nio-8081-exec-7] DEBUG [RateLimiterAspect] - Created or retrieved rate limiter 'teacher-controller' with period: 'PT1M'; limit for period: '100'; timeout: 'PT0S'; method: 'com.common.QLGV.controllers.TeacherController#getStudentsByClassManaging'
+2025-12-09 22:32:37 [http-nio-8081-exec-7] INFO  [LoggingServiceImp] - [qlgv] TeacherController - Get students by classManaging: A1 called successfully by user: HuyT1
+2025-12-09 22:32:37 [http-nio-8081-exec-7] DEBUG [CircuitBreakerAspect] - Created or retrieved circuit breaker 'qlgv-service' with failure rate '50.0' for method: 'com.common.QLGV.services.imp.TeacherServiceImp#getStudentsByClassManaging'
+2025-12-09 22:32:37 [http-nio-8081-exec-7] INFO  [LoggingServiceImp] - [qlgv] TeacherServiceImp - Get students by classManaging : A1 from cache: teachers:classManaging:A1
+2025-12-09 22:32:37 [http-nio-8081-exec-7] DEBUG [CircuitBreakerStateMachine] - CircuitBreaker 'qlgv-service' succeeded:
+2025-12-09 22:32:37 [http-nio-8081-exec-5] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Calling security module with URL: http://localhost:8083/auth/validate to validate token
+2025-12-09 22:32:37 [http-nio-8081-exec-5] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Successfully retrieved user from security module: HuyT1 and cached in Redis with key: user:token:eyJhbGciOiJIUzM4NCJ9.eyJyb2xlIjoiVEVBQ0hFUiIsInBlcm1pc3Npb25zIjpbIlRFQUNIRVJfUkVBRCJdLCJzdWIiOiJIdXlUMSIsImp0aSI6IjU3ZDZiMWZhLWI2YjMtNDMwNi04NjA1LTJkM2RmYjNiNGVlOSIsImlhdCI6MTc2NTI5NDAxMSwiZXhwIjoxNzY1Mjk3NjExfQ.d0ktNvtcOqoy1l_jX08L1R1VP2i7R2XvPh0ELnyWmDuXhxY5Bdqeb5eekKGgBkmF
+2025-12-09 22:32:37 [http-nio-8081-exec-5] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - User HuyT1 successfully authorized
+2025-12-09 22:32:37 [http-nio-8081-exec-5] DEBUG [LoggingServiceImp] - [security_shared] RequiresAuthAspect - User HuyT1 successfully authorized for method: getStudentsByClassManaging with roles: ADMIN, TEACHER and permissions: TEACHER_READ
+2025-12-09 22:32:37 [http-nio-8081-exec-5] DEBUG [RateLimiterAspect] - Created or retrieved rate limiter 'teacher-controller' with period: 'PT1M'; limit for period: '100'; timeout: 'PT0S'; method: 'com.common.QLGV.controllers.TeacherController#getStudentsByClassManaging'
+2025-12-09 22:32:37 [http-nio-8081-exec-5] INFO  [LoggingServiceImp] - [qlgv] TeacherController - Get students by classManaging: A1 called successfully by user: HuyT1
+2025-12-09 22:32:37 [http-nio-8081-exec-5] DEBUG [CircuitBreakerAspect] - Created or retrieved circuit breaker 'qlgv-service' with failure rate '50.0' for method: 'com.common.QLGV.services.imp.TeacherServiceImp#getStudentsByClassManaging'
+2025-12-09 22:32:37 [http-nio-8081-exec-5] INFO  [LoggingServiceImp] - [qlgv] TeacherServiceImp - Get students by classManaging : A1 from cache: teachers:classManaging:A1
+2025-12-09 22:32:37 [http-nio-8081-exec-5] DEBUG [CircuitBreakerStateMachine] - CircuitBreaker 'qlgv-service' succeeded:
+2025-12-09 22:32:42 [http-nio-8081-exec-8] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Calling security module with URL: http://localhost:8083/auth/validate to validate token
+2025-12-09 22:32:42 [http-nio-8081-exec-8] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Successfully retrieved user from security module: HuyT1 and cached in Redis with key: user:token:eyJhbGciOiJIUzM4NCJ9.eyJyb2xlIjoiVEVBQ0hFUiIsInBlcm1pc3Npb25zIjpbIlRFQUNIRVJfUkVBRCJdLCJzdWIiOiJIdXlUMSIsImp0aSI6IjU3ZDZiMWZhLWI2YjMtNDMwNi04NjA1LTJkM2RmYjNiNGVlOSIsImlhdCI6MTc2NTI5NDAxMSwiZXhwIjoxNzY1Mjk3NjExfQ.d0ktNvtcOqoy1l_jX08L1R1VP2i7R2XvPh0ELnyWmDuXhxY5Bdqeb5eekKGgBkmF
+2025-12-09 22:32:42 [http-nio-8081-exec-8] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - User HuyT1 successfully authorized
+2025-12-09 22:32:42 [http-nio-8081-exec-8] DEBUG [LoggingServiceImp] - [security_shared] RequiresAuthAspect - User HuyT1 successfully authorized for method: getStudentsByClassManaging with roles: ADMIN, TEACHER and permissions: TEACHER_READ
+2025-12-09 22:32:42 [http-nio-8081-exec-8] DEBUG [RateLimiterAspect] - Created or retrieved rate limiter 'teacher-controller' with period: 'PT1M'; limit for period: '100'; timeout: 'PT0S'; method: 'com.common.QLGV.controllers.TeacherController#getStudentsByClassManaging'
+2025-12-09 22:32:42 [http-nio-8081-exec-8] INFO  [LoggingServiceImp] - [qlgv] TeacherController - Get students by classManaging: A1 called successfully by user: HuyT1
+2025-12-09 22:32:42 [http-nio-8081-exec-8] DEBUG [CircuitBreakerAspect] - Created or retrieved circuit breaker 'qlgv-service' with failure rate '50.0' for method: 'com.common.QLGV.services.imp.TeacherServiceImp#getStudentsByClassManaging'
+2025-12-09 22:32:42 [http-nio-8081-exec-8] INFO  [LoggingServiceImp] - [qlgv] TeacherServiceImp - Get students by classManaging : A1 from cache: teachers:classManaging:A1
+2025-12-09 22:32:42 [http-nio-8081-exec-8] DEBUG [CircuitBreakerStateMachine] - CircuitBreaker 'qlgv-service' succeeded:
+2025-12-09 22:33:24 [http-nio-8081-exec-9] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Calling security module with URL: http://localhost:8083/auth/validate to validate token
+2025-12-09 22:33:24 [http-nio-8081-exec-9] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Successfully retrieved user from security module: HuyT1 and cached in Redis with key: user:token:eyJhbGciOiJIUzM4NCJ9.eyJyb2xlIjoiVEVBQ0hFUiIsInBlcm1pc3Npb25zIjpbIlRFQUNIRVJfUkVBRCJdLCJzdWIiOiJIdXlUMSIsImp0aSI6IjU3ZDZiMWZhLWI2YjMtNDMwNi04NjA1LTJkM2RmYjNiNGVlOSIsImlhdCI6MTc2NTI5NDAxMSwiZXhwIjoxNzY1Mjk3NjExfQ.d0ktNvtcOqoy1l_jX08L1R1VP2i7R2XvPh0ELnyWmDuXhxY5Bdqeb5eekKGgBkmF
+2025-12-09 22:33:24 [http-nio-8081-exec-9] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - User HuyT1 successfully authorized
+2025-12-09 22:33:24 [http-nio-8081-exec-9] DEBUG [LoggingServiceImp] - [security_shared] RequiresAuthAspect - User HuyT1 successfully authorized for method: getByUserId with roles: ADMIN, TEACHER and permissions: TEACHER_READ
+2025-12-09 22:33:24 [http-nio-8081-exec-9] DEBUG [RateLimiterAspect] - Created or retrieved rate limiter 'teacher-controller' with period: 'PT1M'; limit for period: '100'; timeout: 'PT0S'; method: 'com.common.QLGV.controllers.TeacherController#getByUserId'
+2025-12-09 22:33:24 [http-nio-8081-exec-9] INFO  [LoggingServiceImp] - [qlgv] TeacherController - Get teacher by userId: 3 called successfully by user: HuyT1
+2025-12-09 22:33:24 [http-nio-8081-exec-9] DEBUG [CircuitBreakerAspect] - Created or retrieved circuit breaker 'qlgv-service' with failure rate '50.0' for method: 'com.common.QLGV.services.imp.TeacherServiceImp#getByUserId'
+2025-12-09 22:33:24 [http-nio-8081-exec-9] WARN  [LoggingServiceImp] - [qlgv] TeacherServiceImp - Not found cache for userId: 3, query DB
+2025-12-09 22:33:24 [http-nio-8081-exec-9] DEBUG [CircuitBreakerAspect] - Created or retrieved circuit breaker 'security-service' with failure rate '50.0' for method: 'com.security_shared.services.SecurityService#getUsersByIds'
+2025-12-09 22:33:24 [http-nio-8081-exec-9] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Calling security internal API to batch get users, count: 1
+2025-12-09 22:33:24 [http-nio-8081-exec-9] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Successfully retrieved 1 users
+2025-12-09 22:33:24 [http-nio-8081-exec-9] DEBUG [CircuitBreakerStateMachine] - CircuitBreaker 'security-service' succeeded:
+2025-12-09 22:33:24 [http-nio-8081-exec-9] INFO  [LoggingServiceImp] - [qlgv] TeacherServiceImp - Save cache to Redis : teachers:user:3
+2025-12-09 22:33:24 [http-nio-8081-exec-9] INFO  [LoggingServiceImp] - [qlgv] TeacherServiceImp - Get teacher by userId: 3 Successfully
+2025-12-09 22:33:24 [http-nio-8081-exec-9] DEBUG [CircuitBreakerStateMachine] - CircuitBreaker 'qlgv-service' succeeded:
+2025-12-09 22:33:24 [http-nio-8081-exec-1] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Calling security module with URL: http://localhost:8083/auth/validate to validate token
+2025-12-09 22:33:24 [http-nio-8081-exec-1] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Successfully retrieved user from security module: HuyT1 and cached in Redis with key: user:token:eyJhbGciOiJIUzM4NCJ9.eyJyb2xlIjoiVEVBQ0hFUiIsInBlcm1pc3Npb25zIjpbIlRFQUNIRVJfUkVBRCJdLCJzdWIiOiJIdXlUMSIsImp0aSI6IjU3ZDZiMWZhLWI2YjMtNDMwNi04NjA1LTJkM2RmYjNiNGVlOSIsImlhdCI6MTc2NTI5NDAxMSwiZXhwIjoxNzY1Mjk3NjExfQ.d0ktNvtcOqoy1l_jX08L1R1VP2i7R2XvPh0ELnyWmDuXhxY5Bdqeb5eekKGgBkmF
+2025-12-09 22:33:24 [http-nio-8081-exec-1] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - User HuyT1 successfully authorized
+2025-12-09 22:33:24 [http-nio-8081-exec-1] DEBUG [LoggingServiceImp] - [security_shared] RequiresAuthAspect - User HuyT1 successfully authorized for method: getStudentsByClassManaging with roles: ADMIN, TEACHER and permissions: TEACHER_READ
+2025-12-09 22:33:24 [http-nio-8081-exec-1] DEBUG [RateLimiterAspect] - Created or retrieved rate limiter 'teacher-controller' with period: 'PT1M'; limit for period: '100'; timeout: 'PT0S'; method: 'com.common.QLGV.controllers.TeacherController#getStudentsByClassManaging'
+2025-12-09 22:33:24 [http-nio-8081-exec-1] INFO  [LoggingServiceImp] - [qlgv] TeacherController - Get students by classManaging: A1 called successfully by user: HuyT1
+2025-12-09 22:33:24 [http-nio-8081-exec-1] DEBUG [CircuitBreakerAspect] - Created or retrieved circuit breaker 'qlgv-service' with failure rate '50.0' for method: 'com.common.QLGV.services.imp.TeacherServiceImp#getStudentsByClassManaging'
+2025-12-09 22:33:24 [http-nio-8081-exec-1] WARN  [LoggingServiceImp] - [qlgv] TeacherServiceImp - Not found cache for classManaging: A1query DB
+2025-12-09 22:33:24 [http-nio-8081-exec-1] INFO  [LoggingServiceImp] - [qlgv] TeacherServiceImp - Getting students for classManaging: A1
+2025-12-09 22:33:24 [http-nio-8081-exec-1] INFO  [LoggingServiceImp] - [qlgv] StudentServiceFromTeacher - Calling QLSV API: http://localhost:8080/students/by-class/A1 for schoolClass: A1
+2025-12-09 22:33:24 [http-nio-8081-exec-1] ERROR [LoggingServiceImp] - [qlgv] StudentServiceFromTeacher - Failed to get students by schoolClass: A1: I/O error on GET request for "http://localhost:8080/students/by-class/A1": Connection refused: connect
+2025-12-09 22:33:24 [http-nio-8081-exec-1] INFO  [LoggingServiceImp] - [qlgv] TeacherServiceImp - Found 0 students for classManaging: A1
+2025-12-09 22:33:24 [http-nio-8081-exec-1] WARN  [LoggingServiceImp] - [qlgv] TeacherServiceImp - Not found students with classManaging: A1 from teacher
+2025-12-09 22:33:24 [http-nio-8081-exec-1] INFO  [LoggingServiceImp] - [qlgv] TeacherServiceImp - Get students by classManaging: A1 From teacher Successfully
+2025-12-09 22:33:24 [http-nio-8081-exec-1] DEBUG [CircuitBreakerStateMachine] - CircuitBreaker 'qlgv-service' succeeded:
+2025-12-09 22:33:26 [http-nio-8081-exec-3] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Calling security module with URL: http://localhost:8083/auth/validate to validate token
+2025-12-09 22:33:26 [http-nio-8081-exec-3] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - Successfully retrieved user from security module: HuyT1 and cached in Redis with key: user:token:eyJhbGciOiJIUzM4NCJ9.eyJyb2xlIjoiVEVBQ0hFUiIsInBlcm1pc3Npb25zIjpbIlRFQUNIRVJfUkVBRCJdLCJzdWIiOiJIdXlUMSIsImp0aSI6IjU3ZDZiMWZhLWI2YjMtNDMwNi04NjA1LTJkM2RmYjNiNGVlOSIsImlhdCI6MTc2NTI5NDAxMSwiZXhwIjoxNzY1Mjk3NjExfQ.d0ktNvtcOqoy1l_jX08L1R1VP2i7R2XvPh0ELnyWmDuXhxY5Bdqeb5eekKGgBkmF
+2025-12-09 22:33:26 [http-nio-8081-exec-3] DEBUG [LoggingServiceImp] - [security_shared] SecurityService - User HuyT1 successfully authorized
+2025-12-09 22:33:26 [http-nio-8081-exec-3] DEBUG [LoggingServiceImp] - [security_shared] RequiresAuthAspect - User HuyT1 successfully authorized for method: getStudentsByClassManaging with roles: ADMIN, TEACHER and permissions: TEACHER_READ
+2025-12-09 22:33:26 [http-nio-8081-exec-3] DEBUG [RateLimiterAspect] - Created or retrieved rate limiter 'teacher-controller' with period: 'PT1M'; limit for period: '100'; timeout: 'PT0S'; method: 'com.common.QLGV.controllers.TeacherController#getStudentsByClassManaging'
+2025-12-09 22:33:26 [http-nio-8081-exec-3] INFO  [LoggingServiceImp] - [qlgv] TeacherController - Get students by classManaging: A1 called successfully by user: HuyT1
+2025-12-09 22:33:26 [http-nio-8081-exec-3] DEBUG [CircuitBreakerAspect] - Created or retrieved circuit breaker 'qlgv-service' with failure rate '50.0' for method: 'com.common.QLGV.services.imp.TeacherServiceImp#getStudentsByClassManaging'
+2025-12-09 22:33:26 [http-nio-8081-exec-3] WARN  [LoggingServiceImp] - [qlgv] TeacherServiceImp - Not found cache for classManaging: A1query DB
+2025-12-09 22:33:26 [http-nio-8081-exec-3] INFO  [LoggingServiceImp] - [qlgv] TeacherServiceImp - Getting students for classManaging: A1
+2025-12-09 22:33:26 [http-nio-8081-exec-3] INFO  [LoggingServiceImp] - [qlgv] StudentServiceFromTeacher - Calling QLSV API: http://localhost:8080/students/by-class/A1 for schoolClass: A1
+2025-12-09 22:33:26 [http-nio-8081-exec-3] INFO  [LoggingServiceImp] - [qlgv] StudentServiceFromTeacher - Successfully retrieved 20 students for schoolClass: A1
+2025-12-09 22:33:26 [http-nio-8081-exec-3] INFO  [LoggingServiceImp] - [qlgv] TeacherServiceImp - Found 20 students for classManaging: A1
+2025-12-09 22:33:26 [http-nio-8081-exec-3] INFO  [LoggingServiceImp] - [qlgv] TeacherServiceImp - Save cache to Redis : teachers:classManaging:A1
+2025-12-09 22:33:26 [http-nio-8081-exec-3] INFO  [LoggingServiceImp] - [qlgv] TeacherServiceImp - Get students by classManaging: A1 From teacher Successfully
+2025-12-09 22:33:26 [http-nio-8081-exec-3] DEBUG [CircuitBreakerStateMachine] - CircuitBreaker 'qlgv-service' succeeded:

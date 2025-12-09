@@ -17,6 +17,7 @@ public interface UserRepo extends JpaRepository<UserEntity, Integer> {
     Optional<UserEntity> findByUsername(String username);
     Optional<UserEntity> findByUserId(Integer userId);
     boolean existsByUsername(String username);
+    boolean existsByUsernameAndUserIdNot(String username, Integer userId);
     boolean existsByUserId(Integer userId);
     long countByRole(Role role);
     

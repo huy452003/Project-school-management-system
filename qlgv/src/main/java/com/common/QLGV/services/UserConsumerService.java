@@ -34,7 +34,7 @@ public class UserConsumerService extends KafkaConsumerService<UserEvent> {
     }
 
     @KafkaListener(topics = "user-events")
-    public void HandleUserEvent(@Payload UserEvent userEvent,
+    public void handleUserEvent(@Payload UserEvent userEvent,
                                 @Header(KafkaHeaders.RECEIVED_TOPIC) String topic,
                                 @Header(KafkaHeaders.RECEIVED_PARTITION) int partition,
                                 @Header(KafkaHeaders.OFFSET) long offset,
@@ -48,13 +48,13 @@ public class UserConsumerService extends KafkaConsumerService<UserEvent> {
             }
             
             if(userEvent.getUser().getType().equals(Type.TEACHER)){
+                // handleEvent() sẽ tự động acknowledge, không cần acknowledge lại
                 handleEvent(userEvent, topic, partition, offset, acknowledgment,"qlgv");
             }else {
                 loggingService.logWarn("user event is not a teacher", logContext);
                 acknowledgment.acknowledge();
                 return;
             }
-            acknowledgment.acknowledge();
             loggingService.logInfo("Successfully handled user event", logContext);
         }
         catch (Exception e) {

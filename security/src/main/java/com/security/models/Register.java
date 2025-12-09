@@ -12,6 +12,7 @@ import jakarta.validation.constraints.Size;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.PastOrPresent;
+import jakarta.validation.constraints.Email;
 import java.time.LocalDate;
 import java.util.Set;
 import java.util.Map;
@@ -62,6 +63,16 @@ public class Register {
     @PastOrPresent(message = "{validate.user.birth.pastOrPresent}")
     @NotNull(message = "{validate.user.birth.notNull}")
     private LocalDate birth;
+
+    @NotBlank(message = "{validate.user.phoneNumber.notBlank}")
+    @NotNull(message = "{validate.user.phoneNumber.notNull}")
+    @Size(max = 15, message = "{validate.user.phoneNumber.size}")
+    private String phoneNumber;
+
+    @NotBlank(message = "{validate.user.email.notBlank}")
+    @NotNull(message = "{validate.user.email.notNull}")
+    @Email(message = "{validate.user.email.type}")
+    private String email;
     
     @NotNull(message = "{validate.user.role.notNull}")
     private Role role;

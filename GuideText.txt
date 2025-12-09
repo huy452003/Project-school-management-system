@@ -1297,6 +1297,7 @@
 
     --> sử dụng HashMap trong Single-threaded để tối ưu performance,
     sử dụng ConcurrentHashMap trong Multi-threaded để đảm bảo data không mất, bị lỗi,...
+
             VD:
   * HashMap (UNSAFE) - Lost Data
      Thread A: map.put("key100", 100)
@@ -1363,7 +1364,7 @@
   System.arraycopy(elementData, 2, elementData,  3,      3);
   //                   ↑        ↑        ↑       ↑       ↑
   //                  src     srcPos    dest  destPos  length   
-                              (2)              (3)     (3)
+                               (2)              (3)     (3)
   //                   ↑        ↑        ↑       ↑       ↑
   //                  mảng     cắt      dán     dán     độ
   //                   sẽ      tại      vào     vào     dài
@@ -1372,7 +1373,7 @@
 
       VD: LinkedList
   A -> B -> C -> D  <- Thêm X vào giữa B và C
-      ↓
+  ↓
   A -> B -> X -> C -> D  <- Chỉ cập nhật con trỏ B.next và C.prev
   (gắn vị trí phía sau B lúc này là C = X và gắn vị trí phía trước C lúc này là B = X).
                   
@@ -1393,8 +1394,10 @@
 
 ###( Guide Note 179)###
 * Tại sao spring boot lại tốt nhất hiện tại?
-  - Auto-configuration & Starters: Giảm cấu hình rườm rà, "bật là chạy" với spring-boot-starter-*.
-    + Spring Boot tự đăng ký bean phù hợp.
+  - Auto-configuration & Starters (quan trọng): Giảm cấu hình rườm rà, "bật là chạy" với spring-boot-starter-*.
+    + Có thêm tool tạo project spring boot nhanh : https://start.spring.io/
+    + Spring Boot tự đăng ký bean(@Bean , @Service , @RestController) phù hợp.
+    + Tự động tạo Bean cho các class trong library trong file pom.
     + có Spring Security filter chain tối thiểu.
     + tự động cấu hình server mặc định ( tomcat ).
     + Web MVC mặc định: DispatcherServlet, message converters (Jackson), static resources.
@@ -1415,7 +1418,6 @@
 
   - Cộng đồng và tài nguyên: Kho GitHub của Spring Boot có lượng sao, issue, PR, release rất lớn, phản ánh mức độ sử dụng rộng rãi và hoạt động sôi nổi.
   - Spring Data/Security/Validation/Batch: Xử lý CRUD, bảo mật, validation, batch job theo chuẩn thống nhất, hạn chế code nền.
-
 
 
 * new 16/11/2025

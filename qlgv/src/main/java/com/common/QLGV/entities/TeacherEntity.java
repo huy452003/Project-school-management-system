@@ -6,10 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-import java.time.LocalDate;
-
-import com.model_shared.enums.Gender;
-
 @Entity
 @Table(name = "Teachers")
 @Data
@@ -24,6 +20,12 @@ public class TeacherEntity {
 
     @Column(name = "user_id", nullable = false, unique = true)
     private Integer userId;
+
+    @Column(name = "class_managing")
+    private String classManaging;
+
+    @Column(name = "department")
+    private String department;
 
     @Version
     @Column(name = "version")
