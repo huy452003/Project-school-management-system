@@ -70,21 +70,37 @@ const Layout = ({ children }) => {
           )}
           {/* Menu cho STUDENT */}
           {displayUser?.role === 'STUDENT' && (
-            <Link
-              to="/info-student"
-              className={location.pathname === '/info-student' ? 'active' : ''}
-            >
-              Thông Tin Sinh Viên
-            </Link>
+            <>
+              <Link
+                to="/info-student"
+                className={location.pathname === '/info-student' ? 'active' : ''}
+              >
+                Thông Tin Sinh Viên
+              </Link>
+              <Link
+                to="/profile-edit"
+                className={location.pathname === '/profile-edit' ? 'active' : ''}
+              >
+                Chỉnh Sửa Thông Tin
+              </Link>
+            </>
           )}
           {/* Menu cho TEACHER */}
           {displayUser?.role === 'TEACHER' && (
-            <Link
-              to="/teacher-classes"
-              className={location.pathname === '/teacher-classes' ? 'active' : ''}
-            >
-              Các Lớp Giảng Dạy
-            </Link>
+            <>
+              <Link
+                to="/teacher-classes"
+                className={location.pathname === '/teacher-classes' ? 'active' : ''}
+              >
+                Các Lớp Giảng Dạy
+              </Link>
+              <Link
+                to="/profile-edit"
+                className={location.pathname === '/profile-edit' ? 'active' : ''}
+              >
+                Chỉnh Sửa Thông Tin
+              </Link>
+            </>
           )}
         </div>
         <div className="nav-user">

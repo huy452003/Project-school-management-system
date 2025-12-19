@@ -4,9 +4,10 @@ import { useNavigate } from 'react-router-dom'
 import './Home.css'
 
 const Home = () => {
-  const { user } = useAuth()
+  const { user, validateToken } = useAuth()
   const navigate = useNavigate()
   const [showBanner, setShowBanner] = useState(true)
+  const [refreshing, setRefreshing] = useState(false)
 
   // Kiểm tra xem thông tin có đầy đủ không
   const isInfoComplete = user?.firstName && user?.lastName && user?.age && user?.gender && user?.birth && user?.phoneNumber && user?.email
@@ -20,6 +21,18 @@ const Home = () => {
     const infoCard = document.querySelector('.user-info-card')
     if (infoCard) {
       infoCard.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
+  }
+
+  const handleRefresh = async () => {
+    try {
+      setRefreshing(true)
+      await validateToken()
+      // Có thể thêm thông báo thành công nếu cần
+    } catch (error) {
+      console.error('Refresh error:', error)
+    } finally {
+      setRefreshing(false)
     }
   }
 
@@ -56,6 +69,14 @@ const Home = () => {
       <div className="user-info-card">
         <div className="card-header">
           <h2>📋 Thông Tin Tài Khoản</h2>
+          <button 
+            onClick={handleRefresh} 
+            className="refresh-btn"
+            disabled={refreshing}
+            title="Làm mới thông tin"
+          >
+            {refreshing ? '⏳' : '🔄'} {refreshing ? 'Đang tải...' : 'Làm mới'}
+          </button>
         </div>
         
         <div className="info-sections">

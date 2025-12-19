@@ -1,2 +1,90 @@
-2025-12-10 00:00:00 [scheduling-1] INFO  [LoggingServiceImp] - [security] PendingUserTimeoutService - Starting scheduled check for PENDING user timeout...
-2025-12-10 00:00:00 [scheduling-1] INFO  [LoggingServiceImp] - [security] PendingUserTimeoutService - No PENDING users found
+2025-12-17 14:57:38 [background-preinit] DEBUG [logging] - Logging Provider: org.jboss.logging.Slf4jLoggerProvider found via system property
+2025-12-17 14:57:38 [main] INFO  [SecurityApplication] - Starting SecurityApplication using Java 17.0.16 with PID 11752 (D:\project IntelliJ Ultimate\modules-parent\security\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\security)
+2025-12-17 14:57:38 [main] DEBUG [SecurityApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
+2025-12-17 14:57:38 [main] INFO  [SecurityApplication] - No active profile set, falling back to 1 default profile: "default"
+2025-12-17 14:57:41 [main] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
+2025-12-17 14:57:41 [main] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
+2025-12-17 14:57:41 [main] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
+2025-12-17 14:57:41 [main] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
+2025-12-17 14:57:41 [main] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
+2025-12-17 14:57:41 [main] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
+2025-12-17 14:57:41 [main] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
+2025-12-17 14:57:41 [main] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
+2025-12-17 14:57:41 [main] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
+2025-12-17 14:57:41 [main] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
+2025-12-17 14:57:41 [main] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
+2025-12-17 14:57:41 [main] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
+2025-12-17 14:57:45 [main] DEBUG [InternalLoggerFactory] - Using SLF4J as the default logging framework
+2025-12-17 14:57:48 [main] WARN  [JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-12-17 14:57:50 [main] WARN  [deprecation] - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-12-17 14:57:55 [main] DEBUG [IpGeoBlockingFilter] - Filter 'ipGeoBlockingFilter' configured for use
+2025-12-17 14:57:55 [main] DEBUG [JwtAuthFilter] - Filter 'jwtAuthFilter' configured for use
+2025-12-17 14:57:56 [main] WARN  [InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer] - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2025-12-17 14:57:56 [main] DEBUG [Mappings] - 
+	c.s.c.AuthController:
+	{POST [/auth/register]}: register(Register,String)
+	{POST [/auth/logout]}: logout(String,String)
+	{POST [/auth/refresh]}: refreshToken(String,String)
+	{POST [/auth/login]}: login(Login,String)
+	{GET [/auth/validate]}: validateToken(String,String)
+	{POST [/auth/internal/users/update]}: updateUser(UpdateUserDto)
+	{GET [/auth/decode]}: decodeToken(String,String)
+	{POST [/auth/internal/users/batch]}: getUsersByIds(Map)
+	{DELETE [/auth/internal/users/delete]}: deleteUser(List)
+	{PATCH [/auth/internal/users/disable]}: disableUsers(List,String)
+	{POST [/auth/internal/ip/track-violation]}: trackIpViolation(Map)
+	{GET [/auth/check-status]}: checkAccountStatus(String,String)
+	{PUT [/auth/users/{userId}/admin-update]}: adminUpdateUser(Integer,AdminUpdateUserDto,String)
+	{PATCH [/auth/internal/users/enable]}: enableUsers(List,String)
+2025-12-17 14:57:56 [main] DEBUG [Mappings] - 
+	c.s.c.IpGeoManagementController:
+	{DELETE [/admin/ip-geo/ip/whitelist/{ipAddress}]}: removeIpFromWhitelist(String,String)
+	{POST [/admin/ip-geo/geo/whitelist]}: addCountryToWhitelist(CountryCode,String)
+	{DELETE [/admin/ip-geo/geo/blacklist/{countryCode}]}: removeCountryFromBlacklist(String,String)
+	{DELETE [/admin/ip-geo/geo/whitelist/{countryCode}]}: removeCountryFromWhitelist(String,String)
+	{DELETE [/admin/ip-geo/ip/blacklist/{ipAddress}]}: removeIpFromBlacklist(String,String)
+	{POST [/admin/ip-geo/geo/blacklist]}: addCountryToBlacklist(CountryCode,String)
+	{POST [/admin/ip-geo/ip/whitelist]}: addIpToWhitelist(IpAddress,String)
+	{GET [/admin/ip-geo/ip/status/{ipAddress}]}: getIpStatus(String,String)
+	{POST [/admin/ip-geo/ip/blacklist]}: addIpToBlacklist(IpAddress,String)
+2025-12-17 14:57:57 [main] DEBUG [Mappings] - 
+	o.s.b.a.w.s.e.BasicErrorController:
+	{ [/error]}: error(HttpServletRequest)
+	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
+2025-12-17 14:57:57 [main] DEBUG [Mappings] - 'beanNameHandlerMapping' {}
+2025-12-17 14:57:57 [main] DEBUG [Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
+2025-12-17 14:58:00 [main] DEBUG [Loggers] - Using Slf4j logging framework
+2025-12-17 14:58:03 [main] INFO  [SecurityApplication] - Started SecurityApplication in 25.492 seconds (process running for 26.231)
+2025-12-17 14:58:29 [http-nio-8083-exec-2] DEBUG [LoggingServiceImp] - [security] IpGeoBlockingFilter - Checking IP/Geo blocking for IP: 127.0.0.1, URI: /auth/login
+2025-12-17 14:58:29 [http-nio-8083-exec-2] DEBUG [LoggingServiceImp] - [security] IpGeoBlockingFilter - IP/Geo check passed for IP: 127.0.0.1
+2025-12-17 14:58:29 [http-nio-8083-exec-2] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Processing request: /auth/login
+2025-12-17 14:58:29 [http-nio-8083-exec-2] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Skipping JWT validation for public endpoint: /auth/login
+2025-12-17 14:58:29 [http-nio-8083-exec-2] INFO  [LoggingServiceImp] - [security] AuthController - Login API calling... by user: admin
+2025-12-17 14:58:31 [http-nio-8083-exec-2] INFO  [LoggingServiceImp] - [security] AuthService - Login attempt for username: admin
+2025-12-17 14:58:31 [http-nio-8083-exec-2] INFO  [LoggingServiceImp] - [security] AuthController - User logged in successfully: admin
+2025-12-17 14:58:32 [LoginEvent-1] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - userEvent sent to topic: user-events - with entity id: [1]
+2025-12-17 14:58:32 [LoginEvent-1] INFO  [LoggingServiceImp] - [security] AsyncService - Login event sent successfully for user: admin
+2025-12-17 14:58:32 [kafka-producer-network-thread | security-producer-1] INFO  [LoggingServiceImp] - [kafka_shared] KafkaProducerService - Message sent successfully to topic: user-events, partition: 0, offset: 283, key: [1]
+2025-12-17 14:59:18 [http-nio-8083-exec-5] DEBUG [LoggingServiceImp] - [security] IpGeoBlockingFilter - Checking IP/Geo blocking for IP: 127.0.0.1, URI: /auth/validate
+2025-12-17 14:59:18 [http-nio-8083-exec-5] DEBUG [LoggingServiceImp] - [security] IpGeoBlockingFilter - IP/Geo check passed for IP: 127.0.0.1
+2025-12-17 14:59:18 [http-nio-8083-exec-5] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Processing request: /auth/validate
+2025-12-17 14:59:18 [http-nio-8083-exec-5] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Extracted username from JWT: admin
+2025-12-17 14:59:18 [http-nio-8083-exec-5] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Successfully authenticated user: admin
+2025-12-17 14:59:18 [http-nio-8083-exec-5] INFO  [LoggingServiceImp] - [security] AuthController - validate API Calling...
+2025-12-17 14:59:18 [http-nio-8083-exec-5] INFO  [LoggingServiceImp] - [security] AuthController - Token validated successfully for user: admin
+2025-12-17 14:59:18 [http-nio-8083-exec-6] DEBUG [LoggingServiceImp] - [security] IpGeoBlockingFilter - Checking IP/Geo blocking for IP: 127.0.0.1, URI: /auth/internal/users/update
+2025-12-17 14:59:18 [http-nio-8083-exec-6] DEBUG [LoggingServiceImp] - [security] IpGeoBlockingFilter - IP/Geo check passed for IP: 127.0.0.1
+2025-12-17 14:59:18 [http-nio-8083-exec-6] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Processing request: /auth/internal/users/update
+2025-12-17 14:59:18 [http-nio-8083-exec-6] DEBUG [LoggingServiceImp] - [security] JwtAuthFilter - Skipping JWT validation for public endpoint: /auth/internal/users/update
+2025-12-17 14:59:18 [http-nio-8083-exec-6] INFO  [LoggingServiceImp] - [security] AuthController - updateUser API Calling... for userId: 7
+2025-12-17 14:59:19 [http-nio-8083-exec-6] INFO  [LoggingServiceImp] - [security] AuthController - Updated user profile for userId: 7
+2025-12-17 15:00:00 [scheduling-1] INFO  [LoggingServiceImp] - [security] PendingUserTimeoutService - Starting scheduled check for PENDING user timeout...
+2025-12-17 15:00:00 [scheduling-1] INFO  [LoggingServiceImp] - [security] PendingUserTimeoutService - No PENDING users found
+2025-12-17 15:02:00 [scheduling-1] INFO  [LoggingServiceImp] - [security] PendingUserTimeoutService - Starting scheduled check for PENDING user timeout...
+2025-12-17 15:02:00 [scheduling-1] INFO  [LoggingServiceImp] - [security] PendingUserTimeoutService - No PENDING users found
+2025-12-17 15:04:00 [scheduling-1] INFO  [LoggingServiceImp] - [security] PendingUserTimeoutService - Starting scheduled check for PENDING user timeout...
+2025-12-17 15:04:00 [scheduling-1] INFO  [LoggingServiceImp] - [security] PendingUserTimeoutService - No PENDING users found
+2025-12-17 15:06:00 [scheduling-1] INFO  [LoggingServiceImp] - [security] PendingUserTimeoutService - Starting scheduled check for PENDING user timeout...
+2025-12-17 15:06:00 [scheduling-1] INFO  [LoggingServiceImp] - [security] PendingUserTimeoutService - No PENDING users found
+2025-12-17 15:08:00 [scheduling-1] INFO  [LoggingServiceImp] - [security] PendingUserTimeoutService - Starting scheduled check for PENDING user timeout...
+2025-12-17 15:08:00 [scheduling-1] INFO  [LoggingServiceImp] - [security] PendingUserTimeoutService - No PENDING users found

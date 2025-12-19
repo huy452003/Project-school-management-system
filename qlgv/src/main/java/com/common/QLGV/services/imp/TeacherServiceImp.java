@@ -621,8 +621,8 @@ public class TeacherServiceImp implements TeacherService {
                 }
             }
         }
-        // Cache kết quả filter (cache trong 5 phút)
-        redisTemplate.opsForValue().set(cacheKey, teacherModels, 5, TimeUnit.MINUTES);
+        // Cache kết quả filter (cache trong 1 phút)
+        redisTemplate.opsForValue().set(cacheKey, teacherModels, 1, TimeUnit.MINUTES);
         loggingService.logInfo("Save filtered cache to Redis : " + cacheKey, logContext);
 
         loggingService.logInfo("Filter Teachers Successfully. Found " + teacherModels.size() + " teachers with the given filters", logContext);

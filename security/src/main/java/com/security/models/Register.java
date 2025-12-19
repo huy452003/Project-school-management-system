@@ -66,7 +66,7 @@ public class Register {
 
     @NotBlank(message = "{validate.user.phoneNumber.notBlank}")
     @NotNull(message = "{validate.user.phoneNumber.notNull}")
-    @Size(max = 15, message = "{validate.user.phoneNumber.size}")
+    @Size(max = 11, min = 10, message = "{validate.user.phoneNumber.size}")
     private String phoneNumber;
 
     @NotBlank(message = "{validate.user.email.notBlank}")

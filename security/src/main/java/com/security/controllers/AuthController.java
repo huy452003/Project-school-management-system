@@ -291,6 +291,8 @@ public class AuthController {
             userEntity.setAge(updateUserDto.getAge());
             userEntity.setGender(updateUserDto.getGender());
             userEntity.setBirth(updateUserDto.getBirth());
+            userEntity.setPhoneNumber(updateUserDto.getPhoneNumber());
+            userEntity.setEmail(updateUserDto.getEmail());
             
             UserEntity savedEntity = userRepo.saveAndFlush(userEntity);
             
@@ -428,7 +430,6 @@ public class AuthController {
         return ResponseEntity.status(response.status()).body(response);
     }
 
-    // Internal API để track IP violation (gọi từ các module khác)
     @PostMapping("/internal/ip/track-violation")
     public ResponseEntity<Map<String, String>> trackIpViolation(
         @RequestBody Map<String, String> request

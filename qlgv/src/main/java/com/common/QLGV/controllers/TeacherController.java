@@ -26,7 +26,6 @@ import com.model_shared.utils.IpAddressUtils;
 import com.handle_exceptions.TooManyRequestsExceptionHandle;
 import com.model_shared.enums.Gender;
 
-
 import java.util.List;
 import java.util.Locale;
 

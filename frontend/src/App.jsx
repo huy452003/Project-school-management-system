@@ -8,6 +8,7 @@ import Students from './pages/Students'
 import Teachers from './pages/Teachers'
 import InfoStudent from './pages/InfoStudent'
 import TeacherClasses from './pages/TeacherClasses'
+import ProfileEdit from './pages/ProfileEdit'
 import ProtectedRoute from './components/ProtectedRoute'
 import RoleProtectedRoute from './components/RoleProtectedRoute'
 import Layout from './components/Layout'
@@ -65,6 +66,16 @@ function App() {
               <RoleProtectedRoute allowedRoles={['TEACHER']}>
                 <Layout>
                   <TeacherClasses />
+                </Layout>
+              </RoleProtectedRoute>
+            }
+          />
+          <Route
+            path="/profile-edit"
+            element={
+              <RoleProtectedRoute allowedRoles={['STUDENT', 'TEACHER']}>
+                <Layout>
+                  <ProfileEdit />
                 </Layout>
               </RoleProtectedRoute>
             }

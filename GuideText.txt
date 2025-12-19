@@ -1280,58 +1280,202 @@
 
 ###( Guide Note 172)###
 * HashMap và ConcurrentHashMap
-  - Sử dụng HashMap khi:
-    + tối ưu cho Single-threaded application
-    + Cần performance tối đa
-    + Không cần thread safety
-    + Có thể chấp nhận null keys/values
-  - Sử dụng ConcurrentHashMap khi:
-  + tối ưu cho Multi-threaded application
-  + có (CAS) là một atomic operation cho phép thay đổi giá trị chỉ khi giá trị hiện tại khớp với giá trị mong đợi.
-  ví dụ Chỉ 1 thread thành công, các thread khác retry nên không dẫn đến overwirite data
-  + Cần thread safety : Thread Safety là khả năng của code có thể được sử dụng an toàn bởi
-  nhiều thread đồng thời mà không gây ra lỗi hoặc hành vi không mong đợi.
-  + Read-heavy workloads
-  + Cần high concurrency
-  + Không thể chấp nhận null keys/values
+  * Bucket là gì?
+  + Bucket = Một vị trí (slot) trong Array (table) của HashMap/ConcurrentHashMap
+  + Mỗi bucket có thể chứa:
+    * null → Bucket trống (chưa có key nào hash đến)
+    * 1 Node → Không có collision (chỉ 1 key hash đến bucket này)
+    * Linked List hoặc Red-Black Tree → Có collision (nhiều keys hash đến cùng 1 bucket)
+  + VD: table[0], table[1], table[2], ... table[15] → Mỗi phần tử là 1 bucket
+  + Khi hash(key) → index → table[index] chính là bucket cần tìm
+  + VD cụ thể:
+    * table.length = 16 (16 buckets: index 0-15)
+    * hash("key1") & 15 = 5 → Bucket tại table[5]
+    * hash("key2") & 15 = 5 → Cùng bucket table[5] (collision) → Tạo linked list
+    * hash("key3") & 15 = 10 → Bucket tại table[10] (khác bucket)
 
-    --> sử dụng HashMap trong Single-threaded để tối ưu performance,
-    sử dụng ConcurrentHashMap trong Multi-threaded để đảm bảo data không mất, bị lỗi,...
+  * HashMap - Cơ chế Insert/Update/Remove (KHÔNG Thread-Safe):
+  + Cấu trúc: Array (table) + Linked List / Red-Black Tree (Java 8+)
+  + Insert (put):
+    - Bước 1: Tính hash(key) → hash code
+    - Bước 2: index = hash & (table.length - 1) → Tìm bucket
+    - Bước 3: Nếu bucket null → Tạo node mới, gán table[index] = node
+    - Bước 4: Nếu bucket không null → Traverse linked list/tree, tìm key
+      * Key tồn tại → Update value
+      * Key không tồn tại → Thêm node mới vào cuối list/insert vào tree
+    - Vấn đề Multi-thread: 2 threads cùng đọc table[index] = null → Cả 2 đều ghi → Mất data
+  + Update (put với key đã tồn tại):
+    - Tìm node theo key trong bucket
+    - Gán node.value = newValue (không atomic)
+    - Vấn đề: Thread A đọc value, Thread B update → Thread A có thể đọc giá trị cũ
+  + Remove:
+    - Tìm node theo key trong bucket
+    - Xóa node khỏi linked list/tree (update pointer)
+    - Vấn đề: 2 threads cùng remove → Có thể gây broken linked list
 
-            VD:
-  * HashMap (UNSAFE) - Lost Data
-     Thread A: map.put("key100", 100)
-     Thread B: map.put("key200", 200)
-     Cả 2 đều hash đến bucket index 5
+  * ConcurrentHashMap - Cơ chế Insert/Update/Remove (Thread-Safe):
+  + Cấu trúc: Array (table) + Linked List / Red-Black Tree, sử dụng CAS + synchronized
+  + Sự khác biệt so với HashMap (KHÔNG chỉ CAS cho bucket null):
+    - 1. Bucket null → Dùng CAS (atomic, không cần lock) → Nhanh hơn synchronized
+    - 2. Bucket không null → Dùng synchronized(firstNode) → Lock node đầu tiên của bucket
+    - 3. Read operations (get) → Dùng volatile read → Không cần lock, nhiều threads đọc đồng thời
+    - 4. Fine-grained locking → Chỉ lock 1 bucket, các bucket khác vẫn truy cập song song
+    - 5. Memory visibility → Volatile cho table và nodes → Đảm bảo thay đổi visible ngay lập tức
+  + Insert (put) - Luồng đi để không bị lost data:
+    - Bước 1: Tính hash(key) → hash code
+    - Bước 2: index = hash & (table.length - 1) → Tìm bucket
+    - Bước 3: Kiểm tra bucket
+      * Nếu bucket null → Dùng CAS: casTabAt(table, index, null, newNode)
+        - CAS thành công → Xong (không cần synchronized, đã insert thành công)
+        - CAS thất bại → Bucket đã có giá trị (thread khác đã insert) → Chuyển sang Bước 4
+      * Nếu bucket không null từ đầu → Chuyển sang Bước 4
+    - Bước 4: synchronized(firstNode) → Lock node đầu tiên của bucket
+      * Traverse linked list/tree, tìm key
+      * Key tồn tại → Update value
+      * Key không tồn tại → Thêm node mới vào list/tree
+    - Tóm tắt luồng: Bucket null → CAS → (thành công: xong | thất bại: synchronized) → synchronized để lock node đầu và insert/update
+    - Ưu điểm: Chỉ lock 1 bucket, các bucket khác vẫn có thể truy cập song song
+    - VD cụ thể:
+      * Thread A: bucket null → CAS thành công → Insert nodeA → Xong
+      * Thread B: bucket null → CAS thất bại (vì Thread A đã insert) → synchronized(nodeA) → Traverse list → Insert nodeB vào list
+      * Thread C: bucket không null (đã có nodeA) → synchronized(nodeA) ngay → Traverse list → Insert nodeC vào list
+  + Update (put với key đã tồn tại):
+    - synchronized(node) → Lock node cụ thể
+    - Update value (atomic trong synchronized block)
+    - Đảm bảo thread-safe
+  + Remove:
+    - synchronized(firstNode) → Lock bucket
+    - Xóa node khỏi linked list/tree (atomic)
+    - Đảm bảo không gây broken linked list
+  + Get (read) - KHÔNG cần lock:
+    - Sử dụng volatile read → Đọc trực tiếp từ memory
+    - Traverse linked list/tree không cần lock
+    - Nhiều threads có thể đọc đồng thời → High concurrency
+    - VD: 10 threads cùng get() → Tất cả đều chạy song song, không chờ nhau
 
-     Timeline HashMap:
-     Thread A: read table[5] = null
-     Thread B: read table[5] = null  (cùng lúc)
-     Thread A: write table[5] = node100
-     Thread B: write table[5] = node200  (OVERWRITE!)
+  * Tóm tắt sự khác biệt ConcurrentHashMap vs HashMap:
+  + HashMap: Không có cơ chế bảo vệ → Race condition, mất data
+  + ConcurrentHashMap:
+    - Bucket null → CAS (atomic, không lock) → Nhanh
+    - Bucket không null → synchronized (lock bucket) → An toàn
+    - Get → volatile read (không lock) → Nhiều threads đọc song song
+    - Fine-grained locking → Chỉ lock 1 bucket, các bucket khác vẫn truy cập được
 
-     Kết quả: "key100" bị mất!
-     map.get("key100") = null
-     map.get("key200") = 200
+  * CAS (Compare-And-Swap) - Các thao tác:
+    + CAS là gì?
+      - CAS = Compare-And-Swap = So sánh và hoán đổi
+      - Atomic operation ở hardware level (CPU instruction)
+      - Không cần lock → Nhanh hơn synchronized
+      - Được implement trong Java qua: sun.misc.Unsafe, AtomicInteger, AtomicReference, v.v.
+    + Các thao tác của CAS:
+      - 1. READ (Đọc): Đọc giá trị hiện tại từ memory
+        * VD: currentValue = table[index]
+      - 2. COMPARE (So sánh): So sánh giá trị đọc được với giá trị mong đợi
+        * VD: if (currentValue == expectedValue)
+      - 3. SWAP (Hoán đổi): Nếu so sánh đúng → Ghi giá trị mới, nếu sai → Không làm gì
+        * VD: if (currentValue == expectedValue) → table[index] = newValue
+        * else → return false (thất bại)
+    + Cú pháp CAS (pseudo-code):
+      boolean casTabAt(Object[] table, int index, Object expected, Object newValue) {
+        if (table[index] == expected) {  // COMPARE
+          table[index] = newValue;         // SWAP
+          return true;                     // Thành công
+        }
+        return false;                      // Thất bại
+      }
+    + Cách hoạt động trong ConcurrentHashMap:
+      - Thread A: casTabAt(table, 5, null, nodeA)
+        * READ: table[5] = null
+        * COMPARE: null == null → true
+        * SWAP: table[5] = nodeA
+        * Return: true (thành công)
+      - Thread B (cùng lúc): casTabAt(table, 5, null, nodeB)
+        * READ: table[5] = null (đọc trước khi Thread A ghi)
+        * COMPARE: null == null → true
+        * SWAP: table[5] = nodeB (nhưng Thread A đã ghi nodeA rồi)
+        * → CAS thất bại vì table[5] != null nữa (đã là nodeA)
+        * Return: false (thất bại) → Thread B retry với synchronized
+    + Ưu điểm của CAS:
+      - Không cần lock → Nhanh hơn synchronized
+      - Atomic operation → Thread-safe
+      - Không block threads → High concurrency
+      - Optimistic locking → Chỉ lock khi cần thiết
+    + Nhược điểm của CAS:
+      - Chỉ áp dụng được cho simple operations (đọc, so sánh, ghi)
+      - Có thể bị ABA problem (giá trị thay đổi rồi quay lại giá trị cũ)
+      - Retry loop có thể tốn CPU nếu nhiều threads cùng retry
+    + So sánh CAS vs synchronized:
+      - CAS: Không lock, atomic operation, nhanh, nhưng chỉ cho simple operations
+      - synchronized: Lock, đảm bảo mutual exclusion + atomicity + memory visibility, chậm hơn nhưng linh hoạt hơn
+      - ConcurrentHashMap: Kết hợp cả 2 → CAS cho bucket null (nhanh), synchronized cho bucket không null (linh hoạt)
 
-  * ConcurrentHashMap (SAFE) - No Lost Data
-     Thread A: map.put("key100", 100)
-     Thread B: map.put("key200", 200)
-     Cả 2 đều hash đến bucket index 5
+  * synchronized:
+    - 1. Fine-grained locking = Kỹ thuật lock ở mức độ chi tiết (lock từng phần nhỏ)
+    - 2. Mutual Exclusion (Loại trừ lẫn nhau):
+      * Chỉ 1 thread được vào synchronized block tại 1 thời điểm
+      * Các threads khác phải chờ → Đảm bảo không có race condition
+    - 3. Atomicity (Tính nguyên tử):
+      * Tất cả operations trong synchronized block được thực hiện như 1 operation duy nhất
+      * Không bị gián đoạn bởi thread khác → Đảm bảo data consistency
+      * VD: Traverse list + Insert node → Atomic, không bị gián đoạn
+    - 4. Memory Visibility (Tính nhìn thấy bộ nhớ):
+      * Thread vào synchronized block → Đọc data từ main memory (không dùng cache)
+      * Thread ra khỏi synchronized block → Ghi data vào main memory
+      * Đảm bảo thay đổi từ thread này visible cho thread khác ngay lập tức
+    - 5. Happens-before relationship:
+      * Tất cả operations trước synchronized block → Happens-before operations trong block
+      * Tất cả operations trong synchronized block → Happens-before operations sau block
+      * Đảm bảo thứ tự thực thi giữa các threads
 
-     Timeline ConcurrentHashMap:
-     Thread A: casTabAt(table, 5, null, node100) -> true (thành công)
-     Thread B: casTabAt(table, 5, null, node200) -> false (thất bại)
+  * Tại sao phải dùng Fine-grained locking để lock node đầu tiên?
+  + Lock node đầu tiên = Lock toàn bộ bucket:
+    - Node đầu tiên là entry point (điểm vào) của bucket
+    - Tất cả operations (insert, update, remove) đều phải đi qua node đầu tiên
+    - Lock node đầu tiên → Bảo vệ toàn bộ linked list/tree trong bucket đó
+    - VD: Bucket có list: node1 → node2 → node3
+      * Lock node1 → Thread A traverse list để insert/update/remove
+      * Thread B muốn vào bucket này → Phải chờ Thread A release lock node1
+      * → Đảm bảo không có 2 threads cùng modify bucket cùng lúc
+  + VD cụ thể về Fine-grained locking:
+    - Timeline với 5 threads:
+      * T0: Thread A vào bucket[5] → Lock node đầu bucket[5] → Đang xử lý...
+      * T1: Thread B vào bucket[10] → Lock node đầu bucket[10] → Chạy song song với Thread A ✅
+      * T2: Thread C vào bucket[5] → Phải chờ Thread A release lock (cùng bucket) ⏳
+      * T3: Thread D vào bucket[15] → Lock node đầu bucket[15] → Chạy song song với Thread A, B ✅
+      * T4: Thread E vào bucket[10] → Phải chờ Thread B release lock (cùng bucket) ⏳
+    - Kết quả: Thread A, B, D chạy song song (khác bucket), Thread C, E phải chờ (cùng bucket)
+    - So với Hashtable: Tất cả threads phải chờ nhau (lock toàn bộ map) → Chậm hơn nhiều
+  + Lợi ích của Fine-grained locking (lock node đầu tiên):
+    - Tăng concurrency: Nhiều threads làm việc trên các bucket khác nhau đồng thời
+    - Giảm contention: Chỉ lock 1 bucket tại 1 thời điểm, không block các bucket khác
+    - Tận dụng node có sẵn: Không cần tạo object lock riêng, dùng chính node để lock
+    - Đảm bảo thread-safe: Lock node đầu → Bảo vệ toàn bộ bucket
 
-     Thread B retry với synchronized block:
-     Thread B: synchronized(node100) {
-         // Add node200 vào linked list
-         node100.next = node200
-    }
+  * Lý do ConcurrentHashMap hỗ trợ tốt cho Multi-threads:
+    + Fine-grained Locking (Khóa mức độ chi tiết):
+      - HashMap: Không có locking → Race condition
+      - Hashtable: synchronized toàn bộ map → Chậm (1 thread vào, tất cả threads khác chờ)
+      - ConcurrentHashMap: Lock node đầu tiên của từng bucket → Nhiều threads có thể làm việc song song trên các bucket khác nhau
+    + CAS (Compare-And-Swap) cho bucket null:
+      - Atomic operation ở hardware level → Rất nhanh
+      - Không cần lock cho trường hợp bucket null
+      - Chỉ 1 thread thành công, các thread khác retry → Không mất data
+    + Read Operations không cần lock:
+      - get() không cần lock (sử dụng volatile read)
+      - Nhiều threads có thể đọc đồng thời → High concurrency
+    + Segment-based (Java 7) / Node-based (Java 8+):
+      - Java 8+: Lock từng node đầu tiên của bucket
+      - Giảm contention (xung đột) giữa các threads
+      - Tăng throughput (thông lượng) so với Hashtable
+    + Memory Visibility:
+      - Sử dụng volatile cho table và nodes
+      - Đảm bảo thay đổi từ thread này visible cho thread khác ngay lập tức
 
-     Kết quả: Cả 2 entries đều được lưu!
-     map.get("key100") = 100
-     map.get("key200") = 200
+  * So sánh Performance:
+  + Single-thread: HashMap > ConcurrentHashMap (HashMap không có overhead của locking)
+  + Multi-thread (read-heavy): ConcurrentHashMap >> Hashtable >> HashMap (unsafe)
+  + Multi-thread (write-heavy): ConcurrentHashMap > Hashtable > HashMap (unsafe)
+  + ConcurrentHashMap tối ưu cho: High concurrency, Read-heavy workloads, Cần thread safety
 
 
 ###( Guide Note 174)###
@@ -2539,8 +2683,66 @@
 
 
 
+* new 7/12/2025
 
+###( Guide Note 202)###
+* MySQL Index với LIKE Query:
+  + LIKE 'prefix%' → ✅ INDEX ĐƯỢC SỬ DỤNG (Index Range Scan)
+    - Database tìm "prefix" trong index, sau đó scan forward đến khi không còn match
+    - VD: WHERE name LIKE 'John%' → Tìm "John" trong index, scan forward: "John", "John Doe", "Johnny"
+  + LIKE '%suffix' → ❌ INDEX KHÔNG ĐƯỢC SỬ DỤNG (Full Table Scan)
+    - Index được sắp xếp từ đầu → cuối, không thể tìm từ cuối → đầu
+    - VD: WHERE name LIKE '%Smith' → Phải đọc tất cả rows, check từng row
+  + LIKE '%middle%' → ❌ INDEX KHÔNG ĐƯỢC SỬ DỤNG (Full Table Scan)
+    - VD: WHERE name LIKE '%John%' → Full table scan
+  + Giải pháp cho LIKE '%suffix' và LIKE '%middle%': Full-Text Index (MySQL 5.6+ với InnoDB)
+    - CREATE FULLTEXT INDEX idx_name_fulltext ON users(name);
+    - SELECT * FROM users WHERE MATCH(name) AGAINST('Smith' IN BOOLEAN MODE);
+    - Tốt cho tìm kiếm từ khóa, không tốt cho exact match
 
+  * MySQL Index với Function trên Column (Function thông dụng):
+  + Function trên Indexed Column → ❌ INDEX KHÔNG ĐƯỢC SỬ DỤNG
+    - UPPER/LOWER: WHERE UPPER(name) = 'JOHN', WHERE LOWER(email) = 'user@example.com'
+    - YEAR/MONTH/DAY: WHERE YEAR(created_at) = 2024, WHERE MONTH(birthday) = 12
+    - DATE: WHERE DATE(created_at) = '2024-01-01'
+    - SUBSTRING: WHERE SUBSTRING(name, 1, 3) = 'Joh'
+    - LENGTH: WHERE LENGTH(name) > 10
+    - TRIM: WHERE TRIM(name) = 'John'
+    - Database phải apply function cho mỗi row trước khi so sánh → Full Table Scan
+  + Giải pháp: Generated Column (MySQL 5.7+)
+    - Generated Column: Column được tự động tính toán từ các column khác, không cần INSERT/UPDATE thủ công
+    - Có 2 loại: STORED (lưu trên disk) và VIRTUAL (tính toán khi đọc, không lưu)
+    - STORED: Tốn storage nhưng query nhanh, có thể tạo index
+    - VIRTUAL: Không tốn storage nhưng query chậm hơn, không thể tạo index (MySQL 5.7)
+    - VD tạo STORED column:
+      ALTER TABLE users ADD COLUMN name_upper VARCHAR(255) 
+        GENERATED ALWAYS AS (UPPER(name)) STORED;
+      CREATE INDEX idx_name_upper ON users(name_upper);
+      SELECT * FROM users WHERE name_upper = 'JOHN'; → ✅ Index được sử dụng
+    - Cách hoạt động:
+      + Khi INSERT/UPDATE column 'name', MySQL tự động tính (UPPER function) và lưu 'name_upper' vào disk
+      + Index được tạo trên 'name_upper' (giá trị đã được tính sẵn từ function) → Index cũng lưu trên disk
+      + Query WHERE name_upper = 'JOHN' → MySQL query index từ disk để tìm nhanh, không cần tính lại function
+      + → Lưu vào disk và query index từ disk để sử dụng ở function (không cần tính lại mỗi lần query)
+    - Ưu điểm: Index được sử dụng, query nhanh, tự động maintain (không cần trigger)
+    - Nhược điểm: Tốn thêm storage (STORED), phải maintain khi thay đổi structure
+    - VD khác: 
+      ALTER TABLE orders ADD COLUMN total_price DECIMAL(10,2) 
+        GENERATED ALWAYS AS (quantity * unit_price) STORED;
+      CREATE INDEX idx_total_price ON orders(total_price);
+      SELECT * FROM orders WHERE total_price > 1000; → ✅ Index được sử dụng
+
+  * MySQL Index với Comparison Operators:
+  + ✅ Index được sử dụng: =, >, <, >=, <=, BETWEEN, IN
+  + ❌ Index KHÔNG được sử dụng: !=, <>, NOT IN (phải scan toàn bộ index)
+
+  * Best Practices:
+  + ✅ Nên tạo index: Foreign keys, Columns trong WHERE/JOIN/ORDER BY, Columns có selectivity cao
+  + ❌ Không nên: Columns ít query, Selectivity thấp (như gender), Tables nhỏ, Columns thường UPDATE
+  + Index Selectivity = Số giá trị unique / Tổng số rows
+  + Trade-off: Query nhanh ↔ Write chậm (phải maintain index khi INSERT/UPDATE/DELETE)
+
+  * Monitoring: SHOW INDEX FROM table_name; EXPLAIN SELECT ... (type: range = tốt, ALL = full scan ❌)
 
 
 
