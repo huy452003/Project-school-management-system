@@ -67,3 +67,5 @@ Desktop.ini
 # Diagram files (có thể gây lỗi encoding)
 *.drawio
 *.drawio.xml
+*.bkp
+.$*
