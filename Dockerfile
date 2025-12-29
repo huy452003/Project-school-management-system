@@ -8,13 +8,13 @@ COPY pom.xml .
 COPY */pom.xml ./
 
 # Download dependencies (this layer will be cached if pom.xml doesn't change)
-RUN mvn dependency:go-offline -B || true
+RUN mvn dependency:go-offline -B -Pproduction || true
 
 # Copy source code (excluding target directories via .dockerignore)
 COPY . .
 
-# Build application (skip tests)
-RUN mvn clean install -DskipTests -Dmaven.test.skip=true
+# Build application (skip tests, use production profile)
+RUN mvn clean install -DskipTests -Dmaven.test.skip=true -Pproduction
 
 # Runtime stage
 FROM eclipse-temurin:17-jre-alpine
