@@ -1,9 +1,0 @@
-[phases.setup]
-nixPkgs = ["maven"]
-
-[phases.install]
-cmds = ["mvn clean install -DskipTests -Dmaven.test.skip=true"]
-
-[start]
-cmd = "cd security && java -jar target/security-3.5.0-exec.jar"
-
