@@ -4,6 +4,7 @@
     "builder": "DOCKERFILE",
     "dockerfilePath": "Dockerfile",
     "buildCommand": null,
+    "rootDirectory": ".",
     "watchPatterns": [
       "Dockerfile",
       "**/*.java",
