@@ -16,12 +16,24 @@ public class CorsConfig {
         CorsConfiguration configuration = new CorsConfiguration();
         
         // Cho phép các domain front-end gọi API
-        configuration.setAllowedOrigins(Arrays.asList(
-            "http://localhost:3000",      // Vite dev server
-            "http://localhost:5173",        // Vite default port
-            "http://127.0.0.1:3000",
-            "http://127.0.0.1:5173"
-        ));
+        // Lấy allowed origins từ environment variable hoặc dùng default
+        String allowedOriginsEnv = System.getenv("ALLOWED_ORIGINS");
+        if (allowedOriginsEnv != null && !allowedOriginsEnv.isEmpty()) {
+            // Nếu có env variable, dùng nó (format: "url1,url2,url3")
+            configuration.setAllowedOrigins(Arrays.asList(allowedOriginsEnv.split(",")));
+        } else {
+            // Default: localhost cho development và production domain
+            configuration.setAllowedOrigins(Arrays.asList(
+                "http://localhost:3000",      // Vite dev server
+                "http://localhost:5173",        // Vite default port
+                "http://127.0.0.1:3000",
+                "http://127.0.0.1:5173",
+                "https://huyk3school.up.railway.app",   // Railway production domain
+                "http://huyk3school.up.railway.app",    // HTTP fallback
+                "https://huyk3school.net.vn",   // Custom domain (nếu có)
+                "http://huyk3school.net.vn"    // HTTP fallback (nếu có)
+            ));
+        }
         
         // Cho phép các HTTP methods
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"));
