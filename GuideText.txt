@@ -1647,7 +1647,8 @@
     
     - Các vấn đề có thể xảy ra (concurrency problems):
     1. Dirty Read: Đọc dữ liệu chưa commit từ transaction khác
-      VD: Transaction A update balance = 200 (chưa commit)
+      VD: balance = 100
+          Transaction A update balance = 200 (chưa commit)
           Transaction B đọc balance = 200
           Transaction A rollback → balance = 100
           Transaction B đã dùng dữ liệu sai (200)
@@ -2553,7 +2554,7 @@
   5. REDIS CLUSTER:
     - Kiến trúc:
       Node 1 (Slot 0-5460)    Node 2 (Slot 5461-10922)   Node 3 (Slot 10923-16383)
-      Node 4 (Replica of 1)   Node 5 (Replica of 2)     Node 6 (Replica of 3)
+      Node 4 (Replica of 1)   Node 5 (Replica of 2)      Node 6 (Replica of 3)
     
     - Cách hoạt động:
       + Data được shard thành 16384 slots

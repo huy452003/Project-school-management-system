@@ -1,0 +1,125 @@
+/* Landing Footer Styles */
+.landing-footer {
+  background: #1a1a1a;
+  color: #ccc;
+  padding: 50px 0 20px;
+  margin-top: 60px;
+}
+
+.landing-footer .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Footer Content - Use higher specificity to avoid conflicts */
+.landing-footer .footer-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 40px;
+  margin-bottom: -10px;
+}
+
+.landing-footer .footer-section h3 {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #fff;
+  border-bottom: 2px solid #0066cc;
+  padding-bottom: 10px;
+}
+
+.landing-footer .footer-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.landing-footer .footer-section ul li {
+  margin-bottom: 10px;
+}
+
+.landing-footer .footer-section ul li a {
+  color: #ccc;
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.3s;
+}
+
+.landing-footer .footer-section ul li a:hover {
+  color: #0066cc;
+}
+
+/* QR Section - Use higher specificity to avoid conflicts */
+.landing-footer .footer-qr-section {
+  text-align: center;
+  /* margin: 30px 0; */
+  /* padding: 20px 0; */
+  /* border-top: 1px solid #444;
+  border-bottom: 1px solid #444; */
+}
+
+.landing-footer .footer-qr-btn {
+  background: #0066cc;
+  color: #fff;
+  border: none;
+  padding: 15px 30px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: 0 4px 12px rgba(0, 102, 204, 0.3);
+}
+
+.landing-footer .footer-qr-btn:hover {
+  background: #0052a3;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 102, 204, 0.4);
+}
+
+.landing-footer .footer-qr-btn:active {
+  transform: translateY(0);
+}
+
+/* Footer Bottom - Use higher specificity to avoid conflicts */
+.landing-footer .footer-bottom {
+  border-top: 1px solid #444;
+  padding-top: 30px;
+  text-align: center;
+}
+
+.landing-footer .footer-info {
+  margin-bottom: 20px;
+}
+
+.landing-footer .footer-info h4 {
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: #fff;
+}
+
+.landing-footer .footer-info p {
+  color: #ccc;
+  font-size: 14px;
+  margin: 5px 0;
+}
+
+.landing-footer .footer-copyright {
+  color: #999;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.landing-footer .footer-copyright p {
+  margin: 5px 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .landing-footer .footer-content {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+}
+
