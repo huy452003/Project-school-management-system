@@ -29,9 +29,14 @@ WORKDIR /app
 # Copy only the built JAR from build stage
 COPY --from=build /app/security/target/security-3.5.0-exec.jar app.jar
 
+# Create entrypoint script to handle PORT env variable
+RUN echo '#!/bin/sh' > /app/entrypoint.sh && \
+    echo 'exec java -Dserver.port="${PORT:-8083}" -jar app.jar' >> /app/entrypoint.sh && \
+    chmod +x /app/entrypoint.sh
+
 # Expose port (Railway will set PORT env variable)
 EXPOSE 8080
 
-# Run the application with PORT from environment
-ENTRYPOINT ["sh", "-c", "java -Dserver.port=${PORT:-8083} -jar app.jar"]
+# Run the application
+ENTRYPOINT ["/app/entrypoint.sh"]
 
