@@ -2,7 +2,7 @@
   "$schema": "https://railway.app/railway.schema.json",
   "build": {
     "builder": "NIXPACKS",
-    "buildCommand": "mvn clean install -DskipTests"
+    "buildCommand": "mvn clean install -DskipTests -Dmaven.test.skip=true"
   },
   "deploy": {
     "startCommand": "cd security && java -jar target/security-3.5.0-exec.jar",
