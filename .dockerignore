@@ -1,0 +1,40 @@
+# Maven
+target/
+**/target/
+*.jar
+*.war
+!**/src/main/**/*.jar
+
+# Logs
+logs/
+*.log
+
+# IDE
+.idea/
+.vscode/
+*.iml
+*.ipr
+*.iws
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Git
+.git/
+.gitignore
+
+# Node
+node_modules/
+frontend/node_modules/
+frontend/dist/
+
+# Other
+*.drawio
+*.drawio.xml
+**/*.drawio
+**/*.drawio.xml
+# Files with special characters (Vietnamese, etc.)
+**/*lu*.drawio
+**/*lư*.drawio
+

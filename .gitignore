@@ -63,3 +63,9 @@ Desktop.ini
 *.war
 *.jar
 !**/src/main/**/*.jar
+
+# Diagram files (có thể gây lỗi encoding)
+*.drawio
+*.drawio.xml
+*.bkp
+.$*

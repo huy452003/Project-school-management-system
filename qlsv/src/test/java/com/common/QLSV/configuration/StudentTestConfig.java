@@ -1,17 +1,13 @@
-//package com.common.QLSV.configuration;
-//
-//import com.common.QLSV.services.imp.StudentServiceImp;
-//import org.springframework.boot.test.context.TestConfiguration;
-//import org.springframework.context.annotation.Bean;
-//
-//import static org.mockito.Mockito.mock;
-//
-//@TestConfiguration
-//public class StudentTestConfig {
-//
-//    @Bean
-//    public StudentServiceImp studentServiceImp() {
-//        return mock(StudentServiceImp.class);
-//    }
-//
-//}
+package com.common.QLSV.configuration;
+
+import org.springframework.boot.test.context.TestConfiguration;
+
+/**
+ * Test configuration class for Student tests.
+ * This is a placeholder to avoid compilation errors.
+ */
+@TestConfiguration
+public class StudentTestConfig {
+    // Empty configuration class for testing purposes
+}
+
