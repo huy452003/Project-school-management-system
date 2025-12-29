@@ -32,6 +32,7 @@ COPY --from=build /app/security/target/security-3.5.0-exec.jar app.jar
 # Expose port (Railway will set PORT env variable)
 EXPOSE 8080
 
-# Run the application with PORT from environment
-ENTRYPOINT ["sh", "-c", "java -Dserver.port=${PORT:-8083} -jar app.jar"]
+# Run the application - Railway automatically sets PORT env variable
+# Use CMD shell form to allow PORT env variable expansion
+CMD java -Dserver.port=${PORT:-8083} -jar app.jar
 
