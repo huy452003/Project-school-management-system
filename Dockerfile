@@ -13,6 +13,11 @@ RUN mvn dependency:go-offline -B -Pproduction || true
 # Copy source code (excluding target directories via .dockerignore)
 COPY . .
 
+# Remove problematic files and test directories before build
+RUN find . -name "*.drawio" -type f -delete 2>/dev/null || true && \
+    find . -name "*.drawio.xml" -type f -delete 2>/dev/null || true && \
+    find . -type d -name "test" -path "*/src/test" -exec rm -rf {} + 2>/dev/null || true
+
 # Build application (skip tests, use production profile)
 RUN mvn clean install -DskipTests -Dmaven.test.skip=true -Pproduction
 
