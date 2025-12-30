@@ -31,9 +31,10 @@ WORKDIR /app
 COPY --from=build /app/qlsv/target/QLSV-3.5.0-exec.jar app.jar
 
 # Expose port - Railway will automatically set PORT env variable
+# EXPOSE 8080 is just metadata, Railway will map the actual PORT automatically
 EXPOSE 8080
 
 # Run the application - Railway automatically sets PORT env variable
-# Application will use PORT from Railway, fallback to 8080 if not set
+# Application will use PORT from Railway, fallback to 8080 if not set (matches application.properties)
 CMD java -Dserver.port=${PORT:-8080} -jar app.jar
 
