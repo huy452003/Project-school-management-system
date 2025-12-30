@@ -72,7 +72,7 @@ public class DataSourceConfig {
                     jdbcUrl = String.format("jdbc:postgresql://%s:%d/%s", host, port, path);
                     driverClassName = "org.postgresql.Driver";
                 } else if ("mysql".equals(scheme)) {
-                    jdbcUrl = String.format("jdbc:mysql://%s:%d/%s", host, port, path);
+                    jdbcUrl = String.format("jdbc:mysql://%s:%d/%s?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&connectTimeout=30000&socketTimeout=30000", host, port, path);
                     driverClassName = "com.mysql.cj.jdbc.Driver";
                 } else {
                     // Fallback
