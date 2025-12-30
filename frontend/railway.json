@@ -2,7 +2,8 @@
   "$schema": "https://railway.app/railway.schema.json",
   "build": {
     "builder": "DOCKERFILE",
-    "dockerfilePath": "Dockerfile",
+    "dockerfilePath": "Dockerfile.frontend",
+    "rootDirectory": "frontend",
     "watchPatterns": [
       "Dockerfile",
       "**/*.jsx",
