@@ -30,7 +30,13 @@ public class RedisConfig {
         // Sử dụng environment variables cho Redis connection
         // Format: REDIS_URL=redis://host:port hoặc redis://:password@host:port
         String redisUrl = System.getenv("REDIS_URL");
-        if (redisUrl != null && !redisUrl.isEmpty()) {
+        
+        // Validate REDIS_URL - phải là URL hợp lệ, không phải text/comment
+        boolean isValidRedisUrl = redisUrl != null && !redisUrl.isEmpty() && 
+                                  !redisUrl.contains("(") && !redisUrl.contains(")") &&
+                                  !redisUrl.contains("hoặc") && !redisUrl.contains("từ");
+        
+        if (isValidRedisUrl) {
             // Đảm bảo REDIS_URL có prefix redis:// hoặc rediss://
             String address = redisUrl;
             if (!redisUrl.startsWith("redis://") && !redisUrl.startsWith("rediss://")) {
@@ -43,8 +49,11 @@ public class RedisConfig {
             String redisHost = System.getenv("REDIS_HOST");
             String redisPort = System.getenv("REDIS_PORT");
             
-            if (redisHost != null && !redisHost.isEmpty()) {
-                String port = (redisPort != null && !redisPort.isEmpty()) ? redisPort : "6379";
+            if (redisHost != null && !redisHost.isEmpty() && 
+                !redisHost.contains("(") && !redisHost.contains("hoặc")) {
+                String port = (redisPort != null && !redisPort.isEmpty() && 
+                              !redisPort.contains("(") && !redisPort.contains("hoặc")) 
+                              ? redisPort : "6379";
                 config.useSingleServer().setAddress("redis://" + redisHost + ":" + port);
             } else {
                 // Default fallback cho local development
