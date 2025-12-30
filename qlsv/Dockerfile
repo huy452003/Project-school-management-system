@@ -23,13 +23,31 @@ RUN find . -name "*.drawio" -type f -delete 2>/dev/null || true && \
 # Build entire project to ensure all dependencies are built (same as Security service)
 RUN mvn clean install -DskipTests -Dmaven.test.skip=true -Pproduction
 
+# Verify and prepare JAR file for copying
+RUN echo "=== Listing all files in qlsv/target ===" && \
+    ls -la /app/qlsv/target/ && \
+    echo "=== Finding all JAR files ===" && \
+    find /app/qlsv/target -name "*.jar" -type f && \
+    echo "=== Checking for exec JAR ===" && \
+    if [ -f /app/qlsv/target/QLSV-3.5.0-exec.jar ]; then \
+        echo "Found QLSV-3.5.0-exec.jar"; \
+        cp /app/qlsv/target/QLSV-3.5.0-exec.jar /app/qlsv/target/app.jar; \
+    elif [ -f /app/qlsv/target/QLSV-3.5.0.jar ]; then \
+        echo "Found QLSV-3.5.0.jar, copying as app.jar"; \
+        cp /app/qlsv/target/QLSV-3.5.0.jar /app/qlsv/target/app.jar; \
+    else \
+        echo "ERROR: No JAR file found!"; \
+        find /app/qlsv/target -name "*.jar" -type f -exec cp {} /app/qlsv/target/app.jar \; && \
+        ls -la /app/qlsv/target/app.jar || exit 1; \
+    fi
+
 # Runtime stage
 FROM eclipse-temurin:17-jre-alpine
 
 WORKDIR /app
 
-# Copy the executable JAR file (spring-boot-maven-plugin with classifier=exec creates *-exec.jar)
-COPY --from=build /app/qlsv/target/QLSV-3.5.0-exec.jar app.jar
+# Copy the prepared JAR file
+COPY --from=build /app/qlsv/target/app.jar app.jar
 
 # Expose port - Railway will automatically set PORT env variable
 # EXPOSE 8080 is just metadata, Railway will map the actual PORT automatically
