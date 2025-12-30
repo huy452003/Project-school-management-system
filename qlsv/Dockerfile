@@ -20,14 +20,25 @@ RUN find . -name "*.drawio" -type f -delete 2>/dev/null || true && \
     find . -type d -name "test" -path "*/src/test" -exec rm -rf {} + 2>/dev/null || true
 
 # Build QLSV application (skip tests, use production profile)
-RUN mvn clean install -DskipTests -Dmaven.test.skip=true -Pproduction -pl qlsv -am
+# Build only QLSV module and its dependencies
+RUN mvn clean install -DskipTests -Dmaven.test.skip=true -Pproduction -pl qlsv -am || \
+    (echo "Build with -pl failed, trying full build..." && \
+     mvn clean install -DskipTests -Dmaven.test.skip=true -Pproduction)
+
+# Verify JAR file was created and list all JAR files
+RUN echo "=== Checking QLSV target directory ===" && \
+    ls -la /app/qlsv/target/ && \
+    echo "=== All JAR files in target ===" && \
+    find /app/qlsv/target -name "*.jar" -type f || echo "No JAR files found" && \
+    echo "=== Checking if exec JAR exists ===" && \
+    test -f /app/qlsv/target/QLSV-3.5.0-exec.jar && echo "QLSV-3.5.0-exec.jar found" || echo "QLSV-3.5.0-exec.jar NOT found"
 
 # Runtime stage
 FROM eclipse-temurin:17-jre-alpine
 
 WORKDIR /app
 
-# Copy only the built executable JAR from build stage
+# Copy the executable JAR file (spring-boot-maven-plugin with classifier=exec creates *-exec.jar)
 COPY --from=build /app/qlsv/target/QLSV-3.5.0-exec.jar app.jar
 
 # Expose port - Railway will automatically set PORT env variable

@@ -20,14 +20,25 @@ RUN find . -name "*.drawio" -type f -delete 2>/dev/null || true && \
     find . -type d -name "test" -path "*/src/test" -exec rm -rf {} + 2>/dev/null || true
 
 # Build QLGV application (skip tests, use production profile)
-RUN mvn clean install -DskipTests -Dmaven.test.skip=true -Pproduction -pl qlgv -am
+# Build only QLGV module and its dependencies
+RUN mvn clean install -DskipTests -Dmaven.test.skip=true -Pproduction -pl qlgv -am || \
+    (echo "Build with -pl failed, trying full build..." && \
+     mvn clean install -DskipTests -Dmaven.test.skip=true -Pproduction)
+
+# Verify JAR file was created and list all JAR files
+RUN echo "=== Checking QLGV target directory ===" && \
+    ls -la /app/qlgv/target/ && \
+    echo "=== All JAR files in target ===" && \
+    find /app/qlgv/target -name "*.jar" -type f || echo "No JAR files found" && \
+    echo "=== Checking if exec JAR exists ===" && \
+    test -f /app/qlgv/target/QLGV-3.5.0-exec.jar && echo "QLGV-3.5.0-exec.jar found" || echo "QLGV-3.5.0-exec.jar NOT found"
 
 # Runtime stage
 FROM eclipse-temurin:17-jre-alpine
 
 WORKDIR /app
 
-# Copy only the built executable JAR from build stage
+# Copy the executable JAR file (spring-boot-maven-plugin with classifier=exec creates *-exec.jar)
 COPY --from=build /app/qlgv/target/QLGV-3.5.0-exec.jar app.jar
 
 # Expose port - Railway will automatically set PORT env variable
