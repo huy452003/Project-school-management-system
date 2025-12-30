@@ -1,4 +1,4 @@
-# Multi-stage build for QLSV Spring Boot application
+# Multi-stage build for Spring Boot application
 FROM maven:3.9-eclipse-temurin-17 AS build
 
 WORKDIR /app
@@ -18,21 +18,22 @@ RUN find . -name "*.drawio" -type f -delete 2>/dev/null || true && \
     find . -name "*.drawio.xml" -type f -delete 2>/dev/null || true && \
     find . -type d -name "test" -path "*/src/test" -exec rm -rf {} + 2>/dev/null || true
 
-# Build QLSV application (skip tests, use production profile)
-RUN mvn clean install -DskipTests -Dmaven.test.skip=true -Pproduction -pl qlsv -am
+# Build application (skip tests, use production profile)
+RUN mvn clean install -DskipTests -Dmaven.test.skip=true -Pproduction
 
 # Runtime stage
 FROM eclipse-temurin:17-jre-alpine
 
 WORKDIR /app
 
-# Copy only the built executable JAR from build stage
-COPY --from=build /app/qlsv/target/QLSV-3.5.0-exec.jar app.jar
+# Copy only the built JAR from build stage
+COPY --from=build /app/security/target/security-3.5.0-exec.jar app.jar
 
 # Expose port - Railway will automatically set PORT env variable
-EXPOSE 8080
+# EXPOSE 8083 is just metadata, Railway will map the actual PORT automatically
+EXPOSE 8083
 
 # Run the application - Railway automatically sets PORT env variable
-# Application will use PORT from Railway, fallback to 8080 if not set
-CMD java -Dserver.port=${PORT:-8080} -jar app.jar
+# Application will use PORT from Railway, fallback to 8083 if not set (matches application.properties)
+CMD java -Dserver.port=${PORT:-8083} -jar app.jar
 

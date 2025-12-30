@@ -31,9 +31,10 @@ WORKDIR /app
 COPY --from=build /app/qlgv/target/QLGV-3.5.0-exec.jar app.jar
 
 # Expose port - Railway will automatically set PORT env variable
+# EXPOSE 8081 is just metadata, Railway will map the actual PORT automatically
 EXPOSE 8081
 
 # Run the application - Railway automatically sets PORT env variable
-# Application will use PORT from Railway, fallback to 8081 if not set
+# Application will use PORT from Railway, fallback to 8081 if not set (matches application.properties)
 CMD java -Dserver.port=${PORT:-8081} -jar app.jar
 
