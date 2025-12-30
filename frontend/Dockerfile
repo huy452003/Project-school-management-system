@@ -13,6 +13,16 @@ RUN if [ -f package-lock.json ]; then npm ci; else npm install; fi
 # Copy source code
 COPY . .
 
+# Accept build arguments (environment variables)
+ARG VITE_SECURITY_BASE_URL
+ARG VITE_QLSV_BASE_URL
+ARG VITE_QLGV_BASE_URL
+
+# Set environment variables for build
+ENV VITE_SECURITY_BASE_URL=${VITE_SECURITY_BASE_URL}
+ENV VITE_QLSV_BASE_URL=${VITE_QLSV_BASE_URL}
+ENV VITE_QLGV_BASE_URL=${VITE_QLGV_BASE_URL}
+
 # Build for production
 RUN npm run build || (echo "Build failed!" && exit 1)
 
