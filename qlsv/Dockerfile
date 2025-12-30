@@ -23,23 +23,33 @@ RUN find . -name "*.drawio" -type f -delete 2>/dev/null || true && \
 # Build entire project to ensure all dependencies are built (same as Security service)
 RUN mvn clean install -DskipTests -Dmaven.test.skip=true -Pproduction
 
-# Verify and prepare JAR file for copying
+# Verify and prepare executable JAR file for copying
+# Only copy -exec.jar files (executable JARs created by spring-boot-maven-plugin with classifier=exec)
 RUN echo "=== Listing all files in qlsv/target ===" && \
     ls -la /app/qlsv/target/ && \
     echo "=== Finding all JAR files ===" && \
     find /app/qlsv/target -name "*.jar" -type f && \
-    echo "=== Checking for exec JAR ===" && \
+    echo "=== Finding executable JAR files (-exec.jar) ===" && \
+    find /app/qlsv/target -name "*-exec.jar" -type f && \
+    echo "=== Copying executable JAR ===" && \
     if [ -f /app/qlsv/target/QLSV-3.5.0-exec.jar ]; then \
-        echo "Found QLSV-3.5.0-exec.jar"; \
-        cp /app/qlsv/target/QLSV-3.5.0-exec.jar /app/qlsv/target/app.jar; \
-    elif [ -f /app/qlsv/target/QLSV-3.5.0.jar ]; then \
-        echo "Found QLSV-3.5.0.jar, copying as app.jar"; \
-        cp /app/qlsv/target/QLSV-3.5.0.jar /app/qlsv/target/app.jar; \
+        echo "Found QLSV-3.5.0-exec.jar, copying as app.jar"; \
+        cp /app/qlsv/target/QLSV-3.5.0-exec.jar /app/qlsv/target/app.jar && \
+        echo "Verifying app.jar has Main-Class..." && \
+        unzip -p /app/qlsv/target/app.jar META-INF/MANIFEST.MF | grep -i "Main-Class" || echo "WARNING: No Main-Class found in manifest"; \
     else \
-        echo "ERROR: No JAR file found!"; \
-        find /app/qlsv/target -name "*.jar" -type f -exec cp {} /app/qlsv/target/app.jar \; && \
-        ls -la /app/qlsv/target/app.jar || exit 1; \
-    fi
+        echo "ERROR: QLSV-3.5.0-exec.jar not found!"; \
+        echo "Trying to find any -exec.jar file..."; \
+        EXEC_JAR=$(find /app/qlsv/target -name "*-exec.jar" -type f | head -1); \
+        if [ -n "$EXEC_JAR" ]; then \
+            echo "Found executable JAR: $EXEC_JAR"; \
+            cp "$EXEC_JAR" /app/qlsv/target/app.jar; \
+        else \
+            echo "ERROR: No executable JAR (-exec.jar) found!"; \
+            exit 1; \
+        fi; \
+    fi && \
+    ls -la /app/qlsv/target/app.jar
 
 # Runtime stage
 FROM eclipse-temurin:17-jre-alpine
