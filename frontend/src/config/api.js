@@ -28,5 +28,15 @@ const API_CONFIG = {
   TIMEOUT: 10000,
 }
 
+// Debug: Log API URLs in development
+if (import.meta.env.DEV) {
+  console.log('API Configuration:', {
+    SECURITY_BASE_URL: API_CONFIG.SECURITY_BASE_URL,
+    QLSV_BASE_URL: API_CONFIG.QLSV_BASE_URL,
+    QLGV_BASE_URL: API_CONFIG.QLGV_BASE_URL,
+    VITE_SECURITY_BASE_URL: import.meta.env.VITE_SECURITY_BASE_URL,
+  })
+}
+
 export default API_CONFIG
 
