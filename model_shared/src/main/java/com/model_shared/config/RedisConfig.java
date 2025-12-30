@@ -26,8 +26,33 @@ public class RedisConfig {
     @Bean(destroyMethod = "shutdown")
     public RedissonClient redisson() throws IOException {
         Config config = new Config();
-        config.useSingleServer()
-                .setAddress("redis://127.0.0.1:6379");
+        
+        // Sử dụng environment variables cho Redis connection
+        // Format: REDIS_URL=redis://host:port hoặc redis://:password@host:port
+        String redisUrl = System.getenv("REDIS_URL");
+        if (redisUrl != null && !redisUrl.isEmpty()) {
+            // Nếu có REDIS_URL, dùng nó
+            config.useSingleServer().setAddress(redisUrl);
+        } else {
+            // Fallback: dùng REDIS_HOST và REDIS_PORT hoặc localhost
+            String redisHost = System.getenv("REDIS_HOST");
+            String redisPort = System.getenv("REDIS_PORT");
+            
+            if (redisHost != null && !redisHost.isEmpty()) {
+                String port = (redisPort != null && !redisPort.isEmpty()) ? redisPort : "6379";
+                config.useSingleServer().setAddress("redis://" + redisHost + ":" + port);
+            } else {
+                // Default fallback cho local development
+                config.useSingleServer().setAddress("redis://127.0.0.1:6379");
+            }
+        }
+        
+        // Set password nếu có
+        String redisPassword = System.getenv("REDIS_PASSWORD");
+        if (redisPassword != null && !redisPassword.isEmpty()) {
+            config.useSingleServer().setPassword(redisPassword);
+        }
+        
         return Redisson.create(config);
     }
     
