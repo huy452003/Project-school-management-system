@@ -34,11 +34,28 @@ const createAxiosInstance = (baseURL) => {
       return response.data
     },
     (error) => {
+      // Chỉ logout nếu là 401 từ Security service (authentication error)
+      // Không logout nếu là CORS error hoặc network error (không có error.response)
+      // Không logout nếu là 401 từ QLSV/QLGV (có thể là authorization error, không phải authentication)
       if (error.response?.status === 401) {
-        // Token hết hạn hoặc không hợp lệ
-        localStorage.removeItem('accessToken')
-        localStorage.removeItem('refreshToken')
-        window.location.href = '/login'
+        const requestUrl = error.config?.url || ''
+        const baseURL = error.config?.baseURL || ''
+        
+        // Chỉ logout nếu lỗi 401 từ Security service (auth endpoints)
+        // Không logout nếu lỗi từ QLSV/QLGV (có thể do thiếu quyền, không phải token invalid)
+        if (baseURL.includes('security') || requestUrl.includes('/auth/')) {
+          console.warn('401 Unauthorized from Security service - token may be invalid, logging out')
+          localStorage.removeItem('accessToken')
+          localStorage.removeItem('refreshToken')
+          window.location.href = '/login'
+        } else {
+          // 401 từ QLSV/QLGV - có thể là authorization error (thiếu quyền), không logout
+          console.warn('401 Unauthorized from QLSV/QLGV - may be authorization error, not logging out')
+        }
+      } else if (!error.response) {
+        // Network error hoặc CORS error - không có response từ server
+        // Không logout vì đây là lỗi kết nối, không phải authentication error
+        console.warn('Network error or CORS error - no response from server:', error.message)
       }
       return Promise.reject(error)
     }
