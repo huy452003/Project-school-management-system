@@ -1,7 +1,9 @@
 package com.common.QLSV.configurations;
 
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.Ordered;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -97,6 +99,16 @@ public class CorsConfig implements WebMvcConfigurer {
         source.registerCorsConfiguration("/**", configuration);
         
         return source;
+    }
+    
+    @Bean
+    public FilterRegistrationBean<CorsFilter> corsFilterRegistration() {
+        FilterRegistrationBean<CorsFilter> registration = new FilterRegistrationBean<>();
+        registration.setFilter(new CorsFilter(corsConfigurationSource()));
+        registration.addUrlPatterns("/*");
+        registration.setName("corsFilter");
+        registration.setOrder(Ordered.HIGHEST_PRECEDENCE); // Chạy trước tất cả các filter khác
+        return registration;
     }
     
     @Bean
