@@ -1,5 +1,6 @@
 import React, { createContext, useState, useContext, useEffect, useCallback } from 'react'
 import apiService from '../services/apiService'
+import API_CONFIG from '../config/api'
 
 const AuthContext = createContext(null)
 
@@ -103,9 +104,12 @@ export const AuthProvider = ({ children }) => {
                       `Lỗi ${error.response.status}: ${error.response.statusText}`
       } else if (error.request) {
         // Request được gửi nhưng không nhận được response (CORS, network error)
-        errorMessage = 'Không thể kết nối đến server. Kiểm tra lại:\n' +
-                      '1. Backend có đang chạy ở http://localhost:8083 không?\n' +
-                      '2. CORS đã được cấu hình chưa?'
+        const backendUrl = API_CONFIG?.SECURITY_BASE_URL || 'http://localhost:8083'
+        errorMessage = `Không thể kết nối đến server tại ${backendUrl}.\n` +
+                      'Kiểm tra lại:\n' +
+                      '1. Backend có đang chạy không?\n' +
+                      '2. CORS đã được cấu hình chưa?\n' +
+                      '3. Environment variable VITE_SECURITY_BASE_URL đã được set chưa?'
       } else {
         // Lỗi khác
         errorMessage = error.message || 'Đăng nhập thất bại'
