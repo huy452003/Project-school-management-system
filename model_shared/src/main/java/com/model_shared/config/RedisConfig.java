@@ -31,8 +31,13 @@ public class RedisConfig {
         // Format: REDIS_URL=redis://host:port hoặc redis://:password@host:port
         String redisUrl = System.getenv("REDIS_URL");
         if (redisUrl != null && !redisUrl.isEmpty()) {
-            // Nếu có REDIS_URL, dùng nó
-            config.useSingleServer().setAddress(redisUrl);
+            // Đảm bảo REDIS_URL có prefix redis:// hoặc rediss://
+            String address = redisUrl;
+            if (!redisUrl.startsWith("redis://") && !redisUrl.startsWith("rediss://")) {
+                // Nếu không có prefix, thêm redis://
+                address = "redis://" + redisUrl;
+            }
+            config.useSingleServer().setAddress(address);
         } else {
             // Fallback: dùng REDIS_HOST và REDIS_PORT hoặc localhost
             String redisHost = System.getenv("REDIS_HOST");
