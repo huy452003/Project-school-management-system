@@ -31,7 +31,7 @@ public class CorsConfig {
                 "https://huyk3school.up.railway.app",   // Railway production domain
                 "http://huyk3school.up.railway.app",    // HTTP fallback
                 "https://huyk3school.net.vn",   // Custom domain (nếu có)
-                "http://huyk3school.net.vn"    // HTTP fallback (nếu có)
+                "http://huyk3school.net.vn"
             ));
         }
         
