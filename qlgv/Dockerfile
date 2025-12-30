@@ -23,13 +23,31 @@ RUN find . -name "*.drawio" -type f -delete 2>/dev/null || true && \
 # Build entire project to ensure all dependencies are built (same as Security service)
 RUN mvn clean install -DskipTests -Dmaven.test.skip=true -Pproduction
 
+# Verify and prepare JAR file for copying
+RUN echo "=== Listing all files in qlgv/target ===" && \
+    ls -la /app/qlgv/target/ && \
+    echo "=== Finding all JAR files ===" && \
+    find /app/qlgv/target -name "*.jar" -type f && \
+    echo "=== Checking for exec JAR ===" && \
+    if [ -f /app/qlgv/target/QLGV-3.5.0-exec.jar ]; then \
+        echo "Found QLGV-3.5.0-exec.jar"; \
+        cp /app/qlgv/target/QLGV-3.5.0-exec.jar /app/qlgv/target/app.jar; \
+    elif [ -f /app/qlgv/target/QLGV-3.5.0.jar ]; then \
+        echo "Found QLGV-3.5.0.jar, copying as app.jar"; \
+        cp /app/qlgv/target/QLGV-3.5.0.jar /app/qlgv/target/app.jar; \
+    else \
+        echo "ERROR: No JAR file found!"; \
+        find /app/qlgv/target -name "*.jar" -type f -exec cp {} /app/qlgv/target/app.jar \; && \
+        ls -la /app/qlgv/target/app.jar || exit 1; \
+    fi
+
 # Runtime stage
 FROM eclipse-temurin:17-jre-alpine
 
 WORKDIR /app
 
-# Copy the executable JAR file (spring-boot-maven-plugin with classifier=exec creates *-exec.jar)
-COPY --from=build /app/qlgv/target/QLGV-3.5.0-exec.jar app.jar
+# Copy the prepared JAR file
+COPY --from=build /app/qlgv/target/app.jar app.jar
 
 # Expose port - Railway will automatically set PORT env variable
 # EXPOSE 8081 is just metadata, Railway will map the actual PORT automatically
