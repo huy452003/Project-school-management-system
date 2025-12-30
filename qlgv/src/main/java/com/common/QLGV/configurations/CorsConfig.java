@@ -110,10 +110,5 @@ public class CorsConfig implements WebMvcConfigurer {
         registration.setOrder(Ordered.HIGHEST_PRECEDENCE); // Chạy trước tất cả các filter khác
         return registration;
     }
-    
-    @Bean
-    public CorsFilter corsFilter() {
-        return new CorsFilter(corsConfigurationSource());
-    }
 }
 
