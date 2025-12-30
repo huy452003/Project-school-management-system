@@ -34,7 +34,10 @@ console.log('API Configuration:', {
   QLSV_BASE_URL: API_CONFIG.QLSV_BASE_URL,
   QLGV_BASE_URL: API_CONFIG.QLGV_BASE_URL,
   VITE_SECURITY_BASE_URL: import.meta.env.VITE_SECURITY_BASE_URL,
+  VITE_QLSV_BASE_URL: import.meta.env.VITE_QLSV_BASE_URL,
+  VITE_QLGV_BASE_URL: import.meta.env.VITE_QLGV_BASE_URL,
   ENV_MODE: import.meta.env.MODE,
+  ALL_ENV_VARS: import.meta.env,
 })
 
 export default API_CONFIG
