@@ -5,38 +5,60 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.util.Arrays;
 
 @Configuration
-public class CorsConfig implements WebMvcConfigurer {
-
-    @Override
-    public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**")
-                .allowedOrigins("http://localhost:3000", "http://localhost:5173", "http://127.0.0.1:3000")
-                .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH")
-                .allowedHeaders("*")
-                .allowCredentials(true)
-                .maxAge(3600);
-    }
+public class CorsConfig {
 
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         
-        configuration.setAllowedOrigins(Arrays.asList(
-            "http://localhost:3000",
-            "http://localhost:5173",
-            "http://127.0.0.1:3000"
+        // Cho phép các domain front-end gọi API
+        // Lấy allowed origins từ environment variable hoặc dùng default
+        String allowedOriginsEnv = System.getenv("ALLOWED_ORIGINS");
+        if (allowedOriginsEnv != null && !allowedOriginsEnv.isEmpty()) {
+            // Nếu có env variable, dùng nó (format: "url1,url2,url3")
+            configuration.setAllowedOrigins(Arrays.asList(allowedOriginsEnv.split(",")));
+        } else {
+            // Default: localhost cho development và production domain
+            configuration.setAllowedOrigins(Arrays.asList(
+                "http://localhost:3000",      // Vite dev server
+                "http://localhost:5173",        // Vite default port
+                "http://127.0.0.1:3000",
+                "http://127.0.0.1:5173",
+                "https://huyk3school.up.railway.app",   // Railway production domain
+                "http://huyk3school.up.railway.app",    // HTTP fallback
+                "https://huyk3school.net.vn",   // Custom domain (nếu có)
+                "http://huyk3school.net.vn"    // HTTP fallback (nếu có)
+            ));
+        }
+        
+        // Cho phép các HTTP methods
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"));
+        
+        // Cho phép các headers
+        configuration.setAllowedHeaders(Arrays.asList(
+            "Authorization",
+            "Content-Type",
+            "Accept",
+            "Accept-Language",
+            "X-Requested-With",
+            "Origin"
         ));
         
-        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"));
-        configuration.setAllowedHeaders(Arrays.asList("*"));
+        // Cho phép gửi credentials (cookies, authorization headers)
         configuration.setAllowCredentials(true);
+        
+        // Thời gian cache preflight request (1 giờ)
         configuration.setMaxAge(3600L);
+        
+        // Exposed headers mà front-end có thể đọc được
+        configuration.setExposedHeaders(Arrays.asList(
+            "Authorization",
+            "Content-Type"
+        ));
         
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
