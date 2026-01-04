@@ -734,74 +734,175 @@ section {
     display: none;
   }
 
-  .header-main .container {
-    flex-direction: column;
-    gap: 15px;
+  .landing-main {
+    padding: 20px 0;
   }
 
-  .main-nav {
+  .container {
+    padding: 0 15px;
+  }
+
+  .section-header {
     flex-direction: column;
-    width: 100%;
+    align-items: flex-start;
     gap: 10px;
-  }
-
-  .nav-item {
-    width: 100%;
-    padding: 10px;
-    border-bottom: 1px solid #eee;
-  }
-
-  .dropdown-menu {
-    position: static;
-    opacity: 1;
-    visibility: visible;
-    transform: none;
-    box-shadow: none;
-    margin-top: 0;
-    padding-left: 20px;
-  }
-
-  .hero-slider {
-    height: 300px;
-  }
-
-  .slide-content {
-    padding: 20px 30px;
-  }
-
-  .slide-content h2 {
-    font-size: 24px;
-  }
-
-  .slide-content p {
-    font-size: 16px;
   }
 
   .section-title {
     font-size: 22px;
   }
 
+  .view-all {
+    font-size: 14px;
+  }
+
+  .hero-slider {
+    height: 300px;
+    margin-bottom: 30px;
+  }
+
+  .slide-content {
+    padding: 20px 30px;
+    max-width: 90%;
+  }
+
+  .slide-content h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+
+  .slide-content p {
+    font-size: 16px;
+  }
+
+  section {
+    margin-bottom: 40px;
+  }
+
   .news-grid,
   .recruitment-grid,
   .career-grid {
     grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .news-card,
+  .recruitment-card,
+  .career-card {
+    margin: 0;
+  }
+
+  .news-image,
+  .recruitment-image,
+  .career-image {
+    height: 180px;
+  }
+
+  .news-content,
+  .recruitment-content,
+  .career-content {
+    padding: 15px;
+  }
+
+  .news-title,
+  .recruitment-title,
+  .career-title {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+
+  .student-list,
+  .exam-list {
+    gap: 12px;
   }
 
   .student-item,
   .exam-item {
     flex-direction: column;
     align-items: flex-start;
+    gap: 15px;
+    padding: 15px;
+  }
+
+  .student-content,
+  .exam-title {
+    width: 100%;
   }
 
   .student-link,
   .exam-link {
     width: 100%;
     text-align: center;
+    margin-top: 10px;
+  }
+
+  .landing-footer {
+    padding: 30px 0 15px;
+    margin-top: 40px;
   }
 
   .landing-footer .footer-content {
     grid-template-columns: 1fr;
     gap: 30px;
+  }
+}
+
+@media (max-width: 480px) {
+  .landing-main {
+    padding: 15px 0;
+  }
+
+  .container {
+    padding: 0 12px;
+  }
+
+  .section-title {
+    font-size: 20px;
+  }
+
+  .hero-slider {
+    height: 250px;
+  }
+
+  .slide-content {
+    padding: 15px 20px;
+  }
+
+  .slide-content h2 {
+    font-size: 20px;
+  }
+
+  .slide-content p {
+    font-size: 14px;
+  }
+
+  .news-image,
+  .recruitment-image,
+  .career-image {
+    height: 160px;
+  }
+
+  .news-content,
+  .recruitment-content,
+  .career-content {
+    padding: 12px;
+  }
+
+  .news-title,
+  .recruitment-title,
+  .career-title {
+    font-size: 15px;
+    -webkit-line-clamp: 3;
+  }
+
+  .student-item,
+  .exam-item {
+    padding: 12px;
+  }
+
+  .student-title,
+  .exam-title {
+    font-size: 15px;
   }
 }
 
