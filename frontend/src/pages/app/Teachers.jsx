@@ -480,18 +480,18 @@ const Teachers = () => {
         <div className="table-scroll-wrapper">
           <table className="teachers-table">
             <colgroup>
-              <col style={{ width: '3%' }} />     {/* Checkbox */}
-              <col style={{ width: '4%' }} />     {/* ID */}
-              <col style={{ width: '11%' }} />    {/* Họ tên */}
-              <col style={{ width: '5%' }} />     {/* Tuổi */}
-              <col style={{ width: '7%' }} />     {/* Giới tính */}
-              <col style={{ width: '9%' }} />     {/* Ngày sinh */}
-              <col style={{ width: '9%' }} />     {/* SĐT */}
-              <col style={{ width: '15%' }} />    {/* Email */}
-              <col style={{ width: '10%' }} />    {/* Khoa */}
-              <col style={{ width: '8%' }} />     {/* Lớp QL */}
-              <col style={{ width: '10%' }} />    {/* Trạng thái */}
-              <col style={{ width: '9%' }} />     {/* Thao tác */}
+              <col style={{ width: '3%' }} />
+              <col style={{ width: '4%' }} />
+              <col style={{ width: '11%' }} />
+              <col style={{ width: '5%' }} />
+              <col style={{ width: '7%' }} />
+              <col style={{ width: '9%' }} />
+              <col style={{ width: '9%' }} />
+              <col style={{ width: '15%' }} />
+              <col style={{ width: '10%' }} />
+              <col style={{ width: '8%' }} />
+              <col style={{ width: '10%' }} />
+              <col style={{ width: '9%' }} />
             </colgroup>
             <thead>
               <tr>

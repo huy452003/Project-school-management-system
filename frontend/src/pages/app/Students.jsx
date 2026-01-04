@@ -559,17 +559,17 @@ const Students = () => {
         <div className="table-scroll-wrapper">
           <table className="students-table">
             <colgroup>
-              <col style={{ width: '3%' }} />     {/* Checkbox */}
-              <col style={{ width: '4%' }} />     {/* ID */}
-              <col style={{ width: '12%' }} />    {/* Họ tên */}
-              <col style={{ width: '5%' }} />     {/* Tuổi */}
-              <col style={{ width: '6%' }} />     {/* Giới tính */}
-              <col style={{ width: '9%' }} />     {/* Ngày sinh */}
-              <col style={{ width: '10%' }} />    {/* SĐT */}
-              <col style={{ width: '17%' }} />    {/* Email */}
-              <col style={{ width: '11%' }} />    {/* Tốt nghiệp */}
-              <col style={{ width: '11%' }} />    {/* Trạng thái */}
-              <col style={{ width: '12%' }} />    {/* Thao tác */}
+              <col style={{ width: '3%' }} />
+              <col style={{ width: '4%' }} />
+              <col style={{ width: '12%' }} />
+              <col style={{ width: '5%' }} />
+              <col style={{ width: '6%' }} />
+              <col style={{ width: '9%' }} />
+              <col style={{ width: '10%' }} />
+              <col style={{ width: '17%' }} />
+              <col style={{ width: '11%' }} />
+              <col style={{ width: '11%' }} />
+              <col style={{ width: '12%' }} />
             </colgroup>
             <thead>
               <tr>

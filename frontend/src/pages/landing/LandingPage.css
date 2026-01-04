@@ -128,82 +128,9 @@
   background: #0052a3;
 }
 
-/* Hero Slider */
-.hero-slider {
-  position: relative;
-  height: 500px;
-  overflow: hidden;
-  margin-bottom: 40px;
-}
+/* Hero Slider - Styles moved to HeroSlider.css */
 
-.slider-container {
-  position: relative;
-  width: 100%;
-  height: 100%;
-}
-
-.slide {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-size: cover;
-  background-position: center;
-  opacity: 0;
-  transition: opacity 1s ease-in-out;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.slide.active {
-  opacity: 1;
-}
-
-.slide-content {
-  text-align: center;
-  color: #fff;
-  background: rgba(0, 0, 0, 0.5);
-  padding: 40px 60px;
-  border-radius: 8px;
-  max-width: 800px;
-}
-
-.slide-content h2 {
-  font-size: 42px;
-  margin-bottom: 15px;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-}
-
-.slide-content p {
-  font-size: 20px;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-}
-
-.slider-controls {
-  position: absolute;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 10px;
-  z-index: 10;
-}
-
-.slider-dot {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  border: 2px solid #fff;
-  background: transparent;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-
-.slider-dot.active {
-  background: #fff;
-}
+/* Hero Slider styles moved to HeroSlider.css */
 
 /* Container */
 .container {
@@ -214,7 +141,7 @@
 
 /* Main Content */
 .landing-main {
-  padding: 40px 0;
+  padding: 60px 0 40px 0;
 }
 
 /* Section Styles */
@@ -251,6 +178,22 @@ section {
 }
 
 /* News Section */
+.news-section,
+.recruitment-section,
+.career-section,
+.student-section,
+.exam-section {
+  background: #fff;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 60px;
+}
+
+.recruitment-section {
+  margin-top: 60px; 
+}
+
 .news-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -716,9 +659,6 @@ section {
     font-size: 13px;
   }
 
-  .hero-slider {
-    height: 400px;
-  }
 
   .slide-content h2 {
     font-size: 32px;
@@ -735,7 +675,7 @@ section {
   }
 
   .landing-main {
-    padding: 20px 0;
+    padding: 50px 0 20px 0;
   }
 
   .container {
@@ -756,10 +696,6 @@ section {
     font-size: 14px;
   }
 
-  .hero-slider {
-    height: 300px;
-    margin-bottom: 30px;
-  }
 
   .slide-content {
     padding: 20px 30px;
@@ -849,7 +785,7 @@ section {
 
 @media (max-width: 480px) {
   .landing-main {
-    padding: 15px 0;
+    padding: 40px 0 15px 0;
   }
 
   .container {
@@ -860,9 +796,6 @@ section {
     font-size: 20px;
   }
 
-  .hero-slider {
-    height: 250px;
-  }
 
   .slide-content {
     padding: 15px 20px;
