@@ -466,31 +466,124 @@
 }
 
 @media (max-width: 768px) {
-  .teachers-table th,
-  .teachers-table td {
-    padding: 0.75rem 0.75rem;
-    font-size: 0.85rem;
+  .teachers-page {
+    padding: 0;
   }
 
   .page-header {
     flex-direction: column;
     align-items: flex-start;
     gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .page-header h1 {
+    font-size: 1.75rem;
+  }
+
+  .header-actions {
+    width: 100%;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .delete-btn,
+  .refresh-btn {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    font-size: 0.9rem;
+  }
+
+  .table-container {
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .table-scroll-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .teachers-table {
+    min-width: 800px;
+  }
+
+  .teachers-table th,
+  .teachers-table td {
+    padding: 0.75rem 0.5rem;
+    font-size: 0.8rem;
+  }
+
+  .teachers-table th {
+    font-size: 0.75rem;
+    padding: 0.75rem 0.5rem;
+  }
+
+  .action-buttons {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .edit-btn,
+  .save-btn,
+  .cancel-btn {
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.8rem;
   }
 
   .modal-content {
     width: 95%;
     max-height: 95vh;
+    margin: 1rem;
   }
 
   .form-grid {
     grid-template-columns: 1fr;
+    gap: 1rem;
   }
 
   .modal-header,
   .modal-body,
   .modal-footer {
     padding: 1rem;
+  }
+
+  .modal-header h2 {
+    font-size: 1.3rem;
+  }
+
+  .form-section h3 {
+    font-size: 1.1rem;
+  }
+
+  .permissions-checkbox-group {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  .permission-checkbox-item:not(:last-child) {
+    border-right: none;
+    border-bottom: 1px solid #dee2e6;
+    padding-right: 0;
+    padding-bottom: 1rem;
+  }
+
+  .permission-checkbox-item:last-child {
+    padding-left: 0;
+    padding-bottom: 0;
+  }
+
+  .modal-footer {
+    flex-direction: column-reverse;
+    gap: 0.75rem;
+  }
+
+  .modal-footer .save-btn,
+  .modal-footer .cancel-btn {
+    width: 100%;
+    padding: 0.75rem 1rem;
   }
 }
 
@@ -567,15 +660,49 @@
     padding: 0.75rem;
   }
 
+  .pagination-info {
+    font-size: 0.85rem;
+    text-align: center;
+  }
+
   .pagination-buttons {
     flex-wrap: wrap;
     justify-content: center;
+    gap: 0.4rem;
   }
 
   .pagination-btn {
-    padding: 0.4rem 0.8rem;
-    font-size: 0.85rem;
-    min-width: 35px;
+    padding: 0.4rem 0.7rem;
+    font-size: 0.8rem;
+    min-width: 32px;
+  }
+}
+
+@media (max-width: 480px) {
+  .page-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .teachers-table th,
+  .teachers-table td {
+    padding: 0.6rem 0.4rem;
+    font-size: 0.75rem;
+  }
+
+  .teachers-table th {
+    font-size: 0.7rem;
+  }
+
+  .edit-btn,
+  .save-btn,
+  .cancel-btn {
+    font-size: 0.75rem;
+    padding: 0.4rem 0.6rem;
+  }
+
+  .status-badge {
+    font-size: 0.65rem;
+    padding: 0.3rem 0.6rem;
   }
 }
 
