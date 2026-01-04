@@ -7,6 +7,7 @@ import './Layout.css'
 const Layout = ({ children }) => {
   const { user, logout, validateToken } = useAuth()
   const [displayUser, setDisplayUser] = useState(user)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const location = useLocation()
   const navigate = useNavigate()
 
@@ -38,16 +39,34 @@ const Layout = ({ children }) => {
     navigate('/app/login')
   }
 
+  const toggleMobileMenu = () => {
+    setMobileMenuOpen(!mobileMenuOpen)
+  }
+
+  const closeMobileMenu = () => {
+    setMobileMenuOpen(false)
+  }
+
   return (
     <div className="layout">
       <nav className="navbar">
         <div className="nav-brand">
           <h2>🏫 Quản Lý Nhà Trường</h2>
         </div>
-        <div className="nav-links">
+        <button 
+          className="mobile-menu-toggle" 
+          onClick={toggleMobileMenu}
+          aria-label="Toggle menu"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <div className={`nav-links ${mobileMenuOpen ? 'mobile-open' : ''}`}>
           <Link
             to="/app"
             className={location.pathname === '/app' ? 'active' : ''}
+            onClick={closeMobileMenu}
           >
             {displayUser?.role === 'ADMIN' ? 'Trang Chủ' : 'Thông Tin Tài Khoản'}
           </Link>
@@ -57,12 +76,14 @@ const Layout = ({ children }) => {
               <Link
                 to="/app/students"
                 className={location.pathname === '/app/students' ? 'active' : ''}
+                onClick={closeMobileMenu}
               >
                 Quản Lý Sinh Viên
               </Link>
               <Link
                 to="/app/teachers"
                 className={location.pathname === '/app/teachers' ? 'active' : ''}
+                onClick={closeMobileMenu}
               >
                 Quản Lý Giáo Viên
               </Link>
@@ -74,12 +95,14 @@ const Layout = ({ children }) => {
               <Link
                 to="/app/info-student"
                 className={location.pathname === '/app/info-student' ? 'active' : ''}
+                onClick={closeMobileMenu}
               >
                 Thông Tin Sinh Viên
               </Link>
               <Link
                 to="/app/profile-edit"
                 className={location.pathname === '/app/profile-edit' ? 'active' : ''}
+                onClick={closeMobileMenu}
               >
                 Chỉnh Sửa Thông Tin
               </Link>
@@ -91,25 +114,27 @@ const Layout = ({ children }) => {
               <Link
                 to="/app/teacher-classes"
                 className={location.pathname === '/app/teacher-classes' ? 'active' : ''}
+                onClick={closeMobileMenu}
               >
                 Các Lớp Giảng Dạy
               </Link>
               <Link
                 to="/app/profile-edit"
                 className={location.pathname === '/app/profile-edit' ? 'active' : ''}
+                onClick={closeMobileMenu}
               >
                 Chỉnh Sửa Thông Tin
               </Link>
             </>
           )}
         </div>
-        <div className="nav-user">
+        <div className={`nav-user ${mobileMenuOpen ? 'mobile-open' : ''}`}>
           <span className="username">
             {displayUser?.firstName && displayUser?.lastName 
               ? `${displayUser.firstName} ${displayUser.lastName}` 
               : displayUser?.username || 'User'} ({displayUser?.role || 'N/A'})
           </span>
-          <Link to="/" className="home-btn">
+          <Link to="/" className="home-btn" onClick={closeMobileMenu}>
             Trở lại trang chủ
           </Link>
           <button onClick={handleLogout} className="logout-btn">
