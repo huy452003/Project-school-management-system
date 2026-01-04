@@ -2,6 +2,10 @@
   min-height: calc(100vh - 200px);
   padding: 2rem;
   background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow-x: hidden;
 }
 
 .profile-edit-page .page-header {

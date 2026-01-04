@@ -11,7 +11,7 @@
   animation: fadeIn 0.3s;
   width: 100%;
   max-width: 100%;
-  overflow-x: auto;
+  box-sizing: border-box;
 }
 
 .page-header {
@@ -502,6 +502,8 @@
   .table-scroll-wrapper {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
+    margin: 0 -15px;
+    padding: 0 15px;
   }
 
   .teachers-table {
@@ -681,6 +683,11 @@
 @media (max-width: 480px) {
   .page-header h1 {
     font-size: 1.5rem;
+  }
+
+  .table-scroll-wrapper {
+    margin: 0 -12px;
+    padding: 0 12px;
   }
 
   .teachers-table th,

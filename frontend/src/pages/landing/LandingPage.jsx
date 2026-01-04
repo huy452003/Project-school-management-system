@@ -112,7 +112,7 @@ const LandingPage = () => {
           <section className="news-section">
             <div className="section-header">
               <h2 className="section-title">Tin Tức STU</h2>
-              <Link to="/" className="view-all">Xem tất cả</Link>
+              <Link to="https://stu.edu.vn/vi/cat/261/tin-tuc-stu.html" className="view-all">Xem tất cả</Link>
             </div>
             <div className="news-grid">
               {newsItems.map((item) => (
@@ -142,7 +142,7 @@ const LandingPage = () => {
           <section className="recruitment-section">
             <div className="section-header">
               <h2 className="section-title">Tuyển Sinh STU</h2>
-              <Link to="/" className="view-all">Xem tất cả</Link>
+              <Link to="https://stu.edu.vn/vi/cat/304/tuyen-sinh-stu.html" className="view-all">Xem tất cả</Link>
             </div>
             <div className="recruitment-grid">
               {recruitmentItems.map((item) => (
@@ -171,7 +171,7 @@ const LandingPage = () => {
           <section className="career-section">
             <div className="section-header">
               <h2 className="section-title">Hướng Nghiệp</h2>
-              <Link to="/" className="view-all">Xem tất cả</Link>
+              <Link to="https://stu.edu.vn/vi/cat/325/huong-nghiep.html" className="view-all">Xem tất cả</Link>
             </div>
             <div className="career-grid">
               {careerItems.map((item) => (
@@ -201,7 +201,7 @@ const LandingPage = () => {
           <section className="student-section">
             <div className="section-header">
               <h2 className="section-title">Sinh Viên STU</h2>
-              <Link to="/" className="view-all">Xem tất cả</Link>
+              <Link to="https://stu.edu.vn/vi/cat/127/sinh-vien-stu.html" className="view-all">Xem tất cả</Link>
             </div>
             <div className="student-list">
               {studentItems.map((item) => (

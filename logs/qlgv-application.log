@@ -1,39 +1,38 @@
-2025-12-22 13:33:44 [background-preinit] DEBUG [logging] - Logging Provider: org.jboss.logging.Slf4jLoggerProvider found via system property
-2025-12-22 13:33:44 [restartedMain] INFO  [QlgvApplication] - Starting QlgvApplication using Java 17.0.16 with PID 15576 (D:\project IntelliJ Ultimate\modules-parent\qlgv\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlgv)
-2025-12-22 13:33:44 [restartedMain] DEBUG [QlgvApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
-2025-12-22 13:33:44 [restartedMain] INFO  [QlgvApplication] - No active profile set, falling back to 1 default profile: "default"
-2025-12-22 13:33:48 [restartedMain] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
-2025-12-22 13:33:48 [restartedMain] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
-2025-12-22 13:33:48 [restartedMain] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
-2025-12-22 13:33:48 [restartedMain] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
-2025-12-22 13:33:48 [restartedMain] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
-2025-12-22 13:33:48 [restartedMain] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
-2025-12-22 13:33:48 [restartedMain] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
-2025-12-22 13:33:48 [restartedMain] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
-2025-12-22 13:33:48 [restartedMain] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
-2025-12-22 13:33:48 [restartedMain] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
-2025-12-22 13:33:48 [restartedMain] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
-2025-12-22 13:33:48 [restartedMain] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
-2025-12-22 13:33:52 [restartedMain] DEBUG [InternalLoggerFactory] - Using SLF4J as the default logging framework
-2025-12-22 13:33:53 [restartedMain] WARN  [HikariConfig] - HikariPool-1 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
-2025-12-22 13:33:54 [restartedMain] WARN  [deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-12-22 13:33:54 [restartedMain] WARN  [deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
-2025-12-22 13:34:00 [restartedMain] WARN  [JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-12-22 13:34:00 [restartedMain] DEBUG [Mappings] - 
+2026-01-05 01:24:19 [background-preinit] DEBUG [logging] - Logging Provider: org.jboss.logging.Slf4jLoggerProvider found via system property
+2026-01-05 01:24:19 [restartedMain] INFO  [QlgvApplication] - Starting QlgvApplication using Java 17.0.16 with PID 16568 (D:\project IntelliJ Ultimate\modules-parent\qlgv\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlgv)
+2026-01-05 01:24:19 [restartedMain] DEBUG [QlgvApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
+2026-01-05 01:24:19 [restartedMain] INFO  [QlgvApplication] - No active profile set, falling back to 1 default profile: "default"
+2026-01-05 01:24:26 [restartedMain] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
+2026-01-05 01:24:26 [restartedMain] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
+2026-01-05 01:24:26 [restartedMain] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
+2026-01-05 01:24:26 [restartedMain] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
+2026-01-05 01:24:26 [restartedMain] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
+2026-01-05 01:24:26 [restartedMain] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
+2026-01-05 01:24:26 [restartedMain] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
+2026-01-05 01:24:26 [restartedMain] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
+2026-01-05 01:24:26 [restartedMain] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
+2026-01-05 01:24:26 [restartedMain] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
+2026-01-05 01:24:26 [restartedMain] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
+2026-01-05 01:24:26 [restartedMain] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
+2026-01-05 01:24:33 [restartedMain] DEBUG [InternalLoggerFactory] - Using SLF4J as the default logging framework
+2026-01-05 01:24:36 [restartedMain] WARN  [deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-01-05 01:24:36 [restartedMain] WARN  [deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2026-01-05 01:24:47 [restartedMain] WARN  [JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-01-05 01:24:47 [restartedMain] DEBUG [Mappings] - 
 	c.c.Q.c.RedisController:
 	{GET [/redis/value/{key}]}: getValue(String)
 	{GET [/redis/hash/{key}]}: getHash(String)
 	{GET [/redis/type/{key}]}: getKeyType(String)
 	{GET [/redis/set/{key}]}: getSet(String)
 	{GET [/redis/zset/{key}]}: getZSet(String)
-	{GET [/redis/keys]}: getAllKeys()
-	{GET [/redis/keys/{pattern}]}: getKeysByPattern(String)
 	{GET [/redis/list/{key}]}: getList(String)
-	{DELETE [/redis/keys]}: deleteAllKeys()
+	{GET [/redis/keys/{pattern}]}: getKeysByPattern(String)
+	{GET [/redis/keys]}: getAllKeys()
 	{DELETE [/redis/key/{key}]}: deleteKey(String)
+	{DELETE [/redis/keys]}: deleteAllKeys()
 	{GET [/redis/info]}: getRedisInfo()
 	{GET [/redis/ttl/{key}]}: getTTL(String)
-2025-12-22 13:34:00 [restartedMain] DEBUG [Mappings] - 
+2026-01-05 01:24:47 [restartedMain] DEBUG [Mappings] - 
 	c.c.Q.c.TeacherController:
 	{GET [/teachers]}: get(String,UserDto)
 	{PUT [/teachers/{id}]}: update(Integer,UpdateEntityModel,String,UserDto)
@@ -43,173 +42,118 @@
 	{GET [/teachers/{classManaging}/students]}: getStudentsByClassManaging(String,String,String,UserDto)
 	{GET [/teachers/{userId}]}: getByUserId(Integer,String,UserDto)
 	{GET [/teachers/paged]}: getPaged(int,int,String,String,String,UserDto)
-2025-12-22 13:34:00 [restartedMain] DEBUG [Mappings] - 
+2026-01-05 01:24:47 [restartedMain] DEBUG [Mappings] - 
 	o.s.b.a.w.s.e.BasicErrorController:
 	{ [/error]}: error(HttpServletRequest)
 	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
-2025-12-22 13:34:00 [restartedMain] DEBUG [Mappings] - 'beanNameHandlerMapping' {}
-2025-12-22 13:34:00 [restartedMain] DEBUG [Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
-2025-12-22 13:34:01 [restartedMain] WARN  [ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
-2025-12-22 13:34:01 [restartedMain] DEBUG [Loggers] - Using Slf4j logging framework
-2025-12-22 13:34:03 [restartedMain] WARN  [OptionalLiveReloadServer] - Unable to start LiveReload server
-2025-12-22 13:34:04 [restartedMain] INFO  [QlgvApplication] - Started QlgvApplication in 20.67 seconds (process running for 21.66)
-2025-12-22 14:33:42 [background-preinit] DEBUG [logging] - Logging Provider: org.jboss.logging.Slf4jLoggerProvider found via system property
-2025-12-22 14:33:42 [restartedMain] INFO  [QlgvApplication] - Starting QlgvApplication using Java 17.0.16 with PID 5456 (D:\project IntelliJ Ultimate\modules-parent\qlgv\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlgv)
-2025-12-22 14:33:42 [restartedMain] DEBUG [QlgvApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
-2025-12-22 14:33:42 [restartedMain] INFO  [QlgvApplication] - No active profile set, falling back to 1 default profile: "default"
-2025-12-22 14:33:45 [restartedMain] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
-2025-12-22 14:33:45 [restartedMain] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
-2025-12-22 14:33:45 [restartedMain] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
-2025-12-22 14:33:45 [restartedMain] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
-2025-12-22 14:33:45 [restartedMain] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
-2025-12-22 14:33:45 [restartedMain] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
-2025-12-22 14:33:45 [restartedMain] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
-2025-12-22 14:33:45 [restartedMain] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
-2025-12-22 14:33:45 [restartedMain] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
-2025-12-22 14:33:45 [restartedMain] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
-2025-12-22 14:33:45 [restartedMain] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
-2025-12-22 14:33:45 [restartedMain] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
-2025-12-22 14:33:50 [restartedMain] DEBUG [InternalLoggerFactory] - Using SLF4J as the default logging framework
-2025-12-22 14:33:54 [restartedMain] WARN  [HikariConfig] - HikariPool-1 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
-2025-12-22 14:33:54 [restartedMain] WARN  [deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-12-22 14:33:54 [restartedMain] WARN  [deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
-2025-12-22 14:34:02 [restartedMain] WARN  [JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-12-22 14:34:03 [restartedMain] DEBUG [Mappings] - 
+2026-01-05 01:24:47 [restartedMain] DEBUG [Mappings] - 'beanNameHandlerMapping' {}
+2026-01-05 01:24:48 [restartedMain] DEBUG [Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
+2026-01-05 01:24:48 [restartedMain] WARN  [ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2026-01-05 01:24:50 [restartedMain] DEBUG [Loggers] - Using Slf4j logging framework
+2026-01-05 01:24:52 [restartedMain] WARN  [OptionalLiveReloadServer] - Unable to start LiveReload server
+2026-01-05 01:24:53 [restartedMain] INFO  [QlgvApplication] - Started QlgvApplication in 35.784 seconds (process running for 37.412)
+2026-01-05 01:54:34 [restartedMain] INFO  [QlgvApplication] - Starting QlgvApplication using Java 17.0.16 with PID 16568 (D:\project IntelliJ Ultimate\modules-parent\qlgv\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlgv)
+2026-01-05 01:54:34 [restartedMain] DEBUG [QlgvApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
+2026-01-05 01:54:34 [restartedMain] INFO  [QlgvApplication] - No active profile set, falling back to 1 default profile: "default"
+2026-01-05 01:54:38 [restartedMain] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
+2026-01-05 01:54:38 [restartedMain] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
+2026-01-05 01:54:38 [restartedMain] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
+2026-01-05 01:54:38 [restartedMain] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
+2026-01-05 01:54:38 [restartedMain] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
+2026-01-05 01:54:38 [restartedMain] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
+2026-01-05 01:54:38 [restartedMain] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
+2026-01-05 01:54:38 [restartedMain] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
+2026-01-05 01:54:38 [restartedMain] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
+2026-01-05 01:54:38 [restartedMain] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
+2026-01-05 01:54:38 [restartedMain] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
+2026-01-05 01:54:38 [restartedMain] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
+2026-01-05 01:54:41 [restartedMain] WARN  [deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-01-05 01:54:41 [restartedMain] WARN  [deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2026-01-05 01:54:45 [restartedMain] WARN  [JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-01-05 01:54:45 [restartedMain] DEBUG [Mappings] - 
 	c.c.Q.c.RedisController:
-	{DELETE [/redis/keys]}: deleteAllKeys()
-	{GET [/redis/list/{key}]}: getList(String)
-	{GET [/redis/zset/{key}]}: getZSet(String)
-	{GET [/redis/ttl/{key}]}: getTTL(String)
-	{GET [/redis/info]}: getRedisInfo()
-	{DELETE [/redis/key/{key}]}: deleteKey(String)
-	{GET [/redis/keys]}: getAllKeys()
-	{GET [/redis/keys/{pattern}]}: getKeysByPattern(String)
 	{GET [/redis/value/{key}]}: getValue(String)
 	{GET [/redis/hash/{key}]}: getHash(String)
-	{GET [/redis/set/{key}]}: getSet(String)
 	{GET [/redis/type/{key}]}: getKeyType(String)
-2025-12-22 14:34:03 [restartedMain] DEBUG [Mappings] - 
+	{GET [/redis/set/{key}]}: getSet(String)
+	{GET [/redis/zset/{key}]}: getZSet(String)
+	{GET [/redis/list/{key}]}: getList(String)
+	{GET [/redis/keys/{pattern}]}: getKeysByPattern(String)
+	{GET [/redis/keys]}: getAllKeys()
+	{DELETE [/redis/key/{key}]}: deleteKey(String)
+	{DELETE [/redis/keys]}: deleteAllKeys()
+	{GET [/redis/info]}: getRedisInfo()
+	{GET [/redis/ttl/{key}]}: getTTL(String)
+2026-01-05 01:54:45 [restartedMain] DEBUG [Mappings] - 
 	c.c.Q.c.TeacherController:
-	{GET [/teachers/{userId}]}: getByUserId(Integer,String,UserDto)
 	{GET [/teachers]}: get(String,UserDto)
 	{PUT [/teachers/{id}]}: update(Integer,UpdateEntityModel,String,UserDto)
 	{GET [/teachers/filter]}: filter(Integer,String,String,Integer,Gender,String,String,String,String,String,UserDto)
 	{DELETE [/teachers]}: delete(List,String,UserDto)
 	{DELETE [/teachers/cache]}: clearCache(String,UserDto)
 	{GET [/teachers/{classManaging}/students]}: getStudentsByClassManaging(String,String,String,UserDto)
+	{GET [/teachers/{userId}]}: getByUserId(Integer,String,UserDto)
 	{GET [/teachers/paged]}: getPaged(int,int,String,String,String,UserDto)
-2025-12-22 14:34:03 [restartedMain] DEBUG [Mappings] - 
+2026-01-05 01:54:45 [restartedMain] DEBUG [Mappings] - 
 	o.s.b.a.w.s.e.BasicErrorController:
 	{ [/error]}: error(HttpServletRequest)
 	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
-2025-12-22 14:34:03 [restartedMain] DEBUG [Mappings] - 'beanNameHandlerMapping' {}
-2025-12-22 14:34:03 [restartedMain] DEBUG [Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
-2025-12-22 14:34:03 [restartedMain] WARN  [ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
-2025-12-22 14:34:04 [restartedMain] DEBUG [Loggers] - Using Slf4j logging framework
-2025-12-22 14:34:06 [restartedMain] WARN  [OptionalLiveReloadServer] - Unable to start LiveReload server
-2025-12-22 14:34:07 [restartedMain] INFO  [QlgvApplication] - Started QlgvApplication in 25.994 seconds (process running for 27.082)
-2025-12-22 14:53:14 [org.springframework.kafka.KafkaListenerEndpointContainer#1-0-C-1] WARN  [LoggingServiceImp] - [qlgv] UserConsumerService - User or user type is null in event. Skipping.
-2025-12-22 15:38:19 [restartedMain] INFO  [QlgvApplication] - Starting QlgvApplication using Java 17.0.16 with PID 5456 (D:\project IntelliJ Ultimate\modules-parent\qlgv\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlgv)
-2025-12-22 15:38:19 [restartedMain] DEBUG [QlgvApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
-2025-12-22 15:38:19 [restartedMain] INFO  [QlgvApplication] - No active profile set, falling back to 1 default profile: "default"
-2025-12-22 15:38:20 [restartedMain] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
-2025-12-22 15:38:20 [restartedMain] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
-2025-12-22 15:38:20 [restartedMain] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
-2025-12-22 15:38:20 [restartedMain] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
-2025-12-22 15:38:20 [restartedMain] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
-2025-12-22 15:38:20 [restartedMain] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
-2025-12-22 15:38:20 [restartedMain] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
-2025-12-22 15:38:20 [restartedMain] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
-2025-12-22 15:38:20 [restartedMain] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
-2025-12-22 15:38:20 [restartedMain] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
-2025-12-22 15:38:20 [restartedMain] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
-2025-12-22 15:38:20 [restartedMain] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
-2025-12-22 15:38:21 [restartedMain] WARN  [HikariConfig] - HikariPool-2 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
-2025-12-22 15:38:21 [restartedMain] WARN  [deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-12-22 15:38:21 [restartedMain] WARN  [deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
-2025-12-22 15:38:24 [restartedMain] WARN  [JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-12-22 15:38:24 [restartedMain] DEBUG [Mappings] - 
+2026-01-05 01:54:45 [restartedMain] DEBUG [Mappings] - 'beanNameHandlerMapping' {}
+2026-01-05 01:54:45 [restartedMain] DEBUG [Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
+2026-01-05 01:54:46 [restartedMain] WARN  [ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2026-01-05 01:54:48 [restartedMain] WARN  [OptionalLiveReloadServer] - Unable to start LiveReload server
+2026-01-05 01:54:48 [restartedMain] INFO  [QlgvApplication] - Started QlgvApplication in 14.017 seconds (process running for 1832.255)
+2026-01-05 02:46:29 [background-preinit] DEBUG [logging] - Logging Provider: org.jboss.logging.Slf4jLoggerProvider found via system property
+2026-01-05 02:46:29 [restartedMain] INFO  [QlgvApplication] - Starting QlgvApplication using Java 17.0.16 with PID 8168 (D:\project IntelliJ Ultimate\modules-parent\qlgv\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlgv)
+2026-01-05 02:46:29 [restartedMain] DEBUG [QlgvApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
+2026-01-05 02:46:29 [restartedMain] INFO  [QlgvApplication] - No active profile set, falling back to 1 default profile: "default"
+2026-01-05 02:46:34 [restartedMain] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
+2026-01-05 02:46:34 [restartedMain] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
+2026-01-05 02:46:34 [restartedMain] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
+2026-01-05 02:46:34 [restartedMain] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
+2026-01-05 02:46:34 [restartedMain] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
+2026-01-05 02:46:34 [restartedMain] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
+2026-01-05 02:46:35 [restartedMain] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
+2026-01-05 02:46:35 [restartedMain] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
+2026-01-05 02:46:35 [restartedMain] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
+2026-01-05 02:46:35 [restartedMain] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
+2026-01-05 02:46:35 [restartedMain] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
+2026-01-05 02:46:35 [restartedMain] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
+2026-01-05 02:46:44 [restartedMain] DEBUG [InternalLoggerFactory] - Using SLF4J as the default logging framework
+2026-01-05 02:46:49 [restartedMain] WARN  [deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-01-05 02:46:49 [restartedMain] WARN  [deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2026-01-05 02:46:59 [restartedMain] WARN  [JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-01-05 02:46:59 [restartedMain] DEBUG [Mappings] - 
 	c.c.Q.c.RedisController:
-	{DELETE [/redis/keys]}: deleteAllKeys()
+	{GET [/redis/value/{key}]}: getValue(String)
+	{GET [/redis/hash/{key}]}: getHash(String)
 	{GET [/redis/list/{key}]}: getList(String)
+	{GET [/redis/keys/{pattern}]}: getKeysByPattern(String)
+	{GET [/redis/keys]}: getAllKeys()
+	{DELETE [/redis/keys]}: deleteAllKeys()
+	{DELETE [/redis/key/{key}]}: deleteKey(String)
 	{GET [/redis/zset/{key}]}: getZSet(String)
 	{GET [/redis/ttl/{key}]}: getTTL(String)
 	{GET [/redis/info]}: getRedisInfo()
-	{DELETE [/redis/key/{key}]}: deleteKey(String)
-	{GET [/redis/keys]}: getAllKeys()
-	{GET [/redis/keys/{pattern}]}: getKeysByPattern(String)
-	{GET [/redis/value/{key}]}: getValue(String)
-	{GET [/redis/hash/{key}]}: getHash(String)
-	{GET [/redis/set/{key}]}: getSet(String)
 	{GET [/redis/type/{key}]}: getKeyType(String)
-2025-12-22 15:38:24 [restartedMain] DEBUG [Mappings] - 
+	{GET [/redis/set/{key}]}: getSet(String)
+2026-01-05 02:46:59 [restartedMain] DEBUG [Mappings] - 
 	c.c.Q.c.TeacherController:
-	{GET [/teachers/{userId}]}: getByUserId(Integer,String,UserDto)
 	{GET [/teachers]}: get(String,UserDto)
 	{PUT [/teachers/{id}]}: update(Integer,UpdateEntityModel,String,UserDto)
 	{GET [/teachers/filter]}: filter(Integer,String,String,Integer,Gender,String,String,String,String,String,UserDto)
 	{DELETE [/teachers]}: delete(List,String,UserDto)
 	{DELETE [/teachers/cache]}: clearCache(String,UserDto)
-	{GET [/teachers/{classManaging}/students]}: getStudentsByClassManaging(String,String,String,UserDto)
-	{GET [/teachers/paged]}: getPaged(int,int,String,String,String,UserDto)
-2025-12-22 15:38:24 [restartedMain] DEBUG [Mappings] - 
-	o.s.b.a.w.s.e.BasicErrorController:
-	{ [/error]}: error(HttpServletRequest)
-	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
-2025-12-22 15:38:24 [restartedMain] DEBUG [Mappings] - 'beanNameHandlerMapping' {}
-2025-12-22 15:38:24 [restartedMain] DEBUG [Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
-2025-12-22 15:38:24 [restartedMain] WARN  [ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
-2025-12-22 15:38:26 [restartedMain] WARN  [OptionalLiveReloadServer] - Unable to start LiveReload server
-2025-12-22 15:38:26 [restartedMain] INFO  [QlgvApplication] - Started QlgvApplication in 7.191 seconds (process running for 3885.526)
-2025-12-22 16:33:49 [restartedMain] INFO  [QlgvApplication] - Starting QlgvApplication using Java 17.0.16 with PID 5456 (D:\project IntelliJ Ultimate\modules-parent\qlgv\target\classes started by tranhuy in D:\project IntelliJ Ultimate\modules-parent\qlgv)
-2025-12-22 16:33:49 [restartedMain] DEBUG [QlgvApplication] - Running with Spring Boot v3.5.0, Spring v6.2.7
-2025-12-22 16:33:49 [restartedMain] INFO  [QlgvApplication] - No active profile set, falling back to 1 default profile: "default"
-2025-12-22 16:33:50 [restartedMain] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
-2025-12-22 16:33:50 [restartedMain] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
-2025-12-22 16:33:50 [restartedMain] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
-2025-12-22 16:33:50 [restartedMain] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
-2025-12-22 16:33:50 [restartedMain] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
-2025-12-22 16:33:50 [restartedMain] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
-2025-12-22 16:33:50 [restartedMain] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
-2025-12-22 16:33:50 [restartedMain] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
-2025-12-22 16:33:50 [restartedMain] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
-2025-12-22 16:33:50 [restartedMain] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
-2025-12-22 16:33:50 [restartedMain] DEBUG [RxJava2OnClasspathCondition] - RxJava2 related Aspect extensions are not activated, because RxJava2 is not on the classpath.
-2025-12-22 16:33:50 [restartedMain] DEBUG [ReactorOnClasspathCondition] - Reactor related Aspect extensions are not activated because Resilience4j Reactor module is not on the classpath.
-2025-12-22 16:33:51 [restartedMain] WARN  [HikariConfig] - HikariPool-3 - idleTimeout has been set but has no effect because the pool is operating as a fixed size pool.
-2025-12-22 16:33:51 [restartedMain] WARN  [deprecation] - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-12-22 16:33:51 [restartedMain] WARN  [deprecation] - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
-2025-12-22 16:33:53 [restartedMain] WARN  [JpaBaseConfiguration$JpaWebConfiguration] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-12-22 16:33:53 [restartedMain] DEBUG [Mappings] - 
-	c.c.Q.c.RedisController:
-	{DELETE [/redis/keys]}: deleteAllKeys()
-	{GET [/redis/list/{key}]}: getList(String)
-	{GET [/redis/zset/{key}]}: getZSet(String)
-	{GET [/redis/ttl/{key}]}: getTTL(String)
-	{GET [/redis/info]}: getRedisInfo()
-	{DELETE [/redis/key/{key}]}: deleteKey(String)
-	{GET [/redis/keys]}: getAllKeys()
-	{GET [/redis/keys/{pattern}]}: getKeysByPattern(String)
-	{GET [/redis/value/{key}]}: getValue(String)
-	{GET [/redis/hash/{key}]}: getHash(String)
-	{GET [/redis/set/{key}]}: getSet(String)
-	{GET [/redis/type/{key}]}: getKeyType(String)
-2025-12-22 16:33:53 [restartedMain] DEBUG [Mappings] - 
-	c.c.Q.c.TeacherController:
 	{GET [/teachers/{userId}]}: getByUserId(Integer,String,UserDto)
-	{GET [/teachers]}: get(String,UserDto)
-	{PUT [/teachers/{id}]}: update(Integer,UpdateEntityModel,String,UserDto)
-	{GET [/teachers/filter]}: filter(Integer,String,String,Integer,Gender,String,String,String,String,String,UserDto)
-	{DELETE [/teachers]}: delete(List,String,UserDto)
-	{DELETE [/teachers/cache]}: clearCache(String,UserDto)
-	{GET [/teachers/{classManaging}/students]}: getStudentsByClassManaging(String,String,String,UserDto)
 	{GET [/teachers/paged]}: getPaged(int,int,String,String,String,UserDto)
-2025-12-22 16:33:53 [restartedMain] DEBUG [Mappings] - 
+	{GET [/teachers/{classManaging}/students]}: getStudentsByClassManaging(String,String,String,UserDto)
+2026-01-05 02:46:59 [restartedMain] DEBUG [Mappings] - 
 	o.s.b.a.w.s.e.BasicErrorController:
 	{ [/error]}: error(HttpServletRequest)
 	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
-2025-12-22 16:33:53 [restartedMain] DEBUG [Mappings] - 'beanNameHandlerMapping' {}
-2025-12-22 16:33:53 [restartedMain] DEBUG [Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
-2025-12-22 16:33:53 [restartedMain] WARN  [ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
-2025-12-22 16:33:55 [restartedMain] WARN  [OptionalLiveReloadServer] - Unable to start LiveReload server
-2025-12-22 16:33:55 [restartedMain] INFO  [QlgvApplication] - Started QlgvApplication in 5.962 seconds (process running for 7214.355)
+2026-01-05 02:47:00 [restartedMain] DEBUG [Mappings] - 'beanNameHandlerMapping' {}
+2026-01-05 02:47:00 [restartedMain] DEBUG [Mappings] - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
+2026-01-05 02:47:00 [restartedMain] WARN  [ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2026-01-05 02:47:01 [restartedMain] DEBUG [Loggers] - Using Slf4j logging framework
+2026-01-05 02:47:02 [restartedMain] WARN  [OptionalLiveReloadServer] - Unable to start LiveReload server
+2026-01-05 02:47:03 [restartedMain] INFO  [QlgvApplication] - Started QlgvApplication in 36.694 seconds (process running for 40.217)
